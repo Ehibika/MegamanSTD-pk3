@@ -1,0 +1,542 @@
+/*=============================
+The High Precision Energy gun, or HiPE gun for short; is a lightweight but
+sufficiently strong pump action weapon with remarkable range. it's a slow weapon
+but it deals strong damage from way, far away. this weapon demands precision 
+however, so it's best used when dealing with another far away opponent.
+
+*///===========================
+
+Actor RotaryShellFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ShellKiller : Powerup {inventory.amount 1 inventory.maxamount 1 Powerup.Duration 4}
+Actor ShellActive : Powerup {inventory.amount 1 inventory.maxamount 1 Powerup.Duration 12}
+
+
+actor RotaryShellPart
+{
+//PROJECTILE
+Obituary "%o forgot about %k's orbitars."
+Scale 2.5
+Speed 0
+Height 60
+Radius 35
+Health 80
+painchance 256
+  DamageFactor "Voltspear", 3.0
++MISSILE
++SHOOTABLE
++NOGRAVITY
+//+MTHRUSPECIES
+  +DONTSPLASH
+  +FLOORCLIP
+  +DONTREFLECT
+  +NODAMAGETHRUST
+  +DONTBLAST
+//+NOINTERACTION //--
++FORCEXYBILLBOARD
++NOCLIP
++NOTARGETSWITCH
++NOBLOOD
++NOBLOODDECALS
++thrughost
++Ghost
+//ReactionTime 350
+var int user_XCor;
+var int user_YCor;
+var int user_ZCor;
+var int user_Rads;
+var int user_SMTH;
+var int user_SAdd;
+var int user_Timer;
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",0)
+Goto SpawnC
+SpawnC:
+TNT1 A 1 A_ChangeFlag("SHOOTABLE",false)
+TNT1 A 0 A_SetUserVar("user_SMTH",360/72+user_SMTH)
+TNT1 A 0 A_PlaySoundEx("weapon/copyvision", "weapon")
+	ROSL AAABBB 1 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+	TNT1 A 0 A_GiveToTarget("ShellActive")
+
+	ROSL CCCDDD 1 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+	TNT1 A 0 A_GiveToTarget("ShellActive")
+
+	ROSL ZZDDZZ 1 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+	TNT1 A 0 A_GiveToTarget("ShellActive")
+
+	ROSL DD 1 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+	TNT1 A 0 A_GiveToTarget("ShellActive")
+
+TNT1 A 1 A_ChangeFlag("SHOOTABLE",true)
+VarAdds://--------------------- Vars Stuff
+//DUST C 0 A_JumpIf(user_Rads >= 192,"PointAdd")
+//DUST C 0 A_SetUserVar("user_Rads",user_Rads+1)
+PointAdd:
+DUST C 0 A_SetUserVar("user_SMTH",360/72+user_SMTH)
+DUST C 0 //A_SetUserVar("user_ZCor",user_ZCor+12)
+DUST C 0 A_SetUserVar("user_Timer",user_Timer+1)
+DUST C 0 A_JumpIf(user_Timer == 245,"WarnBuzz")
+DUST C 0 A_JumpIf(user_Timer == 280,"WarnBuzz")
+DUST C 0 A_JumpIf(user_Timer == 315,"WarnBuzz")
+DUST C 0 A_JumpIf(user_Timer >= 350,"Expire")
+goto Warping
+//---------------------
+Warping:
+DUST C 0 A_JumpIfInTargetInventory("IsDead",1,"Terminate")
+DUST C 0 A_JumpIfInTargetInventory("ShellKiller",1,"Expire")
+DUST C 0 //A_CountDown
+//DUST C 0 A_Warp(AAPTR_TARGET,user_Rads*cos(user_SMTH),user_Rads*sin(user_SMTH),cos(user_ZCor)*128)
+DUST C 0 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+DUST C 0 //A_Explode(10,32,0,0,24)
+TNT1 A 0 A_GiveToTarget("ShellActive")
+TNT1 A 1 A_SpawnItemEx("OrbitarFX",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+goto VarAdds
+	Pain:
+	TNT1 A 0  A_PlaySoundEX ("item/protoreflect","Soundslot5")
+	DUST C 0 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+	DUST C 0 //A_Explode(10,32,0,0,24)
+	TNT1 A 0 A_FaceTarget
+	TNT1 A 1 A_SpawnItemEx("OrbitarFX",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+	Goto VarAdds
+WarnBuzz:
+	TNT1 A 0  A_PlaySoundEX ("weapon/gemini","Soundslot6")
+	goto Warping
+Death:
+	TNT1 A 1 A_PlaySoundEx("weapon/CentaurFlash","Weapon")
+	TNT1 AAAAA 0 A_SpawnItemEx("LightScreenSpark", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359))
+
+TNT1 A 0
+stop
+
+Expire:
+TNT1 A 1 A_ChangeFlag("SHOOTABLE",false)
+ROSL DDDEEEFFF 1 A_Warp(AAPTR_TARGET,70*cos(user_SMTH),70*sin(user_SMTH),16)
+Terminate:
+TNT1 A 0
+stop
+}
+}
+
+actor RotaryShellPart_1 : RotaryShellPart
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",72)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPart_2 : RotaryShellPart
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",144)
+Goto SpawnC
+}
+}
+
+
+actor RotaryShellPart_3 : RotaryShellPart
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",216)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPart_4 : RotaryShellPart
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",288)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartRED : RotaryShellPart
+{Species"REDMember" DesignatedTeam 1 Translation "248:248=54:54", "222:222=170:170","192:192=54:54", "198:198=42:42" , "196:196=170:170"}
+
+actor RotaryShellPartRED_1 : RotaryShellPartRED
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",72)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartRED_2 : RotaryShellPartRED
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",144)
+Goto SpawnC
+}
+}
+
+
+actor RotaryShellPartRED_3 : RotaryShellPartRED
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",216)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartRED_4 : RotaryShellPartRED
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",288)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartBLUE : RotaryShellPart
+{Species"BLUEMember" DesignatedTeam 0 Translation "248:248=192:192", "222:222=198:198"}
+
+actor RotaryShellPartBLUE_1 : RotaryShellPartBLUE
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",72)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartBLUE_2 : RotaryShellPartBLUE
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",144)
+Goto SpawnC
+}
+}
+
+
+actor RotaryShellPartBLUE_3 : RotaryShellPartBLUE
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",216)
+Goto SpawnC
+}
+}
+
+actor RotaryShellPartBLUE_4 : RotaryShellPartBLUE
+{
+States
+{
+Spawn:
+DUST C 0
+DUST C 0 A_SetUserVar("user_ZCor",36)
+DUST C 0 A_SetUserVar("user_SMTH",288)
+Goto SpawnC
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor OrbitarFX : FXActor_A
+{
+Scale 2.5
+Alpha 0.6
+States
+{
+Spawn:
+TNT1 A 0
+//TNT1 A 0 A_SetAngle(angle+180)
+ROSH A 1 //A_FaceTarget
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|utility Actors|------------------------------
+//[+]========================================================================[+]
+actor RotaryShellWatcher : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("RotaryShellSpeedDown",1)
+TNT1 A 12
+Watch:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+
+TNT1 A 0 A_JumpIfInTargetInventory("ShellActive",1,"Watch")
+Goto Death
+Death:
+DeathTake:
+TNT1 A 0
+TNT1 A 0 A_GiveToTarget("RotaryShellSpeedReset",1)
+stop
+}
+}
+
+actor RotaryShellSpeedDown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 1 ACS_NamedExecuteAlways("SpeedMod",0,1)
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor RotaryShellSpeedReset : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 1 ACS_NamedExecuteAlways("SpeedMod",0,0)
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+
+
+actor RotaryShellCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("RotaryShellCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("RotaryShellCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor RotaryShellCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("RotaryShellCooldownItem",525)
+TNT1 A 0 A_Spawnitemex("RotaryShellCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor RotaryShellCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 525
+}//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor RotaryShellShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0
+BLTR C 0 A_GiveInventory("ShellKiller")
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+DSTS B 0 A_FireCustomMissile("RotaryShellPart",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPart_1",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPart_2",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPart_3",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPart_4",0,0,8,0)
+TNT1 A 0 A_JumpIfInTargetInventory("ShellActive",1,"Nope")
+TNT1 A 0 A_SpawnItemEx("RotaryShellWatcher")
+stop
+TeamRedFire:
+DSTS B 0 A_FireCustomMissile("RotaryShellPartRED",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartRED_1",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartRED_2",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartRED_3",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartRED_4",0,0,8,0)
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("ShellActive",1,"Nope")
+TNT1 A 0 A_SpawnItemEx("RotaryShellWatcher")
+stop
+TeamBlueFire:
+DSTS B 0 A_FireCustomMissile("RotaryShellPartBLUE",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartBLUE_1",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartBLUE_2",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartBLUE_3",0,0,8,0)
+DSTS B 0 A_FireCustomMissile("RotaryShellPartBLUE_4",0,0,8,0)
+TNT1 A 0
+TNT1 A 0 A_JumpIfInTargetInventory("ShellActive",1,"Nope")
+TNT1 A 0 A_SpawnItemEx("RotaryShellWatcher")
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+
+actor RotaryShellAltTrigger : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 
+"####" B 0 A_JumpIfinventory("RotaryShellCooldownItem",1,"Nope")
+"####" B 0 A_Giveinventory("RotaryShellCooldown")
+"####" B 0 A_Giveinventory("RotaryShellShooter")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ArmoredSuit_Kit : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 
+"####" "#" 1 //A_GiveInventory("BP_Fuel",100)
+"####" "#" 1 A_GiveInventory("RotaryShellFlag")
+"####" "#" 1 A_GiveInventory("RotaryShell_ItemFire")
+
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor RotaryShell_ItemFire : CustomInventory 
+{
+Tag "Activate Rotary Shell"
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "$PU_ETANK"
+
+inventory.icon "MIRRSI"
+Inventory.PickupSound "item/1up"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+EBAL F 0 
+EBAL E 2
+Goto Spawn+2
+Use:
+TNT1 A 0 
+"####" B 0 A_JumpIfinventory("RotaryShellCooldownItem",1,"Nope")
+//"####" "#" 0 A_JumpIfinventory("BP_Fuel",35,"BoostStart")
+//stop
+//BoostStart:
+"####" "#" 0
+
+"####" B 0 A_Giveinventory("RotaryShellCooldown")
+"####" B 0 A_Giveinventory("RotaryShellShooter")
+fail
+
+Nope:
+"####" K 1 ACS_Execute(979,0)
+fail
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+

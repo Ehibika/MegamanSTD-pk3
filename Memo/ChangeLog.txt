@@ -1,0 +1,388 @@
+[+]====================|Alpha A6|========================[+]
+
+==General==
+[+] introduced tip system
+
+==Tag Missile==
+
+[+] projectile speed dropped from 25 to 18
+[+] implemented a homing ramp up to it. so that it starts with no homing and get's sharper and sharper as it travels
+[+] weapon has a 12 frame prefire before it can start to tag players
+[+] weapon also has a 250 map unit deadzone where it cannot tag a target if you are that close to it, that's so long as you haven't tagged them already.
+[+] horizontal knockback force reduced from 40 to 18
+[+] vertical knockback force reduced from 70 to 60(edited)
+
+==Grappling hook==
+[+] can no longer pass enemy light screens
+
+==Time bomb==
+[+] now has blast knockback
+
+==Proxy Mine==
+[+] now has blast knockback
+
+[+]====================|Alpha A7|========================[+]
+==Buster Gun==
+[+]Projectile speed increased from 95 to 180
+==repidifier==
+[+] knockback reduced from 3 to 2
+
+==Slam cannon==
+[+]firing framed increased from 21 to 25
+[+]projectile sprite changed for clarity between it and minibomb
+
+==wave beam==
+[+]Hitbox reduced from 120 to 55
+[+]beam projectiles vanish once the generator is destroyed
+
+==light screen==
+[+]reduced the prefire delay from 5 to 0
+[+]increased afterfire delay from 10 to 14
+[+]screen has been raised up by 16 map units
+[+]screen emits damage sparks at a higher health threshold, 350 instead of 125
+[+]screen hitboxes release sparks when damaged.
+[+]Voxel has be optimized to reduce lag
+
+==TAG Missile==
+[+]projectile speed increased from 18 to 20
+[+]homing ramp up increased from 2 to 3
+[+]can no longer home in without locking on first
+[+]won't explode on walls when locked on
+[+]projectile times out after 3 seconds
+[+]impact damage reduced from 75 to 30
+[+]splash damage increased from 10 to 30
+[+]splash radius increased from 64 to 120
+[+]beam sight was removed
+
+==Proxy Mine==
+[+]detection radius graphic was removed
+
+==Booster Pack==
+[+]fixed the fuel bug
+
+==MediCarbine==
+[+]Projectile speed increased from 150 to 300
+[+]Minimum healing increased from 15 to 30
+[+]thanks to Jaxof7's code, Medicarbine has aim assist for allies to make healing more consistent
+
+==Mending Tool==
+[+]Greatly optimized it's functionality with the Help of Jaxof7's code
+
+[+]====================|Beta A2|========================[+]
+
+==General==
+[+] weapons with cycling reloads no longer auto reload
+[+] introduced (or technically reintroduces) a new weapon, the Hi.P.E.R Beam. the bigger brother
+	to the Hi.P.E gun, this powerfull charged, bolt action hitscan weapon deals damage without
+	falloff! it's charge shots pack a punch but also a fair bit of kickback on your end, and
+	cannot be held forever. use the kickback to give yourself a vertical boost!
+	
+==BusterGun==
+[+] Can now use altfire or swap weapons when overheated
+[+] minimum damage increased from 20 to 30
+
+==Blitzer==
+[+] projectile speed increased from 90 to 150
+[+] spread reduced from 2.6 to 2.0
+[+] Firing frames reduced from 24 to 18
+
+==Hi.P.E Gun==
+[+] fixed issue with weapon stalling while trying to fire on an empty clip
+[+] hud graphic was modified
+
+== MediCarbine ==
+[+] hud graphic was modified
+
+==Slam Cannon==
+[+] fixed issue with weapon stalling while trying to fire on an empty clip
+[+] updated weapon description
+[+] Adjust reload mechanics to make chain blastjumping easier.
+[+] shots now have damage falloff, doing between 50-75 instead of always doing 75 direct damage (minus splash)
+
+==Grappling hook==
+[+] cooldown increased from 2 seconds to 3
+[+] can no longer cling to skyboxes
+[+] hook can detatch early by pressing altfire again
+
+==Proxy Mine==
+[+] max mine count reduced from 3 to 2
+[+] Altered cloaking graphics to be a bit easier to detect
+[+] Horizontal Knockback reduced from 70 to 40
+[+] vertical knockback reduced from 60 to 30
+[+] proxymines placed near another proxymine tied to you will erase the pre-existing proxy mine.
+
+==TAG Missile==
+[+] improved targeting system by using similar code employed by Mending Tool and Medicarbine
+[+] Missile now speed up when foes are 450 map units away from it
+[+] homing ramps up faster while rushing
+[+] projectile speed reduced from 20 to 15
+
+==Thrice Gun==
+[+] Max damage per shot decreased from 80 to 65
+[+] Minimum damage decreased from 45 to 40
+[+] Knockback class changed to Spreadshot 2, which has weaker knockback than Spreadshot 1
+
+==wave beam==
+[+]Cooldown reduced from 22 seconds to 10
+
+==TimeBomb==
+[+] Health reduced from 250 to 150
+
+==Health Generator==
+[+] levels up after every second spawn instead of every third
+[+] pickups restore 125 health instead of 70% health
+
+==bug fixes==
+[+] fixed allied health bars on blue team not showing for healers.
+[+] greatly improved blastjumping mechanics.
+[+] made fixes to the targeting system.
+[+] Mending tool no longer heals or sticks onto dead allies
+[+] Optimized lightscreen for low ping players
+
+[+]====================|Beta A3|========================[+]
+
+==General==
+[+] explosive knockback now has linear falloff 
+[+] added a case so that loadouts can be changed after respawns in some mods
+
+[+] introduced 5 new weapons
+[+++] Crossbow
+[+++] Point Buster
+[+++] Crisperizer
+[+++] Flame Tongue
+[+++] HotShot
+
+[+] introduced 3 new subweapons
+[+++] TopGrenade
+[+++] BuddySentry
+[+++] Barrier
+
+==Blitzer==
+[+] adjusted reload to add more delay frames from reloading on an empty clip
+
+==light screen==
+[+]Increased coverage to being a half circle
+[+]Temporarily removed voxel
+[+]health increased from 900 to 1200
+
+==Slam Cannon==
+[+] reduced projectile speed from 60 to 45
+[+] reduced projectile gravity from 1.3 to 1.1
+[+] Splash AOE increased from 200 to 250
+[+] KnockBack AOE increased from 185 to 250
+
+==MiniBomb==
+[+] KnockBack AOE increased from 185 to 280
+
+==Proxy Mine==
+[+] KnockBack AOE increased from 220 to 280
+
+
+[+]====================|Beta A4|========================[+]
+==General==
+[+] resolved the issue with strange icons showing.
+[+] Introduced new weapon
+	[+] Basher
+[+] Introduced new subweapon
+	[+] RotaryShell
+	
+==HotShot==
+[+] due to a strange desynch quirk with lightscreen, Fireballs can no longer bounce off walls
+
+==Buddy Sentry==
+[+] Reticle is adjusted so as not to obscure the victim's view
+
+==Hi.P.E.R Beam==
+[+] adjusted the beams so they show the right color online
+
+==ThriceGun==
+[+] Added a 10 frame prefire delay with sound effect
+
+==Medicarbine==
+[+] addressed the bug where it heals deployables.
+
+[+]====================|Beta A5|========================[+]
+==General==
+[+] effective range of all weapons increased by 100 map units
+
+==Grappling Hook==
+[+] Reduced pull force from 6 to 3
+
+==Basher==
+[+] Increased time in frames to reach maximum firing speed from 32 to 56
+
+==Proxy Mine==
+[+] closeness threshold reduced from 150 to 40
+[+] Mine limit increased from 2 to 3
+[+] blast radius reduced from 280 to 180
+[+] splash damage reduced from 95 to 55
+[+] Minimum blast radius increased from 160 to 180
+
+==TimeBomb==
+[+] increased initial frames before countdown from 4 to 10
+[+] Decreased counting frames from 17 to 10
+[+] splash radius reduced from 460 to 300
+[+] min splash radius reduced from 250 to 180
+[+] splash damage reduced from 300 to 150
+[+] Overal reduction in size
+[+] overal drop in throwing speed
+
+==Health Generator==
+[+] Can now have up to 3 generators out
+
+==Buddy Sentry==
+[+] will now retaliate to enemies that damage it
+[+] Detection radius increased from 550 to 750
+[+] Detection forget radius increased from 700 to 800
+[+] projectile speed increased from 90 to 120
+
+==SlamCannon==
+[+] increased clip from 3 to 6
+[+] reduced reload delay frames from 26 to 24
+[+] increased reload cycle time from 19 to 24
+[+] vertical knockback increased from 80 to 130
+[+] Arc has been adjusted to be more straight
+[+] minimum direct hit damage reduced from 50 to 10
+[+] Maximum direct hit damage reduced from 75 to 25
+
+==Tag Missile==
+[+] targeting area increased
+[+] NEW MECHANIC: tap the fire key to launch faster, 
+	non homing shots. hold to target for a homing shot. 
+	if you have no target, you will shoot a fast shot
+[+] vertical Knockback increased from 18 to 70
+[+] Non homing missiles have a higher knockback and splash radius than homing 
+	missiles
+	
+==LightScreen==
+[+] no longer dies when the person that deployed it dies
+
+==BoosterPack==
+[+] speed penalty while flying
+[+] fuel threshold to start has been reduced by 30%
+==Minibomb==
+[+] Arc has been adjusted to be more straight
+[+] Direct hit damage reduced from 75 to 20
+
+==ThriceGun==
+[+] mininum damage reduced from 40 to 20
+[+] Maximum damage reduced from 65 to 40
+[+] effective range set to mid ranged
+[+] reduced prefire delay from 10 frames to 6
+
+==Crossbow==
+[+] maximum damage increased from 50 to 65
+[+] damage drop rate scaled down from 15 map units to 10
+[+] reload frames increased from 18 to 21
+
+==Hi.P.E gun==
+[+] Max damage reduced from 85 to 80
+[+] Projectile speed increased from 355 to 425
+[+] Firing frames increased from 22 to 24
+
+==TopGrenade==
+[+] Arc has been adjusted to be more straight
+[+] Throw speed increased from 15 to 35
+[+] Turning sharpness increased from 12 to 35
+[+] top speed reduced from 12 to 8
+
+==BuddySentry==
+[+] Shots possess blast knockback to them
+
+==MediCarbine==
+[+] minimum damage increased from 24 to 30
+[+] maximum damage increased from 32 to 45
+[+] Maximum healing increased from 80 to 200
+[+] Minimum healing increased from 30 to 50
+[+] effective range set to Long Ranged
+
+==Mending tool=
+[+] minimum healing increased from 2 to 20
+
+==BusterGun==
+[+] rapid fire shots have reduced power
+
+==Blitzer==
+[+] Firing frames increased from 18 to 24
+[+] Reload cycle frames increased from 10 to 14
+
+[+]====================|Beta A6|========================[+]
+
+==General==
+[+] Introduced the following weapon
+	[+] Stinger
+[+] Introduced the following subweapons
+	[+] Rotary Shield
+	[+] Barrier
+
+[+] scaled down Mid Weight penalty from 0.15 to 0.07
+[+] scaled down Heavy Weight Penalty from 0.2 to 0.15
+[+] Poison tick damage reduced from 15 to 4
+[+] Poison duration increased from 10 seconds to 15 seconds
+
+==flametongue==
+[+] reclassified as a Mid weapon
+
+==Thrice Gun==
+[+] reclassified as a light weapon
+
+==Mending tool=
+[+] minimum healing Decreased from 20 to 18
+
+==Repidifier==
+[+] Damage knockback reduced from 2 to 1
+
+==Basher==
+[+] increased attenuation of all sounds related to it
+		in other words: you can hear it from further away
+		
+==Hi.P.E gun==
+[+] Firing frames reduced from 24 to 22
+[+] Pump animation no longer canceled after firing the final shot
+[+] initial clip reload frames reduced from 19 to 8
+
+==Blitzer==
+[+] Pump animation no longer canceled after firing the final shot
+
+==Rotary Shell==
+[+] speed penalty while shielded
+
+[+]====================|Beta A8|========================[+]
+[+] Introduced the following weapon
+	[+] VoltSpear
+	[+] Blaster
+
+==BusterGun==
+[+] Projectile speed reduced from 185 to 125
+
+==Crossbow==
+[+] Projectile speed increased from 175 to 225
+[+] reload frames decreased from 21 to 14
+
+==Repidifier==
+[+] Minimum damage increased from 6 to 8
+[+] maximum damage increased from 8 to 12
+
+==CureSpray==
+[+] Lowered movement speed from 25 to 15
+[+] now casts a passive regen instead of healing in a radius
+
+==RotaryShell==
+[+] Health reduced from 100 to 80
+
+==Basher==
+[+] stays revved for 45 frames once it reaches max speed
+	[+] cannot switch weapons or reload while revved
+[+] Clip size increased from 100 to 150
+[+] upwards knockback from shooting the floor removed.
+
+==FlameTongue==
+[+] Ember frequency increased from every 16 frames to every 10
+[+] close ranged hitbox damage increased from 4 to 6
+[+] Mid ranged hitbox damage increased from 3 to 4
+
+[+]====================|Beta A9|========================[+]
+
+==Blaster==
+[+] heat gain on fire increased
+[+] passive heat loss decreased

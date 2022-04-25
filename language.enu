@@ -1,0 +1,61 @@
+[enu default]
+//DOT Obituaries
+OB_Burner = "%k Eliminated %o";
+OB_Poisoner = "%k Eliminated %o";
+
+OB_GENERIC = "%k Eliminated %o";
+
+OB_BUSTERGUN = "%k Eliminated %o";
+OB_CRISPERIZER = "%k Eliminated %o";
+OB_SLICER = "%k Eliminated %o";
+OB_POINTBUSTER = "%%k Eliminated %o";
+OB_SWEEPER = "%k Eliminated %o";
+OB_HOTSHOT = "%k Eliminated %o";
+
+OB_GRENADELAUNCHER = "%k Eliminated %o";
+OB_LONGBOMBER = "%k Eliminated %o";
+OB_NAPALMER = "%k Eliminated %o";
+OB_BAZZOKA = "%k Eliminated %o";
+OB_BASHER = "%k Eliminated %o";
+
+OB_RANGEDRIFLE = "%k Eliminated %o";
+OB_CROSSBOW = "%k Eliminated %o";
+OB_BLASTBOW = "%k Eliminated %o";
+
+OB_MEDIPISTOL = "%k Eliminated %o";
+OB_MEDIRIFLE = "%k Eliminated %o";
+OB_MENDINGTOOL = "%k Eliminated %o";
+
+OB_BLITZER = "%k Eliminated %o";
+OB_MEGABLITZER = "%k Eliminated %o";
+OB_REPIDIFIER = "%k Eliminated %o";
+OB_HIPEGUN = "%k Eliminated %o";
+OB_THRICEGUN = "%k Eliminated %o";
+
+OB_MINIBOMB = "%k Eliminated %o";
+OB_PROXYMINE = "%k Eliminated %o";
+OB_MANNTURRET = "%k Eliminated %o";
+OB_TIMEBOMB = "%k Eliminated %o";
+OB_STINGER = "%k Eliminated %o";
+OB_ICECAPSULE = "%k Eliminated %o";
+OB_WAVEBEAM = "%k Eliminated %o";
+OB_TOPGRENADE = "%k Eliminated %o";
+
+OB_ICECAPSULE = "%k Eliminated %o";
+OB_FLAMETONGUE = "%k Eliminated %o";
+OB_SLAMCANNON = "%k Eliminated %o";
+OB_TAGMISSILE = "%k Eliminated %o";
+OB_VoltSpear = "%k Eliminated %o";
+
+
+
+
+//██████████████████████████████████████████Join Menu████████████████████████████████████████
+MNU_JOIN1 = "Choose your setup of a Primary, Secondary,\nand Subweapon before joining";
+MNU_JOIN2 = "\c[MenuBlue]Auto Select \c[MenuGreen]picks a team for you.";
+
+MNU_JOIN3 = "\c[MenuRed]Class \c-Select";
+MNU_JOIN4 = "\c[MenuOrange]Class \c-Text";
+MNU_JOIN5 = "\c[MenuYellow]Class \c-Specific Menu";
+MNU_JOIN6 = "\c-Auto Select";//"\c[MenuBlue]Auto\c--Select";
+MNU_JOIN7 = "\c[MenuCyan]Original Selection";

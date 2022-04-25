@@ -1,0 +1,298 @@
+/*=============================
+for a while, a few members of our staff have been engaging in a bit of mad science,
+combining the componends of two or more weapons into one greater tool. most of those
+endeavors ended in thing that we in neumodian enterprices would deem "impractical",
+however, we did have a winner here.
+
+the Precision Energy Carbine Rifle, or the P.E.C.r is the synthesis of everything
+great about the ranged rifle, the repidifire, and the Hi.P.E gun all bundled into
+one amazing yet tactical weapon.
+
+using an adaptive variant of the same energy the Hi.P.E gun uses, this weapon
+has a steady, automatic, and rather precise fire while unscoped, but a pinpoint
+accurate shot when scoped in!
+*///===========================
+
+actor PECr : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 35
+Weapon.SlotNumber 1
+Weapon.SelectionOrder 1
+scale 2.0
+Obituary "$OB_RANGEDRIFLE"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "PECrClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+WSNP B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+SNPR B 0 
+RedReady:
+"####" A 0 A_jumpifinventory("ZoomMode",1,"Ready2")
+"####" A 1 A_WeaponReady
+"####" A 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" A 0 A_Jumpifinventory("PECrClip",1,"Ready")
+Goto Reload
+Ready2:  //zooom ready
+"####" O 1 A_WeaponReady(WRF_NOSWITCH)
+"####" O 0 //A_Giveinventory("shootingspeeddown",1)
+"####" O 0 A_ZoomFactor(3.5)
+"####" O 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" O 0 A_Jumpifinventory("PECrClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_jumpifinventory("ZoomMode",1,"ScopeFire")
+"####" B 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" B 0 A_GiveInventory("PECrShooter")
+"####" BJJKK 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
+"####" A 2 
+"####" C 0 A_REfire
+goto Ready
+
+ScopeFire:
+"####" B 0 A_jumpifinventory("PECrClip",5,1)
+Goto Noammo
+"####" O 0
+
+"####" O 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" O 0 A_GiveInventory("ScopedPECrShooter")
+"####" B 0 A_Takeinventory("PECrClip",4)
+"####" OOOOO 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
+"####" O 12 
+"####" O 0 A_REfire
+goto Ready
+
+//===Altfire Overrive |Zoom|
+altfire:
+"####" E 0 A_jumpifinventory("ZoomMode",1,"Takezoom")
+"####" E 0 A_PlaySound("weapon/rminestick")
+"####" E 0 A_ZoomFactor(3.5,0)
+"####" MEEE 2 A_GiveInventory("ZoomMode")
+goto Holdgutter
+Takezoom:
+"####" E 0 A_PlaySound("weapon/rminestick")
+"####" E 0 A_ZoomFactor(1.0,0)
+"####" EEMM 2 A_TakeInventory("ZoomMode")
+goto Holdgutter
+Holdgutter:
+"####" "#" 1
+"####" "#" 1 A_Refire("Holdgutter")
+goto Ready
+
+NoAmmo:
+"####" A 1
+"####" B 0 A_Jumpifinventory("PECrClip",5,"Ready")
+Reload:
+"####" B 0 A_ZoomFactor(1.0,0)
+"####" B 0 A_TakeInventory("ZoomMode")
+/*
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+*/
+//"####" B 44 
+
+"####" QRS 2
+"####" T 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" TUQ 3
+"####" QRS 2
+"####" T 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" TUQ 3
+"####" QRS 2
+"####" T 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" TUQ 3
+
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+/*
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+*/
+"####" B 0 A_Giveinventory("PECrClip",35)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" A 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor PECrClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 35
+}
+
+actor ZoomMode : inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor PECrShot : LinearBullet
+{
+Damage (6 + ACS_ExecuteWithResult(DamageRate,6,400,55))
+radius 8
+height 12 
+}
+
+	actor PECrShot_BLUE : PECrShot
+	{}
+
+	actor PECrShot_RED : PECrShot
+	{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47"}
+	
+actor C_PECrShot : PECrShot
+{
+Speed 355
+Damage (10 + ACS_ExecuteWithResult(DamageRate,25,300,45))
+radius 8
+height 10
+scale 3.5
+MissileType "PECrTrail"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0  
+TNT1 A 0
+Spawn2:
+CRBM A 0 
+CRBM A 2
+Loop
+Death:
+CRBM A 0 A_Stop
+CRBM A 1 A_Spawnitemex("HiPEgunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor C_PECrShot_BLUE : C_PECrShot
+{Speed 355 MissileType "PECrTrail_BLUE"}
+
+actor C_PECrShot_RED : C_PECrShot
+{Speed 355 MissileType "PECrTrail_RED"}
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor PECrPuff1 : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor PECrTrail : FXActor_B
+{
+Alpha 0.6
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0 
+LASH AAA 4
+LASH AAA 1 A_Fadeout
+stop
+}
+}
+
+	actor PECrTrail_BLUE : PECrTrail
+	{
+	}
+
+	actor PECrTrail_RED : PECrTrail
+	{
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47"
+	}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor PECrShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("PECrShot",0,1,4,8)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("PECrShot_RED",0,1,4,8)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("PECrShot_BLUE",0,1,4,8)
+TNT1 A 1
+stop
+}
+}
+
+
+actor ScopedPECrShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("C_PECrShot",0,1,4,8)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("C_PECrShot_RED",0,1,4,8)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("C_PECrShot_BLUE",0,1,4,8)
+TNT1 A 1
+stop
+}
+}

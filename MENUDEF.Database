@@ -1,0 +1,301 @@
+//=================================
+//_________|Weapon_A Database|_______
+//=================================
+OptionMenu "WepADataMenu"
+{
+    Title "Primary Weapon Database"
+	StaticText "Entry Name"
+	Option "-", "WepADataBase", "WepOptionsA"
+	StaticText ""
+		Option " ", "WepADataBase", "WepInfo_A"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+/*
+0, "\cvBlaster		\ci::Medium::"
+1, "Hi.P.E Gun		\ci::Medium::"
+2, "HiPERBeam		\ci::Medium::"
+3, "SLAM Cannon		\cr::Heavy::"
+4, "\cdMediCarbine		::Light::"
+5, "Crossbow		::Light::"
+6, "FlameTongue		\ci::Medium::"
+7, "VoltSpear		\cr::Heavy::"
+8, "TAG Missile		\cr::Heavy::"
+9, "\cvBasher		\cr::Heavy::"
+*/
+
+OptionValue WepInfo_A
+{
+//-1, "Null"
+0, "A dependable assault weapon built \nto cover it’s wielder in every \npossible circumstance with solid \npower, range, and moderate shot \naccuracy and with enough ammo \nto get you through a scuffle or two \nwithout having to restock mid way."
+1, "The High Precision Energy gun, or \nHi.P.E gun for short; is a powerful \npump action weapon that boasts \nsupreme accuracy at great range. \nAble to quickly  fire shots back to \nback, the Hi.P.E Gun is the go-to \nweapon for ranged combat.  in \naccurate hands it has the power to \ntake out any target in a Hurry! it's \nclip is small and takes in ammo one \nround at a time, so this weapon has \na fair bit of downtime to account for."
+2, "Equal parts laser cannon and railgun. \nthe HiperBeam launches super condensed \nenergy beams that can hit distant \ntargets \ca instantly and without \nany loss in power,\cj making it the \nsuperior choice for extreme combat \nranges. \n\nit's shots can be charged for more \nconcentrated damage but the shot \nwill auto fire if held too long to \nprevent heat damage on the weapon \nitself. beware of the kickback \nthough, it's fierce!"
+3, "an explosive launching cannon that \nfires specialized minibombs that \nexplode on contact with anything. \nthe #1 choice for area damage \nwithin the neumodian arsenal! it's 6 \nshot clip gives you plenty of bang for \nyour buck but don't get too trigger \nhappy, not only can you blow \nyourself up but you'll have to reload \none minibomb at a time."
+4, "A device popular with field \nmedics, the Medicarbine \nlaunches specialized darts \ncontaining a treatment nano-\nserum to offer long distance \nfirst-aid. the same rounds can \nstill be used like regular \nbullets against threats.\n\nwithin the Neumodian \ncompetitions, the medicarbine \noffers some aim assistance when \ntargeting your teammates and \n\cahas the dubious trait of \nbypassing shields."
+5, "The signature weapon of a rival \nspecies, but with neumodian \nquality modernizations. This \nlightweight ranged weapon can \nquickly reload after each shot. \ngive the dart time to prime to \nfire poison laced darts that \nnegate all healing. \n\na good fit for marksmen on \nthe move who'd like to be a \nconstant threat to the enemy \nteam."
+6, "this weapon spews flames through \na whip-like aparatus that earns \nthe weapon it's name, the \nflametongue is a potent zoning \nweapon that \caignores shields\n\cj and can force multiple \nopponents back in a torrent of \nflames while setting them \nablaze in the process. and \nwhile firing it can emit slow \nmoving embers to catch foes \njust out of reach. \n\nalthough not a fast killer the \nweapon can be hard to approach, \nmaking it useful as a defensive \ntool."
+7, "An electrical beam cutter specially \ndesigned to cut through shields \nand foes like butter. the \nvoltspear does extra damage to \nprojected shields and deals most \nof it's damage up close, despite \nthat it holds a surprising amount \nof range, and hits all things \ninstantly.\n\nthe weapon has a near endless \nsupply of ammo but can build heat \nrather quickly."
+//8, "The T.A.G Missile launcher is a hefty \nweapon that launces guided missiles. \nhold the trigger to commence the \ntargeting system and release to fire once \nyour target is locked in! guided missiles \nare slow and noisy, but are more \naggressive towards airborne targets. \n\nconfident users can forgo the lock-on \nsystem to launch faster, more \ndestructive missiles."
+8, "one of the biggest handheld \nweapons in our arsenal. the \nBasher Gating gun will terminate \nanything in your way with a \nheavy barrage of plasma fire. \nand it comes with a personal \nshield projector to help you \nrule the battle field. \n\nthe basher is noisy and takes \na bit to get going however and \nit can take a while to reload if \nyou run completely out. This bad \nboy take's commitment."
+}
+
+
+//=================================
+//_________|Weapon_B Database|_______
+//=================================
+OptionMenu "WepBDataMenu"
+{
+    Title "Secondary Weapon Database"
+	StaticText "Entry Name"
+	Option "-", "WepBDataBase", "WepOptionsB"
+	StaticText ""
+		Option " ", "WepBDataBase", "WepInfo_B"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+/*
+0, "BusterGun"		
+1, "\cvBlitzer"		
+2, "Repidifier"		
+3, "Thrice Gun"		
+4, "\cdMending Tool"		
+5, "\cnSubwich"		
+6, "Point Buster"		
+7, "Crisperizer"		
+8, "Hotshot"		
+9, "Stinger"		
+10, "Mine Launcher"
+11, "\cdProtector"
+*/
+
+OptionValue WepInfo_B
+{
+//-1, "Null"
+0, "A ever reliable semi auto hand \npistol featuring a warp-reload \nmechanism. allowing it to \neffectively work without ever \nneeding to reload. the system \nhowever builds heat when fired \ntoo quickly and upon overheating \ncannot be used till it fully cools. \nThe buster gun's flexibility and \nconstant uptime makes it a solid \nfit in nearly any loadout. the \nbustergun can autofire if the \ntrigger is held down."
+1, "the Blitzer offers close quarters \nfirepower through a circular \nspread of projectiles with a \nprojected shield to help close \nthe gap. the blitzer's shield \ncan also be used for defense \nagainst ranged threats. and \nwill suppress explosives that \nhit it directly. \n\nstrong in close quarters, the \nBlitzer's shield gives it added \nutility through self defense, \nmaking it a great option for \ngetting through enemy fire."
+2, "This oddly named machine gun fires a \nrapid barrage of high velocity shots, \n\cafaster than the trail visible to the \nnaked eye,\cj though it has some \nspread it can still hit distant targets \nconsistently. while it also bosts a \nlarge clip and a brisk reload, it's \npower is very low however. the \nrepidifier's weak but assured damage \nmakes it great for support fire, or for \ncleaning up weakened foes."
+3, "There's been many attempts through \nour kind's history to weaponize the \nmost abundant resource we had, \nice; and the Thrice gun was our \nmost successful attempt in generations, \n\nthis rifle flash freezes a triplet of \nsolid icicles to launch in a 3-way \nspread for wide mid-ranged \ncoverage, and at point blank the \nweapon deals tremendous damage."
+4, "The signature product of a \npartnership with an \norganization for interstellar \nmedicine. the mending tool is \nan advanced portable treatment \ndevice capable of restoring all \nmanners of injuries and \ninfections, within the \nneumodian competitions however \nit mearly restores hitpoints.\n\nwith a locked-on stream of \nhealing. this device allows for \nconsistent healing with \nultimate freedom. the de-facto \nchoice for any primary healer."
+5, "An artisan quality sandwich \ntucked into a time control \naparatus, holding it in a \nstasis of perfect freshness and \nrewinding it after every bite. \n\nbeing a source of on demand \nhealth regeneration, it is the \nultimate pick-me-up! but be \ncareful while eating as your \nguard will be down, and\n\cataking damage will leave you \nunable to enjoy the meal."
+6, "A crafty weapon that fires Arrow \nshaped projectiles that head \ntowards the direction the gun \nis pointing at. though some may \ncall it as a silly and novel \ndevice. the ability to curve \nshots around terrain and into \nfoes is nothing to be trifled \nwith. in the right hands you \ncan mess with the minds and \nmovements of your opponent and \nfight from relative safety!"
+7, "designed to work against \nmegafauna with hide tough \nenough to resist most weapons, \nthe crisperizer fires large \nnuclear blasts to cook the \nthreat from the inside-out. \n\nthe version used in the \ncompetitions do not work this \nway for obvious reasons, \nhowever the crisperizer serves \nas a well rounded weapon that \n\cadeals critical damage to \nburning targets."
+8, "Launches a rapid volley of burning \nmaterial that bounces along the \nground. this weapon might seem \npointless in a direct fight but \nit can keep approaching foes at \nbay with a dense barrage of \nbouncing flames. and if the foe \nis too deep  into the weapon's \nfire they will go up in flames \nthemselves. \n\nworks great at high \nground too!"
+9, "sharing it's origins with the \nCrossbow, the stinger has been \nelevated from a gangly crank \noperated dart shooter to the \nrapid needler gun of today. The \nstinger sprays poison needles on \ntrigger pull that can poison a \ntarget if enough of them land in \nsuccession. the needles also do \ncritical damage to poisoned \ntargets. \n\nwith steady hands the stinger \ncan be deadly up close, but at \nrange it is weak and inaccurate."
+10, "A device that launches cylindrical \nmagnetic proximity mines that \ndetonate once an identified enemy \ndraws near. four can be placed at \nany given moment.\n\nthe mines cannot be placed too \nclose to one another and have a \nbrief delay before exploding. so \nusers will need to be crafty with \nwhere they place them."
+11, "a specialized medical device that \nencases an ally in a protective \nbarrier that heals the subject. \nthe barrier can reduce a single \nhit by half of it's damage but \nwill break the shield and end the \nhealing. the protector can also \nblock statuses that would have \neffected the subject. \n\nthe shield remains until the \nsubject is fully healed and \nlingers for 5 seconds afterwards. \nmaking this a handy tool for \nroaming teammates who need healing \non the go."
+}
+
+
+//=================================
+//______|SubWeapon Database|_______
+//=================================
+OptionMenu "SubWepDataMenu"
+{
+    Title "SubWeapon Database"
+	StaticText "Entry Name"
+	Option "-", "SubWepDataBase", "SubWepOptions"
+	StaticText ""
+		Option " ", "SubWepDataBase", "SubWepInfo"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+/*
+0, "Minibomb"
+1, "TopGrenade"
+2, "\cnLight Screen"
+3, "\cnPower Dart"
+4, "\ciGrappling Hook"
+5, "\cdHeal Patch"
+*/
+
+OptionValue SubWepInfo
+{
+//-1, "Null"
+0, "A handheld impact explosive that \nricochets off walls. simple to use \nand quick to prepare. some have \ngone to even ride the blast to \nreach higher areas. a risky tactic \nthat makes the mini bomb double as \na mobility tool as well.\n\nThe minibomb's splash damage and \nmobility utility makes it a must-\nhave subweapon for any mobile \ndamage dealer."
+//1, "A Deceptively Lethal Gadget, the \nTopGrenade is an explosive on a \nspinning gyro that doggedly \npursues the first target it \ndetects until it explodes once it \ncomes Close Enough. shooting it will \nalso get it to explode as well.\n\nthe top grenade is persistent and \ncan chase foes up stairs of off \ncliffs. it's a tactical explosive \nthat can be used to flush foes out \nor alter their movements."
+1, "Deploys a curved energy shield that \nintercepts enemy fire but allows \nyou and your team to shoot through \nit. this subweapon is a great \nspace making tool as it can absorb \na lot of damage and provide cover \nunder heavy fire. and if \nexplosives hit it, the blast will \nbe suppressed!\n\nbe wary of the sparks it emits \nas that's a sign that it's about \nto break."
+2, "this dart gun launches darts that \ncan inject an ally with an \nenergizing substance. allowing \nthem to do critical damage at all \ntimes. the effect is brief but \nwhen timed right can lead to \ndevastating results.\n\ncrit boosted allies are highly \nvisible and easily heard through \nthe audible energy being emitted. "
+3, "a wrist mounted device that can let \nyou zip across the map at high \nspeeds using a retracting claw and \nwire. you can detach the hook \nearly to control where you land or \nride on  the momentum all \cawhile \nreducing the recharge time.\cj \n\nclear great distances and get to \nhigh ground fast, or perform quick \nmaneuvers in mid combat. when \nmobility is what you need, the \ngrappling hook will have you \ncovered."
+4, "a recent venture in technological \naromatherapy. the heal patch is a \ndevice that clings to surfaces and \nplayers alike and releases \naromatic vapors to slowly restore \nhealth in an area. \n\nit's easily destroyed but clings \nto the backs of teammates and \nenemies when used on them. making \nit tough to shoot off."
+5, "A Highly potent fragmentation bomb \nWith a small, concentrated blast \ncapable of blowing apart hostiles \nand leaving sturdier foes severely \nDamaged."
+}
+
+
+//=================================
+//______|Mechanics Glossary|_______
+//=================================
+OptionMenu "MechGlossMenu"
+{
+    Title "Mechanics Glossary"
+	Option "", "MechGlossindex", "MG_name"
+	StaticText ""
+		Option " ", "MechGlossindex", "MG_info"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+OptionValue MG_name
+{
+//-1, "Null"
+0, "Weapon Weight"
+//1, "Combat Weapons"
+//2, "Tactical Weapons"
+//3, "Heavy Weapons"
+//4, "Medical Weapons"
+//5, "Mobility Weapons"
+//6, "Utility Weapons"
+7, "Blast Jumping"
+//8, "KickBack riding"
+9, "Critical Hits"
+10, "Burning"
+11, "Poison"
+12, "Detoxification"
+13, "Shields"
+//14, "Shielded Weapons"
+15, "weapon Heat"
+16, "Healing ramp"
+}
+
+OptionValue MG_info
+{
+//-1, "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
+0, "Weapon Weight is a \nfactor specific to primary \nweapons and is a \ndirect influencer of a \nplayer's movement speed. \nlight weaponry incur no \nspeed penalty, but medium \nand heavy weaponry will \nenact a move speed \npenalty based on their \nquantity."
+1, "Weaponry good at one \nthing and one thing \nalone, doing damage. \nnecessary for combat \ndriven roles, combat weapons \nare efficient at removing \nnumbers from enemy healthbars \nand typically don't have \nany extra effects to \nthem beyond that"
+2, "Tactical weapons offer many \nauxilary functions such \nas status infliction, \nstationary deployment, \nor unique projectile behavior \nall at the cost \nof direct raw power. \n\nwhile usefull in more \nspecialist roles, some can \nmake a difference in \ncombat roles when paired \nwith the right weapon."
+3, "The 'big guns' if \nyou will, heavy weapons \nare large scale armaments \ncapable of toppling multiple \nfoes though strong explosive \ndamage or a heavy barrage \nof fire. \n\nwhile impactful, the natural \nshortcoming these weapons \nhave are their hefty \nspeed penalties and slow \nhandling. as such these \naren't the best choice \nfor solo combat."
+4, "created through a partnership \nwith several interstellar \nmedical organizations, medical \nweapons are gadgets specially \ndesigned to treat injury, \nthough in the context \nof these competitions, they \nmerely refill HP bars. \n\n\cdidentified by having green \nnames\cj, the possession of \nthese classifies the wielder \nas a 'medic' and \ngrants them the ability \nto see the health \nof allies."
+5, "\ciIdentified by an Orange \nname\cj, Mobility weapons are \ntools that do no \nreal damage but grant \nsome significant movement \nskill to the wielder."
+6, "\cnIdentified by a blue \nname\cj, Utility weapons are \ngadgets that possess no \ncombat potential, but rather \noffer helpfull auxillary \nfunctions."
+7, "A Bold strategy that employs \nthe use of an explosive \nweapon to propell the \ntarget into high places \nor across long stretches, \nto blast jump one \nmust first be airborn \nand then trigger an \nexplosion at an \nangle towards the direction \nthey wish to head \ntowards."
+8, "A tactic specific to the Blaster, \nKickback riding is engaged by \naiming downward while firing, \nthe weapon will thrust \nyou up into the air, \ngiving the user of \nthis weapon some verticality"
+9, "Instances of high impact \ndamage usually achieved by \ninflicting harm under specific \nconditions, such as using \na specific weapon on \na foe in an \naltered state. these never \noccur at random and \ncause the victim to \ntake \catriple the damage."
+10, "An altered state where \nthe subject takes rapid \ndamage over time for \na short duration, \nmost fire based weapons \ncan inflict this and \nsome heat weapons can \nexploit the state for \ncritical damage."
+11, "A long lasting altered \nstate that slowly does \ndamage but also blocks \nall forms of healing. \n\nhealth pickups can cure \nit without healing and \nmedical weapons can detoxify \nthe player over time. \nsome weapons can do \ncritical damage to \npoisoned targets"
+12, "\cdSpecific only to medical tools,\cj \ndetoxification occurs when \ntrying to heal a \npoisoned target. \n\nno health is recovered \nbut the poison is \ngradually removed. detox \nlevels are indicated by \nthe color of the \nsmoke particles released \nduring the process."
+13, "projected energy barriers that \ncan block projectiles and \nsuppress the explosion from \nexplosives if they make \ndirect contact. cannot block \n splash damage however."
+14, "\cvIdentified by a cyan name\cj, \nShielded weapons have a \nbuild in shield projector \nto give the wielder \na persistent frontal barrier \nwhen at hand. the \nbarrier draws from a \n200 HP pool that \nreplenishes while the \nweapon is offhand. \n\nsome weapons may drop \nthe shield when firing."
+15, "Certain weapons utilize \nsystems that allow the \nweapon to never need \nto reload, but come \nat the consequence of \noverheating from sustained use. \n\nwhen a weapon overheats \nit becomes unuseable till \nit cools down. however \nyou can still switch \noff of the weapon."
+16, "When a player has been damaged, \nthere is a five second window \nwhere healing from medical tools \nget reduced at a rate \nproportionate with how long ago \nthe subject was last harmed. this \neffects how well certain medical \ntools heal in combat  as different \ntools offer different minimum \nhealing rates. \n\nthis is important to keep in \nmind as players under a supply of \nhealing are not invincible under \nsustained fire, especially from \nrapid weapons."
+}
+
+//=================================
+//______|Suit Database|_______
+//=================================
+OptionMenu "SuitDatabase"
+{
+    Title "Mechanics Glossary"
+	Option "-", "Roleindex", "Suit_Name"
+	Option "Speed", "Roleindex", "Suit_SpeedType"
+	Option "Armor", "Roleindex", "Suit_ArmorType"
+	StaticText ""
+		Option "Ability", "Roleindex", "Suit_Ability"
+		Option " ", "Roleindex", "Suit_Info"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+
+
+}
+
+OptionValue Suit_Name
+{
+//-1, "Null"
+0, "Standard Suit (Megaman)"
+1, "Medi Suit"
+2, "Defense Suit"
+3, "Barrier Suit"
+4, "Jet Suit"
+5, "Armored Suit"
+}
+
+OptionValue Suit_Ability
+{
+//-1, "Null"
+0, "\cfNone"
+1, "\cfHealth Generator"
+2, "\cfBuddy Sentry"
+3, "\cfBarrier"
+4, "\cfBoosterPack"
+5, "\cfRotary Shell"
+}
+
+OptionValue Suit_Info
+{
+//-1, "Null"
+0, "Standard issue combat suit, doesn't \nhave much going for it but it's\ncomfy and will help keep you from \ndying, somewhat. some wise guy \nout there say something along the \nlines of 'when nothing exists, all \nthings are possible', I guess you \ncould apply that to this suit \nmaybe?"
+1, "A Lightweight suit fitted with health \nspawning platforms to keep the \nuser and their squad alive and \nkicking. the health generators \nimprove in efficiency with use, and \nup to 3 can be stationed per \nperson at any time."
+2, "designed for fortification, this suit \npacks equipment for self \ndeploying sentry guns to add to \nthe wearers firepower. keep foes \nat check no matter where they \ncome or how many there are. up \nto two turrets can be stationed per \nperson."
+3, "A suit fitted with a Barrier Projector \nthat Encases the user and their \nTeam in a protective bubble, \nThe Barrier can block a single \nHit in it's entirity, which \ncan save the user from certain doom."
+4, "A lightweight suit fitted with a \nretractable jet pack that allows the \nwearer to fly for short periods of \ntime. take to the skies and wipe \nout foes from a high vantage point. \njust keep an eye on the fuel \ngauge."
+5, "A Heavily armored battle suit \nwith a self defense system \nthat spawns rotating shields \naround the wearer. adding more \nProtective coverage when needed. \nmovement is slowed while the \nShields are active however."
+
+}
+
+OptionValue Suit_SpeedType
+{
+//-1, "Null"
+0, "\ck**"
+1, "\ck***"
+2, "\ck**"
+3, "\ck**"
+4, "\ck***"
+5, "\ck*"
+
+}
+
+OptionValue Suit_ArmorType
+{
+//-1, "Null"
+0, "\ck**"
+1, "\ck*"
+2, "\ck**"
+3, "\ck**"
+4, "\ck*"
+5, "\ck***"
+}

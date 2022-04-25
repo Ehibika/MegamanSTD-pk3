@@ -1,0 +1,117 @@
+actor RespawnGhostEnable : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+	states
+	{
+	Pickup:
+	TNT1 A 0 A_ChangeFlag("NOCLIP",1)
+	TNT1 A 0 A_ChangeFlag("SOLID",0)
+	TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",1)
+	TNT1 A 0 A_ChangeFlag("INVULNERABLE",1)
+	TNT1 A 0 A_GiveInventory("GhostInvisibility",1)
+	TNT1 A 0 SetPlayerProperty(0,1,4)
+	stop
+	}
+}
+
+actor RespawnGhostDisable : CustomInventory
+{
++INVENTORY.AUTOACTIVATE
+	states
+	{
+	Pickup:
+	TNT1 A 0 A_ChangeFlag("NOCLIP",0)
+	TNT1 A 0 A_ChangeFlag("SOLID",1)
+	TNT1 A 0 A_ChangeFlag("NONSHOOTABLE",0)
+	TNT1 A 0 A_ChangeFlag("INVULNERABLE",0)
+	TNT1 A 0 A_TakeInventory("GhostInvisibility",1)
+	TNT1 A 0 SetPlayerProperty(0,0,4)
+	stop
+	}
+}
+
+actor RespawnGhostTimer : Inventory
+{
+inventory.maxamount 999
+}
+
+actor GhostRespawnInvincibility : PowerInvulnerable
+{
+	Powerup.Duration 80
+}
+
+actor GhostInvisibility : PowerInvisibility
+{
+	Powerup.Duration 99999999
+	powerup.mode "translucent"
+	powerup.strength 100
+}
+
+actor LoadoutTimer : Powerup
+{
+	//You can open the loadout screen 5 seconds after respawning
+	Powerup.Duration -5
+}
+
+actor LoadoutUp : Powerup
+{
+	//Loadout is open, this stops the button input
+	Powerup.Duration 0x7FFFFFFF
+}
+
+//[+]==============================[+]
+actor RespawningPlayer : Megaman
+{
+-SHOOTABLE
++THRUACTORS
+player.forwardmove 0.0, 0.0
+player.sidemove 0.0, 0.0
+player.jumpz 0
+player.morphweapon "RespawnCamera"
+RenderStyle "Translucent"
+Alpha 0.0
+}
+
+actor RespawnCamera : Megabuster
+{
++WEAPON.NOAUTOFIRE
+states
+{
+Ready:
+BUST B 0 //ACS_ExecuteAlways(998,0,0)
+BUST B 1 A_WeaponReady
+goto Ready+1
+Fire:
+BUST B 0 ACS_ExecuteAlways(939,0,1)
+BUST B 1
+goto Ready+1
+AltFire:
+BUST B 0 ACS_ExecuteAlways(939,0,0)
+BUST B 1
+goto Ready+1
+}
+}
+
+actor RespawnNoTeleportFog : TeleportFog
+{
+States
+{
+Spawn:
+//Raven:
+//Strife:
+TNT1 A 0
+TNT1 A 1
+Stop
+}
+}
+
+actor RespawnInvulnerability : PowerInvulnerable
+{
+powerup.duration 105
+}
+
+actor RespawnCameraFlag : Inventory
+{
+inventory.amount 1
+inventory.maxamount 64
+}

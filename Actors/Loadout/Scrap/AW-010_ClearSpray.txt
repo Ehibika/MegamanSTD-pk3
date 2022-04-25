@@ -1,0 +1,220 @@
+/*=============================
+Unplesant aligments getting you down? wipe them away with Neumodian enterprise's 
+Clear Spray! Just directly apply it onto the effected area and your problems 
+will be gone in no time! no time to do that? then just chuck that sucker on
+the ground and it's active elements will cover you and your allies in an all
+healing mist!
+
+
+*///===========================
+Actor ClearSprayFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+
+actor ClearSprayProjectile 
+{
+PROJECTILE
+damagetype "Explosion"
+Obituary "%o was blown up by %k"
+radius 11
+height 20
+scale 2.5
+-NOGRAVITY
++DOOMBOuNCE
++MTHRUSPECIES
+//-ALLOWBOUNCEONACTORS
+-BounceOnFloors
+speed 60
+gravity 2.3
+Damage (0)
+wallbouncefactor 0.6
+reactiontime 55
+States
+{
+Spawn:
+MINB A 0
+PSYB B 0 ThrustThingZ(0, 15, 0, 1)
+PSYB B 1
+PSYB B 1 A_SpawnItemEX("ClearSprayTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+Goto Spawn+2
+Death:
+PSYB B 0 A_PlaySoundEx("weapon/MagnetMissile", "Weapon")
+PSYB B 1 
+TNT1 A 2 ACS_ExecuteAlways(RadiusGive,0, 1, 250, 1)
+MINB A 0 A_SpawnItemEx("ClearSprayRingFx",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+stop
+}
+}
+
+	actor ClearSprayProjectile_BLUE : ClearSprayProjectile{}
+	actor ClearSprayProjectile_RED : ClearSprayProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
+	
+	// [+++]=============================[+++]
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor ClearSprayTrail : FXActor_A
+{
+scale 1.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+
+actor ClearSprayHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 
+
+PSYB B 0 A_PlaySoundEx("Support/Heal1","Soundslot6")
+TNT1 A 0 A_GiveInventory("TempFireProof",3)
+TNT1 A 0 A_GiveInventory("TempPoisonProof",3)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+
+actor ClearSprayRingFx
+{
++MISSILE
++NOINTERACTION
++NOTARGETSWITCH
++CLIENTSIDEONLY
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 35
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2 //ACS_ExecuteAlways(RadiusHeal,0, 1, 250, 1)
+TNT1 A 0 A_setuservar("user_Rot",0)
+spawn2:
+TNT1 A 0 A_SpawnItemEx("SmokeFXB",100,0,20,6,0,random(0,4),user_Rot,SXF_TRANSFERTRANSLATION)
+//TNT1 A 0 A_SpawnItemEx("SmokeFXB",50,0,10,6,0,0,user_Rot,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+15)
+TNT1 A 0 A_jumpif(user_Rot >= 360,"Death")
+Goto Spawn2
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor SmokeFXB 
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++CLIENTSIDEONLY
+radius 8
+height 8
+Damage (0)
+scale 3.0
+Reactiontime 35
+Renderstyle "ADD"
+Alpha 0.8
+States
+{
+Spawn:
+ICMS A 0
+ICMS ABCD 2
+ICMS D 5 A_Scalevelocity(0.7)
+ICMS EF 2
+stop
+}
+}
+
+actor ClearSprayCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("ClearSprayCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ClearSprayCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor ClearSprayCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("ClearSprayCooldownItem",85)
+TNT1 A 0 A_Spawnitemex("ClearSprayCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ClearSprayCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 85
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor ClearSprayShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("ClearSprayProjectile",0,1,4,12)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("ClearSprayProjectile_RED",0,1,4,12)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("ClearSprayProjectile_BLUE",0,1,4,12)
+TNT1 A 0
+stop
+}
+}

@@ -1,0 +1,698 @@
+
+/*
+Small, one off named scripts used for certain abilities.
+*/
+
+// Script called by Barrier
+Script "BarrierWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "BasicArmor") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+// Script called by protector shield
+Script "P_BarrierWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "ShieldHits") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "BoosterPackWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "BP_Active") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+
+
+Script "TurretReticleWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "TurretReticleHold") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "HealthGenSyncher" (void) 
+{
+	//int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int BaseTID = ActivatorTID()+1000;
+	
+	// Loop if the base is active still
+	while(GetActorProperty(BaseTID, APROP_HEALTH)>0
+	&& ThingCount(T_NONE,BaseTID) > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "LightScreenSyncher" (void) 
+{
+	//int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	int BaseTID = ActivatorTID()-1000;
+	int Deduction;
+	// Loop if the base is active still
+	while(GetUserVariable(BaseTID, "User_ScreenHP")>0
+	&& ThingCount(T_NONE,BaseTID) > 0
+	){
+	if (GetActorProperty(0, APROP_HEALTH) != GetActorProperty(0, APROP_SPAWNHEALTH))
+		{
+		Deduction = GetActorProperty(0, APROP_SPAWNHEALTH) - GetActorProperty(0, APROP_HEALTH);
+		Healthing(9999);
+		SetUserVariable(BaseTID, "User_ScreenHP",GetUserVariable(BaseTID, "User_ScreenHP")-Deduction);
+		}
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "LightScreenKiller" (Void)
+{
+int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+
+	//While(ThingCount(T_NONE,4000+(Player))
+	//||ThingCount(T_NONE,5000+(Player))
+	//)
+	//{
+	SetActorState (4000+(Player), "Perish");
+	SetActorState (5000+(Player), "Perish");
+	//}
+}
+
+//Damage Over Time Script
+script "DotDamager" (int damage, int TID)
+{
+setactivator(0,AAPTR_TARGET);
+thing_damage2(TID,damage,"OB_Burner");
+}
+
+script "PitchMatch" (Void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+
+SetActorPitch(0,GetActorPitch(FiringPlayer));
+//--
+}
+
+script "PitchGrab" (Void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+int Output = 360 * (GetActorPitch(FiringPlayer));
+
+//Log(f:Output);
+//Log(i:Output >> 16);
+//Setresultvalue(cos(GetActorPitch(FiringPlayer)) * 64 >> 16);
+Setresultvalue(Output >> 16);
+
+//--
+}
+
+Script "SniperPower" (int Damage)
+{
+int TargTID = ACS_ExecuteWithResult(257, 0);
+int BeamPower = (Damage*CheckActorinventory(TargTID,"BeamPowerLevel"))/100;
+SetResultValue(BeamPower);
+}
+
+
+script "HitKnockBack" (int force)
+{
+int pusher = ACS_ExecuteWithResult(814, 0);
+int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
+ThrustThing(Vang, force, 1, 0);
+}
+
+Script 814 (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_TARGET);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+script "ShieldVisibility" (VOID) CLIENTSIDE
+{
+int cpn = consoleplayernumber();
+//log (s:"ConsolePlayerNumber is " ,i: cpn);
+if(getCvar("r_drawvoxels") == TRUE){//log (s:"Voxels are on for" ,i: cpn); 
+									SetActorProperty(0,APROP_ALPHA,0);
+									}
+}
+
+Script "TAGScanner" (int DeadZone)
+{
+
+int FiringPlayer;
+int PlayersTeam;
+int TaggedPlayer;
+If(ActivatorTID() == 0)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+
+if(IsPointerEqual(AAPTR_PLAYER_GETTARGET, AAPTR_NULL) == False)
+	{
+		//We have sights on someone, see if we can make them a
+		//valid target
+	TaggedPlayer = ACS_NamedExecuteWithResult("PlayerTarget_GetTID");
+		if(GetPlayerInfo(TaggedPlayer-1000, PLAYERINFO_TEAM) != PlayersTeam
+		   && TaggedPlayer != ACS_NamedExecuteWithResult("Tracer_GetTID")
+		   && xyzDistance(FiringPlayer,TaggedPlayer) > DeadZone)
+		   {
+			//log(s: "got someone!");
+			localAmbientSound("weapon/BeepCue",127);
+			SetPointer(AAPTR_TRACER,TaggedPlayer);
+			}
+	}
+}
+
+Script "PlayerTarget_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_PLAYER_GETTARGET);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Script "Tracer_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_TRACER);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Script "LineTarget_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_GET_LINETARGET);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Script "Master_GetTID" (Void)
+{
+//log(i:ActivatorTID());
+SetActivator(0,AAPTR_MASTER);
+//log(i:ActivatorTID());
+SetResultValue(ActivatorTID());
+}
+
+Script "Hook_Detatcher" (void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0) - 1000;
+
+int buttons = GetPlayerInput(FiringPlayer, INPUT_BUTTONS);
+int hookTID = activatorTID();
+//log(i:hookTID);
+//log(i:FiringPlayer);
+//first, stall if the button is held before this script started
+Delay(1);
+while (buttons & BT_ALTATTACK)
+	{
+	buttons = GetPlayerInput(FiringPlayer, INPUT_BUTTONS);
+	//log(s:"Hold");
+	Delay(1);
+	}
+	//log(s:"ready");
+//now, while the hook is alive, let's make it self detatch when altfire is pressed
+while(thingCount(T_NONE,hookTID) > 0)
+	{
+	buttons = GetPlayerInput(FiringPlayer, INPUT_BUTTONS);
+	if(buttons & BT_ALTATTACK)
+		{
+		SetActorState(0,"QuickFinish");
+		//log(s:"Detatch");
+		}
+	Delay(1);
+	}
+	//log(s:"it's over");
+}
+
+
+Script "NEUM_ButtonCheck" (int theButton)
+{
+SetResultValue(PressingButton(theButton));
+}
+
+Script "NEUM_PressingBothAttack" (void)
+{
+int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+SetResultValue(PressingButton2(buttons,BT_ATTACK)&&PressingButton2(buttons,BT_ALTATTACK));
+}
+
+function bool PressingButton (int theButton)
+{
+return PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),theButton);
+}
+
+function bool PressingButton2 (int buttons, int theButton)
+{
+return ((buttons&theButton)>0);
+}
+
+
+
+Script "Proxymine_ProxyCheck" (int CheckArea)
+{
+
+int MasterTID = ACS_ExecuteWithResult(257, 0);
+int ObjTIDBase = 3000 + ((MasterTID-1000)*100);
+int SelfTID = ActivatorTID();
+int SelfTIDCount = SelfTID-ObjTIDBase;
+int i=0;
+//delay(5);
+//log(i:SelfTIDCount);
+
+for(i = 0; i < SelfTIDCount; i++)
+{ //log(i:ObjTIDBase+i);
+	if(xyzdistance(SelfTID,ObjTIDBase+i) < CheckArea)
+	{
+	SetActorState(ObjTIDBase+i,"Death");
+	}
+}
+
+for(i = SelfTIDCount+1; i < 9; i++)
+{ //log(i:ObjTIDBase+i);
+	if(xyzdistance(SelfTID,ObjTIDBase+i) < CheckArea)
+	{
+	SetActorState(ObjTIDBase+i,"Death");
+	}
+}
+
+}
+
+
+Script "Actor_Classifier" (int TID, int CheckType)
+{
+bool output;
+
+switch(CheckType)
+	{
+	case 0: if ((ClassifyActor(TID) & ACTOR_NONE)){output = true;} break;
+	case 1: if ((ClassifyActor(TID) & ACTOR_WORLD)){output = true;} break;
+	case 2: if ((ClassifyActor(TID) & ACTOR_PLAYER)){output = true;} break;
+	case 3: if ((ClassifyActor(TID) & ACTOR_BOT)){output = true;} break;
+	case 4: if ((ClassifyActor(TID) & ACTOR_VOODOODOLL)){output = true;} break;
+	case 5: if ((ClassifyActor(TID) & ACTOR_MONSTER)){output = true;} break;
+	case 6: if ((ClassifyActor(TID) & ACTOR_ALIVE)){output = true;} break;
+	case 7: if ((ClassifyActor(TID) & ACTOR_DEAD)){output = true;} break;
+	case 8: if ((ClassifyActor(TID) & ACTOR_MISSILE)){output = true;} break;
+	case 9: if ((ClassifyActor(TID) & ACTOR_GENERIC)){output = true;} break;
+	}
+
+setresultvalue(output);
+}
+
+Script "SpeedMod" (int speedset)
+{
+//log(i:speedset);
+
+switch(speedset)
+	{
+	case 0: //reset
+		setactorproperty(0,APROP_SPEED,PlayerBaseSpeed[playernumber()]);
+		break;
+		
+	case 1: //boosterPack
+		setactorproperty(0,APROP_SPEED,0.6);
+		break;
+	}	
+}
+
+Script "TIDtoPointer" (int TID, int PointerSet)
+{
+
+if (TID > 0){
+	switch(PointerSet)
+	{
+		Case 0:
+		SetPointer(AAPTR_TARGET,TID);
+		Break;
+		
+		Case 1:
+		SetPointer(AAPTR_TRACER,TID);
+		Break;
+		
+		Case 2:
+		SetPointer(AAPTR_MASTER,TID);
+		Break;
+		
+		Case 3:
+		SetPointer(AAPTR_PLAYER_GETTARGET,TID);
+		Break;
+		
+		Case 4:
+		SetPointer(AAPTR_GET_LINETARGET,TID);
+		Break;
+	}
+}
+//int PointerTID = ACS_ExecuteWithResult(257,0);
+//log(i:PointerTID);
+}
+/*
+Script "ScreenDebug" (VOID)
+{
+
+log(s:"current screen health is ",i:checkinventory("LightScreenHealth"));
+}
+
+Script "ShieldDrain" (int Drainammount)
+{
+
+int MasterTID = ACS_ExecuteWithResult(257,0)+4000;
+
+if(ThingCount(T_NONE, MasterTID>0))
+	{TakeActorInventory(MasterTID,"LightScreenHealth",Drainammount);}
+}
+*/
+
+Script "ScreenHealthSynch" (VOID)
+{
+
+int TargetTID = ACS_ExecuteWithResult(257,0);
+
+setresultvalue(checkActorinventory(TargetTID,"LightScreenHealth"));
+}
+
+script "PitchToTarget" (int TargTID)
+{
+ //if(SelfTID <=0 && activatorTID() != 0)
+ //{SelfTID = activatorTID();}
+
+if(TargTID <=0){TargTID = ACS_ExecuteWithResult(257,0);}
+
+
+setactorpitch(0,GetTargetPitch(0,TargTID));
+}
+
+script "PitchToTracer" (int TracTID)
+{
+ //if(SelfTID <=0 && activatorTID() != 0)
+ //{SelfTID = activatorTID();}
+
+if(TracTID <=0){TracTID = ACS_NamedExecuteWithResult("Tracer_GetTID");}
+
+
+setactorpitch(0,GetTargetPitch(0,TracTID));
+}
+
+
+Script "CrossbowCheck" (VOID)
+{
+setActivatorToTarget(0);
+int output;
+str weapon = GetWeapon();
+
+if (StrIcmp(weapon,"NMDCrossbow")  == 0 || StrIcmp(weapon,"NMDCrossbow2")  == 0)
+{
+output = 1;
+}
+//log(i:output);
+setresultvalue(output);
+}
+
+Script "PShieldCheck" (VOID)
+{
+setActivatorToTarget(0);
+int output;
+str weapon = GetWeapon();
+//note: create array for storing weapon names by ID#
+if (
+	StrIcmp(weapon,"Blitzer")  == 0 || StrIcmp(weapon,"Blitzer2")  == 0
+	|| StrIcmp(weapon,"BlasterWep")  == 0 || StrIcmp(weapon,"BlasterWep2")  == 0
+	||StrIcmp(weapon,"Basher")  == 0 || StrIcmp(weapon,"Basher2")  == 0
+	)
+{
+output = 1;
+}
+//log(i:output);
+setresultvalue(output);
+}
+
+
+//Bika's health percent script
+Script SELFHPPERCENT (int TargTID)
+{
+int HealthPercent;
+int PlayerCurrentHealth;// = GetActorProperty(0,APROP_Health);
+int PlayerMaxHealth;// = GetActorProperty(0,APROP_SpawnHealth);
+
+	if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+		Else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+	if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){PlayerMaxHealth = 1; }
+		Else{PlayerMaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+		
+HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth);
+SetResultValue(HealthPercent);
+}
+
+Script SELFHPPERCENT2 (int perval) //Get Health at percentage
+{
+int HealthPercent;
+int PlayerCurrentHealth;// = GetActorProperty(0,APROP_Health);
+int PlayerMaxHealth;// = GetActorProperty(0,APROP_SpawnHealth);
+
+	if(GetActorProperty(0,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+		Else{PlayerCurrentHealth = GetActorProperty(0,APROP_Health);}
+	if(GetActorProperty(0,APROP_SpawnHealth)<=0){PlayerMaxHealth = 1; }
+		Else{PlayerMaxHealth = GetActorProperty(0,APROP_SpawnHealth);}
+		
+HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16;
+SetResultValue(HealthPercent);
+}
+
+Script TARGHPPERCENT (int perval) //Get Health at percentage from target
+{
+int HealthPercent;
+int PlayerCurrentHealth;
+int PlayerMaxHealth;
+int TargTID = ACS_ExecuteWithResult(257, 0);
+
+
+	if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+		Else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+	if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){PlayerMaxHealth = 1; }
+		Else{PlayerMaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+		
+HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16;
+SetResultValue(HealthPercent);
+}
+
+
+Script 673 (void)  //projectile distance returner
+{
+int ProjDistance = xyzdistance(ActivatorTID(), ACS_ExecuteWithResult(257, 0));
+	
+SetResultValue(ProjDistance);
+}
+
+
+Script WEPBLOOMSTAT (void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+SetResultValue(checkactorinventory(FiringPlayer,"WepBloomItem"));
+}
+
+//======|Damage Faloff Formula Script
+Script "DamageRate" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
+{
+int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_ExecuteWithResult(257, 0))-DistStart)/RampRate);
+SetResultValue(Damage);
+}
+
+//Jump Switcher
+script JUMPTOGGLE (Int Toggle)
+{
+
+int pln = ActivatorTID() - 1000;
+
+if (Toggle >= 1){SetActorProperty(ActivatorTID(),APROP_JUMPZ,PlayerJumpZ[pln]);}
+Else {SetActorProperty(ActivatorTID(),APROP_JUMPZ,0);}
+}
+
+script TIDCOUNTER (int Tid)
+{
+int output = 0;
+if (thingcount(T_NONE,Tid) > 0){output = 1;}
+
+setresultvalue(output);
+}
+
+Script HEALRAMP (Int HealMin, Int HealMax)
+{
+int timeMax = 175;
+int rampPerc = (GetActorPowerupTics(0,"HealStall_A")*100)/timeMax;
+//log(i:GetActorPowerupTics(0,"HealStall_A"));
+//log(i:rampPerc);
+int output = (HealMax*(100 - rampPerc))/100;
+//log(i:output);
+
+if (output < HealMin){output = HealMin;}
+if (output > HealMax){output = HealMax;}
+SetResultValue(output);
+}
+
+
+//A variation from core that inherits the user's momentum rather than simply pulling
+//them in at a strait line
+Script "Teamstyle_hookshot" (int PlayerID, int Vel, int Moving)
+{
+    int myx, myy, myz;
+    int px, py, pz;
+    int vx, vy, vz, magnitude, nx, ny, nz;
+    myx = GetActorX(0);
+    myy = GetActorY(0);
+    myz = GetActorZ(0);
+    
+    px = GetActorX(PlayerID);
+    py = GetActorY(PlayerID);
+    pz = GetActorZ(PlayerID);
+
+    GiveActorInventory(PlayerID,"WireAdaptorDelay",1);
+    
+    while(true)
+    {
+        if(Moving > 0){//If the hook is set to move, the positions need to be updated.
+            myx = GetActorX(0);
+            myy = GetActorY(0);
+            myz = GetActorZ(0);
+        }
+        
+        px = GetActorX(PlayerID);
+        py = GetActorY(PlayerID);
+        pz = GetActorZ(PlayerID) + 32.0;
+        
+        vx = myx - px;
+        vy = myy - py;
+        vz = myz - pz;
+        
+
+        magnitude = magnitudeThree(vx >> 16, vy >> 16, vz >> 16);
+
+        if(magnitude != 0)
+        {
+            nx = vx / magnitude; ny = vy / magnitude; nz = vz / magnitude;
+        }
+        else {
+            nx = 0; ny = 0; nz = 0;
+        }
+        
+        SetActorVelocity(PlayerID, nx*Vel, ny*Vel, nz*Vel, true, true);
+
+        Delay(1);
+        
+       // if(magnitude <= Vel)
+       // {
+       //     break;
+       // }
+        
+        if(CheckActorInventory(PlayerID,"WireAdaptorDelay") < 1 || CheckActorInventory(PlayerID,"IsDead"))
+        {
+            break;
+        }
+		
+		//if(abs(px - GetActorX(PlayerID)) < 2.0 && abs(py - GetActorY(PlayerID)) < 2.0 && abs(pz - GetActorZ(PlayerID) - 32.0) < 2.0)
+		//{
+        //    break;
+		//}
+		
+    }
+    
+    Thing_Remove(0);//Remove Hook
+    Delay(1);
+    GiveActorInventory(PlayerID, "WireHookShotEnd",1);
+}
+
+Script "HitSound" (void)
+{
+localAmbientSound("misc/metdie",127);
+}
+
+Function int AltTriggerCheck (int NumCase)
+{
+Int Output;
+int Subwepnum;
+	//check to see what subwep you have
+	For (int s = 0;s < SUBWEAPONLIST_MAX; s++)
+	{
+	If (CheckInventory(SubWeaponList[s][1]) ) { Subwepnum = s;}
+	}
+	
+Return Subwepnum;
+}
+
+Script "Neum_PPCheck" (int PPAmount)
+{
+Bool Output;
+
+/*
+Space for passives
+
+
+
+*/
+
+if (Checkinventory("PsychicPoints") >= PPAmount){Output = True;}
+
+setresultvalue(Output);
+}
+
+Script "Neum_PPTake" (int PPAmount)
+{
+
+/*
+Space for passives
+
+
+
+*/
+
+TakeInventory("PsychicPoints",PPAmount);
+TakeInventory("PsychicPointReso",PPAmount*100);
+
+}

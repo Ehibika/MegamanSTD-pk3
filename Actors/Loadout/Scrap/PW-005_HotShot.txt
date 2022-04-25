@@ -1,0 +1,196 @@
+/*=============================
+
+The hotshot is a bustergun ready to turn up the heat on your enemies, firing
+bouncing spheres of flaming projectiles at a steady rate, this weapon can easily
+overwhelm your foes, especially powerfull when you've got the high ground!
+
+*///===========================
+
+actor HotShot : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 14
+Weapon.SlotNumber 1
+Weapon.SelectionOrder 1
+scale 2.0
+Obituary "$OB_HOTSHOT"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "HotShotClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BUST B 0 
+RedReady:
+"####" B 1 A_WeaponReady
+"####" B 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" B 0 A_Jumpifinventory("HotShotClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/coilfire1","Weapon")
+"####" B 0 A_GiveInventory("HotShotShooter")
+"####" CDD 1 A_WeaponReady(WRF_NOPRIMARY)
+"####" B 3 
+"####" C 0 A_REfire
+goto Ready
+NoAmmo:
+"####" B 1
+"####" B 0 A_Jumpifinventory("HotShotClip",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 22 
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("HotShotClip",12)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor HotShotClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 14
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor HotShotFireball : ProjectileBase
+{
+Speed 20
+Damage (10)
++NOEXPLODEFLOOR
++BOUNCEONWALLS
+-NOGRAVITY
+//Bouncefactor 1
+wallBouncefactor 1
+radius 16
+Reactiontime 30
+Gravity 2.5
+
+height 16
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+HTST A 0 ThrustThingZ(0, 60, 0, 1)
+HTST A 1
+Spawn2:
+HTST A 2 A_Countdown
+HTST A 0 A_Checkfloor("ReBounce")
+TNT1 A 0 A_Spawnitemex("HotShotTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+loop
+ReBounce:
+HTST A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+HTST A 0 A_Playsoundex("weapon/coilbounce1","Soundslot6")
+HTST A 1 ThrustThingZ(0, 60, 0, 1)
+HTST A 1
+Goto Spawn2
+Death:
+BSTG A 1 A_Spawnitemex("HotShotPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+	actor HotShotFireball_BLUE : HotShotFireball
+	{
+	}
+
+	actor HotShotFireball_RED : HotShotFireball
+	{
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"
+	}
+	
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor HotShotPuff1 : FXActor_A
+{
+scale 2
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor HotShotTrail : FXActor_B
+{
+scale 1.4
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+HTST BBCD 2
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor HotShotShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("HotShotFireball",0,1,4,4)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("HotShotFireball_RED",0,1,4,4)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("HotShotFireball_BLUE",0,1,4,4)
+TNT1 A 1
+stop
+}
+}

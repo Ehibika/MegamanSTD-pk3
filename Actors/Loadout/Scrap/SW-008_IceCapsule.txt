@@ -1,0 +1,263 @@
+/*=============================
+It happens to the best of us, some shmuck is making a beeline to the objective
+you've been working so hard on defending. you can't shoot the sucker down but
+you need to keep him from getting to far from you.
+
+in situations like that, the IceCapsule is your best friend. this small grenade
+launcher fires a single payload of super cold liquid. catch someone in the
+blast and it's slow them down. but land the payload itself and they'll be stopped
+dead in their track. or at least soon to be dead since being frozen solid is 
+nothing short of bad news!
+
+Take care not to freeze yourself however.
+
+*///===========================
+
+actor IceCapsule : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoUse2 0
+Weapon.AmmoGive 1
+Weapon.SlotNumber 2
+Weapon.SelectionOrder 2
+scale 2.0
+Obituary "$OB_IceCapsule"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "IceCapsuleClip"
+weapon.ammotype2 "IceCapsuleClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BS2R B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BS2B B 0 
+RedReady:
+"####" B 16 A_WeaponReady
+"####" B 0 A_jumpifinventory("IceCapsuleClip",1,"Ready")
+Goto Reload
+"####" A 0 A_PlaySound("weapon/rminestick")
+"####" B 0 A_GiveInventory("IceCapsuleClip")
+Goto Ready
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" C 3 Offset(0,32)
+"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
+"####" B 0 A_Giveinventory("IceCapsuleShooter")
+"####" CD 6 
+"####" B 10 A_WeaponReady(WRF_NOPRIMARY)
+"####" B 0 
+goto Reload
+
+NoAmmo:
+"####" B 1
+"####" B 0 A_jumpifinventory("IceCapsuleClip",1,"Ready")
+"####" B 16
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 30 A_WeaponReady(WRF_NOPRIMARY|WRF_NOBOB)
+"####" B 0 A_PlaySound("weapon/rminestick")
+"####" B 0 A_GiveInventory("IceCapsuleClip")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 1
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor IceCapsuleClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.IGNORESKILL
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor IceCapsuleProjectile 
+{
+PROJECTILE
+damagetype "Freezer2"
+radius 11
+height 20
+scale 2.5
+//-NOGRAVITY
++CANBOUNCEWATER
+//+DOOMBOuNCE
+//+NOEXPLODEFLOOR
++MTHRUSPECIES
+-ALLOWBOUNCEONACTORS
+speed 65
+gravity 1.1
+bouncefactor 0.5
+seesound "weapon/megaball"
+Damage (15 +  ACS_ExecuteWithResult(DamageRate,30,300,20))
+wallbouncefactor 0.60
+reactiontime 45
+Var Int User_GravTime;
+States
+{
+Spawn:
+NAPC A 0
+NAPC A 0 //ThrustThingZ(0, 20, 0, 1)
+NAPC A 0 
+Spawn2:
+NAPC A 0 A_ChangeFlag("THRUACTORS",0)
+NAPC A 1 A_CountDown
+NAPC A 1 A_SpawnItemEX("ThriceGunParticle",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC A 0 A_Checkfloor("Slowdown")
+
+NAPC B 1 A_CountDown
+NAPC B 1 A_SpawnItemEX("ThriceGunParticle",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC B 0 A_Checkfloor("Slowdown")
+
+NAPC C 1 A_CountDown
+NAPC C 1 A_SpawnItemEX("ThriceGunParticle",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC C 0 A_Checkfloor("Slowdown")
+
+NAPC D 1 A_CountDown
+NAPC D 1 A_SpawnItemEX("ThriceGunParticle",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC D 0 A_Checkfloor("Slowdown")
+
+NAPC D 0 A_Jumpif(User_GravTime >= 2,"Spawn2")
+NAPC D 0 A_Setuservar("User_GravTime",User_GravTime+1)
+NAPC D 0 A_Jumpif(User_GravTime >= 1,"Gravitize")
+Goto Spawn2
+
+Gravitize:
+NAPC D 0 A_Changeflag("NOGRAVITY",false)
+NAPC D 0 //A_ScaleVelocity(0.25)
+NAPC D 0 A_Setuservar("User_GravTime",User_GravTime+1)
+Goto Spawn2
+Slowdown:
+NAPC A 0 A_ChangeFlag("THRUACTORS",1)
+NAPC A 1 A_ScaleVelocity(0.7)
+NAPC A 1 A_CountDown
+NAPC A 0 A_Checkfloor("Slowdown")
+Goto Spawn2
+Crash:
+Death:
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("IceCapsuleExplosion",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+XDeath:
+TNT1 A 0 A_SpawnItemEx("IceCapsuleFakeExplosion",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+	actor IceCapsuleProjectile_BLUE : IceCapsuleProjectile{}
+	actor IceCapsuleProjectile_RED : IceCapsuleProjectile{translation "202:202=33:33","196:196=48:48", "197:197=18:18", "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
+// [+++]=============================[+++]
+actor IceCapsuleExplosion //
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++DONTBLAST
++FORCEXYBILLBOARD
+Speed 0
+//
+Damagetype "Freezer1"
+radius 8
+height 8
+scale 3.5
+
+States
+{
+Spawn:
+NAPC A 0 
+NAPC D 0 //A_Explode(35, 350, 1,0,36)
+NAPC D 0 A_Explode(15, 128, 1,0,50)
+NAPC A 0 A_PlaySoundEx("weapon/icewallspawn", "Weapon")
+NAPC AAAAAAAAAAAAAAAAAAA 0 A_Spawnitemex("ThriceGunParticle",0,0,0,random(-4,4),random(-4,4),random(-4,4),0,SXF_TRANSFERTRANSLATION)
+ASEX ABCDDEEF 1 
+stop
+}
+}
+
+actor IceCapsuleFakeExplosion //
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++DONTBLAST
++FORCEXYBILLBOARD
+Speed 0
+//
+Damagetype "Freezer1"
+radius 8
+height 8
+scale 3.5
+
+States
+{
+Spawn:
+NAPC A 0 
+NAPC A 0 A_PlaySoundEx("weapon/icewallspawn", "Weapon")
+NAPC AAAAAAAAAAAAAAAAAAA 0 A_Spawnitemex("ThriceGunParticle",0,0,0,random(-4,4),random(-4,4),random(-4,4),0,SXF_TRANSFERTRANSLATION)
+ASEX ABCDDEEF 1 
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor IceCapsuleShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("IceCapsuleProjectile",0,1,13,-2)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("IceCapsuleProjectile_RED",0,1,13,-2)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("IceCapsuleProjectile_BLUE",0,1,13,-2)
+TNT1 A 0
+stop
+}
+}

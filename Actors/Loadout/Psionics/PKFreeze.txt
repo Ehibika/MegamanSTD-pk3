@@ -1,0 +1,24 @@
+Actor FreezeI_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeI_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeI_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeI_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FreezeII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FreezeIII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeIII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeIII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeIII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FreezeV_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeV_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeV_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeV_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FreezeX_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeX_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeX_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FreezeX_User4 : inventory {inventory.amount 1 inventory.maxamount 2}

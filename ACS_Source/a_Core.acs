@@ -1,0 +1,233 @@
+
+
+
+//[+]===============|Setup Scripts|================[+]
+
+//======|Master RE Starter
+script "REAPPLICATOR" RESPAWN
+{
+		//GiveInventory("InputChecker",1);
+		ACS_NamedExecuteAlways("TEAMSPECIES",0);
+		ACS_NamedExecuteAlways("NEUM_ClassSetup",0);
+		ACS_NamedExecuteAlways("IconScanner",0);
+		//ACS_NamedExecuteAlways("AltTrigger",0);
+		//ACS_NamedExecuteAlways("HitHealthDecay",0);
+		
+		
+}
+
+
+
+
+//======|Species Script
+
+//Assigns all players a Species so that MTHRUSPECIES can be used to allow
+//allies to shoot past one another
+Script "TEAMSPECIES" ENTER 
+{
+//int IsTeamGame = ACS_ExecuteWithResult(975, 1);
+int pln = playerNumber();
+
+	If(ACS_ExecuteWithResult(975, 1))
+		{
+		switch(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM))
+			{
+		case 0:
+		setactorproperty(0,APROP_SPECIES,"BLUEMember");
+		break;
+		
+		case 1:
+		setactorproperty(0,APROP_SPECIES,"REDMember");
+		break;
+			}
+		}
+		Else{setactorproperty(0,APROP_SPECIES,strparam(s:"Player",i:playernumber()));}
+// Stores the players starting Jump Height on spawn
+PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
+}
+
+
+
+Script "IconScanner" Enter Clientside
+{
+int SightPlayer;
+int IconNum;
+while(GetActorProperty(0,APROP_HEALTH) > 0) {
+	//if(IsPointerEqual(AAPTR_PLAYER_GETTARGET, AAPTR_NULL) == False)
+		//{
+		SightPlayer = ACS_NamedExecuteWithResult("PlayerTarget_GetTID");
+		IconNum = checkActorInventory(SightPlayer,"PlayerIconFlag");
+			if(SightPlayer > 999 
+			&& SightPlayer < 1065
+			&& checksight(0,SightPlayer,0)) //
+			{
+			//log(i:IconNum-1);
+			SetHudSize(320,240,0);
+			SetFont(PlayerIcons[IconNum-1][0]);
+			HudMessage(s:"A"; HUDMSG_FADEOUT, 700, CR_red,220.0, 245.0, 2.0,0.5);
+			}
+		//}
+		delay(1);
+	}
+}
+
+
+
+// modification of the health based shield hit code that
+//counts the number of hits but doesn't refund health
+script "ShieldHitCounter" (int hits, int customProtect)
+{
+	if(hits == 0)
+	{
+		hits = 1;
+	}
+	else if(hits > 999)
+	{
+		//Log(s:"\cgSCRIPT 982: SPECIFIED HITS VALUE TOO HIGH. TERMINATING.");
+		terminate;
+	}
+	
+	int health = GetActorProperty(0, APROP_HEALTH);
+	int maxHealth = GetActorProperty(0, APROP_SPAWNHEALTH);
+	int healCurrent = health;
+	bool loanHP = false;
+	
+	if(maxHealth == 0)
+	{
+		maxHealth = 100;
+	}
+	
+	TakeInventory("ShieldHits", 999);
+	GiveInventory("ShieldHits", hits);
+	
+	SetPlayerProperty(0, 1, PROP_BUDDHA);
+	
+	if(health < 2)
+	{
+		healCurrent = 2;
+		loanHP = true;
+		SetActorProperty(0, APROP_HEALTH, 2);
+	}
+	
+	while(CheckInventory("ShieldHits")>0 && CheckInventory("StopHitShield")==0)
+	{
+		Delay(1);
+		if(GetActorProperty(0, APROP_HEALTH) > health)
+		{
+			health = GetActorProperty(0, APROP_HEALTH);
+			healCurrent = GetActorProperty(0, APROP_HEALTH);
+		}
+		
+		if(healCurrent > GetActorProperty(0, APROP_HEALTH))
+		{
+			TakeInventory("ShieldHits", 1);
+			/*
+			if(CheckInventory("ShieldHits")>0)
+			{
+				SetActorProperty(0, APROP_HEALTH, healCurrent);
+			}
+			else
+			{
+				SetActorProperty(0, APROP_HEALTH, health);
+			}
+			
+			if(!customProtect)
+			{
+				GiveInventory("HitShieldProtection", 1);
+			}
+			*/
+		}
+	}
+	
+	if(loanHP && GetActorProperty(0, APROP_HEALTH) < maxHealth)
+	{
+		SetActorProperty(0, APROP_HEALTH, GetActorProperty(0, APROP_HEALTH)-1);
+	}
+	
+	if(CheckInventory("ShieldCheck")==0 && CheckInventory("BasicArmor")==0 && !customProtect)
+	{
+		GiveInventory("HitShieldProtection", 1);
+	}
+	
+	SetPlayerProperty(0, 0, PROP_BUDDHA);
+}
+
+
+script "AltTrigger" (void)//ENTER
+{
+int InputButtons; 
+int InputOldButtons; 
+
+while (GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0 && CheckInventory("BAWS")==0)
+	{
+	InputButtons = GetPlayerInput(-1, INPUT_BUTTONS);			
+	//
+		If(ButtonCheck(InputButtons, InputOldButtons, BT_ALTATTACK) == 1)
+			{
+			//Log(i:AltTriggerCheck(0));
+				if(AltTriggerCheck(0) == 3 && !CheckInventory("AltHoldDelay"))
+					{//Booster Pack
+					GiveInventory("BoosterPackAltTrigger", 1);
+					GiveInventory("AltHoldDelay", 1);
+					}
+				Else if(AltTriggerCheck(0) == 9 && !CheckInventory("AltHoldDelay"))
+					{//Rotary Shell
+					GiveInventory("RotaryShellAltTrigger", 1);
+					GiveInventory("AltHoldDelay", 1);
+					}
+				Else {GiveInventory("AltHoldDelay", 1);}
+		}
+	delay(1);
+	InputOldButtons = InputButtons;
+	}
+}
+
+/*
+Script "HitHealthDecay" ENTER
+{
+
+if (GetCVar("sv_allowhitdecay") == false){Terminate;}
+//exists only in TDM and TLMS, lowers max health based on damage received
+
+if(    ACS_ExecuteWithResult(975,0) == 1 
+	|| ACS_ExecuteWithResult(975,0) == 3
+	|| ACS_ExecuteWithResult(975,0) == 4){Terminate;}
+	
+ //log(s:"HitDecay is online");
+int PrevHP;
+int CurrHP;
+
+int MaxHPMem;// = GetActorProperty(0, APROP_SPAWNHEALTH);
+int MaxHPCache;// = MaxHPMem;
+int HealthNeg;
+int HealthDiff;
+bool FirstFrame;
+Delay(15);
+while (GetActorProperty(0, APROP_HEALTH) > 0 && CheckInventory("BAWS")==0)
+	{
+	CurrHP = GetActorProperty(0, APROP_HEALTH);
+	HealthDiff = PrevHP - CurrHP;
+		if(HealthDiff > 0 && FirstFrame)
+		{
+		HealthNeg = 1 + (HealthDiff/4);
+		//log(s:"Health Diff is ",i:HealthDiff);
+		//log(i:HealthNeg);
+		MaxHPCache = GetActorProperty(0, APROP_SPAWNHEALTH) - HealthNeg;
+		SetActorProperty(0, APROP_SPAWNHEALTH,MaxHPCache);
+		}
+		
+	PrevHP = CurrHP;
+	Delay(1);
+	//log(i:GetActorProperty(0, APROP_SPAWNHEALTH));
+	if(!FirstFrame)
+		{
+		 MaxHPMem = GetActorProperty(0, APROP_SPAWNHEALTH);
+		 MaxHPCache = MaxHPMem;
+		 //Delay(5);
+		FirstFrame = True;
+		}
+	}
+
+}
+*/
+

@@ -1,0 +1,574 @@
+/*=============================
+A staple for many Corondian interstellar travelers, the MediPistol has been one of
+the first weapons produced by neumodian enterprises, and still one of our 
+top selling weapons to this day. the Buster gun is a highly flexible, corondian sized
+weapon with just the perfect balance of speed and power.
+
+*///===========================
+
+actor MediPistol : WepMasterBase
+{
+Tag "Buster Gun"
+Weapon.AmmoUse 0
+Weapon.AmmoGive 20
+scale 2.0
+Obituary "$OB_MediPistol"
+inventory.icon "BSTRI"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "MediPistolClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+HLBR A 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+HLBB A 0 
+RedReady:
+"####" A 0 A_Jumpifinventory("OverHeatFlag_C",1,"OverHeatReady")
+"####" A 1 A_WeaponReady
+"####" A 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" A 0 A_Jumpifinventory("MediPistolClip",1,"Ready")
+Goto Reload
+
+OverHeatReady:
+"####" A 1 A_WeaponReady(WRF_NOPRIMARY)
+Goto Ready
+//===============
+Deselect:
+TNT1 A 0 A_TakeInventory("NoClipBar",9)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" A 1 A_Lower
+Loop
+Select:
+TNT1 A 0 A_GiveInventory("NoClipBar")
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" A 1 A_Raise
+Loop
+Fire:
+"####" A 0 A_JumpIfNoAmmo("NoAmmo")
+"####" A 0 A_PlaySoundEx("weapon/Basshot","Weapon")
+"####" A 0 A_Jumpifinventory("FTHBuffer2",1,"Fire2")
+
+"####" A 0 A_GiveInventory("MediPistolShooter")
+"####" A 0 A_GiveInventory("FTHBuffer2")
+"####" A 0 A_GiveInventory("HeatCoolDelay")
+"####" A 0 A_GiveInventory("WeaponHeat_C",6)
+
+"####" A 0 A_Jumpifinventory("WeaponHeat_C",100,"OverHeatStart")
+
+"####" BC 2 A_WeaponReady(WRF_NOPRIMARY)
+"####" A 5
+Goto Hold
+
+Fire2:
+	"####" A 0 A_Jumpifinventory("WepBloomItem",12,2)
+	"####" A 0 A_Giveinventory("WepBloomItem",2)
+	"####" A 0
+"####" A 0 A_GiveInventory("MediPistolShooter2")
+"####" A 0 A_GiveInventory("FTHBuffer2")
+"####" A 0 A_GiveInventory("HeatCoolDelay")
+"####" A 0 A_GiveInventory("WeaponHeat_C",14)
+"####" A 0 A_Jumpifinventory("WeaponHeat_C",100,"OverHeatStart")
+"####" BC 2 A_WeaponReady(WRF_NOPRIMARY)
+"####" A 5
+Goto Hold
+Hold:
+"####" A 1 
+"####" B 0 A_Jumpifinventory("WeaponCharge",21,"Charged2")
+"####" B 0 A_Jumpifinventory("WeaponCharge",20,"Charged")
+"####" B 0 A_Giveinventory("WeaponCharge",1)
+"####" C 0 A_REfire
+goto Ready
+StartCharge:
+"####" C 0 A_GunFlash("Sound.BusterCharge", GFF_NOEXTCHANGE)
+"####" B 0 A_Giveinventory("WeaponCharge",1)
+"####" C 0 A_REfire
+goto Ready
+Charged:
+"####" B 0 A_PlaySoundEx("weapon/Trigger","Weapon")
+"####" B 0 A_Giveinventory("WeaponCharge",1)
+"####" C 0 A_REfire
+goto Ready
+Charged2:
+"####" C 0 A_REfire
+"####" A 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" A 0 A_GiveInventory("MediPistolShooter3")
+"####" BBCC 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
+"####" B 0 A_takeInventory("Reload_Trigger",999)
+"####" B 0 A_takeInventory("WeaponCharge",999)
+"####" A 0 A_JumpIfNoAmmo("NoAmmo")
+"####" A 6 
+goto Ready
+
+OverHeatStart:
+"####" A 0 A_PlaySoundEx("weapon/MagnetMissile","Weapon")
+"####" A 0 A_GiveInventory("OverHeatFlag_C")
+Goto OverHeatReady
+
+NoAmmo:
+"####" A 1
+"####" A 0 A_Jumpifinventory("MediPistolClip",1,"Ready")
+Reload:
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 22 
+"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_Giveinventory("MediPistolClip",20)
+"####" A 0 A_TakeInventory("Reload_Trigger",999)
+"####" A 1 A_Refire("Fire")
+Goto Ready
+
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor MediPistol2 : MediPistol
+{Weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor MediPistolClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+Actor FTHBuffer2 : Powerup {inventory.amount 1 inventory.maxamount 1 powerup.duration 8}
+
+actor WeaponHeat_C : inventory
+{
+inventory.amount 1
+inventory.maxamount 100
+}
+
+actor OverHeatFlag_C : inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor MediPistolShot : fastProjectileBase
+{
+Obituary "$OB_MediPistol"
+DamageType "SingleShot"
+Speed 10
+Damage (20 + ACS_ExecuteWithResult(DamageRate,10,Range2,6))
+radius 3
+
+MissileHeight 16
+height 3
+scale 1.0
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0  //A_Changevelocity(0,random(-4,4),random(-4,4),CVF_RELATIVE)
+TNT1 A 0 
+TNT1 AA 1 ACS_NamedExecuteAlways("PitchMatch",0)
+TNT1 A 0 A_scalevelocity(11.5)
+Goto Spawn2
+Spawn2:
+//TNT1 A 0 A_SetUserVar("User_TP",,cos(pitch)*-5,0,(sin(pitch)*5),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-10,0,(sin(pitch)*10),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-15,0,(sin(pitch)*15),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-20,0,(sin(pitch)*20),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-25,0,(sin(pitch)*25),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-30,0,(sin(pitch)*30),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-35,0,(sin(pitch)*35),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-40,0,(sin(pitch)*40),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-45,0,(sin(pitch)*45),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-50,0,(sin(pitch)*50),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-55,0,(sin(pitch)*55),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MediPistolTrail",cos(pitch)*-60,0,(sin(pitch)*60),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+//TNT1 A 0 A_SetUserVar("User_TrailCount",User_TrailCount+1)
+//TNT1 A 0 A_Jumpif(User_TrailCount >= 15,"Spawn3")
+//Goto Spawn2
+Spawn3:
+TNT1 A 0 A_SetUserVar("User_TrailCount",1)
+TNT1 A 1 
+Goto Spawn2
+Death:
+TNT1 A 1 A_Spawnitemex("MediPistolPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+	actor MediPistolShot_BLUE : MediPistolShot
+	{//MissileType "MediPistolTrail"
+	}
+
+	actor MediPistolShot_RED : MediPistolShot
+	{//MissileType "MediPistolTrail_RED"
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"
+	}
+
+actor MediPistolShot2 : MediPistolShot{Damage(10 + ACS_ExecuteWithResult(DamageRate,5,Range2,6))}
+	
+	actor MediPistolShot2_BLUE : MediPistolShot2
+	{//MissileType "MediPistolTrail"
+	}
+
+	actor MediPistolShot2_RED : MediPistolShot2
+	{//MissileType "MediPistolTrail_RED"
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"
+	}
+	
+actor MediPistolChargeShot : fastProjectileBase
+{
+Obituary "$OB_Medipistol"
+DamageType "SingleShot"
+
+Speed 90
+Damage (30 + ACS_ExecuteWithResult(DamageRate,15,Range3,17))
+-MTHRUSPECIES //Has to hit players
++THRUGHOST
++LOOKALLAROUND
++HITTRACER
++SEEKERMISSILE
+radius 10
+height 10
+scale 2.5
+//damagetype "Sniper"
+MissileType "MediRifleTrail"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0  
+LASH A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TRACER,AAPTR_TRACER) //Set the Bullet's tracer to the Shooter's, if they have one.
+BASB UU 1 A_Seekermissile(90,90,SMF_PRECISE)//A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT) //make the shooter our master
+Spawn2:
+BASB U 0 
+BASB U 2
+Loop
+Death:
+BASB U 0 A_Stop
+BASB U 0 //A_Lookex(LOF_NOSOUNDCHECK,0,75,0,360,"Healcheck")
+BASB U 0 ACS_NamedExecuteAlways("AreaHeal_2",0, SH_RAD, 64, 60)
+LASH A 0 A_SpawnItemEx("MedipistolAOE_FX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+BASB U 0 A_Spawnitemex("MediRiflePuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+LASH A 1
+stop
+BASB U 0 A_Jumpiftracercloser(80,"HealCheck")
+Goto Terminate
+Healcheck:
+LASH A 0 A_Jumpifinventory("RespawnCamera",1,"Terminate",AAPTR_TRACER) //You aren't spawned yet
+LASH A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_TARGET) == TRUE, "Terminate") //don't go for yourself
+LASH A 0 //A_Jumpifinventory("WilyTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+LASH A 0 //A_Jumpifinventory("CossackTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+LASH A 0 //A_Jumpifinventory("KingTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+
+BASB U 0 A_GiveInventory("MedipistolHeal",1,AAPTR_TRACER)
+BASB U 0 ACS_NamedExecuteAlways("AreaHeal_2",0, SH_RAD, 64, 60)
+LASH A 0 A_SpawnItemEx("MedipistolAOE_FX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 AAAAAAAAAA 0 A_SpawnItemEx("HealFX3", 0, 0, 14, 256/24, 256/24, random2(256/24), random(0, 359),SXF_TRANSFERTRANSLATION)
+LASH A 1
+stop
+Terminate:
+LASH A 0
+stop
+
+}
+}
+
+	actor MediPistolChargeShot_BLUE : MediPistolChargeShot
+	{MissileType "MediRifleTrail_BLUE"
+	Species "BLUEMember"
+	
+	States
+	{
+	Healcheck:
+	LASH A 0 A_Jumpifinventory("RespawnCamera",1,"Terminate",AAPTR_TRACER) //You aren't spawned yet
+	LASH A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_TARGET) == TRUE, "Terminate")  //don't go for yourself
+	LASH A 0 A_Jumpifinventory("WilyTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+	LASH A 0 //A_Jumpifinventory("CossackTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+	LASH A 0 //A_Jumpifinventory("KingTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+
+	LASH A 0 ACS_NamedExecuteAlways("AreaHeal_2",0, SH_RAD, 64, 60)
+	LASH A 0 A_GiveInventory("MedipistolHeal",1,AAPTR_TRACER)
+	LASH A 0 A_SpawnItemEx("MedipistolAOE_FX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+	TNT1 AAAAAAAAAA 0 A_SpawnItemEx("HealFX3", 0, 0, 14, 256/24, 256/24, random2(256/24), random(0, 359),SXF_TRANSFERTRANSLATION)
+	LASH A 1
+	stop
+	}
+	
+	}
+
+	actor MediPistolChargeShot_RED : MediPistolChargeShot
+	{MissileType "MediRifleTrail_RED"
+	Species "REDMember"
+	
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47"
+	States
+	{
+	Healcheck:
+	LASH A 0 A_Jumpifinventory("RespawnCamera",1,"Terminate",AAPTR_TRACER) //You aren't spawned yet
+	LASH A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_TARGET) == TRUE, "Terminate")  //don't go for yourself
+	LASH A 0 A_Jumpifinventory("LightTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+	LASH A 0 //A_Jumpifinventory("CossackTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+	LASH A 0 //A_Jumpifinventory("KingTeamFlag",1,"Terminate",AAPTR_TRACER) //don't Heal enemies
+
+	LASH A 0 ACS_NamedExecuteAlways("AreaHeal_2",0, SH_RAD, 64, 60)
+	LASH A 0 A_GiveInventory("MedipistolHeal",1,AAPTR_TRACER)
+	LASH A 0 A_SpawnItemEx("MedipistolAOE_FX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+	TNT1 AAAAAAAAAA 0 A_SpawnItemEx("HealFX3", 0, 0, 14, 256/24, 256/24, random2(256/24), random(0, 359),SXF_TRANSFERTRANSLATION)
+	LASH A 1
+	stop
+	}
+	
+	}
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor MediPistolPuff1 : FXActor_A
+{
+scale 1.7
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor MediPistolTrail : FXActor_B
+{
+scale 0.8
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+BASB U 1 
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor MediPistolTrail_RED : MediPistolTrail
+{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"}
+
+Actor MedipistolAOE_FX 
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+Reactiontime 5
+Obituary "%0 succumed to poison"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AAA 0 A_SpawnItemEx("HealFX3", random(0,SH_RAD), 0, random(5,35), 0, 0, random(1,4), random(0, 359),SXF_TRANSFERTRANSLATION)
+TNT1 A 14
+TNT1 A 0 A_Countdown
+loop
+Death:
+TNT1 A 0
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Utility Actors|------------------------------
+//[+]========================================================================[+]
+actor MedipistolHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Nope")
+LASH A 0 A_JumpIf(ACS_NamedExecuteWithResult("Actor_Classifier",0,2) == TRUE, "HealMe")
+stop
+HealMe:
+TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"HealBlock")
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)>=100,"Nope") // no overheal in this mod
+TNT1 AAAA 0 A_Giveinventory("HealEffectSpawn2",1)
+
+//TNT1 A 0 HealThing(85)
+TNT1 A 0 HealThing(ACS_ExecuteWithResult(HealRamp,40,140))
+
+TNT1 A 0 A_PlaySoundEx("item/energyup","Weapon")
+TNT1 A 0
+stop
+
+Nope:
+TNT1 A 0
+stop
+
+HealBlock:
+TNT1 A 1 A_Giveinventory("DetoxLevel",100)
+TNT1 A 1 A_Giveinventory("DetoxEfectSpawn")
+stop
+}
+}
+
+
+actor HeatDrainer_C : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("OverHeatFlag_C",1,"OverHeated")
+TNT1 A 1
+TNT1 A 0 A_JumpIfInTargetInventory("HeatCoolDelay",1,"Spawn")
+TNT1 A 0 A_TakeFromTarget("WeaponHeat_C",9)
+TNT1 A 0 A_TakeFromTarget("WepBloomItem",1)
+loop
+
+OverHeated:
+TNT1 A 3
+TNT1 A 0 A_TakeFromTarget("WeaponHeat_C",7)
+TNT1 A 0 A_JumpIfInTargetInventory("WeaponHeat_C",1,"OverHeated")
+Goto Cooled
+
+Cooled:
+TNT1 A 0 A_TakeFromTarget("OverHeatFlag_C",9)
+TNT1 A 0 A_TakeFromTarget("WepBloomItem",99)
+Goto Spawn
+
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor MediPistolShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("MediPistolShot",0,1,4,4)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot_RED",0,1,4,4)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot_BLUE",0,1,4,4)
+TNT1 A 1
+stop
+}
+}
+
+/*
+actor MediPistolShooter2 : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("MediPistolShot",random(-BGUN_S,BGUN_S),1,4,4,0,random(-BGUN_S,BGUN_S))
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot_RED",random(-BGUN_S,BGUN_S),1,4,4,0,random(-BGUN_S,BGUN_S))
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot_BLUE",random(-BGUN_S,BGUN_S),1,4,4,0,random(-BGUN_S,BGUN_S))
+TNT1 A 1
+stop
+}
+}
+*/
+actor MediPistolShooter2 : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("MediPistolShot2",fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)),1,4,4,0,fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)))
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot2_RED",fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)),1,4,4,0,fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)))
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("MediPistolShot2_BLUE",fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)),1,4,4,0,fRandom(-(ACS_Executewithresult(WepBloomStat)*BGUN_S),(ACS_Executewithresult(WepBloomStat)*BGUN_S)))
+TNT1 A 1
+stop
+}
+}
+
+
+actor MediPistolShooter3 : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("MediPistolChargeShot",0,1,4,8)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("MediPistolChargeShot_RED",0,1,4,8)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("MediPistolChargeShot_BLUE",0,1,4,8)
+TNT1 A 1
+stop
+}
+}

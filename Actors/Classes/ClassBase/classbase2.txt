@@ -1,0 +1,155 @@
+actor ClassBase2 : ClassBase1
+{
+States
+{
+//modded pain states go here
+
+Pain.Poisonous:
+"----" H 0 //A_Jump(192,"Pain")
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,15)
+"----" H 0 A_jumpifinventory("PoisonProof",1,5)
+"----" H 0 A_jumpifinventory("TempPoisonProof",1,4)
+"----" H 0 A_jumpifinventory("PoisonMark",1,3)
+"----" H 0 A_SpawnItemEX("PoisonWatcher",1)
+"----" H 0 A_Playsoundex("support/Negative","Soundslot7")
+"----" H 0 A_Giveinventory("PoisonMark")
+"----" H 0
+"----" H 0
+Goto Pain+1
+Pain.Stinger:
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,1)
+"----" H 0 A_GiveInventory("PoisonCritCheck",1)
+"----" H 0 A_jumpifinventory("PoisonProof",1,9)
+"----" H 0 A_jumpifinventory("TempPoisonProof",1,8)
+"----" H 0 A_jumpifinventory("PoisonMark",1,7)
+"----" H 0 A_jumpifinventory("StingBuffer",1,2)
+"----" H 0 A_SpawnItemEX("StingWatcher",1)
+"----" H 0
+"----" H 0 A_Giveinventory("StingCount")
+"----" H 0 A_Giveinventory("StingBuffer")
+"----" H 0 A_jumpifinventory("StingCount",3,"StingerPoison")
+"----" H 0
+Goto Pain+1
+StingerPoison:
+"----" H 0 A_SpawnItemEX("PoisonWatcher",1)
+"----" H 0 A_Playsoundex("support/Negative","Soundslot7")
+"----" H 0 A_Giveinventory("PoisonMark")
+Goto Pain+1
+
+Pain.PKFire:
+"----" H 0 A_jumpifinventory("PKFireProtection",1,8)
+Pain.Burner:
+Pain.Incendiary:
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,2)
+"----" H 0 //A_Jump(192,"Pain")
+"----" H 0 A_jumpifinventory("FireProof",1,5)
+"----" H 0 A_jumpifinventory("TempFireProof",1,4)
+"----" H 0 A_jumpifinventory("BurnMark",1,2)
+"----" H 0 A_SpawnItemEX("BurnWatcher",1)
+"----" H 0 A_Giveinventory("BurnMark")
+"----" H 0
+"----" H 0 //A_GiveInventory("BurnerhitDelay",1)
+"----" H 0
+Goto Pain+1
+Pain.HotShot:
+"----" H 0 A_GiveInventory("PoisonCritCheck",1)
+"----" H 0 A_jumpifinventory("FireProof",1,9)
+"----" H 0 A_jumpifinventory("TempFireProof",1,8)
+"----" H 0 A_jumpifinventory("BurnMark",1,7)
+"----" H 0 A_jumpifinventory("ScorchBuffer",1,2)
+"----" H 0 A_SpawnItemEX("ScorchWatcher",1)
+"----" H 0
+"----" H 0 A_Giveinventory("ScorchCount")
+"----" H 0 A_Giveinventory("ScorchBuffer")
+"----" H 0 A_jumpifinventory("ScorchCount",3,"HotShotBurn")
+"----" H 0
+"----" H 0 A_jumpifinventory("BurnMark",1,2) //reapply burn if you have it already
+Goto Pain+1
+"----" H 0
+"----" H 0 A_Giveinventory("BurnMark")
+Goto Pain+1
+
+HotShotBurn:
+"----" H 0 A_SpawnItemEX("BurnWatcher",1)
+"----" H 0 A_Giveinventory("BurnMark")
+Goto Pain+1
+
+pain.HeatRay:
+"----" H 0 A_GiveInventory("FireCritCheck",1)
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,6)
+"----" H 0 A_jumpifinventory("FireProof",1,5)
+"----" H 0 A_jumpifinventory("TempFireProof",1,4)
+"----" H 0 A_jumpifinventory("BurnMark",1,2)
+"----" H 0 A_SpawnItemEX("BurnWatcher",1)
+"----" H 0 A_Giveinventory("BurnMark")
+"----" H 0
+"----" H 0 //A_GiveInventory("BurnerhitDelay",1)
+"----" H 0
+Goto Pain+1
+/*
+Pain.Freezer2:
+"----" H 0 A_jumpifinventory("TempFreezeProof",1,"NoFreeze")
+"----" H 0 SetPlayerProperty(0,1,4)
+"----" H 0 Thing_SetTranslation(0, 105)
+"----" H 0 A_SpawnItemEx("FreezeHandler")
+"----" H 0 A_GiveInventory("IceVision",1)
+"----" H 30 A_Stop
+"----" H 30
+"----" H 0 SetPlayerProperty(0,0,0)
+"----" H 0 ACS_ExecuteAlways(998,0,1)
+"----" H 0 A_TakeInventory("IceVision",1)
+"----" H 0 A_Giveinventory("TempFreezeProof")
+Goto Spawn+2
+NoFreeze:
+"----" H 0
+Pain.Freezer1:
+"----" H 0 //A_Jump(192,"Pain")
+"----" H 0 A_jumpifinventory("ChillProof",1,5)
+"----" H 0 A_jumpifinventory("TempChillProof",1,4)
+"----" H 0 A_jumpifinventory("ChilledMark",1,2)
+"----" H 0 A_SpawnItemEX("ChillWatcher",1)
+"----" H 0 A_Giveinventory("ChilledMark")
+"----" H 0
+"----" H 0 //A_GiveInventory("BurnerhitDelay",1)
+"----" H 0
+Goto Pain+1
+*/
+Pain.Crisperizer:
+"----" H 0 A_GiveInventory("FireCritCheck",1)
+"----" H 0
+Goto Pain+1
+
+Pain.Tackle:
+"----" H 0 //A_GiveInventory("TackleHitDelay",1)
+"----" H 0 ThrustThing(random(0,255),30,0,0)
+"----" H 0 ThrustThingZ(0,30,0,0)
+"----" H 0
+Goto Pain+1
+
+
+//---->Status Effect Pain States End<----
+Pain.SingleShot: // regular shots
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,8)
+Goto Pain+1
+pain.VoltSpear:
+Pain.SingleShot2: // rapid shot
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,1)
+Goto Pain+1
+Pain.Sniper: 
+Pain.SingleShot3: //Hard single shots
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,15)
+Goto Pain+1
+Pain.SpreadShot: //shotgun like shots
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,2)
+Goto Pain+1
+Pain.SpreadShot2: //shotgun like shots, weaker knockback
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,1)
+Goto Pain+1
+
+Death.Crisperizer:
+Death.HeatRay:
+"----" H 0 A_GiveInventory("FireCritCheck",1)
+Goto Death
+
+}
+}

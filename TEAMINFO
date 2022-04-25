@@ -1,0 +1,79 @@
+ClearTeams
+
+Team "Team Blue"
+{
+   PlayerColor "DD DD DD"
+   TextColor "Blue"
+   RailColor "00 FF 00"
+   FlagItem "MegaBlueFlag"
+   SkullItem "BlueSkullST"
+   SmallFlagHUDIcon "LFLG"
+   SmallSkullHUDIcon "STKEYS3"
+   LargeFlagHUDIcon "BFLASMAL"
+   LargeSkullHUDIcon "BSKUA0"
+   WinnerPic "LIGHTWIN"
+   LoserPic "LIGHTLOS"
+   WinnerTheme "WTSELECT"
+   LoserTheme "MM3GO"
+   AllowCustomPlayerColor
+   PlayerStartThingNumber 5080
+}
+
+Team "Team Red"
+{
+	PlayerColor "BF 00 00"
+	TextColor "Red"
+	RailColor "FF 00 00"
+	FlagItem "MegaRedFlag"
+	SkullItem "RedSkullST"
+	SmallFlagHUDIcon "WFLG"
+	SmallSkullHUDIcon "STKEYS5"
+	LargeFlagHUDIcon "RFLASMAL"
+	LargeSkullHUDIcon "RSKUA0"
+	WinnerPic "WilyWin"
+	LoserPic "WilyLose"
+	WinnerTheme "WILYVIC"
+	LoserTheme "MM10RAIN"
+	AllowCustomPlayerColor
+	PlayerStartThingNumber 5081
+}
+
+Team "Team Eh..."
+{
+	PlayerColor "FF A5 00"
+	TextColor "Orange"
+	RailColor "FF A5 00"
+	FlagItem "MegaOrangeFlag"
+	SkullItem "OrangeSkullST"
+	PlayerStartThingNumber 0
+	SmallFlagHUDIcon "CFLG"
+	SmallSkullHUDIcon "STKEYS5"
+	LargeFlagHUDIcon "YFLASMAL"
+	LargeSkullHUDIcon "YSKUA0"
+	WinnerPic "CosWin"
+	LoserPic "CosLose"
+	WinnerTheme "COSSVIC"
+	LoserTheme "MM4GO"
+	AllowCustomPlayerColor
+	PlayerStartThingNumber 5082
+}
+
+Team "Who Cares"
+{
+	PlayerColor "80 00 80"
+	TextColor "Purple"
+	RailColor "80 00 80"
+	FlagItem "MegaPurpleFlag"
+	SkullItem "PurpleSkullST"
+	PlayerStartThingNumber 0
+	SmallFlagHUDIcon "KFLG"
+	SmallSkullHUDIcon "STKEYS5"
+	LargeFlagHUDIcon "BFLASMAL"
+	LargeSkullHUDIcon "BSKUA0"
+	WinnerPic "KNGWIN"
+	LoserPic "KNGLOSE"
+	WinnerTheme "MMBSAVE"
+	LoserTheme "MMBGO"
+	AllowCustomPlayerColor
+	PlayerStartThingNumber 5083
+}

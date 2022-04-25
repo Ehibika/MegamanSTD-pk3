@@ -1,0 +1,510 @@
+/*=============================
+Let's face it, even in the era where teleportational technology is a mundane 
+utility, we as a species still haven't mastered the means of being in multiple
+places at once. and if you could hold down any pathway and flank to the
+objective all by yourself, you might not need a team in the first place.
+
+fortunately, We at Neumodian Enterprises have an answer to such an issue...more
+of a band-aid fix but like band-aids, it can only help. this adhesive proximity
+mine once deployed will cloak itself and begin to scan all who pass by it.
+and upon catching sight of unauthorized personell, will detonate itself in order
+to do away with the introduder quickly and efficiently. just remember to replace
+it after every use.
+
+*///===========================
+actor MineLauncher : WepMasterBase
+{
+Tag "Mine Launcher"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 4
+
+Obituary "$OB_MineLauncher"
+inventory.icon "PRMINI"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "MineLauncherClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+Weapon.slotnumber 2
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+RedReady:
+"####" B 1 A_WeaponReady
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER1) == True,"User1")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER2) == True,"User2")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER3) == True,"User3")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER4) == True,"User4")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_RELOAD) == True,"Reload")
+"####" B 0 A_Jumpifinventory("MineLauncherClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" A 1 A_Raise
+Loop
+Fire:
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("ProxyMineShooter")
+"####" B 0 A_Giveinventory("ProxyMineCooldown")
+"####" CDC 2
+"####" B 10
+goto Ready
+
+NoAmmo:
+"####" B 1
+//"####" B 0 A_Takeinventory("WepBloomItem",999)
+"####" B 0 A_Jumpifinventory("MineLauncherClip",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 0 A_Jumpifinventory("MineLauncherClip",1,"Reload2")
+"####" B 16 A_WeaponReady(WRF_NOBOB|WRF_NOPRIMARY)
+goto Reloadloop
+Reload2:
+"####" B 16 A_WeaponReady(WRF_NOBOB)
+goto Reloadloop
+Reloadloop:
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 0 A_Giveinventory("MineLauncherClip",1)
+"####" B 0 A_Jumpifinventory("MineLauncherClip",4,"ReloadLoopEnd")
+"####" B 0 A_Jumpifinventory("MineLauncherClip",1,2)
+"####" B 16 Offset(0,82)
+Goto Reloadloop
+"####" B 16 A_WeaponReady(WRF_NOBOB)
+Goto Reloadloop
+ReloadLoopEnd:
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("MineLauncherClip",4)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor MineLauncher2 : MineLauncher
+{Weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor MineLauncherClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 4
+}
+
+Actor ProxyMineFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ProxyMineCount : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ProxyCountTrigger : powerup
+{inventory.amount 1 Powerup.duration 3}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor ProxyMineSpawner  
+{
++MISSILE
++NOTARGETSWITCH
++NOBLOOD
++DONTBLAST
++SKYEXPLODE
++ThruActors
+Obituary "$OB_PROXYMINE"
+radius 8
+height 8
+scale 1.3
+speed 45
+states
+{
+Spawn:
+PRMN A 0
+PRMN A 3
+goto spawn+1
+Death:
+PRMN A 0 A_SpawnitemEx("ProxyMine",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ProxyMineSpawner_R : ProxyMineSpawner
+{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170","241:241=183:183"
+states
+{
+Death:
+PRMN A 0 A_SpawnitemEx("ProxyMine_RED",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ProxyMineSpawner_B : ProxyMineSpawner
+{
+states
+{
+Death:
+PRMN A 0 A_SpawnitemEx("ProxyMine_BLUE",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor ProxyMine  
+{
++MISSILE
++NOBLOOD
++DONTBLAST
++SEEKERMISSILE
++NOTARGETSWITCH
++SHOOTABLE
++NOGRAVITY
++NOCLIP
++LOOKALLAROUND
+radius 8
+height 8
+speed 0
+health 10
+scale 2
+Var int user_tally;
+states
+{
+Spawn:
+PRMN A 0
+PRMN A 0 ACS_ExecuteAlways(ObjectTally,0)
+PRMN A 1 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
+PRMN A 5 
+	PRMN A 0 ACS_NamedExecuteAlways("Proxymine_ProxyCheck",0,40)
+	PRMN A 30
+PRMN A 0 //A_CheckFlag("NOGRAVITY", "Explode", AAPTR_TARGET)
+PRMN A 1 A_PlaySoundEX("weapon/flashstopper","Weapon")
+PRMN ACACAC 3 A_FadeTo(0.3)
+PRMN A 0 //A_JumpifinTargetInventory("CutterFlag",999,"Perish") // <----
+PRMN A 0 
+PRMN C 0 A_Jump(256,"Scan")
+Goto Scan
+Scan:
+//PRMN C 0 A_SpawnItemEx("MineRadiusRing")
+PRMN C 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+PRMN C 0 A_Jumpif(user_tally >= 4,"Perish")
+PRMN C 0  A_LookEx(LOF_NOSOUNDCHECK, 1, 160, 160, 360, "Targetcheck")
+PRMN C 0 A_Jump(256,"Scan")
+Goto Scan
+Targetcheck:
+PRMN A 1 A_Jumpifcloser(160,"Targetcheck2")
+PRMN C 0 A_Jump(256,"Scan")
+Goto Scan
+Targetcheck2:
+PRMN A 0 A_Jumpifintargetinventory("RespawnCamera",1,"Scan") //You aren't spawned yet
+PRMN A 0 //A_Jumpifintargetinventory("WilyTeamFlag",1,"Scan") //You Are A Teammate
+Goto Explode
+Explode:
+PRMN A 0 ACS_ExecuteAlways(ObjectDeathTally,0)
+PRMN A 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+PRMN A 0 A_Changeflag("SHOOTABLE",0)
+PRMN A 0 A_FadeTo(1.0,1.0)
+//PRMN A 0 A_PlaySoundEX("weapon/BombAlarm","Soundslot6")
+//PRMN A 17 
+//PRMN AAA 2 A_PlaySoundEX("weapon/flashstopper","Soundslot6")
+//PRMN AAA 2 A_PlaySoundEX("weapon/flashstopper","Soundslot6")
+TNT1 A 1 A_StopsoundEX("Soundslot6")
+TNT1 A 1 A_Spawnitemex("ProxyExplosion",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_TRANSFERTRANSLATION)
+Stop
+Death:
+PRMN A 0 ACS_ExecuteAlways(ObjectDeathTally,0)
+Goto Perish
+Perish:
+PRMN A 0 A_FadeTo(1.0,1.0)
+HARD BCDE 3
+PRMN A 0
+stop
+}
+}
+
+actor ProxyMine_RED : ProxyMine
+{
+Designatedteam 1
+states
+{
+Scan:
+//PRMN C 0 A_SpawnItemEx("MineRadiusRing_RED")
+PRMN C 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+PRMN C 0 A_Jumpif(user_tally >= 4,"Perish")
+PRMN C 0  A_LookEx(LOF_NOSOUNDCHECK, 1, 160, 160, 360, "Targetcheck")
+PRMN C 0 A_Jump(256,"Scan")
+Goto Scan
+
+Targetcheck2:
+PRMN A 0 A_Jumpifintargetinventory("RespawnCamera",1,"Scan") //You aren't spawned yet
+PRMN A 0 A_Jumpifintargetinventory("WilyTeamFlag",1,"Scan") //You Are A Teammate
+Goto Explode
+}
+}
+
+actor ProxyMine_BLUE : ProxyMine
+{
+Designatedteam 0
+states
+{
+Scan:
+//PRMN C 0 A_SpawnItemEx("MineRadiusRing_BLUE")
+PRMN C 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
+PRMN C 0 A_Jumpif(user_tally >= 4,"Perish")
+PRMN C 0  A_LookEx(LOF_NOSOUNDCHECK, 1, 160, 160, 360, "Targetcheck")
+PRMN C 0 A_Jump(256,"Scan")
+Goto Scan
+
+Targetcheck2:
+PRMN A 0 A_Jumpifintargetinventory("RespawnCamera",1,"Scan") //You aren't spawned yet
+PRMN A 0 A_Jumpifintargetinventory("LightTeamFlag",1,"Scan") //You Are A Teammate
+Goto Explode
+}
+}
+
+
+actor ProxyExplosion 
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++DONTBLAST
++FORCEXYBILLBOARD
+Speed 0
+//
+Damagetype "Explosion"
+radius 8
+height 8
+scale 3.5
+States
+{
+Spawn:
+NAPC A 0 
+NAPC D 0 A_Explode(55, 180, 1,0,180)
+MINB A 0 ACS_NamedExecuteAlways("BLASTKNOCKBACK",0,40,30,280)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+ASEX ABCDEF 1 
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor MineRadiusRing
+{
+	+NOINTERACTION
+	+NOGRAVITY
+	+CLIENTSIDEONLY
+	+FORCEXYBILLBOARD
+	-SOLID
+radius 2
+height 2
+scale 5.0
+Reactiontime 30
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+spawn2:
+TNT1 A 0 A_SpawnItemEx("MineRadiusDot",160,0,2,0,0,0,user_Rot)
+TNT1 A 0 A_SpawnItemEx("MineRadiusDot",160,0,6,0,0,0,user_Rot+6)
+TNT1 A 0 A_SpawnItemEx("MineRadiusDot",160,0,10,0,0,0,user_Rot)
+
+
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+TNT1 A 0 A_Countdown
+loop
+Death:
+TNT1 A 3
+stop
+}
+}
+
+	actor MineRadiusRing_BLUE : MineRadiusRing
+	{
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	spawn2:
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_BLUE",160,0,2,0,0,0,user_Rot)
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_BLUE",160,0,6,0,0,0,user_Rot+6)
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_BLUE",160,0,10,0,0,0,user_Rot)
+
+	TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+	TNT1 A 0 A_Countdown
+	loop
+	Death:
+	TNT1 A 3
+	stop
+	}
+	}
+
+	actor MineRadiusRing_RED : MineRadiusRing
+	{
+	States
+	{
+	Spawn:
+	TNT1 A 0
+	spawn2:
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_RED",160,0,2,0,0,0,user_Rot)
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_RED",160,0,6,0,0,0,user_Rot+6)
+	TNT1 A 0 A_SpawnItemEx("MineRadiusDot_RED",160,0,10,0,0,0,user_Rot)
+
+	TNT1 A 0 A_setuservar("user_Rot",user_Rot+12)
+	TNT1 A 0 A_Countdown
+	loop
+	Death:
+	TNT1 A 3
+	stop
+	}
+	}
+	
+actor MineRadiusDot : FXActor_A
+{
+PROJECTILE
++NOINTERACTION
++DONTBLAST
++CLIENTSIDEONLY
+Speed 10
+Damage (0)
+radius 7
+height 7
+scale 0.6
+States
+{
+Spawn:
+BASB U 0
+BASB U 2
+Death:
+TNT1 A 1 
+stop
+}
+}
+
+	actor MineRadiusDot_BLUE : MineRadiusDot
+	{
+	VisibletoTeam 0
+	}
+
+	actor MineRadiusDot_RED : MineRadiusDot
+	{
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170","241:241=191:191"
+	VisibletoTeam 1
+	}
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+
+
+actor ProxyMineCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("ProxyMineCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ProxyMineCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor ProxyMineCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("ProxyMineCooldownItem",52)
+TNT1 A 0 A_Spawnitemex("ProxyMineCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ProxyMineCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 52
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Item Shooter |--------------------------------
+//[+]========================================================================[+]
+actor ProxyMineRingShooter : CustomInventory 
+{
+States
+{
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire",AAPTR_MASTER)
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire",AAPTR_MASTER)
+PRMN A 0 A_SpawnitemEx("MineRadiusRing")
+stop
+TeamRedFire:
+PRMN A 0 A_SpawnitemEx("MineRadiusRing_RED")
+TNT1 A 0
+stop
+TeamBlueFire:
+PRMN A 0 A_SpawnitemEx("MineRadiusRing_BLUE")
+TNT1 A 0
+stop
+}
+}
+
+actor ProxyMineShooter : CustomInventory 
+{
+States
+{
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+PRMI C 2 A_FireCustomMissile("ProxyMineSpawner",0,1,8,0)
+stop
+TeamRedFire:
+PRMI C 2 A_FireCustomMissile("ProxyMineSpawner_R",0,1,8,0)
+TNT1 A 0
+stop
+TeamBlueFire:
+PRMI C 2 A_FireCustomMissile("ProxyMineSpawner_B",0,1,8,0)
+TNT1 A 0
+stop
+}
+}

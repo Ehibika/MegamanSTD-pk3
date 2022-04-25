@@ -1,0 +1,303 @@
+//====Constants====//
+#DEFINE MAX_PLAYERS 64
+#DEFINE BASEBLASTMIN 120
+
+#DEFINE CLASSWIPE 722 
+#DEFINE NEUM_ClassSetup 723 
+#DEFINE REAPPLICATOR 724 
+#DEFINE TEAMSPECIES 725
+#DEFINE SELFHPPERCENT 726
+#DEFINE SELFHPPERCENT2 727
+#DEFINE WEPBLOOMSTAT 728
+#DEFINE DAMAGERATE 729
+#DEFINE RADIUSGIVE 730
+#DEFINE JUMPTOGGLE 731
+#DEFINE MEDIVISIONSCRIPT 732
+#DEFINE RADIUSHEAL 733
+#DEFINE DOTDAMAGER 734
+#DEFINE GRAPPLINGHOOKPULL 735
+#DEFINE PITCHMATCH 736
+#DEFINE BLASTKNOCKBACK 737
+#DEFINE TIDCOUNTER 738
+#DEFINE OBJECTTALLY 739
+#DEFINE OBJECTDEATHTALLY 740
+
+#DEFINE TARGHPPERCENT 741
+#DEFINE DEPLPOYABLEDELETER 742
+#DEFINE HEALRAMP 743
+
+#DEFINE TINYBARFRAMES_MAX 20
+#DEFINE PLAYERICON_MAX 26
+
+//int ServerMAX = 32;
+
+//MAX_TARGET_ANGLE (0.0 - 0.5) i think
+#DEFINE MAX_TARGET_ANGLE 0.005
+#DEFINE MAX_TARGET_ANGLE2 0.0005
+#DEFINE TEAM_NONE -1
+#DEFINE TEAM_COOP -2
+
+#DEFINE LOSAMMO_MAX 300
+
+//just using this until GetActorProperty(0,APROP_Height)/2 works
+#DEFINE PLAYER_CENTER 28.0
+
+
+
+#DEFINE MID_WEIGHT 0.1
+#DEFINE HEAVY_WEIGHT 0.25
+//====Variables====//
+int PlayerJumpZ[64];
+int PlayerBaseSpeed[64];
+
+
+str TinyBarFrames[TINYBARFRAMES_MAX][1] = {
+{"TNYBK0"},
+{"TNYBJ0"},
+{"TNYBI0"},
+{"TNYBH0"},
+{"TNYBG0"},
+{"TNYBF0"},
+{"TNYBE0"},
+{"TNYBD0"},
+{"TNYBC0"},
+{"TNYBB0"},
+{"TNYBA0"},
+
+{"TNYBU0"},
+{"TNYBT0"},
+{"TNYBS0"},
+{"TNYBR0"},
+{"TNYBQ0"},
+{"TNYBP0"},
+{"TNYBN0"},
+{"TNYBM0"},
+{"TNYBL0"},
+};
+
+str PlayerIcons[PLAYERICON_MAX][1] = {
+{"PE00A0"},
+{"PE00B0"},
+{"PE00C0"},
+{"PE00D0"},
+{"PE00E0"},
+{"PE00F0"},
+{"PE00G0"},
+{"PE00H0"},
+{"PE00I0"},
+{"PE00J0"},
+{"PE00K0"},
+{"PE00L0"},
+{"PE00M0"},
+{"PE00N0"},
+{"PE00O0"},
+{"PE00P0"},
+{"PE00Q0"},
+{"PE00R0"},
+{"PE00S0"},
+{"PE00T0"},
+{"PE00U0"},
+{"PE00V0"},
+{"PE00W0"},
+{"PE00X0"},
+{"PE00Y0"},
+{"PE00Z0"},
+};
+
+//====Functions====//
+Function int ButtonCheck (int Buttons, int OldButtons, int WhichButton)
+{
+int ButtonNow = Buttons & WhichButton;
+int ButtonOld = OldButtons & WhichButton;
+If(ButtonNow > ButtonOld){Return 1;}
+If(ButtonNow < ButtonOld){Return 2;}
+If(ButtonNow > 0 &&  ButtonOld > 0){Return 3;}
+Return 0;
+}
+
+// Returns a number below 0 as 0
+Function int NoNeg (int Numb)
+{
+Int Output;
+
+if(Numb > 0){Output = Numb;}
+else{Output = 0;}
+return Output;
+}
+
+/*
+// returns the distance between two actors that have TIDs
+function int xyzDistance (int tid1, int tid2)
+{
+	int x, y, z, d;
+	x = GetActorX(tid1) - GetActorX(tid2) >> 16; // Convert fixed point to integer
+	y = GetActorY(tid1) - GetActorY(tid2) >> 16;
+	z = GetActorZ(tid1) - GetActorZ(tid2) >> 16;
+	d = sqrt8( x*x + y*y + z*z );
+	return d;
+}
+
+// returns the distance relative to the horizontal axis
+function int xyDistance (int tid1, int tid2)
+{
+	int x, y, d;
+	x = GetActorX(tid1) - GetActorX(tid2) >> 16; // Convert fixed point to integer
+	y = GetActorY(tid1) - GetActorY(tid2) >> 16;
+	d = sqrt8( x*x + y*y);
+	return d;
+}
+
+//Returns the squareRoot of a number
+function int sqrt8 (int number)
+{
+	if(number <= 3)
+	{
+		if(number > 0)
+		{
+			return 1;
+		}
+		return 0;
+	}
+
+	int oldAns = number >> 1,                     // initial guess
+	    newAns = (oldAns + number / oldAns) >> 1; // first iteration
+
+	// main iterative method
+	while(newAns < oldAns)
+	{
+		oldAns = newAns;
+		newAns = (oldAns + number / oldAns) >> 1;
+	}
+
+	return oldAns;
+}
+*/
+//Used in Script 899
+Function int RadhealDiminish (int HealMax, int Splitcount, int Dropamount)
+{
+int Result = (HealMax - (Splitcount * Dropamount));
+
+	if(Result <= (HealMax/4)) {Result = HealMax/4;}
+return Result;
+}
+
+//returns the relative pitch of a thing with tid2, from a thing with tid1.
+function int GetTargetPitch (int tid1, int tid2)
+{
+    int x, y, z, xy, a;
+    x = GetActorX(tid2) - GetActorX(tid1);
+    y = GetActorY(tid2) - GetActorY(tid1);
+    z = GetActorZ(tid2) - GetActorZ(tid1);
+    a = VectorAngle(x, y);
+
+    if ((a + 0.125) % 0.5 > 0.25)
+        xy = FixedDiv(y, sin(a));
+    else
+        xy = FixedDiv(x, cos(a));
+
+    return -VectorAngle(xy, z);
+}
+
+
+
+//For mediscan, calculates health and returns the proper sprite.
+Function str TinyBarFrameGetter(int TargTID)
+{
+int CurHealth; 
+int MaxHealth; 
+int HealthPercent;
+
+	if(GetActorProperty(TargTID,APROP_HEALTH)<=0){CurHealth = 1; }
+		Else{CurHealth = GetActorProperty(TargTID,APROP_Health);}
+	if(GetActorProperty(TargTID,APROP_SpawnHealth)<=0){MaxHealth = 1; }
+		Else{MaxHealth = GetActorProperty(TargTID,APROP_SpawnHealth);}
+		
+HealthPercent = ((CurHealth*100)/MaxHealth);
+return TinyBarFrames[HealthPercent/10][0];
+}
+
+// Returns the closest integer, rounded up
+/*
+function int ceil(int fixedIn)
+{
+	if(fixedIn % 65536 != 0)
+	{
+		return (fixedIn >> 16) + 1;
+	}
+	return fixedIn >> 16;
+}
+*/
+//====
+//HudMessageOnActor from ZDoom wiki
+function void HudMessageOnActorZPlusAllign(int tid, int ZPlus, int msgID, int hudX, int hudY, int xOffset, int yOffset, int range, str sprite, str text, int holdTime, str colour)
+{
+		
+	int dist, angle, vang, pitch, x, y;
+	
+	if (holdTime == 0) { holdTime = 0.1; }	
+	if (hudX == 0) { hudX = 640; }
+	if (hudY == 0) { hudY = 480; }
+	
+	if(sprite != -1)
+	{
+		
+		SetFont(sprite);
+		text = "A";
+		
+	}
+	
+	SetHudSize(hudX, hudY, 1);
+	x = GetActorX(tid) - GetActorX(0);
+	y = GetActorY(tid) - GetActorY(0);
+	
+	vang = VectorAngle(x,y);
+	angle = (vang - GetActorAngle(0) + 1.0) % 1.0;
+	
+	if(((vang+0.125)%0.5) > 0.25) dist = FixedDiv(y, sin(vang));
+	else dist = FixedDiv(x, cos(vang));
+	
+	if ((angle < 0.23 || angle > 0.85) && (dist >> 16) < range)
+	{
+		
+		if (GetActorPitch(0) >= -0.5 && GetActorPitch(0) <= 0.5)
+		{
+ 
+			pitch = VectorAngle(dist, GetActorZ(tid) + ZPlus - (GetActorZ(0) + GetActorViewHeight(0)));
+			pitch += FixedMul(GetActorPitch(0), 1.2) % 1.0;
+ 
+			if ((hudX/2) * sin(angle) != 0 && cos(angle) != 0 && (hudX/2) * sin(pitch) != 0 && cos(pitch) != 0)
+			{
+				
+				x = hudX/2 - ((hudX/2) * sin(angle) / cos(angle));
+				y = hudY/2 - ((HUDX/2) * sin(pitch) / cos(pitch));
+				
+				x+=xOffset;
+				y+=yOffset;
+				
+				HudMessage(s:text; HUDMSG_PLAIN, msgID, colour, (x << 16)+0.1, (y << 16)+0.1, holdTime);
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
+/*
+// Returns absolute value
+function int abs (int x)
+{
+    if (x < 0)
+	{
+        return -x;
+	}
+    return x;
+}
+
+// Hookshot
+function int magnitudeThree(int x, int y, int z)
+{
+    return sqrt8(x*x + y*y + z*z);
+}
+*/

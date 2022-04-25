@@ -1,0 +1,312 @@
+
+//Weapons
+OptionMenu "EditLoadOutMenu"
+{
+	Title "Loadouts"
+	
+	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	StaticText ""
+	Option "Weapon A", "Lo_WepA", "WepOptionsA"
+	StaticText ""
+		Option "Desc:", "Lo_WepA", "WepDescA", "unselectable"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	
+	Option "Weapon B", "Lo_WepB", "WepOptionsB"
+	StaticText ""
+		Option "Desc:", "Lo_WepB", "WepDescB", "unselectable"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	
+	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
+	StaticText ""
+		Option "Desc:", "Lo_SubWep", "SubWepDesc", "unselectable"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	JoinMenuPlayerClassOption
+	StaticText ""
+	StaticText "Remember to Bind the reload Key!"
+}
+
+
+OptionValue EmblemOptions
+{
+0, "Dot"
+1, "\cqBullets"
+2, "\cqSlug"
+3, "\cqLarge Bullet"
+4, "\ccBuster Gun"
+5, "\ceShield"
+6, "\cwHeavy Weapons Guy"
+7, "\cwMuscle"
+8, "\cdHealer"
+9, "\cdHealer 2"
+10, "\cdMedical cross"
+11, "\cdpill"
+12, "\csCrosshair 1"
+13, "\csCrosshair 2"
+14, "\ctskull"
+15, "\ctDagger"
+16, "\ctCobra"
+17, "\cnScout"
+18, "\cnJetpack"
+19, "\caSuits:spade"
+20, "\caSuits:Club"
+21, "\caSuits:Diamond"
+22, "\caSuits:Heart"
+23, "\chChess:Rook"
+24, "\chChess:Bishop"
+25, "\chChess:knight"
+}
+
+OptionValue WepOptionsA
+{
+0, "none"
+1, "Blaster	\cf::PB=\cj5\cf::"
+2, "Hi.P.E Gun \cf::PB=\cj10\cf::"
+3, "HiPERBeam \cf::PB=\cj25\cf::"
+4, "SLAM Cannon \cf::PB=\cj25\cf::"
+5, "\cdMediCarbine \cf::PB=\cj5\cf::"
+6, "Crossbow \cf::PB=\cj5\cf::"
+7, "FlameTongue	 \cf::PB=\cj10\cf::"
+8, "VoltSpear \cf::PB=\cj30\cf::"
+//8, "TAG Missile \cf::PB=\cj30\cf::"
+9, "Basher \cf::PB=\cj30\cf::"
+
+10, "BusterGun \cf::PB=\cj0\cf::"		
+11, "Blitzer \cf::PB=\cj5\cf::"		
+12, "Repidifier \cf::PB=\cj5\cf::"		
+13, "Thrice Gun \cf::PB=\cj10\cf::"		
+14, "\cdMending Tool \cf::PB=\cj5\cf::"		
+15, "\cnSubwich \cf::PB=\cj5\cf::"		
+16, "Point Buster \cf::PB=\cj5\cf::"		
+17, "Crisperizer \cf::PB=\cj5\cf::"		
+18, "Hotshot \cf::PB=\cj5\cf::"		
+19, "Stinger \cf::PB=\cj5\cf::"		
+20, "Mine Launcher \cf::PB=\cj15\cf::"
+21, "\cdProtector \cf::PB=\cj15\cf::"
+}
+
+
+OptionValue WepOptionsB //No Primaries
+{
+0, "none"
+
+
+10, "BusterGun \cf::PB=\cj0\cf::"		
+11, "Blitzer \cf::PB=\cj5\cf::"		
+12, "Repidifier \cf::PB=\cj5\cf::"		
+13, "Thrice Gun \cf::PB=\cj10\cf::"		
+14, "\cdMending Tool \cf::PB=\cj5\cf::"		
+15, "\cnSubwich \cf::PB=\cj5\cf::"		
+16, "Point Buster \cf::PB=\cj5\cf::"		
+17, "Crisperizer \cf::PB=\cj5\cf::"		
+18, "Hotshot \cf::PB=\cj5\cf::"		
+19, "Stinger \cf::PB=\cj5\cf::"		
+20, "Mine Launcher \cf::PB=\cj15\cf::"
+21, "\cdProtector \cf::PB=\cj15\cf::"
+}
+
+OptionValue SubWepOptions
+{
+0, "None"
+
+1, "Minibomb \cf::PB=\cj10\cf::"
+//2, "TopGrenade \cf::PB=\cj15\cf::"
+2, "\cnLight Screen \cf::PB=\cj15\cf::"
+3, "\cnPower Dart \cf::PB=\cj25\cf::"
+4, "\ciGrappling Hook \cf::PB=\cj15\cf::"
+5, "\cdHeal Patch \cf::PB=\cj20\cf::"
+6, "Hyper Bomb \cf::PB=\cj20\cf::"
+}
+
+OptionValue WepDescA
+{
+//-1, "Null"
+0, "---"
+1, "Standard issue Assault weapon \n With Solid power but \nconsiderable kickback while firing"
+2, "High Precision Energy Gun,\n pump action weapon that is\n great at long range."
+3, "chargeable beam rail that \ncan obloterate distant foes, has \nconsiderable kickpack on charge shots."
+4, "launches modified minibombs that \nexplode on impact, high \npower but slow"
+5, "A medical weapon, it's shots can heal \n allies but also harm enemies,\n has decent range but slow firing"
+6, "A mid-long ranged weapon that can \nlaunch poisoned darts if given \nthe time to prime, suppressing healing"
+7, "A Flamethrower that periodically \nspews embers that can set enemies \nablaze, dealing damage over time"
+8, "Super electro-lazer that burns \nright through enemies and \ndefenses alike!"
+//9, "Launches small homing missiles, \nhold fire to lock onto \nfoes before firing"
+9, "This heavy weapon can fire a rapid \nvolley of projectiles! slow and \nrequire time to rev up"
+
+10, "Standard and well rounded, \ncan fire as quickly as you \ncan pull but may overheat."
+11, "PowerFul spread weapon, \ndeals high damage up close and \nmoderate mid-ranged damage"
+12, "Rapid volley of high velocity \nshots, not the strongest but \nhas excellent coverage"
+13, "3-way icicle shot, has \n amazing cover, making this weapon \nideal in wider areas"
+14, "a non offensive weapon that \nheals damage with a healing stream,\n works best out of combat"
+15, "Take a lunch break and eat this \nself replenishing sandwich. \caall \nharm will Crit you while eating however."
+16, "launches arrow-shaped projectile \nthat follow your reticle, a tricky \nweapon with multiple uses"
+17, "Launches large, superheated projectiles, \ndeals critical damage to foes \non fire"
+18, "Launch a volley of bouncing fireballs, \nweak in power but can easily \noverwhelm targets."
+19, "poisons a target through successive \nhits, deals critical damage to \npoisoned targets as well"
+20, "shoots Proxy mines that explode \nwhen enemies are in range, \nup to two can be out per person."
+21, "Encase an ally in a healing \nshield that reduces a \nsingle hit by half."
+}
+
+OptionValue WepDescB
+{
+10, "Standard and well rounded, \ncan fire as quickly as you \ncan pull but may overheat."
+11, "PowerFul spread weapon, \ndeals high damage up close and \nmoderate mid-ranged damage"
+12, "Rapid volley of high velocity \nshots, not the strongest but \nhas excellent coverage"
+13, "3-way icicle shot, has \n amazing cover, making this weapon \nideal in wider areas"
+14, "a non offensive weapon that \nheals damage with a healing stream,\n works best out of combat"
+15, "Take a lunch break and eat this \nself replenishing sandwich. \caall \nharm will Crit you while eating however."
+16, "launches arrow-shaped projectile \nthat follow your reticle, a tricky \nweapon with multiple uses"
+17, "Launches large, superheated projectiles, \ndeals critical damage to foes \non fire"
+18, "Launch a volley of bouncing fireballs, \nweak in power but can easily \noverwhelm targets."
+19, "poisons a target through successive \nhits, deals critical damage to \npoisoned targets as well"
+20, "shoots Proxy mines that explode \nwhen enemies are in range, \nup to two can be out per person."
+21, "Encase an ally in a healing \nshield that reduces a \nsingle hit by half."
+}
+
+OptionValue SubWepDesc
+{
+//-1, "Null"
+0, "---"
+1, "Throwing explosive that detonates \non the floor, ride the blast \nto get to high places."
+//2, "Heat Seeking Gyro Explosive that \nPursues players in sight, usefull \n around corners."
+2, "a defensive bunker you can \nshoot through, has limited health."
+3, "Inject an allie with the power of \ncritical hits! hold to \nselect your target."
+4, "reach distant places with great ease! \nbe mindfull of your momentum however."
+5, "adheres to surfaces or players \nto emit a healing aura, \nit's destructable so beware"
+6, "Destructive, High caliber thrown \nExplosive that can demolish \nFoes in an instant"
+}
+
+OptionMenu "EditEmblemMenu"
+{
+    Title "Emblem"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+		Option "Emblem", "Lo_Emblem", "EmblemOptions"
+}
+
+
+//Psionics
+
+OptionMenu "EditPsionicsMenu"
+{
+	Title "Psionics"
+	
+	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	StaticText ""
+	Option "Slot 1:", "Lo_PsiA", "PSIOptions"
+	Option "PP Cost:", "Lo_PsiA", "PSICostOptions" , "unselectable"
+	Option "_", "Lo_PsiA", "PSILevelOptions" , "unselectable"
+	Slider "Level", "Lo_PsiPowerA" , 1 , 5 , 1 
+	
+	Option "Slot 2:", "Lo_PsiB", "PSIOptions"
+	Option "PP Cost:", "Lo_PsiB", "PSICostOptions" , "unselectable"
+	Option "_", "Lo_PsiB", "PSILevelOptions" , "unselectable"
+	Slider "Level", "Lo_PsiPowerB" , 1 , 5 , 1 
+
+	Option "Slot 3:", "Lo_PsiC", "PSIOptions"
+	Option "PP Cost:", "Lo_PsiC", "PSICostOptions" , "unselectable"
+	Option "_", "Lo_PsiC", "PSILevelOptions" , "unselectable"
+	Slider "Level", "Lo_PsiPowerC" , 1 , 5 , 1 
+
+	Option "Slot 4:", "Lo_PsiD", "PSIOptions"
+	Option "PP Cost:", "Lo_PsiD", "PSICostOptions" , "unselectable"
+	Option "_", "Lo_PsiD", "PSILevelOptions" , "unselectable"
+	Slider "Level", "Lo_PsiPowerD" , 1 , 5 , 1 
+	StaticText "======================================"
+	Option "-", "Lo_PsiDetail", "PSIDetailName"
+	//StaticText ""
+		Option "Desc:", "Lo_PsiDetail", "PSIDetailDesc", "unselectable"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+}
+
+OptionValue PSIOptions
+{
+0, "None"
+
+1, "PK Fire \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
+2, "PK Freeze \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
+3, "PK Thunder \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
+4, "\cdPK Lifeup \cf::PB=\cj15\cf:\cj20\cf:\cj25\cf:\cj35\cf:\cj55\cf::"
+}
+
+OptionValue PSICostOptions
+{
+0, "  0   0   0   0   0"
+1, "  1   2   3   -   5"
+2, "  1   2   3   -   5"
+3, "  1   2   3   -   5"
+4, "  1   2   3   3   4"
+}
+
+OptionValue PSIPBOptions
+{
+0, "  0   0   0   0   0"
+1, "  10   20   30   -   55"
+2, "  10   20   30   -   55"
+3, "  10   20   30   -   55"
+4, "  10   15   25   -35   55"
+}
+
+OptionValue PSILevelOptions
+{
+0, "  I   II   III   V   X"
+
+1, "  I   II   III   -   X"
+2, "  I   II   III   -   X"
+3, "  I   II   III   -   X"
+4, "  I   II   III   V   X"
+}
+
+OptionValue PSIPowerBudget
+{
+0, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj10\cf   \cfX=\cj10\cf"
+
+1, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj-\cf   \cfX=\cj10\cf"
+2, "  I   II   III   -   X"
+3, "  I   II   III   -   X"
+4, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj10\cf   \cfX=\cj10\cf"
+}
+
+
+OptionValue PSIDetailName
+{
+0, "None"
+
+1,"PK Fire Alpha (I) \cf::PB=\cj10\cf:: \cd::PP=\cj1\cf::"
+2, "PK Fire Beta (II) \cf::PB=\cj20\cf:: \cd::PP=\cj2\cf::"
+3, "PK Fire Gamma (III) \cf::PB=\cj30\cf:: \cd::PP=\cj3\cf::"
+4, "PK Fire Omega (X) \cf::PB=\cj55\cf:: \cd::PP=\cj4\cf::"
+
+5, "PK Freeze Alpha (I) \cf::PB=\cj10\cf::"
+6, "PK Freeze Beta (II) \cf::PB=\cj20\cf::"
+7, "PK Freeze Gamma (III) \cf::PB=\cj30\cf::"
+8, "PK Freeze Omega (X) \cf::PB=\cj55\cf::"
+
+9, "PK Thunder Alpha (I) \cf::PB=\cj10\cf::"
+10, "PK Thunder Beta (II) \cf::PB=\cj20\cf::"
+11, "PK Thunder Gamma (III) \cf::PB=\cj30\cf::"
+12, "PK Thunder Omega (X) \cf::PB=\cj55\cf::"
+
+13, "\cdPK Lifeup Alpha (I) \cf::PB=\cj15\cf::"
+14, "\cdPK Lifeup Beta (II) \cf::PB=\cj20\cf::"
+15, "\cdPK Lifeup Gamma (III) \cf::PB=\cj25\cf::"
+16, "\cdPK Lifeup Sigma (V) \cf::PB=\cj35\cf::"
+17, "\cdPK Lifeup Omega (X) \cf::PB=\cj55\cf::"
+}
+
+OptionValue PSIDetailDesc
+{
+0, "None"
+
+1,"Launch a fast moving \nprojectile that explodes \non impact, can \nset foes ablaze"
+
+}

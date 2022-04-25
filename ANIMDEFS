@@ -1,0 +1,27 @@
+
+
+Texture GTLHEAT1
+pic VARAMM13 tics 5
+pic VARAMM53 tics 5
+pic VARAMM57 tics 5
+
+Texture GTLHEAT2
+pic VARAMM13 tics 3
+pic VARAMM53 tics 3
+pic VARAMM57 tics 3
+
+
+Texture GTLHEAT3
+pic VARAMM13 tics 1
+pic VARAMM53 tics 1
+pic VARAMM57 tics 1
+
+
+Texture ELECPW1
+pic VARAMM60 tics 4
+pic VARHEALT tics 4
+
+
+Texture ELECPW2
+pic VARAMM60 tics 2
+pic VARHEALT tics 2

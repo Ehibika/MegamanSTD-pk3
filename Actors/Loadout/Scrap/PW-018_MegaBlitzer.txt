@@ -1,0 +1,175 @@
+/*=============================
+For everything good about the standard Blitzer, sometimes you just need
+something with a little more 'omph' to it, whatever that may be. well 
+here in neumodian enterprises, we believe that sometimes more is more!
+
+Enter the Megablitzer, has the aproximate stats of two blitzers melted 
+down into one, and then reforged into an actual useable weapon (as molten
+shotguns aren't very easy to handle)
+*///===========================
+
+actor MegaBlitzer : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 5
+Weapon.SlotNumber 1
+Weapon.SelectionOrder 1
+scale 2.0
+Obituary "$OB_MEGABLITZER"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "MegaBlitzerClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+loop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BUST B 0 
+RedReady:
+"####" B 1 A_WeaponReady
+"####" B 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" B 0 A_Jumpifinventory("MegaBlitzerClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/HardBuster1","Weapon")
+"####" B 0 A_GiveInventory("MegaBlitzerShooter")
+"####" CCDD 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
+
+"####" B 12 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 2 Offset(0,32)
+"####" B 2 Offset(0,46)
+"####" B 2 Offset(0,58)
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 2 Offset(0,58)
+"####" B 2 Offset(0,46)
+"####" B 2 Offset(0,32)
+
+"####" B 4  A_WeaponReady(WRF_NOPRIMARY)
+"####" B 0 A_Refire
+// ===30 frames===
+goto Ready
+
+
+NoAmmo:
+"####" B 1
+"####" B 0 A_Jumpifinventory("MegaBlitzerClip",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 32 
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("MegaBlitzerClip",5)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 1
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor MegaBlitzerClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 3
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor MegaBlitzerPellet : LinearBullet2
+{
+//Speed 21
+Damage (1 + ACS_ExecuteWithResult(DamageRate,4,130,65))
+radius 6
+height 6
+}
+
+	actor MegaBlitzerPellet_BLUE : MegaBlitzerPellet
+	{
+	//Missiletype "RepidifierTrail_BLUE"
+	}
+
+	actor MegaBlitzerPellet_RED : MegaBlitzerPellet
+	{
+	//Missiletype "RepidifierTrail_RED"
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"
+	}
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor BlitzerPuff : FXActor_A
+{
+scale 0.5
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+
+
+actor MegaBlitzerShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("MegaBlitzerPellet",Frandom(-MB_SPD,MB_SPD),2,15,8,0,Frandom(-MB_SPD,MB_SPD))
+BUST BBBBBBBBBBBBBBBBBB 0 A_FireCustomMissile("MegaBlitzerPellet",Frandom(-MB_SPD,MB_SPD),0,15,8,0,Frandom(-MB_SPD,MB_SPD))
+
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("MegaBlitzerPellet_RED",Frandom(-MB_SPD,MB_SPD),2,15,8,0,Frandom(-MB_SPD,MB_SPD))
+BUST BBBBBBBBBBBBBBBBBB 0 A_FireCustomMissile("MegaBlitzerPellet_RED",Frandom(-MB_SPD,MB_SPD),0,15,8,0,Frandom(-MB_SPD,MB_SPD))
+
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("MegaBlitzerPellet_BLUE",Frandom(-MB_SPD,MB_SPD),2,15,8,0,Frandom(-MB_SPD,MB_SPD))
+BUST BBBBBBBBBBBBBBBBBB 0 A_FireCustomMissile("MegaBlitzerPellet_BLUE",Frandom(-MB_SPD,MB_SPD),0,15,8,0,Frandom(-MB_SPD,MB_SPD))
+
+stop
+}
+}

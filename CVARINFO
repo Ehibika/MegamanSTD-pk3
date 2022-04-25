@@ -1,0 +1,41 @@
+server bool sv_nointernalrespawn = false;
+server bool sv_allowhitdecay = false;
+server int sv_Respawntimer = 5;
+
+server int sv_LMSPrepTime = 30;
+//===|loadout server variables|===
+
+server int Sv_PowerBudget = 35;
+user noarchive bool CanViewClass = true; 
+user bool unselectable = False; 
+
+//===|Weapon loadout server variables|===
+
+user noarchive int Lo_WepA = 1;
+user noarchive int Lo_WepB = 10;
+user noarchive int Lo_SubWep = 1;
+user noarchive int Lo_AutoPick = 0;
+user noarchive int Lo_Emblem = 0;
+user noarchive int Class_Secondary = -1;
+user noarchive int Class_Alternate = -1;
+
+//===|Psionics loadout server variables|===
+user noarchive int Lo_PsiA = 0;
+user noarchive int Lo_PsiB = 0;
+user noarchive int Lo_PsiC = 0;
+user noarchive int Lo_PsiD = 0;
+
+user noarchive int Lo_PsiPowerA = 1;
+user noarchive int Lo_PsiPowerB = 1;
+user noarchive int Lo_PsiPowerC = 1;
+user noarchive int Lo_PsiPowerD = 1;
+
+user noarchive int Lo_PsiDetail = 1;
+
+//===|Database server variables|===
+user noarchive int WepADataBase = 0; 
+user noarchive int WepBDataBase = 0; 
+user noarchive int SubWepDataBase = 0; 
+
+user noarchive int MechGlossindex = 0; 
+user noarchive int Roleindex = 0; 

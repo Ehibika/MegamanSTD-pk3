@@ -1,0 +1,24 @@
+Actor LifeUpI_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpI_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpI_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpI_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor LifeUpII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor LifeUpIII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpIII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpIII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpIII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor LifeUpV_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpV_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpV_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpV_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor LifeUpX_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpX_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpX_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor LifeUpX_User4 : inventory {inventory.amount 1 inventory.maxamount 2}

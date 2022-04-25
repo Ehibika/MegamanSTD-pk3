@@ -1,0 +1,24 @@
+Actor ThunderI_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderI_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderI_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderI_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ThunderII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ThunderIII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderIII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderIII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderIII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ThunderV_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderV_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderV_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderV_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor ThunderX_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderX_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderX_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor ThunderX_User4 : inventory {inventory.amount 1 inventory.maxamount 2}

@@ -1,0 +1,67 @@
+
+OptionMenu ZA_JoinMenu
+{
+	Title "JOIN GAME"
+
+	StaticText"You are spectating."
+	StaticText""
+	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText"$MNU_JOIN1"
+	StaticText""
+	StaticText""
+	Option "Primary", "Lo_WepA", "WepOptionsA"
+	Option "Secondary", "Lo_WepB", "WepOptionsB"
+	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
+	StaticText"--Suit--"
+	JoinMenuPlayerClassOption
+	Option "Emblem", "Lo_Emblem", "EmblemOptions"
+	Command "       Join game", "menu_joingamewithclass"
+	StaticText""
+	
+}
+
+OptionMenu ZA_JoinTeamMenu
+{
+	Title "JOIN TEAMGAME"
+
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText"$MNU_JOIN1"//$MNU_CHELP_EQUALLINE
+	StaticText""
+	StaticText"$MNU_JOIN2"
+	StaticText""
+	StaticText""
+	Command "$MNU_JOIN6", "menu_autoselect"
+	StaticText""
+	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	Option "Primary", "Lo_WepA", "WepOptionsA"
+	Option "Secondary", "Lo_WepB", "WepOptionsB"
+	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
+	StaticText"--Suit--"
+	JoinMenuPlayerClassOption
+	Option "Emblem", "Lo_Emblem", "EmblemOptions"
+	JoinMenuTeamOption
+	StaticText""
+	Command "       Join game", "menu_joingamewithclass"
+	StaticText""
+}
+
+OptionMenu ZA_SelectClassMenu
+{
+	Title "PLAYER CLASS SELECTION"
+
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText""
+	JoinMenuPlayerClassOption
+	StaticText""
+	Command "Join game", "menu_joingamewithclass"
+}

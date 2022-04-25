@@ -1,0 +1,262 @@
+/*=============================
+Using a resevoire of liquid freezing chemicals, the thrice gun fires a trio
+of sharp ice projectiles in a wide spread. since it has to freeze up the next
+batch of icicles after each shot, this weapon has a fairly slow fire rare
+compared to the blitzer, but as it shoots 100% solid and air bubble free ice.
+this weapon backs quite a punch, and does well at longer ranges than the
+blitzer to boot!
+
+*///===========================
+
+actor ThriceGun : WepMasterBase
+{
+tag "Thrice Gun"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 3
+
+Obituary "$OB_THRICEGUN"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+inventory.icon "THRII"
+weapon.ammotype "ThriceGunClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+Weapon.slotnumber 2
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BS2R B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BS2B B 0 
+RedReady:
+"####" B 1 A_WeaponReady
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER1) == True,"User1")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER2) == True,"User2")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER3) == True,"User3")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_USER4) == True,"User4")
+"####" B 0 A_Jumpif(CallACS("NEUM_ButtonCheck",BT_RELOAD) == True,"Reload")
+"####" B 0 A_Jumpifinventory("ThriceGunClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/iceslasher","Weapon")
+"####" B 2
+"####" B 0 A_PlaySoundEx("weapon/icewavespawn","Weapon")
+"####" B 0 A_GiveInventory("ThriceGunShooter")
+"####" CCDD 1 
+
+"####" B 4
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 2 Offset(0,32)
+"####" B 2 Offset(0,46)
+"####" B 2 Offset(0,58)
+"####" B 8 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 2 Offset(0,58)
+"####" B 2 Offset(0,46)
+"####" B 2 Offset(0,32)
+
+"####" B 4  A_WeaponReady(WRF_NOPRIMARY)
+"####" B 0 A_Refire
+goto Ready
+// ===36 frames===
+NoAmmo:
+"####" B 1
+"####" B 0 A_Jumpifinventory("ThriceGunClip",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 32 
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("ThriceGunClip",3)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor ThriceGun2 : ThriceGun
+{weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor ThriceGunClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 3
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor ThriceGunShot : ProjectileBase
+{
+Obituary "$OB_THRICEGUN"
+DamageType "SpreadShot2"
+
+Speed 60
+Damage (25 + CallACS("DamageRate",13,Range2,6))
+radius 10
+height 12
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0
+Spawn2:
+CRBM A 0 
+TRIC A 4 A_Spawnitemex("ThriceGunParticle",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+Loop
+Death:
+TRIC A 1 A_Spawnitemex("ThriceGunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+	actor ThriceGunShot_BLUE : ThriceGunShot
+	{
+	}
+
+	actor ThriceGunShot_RED : ThriceGunShot
+	{
+	translation "202:202=33:33","196:196=48:48", "197:197=18:18","192:192=54:54", "198:198=42:42" , "196:196=170:170"
+	}
+
+
+actor ThriceGunMidShot : ProjectileBase
+{
+Obituary "$OB_THRICEGUN"
+DamageType "SpreadShot2"
+
+Speed 60
+Damage (25 + CallACS("DamageRate",13,Range2,6))
+radius 10
+height 12
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0
+Spawn2:
+CRBM A 0 
+TRIC A 4 A_Spawnitemex("ThriceGunParticle",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+Loop
+XDeath:
+Crash:
+TNT1 A 0 A_JumpifCloser(100,"MeatshotFX")
+Death:
+TRIC A 1 A_Spawnitemex("ThriceGunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+MeatshotFX:
+TNT1 A 0 A_SpawnItemEx("PowerStrikeFX")
+stop
+}
+}
+
+	actor ThriceGunMidShot_BLUE : ThriceGunMidShot
+	{
+	}
+
+	actor ThriceGunMidShot_RED : ThriceGunMidShot
+	{
+	translation "202:202=33:33","196:196=48:48", "197:197=18:18","192:192=54:54", "198:198=42:42" , "196:196=170:170"
+	}
+	
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor ThriceGunPuff1 : FXActor_A
+{
+scale 3.5
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor ThriceGunParticle : FXActor_A
+{
+scale 2.5
+Reactiontime 70
+-NOINTERACTION
+-NOGRAVITY
+-NOCLIP
+Gravity 0.2
+States
+{
+Spawn:
+BLIZ C 0 
+BLIZ T 1 A_Changevelocity(0,random2(5),0,CVF_RELATIVE)
+Spawn2:
+BLIZ T 1
+BLIZ T 0 A_Countdown
+loop
+Death:
+BLIZ T 1
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor ThriceGunShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("ThriceGunShot",0,1,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunMidShot",10,0,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunShot",350,0,4,8)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("ThriceGunShot_RED",0,1,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunMidShot_RED",10,0,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunShot_RED",350,0,4,8)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("ThriceGunShot_BLUE",0,1,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunMidShot_BLUE",10,0,4,8)
+BUST B 1 A_FireCustomMissile("ThriceGunShot_BLUE",350,0,4,8)
+TNT1 A 1
+stop
+}
+}

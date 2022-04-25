@@ -1,0 +1,394 @@
+#library "LOADOUT"
+
+#include "zcommon.acs"
+//#include "CTFU.acs"
+
+#DEFINE CLASSLIST 20
+
+#DEFINE WEAPONLIST_MAX 23
+#DEFINE SUBWEAPONLIST_MAX 13
+#DEFINE AUTOPICKLIST_MAX 31
+#DEFINE TINYBARFRAMES_MAX 20
+#DEFINE PLAYERICON_MAX 26
+
+
+#DEFINE MID_WEIGHT 0.08
+#DEFINE HEAVY_WEIGHT 0.18
+
+int PlayerJumpZ[64];
+int PlayerBaseSpeed[64];
+//int ServerMAX = 32;
+
+str WeaponList[WEAPONLIST_MAX][5] = {
+{"Buster Gun", "BusterGun", "LIGHT","HEAT","----"},
+{"Blitzer", "Blitzer", "MID","SHIELD","----"},
+{"Repidifier","Repidifier", "LIGHT","----","----"},
+{"Hi.P.E Gun", "HiPEgun", "MID","----","----"},
+{"TAG Missile","TAGMissile", "HEAVY","----","----"},
+{"SLAM Cannon", "SLAMCannon", "HEAVY","----","----"},
+{"Thrice Gun","ThriceGun", "LIGHT","----","----"},
+{"MediCarbine","MediCarbine", "LIGHT","MEDICAL","----"},
+{"Mending Tool","MendingTool", "LIGHT","MEDICAL","----"},
+{"Subwich","SubWich", "LIGHT","----","----"},
+{"Crossbow","NMDCrossbow", "LIGHT","----","----"},
+{"Point Buster","PointBuster", "LIGHT","----","----"},
+{"FlameTongue","FlameTongue", "MID","----","----"},
+{"Crisperizer","Crisperizer", "LIGHT","----","----"},
+{"HotShot","HotShot", "LIGHT","----","----"},
+{"Basher","Basher", "HEAVY","SHIELD","----"},
+{"Stinger","Stinger", "LIGHT","----","----"},
+{"Blaster","BlasterWep", "MID","HEAT&SHIELD","----"},
+{"VoltSpear","VoltSpear", "HEAVY","HEAT","----"},
+{"Mine Launcher","MineLauncher", "MID","----","NOBOT"},
+{"Sentry Gear","SentryGear", "MID","----","NOBOT"},
+{"Health Generator","HealthGen", "MID","----","NOBOT"},
+{"Protector","Protector", "LIGHT","MEDICAL","NOBOT"},
+
+};
+//{"MediPistol","MediPistol", "LIGHT","MEDICAL"},
+//{"Hi.P.E.R Beam","HiperBeam"},
+
+str SubWeaponList[SUBWEAPONLIST_MAX][3] = {
+{"Minibomb","MinibombFlag","----"},
+{"Proxy Mine","ProxyMineFlag","----"},
+{"Light Screen","LightScreenFlag","----"},
+{"Booster Pack","BoosterPackFlag","FUEL"},
+{"Grappling Hook","GrapplingHookFlag","----"},
+{"Health Generator","HealthGeneratorFlag","----"},
+{"Buddy Sentry","BuddySentryFlag","----"},
+{"TopGrenade","TopGrenadeFlag","----"},
+{"Barrier","BarrierFlag","----"},
+{"RotaryShell","RotaryShellFlag","----"},
+{"CureSpray","CureSprayFlag","MEDICAL"},
+{"PowerDart","PowerDartFlag","----"},
+{"HealPatch","HealPatchFlag","MEDICAL"},
+};
+
+//{"Time Bomb","TimeBombFlag"},
+//
+
+//pick list array elements:
+// 0 = weapon A
+// 1 = Weapon B
+// 2 = SubWeapon
+
+//approvals, 0 or less for no, 1 or more for yes
+//3 = Generalist
+//4 = Aggressive
+//5 = frontline
+//6 = mobile
+//7 = Support
+//8 = backline
+int AutoPickList[AUTOPICKLIST_MAX][9] = {
+{0,1,0, /* */0,1,0,1,0,0},
+{1,3,0, /* */1,1,0,0,0,0},
+{1,2,2, /* */1,0,1,0,0,0},
+{2,1,4, /* */1,1,0,1,0,0},
+{0,3,0, /* */1,0,0,0,0,0},
+{2,3,2, /* */1,0,0,0,0,0},
+
+{5,2,3, /* */0,1,0,1,0,0},
+{5,1,0, /* */0,1,0,0,0,0},
+{3,2,6, /* */0,1,0,0,0,0},
+{5,3,3, /* */0,1,0,1,0,0},
+{1,2,6, /* */0,1,0,0,0,0},
+
+{2,6,2, /* */0,0,1,0,0,0},
+{5,0,2, /* */0,0,1,0,0,0},
+{1,9,2, /* */0,0,1,0,0,0},
+{5,6,2, /* */0,0,1,0,0,0},
+{2,9,2, /* */0,0,1,0,0,0},
+
+{3,9,3, /* */0,0,0,1,0,0},
+{2,4,3, /* */0,0,0,1,0,0},
+{5,6,4, /* */0,0,0,1,0,0},
+{0,1,4, /* */0,0,0,1,0,0},
+{5,6,0, /* */0,0,0,1,0,0},
+
+{7,1,7, /* */0,0,0,0,1,0},
+{7,2,5, /* */0,0,0,0,1,0},
+{7,8,2, /* */0,0,0,0,1,0},
+{0,8,3, /* */0,0,0,0,1,0},
+{1,8,1, /* */0,0,0,0,1,0},
+
+{3,4,1, /* */0,0,0,0,0,1},
+{3,4,5, /* */0,0,0,0,0,1},
+{3,2,7, /* */0,0,0,0,0,1},
+{3,2,1, /* */0,0,0,0,0,1},
+{3,1,2, /* */0,0,0,0,0,1},
+};
+
+
+str TinyBarFrames[TINYBARFRAMES_MAX][1] = {
+{"TNYBK0"},
+{"TNYBJ0"},
+{"TNYBI0"},
+{"TNYBH0"},
+{"TNYBG0"},
+{"TNYBF0"},
+{"TNYBE0"},
+{"TNYBD0"},
+{"TNYBC0"},
+{"TNYBB0"},
+{"TNYBA0"},
+
+{"TNYBU0"},
+{"TNYBT0"},
+{"TNYBS0"},
+{"TNYBR0"},
+{"TNYBQ0"},
+{"TNYBP0"},
+{"TNYBN0"},
+{"TNYBM0"},
+{"TNYBL0"},
+};
+
+str PlayerIcons[PLAYERICON_MAX][1] = {
+{"PE00A0"},
+{"PE00B0"},
+{"PE00C0"},
+{"PE00D0"},
+{"PE00E0"},
+{"PE00F0"},
+{"PE00G0"},
+{"PE00H0"},
+{"PE00I0"},
+{"PE00J0"},
+{"PE00K0"},
+{"PE00L0"},
+{"PE00M0"},
+{"PE00N0"},
+{"PE00O0"},
+{"PE00P0"},
+{"PE00Q0"},
+{"PE00R0"},
+{"PE00S0"},
+{"PE00T0"},
+{"PE00U0"},
+{"PE00V0"},
+{"PE00W0"},
+{"PE00X0"},
+{"PE00Y0"},
+{"PE00Z0"},
+};
+//[+]===============|Setup Scripts|================[+]
+script "NEUM_ClassSetup" ENTER
+{
+
+int pln = playernumber();
+int plc = PlayerClass(pln);
+
+int WepA_Num = GetUserCvar(pln,"Lo_WepA");
+int WepB_Num = GetUserCvar(pln,"Lo_WepB");
+int SubWep_Num = GetUserCvar(pln,"Lo_SubWep");
+
+bool PickDone = False;
+bool BotPick = False;
+
+int picknum;
+int pickRollcount;
+
+int IconChoice = GetUserCvar(pln,"Lo_Emblem");
+int SpeedPenalty = 0.0;
+
+//first let's check for illegal numbers due to direct
+//manilulation
+if(WepA_Num < 0 || WepA_Num > WEAPONLIST_MAX){WepA_Num = 0;}
+if(WepB_Num < 0 || WepB_Num > WEAPONLIST_MAX){WepB_Num = 1;}
+if(SubWep_Num < 0 || SubWep_Num > SUBWEAPONLIST_MAX){SubWep_Num = 0;}
+
+if ((ClassifyActor(0) & ACTOR_BOT))
+	{
+		while(!BotPick)
+		{
+		WepA_Num = random(0,WEAPONLIST_MAX-1);
+		WepB_Num = random(0,WEAPONLIST_MAX-1);
+		SubWep_Num = random(0,SUBWEAPONLIST_MAX-1);
+		IconChoice = Random(0,PLAYERICON_MAX-1);
+		
+			if(WeaponList[WepA_Num][4] != "NOBOT"
+			&& WeaponList[WepB_Num][4] != "NOBOT")
+			{
+			BotPick = true;
+			}
+		}
+	}
+
+
+	if(WepA_Num == WepB_Num)
+		{
+		while(WepA_Num == WepB_Num)
+			{
+			WepB_Num = random(0,WEAPONLIST_MAX-1);
+			}
+		
+		}
+		
+	
+if (GetUserCvar(pln,"Lo_AutoPick") > 0)
+	{
+	
+
+		while(!PickDone)
+		{
+		picknum = Random(0,AUTOPICKLIST_MAX-1);
+		
+			
+			//as long as we are below the "anything" value, check
+			//if this pick number qualifies 
+			if(AutoPickList[picknum][GetUserCvar(pln,"Lo_AutoPick")+2] == 1
+			&& GetUserCvar(pln,"Lo_AutoPick") < 7)
+			{
+				WepA_Num = AutoPickList[picknum][0];
+				WepB_Num = AutoPickList[picknum][1];
+				SubWep_Num = AutoPickList[picknum][2];
+				PickDone = True;
+			}
+			
+			//if we are on the "anything" value, then accept this
+			//picknumber regardless
+			if (GetUserCvar(pln,"Lo_AutoPick") == 7)
+			{
+				WepA_Num = AutoPickList[picknum][0];
+				WepB_Num = AutoPickList[picknum][1];
+				SubWep_Num = AutoPickList[picknum][2];
+				PickDone = True;
+			}
+			
+			//if we are on "random", then just fully randomize things
+			if (GetUserCvar(pln,"Lo_AutoPick") >= 8)
+			{
+				WepA_Num = random(0,WEAPONLIST_MAX-1);
+				WepB_Num = random(0,WEAPONLIST_MAX-1);
+				SubWep_Num = random(0,SUBWEAPONLIST_MAX-1);
+					if(WepA_Num == WepB_Num)
+						{
+						while(WepA_Num == WepB_Num)
+							{
+							WepB_Num = random(0,WEAPONLIST_MAX-1);
+							}
+						
+						}
+				PickDone = True;
+			}
+			
+			//bit of a failsafe code, if we fail to roll a valid option 80 times
+			//then just grab the first valid option on the list.
+			else{pickRollcount = pickRollcount+1;}
+			
+			if(pickRollcount >= 80)
+			{
+				For(int p = 0;p < AUTOPICKLIST_MAX; p++)
+				{
+					if(AutoPickList[p][GetUserCvar(pln,"Lo_AutoPick")+2] == 1)
+					{
+						WepA_Num = AutoPickList[p][0];
+						WepB_Num = AutoPickList[p][1];
+						SubWep_Num = AutoPickList[p][2];
+						PickDone = True;
+						Break;
+					}
+					PickDone = True;
+				}
+			}
+		}
+	}
+	
+	
+	//now for the speed penalty, mid weapons incure a 10% speed drop, and heavy a 20%
+		
+		if(WeaponList[WepA_Num][2] == "MID") {SpeedPenalty = SpeedPenalty+MID_WEIGHT;}
+		if(WeaponList[WepB_Num][2] == "MID") {SpeedPenalty = SpeedPenalty+MID_WEIGHT;}
+		if(WeaponList[WepA_Num][2] == "HEAVY") {SpeedPenalty = SpeedPenalty+HEAVY_WEIGHT;}
+		if(WeaponList[WepB_Num][2] == "HEAVY")	{SpeedPenalty = SpeedPenalty+HEAVY_WEIGHT;}
+
+GiveInventory(WeaponList[WepA_Num][1],1);
+GiveInventory(strParam(s:WeaponList[WepB_Num][1], s:"2"),1);
+GiveInventory(SubWeaponList[SubWep_Num][1],1);
+GiveInventory("PlayerIconFlag",IconChoice+1);
+
+
+PlayerBaseSpeed[playernumber()] = 1.0-SpeedPenalty;
+setactorproperty(0,APROP_SPEED,1.0-SpeedPenalty);
+//log(s:"speed is at ",f:GetActorProperty(0,APROP_SPEED),s:" with a penalty of ", f:SpeedPenalty);
+
+//supplemental stuff
+
+if	 (WeaponList[WepA_Num][3] == "MEDICAL"
+	||WeaponList[WepB_Num][3] == "MEDICAL"
+	||SubWeaponList[SubWep_Num][2] == "MEDICAL"
+	)
+	{ //got a medical weapon? get mediscan
+	GiveInventory("Mediscan",1);
+	}
+	
+if	 (SubWeaponList[SubWep_Num][2] == "FUEL")
+	{//Give boosterPackFuel
+	GiveInventory("BP_Fuel",105);
+	}
+if	 (WeaponList[WepA_Num][3] == "HEAT"
+	||WeaponList[WepB_Num][3] == "HEAT"
+	||WeaponList[WepA_Num][3] == "HEAT&SHIELD"
+	||WeaponList[WepB_Num][3] == "HEAT&SHIELD"
+	)
+	{ //got a heat based weapon? get heatmanager
+	GiveInventory("HeatManager",1);
+	}
+if	 (WeaponList[WepA_Num][3] == "SHIELD"
+	||WeaponList[WepB_Num][3] == "SHIELD"
+	||WeaponList[WepA_Num][3] == "HEAT&SHIELD"
+	||WeaponList[WepB_Num][3] == "HEAT&SHIELD"
+	)
+	{ //got a Shielded weapon? get ShieldManager
+	GiveInventory("ShieldManager",1);
+	}
+	
+delay(5);
+
+//Before we end off, check if we are respawning, so that if the
+//player has changed their loadout, we can reset it
+
+if(Checkinventory("GhostInvisibility")
+	||Checkinventory("RespawnTime"))
+	{
+	While(Checkinventory("GhostInvisibility")
+	||Checkinventory("RespawnTime"))
+		{
+		//log(s:"waiting on player ", i:playernumber());
+		delay(1);
+		}
+		
+		For (int w = 0;w < WEAPONLIST_MAX; w++)
+		{
+		TakeInventory(WeaponList[w][1],1);
+		TakeInventory(strParam(s:WeaponList[w][1], s:"2"),1);
+		}
+		
+		For (int s = 0;s < SUBWEAPONLIST_MAX; s++)
+		{
+		TakeInventory(SubWeaponList[s][1],1);
+		}
+		TakeInventory("PlayerIconFlag",999);
+		Restart;
+	}
+	
+//int IsTeamGame = ACS_ExecuteWithResult(975, 1);
+/*
+	If(IsTeamGame)
+		{
+		switch(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM))
+			{
+		case 0:
+		SpawnForced("PlayerIconMapMarker_BLUE",0,0,0,activatorTID(),0);
+		break;
+		
+		case 1:
+		SpawnForced("PlayerIconMapMarker_RED",0,0,0,activatorTID(),0);
+		break;
+			}
+		}
+*/
+
+delay(5);
+GiveInventory("PlayerIconSpawner",1);
+}

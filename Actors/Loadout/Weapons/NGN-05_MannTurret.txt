@@ -1,0 +1,652 @@
+/*=============================
+When something needs to be guarded, nothing denies access quite like the Mannturret!
+This sturdy yet portable sentry station can quickly fire waves of suppressive fire
+to hold enemies back, and if they return fire than rest assured that the turret will
+absorbe some of the damage too. you can't move while it's set up but neither will
+your enemies move when you're on guard with this!
+
+*///===========================
+Actor MannTurretFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+actor MannTurretWep : Weapon
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 100
+Weapon.SlotNumber 3
+scale 2.0
+Obituary "$OB_MANNTURRET"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+inventory.icon "BUSTI"
+weapon.ammotype "MannTurretAmmo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
+//+WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+TNT1 A 0
+TNT1 A 0 Offset(0,130)
+MTRE B 0 Setplayerproperty(0,1,0)
+MTRE B 0 A_Stop
+MTRE B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+MTRT B 0 
+"####" B 1 A_Playsoundex("Weapon/turretup","voice")
+"####" B 1 Offset(0,130)
+"####" B 1 Offset(0,112)
+"####" B 1 Offset(0,96)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 1 A_Gunflash
+Ready2:
+MTRE B 0 Setplayerproperty(0,1,0)
+MTRE B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+MTRT B 0 
+MTRT B 0 
+RedReady:
+"####" B 1 A_WeaponReady(WRF_NOSWITCH)
+"####" B 0 A_Giveinventory("MannTurretReticleShooter")
+"####" B 0 //A_Giveinventory("TurretShieldProjector",1)
+"####" B 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" B 0 A_Jumpifinventory("MannTurretAmmo",1,"Ready2")
+"####" B 0 
+goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_Giveinventory("TurretFiring",1)
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/RapidBuster3","Weapon")
+"####" B 0 A_Giveinventory("MannTurretShooter",1)
+"####" CDB 1 A_Giveinventory("MannTurretReticleShooter")
+
+//"####" A 0 A_Takeinventory("MannTurretAmmo",1)
+"####" B 0 
+"####" B 0
+"####" B 0 A_Refire
+"####" B 0 A_Takeinventory("TurretFiring",999)
+goto Ready2
+Altfire:
+"####" B 1
+"####" B 0 A_Refire
+goto Disengage
+NoAmmo:
+"####" B 1
+"####" B 0 A_Takeinventory("TurretFiring",999)
+"####" B 0 A_Jumpifinventory("MannTurretAmmo",1,"Ready2")
+Reload:
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 15
+Reloadloop:
+"####" D 2 A_PlaySoundEx("weapon/turretup","Weapon")
+"####" C 2 A_Giveinventory("MannTurretAmmo",5)
+"####" B 0 A_Jumpifinventory("MannTurretAmmo",100,"Ready2")
+"####" B 0 A_Jumpifinventory("MannTurretAmmo",15,2)
+"####" B 2
+Goto Reloadloop
+"####" B 2 A_WeaponReady(WRF_NOSWITCH)
+Goto Reloadloop
+
+"####" B 1 A_Refire("Fire")
+Goto Ready2
+
+Disengage:
+"####" B 1 A_Playsoundex("Weapon/turretup","voice")
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,96)
+"####" B 1 Offset(0,112)
+"####" B 1 Offset(0,130)
+"####" B 1 Setplayerproperty(0,0,0)
+//TNT1 A 0 A_Giveinventory("JumpOn")
+TNT1 A 0 A_ChangeFlag("DONTBLAST",0)
+"####" B 0 A_Takeinventory("InMannTurret",99)
+"####" B 0 A_Takeinventory("MannTurretAmmo",99)
+"####" B 1 A_Giveinventory("MannTurretCooldown")
+"####" B 1 A_Takeinventory("MannTurretDefense")
+"####" B 3
+"####" B 0 A_Takeinventory("MannTurretWep",99)
+"####" B 6
+Goto Ready2
+Flash:
+TNT1 A 1
+"####" B 0 //A_Jumpifinventory("TurretFiring",1,2)
+"####" B 0 //A_Giveinventory("TurretwallShooter",1)
+"####" B 0
+loop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+
+actor MannTurretAmmo : ammo {inventory.amount 1 inventory.maxamount 100}
+
+actor MannTurretDefense : Powerprotection {powerup.duration 0x7FFFFFFF 
+Damagefactor "NORMAL", 0.45
+Damagefactor "Explosion", 0.65
+Damagefactor "Sniper", 1.0
+}
+			//=============
+actor InMannTurret : inventory {inventory.amount 1 inventory.maxamount 2}
+actor TurretFiring : inventory {inventory.amount 1 inventory.maxamount 2}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+
+actor MannTurretPuff : BulletPuff
+{
+scale 1
+Obituary "$OB_MANNTURRET"
++PUFFONACTORS
++ALWAYSPUFF
++PUFFGETSOWNER
++MTHRUSPECIES
+alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 1 A_Explode(12 + CallACS("DamageRate",8,range3,35),10,0,0,10)
+BIM1 AABCDEF 1
+stop
+}
+}
+
+	actor MannTurretPuff_BLUE : MannTurretPuff
+	{}
+
+	actor MannTurretPuff_RED : MannTurretPuff
+	{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47"}
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MannTurretFX : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 0 A_SpawnItemEx("MannTurretFrontFX",1,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 //A_SelectWeapon("MannTurretWep")
+TNT1 A 0 A_JumpIf(z-floorz<5, "End")
+TNT1 A 0 ThrustThingZ(0, 20, 1, 1)
+stop
+End:
+TNT1 A 0
+stop
+}
+}
+
+actor MannTurretFrontFX 
+{
++NOTIMEFREEZE
++CLIENTSIDEONLY
+-SOLID
++NOGRAVITY
++NOINTERACTION
+scale 2.0
+height 0
+radius 0
+States
+{
+Spawn:
+MTRT A 3
+stop
+}
+}
+
+
+actor MannTurretReticle : FXActor_A
+{
++MTHRUSPECIES
++DONTSPLASH
+scale 4.5
+States
+{
+Spawn:
+TNT1 A 0 
+RETC B 2
+stop
+}
+}
+
+	actor MannTurretReticle_BLUE : MannTurretReticle
+	{
+	}
+
+	actor MannTurretReticle_RED : MannTurretReticle
+	{
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47"
+	}
+//[+]========================================================================[+]
+//------------------------------|Utility Actors|------------------------------
+//[+]========================================================================[+]
+actor MannTurretActivate : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+states
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 0 A_PlaySound("weapon/rminestick")
+TNT1 A 0 A_TakeInventory("ZoomMode")
+TNT1 A 0 A_GiveInventory("MannTurretDefense")
+TNT1 A 0 A_GiveInventory("InMannTurret")
+TNT1 A 0 A_GiveInventory("MannTurretWep")
+TNT1 A 0 A_SelectWeapon("MannTurretWep")
+TNT1 A 0 //A_Giveinventory("JumpOff")
+TNT1 A 0 A_ChangeFlag("DONTBLAST",1)
+//TNT1 A 0 A_SpawnItemEx("MannTurretFrontFX",1,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MannTurretGiver",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor MannTurretGiver
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 AA 1 A_GiveToTarget("MannTurretFX",1)
+TNT1 A 0 A_JumpIfInTargetInventory("IsDead",1,"Death")
+TNT1 A 0 A_JumpIfInTargetInventory("InMannTurret",1,"Spawn")
+Goto Death
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+
+actor JumpOn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_EXECUTEAlways(JumpToggle,0,1)
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor JumpOff : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 ACS_EXECUTEAlways(JumpToggle,0,0)
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor MannTurretCooler // Coolers are a type of watcher actor that handle weapon cooldowns
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
++NOTARGETSWITCH
+Reactiontime 5
+Obituary "%0 succumed to poison"
+States
+{
+Spawn:
+TNT1 A 0 //A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("MannTurretCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("MannTurretCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor MannTurretCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("MannTurretCooldownItem",175)
+TNT1 A 0 A_Spawnitemex("MannTurretCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor MannTurretCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 175 //5 seconds
+}
+
+//[+]========================================================================[+]
+//-----------------------------|MannTurret Shield|----------------------------
+//[+]========================================================================[+]
+Actor TurretShieldPart : BarrierPartBase
+{
+DamageFactor "Explsion" , 0.0
+  Health 9999
+  Var int User_HitDrain;
+    RenderStyle "ADD"
+  Alpha 0.25
+  States
+  {
+  Spawn:
+	TNT1 A 0
+    TNT1 AA 1 A_Stop
+	TNT1 A 0 //A_SpawnItemEx ("ScreenPartVisual", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+	Goto DeathCheck
+	Pain:
+	TNT1 A 0 A_Stop
+	TNT1 A 0 //A_SpawnItemEx ("ScreenPartVisual", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+	TNT1 A 0  A_PlaySoundEX ("item/protoreflect","Soundslot5")
+    TNT1 A 1 A_Stop
+	Goto DeathCheck
+	DeathCheck:
+	TNT1 AA 1
+	Goto Death
+  Death:
+    TNT1 A 2
+    stop
+  }
+}
+
+Actor TurretShieldPart_B : TurretShieldPart{Designatedteam 0 Species "BLUEMember"}
+Actor TurretShieldPart_R : TurretShieldPart{Designatedteam 1 Species "REDMember"}
+
+//[+]==================================[+]
+//[+]==================================[+]
+actor TShieldSpawner5up_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    stop
+  }
+}
+
+actor TShieldSpawner5up_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 80, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 0, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 16, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 32, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 48, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 64, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    stop
+  }
+}
+//[+]==================================[+]
+//[+]==================================[+]
+actor TShieldSpawner4up_B
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 0
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_B", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    stop
+  }
+}
+
+
+actor TShieldSpawner4up_R
+{
+  Radius 1
+  Height 1
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    TNT1 A 0
+    TNT1 A 1
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TurretShieldPart_R", 0, 0, 72, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 8, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 24, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 40, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    //TNT1 A 0 A_SpawnItemEx ("ScreenPartVisual", 0, 0, 56, 0, 0, 0, 0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    stop
+  }
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor MannTurretReticleShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+
+BUST B 1 A_FireCustomMissile("HiperBeamAimsight",0,0,0,0)
+BUST B 1 A_fireBullets(0,0,1,0,"MannTurretReticle",FBF_NORANDOM|FBF_NORANDOMPUFFZ,0)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("HiperBeamAimsight_RED",0,0,0,0)
+BUST B 1 A_fireBullets(0,0,1,0,"MannTurretReticle_RED",FBF_NORANDOM|FBF_NORANDOMPUFFZ,0)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("HiperBeamAimsight_BLUE",0,0,0,0)
+BUST B 1 A_fireBullets(0,0,1,0,"MannTurretReticle_BLUE",FBF_NORANDOM|FBF_NORANDOMPUFFZ,0)
+TNT1 A 1
+stop
+}
+}
+
+
+actor MannTurretShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("FakeBullet",fRandom(-MT_SPD,MT_SPD),1,0,4,0,fRandom(-MT_SPD,MT_SPD))
+
+BUST B 1 A_FireBullets(MT_SPD,MT_SPD,1,0,"MannTurretPuff",FBF_NORANDOM,0)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("FakeBullet_RED",fRandom(-MT_SPD,MT_SPD),1,0,4,0,fRandom(-MT_SPD,MT_SPD))
+
+BUST B 1 A_FireBullets(MT_SPD,MT_SPD,1,0,"MannTurretPuff_RED",FBF_NORANDOM,0)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("FakeBullet_BLUE",fRandom(-MT_SPD,MT_SPD),1,0,4,0,fRandom(-MT_SPD,MT_SPD))
+
+BUST B 1 A_FireBullets(MT_SPD,MT_SPD,1,0,"MannTurretPuff_BLUE",FBF_NORANDOM,0)
+TNT1 A 1
+stop
+}
+}
+
+actor TurretShieldProjector : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+//BUST B 0 A_SpawnItemEx("ScreenProjector",cos(pitch)*65,0, (sin(pitch)*-65))
+  TNT1 A 1 
+TNT1 A 0 A_SpawnItemEx("BarricadeVoxel",76,0,48,0,0,0,0)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 0, 70, 0, 0, 0, 0, 90,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", 24, 70, 0, 0, 0, 0, 96,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", -24, 70, 0, 0, 0, 0, 84,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 48, 70, 0, 0, 0, 0, 102,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", -48, 70, 0, 0, 0, 0, 78,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", 72, 70, 0, 0, 0, 0, 108,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", -72, 70, 0, 0, 0, 0, 72,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 96, 70, 0, 0, 0, 0, 114,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", -96, 70, 0, 0, 0, 0, 66,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+stop
+TeamRedFire:
+  TNT1 A 1 
+TNT1 A 0 A_SpawnItemEx("BarricadeVoxel_RED",76,0,48,0,0,0,0)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_R", 0, 70, 0, 0, 0, 0, 90,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_R", 24, 70, 0, 0, 0, 0, 96,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_R", -24, 70, 0, 0, 0, 0, 84,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_R", 48, 70, 0, 0, 0, 0, 102,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_R", -48, 70, 0, 0, 0, 0, 78,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_R", 72, 70, 0, 0, 0, 0, 108,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_R", -72, 70, 0, 0, 0, 0, 72,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_R", 96, 70, 0, 0, 0, 0, 114,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_R", -96, 70, 0, 0, 0, 0, 66,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+stop
+TeamBlueFire:
+  TNT1 A 1 
+TNT1 A 0 A_SpawnItemEx("BarricadeVoxel",76,0,48,0,0,0,0)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 0, 70, 0, 0, 0, 0, 90,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", 24, 70, 0, 0, 0, 0, 96,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", -24, 70, 0, 0, 0, 0, 84,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 48, 70, 0, 0, 0, 0, 102,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", -48, 70, 0, 0, 0, 0, 78,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", 72, 70, 0, 0, 0, 0, 108,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner5up_B", -72, 70, 0, 0, 0, 0, 72,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", 96, 70, 0, 0, 0, 0, 114,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 0 A_SpawnItemEx ("TShieldSpawner4up_B", -96, 70, 0, 0, 0, 0, 66,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+stop
+}
+}

@@ -1,0 +1,471 @@
+actor absolutelynothing1 replaces RollingCutterWep
+{
+states
+{
+spawn:
+TNT1 A 0
+stop
+}
+}
+
+actor absolutelynothing2 : absolutelynothing1 replaces SuperArmWep
+{
+}
+
+actor absolutelynothing3 : absolutelynothing1 replaces SuperArmWep
+{
+}
+
+actor absolutelynothing4 : absolutelynothing1 replaces HyperBombWep
+{
+}
+
+actor absolutelynothing5 : absolutelynothing1 replaces FireStormWep
+{
+}
+
+actor absolutelynothing6 : absolutelynothing1 replaces IceSlasherWep
+{
+}
+
+actor absolutelynothing7 : absolutelynothing1 replaces ThunderBeamWep
+{
+}
+
+actor absolutelynothing8 : absolutelynothing1 replaces OilSliderWep
+{
+}
+
+actor absolutelynothing9 : absolutelynothing1 replaces TimeSlowWep
+{
+}
+
+actor absolutelynothing10 : absolutelynothing1 replaces AirShooterWep
+{
+}
+
+actor absolutelynothing11 : absolutelynothing1 replaces AtomicFireWep
+{
+}
+
+actor absolutelynothing12 : absolutelynothing1 replaces BubbleLeadWep
+{
+}
+
+actor absolutelynothing13 : absolutelynothing1 replaces CrashBombWep
+{
+}
+
+actor absolutelynothing14 : absolutelynothing1 replaces LeafShieldWep
+{
+}
+
+actor absolutelynothing15 : absolutelynothing1 replaces MetalBladeWep
+{
+}
+
+actor absolutelynothing16 : absolutelynothing1 replaces QuickBoomerangWep
+{
+}
+
+actor absolutelynothing17 : absolutelynothing1 replaces TimeStopperWep
+{
+}
+
+actor absolutelynothing18 : absolutelynothing1 replaces GeminiLaserWep
+{
+}
+
+actor absolutelynothing19 : absolutelynothing1 replaces HardKnuckleWep
+{
+}
+
+actor absolutelynothing20 : absolutelynothing1 replaces MagnetMissileWep
+{
+}
+
+actor absolutelynothing21 : absolutelynothing1 replaces NeedleCannonWep
+{
+}
+
+actor absolutelynothing22 : absolutelynothing1 replaces SearchSnakeWep
+{
+}
+
+actor absolutelynothing23 : absolutelynothing1 replaces ShadowBladeWep
+{
+}
+
+actor absolutelynothing24 : absolutelynothing1 replaces SparkShockWep
+{
+}
+
+actor absolutelynothing25 : absolutelynothing1 replaces TopSpinWep
+{
+}
+
+actor absolutelynothing26 : absolutelynothing1 replaces DiveMissileWep
+{
+}
+
+actor absolutelynothing27 : absolutelynothing1 replaces DrillBombWep
+{
+}
+
+actor absolutelynothing28 : absolutelynothing1 replaces DustCrusherWep
+{
+}
+
+actor absolutelynothing29 : absolutelynothing1 replaces FlashStopperWep
+{
+}
+
+actor absolutelynothing30 : absolutelynothing1 replaces PharaohShotWep
+{
+}
+
+actor absolutelynothing31 : absolutelynothing1 replaces RainFlushWep
+{
+}
+
+actor absolutelynothing32 : absolutelynothing1 replaces RingBoomerangWep
+{
+}
+
+actor absolutelynothing33 : absolutelynothing1 replaces SkullBarrierWep
+{
+}
+
+actor absolutelynothing34 : absolutelynothing1 replaces ChargeKickWep
+{
+}
+
+actor absolutelynothing35 : absolutelynothing1 replaces CrystalEyeWep
+{
+}
+
+actor absolutelynothing36 : absolutelynothing1 replaces GravityHoldWep
+{
+}
+
+actor absolutelynothing37 : absolutelynothing1 replaces GyroAttackWep
+{
+}
+
+actor absolutelynothing38 : absolutelynothing1 replaces NapalmBombWep
+{
+}
+
+actor absolutelynothing39 : absolutelynothing1 replaces PowerStoneWep
+{
+}
+
+actor absolutelynothing40 : absolutelynothing1 replaces StarCrashWep
+{
+}
+
+actor absolutelynothing41 : absolutelynothing1 replaces WaterWaveWep
+{
+}
+
+actor absolutelynothing42 : absolutelynothing1 replaces BlizzardAttackWep
+{
+}
+
+actor absolutelynothing43 : absolutelynothing1 replaces CentaurFlashWep
+{
+}
+
+actor absolutelynothing44 : absolutelynothing1 replaces FlameBlastWep
+{
+}
+
+actor absolutelynothing45 : absolutelynothing1 replaces KnightCrushWep
+{
+}
+
+actor absolutelynothing46 : absolutelynothing1 replaces PlantBarrierWep
+{
+}
+
+actor absolutelynothing47 : absolutelynothing1 replaces SilverTomahawkWep
+{
+}
+
+actor absolutelynothing48 : absolutelynothing1 replaces WindStormWep
+{
+}
+
+actor absolutelynothing49 : absolutelynothing1 replaces YamatoSpearWep
+{
+}
+
+actor absolutelynothing50 : absolutelynothing1 replaces FreezeCrackerWep
+{
+}
+
+actor absolutelynothing51 : absolutelynothing1 replaces DangerWrapWep
+{
+}
+
+actor absolutelynothing52 : absolutelynothing1 replaces JunkShieldWep
+{
+}
+
+actor absolutelynothing53 : absolutelynothing1 replaces NoiseCrushWep
+{
+}
+
+actor absolutelynothing54 : absolutelynothing1 replaces ScorchWheelWep
+{
+}
+
+actor absolutelynothing55 : absolutelynothing1 replaces ThunderBoltWep
+{
+}
+
+actor absolutelynothing56 : absolutelynothing1 replaces WildCoilWep
+{
+}
+
+actor absolutelynothing57 : absolutelynothing1 replaces SlashClawWep
+{
+}
+
+actor absolutelynothing58 : absolutelynothing1 replaces MegaBallWep
+{
+}
+
+actor absolutelynothing59 : absolutelynothing1 replaces AstroCrushWep
+{
+}
+
+actor absolutelynothing60 : absolutelynothing1 replaces FlameSwordWep
+{
+}
+
+actor absolutelynothing61 : absolutelynothing1 replaces FlashBombWep
+{
+}
+
+actor absolutelynothing62 : absolutelynothing1 replaces HomingSniperWep
+{
+}
+
+actor absolutelynothing63 : absolutelynothing1 replaces IceWaveWep
+{
+}
+
+actor absolutelynothing64 : absolutelynothing1 replaces ThunderClawWep
+{
+}
+
+actor absolutelynothing65 : absolutelynothing1 replaces TornadoHoldWep
+{
+}
+
+actor absolutelynothing66 : absolutelynothing1 replaces WaterBalloonWep
+{
+}
+
+actor absolutelynothing67 : absolutelynothing1 replaces TenguBladeWep
+{
+}
+
+actor absolutelynothing68 : absolutelynothing1 replaces WaveBurnerWep
+{
+}
+
+actor absolutelynothing69 : absolutelynothing1 replaces SpreadDrillWep
+{
+}
+
+actor absolutelynothing70 : absolutelynothing1 replaces CopyVisionWep
+{
+}
+
+actor absolutelynothing71 : absolutelynothing1 replaces MagicCardWep
+{
+}
+
+actor absolutelynothing72 : absolutelynothing1 replaces RemoteMineWep
+{
+}
+
+actor absolutelynothing73 : absolutelynothing1 replaces IceWallWep
+{
+}
+
+actor absolutelynothing74 : absolutelynothing1 replaces LightningBoltWep
+{
+}
+
+actor absolutelynothing75 : absolutelynothing1 replaces BalladeCrackerWep
+{
+}
+
+actor absolutelynothing76 : absolutelynothing1 replaces MirrorBusterWep
+{
+}
+
+actor absolutelynothing77 : absolutelynothing1 replaces SakugarneWep
+{
+}
+
+actor absolutelynothing78 : absolutelynothing1 replaces ScrewCrusherWep
+{
+}
+
+actor absolutelynothing79 : absolutelynothing1 replaces BassUpgrade
+{
+}
+
+actor absolutelynothing80 : absolutelynothing1 replaces ProtoUpgrade
+{
+}
+
+actor absolutelynothing81 : absolutelynothing1 replaces AdaptorUpgrade
+{
+}
+
+actor absolutelynothing82 : absolutelynothing1 replaces LaserBusterUpgrade
+{
+}
+
+actor absolutelynothing83 : absolutelynothing1 replaces ArrowBusterUpgrade
+{
+}
+
+actor absolutelynothing84 : absolutelynothing1 replaces DuoFistUpgrade
+{
+}
+
+actor absolutelynothing85 : absolutelynothing1 replaces TrebleBoostUpgrade
+{
+}
+
+actor absolutelynothing86 : absolutelynothing1 replaces WTank
+{
+}
+
+actor absolutelynothing87 : absolutelynothing1 replaces MTank
+{
+}
+
+actor absolutelynothing88 : absolutelynothing1 replaces BeatSupport
+{
+}
+
+actor absolutelynothing89 : absolutelynothing1 replaces ReggaeCall
+{
+}
+
+actor absolutelynothing90 : absolutelynothing1 replaces EnergyBalancer
+{
+}
+
+actor absolutelynothing91 : absolutelynothing1 replaces EddieSummon
+{
+}
+
+actor absolutelynothing92 : absolutelynothing1 replaces TimeStopperGiver
+{
+}
+
+actor absolutelynothing93 : absolutelynothing1 replaces FlashStopperGiver
+{
+}
+
+actor absolutelynothing94 : absolutelynothing1 replaces SkullBarrierGiver
+{
+}
+
+actor absolutelynothing95 : absolutelynothing1 replaces SakugarneGiver
+{
+}
+
+actor absolutelynothing96 : absolutelynothing1 replaces TangoSummon
+{
+}
+
+actor absolutelynothing97 : absolutelynothing1 replaces TrebleSentry
+{
+}
+
+actor absolutelynothing98 : absolutelynothing1 replaces RushCoil
+{
+}
+
+actor absolutelynothing99 : absolutelynothing1 replaces RushJet
+{
+}
+
+actor absolutelynothing100 : absolutelynothing1 replaces RushMarine
+{
+}
+
+actor absolutelynothing101 : absolutelynothing1 replaces Item1
+{
+}
+
+actor absolutelynothing102 : absolutelynothing1 replaces Item2
+{
+}
+
+//actor absolutelynothing103 : absolutelynothing1 replaces Item3
+//{
+//}
+
+actor absolutelynothing104 : absolutelynothing1 replaces ETank
+{
+}
+
+actor absolutelynothing105 : absolutelynothing1 replaces ConcreteShotWep
+{
+}
+
+actor absolutelynothing106 : absolutelynothing1 replaces TornadoBlowWep
+{
+}
+
+actor absolutelynothing107 : absolutelynothing1 replaces LaserTridentWep
+{
+}
+
+actor absolutelynothing108 : absolutelynothing1 replaces PlugBallWep
+{
+}
+
+actor absolutelynothing109 : absolutelynothing1 replaces HornetChaserWep
+{
+}
+
+actor absolutelynothing110 : absolutelynothing1 replaces MagmaBazookaWep
+{
+}
+
+actor absolutelynothing111 : absolutelynothing1 replaces BlackHoleBombWep
+{
+}
+
+actor absolutelynothing112 : absolutelynothing1 replaces JewelSatelliteWep
+{
+}
+
+actor absolutelynothing113 : absolutelynothing1 replaces SolarBlazeWep
+{
+}
+
+actor absolutelynothing114 : absolutelynothing1 replaces ExitUnit
+{
+}
+
+actor shadeflag : CustomInventory
+{
+}
+
+actor shademanflightcountertake : CustomInventory
+{
+}
+
+

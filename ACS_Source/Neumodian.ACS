@@ -1,0 +1,14 @@
+#library "NEUMODIAN"
+#include "zcommon.acs"
+#include "8BDMLIB.ACS"
+
+#include "neumlib.acs"
+#include "a_Core.acs"
+#include "a_Tips.acs"
+#include "a_Deployable.acs"
+#include "a_DamageDisplay.acs"
+#include "a_Loadout.acs"
+#include "a_Micro.acs" 
+#include "a_Targeter.acs"
+#include "a_Isolate.acs"
+ 

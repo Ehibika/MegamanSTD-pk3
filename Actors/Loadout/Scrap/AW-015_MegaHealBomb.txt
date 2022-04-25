@@ -1,0 +1,288 @@
+/*=============================
+Lightweight and quite easy to handle, this handy explosive can lay waste to all
+kinds of opponents and obstacles and it ricochets off walls to! the go-to hand
+explosive for all corondian infantry or lone travelers that need some means to
+reduce something or someone into tattered bits.
+
+Some of our more bold personell have been using the explosive to give 
+themselves a boost in the air, by throwing it beneath them and riding off the
+blast, this is highly unadvised as it's simply dangerous and stupid.
+*///===========================
+Actor MegaHealBombFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+
+actor MegaHealBombProjectile 
+{
+PROJECTILE
+damagetype "MegaHealBomb"
+Obituary "$OB_HYPERBOMB"
+seesound "weapon/megaball"
+- NOGRAVITY
++RIPPER
++BOUNCEONACTORS
++NOTARGETSWITCH
++DOOMBOUNCE
++CANBOUNCEWATER
++PUSHABLE
++SOLID
+//+BOUNCEAUTOOFFFLOORONLY
++NOEXPLODEFLOOR
+Radius 6
+Height 7
+scale 1.5
+speed 25
+reactiontime 85
+gravity 2.8
+//bouncefactor 0.77
+States
+{
+Spawn:
+BOMB A 0
+BOMB A 0 ThrustThingZ(0, 12, 0, 1)
+spawn2:
+MGHB ABACAABACA 2
+MGHB E 5 A_PlaySoundEx("weapon/rollhealing", "Soundslot6")
+MGHB ABACAABACA 2
+MGHB E 5 A_PlaySoundEx("weapon/rollhealing", "Soundslot6")
+MGHB ABACAABACA 2
+MGHB E 5 A_PlaySoundEx("weapon/rollheal", "Soundslot6")
+MGHB D 2 A_Scalevelocity(0.5)
+MGHB E 2 A_PlaySoundEx("weapon/rollheal", "Soundslot6")
+MGHB D 2 A_Scalevelocity(0.5)
+MGHB E 2 A_PlaySoundEx("weapon/rollheal", "Soundslot6")
+MGHB D 2 A_Scalevelocity(0.5)
+MGHB E 2 A_PlaySoundEx("weapon/rollheal", "Soundslot6")
+MGHB D 2 A_Scalevelocity(0.5)
+MGHB E 2 A_PlaySoundEx("weapon/rollheal", "Soundslot6")
+Goto Detonate
+Detonate:
+BOMB A 0 A_Stop
+BOMB A 0 A_PlaySoundEx("weapon/hyperbomb", "Weapon")
+BOMB A 0 A_ChangeFlag("NOGRAVITY",1)
+MGHB E 2 ACS_ExecuteAlways(RadiusGive,0, 9, 450, 10)//A_spawnitemex("HealAOE")
+TNT1 A 2 A_spawnitemex("MegahealBlastFX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+Goto Death
+Death:
+BOMB A 0 A_PlaySoundEx("weapon/hyperbomb", "Weapon")
+stop
+}
+}
+
+	actor MegaHealBombProjectile_BLUE : MegaHealBombProjectile{}
+	actor MegaHealBombProjectile_RED : MegaHealBombProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
+	
+	// [+++]=============================[+++]
+actor MegaHealBombExplosion : ExplosionBase
+{
+States
+{
+Spawn:
+NAPC A 0 
+NAPC D 0 A_Explode(35, 280, 1,0,36)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+ASEX ABCDEF 1 
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+
+actor MegahealMist : FXActor_A
+{
+-Nogravity
+scale 3.0
+Gravity 1.5
+Alpha 0.5
+States
+{
+Spawn:
+ICMS A 0
+ICMS ABCD 1 
+spawn2:
+ICMS DDDDD 1 A_CheckFloor("Death")
+ICMS D 0 A_Jump(150,"spawn2")
+ICMS EF 1
+Death:
+ICMS D 0
+stop
+}
+}
+
+actor MegahealBlastFX
+{
+PROJECTILE
++NOINTERACTION
+Scale 7.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+TNT1 A 0 A_SpawnItemEx("HealParticlesBlast",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MistBlast",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+Death:
+HARD EDCB 2
+stop
+}
+}
+
+actor MistBlast
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++CLIENTSIDEONLY
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 35
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_setuservar("user_Rot",0)
+TNT1 A 0
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("MegahealMist",50,0,50,16,momy/4,random(12,26),user_Rot,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("MegahealMist",80,0,25,8,momy/4,random(12,26),user_Rot,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+16)
+TNT1 A 0 A_jumpif(user_Rot >= 360,"Death")
+Goto spawn+3
+Death:
+HARD EDCB 2
+stop
+}
+}
+
+actor HealParticlesBlast
+{
+PROJECTILE
++NOINTERACTION
++NOCLIP
++CLIENTSIDEONLY
+radius 8
+height 8
+Damage (0)
+scale 5.0
+Reactiontime 35
+Renderstyle "ADD"
+Alpha 0.8
+var int user_Rot;
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_setuservar("user_Rot",0)
+TNT1 A 0
+TNT1 A 0
+TNT1 A 0 A_SpawnItemEx("HealFX",30,0,random(0,50),random(35,67),momy/4,random(0,8),user_Rot,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("HealFX",450,0,0,3,momy/4,0,user_Rot,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_setuservar("user_Rot",user_Rot+16)
+TNT1 A 0 A_jumpif(user_Rot >= 360,"Death")
+Goto spawn+3
+Death:
+HARD EDCB 2
+stop
+}
+}
+
+actor Megaheal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpifHealthlower(1,"Nope")
+TNT1 A 0 A_SpawnItemEx("HealEffectWatcher")
+TNT1 A 0 A_Playsoundex("Support/Heal1","voice")
+TNT1 A 0 HealThing(100)
+TNT1 A 0 A_Giveinventory("TempFireProof",3)
+TNT1 A 0 A_Giveinventory("TempPoisonProof",3)
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor MegaHealBombCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("MegaHealBombCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("MegaHealBombCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor MegaHealBombCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("MegaHealBombCooldownItem",490)
+TNT1 A 0 A_Spawnitemex("MegaHealBombCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor MegaHealBombCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 490
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor MegaHealBombShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("MegaHealBombProjectile",0,1,4,12)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("MegaHealBombProjectile_RED",0,1,4,12)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("MegaHealBombProjectile_BLUE",0,1,4,12)
+TNT1 A 0
+stop
+}
+}

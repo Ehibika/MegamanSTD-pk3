@@ -1,0 +1,397 @@
+
+
+actor WepMasterBase : Weapon
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 3
+Weapon.SlotNumber 1
+Weapon.SlotPriority 0
+scale 2.0
+Obituary "OB_GENERIC"
+inventory.icon "BUSTI"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "BusterAmmo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,"Ready.Wep")
+BUST B 0 
+Ready.Wep:
+"####" B 1 A_WeaponReady
+Goto Ready
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 1 
+goto Ready
+
+Altfire:
+"####" "#" 0 A_JumpIfinventory("MiniBombFlag",1,"Minibomb")
+//"####" "#" 0 A_JumpIfinventory("MannturretFlag",1,"Mannturret")
+//"####" "#" 0 A_JumpIfinventory("ProxyMineFlag",1,"ProxyMine")
+"####" "#" 0 A_JumpIfinventory("HealPatchFlag",1,"HealPatch")
+"####" "#" 0 A_JumpIfinventory("LightScreenFlag",1,"LightScreen")
+//"####" "#" 0 A_JumpIfinventory("BarrierFlag",1,"Barrier")
+"####" "#" 0 A_JumpIfinventory("GrapplingHookFlag",1,"GrapplingHook")
+//"####" "#" 0 A_JumpIfinventory("CureSprayFlag",1,"CureSpray")
+"####" "#" 0 A_JumpIfinventory("HyperBombFlag",1,"HyperBomb")
+//"####" "#" 0 A_JumpIfinventory("MegaHealBombFlag",1,"MegaHealBomb")
+//"####" "#" 0 A_JumpIfinventory("BoosterPackFlag",1,"BoosterPack")
+//"####" "#" 0 A_JumpIfinventory("TimeBombFlag",1,"TimeBomb")
+//"####" "#" 0 A_JumpIfinventory("HealthGeneratorFlag",1,"HealthGenerator")
+//"####" "#" 0 A_JumpIfinventory("BuddySentryFlag",1,"BuddySentry")
+//"####" "#" 0 A_JumpIfinventory("RotaryShellFlag",1,"RotaryShell")
+"####" "#" 0 A_JumpIfinventory("PowerDartFlag",1,"PowerDart")
+
+"####" "#" 1 
+"####" "#" 0 A_Jump(256,"Ready")
+goto Ready
+
+Minibomb: //===Minibomb===
+"####" B 0 A_JumpIfinventory("MiniBombCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("MiniBombShooter")
+"####" B 0 A_Giveinventory("MiniBombCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+HealPatch: //===HealPatch===
+"####" B 0 A_JumpIfinventory("HealPatchCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("HealPatchShooter")
+"####" B 0 A_Giveinventory("HealPatchCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+LightScreen: //===LightScreen===
+"####" B 0 A_JumpIfinventory("LightScreenCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+//"####" A 3
+"####" C 0 A_PlaySoundEx("weapon/mirroractivate","Weapon")
+"####" B 0 A_GiveInventory("LightScreenShooter")
+"####" B 0 A_Giveinventory("LightScreenCooldown")
+//"####" FFGGG 1
+"####" FGIJKLM 2
+//"####" BCDE 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+GrapplingHook:  //===Grappling Hook===
+"####" B 0 A_Jumpifinventory("GrapplingHookCooldownItem",1,"NoAmmo")
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+
+"####" E 0 A_PlaySoundEx("weapon/Mbuster","Weapon")
+"####" E 2 Offset(56,82)
+"####" E 2 Offset(28,58)
+"####" E 2 Offset(-14,18)
+"####" E 0 //A_Jumpifinventory("HookOutFlag",1,"NoAmmo")
+"####" E 1 A_GiveInventory("GrapplingHookShooter")
+Holdloop:
+"####" E 2
+"####" E 0 A_Jumpifinventory("HookOutFlag",1,"Holdloop")
+"####" B 0 A_Jump(256,"Ready")
+Goto Ready
+
+HyperBomb: //===HyperBomb===
+"####" B 0 A_JumpIfinventory("HyperBombCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+/*
+"####" B 0 A_TakeInventory("TargActive",9)
+"####" B 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_NULL)
+"####" GF 2
+"####" F 1 A_Refire("HoldLoopStart2")
+Goto Holdrelease2
+
+HoldLoopStart2:
+"####" F 0 A_GiveInventory("TargActive",1)
+"####" F 0 A_GiveInventory("TargContractor")
+"####" F 0 ACS_NamedExecuteAlways("TracerTargeter",0,0,1120)
+HoldLoop2:
+"####" F 1 A_GiveInventory("TargActive",1)
+"####" F 0 A_GiveInventory("TargContractor")
+"####" F 1 A_Refire("HoldLoop2")
+Holdrelease2:
+"####" F 0 A_TakeInventory("TargActive",9)
+*/
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("HyperBombShooter")
+"####" B 0 A_Giveinventory("HyperBombCooldown")
+"####" IJKLM 2
+//"####" B 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_NULL)
+//"####" B 0 A_JumpIfinventory("MendingTool",1,"MendingRefresh")
+//"####" B 0 A_JumpIfinventory("MendingTool2",1,"MendingRefresh")
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+//MendingRefresh:
+//"####" B 0 A_GiveInventory("TargActive",1)
+//"####" B 0 ACS_NamedExecuteAlways("TracerTargeter",0,1,630)
+//"####" B 1
+//"####" B 0 A_Jump(256,"Ready")
+//goto Ready
+/*
+MegaHealBomb: //===MegaHealBomb===
+"####" B 0 A_JumpIfinventory("MegaHealBombCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/WaterBalloon","Weapon")
+"####" B 0 A_GiveInventory("MegaHealBombShooter")
+"####" B 0 A_Giveinventory("MegaHealBombCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+*/
+BoosterPack: //===BoosterPack===
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready")
+goto Ready
+/*
+"####" "#" 0 A_JumpIfinventory("BP_Active",1,"BoostEnd")
+"####" "#" 0 A_JumpIfinventory("BoosterPackCooldownItem",1,"NoAmmo")
+"####" "#" 0 A_JumpIfinventory("BP_Fuel",35,1)
+goto Ready
+"####" "#" 0
+
+//BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+//BUST B 0 
+//"####" B 0
+//"####" B 0 A_JumpIfinventory("BP_Active",1,"BoostEnd")
+"####" "#" 0 A_PlaySoundEx("weapon/WaterBalloon","Weapon")
+"####" "#" 0 A_Giveinventory("BP_Active",1)
+"####" "#" 0 A_Giveinventory("BP_PreThrust",1)
+"####" "#" 1 A_SpawnItemEx("AdaptorWings2",-16,0,12,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+"####" "#" 0 A_SpawnitemEX("BP_Watcher")
+"####" "#" 7
+"####" "#" 0 A_Jump(256,"Ready")
+goto Ready
+BoostEnd:
+"####" "#" 1 A_GiveInventory("BP_Stopper")
+"####" "#" 0 A_Jump(256,"Ready")
+goto Ready
+*/
+
+PowerDart: //===PowerDart===
+"####" B 0 A_JumpIfinventory("PowerDartCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" E 0
+
+"####" E 0 A_TakeInventory("TargActive",9)
+"####" E 0 A_RearrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_NULL)
+"####" E 1 Offset(0,82)
+"####" E 1 Offset(0,70)
+"####" E 1 Offset(0,58)
+"####" E 1 Offset(0,46)
+"####" E 1 Offset(0,32)
+"####" E 1 A_Refire("HoldLoopStart2")
+Goto DartDecline
+
+HoldLoopStart2:
+"####" E 0 A_GiveInventory("TargActive",1)
+"####" E 0 A_GiveInventory("TargContractor")
+"####" E 0 ACS_NamedExecuteAlways("TracerTargeter",0,1,1120)
+HoldLoop2:
+"####" E 1 A_GiveInventory("TargActive",1)
+"####" E 0 A_GiveInventory("TargContractor")
+"####" E 1 A_Refire("HoldLoop2")
+"####" E 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == TRUE, "DartDecline")
+Holdrelease2:
+"####" E 0 A_TakeInventory("TargActive",9)
+"####" E 0 A_PlaySoundEx("weapon/slashclaw","Weapon")
+"####" E 0 A_GiveInventory("PowerDartShooter")
+"####" E 0 A_Giveinventory("PowerDartCooldown")
+"####" E 2 Offset(56,82)
+"####" E 2 Offset(28,58)
+"####" E 6 Offset(-14,18)
+DartDecline:
+"####" E 0 A_TakeInventory("TargActive",9)
+		"####" E 1 Offset(0, 32)
+		"####" E 1 Offset(0, 46)
+		"####" E 1 Offset(0, 58)
+		"####" E 1 Offset(0, 70)
+		"####" E 1 Offset(0, 82)
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+/*
+Mannturret:
+"####" B 0 A_Jumpifinventory("MannTurretcooldownitem",1,"NoAmmo")
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,96)
+"####" B 1 Offset(0,112)
+"####" B 1 Offset(0,130)
+"####" A 0 A_PlaySound("weapon/rminestick")
+"####" A 0 A_GiveInventory("MannTurretDefense")
+"####" A 0 A_GiveInventory("InMannTurret")
+
+"####" A 0 A_ChangeFlag("DONTBLAST",1)
+"####" A 0 A_SpawnItemEx("MannTurretFrontFX",1,0,0,0,0,0,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+"####" A 0 A_SpawnItemEx("MannTurretGiver",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+"####" A 0 A_GiveInventory("MannTurretWep")
+"####" A 0 A_SelectWeapon("MannTurretWep")
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+TimeBomb: //===TimeBomb===
+"####" B 0 A_JumpIfinventory("TimeBombCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("TimeBombShooter")
+"####" B 0 A_Giveinventory("TimeBombCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+HealthGenerator: //===HealthGenerator===
+"####" B 0 A_JumpIfinventory("HealthGeneratorCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("HealthGeneratorShooter")
+"####" B 0 A_Giveinventory("HealthGeneratorCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+BuddySentry:  //===Buddy Sentry===
+"####" B 0 A_Jumpifinventory("BuddySentryCooldownItem",1,"NoAmmo")
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+ 
+HoldLoop3:
+"####" E 1 A_Giveinventory("BuddysentryChecker")
+
+"####" E 1 A_Refire("HoldLoop3")
+"####" E 1 A_JumpIfInventory("SpawnDeny",1,"NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/waterballoon","Weapon")  
+"####" B 0 
+"####" B 0 A_GiveInventory("BuddySentryplanter")  //what places the sentry
+"####" B 0 A_Giveinventory("BuddySentryCooldown")
+
+"####" E 10
+"####" "#" 0 A_Jump(256,"Ready")
+Goto Ready
+
+RotaryShell: //===RotaryShell===
+/*
+"####" B 0 A_JumpIfinventory("RotaryShellCooldownItem",1,"NoAmmo")
+//"####" B 0 A_JumpIfinventory("BasicArmor",1,"NoAmmo")
+
+HWAR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+HWAB B 0 
+"####" B 0
+"####" A 3
+"####" C 0 //A_PlaySoundEx("Support/Barrier2","SoundSlot7")
+"####" B 0 //ACS_ExecuteAlways(RadiusGive,0, 2, 800, 1)//A_GiveInventory("BarrierShooter")
+"####" B 0 A_Giveinventory("RotaryShellCooldown")
+"####" BCDE 2
+"####" B 0 A_Giveinventory("RotaryShellShooter")
+
+CureSpray: //===CureSpray===
+"####" B 0 A_JumpIfinventory("CureSprayCooldownItem",1,"NoAmmo")
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" B 0
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/WaterWave","Weapon")
+"####" B 0 A_GiveInventory("CureSprayShooter")
+"####" B 0 A_Giveinventory("CureSprayCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+
+ProxyMine: //===ProxyMine===
+"####" B 0 A_JumpIfinventory("ProxyMineCooldownItem",1,"NoAmmo")
+"####" B 0
+
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+BUST B 0 
+"####" FFGGG 1
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_GiveInventory("ProxyMineShooter")
+"####" B 0 A_Giveinventory("ProxyMineCooldown")
+"####" IJKLM 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+Barrier: //===Barrier===
+"####" B 0 A_JumpIfinventory("BarrierCooldownItem",1,"NoAmmo")
+"####" B 0 A_JumpIfinventory("BasicArmor",1,"NoAmmo")
+
+HWAR B 0 A_Jumpifinventory("WilyTeamFlag",1,2)
+HWAB B 0 
+"####" B 0
+"####" A 3
+"####" C 0 A_PlaySoundEx("Support/Barrier2","SoundSlot7")
+"####" B 0 ACS_ExecuteAlways(RadiusGive,0, 2, 800, 1)//A_GiveInventory("BarrierShooter")
+"####" B 0 A_Giveinventory("BarrierCooldown")
+"####" BCDE 2
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+*/
+"####" B 1
+"####" B 0 A_Jump(256,"Ready")
+goto Ready
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready")
+Goto Ready
+
+Flash:
+TNT1 A 1
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}

@@ -1,0 +1,188 @@
+
+
+
+
+
+script 677 ENTER { 	GiveInventory("DMDPScript", 1); }
+script 678 (VOID) { 	
+//delay(1);
+		//if(checkactorproperty(0,APROP_NAMETAG, "RespawningPlayer")) { log(s:"nope");Restart;}
+GiveInventory("DMDPScript", 1); }
+
+script 692 (void)
+{
+//log(s:"Bing!");
+	int HPMax = GetActorProperty(0, APROP_Health);
+	int SpawnDivideZeroBug;
+	int DisplayReady = 1;
+	int Damagedigits = 0;
+		int HPP = 0; // "Health Point Past/Future"
+		int HPF = 0;
+		int HPC = 0; // "HP Calculation"
+		int HPCC = 0; // HP Carry
+		While(TRUE)
+		{
+//if(checkactorproperty(0,APROP_NAMETAG, "RespawningPlayer")) { log(s:"Nu-uh");Terminate;}
+			SpawnDivideZeroBug = GetActorProperty(0, APROP_SpawnHealth);
+			if(SpawnDivideZeroBug == 0)
+			{
+				HPP = GetActorProperty(0, APROP_Health);
+				delay(2); // Things are occuring... o_o values being damaged/healed
+				HPF = GetActorProperty(0, APROP_Health); // let's check what happened! now!
+			}
+			else
+			{
+				HPP = GetActorProperty(0, APROP_Health);
+				delay(2); // Things are occuring... o_o values being damaged/healed
+				HPF = GetActorProperty(0, APROP_Health); // let's check what happened! now!
+			}
+			HPC = HPP-HPF;
+			 
+				if(HPC != 0)
+				{
+				HPCC = HPC;
+				if(Checkinventory("DaDiBuffer")){HPCC = HPCC - Checkinventory("DaDiBuffer"); TakeInventory("DaDiBuffer",9999);}
+				HPC = 0;
+				
+					if(HPCC <= -1) // Healing Gained
+					{ Damagedigits = GetTotalDigits(-HPCC);
+						Switch(Damagedigits)
+						{
+							Case 1: GiveInventory("NumberScrub",1);
+										if (getNthDigit(-HPCC,10,1) == 0) {GiveInventory("Digit1Count", (-HPCC/10));}  //in case we get a remainder of 0
+											else {GiveInventory("Digit1Count", getNthDigit(-HPCC,10,1));}
+									 
+									GiveInventory("Numbersize1", 1);
+									GiveInventory("HealPlus", 1);
+									GiveInventory("DisplayTimer",8);
+									GiveInventory("HealShower",1);
+									
+									break;
+							Case 2: GiveInventory("NumberScrub",1);
+									GiveInventory("Digit1Count", getNthDigit(-HPCC,10,2)); 
+									GiveInventory("Digit2Count", getNthDigit(-HPCC,10,1)); 
+									GiveInventory("Numbersize2", 1);
+									GiveInventory("HealPlus", 1);
+									GiveInventory("DisplayTimer",9);
+									GiveInventory("HealShower",1);
+									
+									break;
+							Case 3: GiveInventory("NumberScrub",1);
+									GiveInventory("Digit1Count", getNthDigit(-HPCC,10,3)); 
+									GiveInventory("Digit2Count", getNthDigit(-HPCC,10,2)); 
+									GiveInventory("Digit3Count", getNthDigit(-HPCC,10,1)); 
+									GiveInventory("Numbersize3", 1);
+									GiveInventory("HealPlus", 1);
+									GiveInventory("DisplayTimer",10);
+									GiveInventory("HealShower",1);
+									
+									break;
+						}
+					}
+					
+					if(HPCC >= 1) // Damage taken
+					{ Damagedigits = GetTotalDigits(HPCC);
+						if(HPCC > 999){HPCC = 999;}
+						Switch(Damagedigits)
+						{
+							Case 1: GiveInventory("NumberScrub",1);
+										if (getNthDigit(HPCC,10,1) == 0) {GiveInventory("Digit1Count", (HPCC/10));}  //in case we get a remainder of 0
+											else {GiveInventory("Digit1Count", getNthDigit(HPCC,10,1));}
+									 
+									GiveInventory("Numbersize1", 1);
+									GiveInventory("DisplayTimer",8);
+									GiveInventory("DamageShower",1);
+									
+									break;
+							Case 2: GiveInventory("NumberScrub",1);
+									GiveInventory("DisplayTimer",9); if (getNthDigit(HPCC,10,2) >= 20){GiveInventory("DisplayTimer",9);}
+									GiveInventory("Digit1Count", getNthDigit(HPCC,10,2)); 
+									GiveInventory("Digit2Count", getNthDigit(HPCC,10,1)); 
+									GiveInventory("Numbersize2", 1);
+									GiveInventory("DamageShower",1);
+									
+									break;
+							Case 3: GiveInventory("NumberScrub",1);
+									GiveInventory("DisplayTimer",19);
+									GiveInventory("Digit1Count", getNthDigit(HPCC,10,3)); 
+									GiveInventory("Digit2Count", getNthDigit(HPCC,10,2)); 
+									GiveInventory("Digit3Count", getNthDigit(HPCC,10,1)); 
+									GiveInventory("Numbersize3", 1);
+									GiveInventory("DamageShower",1);
+									
+									break;
+						}
+					}
+					
+					
+
+				}
+			}
+							//log(s:"Bang!!");
+}
+
+function int getNthDigit (int number, int base, int n)
+{
+int result = ((number / pow(base, n - 1)) % base);
+return result;
+}
+
+function int GetTotalDigits (int number)
+{
+int result;
+if (number >= 100) {result = 3;}
+else if (number >= 10) {result = 2;}
+else {result = 1;}
+return result;
+}
+
+function int pow (int x, int n)
+{
+	int y = 1;
+	while (n-- > 0) y *= x;
+	return y;
+}
+
+#define MATH_E 178145
+function int logN (int x, int base)
+{
+    if (!base) base = MATH_E;
+    int integer = 0;
+
+    if (x < 1.0 && base < 1.0) return 0;
+      
+    while (x < 1)
+    {
+        integer -= 1;
+        x = FixedMul (x, base);
+    }
+    while (x >= base)
+    {
+        integer += 1;
+        x = FixedDiv (x, base);
+    }
+    int partial = 0.5;
+    x = FixedMul (x, x);
+    int decimal = 0;
+    while (partial > 1) // Actually 0.0000152587890625
+    {
+        if (x >= base)
+        {
+            decimal += partial;
+            x = FixedDiv (x, base);
+        }
+        partial = FixedMul (partial, 0.5);
+        x = FixedMul (x, x);
+    }
+    return ((integer << 16) + decimal);
+}
+
+script 693(void)
+{
+int TargetTID = ACS_ExecuteWithResult(257, 0);
+if(checkActorinventory(TargetTID,"DisplayTimer") >= 1)
+	{
+	//Giveinventory("DisplayTimer",checkActorinventory(TargetTID,"DisplayTimer"));
+	SetResultValue(checkActorinventory(TargetTID,"DisplayTimer"));
+	}
+}

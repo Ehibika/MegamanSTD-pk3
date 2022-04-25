@@ -1,0 +1,421 @@
+
+ 
+/*
+ACS Script that have the "continue" function, for whatever reason, my ACS doesn't
+jive with me using these above any string arrays.
+*/
+
+//======| Radial heal script with diminishing returns
+Script "RADIUSHEAL" (int HealRadius, int HealAmmount, int DropRate)
+{
+int PlayersTeam;
+int Target_TID;
+int TargetCount;
+int FiringPlayer;
+Bool Approve;
+int p;
+
+int q;
+If(ActivatorTID() == 0)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+//==== Count Allies
+
+For( p = 0;p < ServerMax; p++)
+	{Approve = true;
+	
+		If(!PlayerInGame(p)){Approve = False;}
+	if(checkWeapon("RespawnCamera")&&GetActorProperty(0,APROP_HEALTH)>0){Approve = False;}
+	If(PlayersTeam != GetPlayerInfo(p, PLAYERINFO_TEAM)){Approve = False;}
+		Target_TID = p+1000;
+	if((xyzDistance(0,Target_TID) < HealRadius) && Checksight(0,Target_TID,0) && Approve)
+		{TargetCount = TargetCount+1;}
+	}
+
+	if(TargetCount <= 0){Terminate;}
+	
+//==== Heal Allies	
+
+Int HealCount = RadhealDiminish(HealAmmount,TargetCount,DropRate) ;
+
+For( q = 0;q < ServerMax; q++)
+	{Approve = true;
+	
+	If(!PlayerInGame(q)){Approve = False;}
+	if(checkWeapon("RespawnCamera")&&GetActorProperty(0,APROP_HEALTH)>0){Approve = False;}
+	If(PlayersTeam != GetPlayerInfo(q, PLAYERINFO_TEAM)){Approve = False;}
+	
+	Target_TID = q+1000;
+	If((xyzDistance(0,Target_TID) < HealRadius) && Approve)
+		{
+		GiveActorInventory(Target_TID,"Health",HealCount );
+		GiveActorInventory(Target_TID,"RadialHealEffect",1 );
+		}
+	}
+	
+	
+}
+
+//======|Radius Give Script
+script "RADIUSGIVE" (int GiveID, int GiveRadius, int GiveType)
+{ 
+int Target_TID;
+int Target_Distance;
+int FiringPlayer;
+int PlayersTeam;
+//int IsTeamGame = ACS_ExecuteWithResult(975, 1);
+Bool Approve;
+// GiveType 1 = self + Friendlies
+// GiveType 2 = Friendlies only
+// GiveType 3 = Self only
+// GiveType 4 = Enemies only
+// GiveType 5 = self + Enemies
+// GiveType 6 = All but self
+// GiveType 7 = All
+If(ActivatorTID() == 0)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+
+For(int p = 0;p < ServerMax; p++)
+	{
+	Approve = true;
+	
+	If(!PlayerInGame(p)){Approve = False;}
+	if(checkactorinventory(p,"RespawnCamera")){Approve = False;}
+	If(IsTeamGame)
+		{
+		switch(GiveType)
+			{
+			case 1:
+			If(PlayersTeam != GetPlayerInfo(p, PLAYERINFO_TEAM)){Approve = False;}
+			Break;
+			
+			case 2:
+			If(PlayersTeam != GetPlayerInfo(p, PLAYERINFO_TEAM) || (PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM) && p == FiringPlayer-1000)){Approve = False;}
+			Break;
+			
+			case 3:
+			If(PlayersTeam != GetPlayerInfo(p, PLAYERINFO_TEAM) || (p != FiringPlayer-1000)){Approve = False;}
+			Break;
+
+			case 4:
+			If(PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM) || p == FiringPlayer-1000){Approve = False;}
+			Break;
+			
+			case 5:
+			If(PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM) && p != FiringPlayer-1000){Approve = False;}
+			Break;
+			
+			case 6:
+			If(p == FiringPlayer-1000){Approve = False;}	
+			Break;
+			}
+		}
+	Target_TID = p+1000;
+		if(Approve)
+		{
+		If(xyzDistance(0,Target_TID) < GiveRadius) 
+			{
+			GiveActorInventory(Target_TID,"PackageID", GiveID);
+			GiveActorInventory(Target_TID,"GivePackage", 1);
+			}
+		}
+	}
+}
+
+//======|Medivision Script
+script "MEDIVISIONSCRIPT" (VOID) 
+{ 
+int Target_TID;
+//int Target_Distance;
+//int Activeplayer;
+int PlayersTeam;
+//int IsTeamGame = ACS_ExecuteWithResult(975, 1);
+Bool Approve;
+
+while (GetActorProperty(ActivatorTID(), APROP_HEALTH) > 0)
+	{
+	Delay(1);
+PlayersTeam = GetPlayerInfo(ActivatorTID()-1000, PLAYERINFO_TEAM);
+For(int p = 0;p < ServerMax; p++)
+	{
+	Approve = true;
+	If(!PlayerInGame(p)){Approve = False;}
+	if(p+1000 == ActivatorTID()){Approve = False;}
+	if(checkWeapon("RespawnCamera")&&GetActorProperty(0,APROP_HEALTH)>0){Approve = False;}
+	If(PlayersTeam != GetPlayerInfo(p, PLAYERINFO_TEAM)){Approve = False;}
+	
+		if(Approve)
+		{
+		Target_TID = p+1000;
+		If((xyzDistance(0,Target_TID) < 900) && Checksight(0,Target_TID,0))
+			{
+			GiveActorInventory(Target_TID,"Tinybarspawner", 1);
+			}
+		}
+	}
+	}
+}
+
+script "Medivision" (VOID) CLIENTSIDE {
+	int ownerNumber = PlayerNumber();
+	
+	if(ownerNumber==ConsolePlayerNumber()) {
+	
+		int xOffset = 10.0;
+		int yOffset = 380.0;
+		int t;
+		int PlayersTeam = GetPlayerInfo(0, PLAYERINFO_TEAM);
+		int i;
+		int Target_TID;
+		while(GetActorProperty(0,APROP_HEALTH) > 0) {
+			
+			//apparently these two for loops are done in a way that excludes the
+			//script activator. possibly for potential desynch maybe?
+			
+			for(i=0;i<ownerNumber;i++) {
+			Target_TID = i+1000;
+			
+				if((xyzDistance(0,Target_TID) < 900) && Checksight(0,Target_TID,0) && PlayersTeam == GetPlayerInfo(i, PLAYERINFO_TEAM)) {
+					HudMessageOnActorZPlusAllign(1000+i, PLAYER_CENTER, 400+i, 320, 240, 0, -30, 9000, TinyBarFrameGetter(Target_TID), strparam(i:GetActorProperty(0,APROP_HEALTH)), 0, CR_UNTRANSLATED);
+				}
+			}
+			for(i=ownerNumber+1;i<MAX_PLAYERS;i++) {
+			Target_TID = i+1000;
+				if((xyzDistance(0,Target_TID) < 900) && Checksight(0,Target_TID,0) && PlayersTeam == GetPlayerInfo(i, PLAYERINFO_TEAM)) {
+					HudMessageOnActorZPlusAllign(1000+i, PLAYER_CENTER, 400+i, 320, 240, 0, -30, 9000, TinyBarFrameGetter(Target_TID), strparam(i:GetActorProperty(0,APROP_HEALTH)), 0, CR_UNTRANSLATED);
+				}
+			}
+			
+			delay(1);
+		}
+	}
+}
+
+Script "BlastKnockback" (int BlastThrust, int ThrustForceH, int MaxRadius)
+{
+
+int userTID;
+int userTeam;
+Bool SelfThrustOnly = False;
+int ThrustForce = BlastThrust;
+	if(ThrustForce < 0) {SelfThrustOnly = true; ThrustForce = ThrustForce*-1;}
+int AdditiveForce;
+	if(MaxRadius < 0) {AdditiveForce = 1; MaxRadius = MaxRadius*-1;}
+
+	if(ActivatorTID() == 0)
+	{
+		userTID = ACS_ExecuteWithResult(257, 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+	}
+	else
+	{
+		userTID = ActivatorTID();
+	}
+	
+
+int ActX = GetActorX(0);
+int ActY = GetActorY(0);
+//int ActHeight = GetActorProperty(0,APROP_HEIGHT) >>16;
+int Dist;
+int distdiff;
+int ZThrust;
+int XYThrust;
+int targetTID;
+int PlayerX;
+int PlayerY;
+int pitch;
+
+int FinalForce;
+int FinalForceH;
+
+//int ThrustDrop = NoNeg( (Dist/10) - MaxRadius) << 16;
+//SetActivatorToTarget(0);
+
+Bool ThrustApprove = true;
+
+For(int q = 0;q < ServerMax; q++)
+	{
+		ThrustApprove = true;
+
+		targetTID = q+1000;
+		
+		if(!PlayerInGame(q))
+		{
+			ThrustApprove = false;
+		}
+		
+		if( (userTID != targetTID) && (SelfThrustOnly == True)){ThrustApprove = false;}
+		if(ACS_ExecuteWithResult(975, 1) == 1)
+		{
+			if(userTeam == GetPlayerInfo(q, PLAYERINFO_TEAM) && userTID != targetTID)
+			{
+				ThrustApprove = false;
+			}
+		}
+		
+		if(ThrustApprove)
+		{
+			//log(s:"distance is ",i:xyzDistance(0, targetTID));
+			if(xyzDistance(0, targetTID) < MaxRadius && checksight(0,targetTID,0) == True
+			|| xyzDistance(0, targetTID) <20)
+			{
+			Dist = xyzDistance(0,targetTID);
+		
+			distdiff = NoNeg(Dist - MaxRadius);
+			pitch = GetTargetPitch(targetTID,0);
+			//VectorAngle(xyDistance(0, targetTID), GetActorZ(0) - GetActorZ(targetTID) >> 16);
+			//log(s:"pitch relative to player ",i:q,s:" is ", f:pitch);
+			//log(s:"Height is  ",i:ActHeight);
+			if(xyzDistance(0, targetTID) > BASEBLASTMIN)
+			{
+			FinalForce = ceil(FixedMul(ThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+			FinalForceH = ceil(FixedMul(ThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+			}
+			Else
+			{
+			FinalForce = ThrustForce;
+			FinalForceH = ThrustForceH;
+			}
+			ZThrust = (sin(pitch)*-FinalForce); //GetActorPitch(targetTID)
+			XYThrust = (cos(pitch)*-FinalForceH);
+			
+			if (GetActorZ(targetTID) - GetActorFloorZ (targetTID) == 0){XYThrust = FixedMul(XYThrust,1.0);}
+			//log(i:GetActorZ(targetTID) - GetActorFloorZ (targetTID));
+			//log(s:"horizontal thrust is is  ",i:(FixedMul(XYThrust , 1.0 - fixedDiv(distdiff,100)))>> 16);
+			PlayerX = GetActorX(targetTID);
+			PlayerY = GetActorY(targetTID);
+			
+			ThrustThing(VectorAngle(ActX - PlayerX,ActY - PlayerY)>>8,(FixedMul(XYThrust , 1.0 - fixedDiv(distdiff,100)))>> 16,1,targetTID);
+			thrustthingz(targetTID,(FixedMul(ZThrust , 1.0 - fixedDiv(distdiff,100)))>> 16,1,AdditiveForce);
+		}
+	}
+}
+
+}
+
+//======| Area heal script distance falloff
+
+Script "AreaHeal" (int HealRadius, int HealRadiusMin, int HealAmount)
+{
+int PlayersTeam;
+int Target_TID;
+int TargetCount;
+int FiringPlayer;
+
+If(ActivatorTID() == 0)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+
+//==== Heal Allies	
+int HealRate;
+int HealTotal;
+int Targ_Dist;
+Bool Approve;
+
+For(int q = 0;q < ServerMax; q++)
+	{
+	
+	Approve = True;
+	If(!PlayerInGame(q)){Approve = False;}
+	if(checkWeapon("RespawnCamera")&&GetActorProperty(0,APROP_HEALTH)>0){Approve = False;}
+	If(PlayersTeam != GetPlayerInfo(q, PLAYERINFO_TEAM)){Approve = False;}
+	if(CheckActorInventory(q+1000,"PoisonMark")){Approve = False;}
+		if(Approve)
+		{
+		Target_TID = q+1000;
+		Targ_Dist = xyzDistance(0,Target_TID);
+		If((xyzDistance(0,Target_TID) < HealRadius) )
+			{
+			//now to calculate their healing based on how far they are from the source
+			if (Targ_Dist <= HealRadiusMin){HealRate = 100;}
+			else{HealRate = noneg(((((Targ_Dist- HealRadiusMin)*100)/HealRadius) - 100)*-1);}
+			HealTotal = (HealAmount*HealRate)/100;
+			//log(s:"Healed ",i:HealTotal);
+			GiveActorInventory(Target_TID,"Health",HealTotal );
+			GiveActorInventory(Target_TID,"AreaHealEffect",1 );
+			}
+		}
+	}
+	
+	
+}
+
+
+//======| Area heal script distance falloff that ignores the owner
+Script "AreaHeal_2" (int HealRadius, int HealRadiusMin, int HealAmount)
+{
+int PlayersTeam;
+int Target_TID;
+int TargetCount;
+int FiringPlayer;
+
+If(ActivatorTID() == 0)
+	{
+	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	}
+else
+	{
+	FiringPlayer=ActivatorTID();
+	}
+
+PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+
+//==== Heal Allies	
+int HealRate;
+int HealTotal;
+int Targ_Dist;
+
+Bool Approve;
+For(int q = 0;q < ServerMax; q++)
+	{
+	Approve = True;
+	
+		If(!PlayerInGame(q)){Approve = False;}
+		if(checkWeapon("RespawnCamera")&&GetActorProperty(0,APROP_HEALTH)>0){Approve = False;}
+			If(PlayersTeam != GetPlayerInfo(q, PLAYERINFO_TEAM)){Approve = False;}
+			If(q+1000 == FiringPlayer){Approve = False;}
+			if(CheckActorInventory(q+1000,"PoisonMark")){Approve = False;}
+			
+		if(Approve)
+			{
+			Target_TID = q+1000;
+			Targ_Dist = xyzDistance(0,Target_TID);
+			If((xyzDistance(0,Target_TID) < HealRadius) )
+				{
+				//now to calculate their healing based on how far they are from the source
+				if (Targ_Dist <= HealRadiusMin){HealRate = 100;}
+				else{HealRate = noneg(((((Targ_Dist- HealRadiusMin)*100)/HealRadius) - 100)*-1);}
+				HealTotal = (HealAmount*HealRate)/100;
+				//log(s:"Healed ",i:HealTotal);
+				GiveActorInventory(Target_TID,"Health",HealTotal );
+				GiveActorInventory(Target_TID,"AreaHealEffect",1 );
+				}
+			}
+	}
+	
+	
+}
+
+
+

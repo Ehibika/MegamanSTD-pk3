@@ -1,0 +1,265 @@
+/*=============================
+This glowing entity is quite attractive, given it's ability to heal thoses around
+it, the Heal flare is a rather flexible utility in the medic's arsenal, launching
+a long ranged flare that heals around itself, and upon landing creates a stationary
+healing source for the whole team, including the medic themself!
+
+*///===========================
+Actor HealPatchFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FlareHealDelay : powerup{inventory.amount 1 Powerup.duration 12}
+Actor PatchedFlag : powerup{inventory.amount 1 Powerup.duration 8}
+
+actor HealPatchThrow 
+{
+//PROJECTILE
+radius 8
+height 6
+scale 2.5
++MISSILE
++NOGRAVITY
+//+CANBOUNCEWATER
+//+DOOMBOuNCE
+//+BOUNCEONWALLS
+//+BOUNCEONCEILINGS
+//+NOEXPLODEFLOOR
+//+SLIDESONWALLS
++THRUGHOST
+//+MTHRUSPECIES
+//+THRUACTORS
++HITTRACER
+speed 30
+gravity 1.0
+bouncefactor 0.3
+Damage (0)
+wallbouncefactor 0.8
+//reactiontime 110
+States
+{
+Spawn:
+LASH A 0
+CRAS A 4
+CRAS A 0 A_ChangeFlag("NOGRAVITY",false)
+Spawn2:
+CRAS A 1
+Goto Spawn2
+Death:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire",AAPTR_TARGET)
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire",AAPTR_TARGET)
+TNT1 A 1 A_SpawnItemEx("HealPatchAttach",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+//CENF AAAAAAAAAA 0 A_SpawnItemEx("HealFX2", 0, 0, 28, 256/24, 256/24, random2(256/24), random(0, 359),SXF_TRANSFERTRANSLATION)
+stop
+TeamRedFire:
+TNT1 A 1 A_SpawnItemEx("HealPatchAttach_RED",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+stop
+TeamBlueFire:
+TNT1 A 1 A_SpawnItemEx("HealPatchAttach_BLUE",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+stop
+}
+}
+
+	actor HealPatchThrow_BLUE : HealPatchThrow{Designatedteam 0 translation "225:225=198:198"}
+	actor HealPatchThrow_RED : HealPatchThrow{Designatedteam 1 translation "192:192=54:54", "198:198=42:42" , "196:196=170:170","225:225=42:42"}
+
+Actor HealPatchAttach
+{
+radius 8
+height 6
+scale 2.5
++MISSILE
++NOGRAVITY
++SHOOTABLE
++THRUGHOST
++NOEXPLODEFLOOR
+ReactionTime 35
+Bloodtype "BombHit"
+Painchance 256
+States
+{
+Spawn:
+TNT1 A 0
+DIVE A 0 A_JumpIf(IsPointerEqual(AAPTR_TRACER, AAPTR_NULL) == FALSE, "PlayerStick")
+MapStick:
+CRAS A 0 A_JumpIf(z-floorz<5, "Floor")
+CRAS A 0 A_JumpIf(z-ceilingz==0-6, "Ceiling")
+CRAS DC 3
+LASH A 0 ACS_NamedExecuteAlways("RadiusGive",0, 4, HLP_RAD, 1)
+LASH AA 0 A_SpawnItemEx("HealFX2",random2(28),0,random(0,5),momx/4,momy/4,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+LASH AAA 0 A_SpawnItemEx("HealFX2",HLP_RAD,0,random(2,10),0,0,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+LASH A 0 A_CountDown
+Goto MapStick
+	Floor:
+	CRAS GF 3
+	LASH A 0 ACS_NamedExecuteAlways("RadiusGive",0, 4, HLP_RAD, 1)
+	LASH AA 0 A_SpawnItemEx("HealFX2",random2(28),0,random(0,5),momx/4,momy/4,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+	LASH AAA 0 A_SpawnItemEx("HealFX2",HLP_RAD,0,random(2,10),0,0,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+	LASH A 0 A_CountDown
+	Goto MapStick
+	Ceiling:
+	CRAS JI 3
+	LASH A 0 ACS_NamedExecuteAlways("RadiusGive",0, 4, HLP_RAD, 1)
+	LASH AA 0 A_SpawnItemEx("HealFX2",random2(28),0,random(0,5),momx/4,momy/4,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+	LASH AAA 0 A_SpawnItemEx("HealFX2",HLP_RAD,0,random(2,10),0,0,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+	LASH A 0 A_CountDown
+	Goto MapStick
+PlayerStick:
+TNT1 A 0 A_JumpIfInventory("PatchedFlag",1,"Detatch",AAPTR_TRACER)
+Goto PlayerStick2
+PlayerStick2:
+LASH A 0 A_GiveInventory("PatchedFlag",1,AAPTR_TRACER)
+CRAS DDDCCC 1 A_Warp(AAPTR_TRACER,-20,0,30,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+LASH A 0 ACS_NamedExecuteAlways("RadiusGive",0, 4, HLP_RAD, 1)
+LASH AA 0 A_SpawnItemEx("HealFX2",random2(28),0,random(0,5),momx/4,momy/4,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+LASH AAA 0 A_SpawnItemEx("HealFX2",HLP_RAD,0,random(2,10),0,0,random(1,6),random(0,360),SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+LASH A 0 A_CountDown
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Detatch",AAPTR_TRACER)
+Goto PlayerStick2
+
+Detatch:
+LASH A 0 A_ChangeFlag("NOGRAVITY",false)
+Fall:
+CRAS DC 3 A_CheckFloor("Land")
+LASH A 0 A_CountDown
+Goto Fall
+Land:
+LASH A 0 A_ChangeFlag("NOGRAVITY",true)
+Goto MapStick
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+	actor HealPatchAttach_BLUE : HealPatchAttach{Designatedteam 0 translation "225:225=198:198"}
+	actor HealPatchAttach_RED : HealPatchAttach{Designatedteam 1 translation "192:192=54:54", "198:198=42:42" , "196:196=170:170","225:225=42:42"}
+
+
+actor HealPatchHeal : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_Jumpifinventory("CutterFlag",999,"Nope")
+
+TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"HealBlock")
+TNT1 A 1 //A_Giveinventory("HealDiodeBlock",1)
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)>=100,"Nope")
+TNT1 A 0 A_jumpifinventory("FlareHealDelay",1,"Nope")
+TNT1 A 0
+TNT1 A 1 A_Giveinventory("HealEffectSpawn",1)
+TNT1 A 0 A_Playsoundex("item/energyup","voice")
+TNT1 A 0 HealThing(ACS_ExecuteWithResult(HealRamp,8,15))
+TNT1 A 0 A_Giveinventory("FlareHealDelay",1)
+TNT1 A 0
+stop
+
+
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+
+HealBlock:
+TNT1 A 1 A_Giveinventory("FlareHealDelay")
+TNT1 A 1 A_Giveinventory("DetoxLevel",2)
+TNT1 A 1 A_Giveinventory("DetoxEfectSpawn")
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor HealPatchTrail : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+
+
+actor HealPatchCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("HealPatchCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("HealPatchCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor HealPatchCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("HealPatchCooldownItem",280)
+TNT1 A 0 A_Spawnitemex("HealPatchCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor HealPatchCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 280
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor HealPatchShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("HealPatchThrow",0,1,4,12)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("HealPatchThrow_RED",0,1,4,12)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("HealPatchThrow_BLUE",0,1,4,12)
+TNT1 A 0
+stop
+}
+}

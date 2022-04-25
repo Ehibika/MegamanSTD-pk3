@@ -1,0 +1,144 @@
+Actor SmallHealthFusion : CustomInventory replaces SmallHealth //10001
+{
+//$Category MM8BDM-Health/Energy
+-COUNTITEM
++INVENTORY.IGNORESKILL
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickUpMessage "Picked up a health capsule."
+Inventory.PickUpSound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+HBAL AB 6
+Loop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)<100,"Healme") 
+TNT1 A 0
+Fail
+Healme:
+TNT1 A 0 HealThing(10) //ACS_ExecuteWithResult(GetValueHPPerc,15)
+TNT1 A 0 A_GiveInventory("TempFireProof",2)
+TNT1 A 0
+stop
+Detox:
+TNT1 A 1 A_Giveinventory("DetoxLevel",25)
+TNT1 A 1 A_Giveinventory("DetoxEfectSpawn")
+stop
+Nope:
+TNT1 A 0 
+Fail
+}
+}
+
+Actor BigHealthFusion : CustomInventory replaces BigHealth //10002
+{
+//$Category MM8BDM-Health/Energy
+-COUNTITEM
++INVENTORY.IGNORESKILL
+Inventory.Amount 1
+Inventory.MaxAmount 1
+Inventory.PickUpMessage "Picked up a large health capsule."
+Inventory.PickUpSound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+HBAL CD 6
+Loop
+Pickup:
+TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)<100,"Healme") 
+
+TNT1 A 0
+Fail
+Healme:
+TNT1 A 0 HealThing(ACS_ExecuteWithResult(GetValueHPPerc,30))
+TNT1 A 0 A_GiveInventory("TempFireProof",5)
+TNT1 A 0
+stop
+Detox:
+TNT1 A 1 A_Giveinventory("DetoxLevel",25)
+stop
+Nope:
+TNT1 A 0 
+Fail
+}
+}
+
+
+Actor SmallHealthFusion2 : absolutelynothing1 replaces WeaponEnergy 
+{}
+Actor BigHealthFusion2 : absolutelynothing1 replaces BigWeaponEnergy 
+{}
+
+/*
+Actor WeaponEnergyFusion : CustomInventory replaces WeaponEnergy //10003
+{
+//$Category MM8BDM-Health/Energy
+-COUNTITEM
+Inventory.Amount 1
+Inventory.PickUpMessage "Picked up a small energy capsule."
+Inventory.PickUpSound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+
+EBAL A 0
+EBAL A 0 Thing_ChangeTID(0,999)
+EBAL AB 6
+
+GoTo Spawn
+PickUp:
+TNT1 A 0 A_GiveInventory("YamatoSpearAmmo",5)
+TNT1 A 0 A_GiveInventory("NeedleCannonAmmo",5)
+TNT1 A 0 A_GiveInventory("BalladeCrackerAmmo",4)
+TNT1 A 0 A_GiveInventory("HyperBombAmmo",7)
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+stop
+Success:
+TNT1 A 0 ACS_ExecuteAlways(992,0,4)
+Stop
+}
+}
+
+
+Actor BigWeaponEnergyFusion : CustomInventory replaces BigWeaponEnergy //10004
+{
+//$Category MM8BDM-Health/Energy
+-COUNTITEM
+Inventory.Amount 1
+Inventory.PickUpMessage "Picked up a large energy capsule."
+Inventory.PickUpSound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+
+EBAL C 0
+EBAL C 0 Thing_ChangeTID(0,999)
+EBAL CD 6 
+
+GoTo Spawn
+PickUp:
+TNT1 A 0 A_GiveInventory("YamatoSpearAmmo",28)
+TNT1 A 0 A_GiveInventory("NeedleCannonAmmo",28)
+TNT1 A 0 A_GiveInventory("BalladeCrackerAmmo",12)
+TNT1 A 0 A_GiveInventory("HyperBombAmmo",21)
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+stop
+Success:
+TNT1 A 0 ACS_ExecuteAlways(992,0,10)
+Stop
+}
+}
+*/

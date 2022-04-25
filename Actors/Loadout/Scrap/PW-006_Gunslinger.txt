@@ -1,0 +1,266 @@
+/*=============================
+A choice fit for those who fancy themselves as sharpshooters, this bustergun
+fires magnum rounds that pack a far greater punch than the standard buster gun,
+and with it's quick action technology, it can fire as quickly as you can pull 
+the trigger!
+
+it only has room for 6 bullets however, but they can be inserted one at a time.
+this can be a blessing or a curse.
+*///===========================
+
+actor Gunslinger : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 6
+Weapon.SlotNumber 1
+Weapon.SelectionOrder 1
+scale 2.0
+Obituary "$OB_Gunslinger"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "GunslingerClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BUST B 0 
+RedReady:
+"####" B 1 A_WeaponReady
+"####" B 0 A_Jumpifinventory("Reload_Trigger",1,"Reload")
+"####" B 0 A_Jumpifinventory("GunslingerClip",1,"Ready")
+Goto Reload
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_Jumpifinventory("Unsteady1",1,"Fire1")
+"####" B 0 A_PlaySoundEx("weapon/Revolver2","Weapon") //weapon/mbuster
+"####" B 0 A_PlaySoundEx("weapon/Revolver3","SoundSlot6")//weapon/mbuster
+"####" B 0 A_GiveInventory("GunslingerShooter")
+"####" B 0 A_GiveInventory("Unsteady1")
+"####" CD 1 A_WeaponReady(WRF_NOPRIMARY)
+Goto Hold
+Fire1:
+"####" B 0 A_PlaySoundEx("weapon/Revolver2","Weapon") //weapon/mbuster
+//"####" B 0 A_PlaySoundEx("weapon/Revolver3","SoundSlot6")//weapon/mbuster
+"####" B 0 A_GiveInventory("GunslingerShooter2")
+"####" B 0 A_GiveInventory("Unsteady1")
+"####" CD 1 A_WeaponReady(WRF_NOPRIMARY)
+Goto Hold
+Hold:
+"####" B 1 
+"####" C 0 A_REfire
+"####" B 0 A_Jumpifinventory("GunslingerClip",1,"Ready")
+goto Reload
+NoAmmo:
+"####" B 1
+"####" B 0 A_Jumpifinventory("GunslingerClip",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 0 A_Jumpifinventory("GunslingerClip",4,"ReloadLoop")
+Goto ForceLoad
+ReloadLoop:
+"####" B 13 A_WeaponReady(WRF_NOBOB)
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 0 A_PlaySoundEx("misc/fakereloadshort","Weapon")
+"####" B 0 A_Giveinventory("GunslingerClip",1)
+"####" B 0 A_Jumpifinventory("GunslingerClip",6,"ReloadEnd")
+Goto ReloadLoop
+
+ForceLoad:
+"####" B 13 
+"####" B 0 A_TakeInventory("Reload_Trigger",999)
+"####" B 0 A_PlaySoundEx("misc/fakereloadshort","Weapon")
+"####" B 0 A_Giveinventory("GunslingerClip",1)
+"####" B 0 A_Jumpifinventory("GunslingerClip",6,"ReloadEnd")
+"####" B 0 A_Jumpifinventory("GunslingerClip",4,"ReloadLoop")
+Goto ForceLoad
+ReloadEnd:
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor GunslingerClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 6
++INVENTORY.IGNORESKILL
+}
+
+Actor Unsteady1 : Powerup {inventory.amount 1 Powerup.duration 7}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor GunslingerShot : fastProjectileBase
+{
+Speed 10
+Damage (10 + ACS_ExecuteWithResult(DamageRate,15,350,20))
+radius 3
+
+MissileHeight 16
+height 3
+scale 2.2
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0  //A_Changevelocity(0,random(-4,4),random(-4,4),CVF_RELATIVE)
+TNT1 A 0 
+TNT1 AA 1 ACS_ExecuteAlways(TargPitch,0)
+TNT1 A 0 A_scalevelocity(15.5)
+//Goto Spawn2+5
+Spawn2:
+//TNT1 A 0 A_SetUserVar("User_TP",10*User_TrailCount)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(10+70),0,(sin(pitch)*(10+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(20+70),0,(sin(pitch)*(20+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(30+70),0,(sin(pitch)*(30+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(40+70),0,(sin(pitch)*(40+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(50+70),0,(sin(pitch)*(50+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(60+70),0,(sin(pitch)*(60+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(70+70),0,(sin(pitch)*(70+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(80+70),0,(sin(pitch)*(80+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(90+70),0,(sin(pitch)*(90+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_SpawnItemEx("GunslingerTrail",cos(pitch)*-(100+70),0,(sin(pitch)*(100+70)),momX,MomY,MomZ,0,SXF_TRANSFERPITCH|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERTRANSLATION)
+//TNT1 A 0 A_SetUserVar("User_TrailCount",User_TrailCount+1)
+//TNT1 A 0 A_Jumpif(User_TrailCount >= 15,1)
+//loop
+//TNT1 A 0 
+MBUL B 1 //A_SetUserVar("User_TrailCount",1)
+Goto Spawn2
+Death:
+TNT1 A 1 A_Spawnitemex("GunslingerPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+	actor GunslingerShot_BLUE : GunslingerShot
+	{//MissileType "GunslingerTrail"
+	}
+
+	actor GunslingerShot_RED : GunslingerShot
+	{//MissileType "GunslingerTrail_RED"
+	translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"
+	}
+	
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor GunslingerPuff1 : FXActor_A
+{
+scale 2
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_PlaySound("weapon/mirrordeflect")
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor GunslingerTrail : FXActor_A
+{
+scale 1.8
+Alpha 0.2
+States
+{
+Spawn:
+CRBM A 0
+BASB U 2
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor GunslingerTrail_RED : GunslingerTrail
+{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170", "199:199=47:47", "241:241=191:191"}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor GunslingerShooter : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("GunslingerShot",0,1,4,4)
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("GunslingerShot_RED",0,1,4,4)
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("GunslingerShot_BLUE",0,1,4,4)
+TNT1 A 1
+stop
+}
+}
+
+Const float unSpd = 4.2;
+
+actor GunslingerShooter2 : CustomInventory 
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 1 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 1 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 1 A_FireCustomMissile("GunslingerShot",Frandom(-unSpd,unSpd),1,4,4,0,Frandom(-unSpd,unSpd))
+stop
+TeamRedFire:
+BUST B 1 A_FireCustomMissile("GunslingerShot_RED",Frandom(-unSpd,unSpd),1,4,4,0,Frandom(-unSpd,unSpd))
+TNT1 A 1
+stop
+TeamBlueFire:
+BUST B 1 A_FireCustomMissile("GunslingerShot_BLUE",Frandom(-unSpd,unSpd),1,4,4,0,Frandom(-unSpd,unSpd))
+TNT1 A 1
+stop
+}
+}

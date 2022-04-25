@@ -1,0 +1,287 @@
+Actor FireI_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireI_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireI_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireI_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FireII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FireIII_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireIII_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireIII_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireIII_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FireV_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireV_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireV_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireV_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+Actor FireX_User1 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireX_User2 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireX_User3 : inventory {inventory.amount 1 inventory.maxamount 2}
+Actor FireX_User4 : inventory {inventory.amount 1 inventory.maxamount 2}
+
+actor PKFireProtection : PowerProtection //for blastjumps
+{
+inventory.amount 1
+powerup.duration 5
+Damagefactor "PKFire", 0.45
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles|--------------------------------
+//[+]========================================================================[+]
+actor PKFireBallI : ProjectileBase
+{
+Speed 80
+Damage (10)
+radius 16
+Reactiontime 60
+Obituary "$OB_HOTSHOT"
+Damagetype "PKFire"
+height 16
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+HTST A 1
+Spawn2:
+TNT1 AA 1 A_Spawnitemex("HotShotGraphic",0,0,0,velX,vely,velz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_Countdown
+TNT1 A 0 A_Spawnitemex("HotShotTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+loop
+Death:
+AMIS A 0 A_CheckFloor("JumpCheck")
+TNT1 A 0 A_SpawnItemEx("FireIExplosion")
+stop
+Crash:
+TNT1 A 0 A_SpawnItemEx("FireIExplosion")
+stop
+XDeath:
+TNT1 A 0 A_SpawnItemEx("FireIFakeExplosion")
+stop
+JumpCheck:
+TNT1 A 0 A_Jumpifcloser(185,"blastjump")
+TNT1 A 0 A_SpawnItemEx("FireIExplosion")
+TNT1 A 0 A_SpawnItemEx("FireIThrustSource",0,0,-10)
+stop
+//---
+blastjump:
+MINB A 0 A_SpawnItemEx("FireIThrustSource",0,0,-10)
+TNT1 A 0 A_GiveToTarget("PKFireProtection")
+TNT1 A 5 A_SpawnItemEx("FireIExplosion")
+stop
+}
+}
+
+	// [+++]=============================[+++]
+    actor FireIThrustSource : ExplosionBase //now just the FX due to desynch
+    {
+    States
+    {
+    Spawn:
+    MINB A 0 
+    NAPC D 0 //A_Explode(35, 350, 1,0,36)
+    MINB A 0 ACS_NamedExecuteAlways("BLASTKNOCKBACK",0,-90,50,160)
+    TNT1 AA 1 
+    stop
+    }
+    }
+        
+    actor FireIExplosion : ExplosionBase
+    {
+    Damagetype "PKFire"
+    States
+    {
+    Spawn:
+    NAPC A 0 
+    NAPC D 0 A_Explode(15, 96, 1,0,56)
+    NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+    ASEX ABCDEF 1 
+    stop
+    }
+    }
+    
+    actor FireIFakeExplosion : ExplosionBase
+    {
+    States
+    {
+    Spawn:
+    NAPC A 0 
+    NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+    ASEX ABCDEF 1 
+    stop
+    }
+    }
+
+
+actor PKFireBallII : PKFireBallI
+{
+Speed 55
+Damage (25)
+radius 16
+States
+{
+Spawn:
+TNT1 A 0 
+HTST A 1
+Spawn2:
+TNT1 AA 1 A_Spawnitemex("HotShotGraphic",0,0,0,velX,vely,velz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_Countdown
+TNT1 A 0 A_Spawnitemex("HotShotTrail",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+loop
+Death:
+AMIS A 0 A_CheckFloor("JumpCheck")
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+stop
+Crash:
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+stop
+XDeath:
+TNT1 A 0 A_SpawnItemEx("FireIIFakeExplosion")
+stop
+JumpCheck:
+TNT1 A 0 A_Jumpifcloser(185,"blastjump")
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+TNT1 A 0 A_SpawnItemEx("FireIIThrustSource",0,0,-10)
+stop
+//---
+blastjump:
+MINB A 0 A_SpawnItemEx("FireIIThrustSource",0,0,-10)
+TNT1 A 0 A_GiveToTarget("BlastProtection")
+TNT1 A 5 A_SpawnItemEx("FireIIExplosion")
+stop
+}
+}
+
+	// [+++]=============================[+++]
+    actor FireIIThrustSource : ExplosionBase //now just the FX due to desynch
+    {
+    States
+    {
+    Spawn:
+    MINB A 0 
+    NAPC D 0 //A_Explode(35, 350, 1,0,36)
+    MINB A 0 ACS_NamedExecuteAlways("BLASTKNOCKBACK",0,90,50,200)
+    TNT1 AA 1 
+    stop
+    }
+    }
+        
+    actor FireIIExplosion : ExplosionBase
+    {
+    Damagetype "PKFire"
+    States
+    {
+    Spawn:
+    NAPC A 0 
+    NAPC D 0 A_Explode(30, 164, 1,0,56)
+    NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+    ASEX ABCDEF 1 
+    stop
+    }
+    }
+    
+    actor FireIIFakeExplosion : ExplosionBase
+    {
+    States
+    {
+    Spawn:
+    NAPC A 0 
+    NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+    ASEX ABCDEF 1 
+    stop
+    }
+    }
+
+actor PKFireBallIII : PKFireBallI
+{
+Speed 35
+Damage (1)
+radius 16
+Scale 4.0
+States
+{
+Spawn:
+TNT1 A 0 
+FIRE D 1
+TNT1 A 0 A_ChangeFlag("NOGRAVITY",false)
+Spawn2:
+FIRE D 1 
+TNT1 A 0 A_Countdown
+loop
+Death:
+AMIS A 0 A_CheckFloor("JumpCheck")
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+stop
+Crash:
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+stop
+XDeath:
+TNT1 A 0 A_SpawnItemEx("FireIIFakeExplosion")
+stop
+JumpCheck:
+TNT1 A 0 A_Jumpifcloser(185,"blastjump")
+TNT1 A 0 A_SpawnItemEx("FireIIExplosion")
+TNT1 A 0 A_SpawnItemEx("FireIIIThrustSource",0,0,-10)
+TNT1 A 0 A_Jumpif(z-floorz < 100, "FireField")
+stop
+//---
+blastjump:
+MINB A 0 A_SpawnItemEx("FireIIIThrustSource",0,0,-10)
+TNT1 A 0 A_GiveToTarget("BlastProtection")
+TNT1 A 5 A_SpawnItemEx("FireIIExplosion")
+TNT1 A 0 A_Jumpif(z-floorz < 100, "FireField")
+stop
+
+FireField:
+TNT1 A 0 A_SpawnItemEx("FireIII_FireField")
+stop
+}
+}
+
+
+actor FireIIIExplosion : ExplosionBase
+{
+Damagetype "PKFire"
+States
+{
+Spawn:
+NAPC A 0 
+NAPC D 0 A_Explode(30, 164, 1,0,56)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+ASEX ABCDEF 1 
+stop
+}
+}
+
+actor FireIIIThrustSource : ExplosionBase //now just the FX due to desynch
+{
+States
+{
+Spawn:
+MINB A 0 
+NAPC D 0 //A_Explode(35, 350, 1,0,36)
+MINB A 0 ACS_NamedExecuteAlways("BLASTKNOCKBACK",0,-70,50,200)
+TNT1 AA 1 
+stop
+}
+}
+
+actor FireIII_FireField : ExplosionBase
+{
+Damagetype "PKFire"
+ReactionTime 21
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 AAAAA 1 A_SpawnItemEx("HeatSprayFx",random(0,164),0,random(1,5),0,0,4,random(1,360),SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION) 
+TNT1 A 0 A_Explode(5, 164, 0,0,164)
+TNT1 A 0 A_PlaySoundEx("weapon/WaveBurner", "Weapon")
+TNT1 A 0 A_CountDown
+loop
+}
+}

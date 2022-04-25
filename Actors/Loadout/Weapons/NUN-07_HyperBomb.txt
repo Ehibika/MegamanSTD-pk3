@@ -1,0 +1,222 @@
+/*=============================
+This glowing entity is quite attractive, given it's ability to heal thoses around
+it, the Heal flare is a rather flexible utility in the medic's arsenal, launching
+a long ranged flare that heals around itself, and upon landing creates a stationary
+healing source for the whole team, including the medic themself!
+
+*///===========================
+Actor HyperBombFlag : inventory {inventory.amount 1 inventory.maxamount 2}
+
+actor N_HyperBomb 
+{
+//translation "244:244=230:230", "75:75=229:229", "74:74=228:228", "205:205=160:160", "196:196=214:214"
+
+PROJECTILE
+damagetype "Explosion"
+obituary "$OB_EXOPLOSIVE"
+radius 4
+height 4
+scale 2.0
+//-NOGRAVITY
++DOOMBOuNCE
++BOUNCEONCEILINGS
++ALLOWBOUNCEONACTORS
++BOUNCEONACTORS
++MTHRUSPECIES
++USEBOUNCESTATE
++NOTARGETSWITCH
++NOEXPLODEFLOOR
++SLIDESONWALLS
++MBFBOUNCER
+speed 55
+gravity 2.2
+Damage (0)
+wallbouncefactor 0.6
+BounceFactor 0.3
+reactiontime 25
+States
+{
+Spawn:
+BOMB S 0
+BOMB SSS 1 A_SpawnItemEX("N_HyperBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+MINB A 0 A_ChangeFlag("NOGRAVITY",false)
+MINB A 0 
+BOMB SSS 1 A_SpawnItemEX("N_HyperBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+BOMB S 0 A_ScaleVelocity(0.75)
+Goto Spawn+5
+
+Bounce.Floor:
+Bounce.Ceiling:
+MINB A 0 A_ChangeFlag("NOGRAVITY",false)
+MINB A 0 A_ChangeFlag("USEBOUNCESTATE",false)
+BOMB S 1 A_SpawnItemEX("N_HyperBomb2",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPOINTERS,0)
+stop
+
+Death:
+MINB A 0 A_SpawnItemEx("N_HyperBombExplosion")
+stop
+Crash:
+MINB A 0 A_SpawnItemEx("N_HyperBombExplosion")
+stop
+XDeath:
+HARD BCDE 1 A_Stop
+stop
+}
+}
+
+	actor N_HyperBomb_BLUE : N_HyperBomb{translation "244:244=244:244", "75:75=75:75", "74:74=74:74", "205:205=205:205", "196:196=196:196"}
+	actor N_HyperBomb_RED : N_HyperBomb{translation "192:192=54:54", "244:244=191:191", "75:75=43:43", "74:74=179:179", "205:205=174:174", "196:196=170:170", "198:198=42:42" }
+
+actor N_HyperBomb2 : N_HyperBomb
+{
+-USEBOUNCESTATE
+-NOGRAVITY
+States
+{
+Spawn:
+BOMB S 0
+BOMB S 0 A_PlaySoundEX("weapon/BombAlarm","Soundslot6")
+Spawn2:
+BOMB SS 1 A_CountDown
+BOMB S 0 A_ScaleVelocity(0.9)
+BOMB SS 1 A_CountDown
+BOMB S 0 A_ScaleVelocity(0.9)
+BOMB S 0 A_CheckFloor("SlowDown")
+loop
+SlowDown:
+BOMB S 0 A_ScaleVelocity(0.3)
+Goto Spawn2
+	
+Death:
+MINB A 0 A_SpawnItemEx("N_HyperBombExplosion",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPOINTERS)
+stop
+Crash:
+MINB A 0 A_SpawnItemEx("N_HyperBombExplosion",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEMOMENTUM|SXF_TRANSFERPOINTERS)
+stop
+XDeath:
+MINB A 0 //A_SpawnItemEx("N_HyperBombFakeExplosion")
+stop
+}
+}
+
+
+actor N_HyperBombExplosion : ExplosionBase
+{
+States
+{
+Spawn:
+NAPC A 0 
+NAPC D 0 A_Explode(75, 168, 1,0,80)
+NAPC D 0 A_Explode(50, 168, 1,0,168)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+NAPC A 0 A_Quake(30,12,0,550)
+ASEX ABCDEF 1 
+stop
+}
+}
+/*
+actor N_HyperBombFakeExplosion : ExplosionBase
+{
+States
+{
+Spawn:
+NAPC A 0 
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+ASEX ABCDEF 1 
+stop
+}
+}
+*/
+
+
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor N_HyperBombTrail : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor HyperBombCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("HyperBombCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("HyperBombCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor HyperBombCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("HyperBombCooldownItem",280)
+TNT1 A 0 A_Spawnitemex("HyperBombCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor HyperBombCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 280
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor HyperBombShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("N_HyperBomb",0,1,4,12)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("N_HyperBomb_RED",0,1,4,12)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("N_HyperBomb_BLUE",0,1,4,12)
+TNT1 A 0
+stop
+}
+}

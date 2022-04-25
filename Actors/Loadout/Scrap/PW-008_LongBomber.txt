@@ -1,0 +1,223 @@
+/*=============================
+As the local explosive expert, life is great, you get to cover the enemy field
+with pipe grenades and watch as they seem to pay no mind to the explosives 
+untill it is much to late. but sometimes you're in those situations where your
+explosives just can't go the distance.
+
+Enter the longbomber. this lighter alternative to the grenade launcher fires
+smaller and more aerodynamic rounds, it's clip size is shorter but that's a
+small price to pay to be able to deal explosive damage from across the map.
+the fuse time was also increased slightly so it will reach it's destination.
+
+Be warned though, reports indicate that the longbomb's rounds are a bit bouncier
+than the regular grenade launcher's rounds.
+
+*///===========================
+
+actor LongBomber : WepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoUse2 0
+Weapon.AmmoGive 2
+Weapon.SlotNumber 1
+Weapon.SelectionOrder 1
+scale 2.0
+Obituary "$OB_LONGBOMBER"
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "LongBombClip"
+weapon.ammotype2 "LongBombClip"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUSR B 0 A_Jumpifinventory("WilyTeamFlag",1,"RedReady")
+BUST B 0 
+RedReady:
+"####" B 16 A_WeaponReady
+"####" B 0 A_jumpifinventory("LongBombClip",2,"Ready")
+Goto Reload
+"####" A 0 A_PlaySound("weapon/rminestick")
+"####" B 0 A_GiveInventory("LongBombClip")
+Goto Ready
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" C 3 Offset(0,32)
+"####" B 0 A_Giveinventory("BlastProtection")
+"####" B 0 A_PlaySoundEx("weapon/GrenadeLauncher","Weapon")
+"####" B 0 A_Giveinventory("LongBombShooter")
+"####" CD 6
+"####" B 10
+"####" B 0 A_Refire
+goto Ready
+
+NoAmmo:
+"####" B 1
+"####" B 0 A_jumpifinventory("LongBombClip",1,"Ready")
+"####" B 16
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+ReloadLoop:
+"####" B 0 A_PlaySound("weapon/rminestick")
+"####" B 0 A_GiveInventory("LongBombClip")
+"####" B 0 A_jumpifinventory("LongBombClip",2,"ReloadEnd")
+"####" B 9 A_WeaponReady(WRF_NOSWITCH|WRF_NOBOB)
+Goto ReloadLoop
+ReloadEnd:
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 1 A_Refire("Fire")
+Goto Ready
+Flash:
+TNT1 A 1
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor LongBombClip : Ammo
+{
+inventory.amount 1
+inventory.maxamount 2
++INVENTORY.IGNORESKILL
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+actor LongBombProjectile 
+{
+PROJECTILE
+damagetype "Explosion"
+radius 11
+height 20
+scale 1.6
+-NOGRAVITY
+//+CANBOUNCEWATER
+//+DOOMBOuNCE
+//+NOEXPLODEFLOOR
++MTHRUSPECIES
+//-ALLOWBOUNCEONACTORS
+speed 30
+gravity 0.6
+bouncefactor 0.9
+seesound "weapon/megaball"
+Damage (5 +  ACS_ExecuteWithResult(DamageRate,20,400,60))
+wallbouncefactor 0.95
+reactiontime 75
+States
+{
+Spawn:
+NAPC A 0
+NAPC A 0 ThrustThingZ(0, 25, 0, 1)
+NAPC A 0 
+NAPC A 0 A_ChangeFlag("THRUACTORS",0)
+NAPC A 1 A_CountDown
+NAPC A 1 A_SpawnItemEX("LongBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC A 0 A_Checkfloor("Slowdown")
+
+NAPC B 1 A_CountDown
+NAPC B 1 A_SpawnItemEX("LongBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC B 0 A_Checkfloor("Slowdown")
+
+NAPC C 1 A_CountDown
+NAPC C 1 A_SpawnItemEX("LongBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC C 0 A_Checkfloor("Slowdown")
+
+NAPC D 1 A_CountDown
+NAPC D 1 A_SpawnItemEX("LongBombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+NAPC D 0 A_Checkfloor("Slowdown")
+Goto Spawn+2
+Slowdown:
+NAPC A 0 A_ChangeFlag("THRUACTORS",1)
+NAPC A 1 A_ScaleVelocity(0.6)
+NAPC A 1 A_CountDown
+NAPC A 0 A_Checkfloor("Slowdown")
+Goto Spawn+2
+Crash:
+Death:
+NAPC AA 1 A_Stop
+TNT1 A 0 A_Changeflag("DOOMBOuNCE",false)
+NAPC D 0 A_Explode(20, 200, 1,0,50)
+TNT1 A 0 A_SpawnItemEx("GrenadeExplosion")
+AMIS A 0 A_Jumpifcloser(140,"blastjump")
+stop
+//---
+blastjump:
+AMIS A 0 //A_GiveToTarget("BlastJumperItem")
+AMIS A 0 //A_GiveToTarget("BlastJumperItem2")
+stop
+}
+}
+
+	actor LongBombProjectile_BLUE : LongBombProjectile{}
+	actor LongBombProjectile_RED : LongBombProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
+
+//[+]========================================================================[+]
+//--------------------------------|Special Actors|------------------------------
+//[+]========================================================================[+]
+actor LongBombTrail : FXActor_A
+{
+scale 0.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Item Shooters|------------------------------
+//[+]========================================================================[+]
+actor LongBombShooter : CustomInventory  //places a buster posie based on the team.
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
+BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
+BUST B 0 A_FireCustomMissile("LongBombProjectile",0,1,4,2)
+stop
+TeamRedFire:
+BUST B 0 A_FireCustomMissile("LongBombProjectile_RED",0,1,4,2)
+TNT1 A 0
+stop
+TeamBlueFire:
+BUST B 0 A_FireCustomMissile("LongBombProjectile_BLUE",0,1,4,2)
+TNT1 A 0
+stop
+}
+}

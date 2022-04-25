@@ -1,0 +1,82 @@
+
+#include "Actors/SourceActors.txt"
+#include "Actors/Nullifiers/ReplacingStuff.txt"
+
+#include "actors/Classes/ClassBase/classbase0.txt"
+#include "actors/Classes/ClassBase/classbase1.txt"
+#include "actors/Classes/ClassBase/classbase2.txt"
+#include "actors/Classes/ClassBase/classbase.txt"
+#include "actors/Classes/ClassBase/classbaseTID.txt"
+#include "actors/Classes/ClassBase/classbase-flags.txt"
+
+#include "Actors/Classes/NeumodianClass.txt"
+
+//Loadout
+#include "Actors/Loadout/ConstList.txt"
+
+//#include "Actors/Loadout/WeaponBase/MasterBase.txt"
+#include "Actors/Loadout/WeaponBase/WeaponBase0.txt"
+#include "Actors/Loadout/WeaponBase/WeaponBase1.txt"
+#include "Actors/Loadout/WeaponBase/WeaponBase2.txt"
+#include "Actors/Loadout/WeaponBase/WeaponBase.txt"
+
+#include "Actors/Loadout/Weapons/NWN-01_Blaster.txt"
+#include "Actors/Loadout/Weapons/NWN-02_HiPEgun.txt"
+#include "Actors/Loadout/Weapons/NWN-03_HiPERBeam.txt"
+#include "Actors/Loadout/Weapons/NWN-04_SLAMCannon.txt"
+#include "Actors/Loadout/Weapons/NWN-05_MediCarbine.txt"
+#include "Actors/Loadout/Weapons/NWN-06_Crossbow.txt"
+#include "Actors/Loadout/Weapons/NWN-07_FlameTongue.txt"
+#include "Actors/Loadout/Weapons/NWN-08_VoltSpear.txt"
+#include "Actors/Loadout/Weapons/NWN-09_TAGMissile.txt"
+#include "Actors/Loadout/Weapons/NWN-10_Basher.txt"
+
+
+#include "Actors/Loadout/Weapons/NSN-01_BusterGun.txt"
+#include "Actors/Loadout/Weapons/NSN-02_Blitzer.txt"
+#include "Actors/Loadout/Weapons/NSN-03_Repidifier.txt"
+#include "Actors/Loadout/Weapons/NSN-04_ThriceGun.txt"
+#include "Actors/Loadout/Weapons/NSN-05_MendingTool.txt"
+#include "Actors/Loadout/Weapons/NSN-06_Subwich.txt"
+#include "Actors/Loadout/Weapons/NSN-07_PointBuster.txt"
+#include "Actors/Loadout/Weapons/NSN-08_Crisperizer.txt"
+#include "Actors/Loadout/Weapons/NSN-09_HotShot.txt"
+#include "Actors/Loadout/Weapons/NSN-10_Stinger.txt"
+#include "Actors/Loadout/Weapons/NSN-11_MineLauncher.txt"
+#include "Actors/Loadout/Weapons/NSN-12_Protector.txt"
+
+#include "Actors/Loadout/Weapons/NUN-01_Minibomb.txt"
+#include "Actors/Loadout/Weapons/NUN-02_TopGrenade.txt"
+#include "Actors/Loadout/Weapons/NUN-03_LightScreen.txt"
+#include "Actors/Loadout/Weapons/NUN-04_PowerDart.txt"
+#include "Actors/Loadout/Weapons/NUN-05_Grapplinghook.txt"
+#include "Actors/Loadout/Weapons/NUN-06_HealFlare.txt"
+#include "Actors/Loadout/Weapons/NUN-07_HyperBomb.txt"
+
+#include "Actors/Loadout/Weapons/NGN-01_BoosterPack.txt"
+#include "Actors/Loadout/Weapons/NGN-02_HealthGenerator.txt"
+#include "Actors/Loadout/Weapons/NGN-03_RotaryShell.txt"
+#include "Actors/Loadout/Weapons/NGN-04_BuddySentry.txt"
+#include "Actors/Loadout/Weapons/NGN-05_MannTurret.txt"
+#include "Actors/Loadout/Weapons/NGN-06_Barrier.txt"
+#include "Actors/Loadout/Weapons/NGN-07_CounterQuill.txt"
+
+#include "Actors/Loadout/Psionics/PKFire.txt"
+#include "Actors/Loadout/Psionics/PKFreeze.txt"
+#include "Actors/Loadout/Psionics/PKThunder.txt"
+#include "Actors/Loadout/Psionics/PKLifeUp.txt"
+
+//inventories
+
+#include "Actors/inventory/TinyBar.txt"
+#include "Actors/inventory/Giverpackage.txt"
+#include "Actors/inventory/InputTriggers.txt"
+#include "Actors/inventory/ItemGiver.txt"
+#include "Actors/inventory/KeyItems.txt"
+#include "Actors/inventory/PlayerIcons.txt"
+
+//misc
+
+//#include "Actors/Loadout/SpecialEffects.txt"
+#include "Actors/ScriptActors/DaDi_Content.txt"
+//#include "Actors/ScriptActors/Respawn_Content.txt"
