@@ -231,3 +231,118 @@ while (GetActorProperty(0, APROP_HEALTH) > 0 && CheckInventory("BAWS")==0)
 }
 */
 
+
+
+script "UseClassAbility" (int AbilityNum)
+{
+Str ClassName,Command;
+
+ClassName = GetActorClass(0);
+
+Command = StrParam(s:"UseAbility",i:AbilityNum,s:"_",s:ClassName);
+
+//log(s:Command);
+UseInventory(Command);
+}
+
+
+script "RunClassAbility" (int AbilityNum)
+{
+	str CurrentWeapon = GetWeapon();
+	Str ClassName = GetActorClass(0);
+	Str AbilityWep = StrParam(s:"Ability",i:AbilityNum,s:"_",s:ClassName);
+	Bool AbilitySwap;
+	//log(s:"Start Ability");
+	
+	/*
+	First we check for the AbilityActiveFlag, this indicates if the player is actively
+	using an ability. the script will run in two differend ways depending on if this
+	is a new ability initiation, or an ability swap
+	*/
+	if(!CheckInventory("AbilityActiveFlag")) //New Ability Initiation
+	{
+	GiveInventory("AbilityActiveFlag",1);
+	GiveInventory(AbilityWep,1);
+	SetWeapon(AbilityWep);
+	}
+	else //Ability Swap
+	{
+	Str PastAbilityWep = isCurrentWepAbility(ClassName);
+	GiveInventory(AbilityWep,1);
+	until(CheckWeapon(AbilityWep)) 
+		{
+		SetWeapon(AbilityWep); 
+		delay(1);
+		//TakeInventory(PastAbilityWep,1);
+		AbilitySwap = true;
+		GiveInventory("AbilitySwapFlag",1);
+		}
+	}
+	
+	/*
+	Now for the body of the script
+	*/
+	
+	if(AbilitySwap)
+		{
+		//log(s:"Waiting for past ability");
+		While(CheckInventory("AbilitySwapFlag")) delay(1);
+		//log(s:"Waiting Complete");
+		if(!CheckInventory("AbilityActiveFlag")){GiveInventory("AbilityActiveFlag",1);}
+		}
+
+	While(CheckWeapon(CurrentWeapon)&&CheckInventory("AbilityActiveFlag")) delay(1);
+	//log(s:"Ability Is Active");
+	if(CheckWeapon(AbilityWep)) 
+		{ //log(s:"Ability Confirmed");
+		while(CheckInventory("AbilityActiveFlag")&&!CheckInventory("AbilitySwapFlag")) {delay(1);}
+		if(CheckWeapon(AbilityWep)) {SetWeapon(CurrentWeapon);}
+		}
+	if(!CheckInventory("AbilitySwapFlag")){TakeInventory("AbilityActiveFlag",1);}
+	TakeInventory("AbilitySwapFlag",1);
+	TakeInventory(AbilityWep,1);
+	//log(s:"Ability Is Over");
+	
+}
+
+function Str isCurrentWepAbility (int ClassName)
+{
+str Output = "NO";
+Str ClassAbility;
+str CurrentAbility = GetWeapon();
+For(int i=1;i<=3;i++)
+	{
+	ClassAbility = StrParam(s:"Ability",i:i,s:"_",s:ClassName);
+	if(CurrentAbility == ClassAbility)
+		{
+		Output = ClassAbility;
+		}
+	}
+return Output;
+}
+
+Script "CSLT_CheckAbilityInput" (int InputType)
+{
+int Output;
+Switch(InputType)
+	{
+	Case 1: Output = (PressingButton(BT_USER1)); /*|| PressingButton(BT_RELOAD));*/ Break;
+	Case 2: Output = (PressingButton(BT_USER2)); /*|| PressingButton(BT_ZOOM));*/ Break;
+	Case 3: Output = PressingButton(BT_USER3); Break;
+	Case 4: Output = PressingButton(BT_USER4); Break;
+	Default: Output = 0; Break;
+	}
+if(!CheckInventory("NetCheck_Freeze")){SetResultValue(Output);}
+else SetResultValue(0);
+}
+
+script "SprayerAlpha"  (int Value) CLIENTSIDE
+{ //applies different alpha for the client of sprayer particles
+    int cln = consolePlayerNumber();
+	int Owner = ACS_NamedExecuteWithResult("core_gettarget")-1000;
+    if(Owner == cln)
+    {
+        SetActorProperty(0,APROP_ALPHA,Value);
+    }
+
+}

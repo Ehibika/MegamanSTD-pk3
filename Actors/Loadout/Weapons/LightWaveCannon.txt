@@ -1,0 +1,260 @@
+actor LightWaveCannonWep : WepMasterBase
+{
+
+Tag "LightWaveCannon"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+Obituary "$OB_LightWaveCannon"
+inventory.icon "BLASI"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "LightWaveCannon_Ammo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+Var int User_Spread;
+States
+{
+Spawn:
+WEAP X 1
+stop
+
+Ready:
+Ready.Wep:
+0G_H A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+"####" A 0 A_Jumpifinventory("LightWaveCannon_Ammo",1,"Ready.Core")
+Goto Reload
+//===============
+
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+0G_H A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+//TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,LightCannon_MoveSpeed*FVM)
+0G_H A 1 A_Raise
+Loop
+
+Fire:
+0G_H B 0 A_JumpIfNoAmmo("NoAmmo")
+0G_H A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Buffer")
+0G_H A 0 A_PlaySoundEx("weapon/AutoFirework","Weapon")
+0G_H B 0 A_FireCustomMissile("LightWaveCannonShot",0,2,0,2)
+
+0G_H B 2 Offset(4,28)
+0G_H C 2 Offset(8,24)
+0G_H B 2 Offset(4,28)
+0G_H A 2 A_WeaponReady(WRF_NOPRIMARY)
+0G_H A 0 A_Giveinventory("LightWaveCannonCST",1)
+/*
+0G_H D 10 A_PlaySound("weapon/AutoReload1",4,1.0)
+0G_H D 0 A_PlaySound("weapon/AutoReload2",1,0.75)
+0G_H D 2 Offset(-6,44)
+0G_H D 2 Offset(-6,44)
+0G_H D 6 A_WeaponReady(14)
+0G_H A 8 A_PlaySound("weapon/AutoReload3",1,0.75)
+*/
+"####" A 0 A_Refire("Fire")
+Goto Ready.Wep
+
+Fire.Buffer:
+"####" A 1
+"####" A 0 A_Refire("Fire")
+Goto Ready.Wep
+
+NoAmmo:
+"####" A 1
+"####" A 0 A_Jumpifinventory("LightWaveCannon_Ammo",1,"Ready")
+Reload:
+
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 32 
+"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_Giveinventory("LightWaveCannon_Ammo",20)
+"####" A 1 A_Refire("Fire")
+Goto Ready.Wep
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor LightWaveCannonWep2 : LightWaveCannonWep
+{Weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor LightWaveCannon_Ammo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 20
+}
+
+actor LightWaveCannonCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 17
+powerup.type "ConShotTimer"
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor LightWaveCannonShot : FastProjectileBase
+{
+Speed 64
+Damage (5)
+Obituary "$OB_LIGHTCANNON"
+damagetype "LightCannon"
+renderstyle "add"
++HITTRACER
+radius 12
+Reactiontime 12
+height 12
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+MGMS A 1 A_SpawnItemEx("LightCannonTrail",-80,0,-momz,momx,momy,momz,0,9)
+TNT1 A 0 A_Countdown
+loop
+
+Death:
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_SpawnItemEx("LightCannonImpactFX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_Explode(15,96,1,0,96)
+TNT1 AAAAAAAAAAAA 1 A_SpawnItemEx("LightCannonTrailFX6", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),1)
+stop
+}
+}
+
+
+actor LightCannonTrail : ExplosionBase
+{
+Obituary "$OB_LIGHTCANNON"
+damagetype "LightCannon"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("LightCannonTrailFX1",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("LightCannonTrailFX2",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("LightCannonTrailFX3",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("LightCannonTrailFX4",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("LightCannonTrailFX5",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+
+actor LightCannonTrailFX1 : BasicClientside
+{
+scale 2.5
+renderstyle "add"
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+MGMS B 1 
+stop
+}
+}
+
+
+actor LightCannonTrailFX2 : LightCannonTrailFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+MGMS C 2 
+stop
+}
+}
+
+actor LightCannonTrailFX3 : LightCannonTrailFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+MGMS D 2 
+stop
+}
+}
+
+actor LightCannonTrailFX4 : LightCannonTrailFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+MGMS E 2 
+stop
+}
+}
+
+actor LightCannonTrailFX5 : LightCannonTrailFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+MGMS F 2 
+stop
+}
+}
+
+
+actor LightCannonTrailFX6 : BasicClientside
+{
+scale 2.5
+renderstyle "add"
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+MGMS BCDEF 2 
+stop
+}
+}
+
+actor LightCannonImpactFX : BasicClientside
+{
+renderstyle "add"
+scale 3.5
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
+MGMS GHIJKLM 1
+stop
+}
+}

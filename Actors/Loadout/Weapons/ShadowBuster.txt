@@ -1,0 +1,183 @@
+/*=============================
+
+*///===========================
+
+actor ShadowBusterWep : WepMasterBase
+{
+Tag "Shadow Buster"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 20
+
+Obituary "$OB_Blaster"
+inventory.icon "BLASI"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "ShadowBuster_Ammo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+Var int User_Spread;
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+Ready.Wep:
+BUST B 1 A_WeaponReady(WRF_ALLOWRELOAD)
+"####" B 0 A_Jumpifinventory("ShadowBuster_Ammo",1,"Ready.Core")
+Goto Reload
+
+//===============
+Deselect:
+TNT1 A 0 A_TakeInventory("NoClipBar",9)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
+"####" B 0 A_FireCustomMissile("ShadowBusterRound",0,1,4,4,0,0)
+BUST C 1
+Hold:
+"####" D 1
+"####" B 0 A_Refire
+"####" B 2
+goto Ready.Wep
+
+NoAmmo:
+"####" B 1
+//"####" B 0 A_Takeinventory("WepBloomItem",999)
+"####" B 0 A_Jumpifinventory("ShadowBuster_Ammo",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 32 
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("ShadowBuster_Ammo",20)
+"####" B 1 A_Refire("Fire")
+goto Ready.Wep
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor ShadowBusterWep2 : ShadowBusterWep
+{Weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor ShadowBuster_Ammo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 20
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor ShadowBusterRound : ProjectileBase
+{
++USEBOUNCESTATE
++BOUNCEONWALLS
+Obituary "$OB_Blaster"
+DamageType "ShadowBlade"
+Speed 64
+Damage (20)
++RIPPER
+Radius 7
+Height 7
+scale 3.5
+BounceFactor 1.0
+BounceCount 5
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+
+reactiontime 10
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+SBLA AAA 1 A_SpawnItemEx("ShadowBusterTrail_FX1",0,0,0,0,0,0,0,9)
+SBLA BBB 1 A_SpawnItemEx("ShadowBusterTrail_FX2",0,0,0,0,0,0,0,9)
+SBLA AAA 1 A_SpawnItemEx("ShadowBusterTrail_FX1",0,0,0,0,0,0,0,9)
+SBLA BBB 1 A_SpawnItemEx("ShadowBusterTrail_FX2",0,0,0,0,0,0,0,9)
+SBLA A 0 A_ScaleVelocity(-1)
+Goto Return
+Bounce.Wall:
+TNT1 A 0  A_PlaySoundEX ("item/protoreflect","Soundslot5")
+TNT1 A 0 A_Spawnitemex("ShadowBusterPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+//SBLA A 0 A_Changeflag("USEBOUNCESTATE",0)
+Return:
+SBLA AAA 1 A_SpawnItemEx("ShadowBusterTrail_FX1",0,0,0,0,0,0,0,9)
+SBLA BBB 1 A_SpawnItemEx("ShadowBusterTrail_FX2",0,0,0,0,0,0,0,9)
+SBLA AAA 1 A_SpawnItemEx("ShadowBusterTrail_FX1",0,0,0,0,0,0,0,9)
+SBLA BBB 1 A_SpawnItemEx("ShadowBusterTrail_FX2",0,0,0,0,0,0,0,9)
+Stop
+Death:
+TNT1 A 0 A_Spawnitemex("ShadowBusterPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor ShadowBusterPuff : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+
+
+
+actor ShadowBusterTrail_FX1 : FXActor_B
+{
+scale 3.0
+Alpha 0.8
+States
+{
+Spawn:
+BUST A 0
+SBLA AAA 2 A_Fadeout
+stop
+}
+}
+
+actor ShadowBusterTrail_FX2 : ShadowBusterTrail_FX1
+{
+States
+{
+Spawn:
+CRBM A 0
+SBLA BBB 2 A_Fadeout
+stop
+}
+}
+

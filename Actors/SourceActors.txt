@@ -393,3 +393,34 @@ radius 2
 height 2
 scale 2.5
 }
+
+actor BasicNotClientSide : BasicClientSide
+{
+-CLIENTSIDEONLY
+}
+
+
+Actor BasicHelper
+{
++NOINTERACTION
+-SOLID
++MISSILE
+radius 1
+height 1
++NOGRAVITY
++DONTBLAST
++DONTREFLECT
+renderstyle none
+States
+{
+Spawn:
+TNT1 A 1
+stop
+Death:
+TNT1 A 1
+stop
+}
+}
+
+Actor BasicServerSideHelper : BasicHelper
+{+SERVERSIDEONLY}

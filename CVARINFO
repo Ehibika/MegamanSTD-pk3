@@ -1,3 +1,6 @@
+server noarchive bool PKMN_SV_ProJTeamColor = true;
+user bool PKMN_CV_ProjTeamColor = true;
+
 server bool sv_nointernalrespawn = false;
 server bool sv_allowhitdecay = false;
 server int sv_Respawntimer = 5;

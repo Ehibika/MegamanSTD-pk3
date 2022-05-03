@@ -1,0 +1,193 @@
+/*=============================
+
+*///===========================
+
+actor ArrowBusterWep : WepMasterBase
+{
+Tag "Arrow Buster"
+Weapon.AmmoUse 1
+Weapon.AmmoGive 10
+
+Obituary "$OB_Blaster"
+inventory.icon "BLASI"
+scale 2.0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+weapon.ammotype "ArrowBuster_Ammo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
++WEAPON.NOAUTOFIRE
++WEAPON.NOAUTOAIM
+Var int User_Spread;
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+Ready.Wep:
+BUST B 1 A_WeaponReady(WRF_ALLOWRELOAD)
+"####" B 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready.Core")
+Goto Reload
+
+//===============
+Deselect:
+TNT1 A 0 A_TakeInventory("NoClipBar",9)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+Fire:
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
+"####" B 0 A_FireCustomMissile("ArrowBusterRound",0,1,4,4,0,0)
+BUST C 1
+Hold:
+"####" D 1
+"####" B 0 A_Refire
+"####" B 2
+goto Ready.Wep
+
+NoAmmo:
+"####" B 1
+//"####" B 0 A_Takeinventory("WepBloomItem",999)
+"####" B 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready")
+Reload:
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" B 32 
+"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_Giveinventory("ArrowBuster_Ammo",10)
+"####" B 1 A_Refire("Fire")
+goto Ready.Wep
+Flash:
+TNT1 A 5 
+stop
+NoFlash:
+TNT1 A 1
+stop
+}
+}
+
+actor ArrowBusterWep2 : ArrowBusterWep
+{Weapon.slotnumber 2}
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor ArrowBuster_Ammo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 8
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor ArrowBusterRound : fastProjectileBase
+{
+Obituary "$OB_Blaster"
+DamageType "SingleShot2"
+Speed 100
+Damage (20)
+radius 3
+
+MissileHeight 16
+height 3
+scale 1.0
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+
+reactiontime 10
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail",0,0,0,momx,momy,momz,0,9)
+Spawn3:
+TNT1 A 0 A_CountDown
+TNT1 A 1 
+Goto Spawn2
+Death:
+TNT1 A 1 A_Spawnitemex("ArrowBusterPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor ArrowBusterPuff : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+BIM1 AABCDEF 1
+stop
+}
+}
+
+actor ArrowBusterTrail : ExplosionBase
+{
+Obituary "$OB_MegaBuster"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail_FX1",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail_FX2",0,0,0,-momx*0.1,-momy*0.1,-momz*0.1,0,9)
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail_FX2",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail_FX3",0,0,0,-momx*0.3,-momy*0.3,-momz*0.3,0,9)
+TNT1 A 0 A_SpawnItemEx("ArrowBusterTrail_FX3",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+
+
+actor ArrowBusterTrail_FX1 : FXActor_B
+{
+scale 3.0
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+ARRS T 1
+stop
+}
+}
+
+actor ArrowBusterTrail_FX2 : FXActor_B
+{
+scale 3.0
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 1
+stop
+}
+}
+
+actor ArrowBusterTrail_FX3 : ArrowBusterTrail_FX2
+{scale 2.0}

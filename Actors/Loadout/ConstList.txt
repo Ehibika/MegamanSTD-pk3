@@ -1,3 +1,6 @@
+Const int FVM = 65536; //Fixed Value Multiple
+Const float FVMF = 65536.0;
+
 //====|Damage falloff range constants|====
 Const int Range1 = 275; //close quarters
 Const int Range2 = 450; // mid range
@@ -10,7 +13,7 @@ Const int HealRate2_Max = 20;
 
 //====|Primary Weapon Stats|====
 //==|Blaster|==
-const float BST_SPD = 2.3; 
+const float BST_SPD = 1.3; 
 
 //==|HiPE Gun|==
 //==|HiPER Beam|==

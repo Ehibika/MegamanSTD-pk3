@@ -280,9 +280,9 @@ ininventory WeaponHeat_C ,70 {DrawBar "CLDBAR03", "NBARE", WeaponHeat_C, Horizon
 DrawImage "ATOMI", 134, 136;
 */
 	DrawImage "HEATBASE", 11, 150;
-	DrawBar "HTBAR1", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;
-	ininventory WeaponHeat_C ,70 {DrawBar "HTBAR2", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;}
-	ininventory OverHeatFlag_C ,1 {DrawBar "HTBAR3", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;}
+	//DrawBar "HTBAR1", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;
+	//ininventory WeaponHeat_C ,70 {DrawBar "HTBAR2", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;}
+	//ininventory OverHeatFlag_C ,1 {DrawBar "HTBAR3", "NOHEATBR", WeaponHeat_C, Horizontal, 26, 150;}
 }
 
 
