@@ -424,3 +424,24 @@ stop
 
 Actor BasicServerSideHelper : BasicHelper
 {+SERVERSIDEONLY}
+
+
+actor BasicGuideDot
+{
++CLIENTSIDEONLY
++NOINTERACTION
++NOGRAVITY
+-SOLID
+radius 2
+height 2
+Scale 1.0
+Renderstyle Stencil
+StencilColor "#FBFF00"
+States
+{
+Spawn:
+BASB U 0
+BASB U 1
+stop
+}
+}

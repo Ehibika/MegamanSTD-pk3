@@ -10,9 +10,6 @@
 #include "actors/Classes/ClassBase/classbaseTID.txt"
 #include "actors/Classes/ClassBase/classbase-flags.txt"
 
-#include "Actors/Classes/NeumodianClass.txt"
-
-//Loadout
 #include "Actors/Loadout/ConstList.txt"
 
 //#include "Actors/Loadout/WeaponBase/MasterBase.txt"
@@ -21,6 +18,11 @@
 #include "Actors/Loadout/WeaponBase/WeaponBase2.txt"
 #include "Actors/Loadout/WeaponBase/WeaponBase.txt"
 
+#include "Actors/Classes/Megaman/MegamanClass.txt"
+#include "Actors/Classes/Megaman/Rushcall.txt"
+#include "Actors/Classes/Megaman/CombatSlide.txt"
+
+//Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"
 #include "Actors/Loadout/Weapons/BasicLauncher.txt"

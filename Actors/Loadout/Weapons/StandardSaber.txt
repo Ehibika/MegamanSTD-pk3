@@ -23,7 +23,8 @@ stop
 Ready:
 Ready.Wep:
 BLDH A 1 A_WeaponReady
-Goto Ready
+"####" "#" 0 A_Jump(256,"Ready.Core")
+Goto Ready.Core
 
 //===============
 Deselect:
@@ -32,6 +33,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 "####" A 1 A_Lower
 Loop
 Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Melee_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 "####" A 1 A_Raise
 Loop
@@ -135,7 +137,7 @@ actor SS_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "StandardSaberEdge"
-damage (20)
+damage (35)
 height 5
 radius 5
 Speed 25
@@ -167,7 +169,7 @@ actor SS_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "StandardSaberTip"
-damage (50)
+damage (75)
 height 5
 radius 5
 Speed 26

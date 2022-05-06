@@ -5,7 +5,6 @@ OptionMenu ZA_JoinMenu
 
 	StaticText"You are spectating."
 	StaticText""
-	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
 	StaticText""
 	StaticText""
 	StaticText""
@@ -13,12 +12,10 @@ OptionMenu ZA_JoinMenu
 	StaticText"$MNU_JOIN1"
 	StaticText""
 	StaticText""
+	StaticText"--Class--"
+	JoinMenuPlayerClassOption
 	Option "Primary", "Lo_WepA", "WepOptionsA"
 	Option "Secondary", "Lo_WepB", "WepOptionsB"
-	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
-	StaticText"--Suit--"
-	JoinMenuPlayerClassOption
-	Option "Emblem", "Lo_Emblem", "EmblemOptions"
 	Command "       Join game", "menu_joingamewithclass"
 	StaticText""
 	
@@ -38,14 +35,11 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText""
 	Command "$MNU_JOIN6", "menu_autoselect"
 	StaticText""
-	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	JoinMenuTeamOption
+	StaticText"--Class--"
+	JoinMenuPlayerClassOption
 	Option "Primary", "Lo_WepA", "WepOptionsA"
 	Option "Secondary", "Lo_WepB", "WepOptionsB"
-	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
-	StaticText"--Suit--"
-	JoinMenuPlayerClassOption
-	Option "Emblem", "Lo_Emblem", "EmblemOptions"
-	JoinMenuTeamOption
 	StaticText""
 	Command "       Join game", "menu_joingamewithclass"
 	StaticText""

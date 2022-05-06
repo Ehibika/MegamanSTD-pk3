@@ -34,6 +34,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 "####" A 1 A_Lower
 Loop
 Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Rifle_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 "####" A 1 A_Raise
 Loop
@@ -44,7 +45,7 @@ Fire:
 "####" A 0 A_FireCustomMissile("TriangleGunShot",-8+fRandom(-(TRGG_SPD),(TRGG_SPD)),0,4,4,0,fRandom(-(TRGG_SPD),(TRGG_SPD)))
 "####" A 0 A_FireCustomMissile("TriangleGunShot",8+fRandom(-(TRGG_SPD),(TRGG_SPD)),0,4,4,0,fRandom(-(TRGG_SPD),(TRGG_SPD)))
 "####" BC 1 A_WeaponReady(WRF_NOPRIMARY)
-"####" A 6 
+"####" A 5 
 "####" C 0 A_REfire
 "####" A 0 A_Takeinventory("WepBloomItem",999)
 goto Ready.Wep

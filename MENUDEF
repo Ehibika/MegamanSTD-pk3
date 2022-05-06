@@ -32,7 +32,7 @@ LISTMENU "MainMenu"
 		TextItem "Multiplayer", "m", "ZA_MultiplayerOptions" // [Lego]
 		Font "DBIGFONT", "MenuGreen" // [C]
 		TextItem "Player Setup", "p", "PlayerMenu"
-		TextItem "Loadout", "t", "LoadOutMenu" //
+		TextItem "Loadout", "t", "EditLoadOutMenu" //
 		TextItem "Database", "d", "N_DataBaseMenu" //
 		//Font "DBIGFONT", "MenuGreen" // [C]
 		//TextItem "Class Help", "h", "ReadThisMenu"

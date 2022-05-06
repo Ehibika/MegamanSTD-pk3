@@ -36,18 +36,22 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 "####" B 1 A_Lower
 Loop
 Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Buster_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 "####" B 1 A_Raise
 Loop
 Fire:
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
 "####" B 0 A_FireCustomMissile("WindPressureBusterRound",0,1,4,4,0,0)
+"####" B 0 A_Giveinventory("WindPressureCST")
+
 BUST C 1
 Hold:
 "####" D 1
+"####" B 0 A_Jumpifinventory("isBot",1,"BotRefire")
 "####" B 0 A_Refire
-"####" B 2
 goto Ready.Wep
 
 NoAmmo:
@@ -91,6 +95,13 @@ inventory.amount 1
 inventory.maxamount 40
 }
 
+actor WindPressureCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 5
+powerup.type "ConShotTimer"
+}
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -101,15 +112,13 @@ Obituary "$OB_WindPressure"
 DamageType "SingleShot2"
 Speed 128
 Damage (22)
-radius 3
-
-MissileHeight 16
-height 3
+radius 8
+height 8
 scale 1.0
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition
 
-reactiontime 6
+reactiontime 15
 States
 {
 Spawn:

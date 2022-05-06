@@ -58,6 +58,9 @@ actor NoClipBar : Inventory {inventory.amount 1 Inventory.MaxAmount 1}
 actor NoCoolBar : Inventory {inventory.amount 1 Inventory.MaxAmount 1}
 Actor MultiWep : Inventory {inventory.amount 1 Inventory.MaxAmount 1}
 
+actor AbilityActiveFlag : Once{}
+actor AbilitySwapFlag : Once{}
+
 Actor CritAble : powerprotection
 {inventory.amount 1 powerup.duration -1 Damagefactor "NORMAL", 3.0}
 

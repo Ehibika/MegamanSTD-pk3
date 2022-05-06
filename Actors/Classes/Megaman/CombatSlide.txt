@@ -1,0 +1,111 @@
+actor Ability1_STDMegaman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "HyperBomb Ability"
+weapon.ammotype2 "BusterAmmo"
+inventory.icon "CHARSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+CKIC C 0 
+"####" C 1 //A_WeaponReady
+goto Fire
+
+Fire:
+CKIC C 0 A_PlaySoundEx("weapon/chargekick","Weapon")
+"####" C 0 SetPlayerProperty(0,1,0)
+"####" BBAAAAAA 1 A_ChangeVelocity(35,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
+"####" A 0 SetPlayerProperty(0,0,0)
+"####" BC 2
+"####" B 1 A_GiveInventory("CombatSlideCooldown")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" C 1
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_STDMegaman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("CombatSlideAbility",1)
+fail
+}
+}
+
+actor CombatSlideAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CombatSlideCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+//=================
+//=================
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor CombatSlideCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("CombatSlideCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CombatSlideCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor CombatSlideCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("CombatSlideCooldownItem",85)
+TNT1 A 0 A_Spawnitemex("CombatSlideCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor CombatSlideCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 85
+}

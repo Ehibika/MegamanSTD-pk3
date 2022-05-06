@@ -1,6 +1,12 @@
 Const int FVM = 65536; //Fixed Value Multiple
 Const float FVMF = 65536.0;
 
+//====|MoveSpeedModifiers|====
+const float Buster_MSPD = 0.8;
+const float Sprayer_MSPD = 0.8;
+const float Rifle_MSPD = 0.7;
+const float Melee_MSPD = 1.0;
+const float Launcher_MSPD = 0.6;
 //====|Damage falloff range constants|====
 Const int Range1 = 275; //close quarters
 Const int Range2 = 450; // mid range

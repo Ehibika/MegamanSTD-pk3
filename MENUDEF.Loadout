@@ -4,7 +4,7 @@ OptionMenu "EditLoadOutMenu"
 {
 	Title "Loadouts"
 	
-	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
+	JoinMenuPlayerClassOption
 	StaticText ""
 	Option "Weapon A", "Lo_WepA", "WepOptionsA"
 	StaticText ""
@@ -20,13 +20,9 @@ OptionMenu "EditLoadOutMenu"
 	StaticText ""
 	StaticText ""
 	
-	Option "SubWeapon", "Lo_SubWep", "SubWepOptions"
-	StaticText ""
-		Option "Desc:", "Lo_SubWep", "SubWepDesc", "unselectable"
 	StaticText ""
 	StaticText ""
 	StaticText ""
-	JoinMenuPlayerClassOption
 	StaticText ""
 	StaticText "Remember to Bind the reload Key!"
 }
@@ -90,27 +86,27 @@ OptionValue WepOptionsA
 
 OptionValue WepOptionsB //No Primaries
 {
-0, "MilitaryBuster"
+0, "Military Buster"
 1, "Wind Pressure Buster"
 2, "Arrow Buster"
 3, "Shadow Buster"
-4, "LazerRifle"
-5, "TriangleGun"
-6, "HighSpeedRifle"
-7, "GatlingGun"
+4, "Lazer Rifle"
+5, "Triangle Gun"
+6, "HighSpeed Rifle"
+7, "Gatling Gun"
 8, "Shotgun"
 9, "GasEmitter"
-10, "CompressedSprayer"		
-11, "BurningSprayer"		
-12, "SnowySprayer"		
-13, "CrushingSprayer"		
+10, "Compressed Sprayer"		
+11, "Burning Sprayer"		
+12, "Snowy Sprayer"		
+13, "Crushing Sprayer"		
 14, "EnergyCannon"		
-15, "MegaCannon"		
-16, "LightWaveCannon"		
-17, "DrillHeadCannon"		
-18, "StandardSaber"		
-19, "BeamRapier"		
-20, "TriangularSaber"
+15, "Mega Cannon"		
+16, "LightWave Cannon"		
+17, "DrillHead Cannon"		
+18, "Standard Saber"		
+19, "Beam Rapier"		
+20, "Triangular Saber"
 }
 
 OptionValue SubWepOptions
