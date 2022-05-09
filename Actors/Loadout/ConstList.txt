@@ -160,3 +160,11 @@ const int BT_USER1 = 2097152;
 const int BT_USER2 = 4194304;
 const int BT_USER3 = 8388608;
 const int BT_USER4 = 16777216;
+//=======|RadiusGive Constants|==========
+const int RG_SELF = 1;
+const int RG_TEAM = 2;
+const int RG_ENEMY = 4;
+const int RG_LOS = 8;
+//=======|Targeting Constants|==========
+const int TG_TEAM = 1;
+const int TG_ENEMY = 2;

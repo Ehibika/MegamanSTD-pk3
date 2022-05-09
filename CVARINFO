@@ -14,8 +14,8 @@ user bool unselectable = False;
 
 //===|Weapon loadout server variables|===
 
-user noarchive int Lo_WepA = 1;
-user noarchive int Lo_WepB = 10;
+user noarchive int Lo_WepA = 0;
+user noarchive int Lo_WepB = 18;
 user noarchive int Lo_SubWep = 1;
 user noarchive int Lo_AutoPick = 0;
 user noarchive int Lo_Emblem = 0;

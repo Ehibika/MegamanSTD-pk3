@@ -1,6 +1,6 @@
 //====Constants====//
 #DEFINE MAX_PLAYERS 64
-#DEFINE BASEBLASTMIN 120
+
 
 #DEFINE CLASSWIPE 722 
 #DEFINE NEUM_ClassSetup 723 
@@ -47,8 +47,7 @@
 #DEFINE MID_WEIGHT 0.1
 #DEFINE HEAVY_WEIGHT 0.25
 //====Variables====//
-int PlayerJumpZ[64];
-int PlayerBaseSpeed[64];
+
 
 
 str TinyBarFrames[TINYBARFRAMES_MAX][1] = {

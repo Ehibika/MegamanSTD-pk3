@@ -6,11 +6,11 @@ Tag "GatlingGun"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 100
 
-Obituary "$OB_GatlingGun"
+Obituary "$OB_GATLINGGUN"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "GatlingGunClip"
+weapon.ammotype "GatlingGun_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
 +WEAPON.NOAUTOFIRE
@@ -24,7 +24,7 @@ stop
 Ready:
 Ready.Wep:
 PIDB A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" A 0 A_Jumpifinventory("GatlingGunClip",1,"Ready.Core")
+"####" A 0 A_Jumpifinventory("GatlingGun_Ammo",1,"Ready.Core")
 Goto Reload
 //===============
 Deselect:
@@ -50,7 +50,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" A 1
-"####" A 0 A_Jumpifinventory("GatlingGunClip",1,"Ready")
+"####" A 0 A_Jumpifinventory("GatlingGun_Ammo",1,"Ready")
 Reload:
 
 "####" A 1 Offset(0,32)
@@ -66,7 +66,7 @@ Reload:
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)
-"####" A 0 A_Giveinventory("GatlingGunClip",100)
+"####" A 0 A_Giveinventory("GatlingGun_Ammo",100)
 "####" A 1 A_Refire("Fire")
 Goto Ready.Wep
 Flash:
@@ -83,7 +83,7 @@ actor GatlingGunWep2 : GatlingGunWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor GatlingGunClip : Ammo
+actor GatlingGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 100
@@ -95,8 +95,8 @@ inventory.maxamount 100
 
 actor GatlingGunShot : fastProjectileBase
 {
-Obituary "$OB_GatlingGun"
-DamageType "SingleShot2"
+Obituary "$OB_GATLINGGUN"
+DamageType "GatlingGunP"
 Speed 64
 Damage (10)
 radius 3
@@ -128,8 +128,7 @@ stop
 
 actor GatlingGunTrail : ExplosionBase
 {
-Obituary "$OB_MegaBuster"
-damagetype "MegaBuster"
+Obituary "$OB_GATLINGGUN"
 States
 {
 Spawn:

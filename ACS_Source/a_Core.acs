@@ -1,5 +1,23 @@
 
+#library "A_Core"
+#include "zcommon.acs"
+#include "8bdmlib.acs"
 
+#LIBDEFINE MAX_PLAYERS 64
+#LIBDEFINE TEAM_NONE -1
+#LIBDEFINE TEAM_COOP -2
+
+#LIBDEFINE XRAYActorTID 580000
+
+#LIBDEFINE BARRIERTID 390000 // 37| Owner TID
+
+#LIBDEFINE DROPITEMTID 4540
+#LIBDEFINE ZDMETER 32 //a meter is 32 map units
+
+#LIBDEFINE BASEBLASTMIN 120
+
+int PlayerJumpZ[64];
+int PlayerBaseSpeed[64];
 
 //[+]===============|Setup Scripts|================[+]
 
@@ -8,8 +26,8 @@ script "REAPPLICATOR" RESPAWN
 {
 		//GiveInventory("InputChecker",1);
 		ACS_NamedExecuteAlways("TEAMSPECIES",0);
-		ACS_NamedExecuteAlways("NEUM_ClassSetup",0);
-		ACS_NamedExecuteAlways("IconScanner",0);
+		ACS_NamedExecuteAlways("MSTD_ClassSetup",0);
+		//ACS_NamedExecuteAlways("IconScanner",0);
 		//ACS_NamedExecuteAlways("AltTrigger",0);
 		//ACS_NamedExecuteAlways("HitHealthDecay",0);
 		
@@ -47,7 +65,7 @@ PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
 }
 
 
-
+/*
 Script "IconScanner" Enter Clientside
 {
 int SightPlayer;
@@ -70,7 +88,7 @@ while(GetActorProperty(0,APROP_HEALTH) > 0) {
 		delay(1);
 	}
 }
-
+*/
 
 
 // modification of the health based shield hit code that
@@ -152,7 +170,7 @@ script "ShieldHitCounter" (int hits, int customProtect)
 	SetPlayerProperty(0, 0, PROP_BUDDHA);
 }
 
-
+/*
 script "AltTrigger" (void)//ENTER
 {
 int InputButtons; 
@@ -321,7 +339,7 @@ For(int i=1;i<=3;i++)
 return Output;
 }
 
-Script "CSLT_CheckAbilityInput" (int InputType)
+Script "MSTD_CheckAbilityInput" (int InputType)
 {
 int Output;
 Switch(InputType)
@@ -356,4 +374,105 @@ if(Value != GetActorProperty(0,APROP_SPEED))
 	SetActorPRoperty(0,APROP_SPEED,Value);
 	}
 
+}
+
+Function bool GetMaxEntities(void)
+{
+	int ret = GetCVAR("sv_MaxClients");
+	
+	if(PlayerCount()>ret) // admins can join above the max player limit.
+	{
+		ret = PlayerCount();
+	}
+
+	int output = ret+GetCvar("Sv_MaxEntities");
+	return output;
+}
+
+
+// Returns a number below 0 as 0
+Function int NoNeg (int Numb)
+{
+Int Output;
+
+if(Numb > 0){Output = Numb;}
+else{Output = 0;}
+return Output;
+}
+
+
+//returns the relative pitch of a thing with tid2, from a thing with tid1.
+function int GetTargetPitch (int tid1, int tid2)
+{
+    int x, y, z, xy, a;
+    x = GetActorX(tid2) - GetActorX(tid1);
+    y = GetActorY(tid2) - GetActorY(tid1);
+    z = GetActorZ(tid2) - GetActorZ(tid1);
+    a = VectorAngle(x, y);
+
+    if ((a + 0.125) % 0.5 > 0.25)
+        xy = FixedDiv(y, sin(a));
+    else
+        xy = FixedDiv(x, cos(a));
+
+    return -VectorAngle(xy, z);
+}
+
+Function bool CheckActorTeam(int TID)
+{
+	if(ClassifyActor(TID) & ACTOR_PLAYER) {return GetPlayerInfo(TID-1000, PLAYERINFO_TEAM);}
+
+	if(ClassifyActor(TID) & ACTOR_MONSTER)
+		{
+			if(CheckActorInventory(TID,"LightTeamFlag")) {Return 0;}
+			if(CheckActorInventory(TID,"WilyTeamFlag")) {Return 1;}
+			if(CheckActorInventory(TID,"CossackTeamFlag")) {Return 2;}
+			if(CheckActorInventory(TID,"KingTeamFlag")) {Return 3;}
+		}
+
+		return -1;
+}
+
+
+function void adjustInventory(str item, int amount)
+{
+int currentAmount = CheckInventory(item);
+if(amount>currentAmount) {
+	GiveInventory(item,amount-currentAmount);
+} else if(amount<currentAmount) {
+	TakeInventory(item,currentAmount-amount);
+}
+}
+
+
+
+Function int CSLTButtonCheck (int NewButtons, int OldButtons, int Which)
+{
+	int ButtonNow = NewButtons & Which;
+	int ButtonOld = OldButtons & Which;
+	If(ButtonNow > ButtonOld){Return 1;}
+	If(ButtonNow < ButtonOld){Return 2;}
+	If(ButtonNow > 0 &&  ButtonOld > 0){Return 3;}
+	Return 0;
+}
+
+
+function bool PressingButton (int theButton)
+{
+return PressingButton2(GetPlayerInput(-1, INPUT_BUTTONS),theButton);
+}
+
+function bool PressingButton2 (int buttons, int theButton)
+{
+return ((buttons&theButton)>0);
+}
+
+Function int ButtonCheck (int Buttons, int OldButtons, int WhichButton)
+{
+int ButtonNow = Buttons & WhichButton;
+int ButtonOld = OldButtons & WhichButton;
+If(ButtonNow > ButtonOld){Return 1;}
+If(ButtonNow < ButtonOld){Return 2;}
+If(ButtonNow > 0 &&  ButtonOld > 0){Return 3;}
+Return 0;
 }

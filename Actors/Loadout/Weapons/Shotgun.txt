@@ -11,11 +11,11 @@ Tag "ShotGun"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 35
 
-Obituary "$OB_ShotGun"
+Obituary "$OB_SHOTGUN"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "ShotGunClip"
+weapon.ammotype "ShotGun_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
 +WEAPON.NOAUTOFIRE
@@ -29,7 +29,7 @@ stop
 Ready:
 Ready.Wep:
 PIDB A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" A 0 A_Jumpifinventory("ShotGunClip",1,"Ready.Core")
+"####" A 0 A_Jumpifinventory("ShotGun_Ammo",1,"Ready.Core")
 Goto Reload
 //===============
 Deselect:
@@ -63,7 +63,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" A 1
-"####" A 0 A_Jumpifinventory("ShotGunClip",1,"Ready")
+"####" A 0 A_Jumpifinventory("ShotGun_Ammo",1,"Ready")
 Reload:
 
 "####" A 1 Offset(0,32)
@@ -79,7 +79,7 @@ Reload:
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)
-"####" A 0 A_Giveinventory("ShotGunClip",35)
+"####" A 0 A_Giveinventory("ShotGun_Ammo",35)
 "####" A 1 A_Refire("Fire")
 Goto Ready.Wep
 Flash:
@@ -96,7 +96,7 @@ actor ShotGunWep2 : ShotGunWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor ShotGunClip : Ammo
+actor ShotGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 35
@@ -108,8 +108,8 @@ inventory.maxamount 35
 
 actor ShotGunShot : fastProjectileBase
 {
-Obituary "$OB_ShotGun"
-DamageType "SingleShot2"
+Obituary "$OB_SHOTGUN"
+DamageType "ShotgunP"
 Speed 80
 Damage (10)
 radius 3
@@ -142,8 +142,7 @@ stop
 
 actor ShotGunTrail : ExplosionBase
 {
-Obituary "$OB_MegaBuster"
-damagetype "MegaBuster"
+Obituary "$OB_SHOTGUN"
 States
 {
 Spawn:

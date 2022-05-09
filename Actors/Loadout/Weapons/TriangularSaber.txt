@@ -7,7 +7,7 @@ Tag "Triangular Saber"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 10
 
-Obituary "$OB_Blaster"
+Obituary "$OB_TRIANGULARSABER"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"

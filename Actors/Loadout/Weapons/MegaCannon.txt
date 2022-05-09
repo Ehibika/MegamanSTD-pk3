@@ -4,7 +4,7 @@ actor MegaCannonWep : WepMasterBase
 Tag "MegaCannon"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 7
-Obituary "$OB_MegaCannon"
+Obituary "$OB_MEGACANNON"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -120,8 +120,8 @@ actor MegaCannonShot : FastProjectileBase
 {
 Speed 48
 Damage (50)
-Obituary "$OB_LIGHTCANNON"
-damagetype "LightCannon"
+Obituary "$OB_MEGACANNON"
+damagetype "MegaCannon"
 radius 8
 Reactiontime 25
 height 8

@@ -4,7 +4,7 @@ actor DrillHeadCannonWep : WepMasterBase
 Tag "DrillHeadCannon"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 15
-Obituary "$OB_DrillHeadCannon"
+Obituary "$OB_DRILLHEADCANNON"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -127,7 +127,7 @@ actor DrillHeadCannonShot : FastProjectileBase
 Speed 64
 Damage (35)
 +RIPPER
-Obituary "$OB_DrillHead"
+Obituary "$OB_DRILLHEADCANNON"
 damagetype "DrillHead"
 radius 8
 Reactiontime 25

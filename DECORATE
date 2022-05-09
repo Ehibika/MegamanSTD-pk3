@@ -113,6 +113,7 @@
 #include "Actors/inventory/ItemGiver.txt"
 #include "Actors/inventory/KeyItems.txt"
 #include "Actors/inventory/PlayerIcons.txt"
+#include "Actors/inventory/Armor.txt"
 
 //misc
 

@@ -1,0 +1,19 @@
+Line 1 in file "NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs" ...
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:1: Syntax error in constant expression.
+> Script OBJECTTALLY 
+>                  ^
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:1: Script number must be between 1 and 32767.
+> Script OBJECTTALLY (int BaseNum)
+>                               ^
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:38: Syntax error in constant expression.
+> Script OBJECTDEATHTALLY 
+>                       ^
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:38: Script number must be between 1 and 32767.
+> Script OBJECTDEATHTALLY (VOID)
+>                             ^
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:60: Syntax error in constant expression.
+> Script DEPLPOYABLEDELETER 
+>                         ^
+NeumodianProject-pk3/ACS_Source/Depreciated/a_Deployable.acs:60: Script number must be between 1 and 32767.
+> Script DEPLPOYABLEDELETER (int gone)
+>                                   ^

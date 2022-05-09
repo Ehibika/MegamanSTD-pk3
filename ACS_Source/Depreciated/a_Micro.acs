@@ -653,6 +653,7 @@ Script "HitSound" (void)
 localAmbientSound("misc/metdie",127);
 }
 
+/*
 Function int AltTriggerCheck (int NumCase)
 {
 Int Output;
@@ -665,7 +666,7 @@ int Subwepnum;
 	
 Return Subwepnum;
 }
-
+*/
 Script "Neum_PPCheck" (int PPAmount)
 {
 Bool Output;

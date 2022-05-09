@@ -6,9 +6,9 @@ Tag "SnowySprayer"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 45
 scale 2.0
-Obituary "$OB_SnowySpray"
+Obituary "$OB_SNOWYSPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "SnowySprayerClip"
+weapon.ammotype "SnowySprayer_Ammo"
 inventory.icon "FTONI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
@@ -23,7 +23,7 @@ stop
 Ready:
 Ready.Wep:
 FWPR B 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" B 0 A_Jumpifinventory("SnowySprayerClip",1,"Ready.Core")
+"####" B 0 A_Jumpifinventory("SnowySprayer_Ammo",1,"Ready.Core")
 Goto Reload
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
@@ -62,7 +62,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" B 1
-"####" B 0 A_Jumpifinventory("SnowySprayerClip",1,"Ready")
+"####" B 0 A_Jumpifinventory("SnowySprayer_Ammo",1,"Ready")
 Reload:
 "####" B 1 Offset(0,32)
 "####" B 1 Offset(0,46)
@@ -77,7 +77,7 @@ Reload:
 "####" B 1 Offset(0,58)
 "####" B 1 Offset(0,46)
 "####" B 1 Offset(0,32)
-"####" B 0 A_Giveinventory("SnowySprayerClip",45)
+"####" B 0 A_Giveinventory("SnowySprayer_Ammo",45)
 "####" B 0 A_TakeInventory("Reload_Trigger",999)
 "####" B 1 A_Refire("Fire")
 Goto Ready.Wep
@@ -95,7 +95,7 @@ actor SnowySprayerWep2 : SnowySprayerWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor SnowySprayerClip : Ammo
+actor SnowySprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 45
@@ -151,7 +151,7 @@ actor SnowySprayDamager : FastProjectileBase
 {
     PROJECTILE
     damagetype "SnowySpray"
-    Obituary "$OB_SnowySpray"
+    Obituary "$OB_SNOWYSPRAYER"
     +SKYEXPLODE
     +EXPLODEONWATER
     +RIPPER

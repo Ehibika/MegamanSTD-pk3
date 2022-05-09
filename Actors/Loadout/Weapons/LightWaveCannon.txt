@@ -4,7 +4,7 @@ actor LightWaveCannonWep : WepMasterBase
 Tag "LightWaveCannon"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 20
-Obituary "$OB_LightWaveCannon"
+Obituary "$OB_LIGHTWAVECANNON"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -120,8 +120,8 @@ actor LightWaveCannonShot : FastProjectileBase
 {
 Speed 64
 Damage (5)
-Obituary "$OB_LIGHTCANNON"
-damagetype "LightCannon"
+Obituary "$OB_LIGHTWAVECANNON"
+damagetype "LightWaveCannon"
 renderstyle "add"
 +HITTRACER
 radius 12
@@ -150,8 +150,7 @@ stop
 
 actor LightCannonTrail : ExplosionBase
 {
-Obituary "$OB_LIGHTCANNON"
-damagetype "LightCannon"
+Obituary "$OB_LIGHTWAVECANNON"
 States
 {
 Spawn:

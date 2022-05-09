@@ -1,89 +1,16 @@
-#DEFINE WEAPONLIST 21
-#DEFINE SUBWEAPONLIST_MAX 7
-#DEFINE PSILIST 5
+/* -=- Loadout System -=-
+ * Code that handles the distribution of loadout elements, 
+ *
+ * 
 
-#DEFINE AUTOPICKLIST_MAX 31
+*/
+#library "A_Loadout"
+#include "zcommon.acs"
+#Import "db_Loadout.acs"
 
-#DEFINE NO_PB -1.0
-#DEFINE PB_START 0.0
-//Master Weapon List
-str MasterWepList[WEAPONLIST][6] = {
-//Weapname, Actorname,PowerBudget , Primary only, specialty , not for bots 
 
-/*0*/{"Military Buster","MilitaryBusterWep",NO_PB, "NO","----","----"},
-/*1*/{"WindPressure Buster", "WindPressureBusterWep",NO_PB, "NO","----","----"},
-/*2*/{"Arrow Buster","ArrowBusterWep",NO_PB,"NO","----","NOBOT"},
-/*3*/{"Shadow Buster", "ShadowBusterWep",NO_PB, "NO","----","----"},
-/*4*/{"Lazer Rifle","LazerRifleWep",NO_PB, "NO","----","----"},
-/*5*/{"Triangle Gun","TriangleGunWep",NO_PB, "NO","----","----"},
-/*6*/{"HighSpeed Rifle","HighSpeedRifleWep",NO_PB, "NO","----","----"},
-/*7*/{"GatlingGun","GatlingGunWep",NO_PB, "NO","----","----"},
-/*8*/{"Shotgun","ShotgunWep", NO_PB,"NO","NO","----"},
 
-/*9*/{"Gas Emitter", "GasEmitterWep",NO_PB, "NO","HEAT","----"},
-/*10*/{"Compressed Sprayer", "CompressedSprayerWep",NO_PB,"NO","----","----"},
-/*11*/{"Burning Sprayer","BurningSprayerWep",NO_PB, "NO","----","----"},
-/*12*/{"Snowy Sprayer","SnowySprayerWep",NO_PB, "NO","----","----"},
-/*13*/{"Crushing Sprayer","CrushingSprayerWep",NO_PB, "NO","----","NOBOT"},
-/*14*/{"Energy Cannon","EnergyCannonWep",NO_PB, "NO","----","NOBOT"},
-/*15*/{"Mega Cannon","MegaCannonWep",NO_PB, "NO","----","----"},
-/*16*/{"LightWave Cannon","LightWaveCannonWep",NO_PB, "NO","----","----"},
-/*17*/{"DrillHeadC annon","DrillHeadCannonWep", NO_PB, "NO","----","----"},
-/*18*/{"Standard Saber","StandardSaberWep", NO_PB, "NO","----","----"},
-/*19*/{"Beam Rapier","BeamRapierWep",NO_PB, "NO","----","NOBOT"},
-/*20*/{"Triangular Saber","TriangularSaberWep",NO_PB, "NO","----","NOBOT"},
-};
-
-//#region -=-Depreciated-=-
-str SubWeaponList[SUBWEAPONLIST_MAX][4] = {
-{"None","None",NO_PB,"----"},
-
-/*1*/{"Minibomb","MinibombFlag",10.0,"----"},
-/*2*/{"Light Screen","LightScreenFlag",15.0,"----"},
-/*3*/{"PowerDart","PowerDartFlag",25.0,"----"},
-/*4*/{"Grappling Hook","GrapplingHookFlag",15.0,"----"},
-/*5*/{"HealPatch","HealPatchFlag",20.0,"MEDICAL"},
-/*6*/{"HyperBomb","HyperBombFlag",20.0,"----"},
-};
-
-//Psionics list
-str PsionicsList[PSILIST][8] = {
-	//Psi name,	Actorname,	PowerBudget,Alpha, Beta, Gamma,  Sigma,  Omega 
-	{"None",	"NULL", 	NO_PB,		"YES","DOWN","DOWN", "DOWN", "DOWN"},
-	{"PKFire",	"Fire", 	NO_PB,		"YES","YES","YES", "UP", "YES"},
-	{"PKFreeze","Freeze", 	NO_PB,		"YES","YES","YES", "UP", "YES"},
-	{"PKThunder","Thunder", NO_PB,		"YES","YES","YES", "UP", "YES"},
-	{"PKLifeUp","LifeUp", 	NO_PB,		"YES","YES","YES", "UP", "YES"},
-};
-
-#DEFINE PLO 2 //Psi List Offset
-
-//Psionic names for error report
-str PKLevelName[1][5] = {{" Alpha(I)"," Beta(II)"," Gamma(III)"," Sigma(V)"," Omega(X)"}};
-
-//Psionics PowerBudget list
-int PsionicsPBList[PSILIST][6] = {
-/*None*/{PB_START,NO_PB,NO_PB,NO_PB,NO_PB,NO_PB},
-//each starts with 0 in element 0 since the uservar starts from 1, not 0
-
-/*Fire*/{PB_START,10.0,20.0,30.0,NO_PB,40.0},
-/*Freeze*/{PB_START,10.0,20.0,30.0,NO_PB,40.0},
-/*Thunder*/{PB_START,10.0,20.0,30.0,NO_PB,40.0},
-/*LifeUp*/{PB_START,10.0,20.0,30.0,NO_PB,40.0},
-};
-//#endregion
-
-//Generic text for error reports
-str ErrorText[5] =
-{
-" was rejected, it is a primary only weapon",
-" is set as both primary and secondary",
-" Was rejected, exceedes the server Power Budget",
-" was rejected, exceeded your power budget",
-" was rejected, Already Equipped."
-};
-
-script "NEUM_ClassSetup" ENTER
+script "MSTD_ClassSetup" ENTER
 {
 int pln = playernumber();
 int plc = PlayerClass(pln);
@@ -92,24 +19,6 @@ if(PlayerIsSpectator(pln) != 0 && (ClassifyActor(pln+1000) & ACTOR_ALIVE)){Termi
 
 int WepA_Num = GetUserCvar(pln,"Lo_WepA");
 int WepB_Num = GetUserCvar(pln,"Lo_WepB");
-//int SubWep_Num = GetUserCvar(pln,"Lo_SubWep");
-
-//Int PSI_Slot1 = GetUserCvar(pln,"Lo_PsiA");
-//Int PSI_Slot2 = GetUserCvar(pln,"Lo_PsiB");
-//Int PSI_Slot3 = GetUserCvar(pln,"Lo_PsiC");
-//Int PSI_Slot4 = GetUserCvar(pln,"Lo_PsiD");
-
-//Int PSILevel_Slot1 = GetUserCvar(pln,"Lo_PsiPowerA");
-//Int PSILevel_Slot2 = GetUserCvar(pln,"Lo_PsiPowerB");
-//Int PSILevel_Slot3 = GetUserCvar(pln,"Lo_PsiPowerC");
-//Int PSILevel_Slot4 = GetUserCvar(pln,"Lo_PsiPowerD");
-
-//Str PSIFlagName;
-//str PSI_ErrorName;
-//Bool HasPSI;
-
-int MaxPB = 0.0;
-int PB_Total = 0.0;
 
 bool PickDone = False;
 bool BotPick = False;
@@ -120,9 +29,6 @@ int pickRollcount;
 int IconChoice = GetUserCvar(pln,"Lo_Emblem");
 int SpeedPenalty = 0.0;
 
-MaxPB = GetCvar("Sv_PowerBudget") << 16;
-if(MaxPB <= 0){MaxPB = 0.0;}
-
 //first let's check for illegal numbers due to direct
 //manilulation
 if(WepA_Num < 0 || WepA_Num > WEAPONLIST){WepA_Num = 0;}
@@ -131,356 +37,51 @@ if(WepB_Num < 0 || WepB_Num > WEAPONLIST){WepB_Num = 0;}
 
 
 if ((ClassifyActor(0) & ACTOR_BOT))
-	//Bots never use altfire or second weapons, so they just pick a primary and go
+	//Bots always use the last weapon they get, but both are defined the same just in case
 	{
 		while(!BotPick)
 		{
 		WepA_Num = random(1,WEAPONLIST-1);
 		WepB_Num = random(1,WEAPONLIST-1);
-		//SubWep_Num = 0;
-		IconChoice = Random(0,PLAYERICON_MAX-1);
+		//IconChoice = Random(0,PLAYERICON_MAX-1);
 		
-			if(MasterWepList[WepA_Num][5] != "NOBOT" )
+			if(MasterWepList[WepA_Num][3] && WF_NOBOT)
 			{
 			BotPick = true;
 			}
 		}
 	}
 
-
-/* 
-Now, let's go down the list of requested loadout options, the idea here is that for each weapon or loadout item, we
-check to see if it's :
-
-1. below the maximum Power Budget value designated by the server
-2. is within our allotted Power Budget
-
-for each approved item, we will add it's powerbudget to the current sum, and if the next item causes us to exceede our
-remaining power budget or is beyond the max power budget, it get's ignored
-*/
-//log(i:MaxPB);
-log(f:MaxPB);
 //===|Check Weapon A
 if(WepA_Num >= 0)
 	{
-	if( MasterWepList[WepA_Num][2] <= MaxPB 
-	&& MasterWepList[WepA_Num][2] <= MaxPB-PB_Total)
-		{
-			log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
-		GiveInventory(MasterWepList[WepA_Num][1],1);
-		if(MasterWepList[WepA_Num][2] >= 0){PB_Total += MasterWepList[WepA_Num][2];}
-		}
+		log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
+		GiveInventory(MasterWepList[WepA_Num][1],1);		
 	}
 
 //===|Check Weapon B
 if(WepB_Num >= 0)
 	{
-	if(MasterWepList[WepB_Num][3] != "YES" // Wep B is primary only
-	&& WepA_Num != WepB_Num
-	&& MasterWepList[WepB_Num][2] <= MaxPB 
-	&& MasterWepList[WepB_Num][2] <= MaxPB-PB_Total)
+	if(WepA_Num != WepB_Num)
 	{
 		log(s:"Get Second = ", s:MasterWepList[WepB_Num][1]);
 	GiveInventory(strParam(s:MasterWepList[WepB_Num][1],i:2),1);
-	
-	//if(MasterWepList[WepB_Num][2] >= 0){PB_Total += MasterWepList[WepB_Num][2];}
 	}
-	else //your wep request was rejected, see why
+	else //Doubled weapon, you get a military buster or Wind Pressure Buster
 		{
-			if(MasterWepList[WepB_Num][3] == "YES"){print(s:MasterWepList[WepB_Num][1],s:ErrorText[0]);}
-			if(WepA_Num == WepB_Num){print(s:MasterWepList[WepB_Num][1],s:ErrorText[1]);}
-			if(MasterWepList[WepB_Num][2] >= MaxPB){print(s:MasterWepList[WepB_Num][1],s:ErrorText[2]);}
-			else if(MasterWepList[WepB_Num][2] >= MaxPB-PB_Total){print(s:MasterWepList[WepB_Num][1],s:ErrorText[3]);}
-		}
-	}
-	
-
-//if no weapon has been picked, just give the player a Military Buster
-//if(PB_Total <= 0){GiveInventory("MilitaryBusterWep",1);}
-
-/*
-//===|Check SubWeapon
-if(SubWep_Num > 0)
-	{
-	if(SubWeaponList[SubWep_Num][2] <= MaxPB 
-	&& SubWeaponList[SubWep_Num][2] <= MaxPB-PB_Total)
-	{
-	GiveInventory(SubWeaponList[SubWep_Num][1],1);
-	if(SubWeaponList[SubWep_Num][2] >= 0){PB_Total += SubWeaponList[SubWep_Num][2];}
-	}
-	else //your Subwep request was rejected, see why
-		{
-			if(SubWeaponList[SubWep_Num][2] >= MaxPB){print(s:SubWeaponList[SubWep_Num][1],s:ErrorText[2]);}
-			else if(SubWeaponList[SubWep_Num][2] >= MaxPB-PB_Total){print(s:SubWeaponList[SubWep_Num][1],s:ErrorText[3]);}
+			if(WepA_Num == 0 && WepB_Num == 0){GiveInventory(strParam(s:MasterWepList[WINDPRESSUREBUSTER][1],i:2),1);}
+			else{GiveInventory(strParam(s:MasterWepList[MILITARYBUSTER][1],i:2),1);}
 		}
 	}
 
 
-//===|Check PSI
-if(PSI_Slot1 > 0)
-	{
-		PSILevel_Slot1 = PSILevelSet(PSI_Slot1,PSILevel_Slot1);
-		if( PsionicsPBList[PSI_Slot1][PSILevel_Slot1] <= MaxPB 
-			&& PsionicsPBList[PSI_Slot1][PSILevel_Slot1] <= MaxPB-PB_Total)
-			{
-				PSIFlagName = GrabPSIFlag(PSI_Slot1,PSILevel_Slot1+PLO,1);
-				if(!CheckForPSIFlag(PSI_Slot1,PSILevel_Slot1))
-				{
-					GiveInventory(PSIFlagName,1);
-					log(s:"Get Psionic = ", s:PsionicsList[PSI_Slot1][1],s:PKLevelName[0][PSILevel_Slot1-1]);
-				}
-				Else
-				{
-					PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot1][1],s:PKLevelName[0][PSILevel_Slot1-1]);
-					print(s:PSI_ErrorName,s:ErrorText[4]);
-				}
-				if(PsionicsPBList[PSI_Slot1][PSILevel_Slot1] >= 0){PB_Total += PsionicsPBList[PSI_Slot1][PSILevel_Slot1];}
-				HasPSI = true;
-			}
-			else //your PSI request was rejected, see why
-		{
-			PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot1][1],s:PKLevelName[0][PSILevel_Slot1-1]);
-			if(PsionicsPBList[PSI_Slot1][PSILevel_Slot1] >= MaxPB){print(s:PSI_ErrorName,s:ErrorText[2]);}
-			else if(PsionicsPBList[PSI_Slot1][PSILevel_Slot1] >= MaxPB-PB_Total){print(s:PSI_ErrorName,s:ErrorText[3]);}
-		}
-	}
-
-if(PSI_Slot2 > 0)
-	{
-		PSILevel_Slot2 = PSILevelSet(PSI_Slot2,PSILevel_Slot2);
-		if( PsionicsPBList[PSI_Slot2][PSILevel_Slot2] <= MaxPB 
-			&& PsionicsPBList[PSI_Slot2][PSILevel_Slot2] <= MaxPB-PB_Total)
-			{
-				PSIFlagName = GrabPSIFlag(PSI_Slot2,PSILevel_Slot2+PLO,2);
-				if(!CheckForPSIFlag(PSI_Slot2,PSILevel_Slot2))
-				{
-					GiveInventory(PSIFlagName,1);
-					log(s:"Get Psionic = ", s:PsionicsList[PSI_Slot2][1],s:PKLevelName[0][PSILevel_Slot2-1]);
-				}
-				Else
-				{
-					PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot2][1],s:PKLevelName[0][PSILevel_Slot2-1]);
-					print(s:PSI_ErrorName,s:ErrorText[4]);
-				}
-				if(PsionicsPBList[PSI_Slot2][PSILevel_Slot2] >= 0){PB_Total += PsionicsPBList[PSI_Slot2][PSILevel_Slot2];}
-				HasPSI = true;
-			}
-			else //your PSI request was rejected, see why
-		{
-			PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot2][1],s:PKLevelName[0][PSILevel_Slot2-1]);
-			if(PsionicsPBList[PSI_Slot2][PSILevel_Slot2] >= MaxPB){print(s:PSI_ErrorName,s:ErrorText[2]);}
-			else if(PsionicsPBList[PSI_Slot2][PSILevel_Slot2] >= MaxPB-PB_Total){print(s:PSI_ErrorName,s:ErrorText[3]);}
-		}
-	}
-
-if(PSI_Slot3 > 0)
-	{
-		PSILevel_Slot3 = PSILevelSet(PSI_Slot3,PSILevel_Slot3);
-		if( PsionicsPBList[PSI_Slot3][PSILevel_Slot3] <= MaxPB 
-			&& PsionicsPBList[PSI_Slot3][PSILevel_Slot3] <= MaxPB-PB_Total)
-			{
-				PSIFlagName = GrabPSIFlag(PSI_Slot3,PSILevel_Slot3+PLO,3);
-				if(!CheckForPSIFlag(PSI_Slot3,PSILevel_Slot3))
-				{
-					GiveInventory(PSIFlagName,1);
-					log(s:"Get Psionic = ", s:PsionicsList[PSI_Slot3][1],s:PKLevelName[0][PSILevel_Slot3-1]);
-				}
-				Else
-				{
-					PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot3][1],s:PKLevelName[0][PSILevel_Slot3-1]);
-					print(s:PSI_ErrorName,s:ErrorText[4]);
-				}
-				if(PsionicsPBList[PSI_Slot3][PSILevel_Slot3] >= 0){PB_Total += PsionicsPBList[PSI_Slot3][PSILevel_Slot3];}
-				HasPSI = true;
-			}
-			else //your PSI request was rejected, see why
-		{
-			PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot3][1],s:PKLevelName[0][PSILevel_Slot3-1]);
-			if(PsionicsPBList[PSI_Slot3][PSILevel_Slot3] >= MaxPB){print(s:PSI_ErrorName,s:ErrorText[2]);}
-			else if(PsionicsPBList[PSI_Slot3][PSILevel_Slot3] >= MaxPB-PB_Total){print(s:PSI_ErrorName,s:ErrorText[3]);}
-		}
-	}
-
-if(PSI_Slot4 > 0)
-	{
-		PSILevel_Slot4 = PSILevelSet(PSI_Slot4,PSILevel_Slot4);
-		if( PsionicsPBList[PSI_Slot4][PSILevel_Slot4] <= MaxPB 
-			&& PsionicsPBList[PSI_Slot4][PSILevel_Slot4] <= MaxPB-PB_Total)
-			{
-				PSIFlagName = GrabPSIFlag(PSI_Slot4,PSILevel_Slot4+PLO,4);
-				if(!CheckForPSIFlag(PSI_Slot4,PSILevel_Slot4))
-					{
-						GiveInventory(PSIFlagName,1);
-						log(s:"Get Psionic = ", s:PsionicsList[PSI_Slot4][1],s:PKLevelName[0][PSILevel_Slot4-1]);
-					}
-					Else
-					{
-						PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot4][1],s:PKLevelName[0][PSILevel_Slot4-1]);
-						print(s:PSI_ErrorName,s:ErrorText[4]);
-					}
-				if(PsionicsPBList[PSI_Slot4][PSILevel_Slot4] >= 0){PB_Total += PsionicsPBList[PSI_Slot4][PSILevel_Slot4];}
-				HasPSI = true;
-			}
-			else //your PSI request was rejected, see why
-		{
-			PSI_ErrorName = StrParam(s:PsionicsList[PSI_Slot4][1],s:PKLevelName[0][PSILevel_Slot4-1]);
-			if(PsionicsPBList[PSI_Slot4][PSILevel_Slot4] >= MaxPB){print(s:PSI_ErrorName,s:ErrorText[2]);}
-			else if(PsionicsPBList[PSI_Slot4][PSILevel_Slot4] >= MaxPB-PB_Total){print(s:PSI_ErrorName,s:ErrorText[3]);}
-		}
-	}
-
-if(HasPSI){GiveInventory("PSIKit",1);}
-*/
-
-log(f:PB_Total);
-
-//PlayerBaseSpeed[playernumber()] = 1.0-SpeedPenalty;
-//setactorproperty(0,APROP_SPEED,1.0-SpeedPenalty);
-//log(s:"speed is at ",f:GetActorProperty(0,APROP_SPEED),s:" with a penalty of ", f:SpeedPenalty);
-
-//supplemental stuff
-
+//===|supplemental stuff
 if	 (MasterWepList[WepA_Num][4] == "MEDICAL")
 	{ //got a medical weapon? get mediscan
 	GiveInventory("Mediscan",1);
 	}
-	/*
-if	 (SubWeaponList[SubWep_Num][3] == "FUEL")
-	{//Give boosterPackFuel
-	GiveInventory("BP_Fuel",105);
-	}
-	*/
-if	 (MasterWepList[WepA_Num][4] == "HEAT"
-	||MasterWepList[WepA_Num][4] == "HEAT&SHIELD"
-	||MasterWepList[WepB_Num][4] == "HEAT"
-	||MasterWepList[WepB_Num][4] == "HEAT&SHIELD"
-	)
-	{ //got a heat based weapon? get heatmanager
-	GiveInventory("HeatManager",1);
-	}
-if	 (MasterWepList[WepA_Num][4] == "SHIELD"
-	||MasterWepList[WepA_Num][4] == "HEAT&SHIELD"
-	||MasterWepList[WepB_Num][4] == "SHIELD"
-	||MasterWepList[WepB_Num][4] == "HEAT&SHIELD"
-	)
-	{ //got a Shielded weapon? get ShieldManager
-	GiveInventory("ShieldManager",1);
-	}
+
 	
-delay(5);
-
-//Before we end off, check if we are respawning, so that if the
-//player has changed their loadout, we can reset it
-
-if(Checkinventory("GhostInvisibility")
-	||Checkinventory("RespawnTime"))
-	{
-	While(Checkinventory("GhostInvisibility")
-	||Checkinventory("RespawnTime"))
-		{
-		//log(s:"waiting on player ", i:playernumber());
-		delay(1);
-		}
-		
-		For (int w = 1;w < WEAPONLIST; w++)
-		{
-		TakeInventory(MasterWepList[w][1],1);
-		//TakeInventory(strParam(s:MasterWepList[w][1], s:"2"),1);
-		}
-		
-		/*
-		For (int s = 1;s < SUBWEAPONLIST_MAX; s++)
-		{
-		TakeInventory(SubWeaponList[s][1],1);
-		}
-		TakeInventory("PlayerIconFlag",999);
-		*/
-		Restart;
-	}
-
-delay(5);
-//GiveInventory("PlayerIconSpawner",1);
+delay(1);
 }
 
-
-Function Str GrabPSIFlag (int PSI_ID, int PSILevel, int PSISlot)
-{
-Str Output;
-Str PSILevelString;
-Str PSIName;
-
-Bool GotLevel;
-
-PSIName = PsionicsList[PSI_ID][1];
-
-Until(GotLevel)
-	{
-		If(PsionicsList[PSI_ID][PSILevel] == "UP"){PSILevel++;}
-		Else if(PsionicsList[PSI_ID][PSILevel] == "DOWN"){PSILevel--;}
-
-		if(PSILevel > 7){PSILevel = 3;}
-		Else if(PSILevel < 3){PSILevel = 7;}
-
-		If(PsionicsList[PSI_ID][PSILevel] == "YES")
-			{
-			switch(PSILevel)
-				{
-					Case 3 : PSILevelString = "I"; break;
-					Case 4 : PSILevelString = "II"; break;
-					Case 5 : PSILevelString = "III"; break;
-					Case 6 : PSILevelString = "V"; break;
-					Case 7 : PSILevelString = "X"; break;
-				}
-				GotLevel = true;
-			}
-	}
-
-Output = StrParam(s:PSIName,s:PSILevelString,s:"_User",i:PSISlot);
-
-Return Output;
-}
-
-
-Function Int PSILevelSet (int PSI_ID, Int PSILevel)
-{
-	int Output;
-	Bool GotLevel;
-
-	Until(GotLevel)
-	{
-		If(PsionicsList[PSI_ID][PSILevel+PLO] == "UP"){PSILevel++;}
-		Else if(PsionicsList[PSI_ID][PSILevel+PLO] == "DOWN"){PSILevel--;}
-
-		if(PSILevel > 5){PSILevel = 1;}
-		Else if(PSILevel < 1){PSILevel = 5;}
-
-		If(PsionicsList[PSI_ID][PSILevel+PLO] == "YES")
-			{
-				Output = PSILevel;
-				GotLevel = true;
-			}
-	}
-
-	Return Output;
-}
-
-Function bool CheckForPSIFlag (int PSI_ID, Int PSILevel)
-{
-	bool Output;
-	str PSIName = PsionicsList[PSI_ID][1];
-	str PSILevelString;
-
-	switch(PSILevel)
-	{
-		Case 1 : PSILevelString = "I"; break;
-		Case 2 : PSILevelString = "II"; break;
-		Case 3 : PSILevelString = "III"; break;
-		Case 4 : PSILevelString = "V"; break;
-		Case 5 : PSILevelString = "X"; break;
-	}
-	For(int id=1; id<5; id++)
-	{
-	if(CheckInventory(StrParam(s:PSIName,s:PSILevelString,s:"_User",i:id))){Output = true;}
-	}
-	Return Output;
-}

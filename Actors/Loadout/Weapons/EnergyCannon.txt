@@ -4,7 +4,7 @@ actor EnergyCannonWep : WepMasterBase
 Tag "EnergyCannon"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 20
-Obituary "$OB_EnergyCannon"
+Obituary "$OB_ENERGYCANNON"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -120,7 +120,7 @@ actor EnergyCannonShot : FastProjectileBase
 {
 Speed 48
 Damage (35)
-Obituary "$OB_EnergyCannon"
+Obituary "$OB_ENERGYCANNON"
 damagetype "EnergyCannon"
 renderstyle "Translucent"
 +HITTRACER
@@ -151,7 +151,7 @@ stop
 
 actor EnergyCannonTrail : ExplosionBase
 {
-Obituary "$OB_EnergyCannon"
+Obituary "$OB_ENERGYCANNON"
 damagetype "EnergyCannon"
 States
 {

@@ -8,7 +8,7 @@ Tag "Shadow Buster"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 20
 
-Obituary "$OB_Blaster"
+Obituary "$OB_SHADOWBUSTER"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -100,6 +100,13 @@ actor ShadowBusterCST : PowerupGiver
 Powerup.Duration 6
 powerup.type "ConShotTimer"
 }
+
+Actor ShadowBusterProtect : powerprotection
+{
+Powerup.duration 3
+Damagefactor "ShadowBuster", 0
+}
+
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -108,8 +115,8 @@ actor ShadowBusterRound : ProjectileBase
 {
 +USEBOUNCESTATE
 +BOUNCEONWALLS
-Obituary "$OB_Blaster"
-DamageType "ShadowBlade"
+Obituary "$OB_SHADOWBUSTER"
+DamageType "ShadowBuster"
 Speed 64
 Damage (20)
 +RIPPER

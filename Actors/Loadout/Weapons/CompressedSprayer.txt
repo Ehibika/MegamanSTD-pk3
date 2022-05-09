@@ -6,9 +6,9 @@ Tag "CompressedSprayer"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 6
 scale 2.0
-Obituary "$OB_Burner"
+Obituary "$OB_COMPRESSEDSPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "CompressedSprayerClip"
+weapon.ammotype "CompressedSprayer_Ammo"
 inventory.icon "FTONI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
@@ -23,7 +23,7 @@ stop
 Ready:
 Ready.Wep:
 FWPR B 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" B 0 A_Jumpifinventory("CompressedSprayerClip",1,"Ready.Core")
+"####" B 0 A_Jumpifinventory("CompressedSprayer_Ammo",1,"Ready.Core")
 Goto Reload
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
@@ -46,7 +46,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" B 1
-"####" B 0 A_Jumpifinventory("CompressedSprayerClip",1,"Ready")
+"####" B 0 A_Jumpifinventory("CompressedSprayer_Ammo",1,"Ready")
 Reload:
 "####" B 1 Offset(0,32)
 "####" B 1 Offset(0,46)
@@ -61,7 +61,7 @@ Reload:
 "####" B 1 Offset(0,58)
 "####" B 1 Offset(0,46)
 "####" B 1 Offset(0,32)
-"####" B 0 A_Giveinventory("CompressedSprayerClip",6)
+"####" B 0 A_Giveinventory("CompressedSprayer_Ammo",6)
 "####" B 0 A_TakeInventory("Reload_Trigger",999)
 "####" B 1 A_Refire("Fire")
 Goto Ready.Wep
@@ -79,7 +79,7 @@ actor CompressedSprayerWep2 : CompressedSprayerWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor CompressedSprayerClip : Ammo
+actor CompressedSprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 6

@@ -8,7 +8,7 @@ Tag "Arrow Buster"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 10
 
-Obituary "$OB_Blaster"
+Obituary "$OB_ARROWBUSTER"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -25,53 +25,59 @@ WEAP X 1
 stop
 Ready:
 Ready.Wep:
-BUST B 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" B 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready.Core")
+FABU A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+"####" A 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready.Core")
 Goto Reload
 
 //===============
 Deselect:
 TNT1 A 0 A_TakeInventory("NoClipBar",9)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
-"####" B 1 A_Lower
+"####" A 1 A_Lower
 Loop
 Select:
 TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Buster_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
-"####" B 1 A_Raise
+"####" A 1 A_Raise
 Loop
 Fire:
-"####" B 0 A_JumpIfNoAmmo("NoAmmo")
-"####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
-"####" B 0 A_FireCustomMissile("ArrowBusterRound",0,1,4,4,0,0)
-"####" B 0 A_Giveinventory("ArrowBusterCST")
-BUST C 1
+"####" A 0 A_JumpIfNoAmmo("NoAmmo")
+"####" C 0 A_Jumpifinventory("isBot",1,"BotRefire")
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
+"####" "#" 0 A_PlaySoundEx("weapon/HardBuster6","Weapon")
+"####" "#" 0 A_PlaySoundEx("weapon/coilexplode", "SoundSlot6")
+//"####" A 0 A_FireCustomMissile("ArrowBusterRound",0,1,4,4,0,0)
+
+"####" B 0 A_FireCustomMissile("ArrowBusterStart",0,0,0,0)
+"####" B 0 A_FireCustomMissile("ArrowBusterDamager",0,1,0,0)
+"####" A 0 A_Giveinventory("ArrowBusterCST")
+"####" BC 2
 Hold:
-"####" D 1
-"####" B 0 A_Jumpifinventory("isBot",1,"BotRefire")
-"####" B 0 A_Refire
+"####" A 1
+"####" C 0 A_Jumpifinventory("isBot",1,"BotRefire")
+"####" C 0 A_Refire
 goto Ready.Wep
 
 NoAmmo:
-"####" B 1
-//"####" B 0 A_Takeinventory("WepBloomItem",999)
-"####" B 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready")
+"####" A 1
+//"####" A 0 A_Takeinventory("WepBloomItem",999)
+"####" A 0 A_Jumpifinventory("ArrowBuster_Ammo",1,"Ready")
 Reload:
-"####" B 1 Offset(0,32)
-"####" B 1 Offset(0,46)
-"####" B 1 Offset(0,58)
-"####" B 1 Offset(0,70)
-"####" B 1 Offset(0,82)
-"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
-"####" B 32 
-"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
-"####" B 1 Offset(0,82)
-"####" B 1 Offset(0,70)
-"####" B 1 Offset(0,58)
-"####" B 1 Offset(0,46)
-"####" B 1 Offset(0,32)
-"####" B 0 A_Giveinventory("ArrowBuster_Ammo",10)
-"####" B 1 A_Refire("Fire")
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 32 
+"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_Giveinventory("ArrowBuster_Ammo",10)
+"####" A 1 A_Refire("Fire")
 goto Ready.Wep
 Flash:
 TNT1 A 5 
@@ -96,17 +102,18 @@ inventory.maxamount 10
 actor ArrowBusterCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 6
+Powerup.Duration 25
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+Const Int ArrowBusterRange = 200;
 
 actor ArrowBusterRound : fastProjectileBase
 {
-Obituary "$OB_Blaster"
-DamageType "SingleShot2"
+Obituary "$OB_ARROWBUSTER"
+DamageType "ArrowBuster"
 Speed 128
 Damage (30)
 radius 8
@@ -134,9 +141,100 @@ stop
 }
 }
 
+
+actor ArrowBusterDamager : FastProjectileBase
+{
+    PROJECTILE
+    damagetype "ArrowBuster"
+    Obituary "$OB_ARROWBUSTER"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    RenderStyle None
+    Damage (30)
+    Radius 10
+    Height 10
+    speed 3000 //15 * ArrowBusterRange(200)
+    scale 2.5
+    states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        TNT1 A 0
+        stop
+    }
+}
+
+actor ArrowBusterStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,15,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_SpawnItemEx("ArrowBusterRay",0,0,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+actor ArrowBusterRay : FastProjectilebase//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    RenderStyle None
+    Damage (0)
+    Radius 10
+    Height 10
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > ArrowBusterRange,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("ArrowBusterRay",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("ArrowBusterRayFX",0,0,0,0,0,0,0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("ArrowBusterPuff",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("ArrowBusterPuff",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
+
+
+
+
 //[+]========================================================================[+]
 //--------------------------------|Effect Actors|-------------------------------
 //[+]========================================================================[+]
+/*
 actor ArrowBusterPuff : FXActor_A
 {
 scale 1.5
@@ -147,10 +245,29 @@ BIM1 AABCDEF 1
 stop
 }
 }
+*/
+
+actor ArrowBusterPuff : BasicClientside//BulletPuff
+{
+scale 2.5
+DamageType "ArrowBuster"
+Obituary "$OB_ARROWBUSTER"
+
+alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+CRBM A 0 
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+Hard BBCCDDEE 1 
+stop
+}
+}
 
 actor ArrowBusterTrail : ExplosionBase
 {
-Obituary "$OB_MegaBuster"
+Obituary "$OB_ARROWBUSTER"
 damagetype "MegaBuster"
 States
 {
@@ -197,3 +314,18 @@ stop
 
 actor ArrowBusterTrail_FX3 : ArrowBusterTrail_FX2
 {scale 2.0}
+
+actor ArrowBusterRayFX : BasicClientside
+{
+scale 2.0
+renderstyle "add"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MBEA A 3
+MBEA AAAAA 2 A_Fadeout
+stop
+}
+}

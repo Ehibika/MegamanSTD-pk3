@@ -5,11 +5,11 @@ Tag "HighSpeedRifle"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 50
 
-Obituary "$OB_HighSpeedRifle"
+Obituary "$OB_HIGHSPEEDRIFLE"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "HighSpeedRifleClip"
+weapon.ammotype "HighSpeedRifle_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
 +WEAPON.NOAUTOFIRE
@@ -23,7 +23,7 @@ stop
 Ready:
 Ready.Wep:
 PIDB A 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" A 0 A_Jumpifinventory("HighSpeedRifleClip",1,"Ready.Core")
+"####" A 0 A_Jumpifinventory("HighSpeedRifle_Ammo",1,"Ready.Core")
 Goto Reload
 //===============
 Deselect:
@@ -48,7 +48,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" A 1
-"####" A 0 A_Jumpifinventory("HighSpeedRifleClip",1,"Ready")
+"####" A 0 A_Jumpifinventory("HighSpeedRifle_Ammo",1,"Ready")
 Reload:
 
 "####" A 1 Offset(0,32)
@@ -64,7 +64,7 @@ Reload:
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)
-"####" A 0 A_Giveinventory("HighSpeedRifleClip",50)
+"####" A 0 A_Giveinventory("HighSpeedRifle_Ammo",50)
 "####" A 1 A_Refire("Fire")
 Goto Ready.Wep
 Flash:
@@ -81,7 +81,7 @@ actor HighSpeedRifleWep2 : HighSpeedRifleWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor HighSpeedRifleClip : Ammo
+actor HighSpeedRifle_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 50
@@ -93,8 +93,8 @@ inventory.maxamount 50
 
 actor HighSpeedRifleShot : fastProjectileBase
 {
-Obituary "$OB_HighSpeedRifle"
-DamageType "SingleShot2"
+Obituary "$OB_HIGHSPEEDRIFLE"
+DamageType "HighSpeedRifle"
 Speed 120
 Damage (4)
 radius 3
@@ -127,8 +127,7 @@ stop
 
 actor HighSpeedRifleTrail : ExplosionBase
 {
-Obituary "$OB_MegaBuster"
-damagetype "MegaBuster"
+Obituary "$OB_HIGHSPEEDRIFLE"
 States
 {
 Spawn:

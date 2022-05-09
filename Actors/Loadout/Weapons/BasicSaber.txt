@@ -8,7 +8,7 @@ Tag "Saber"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 10
 
-Obituary "$OB_Blaster"
+Obituary "$OB_STANDARDSABER"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"

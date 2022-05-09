@@ -1,6 +1,11 @@
-//TIP SYSTEM
-//Stolen from Gummy, who stole it from Internal Conflict
+/* -=- Tip System -=-
+ * Gives random gameplay tips on death
+ *
+ * 
 
+*/
+#library "A_Tips"
+#include "zcommon.acs"
 
 #DEFINE TIPCOUNT 110
 

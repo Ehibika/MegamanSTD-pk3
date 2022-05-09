@@ -6,9 +6,9 @@ Tag "CrushingSprayer"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 6
 scale 2.0
-Obituary "$OB_Burner"
+Obituary "$OB_CRUSHINGSPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "CrushingSprayerClip"
+weapon.ammotype "CrushingSprayer_Ammo"
 inventory.icon "FTONI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
@@ -23,7 +23,7 @@ stop
 Ready:
 Ready.Wep:
 FWPR B 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" B 0 A_Jumpifinventory("CrushingSprayerClip",1,"Ready.Core")
+"####" B 0 A_Jumpifinventory("CrushingSprayer_Ammo",1,"Ready.Core")
 Goto Reload
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
@@ -45,7 +45,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" B 1
-"####" B 0 A_Jumpifinventory("CrushingSprayerClip",1,"Ready")
+"####" B 0 A_Jumpifinventory("CrushingSprayer_Ammo",1,"Ready")
 Reload:
 "####" B 1 Offset(0,32)
 "####" B 1 Offset(0,46)
@@ -60,7 +60,7 @@ Reload:
 "####" B 1 Offset(0,58)
 "####" B 1 Offset(0,46)
 "####" B 1 Offset(0,32)
-"####" B 0 A_Giveinventory("CrushingSprayerClip",6)
+"####" B 0 A_Giveinventory("CrushingSprayer_Ammo",6)
 "####" B 0 A_TakeInventory("Reload_Trigger",999)
 "####" B 1 A_Refire("Fire")
 Goto Ready.Wep
@@ -78,7 +78,7 @@ actor CrushingSprayerWep2 : CrushingSprayerWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor CrushingSprayerClip : Ammo
+actor CrushingSprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 6
@@ -128,7 +128,7 @@ actor CrushingSprayerDamager : FastProjectileBase
 {
     PROJECTILE
     damagetype "CrushingSpray"
-    Obituary "$OB_CrushingSprayer"
+    Obituary "$OB_CRUSHINGSPRAYER"
     +SKYEXPLODE
     +EXPLODEONWATER
     +RIPPER

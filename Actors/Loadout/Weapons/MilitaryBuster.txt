@@ -8,7 +8,7 @@ Tag "Military Buster"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 30
 
-Obituary "$OB_Military"
+Obituary "$OB_MILITARYBUSTER"
 inventory.icon "BLASI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -25,54 +25,54 @@ WEAP X 1
 stop
 Ready:
 Ready.Wep:
-BUST B 1 A_WeaponReady(WRF_ALLOWRELOAD)
-"####" B 0 A_Jumpifinventory("MilitaryBuster_Ammo",1,"Ready.Core")
+LBUS A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+"####" A 0 A_Jumpifinventory("MilitaryBuster_Ammo",1,"Ready.Core")
 Goto Reload
 
 //===============
 Deselect:
 TNT1 A 0 A_TakeInventory("NoClipBar",9)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
-"####" B 1 A_Lower
+"####" A 1 A_Lower
 Loop
 Select:
 TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Buster_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
-"####" B 1 A_Raise
+"####" A 1 A_Raise
 Loop
 Fire:
-"####" B 0 A_JumpIfNoAmmo("NoAmmo")
-"####" B 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
-"####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
-"####" B 0 A_FireCustomMissile("MilitaryBusterRound",0,1,4,4,0,0)
-"####" B 0 A_Giveinventory("MilitaryBusterCST")
-BUST C 1
+"####" A 0 A_JumpIfNoAmmo("NoAmmo")
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
+"####" A 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
+"####" A 0 A_FireCustomMissile("MilitaryBusterRound",0,1,4,4,0,0)
+"####" A 0 A_Giveinventory("MilitaryBusterCST")
+"####" BC 1
 Hold:
-"####" D 1
-"####" B 0 A_Jumpifinventory("isBot",1,"BotRefire")
-"####" B 0 A_Refire
+"####" A 1
+"####" A 0 A_Jumpifinventory("isBot",1,"BotRefire")
+"####" A 0 A_Refire
 goto Ready.Wep
 
 NoAmmo:
-"####" B 1
-//"####" B 0 A_Takeinventory("WepBloomItem",999)
-"####" B 0 A_Jumpifinventory("MilitaryBuster_Ammo",1,"Ready")
+"####" A 1
+//"####" A 0 A_Takeinventory("WepBloomItem",999)
+"####" A 0 A_Jumpifinventory("MilitaryBuster_Ammo",1,"Ready")
 Reload:
-"####" B 1 Offset(0,32)
-"####" B 1 Offset(0,46)
-"####" B 1 Offset(0,58)
-"####" B 1 Offset(0,70)
-"####" B 1 Offset(0,82)
-"####" B 0 A_PlaySoundEx("weapon/rminestick","Weapon")
-"####" B 32 
-"####" B 0 A_PlaySoundEx("weapon/Crashland","Weapon")
-"####" B 1 Offset(0,82)
-"####" B 1 Offset(0,70)
-"####" B 1 Offset(0,58)
-"####" B 1 Offset(0,46)
-"####" B 1 Offset(0,32)
-"####" B 0 A_Giveinventory("MilitaryBuster_Ammo",30)
-"####" B 1 A_Refire("Fire")
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 32 
+"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_Giveinventory("MilitaryBuster_Ammo",30)
+"####" A 1 A_Refire("Fire")
 goto Ready.Wep
 Flash:
 TNT1 A 5 
@@ -107,7 +107,7 @@ powerup.type "ConShotTimer"
 actor MilitaryBusterRound : fastProjectileBase
 {
 Obituary "$OB_Military"
-DamageType "SingleShot2"
+DamageType "MilitaryBuster"
 Speed 96
 Damage (32)
 scale 1.0
@@ -150,7 +150,7 @@ stop
 
 actor MilitaryTrail : ExplosionBase
 {
-Obituary "$OB_MegaBuster"
+Obituary "$OB_MILITARYBUSTER"
 damagetype "MegaBuster"
 States
 {
@@ -180,7 +180,7 @@ States
 {
 Spawn:
 CRBM A 0
-BSTG A 1
+XSHO A 1
 //BSTG AAAAA 1 A_Fadeout
 stop
 }
@@ -194,7 +194,7 @@ States
 {
 Spawn:
 BUST A 0
-BUST A 1
+XSHO A 1
 stop
 }
 }

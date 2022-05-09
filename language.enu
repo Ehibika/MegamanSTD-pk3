@@ -1,4 +1,29 @@
 [enu default]
+
+// -=- Weapon obituaries -=-
+OB_MILITARYBUSTER = "%k Eliminated %o with the MILITARY BUSTER";
+OB_WINDPRESSUREBUSTER = "%k Eliminated %o with the WIND PRESSURE BUSTER";
+OB_ARROWBUSTER = "%k Eliminated %o with the ARROW BUSTER";
+OB_SHADOWBUSTER = "%k Eliminated %o with the SHADOW BUSTER";
+OB_LAZERRIFLE = "%k Eliminated %o with the LAZER RIFLE";
+OB_TRIANGLEGUN = "%k Eliminated %o with the TRIANGL EGUN";
+OB_HIGHSPEEDRIFLE = "%k Eliminated %o with the HIGH SPEED RIFLE";
+OB_GATLINGGUN = "%k Eliminated %o with the GATLING GUN";
+OB_SHOTGUN = "%k Eliminated %o with the SHOTGUN";
+OB_GASEMITTER = "%k Eliminated %o with the GASE MITTER";
+OB_COMPRESSEDSPRAYER = "%k Eliminated %o with the COMPRESSED SPRAYER";		
+OB_BURNINGSPRAYER = "%k Eliminated %o with the BURNING SPRAYER";		
+OB_SNOWYSPRAYER = "%k Eliminated %o with the SNOWY SPRAYER";		
+OB_CRUSHINGSPRAYER = "%k Eliminated %o with the CRUSHING SPRAYER";		
+OB_ENERGYCANNON = "%k Eliminated %o with the ENERGY CANNON";		
+OB_MEGACANNON = "%k Eliminated %o with the MEGA CANNON";		
+OB_LIGHTWAVECANNON = "%k Eliminated %o with the LIGHTWAVE CANNON";		
+OB_DRILLHEADCANNON = "%k Eliminated %o with the DRILLHEAD CANNON";		
+OB_STANDARDSABER = "%k Eliminated %o with the STANDARD SABER";		
+OB_BEAMRAPIER = "%k Eliminated %o with the BEAM RAPIER";		
+OB_TRIANGULARSABER = "%k Eliminated %o with the TRIANGULAR SABER";
+
+//#region old
 //DOT Obituaries
 OB_Burner = "%k Eliminated %o";
 OB_Poisoner = "%k Eliminated %o";
@@ -46,7 +71,7 @@ OB_FLAMETONGUE = "%k Eliminated %o";
 OB_SLAMCANNON = "%k Eliminated %o";
 OB_TAGMISSILE = "%k Eliminated %o";
 OB_VoltSpear = "%k Eliminated %o";
-
+//#endregion
 
 
 
