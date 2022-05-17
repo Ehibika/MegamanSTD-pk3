@@ -1,0 +1,35 @@
+Actor Massimo : ClassBase 
+{
+Player.DisplayName "Massimo"
+Player.SoundClass "megaman"
+Health 200
+Player.MaxHealth 200
+Player.JumpZ 10
+
+Player.Startitem "IsMassimo"
+Player.Startitem "UseAbility1_Massimo"
+Player.Startitem "UseAbility2_Massimo"
+
++NOSKIN
+States
+{
+Spawn: 
+MAXM A 0
+MAXM B 1 
+MAXM A 1
+GoTo Spawn+2
+See:
+MAXM BCDE 5
+GoTo Spawn+1
+Missile:
+MAXM F 5
+MAXM G 4
+GoTo Spawn+2
+PainFix:
+MAXM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsMassimo : Once{}

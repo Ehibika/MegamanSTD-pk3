@@ -15,7 +15,7 @@ OptionMenu ZA_JoinMenu
 	StaticText"--Class--"
 	JoinMenuPlayerClassOption
 	Option "Primary", "Lo_WepA", "WepOptionsA"
-	Option "Secondary", "Lo_WepB", "WepOptionsB"
+	Option "Secondary", "Lo_WepB", "WepOptionsA"
 	Command "       Join game", "menu_joingamewithclass"
 	StaticText""
 	
@@ -39,7 +39,7 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText"--Class--"
 	JoinMenuPlayerClassOption
 	Option "Primary", "Lo_WepA", "WepOptionsA"
-	Option "Secondary", "Lo_WepB", "WepOptionsB"
+	Option "Secondary", "Lo_WepB", "WepOptionsA"
 	StaticText""
 	Command "       Join game", "menu_joingamewithclass"
 	StaticText""

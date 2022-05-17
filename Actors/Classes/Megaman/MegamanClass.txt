@@ -15,19 +15,19 @@ Player.Startitem "UseAbility2_STDMegaman"
 States
 {
 Spawn: 
-PLY1 A 0
-PLY1 B 1 
-PLY1 A 1
+MEGM A 0
+MEGM B 1 
+MEGM A 1
 GoTo Spawn+2
 See:
-PLY1 BCDE 5
+MEGM BCDE 5
 GoTo Spawn+1
 Missile:
-PLY1 F 5
-PLY1 G 4
+MEGM F 5
+MEGM G 4
 GoTo Spawn+2
 PainFix:
-PLY1 H 0 
+MEGM H 0 
 GoTo PainFrames
 }
 }
@@ -35,7 +35,7 @@ GoTo PainFrames
 
 Actor IsMegaman : Once{}
 
-
+//#region -=-Depreciated-=-
 actor MedicRegenStarter : CustomInventory
 {
 inventory.amount 1
@@ -138,3 +138,4 @@ TNT1 A 0
 stop
 }
 }
+//#endregion

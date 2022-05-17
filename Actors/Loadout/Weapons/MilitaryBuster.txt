@@ -6,7 +6,7 @@ actor MilitaryBusterWep : WepMasterBase
 {
 Tag "Military Buster"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 30
+Weapon.AmmoGive 15
 
 Obituary "$OB_MILITARYBUSTER"
 inventory.icon "BLASI"
@@ -15,7 +15,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "MilitaryBuster_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Var int User_Spread;
 States
@@ -43,12 +43,14 @@ Loop
 Fire:
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
+"####" A 0 A_Jumpifinventory("RefireBuffer",1,"Hold")
 "####" A 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
 "####" A 0 A_FireCustomMissile("MilitaryBusterRound",0,1,4,4,0,0)
 "####" A 0 A_Giveinventory("MilitaryBusterCST")
 "####" BC 1
 Hold:
-"####" A 1
+"####" A 1 A_WeaponReady(WRF_NOPRIMARY|WRF_ALLOWRELOAD)
+"####" "#" 0 A_Jumpif(CallACS("MSTD_CheckAbilityInput",1)==1,"User1")
 "####" A 0 A_Jumpifinventory("isBot",1,"BotRefire")
 "####" A 0 A_Refire
 goto Ready.Wep
@@ -71,7 +73,7 @@ Reload:
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)
-"####" A 0 A_Giveinventory("MilitaryBuster_Ammo",30)
+"####" A 0 A_Giveinventory("MilitaryBuster_Ammo",15)
 "####" A 1 A_Refire("Fire")
 goto Ready.Wep
 Flash:
@@ -91,13 +93,13 @@ actor MilitaryBusterWep2 : MilitaryBusterWep
 actor MilitaryBuster_Ammo : Ammo
 {
 inventory.amount 1
-inventory.maxamount 30
+inventory.maxamount 15
 }
 
 actor MilitaryBusterCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 5
+Powerup.Duration 7
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
@@ -143,6 +145,8 @@ scale 2.5
 States
 {
 Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 BIM1 AABCDEF 1
 stop
 }

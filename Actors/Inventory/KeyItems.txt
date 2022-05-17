@@ -201,17 +201,14 @@ inventory.amount 1
 inventory.maxamount 100
 }
 
-actor FireProof : inventory{inventory.amount 1 inventory.maxamount 1}
-actor TempFireProof : Powerup{inventory.amount 1 powerup.duration 140}
+actor BurnProof : inventory{inventory.amount 1 inventory.maxamount 1}
+actor TempBurnProof : Powerup{inventory.amount 1 powerup.duration 140}
 
 actor PoisonProof : inventory{inventory.amount 1 inventory.maxamount 1}
 actor TempPoisonProof : Powerup{inventory.amount 1 powerup.duration 85}
 
-actor ChillProof : inventory{inventory.amount 1 inventory.maxamount 1}
-actor TempChillProof : Powerup{inventory.amount 1 powerup.duration 85}
-
-actor FreezeProof : inventory{inventory.amount 1 inventory.maxamount 1}
-actor TempFreezeProof : Powerup{inventory.amount 1 powerup.duration 85}
+actor FrostProof : inventory{inventory.amount 1 inventory.maxamount 1}
+actor TempFrostProof : Powerup{inventory.amount 1 powerup.duration 85}
 
 actor BlastProtection : PowerProtection //for blastjumps
 {

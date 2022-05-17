@@ -7,7 +7,7 @@ Actor VoltSpear : WepMasterBase
 	Inventory.Pickupmessage "Zap 'em."
 	+WEAPON.AMMO_OPTIONAL
 	+WEAPON.DONTBOB
-	+WEAPON.NOAUTOFIRE
+	//+WEAPON.NOAUTOFIRE
 	+WEAPON.NOAUTOAIM
 	Obituary "$OB_VoltSpear"
 	Tag "Volt Spear"

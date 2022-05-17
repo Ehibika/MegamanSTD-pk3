@@ -18,7 +18,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "ShotGun_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Var int User_Spread;
 States
@@ -44,21 +44,21 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 Loop
 Fire:
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_PlaySoundEx("weapon/HardBuster1","Weapon")
 "####" A 0 A_FireCustomMissile("ShotGunShot",0,2,0,8)
-"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprAng,0,0,8,0,0)
+//"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprAng,0,0,8,0,0)
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_Ang,0,0,8,0,SG_SprD_Ang)
-"####" A 0 A_FireCustomMissile("ShotGunShot",0,0,0,8,0,SG_SprAng)
+//"####" A 0 A_FireCustomMissile("ShotGunShot",0,0,0,8,0,SG_SprAng)
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_Ang,0,0,8,0,SG_SprD_AngRev)
-"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprAngRev,0,0,8,0,0)
+//"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprAngRev,0,0,8,0,0)
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_AngRev,0,0,8,0,SG_SprD_AngRev)
-"####" A 0 A_FireCustomMissile("ShotGunShot",0,0,0,8,0,SG_SprAngRev)
-"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_AngRev,0,0,0,0,SG_SprD_Ang)
-
+//"####" A 0 A_FireCustomMissile("ShotGunShot",0,0,0,8,0,SG_SprAngRev)
+"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_AngRev,0,0,8,0,SG_SprD_Ang)
+//--
+"####" A 0 A_Giveinventory("ShotgunCST")
 "####" BC 1 A_WeaponReady(WRF_NOPRIMARY)
-"####" A 7 
 "####" C 0 A_REfire
-"####" A 0 A_Takeinventory("WepBloomItem",999)
 goto Ready.Wep
 
 NoAmmo:
@@ -102,6 +102,12 @@ inventory.amount 1
 inventory.maxamount 35
 }
 
+actor ShotgunCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 9
+powerup.type "ConShotTimer"
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -111,7 +117,7 @@ actor ShotGunShot : fastProjectileBase
 Obituary "$OB_SHOTGUN"
 DamageType "ShotgunP"
 Speed 80
-Damage (10)
+Damage (6)
 radius 3
 
 MissileHeight 16

@@ -22,7 +22,7 @@ weapon.ammotype "SLAMCannonClip"
 weapon.ammotype2 "SLAMCannonClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

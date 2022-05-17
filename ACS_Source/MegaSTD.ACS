@@ -3,6 +3,7 @@
 #include "8BDMLIB.ACS"
 
 #import "a_Core.acs"
+#import "a_Loadout.acs"
 
 //#region -=- Hit Event -=-
 #region -=- Hit Event -=-
@@ -35,7 +36,6 @@ SetResultValue(Damage);
 }
 #endregion
 //#endregion
-
 
 //#region -=- EntiTID -=-
 #region -=- EntiTID -=-
@@ -311,6 +311,42 @@ Str TinyBarSprite[21] = {
 
 //#region -=- Healing Scripts -=-
 #region -=- Healing Scripts -=-
+
+
+Script "MSTD_HealthPercent" (int Pointer, int Type, int perval)
+{
+int HealthPercent;
+int PlayerCurrentHealth;
+int PlayerMaxHealth;
+int MaxHPCache;
+int TargTID;
+
+if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
+else {TargTID = ActivatorTID();}
+
+if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+
+MaxHPCache = GetActorProperty(TargTID,APROP_SpawnHealth); 
+
+	
+if(MaxHPCache<=0){PlayerMaxHealth = 1; }
+else{PlayerMaxHealth = MaxHPCache;}
+
+// Type 0 = current percentage of health
+// Type 1 = Value of Health at that percentage
+// Type 2 = Current Remaining HP
+
+Switch (Type)
+	{
+	default : HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth); Break;
+	Case 1 : HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16; Break;
+	Case 2 : HealthPercent = PlayerCurrentHealth; Break;
+	}
+
+SetResultValue(HealthPercent);
+}
+
 Script "MSTD_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal ) //to be phased out
 {
 int OverhealMax = Overheal+100;
@@ -394,7 +430,6 @@ for(int g=1;g<=HealAmount;g++)
 #region -=- Blast Knockback -=-
 Script "BlastKnockback" (int BlastThrust, int ThrustForceH, int MaxRadius)
 {
-
 int userTID;
 int userTeam;
 Bool SelfThrustOnly = False;
@@ -434,10 +469,9 @@ int FinalForceH;
 
 Bool ThrustApprove = true;
 
-For(int q = 0;q < ServerMax; q++)
+For(int q = 0;q < GetMaxEntities(); q++)
 	{
 		ThrustApprove = true;
-
 		targetTID = q+1000;
 		
 		if(!PlayerInGame(q))
@@ -496,6 +530,46 @@ For(int q = 0;q < ServerMax; q++)
 #endregion
 //#endregion
 
+//#region -=- Arc limit -=-
+
+int count;
+
+script "Arc_Limit_Start" (void) CLIENTSIDE
+{
+count = 0;
+}
+
+script "Arc_Limit" (void) CLIENTSIDE
+{
+count++;
+SetResultValue(count>50);
+}
+
+script "Arc_ClientSide" (void) CLIENTSIDE
+{
+	int u = UniqueTID();
+	SetActivator(0,AAPTR_TARGET);
+	//Log(i:consoleplayernumber(),s:" ",i:playernumber());
+	if(consoleplayernumber() != playernumber()){
+		SetResultValue(0);
+	}
+	else
+	{SetResultValue(1);}
+}
+
+script "Arc_ClientSide2" (int TargTID) CLIENTSIDE
+{
+	//int u = UniqueTID();
+	SetActivator(TargTID);
+	//Log(i:consoleplayernumber(),s:" ",i:playernumber(),s:" ",s:GetActorClass(0));
+	if(consoleplayernumber() != playernumber()){
+		SetResultValue(0);
+	}
+	else
+	{SetResultValue(1);}
+}
+//#endregion
+
 Script "MSTD_ActorClassifier" (int TID, int CheckType)
 {
 bool output;
@@ -520,4 +594,98 @@ SetResultValue(output);
 Script "HitSound" (void)
 {
 localAmbientSound("misc/metdie",127);
+}
+
+script "Spawn_SmallHealth_MSTD" (void)
+{
+SpawnNewWepFunc("SmallHealth_MSTD");
+}
+
+script "Spawn_BigHealth_MSTD" (void)
+{
+SpawnNewWepFunc("BigHealth_MSTD");
+}
+
+//Damage Over Time Script
+script "DotDamager" (int damage, int TID)
+{
+setactivator(0,AAPTR_TARGET);
+thing_damage2(TID,damage,"OB_Burner");
+}
+
+script "HitKnockBack" (int force)
+{
+int pusher = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
+int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
+ThrustThing(Vang, force, 1, 0);
+}
+
+
+function bool OpenGLCvarClient(void)
+{
+return (getCvar("vid_renderer"));
+}
+
+script "MMBN_OpenGLCheck" (void) CLIENTSIDE
+{
+SetResultValue(OpenGLCvarClient());
+}
+
+Script "MassimoDamageRamp" (int MinDam, int MaxDam)
+{
+int HealthPer = ACS_NamedExecuteWithResult("MSTD_HealthPercent",AAPTR_TARGET);
+int Output = ValueMap(HealthPer,100,0,MinDam,MaxDam);
+SetResultValue(Output);
+}
+
+Script "SniperBusterRamp" (int hitCap, int MinDam, int MaxDam)
+{
+SetActivatorToTarget(0);
+str WepName = STD_WhichWeaponName();
+str WepName2 = StrLeft(WepName,StrLen(WepName)-StrLen("Wep"));
+log(s:WepName);
+log(s:WepName2);
+int ItemCount = CheckInventory(StrParam(s:WepName2,s:"_HitCounter"));
+if(ItemCount > hitCap){ItemCount = hitCap;}
+int Output = ValueMap(ItemCount,0,hitCap,MinDam,MaxDam);
+SetResultValue(Output);
+}
+
+
+
+Script "CheckStatusGuard" (int Pointer, int Input)
+{
+Int Output;
+
+/*
+ * 0 = no status protection
+ * 1 = Minor status protection
+ * 2 = Major status protection
+ *
+ */ 
+
+
+if(Pointer!=0){SetActivator(0,Pointer);}
+
+
+if(CheckInventory("PoisonMark")
+||CheckInventory("BurnMark")
+||CheckInventory("FrostbiteMark")
+)
+{Output = Output | STATUS_MAJOR;}
+
+//if(CheckInventory("ProtectGuard")
+//||CheckInventory("DetectGuard")
+//||CheckInventory("SubGuard"))
+//{Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_STATS;}
+
+    //if(CheckInventory("SafeguardPower"))
+    //{Output = Output | STATUS_MAJOR | STATUS_MINOR | STATUS_SPECIALTY | STATUS_TAUNT;}
+
+    //if(CheckInventory("MistFlag"))
+    //{Output = Output | STATUS_STATS  | STATUS_MINOR | STATUS_TAUNT;}
+
+    //if(CheckInventory("CleanseTag"))
+    //{Output = Output | STATUS_STATS;}
+SetResultValue(Output & Input);
 }

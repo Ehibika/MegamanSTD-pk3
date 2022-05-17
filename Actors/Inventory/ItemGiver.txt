@@ -1,4 +1,4 @@
-Actor SmallHealthFusion : CustomInventory replaces SmallHealth //10001
+Actor SmallHealth_MSTD : CustomInventory 
 {
 //$Category MM8BDM-Health/Energy
 -COUNTITEM
@@ -16,7 +16,7 @@ Loop
 Pickup:
 TNT1 A 0
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
-TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)<100,"Healme") 
+TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 
 TNT1 A 0
 Fail
 Healme:
@@ -34,7 +34,7 @@ Fail
 }
 }
 
-Actor BigHealthFusion : CustomInventory replaces BigHealth //10002
+Actor BigHealth_MSTD : CustomInventory //10002
 {
 //$Category MM8BDM-Health/Energy
 -COUNTITEM
@@ -52,17 +52,17 @@ Loop
 Pickup:
 TNT1 A 0
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
-TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(GetTotalHPPerc,0)<100,"Healme") 
+TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 
 
 TNT1 A 0
 Fail
 Healme:
-TNT1 A 0 HealThing(ACS_ExecuteWithResult(GetValueHPPerc,30))
+TNT1 A 0 HealThing(CallACS("MSTD_HealthPercent",0,1,30))
 TNT1 A 0 A_GiveInventory("TempFireProof",5)
 TNT1 A 0
 stop
 Detox:
-TNT1 A 1 A_Giveinventory("DetoxLevel",25)
+TNT1 A 1 A_Giveinventory("DetoxLevel",55)
 stop
 Nope:
 TNT1 A 0 
@@ -70,11 +70,26 @@ Fail
 }
 }
 
+actor ChangeFlagDropped1 : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_ChangeFlag("DROPPED",1)
+stop
+}
+}
 
-Actor SmallHealthFusion2 : absolutelynothing1 replaces WeaponEnergy 
-{}
-Actor BigHealthFusion2 : absolutelynothing1 replaces BigWeaponEnergy 
-{}
+actor ChangeFlagDropped0 : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_ChangeFlag("DROPPED",0)
+stop
+}
+}
+
 
 /*
 Actor WeaponEnergyFusion : CustomInventory replaces WeaponEnergy //10003

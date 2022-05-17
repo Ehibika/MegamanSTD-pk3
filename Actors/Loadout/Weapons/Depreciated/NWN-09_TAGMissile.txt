@@ -30,7 +30,7 @@ weapon.ammotype "TAGMissileClip"
 weapon.ammotype2 "TAGMissileClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

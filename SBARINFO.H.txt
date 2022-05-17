@@ -101,6 +101,38 @@ InInventory IsMegaman, 1
 	ininventory RushCallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RushCallCooldownItem, vertical,reverse, 25, 163;}
 	}
 
+InInventory IsMegamanX, 1
+	{
+	DrawImage "BDASWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", CombatDashCooldownItem, vertical,reverse, 5, 163;
+	ininventory CombatDashCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CombatDashCooldownItem, vertical,reverse, 5, 163;}
+
+	//DrawImage "RCOIL", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", XChargeShotCooldownItem, vertical,reverse, 25, 163;
+	ininventory XChargeShotCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", XChargeShotCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMegamanEXE, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", GutsPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory GutsPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GutsPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "RKCUBEI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RockCubeCooldownItem, vertical,reverse, 25, 163;
+	ininventory RockCubeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RockCubeCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMassimo, 1
+	{
+	DrawImage "TOMASI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", WhirlWindCooldownItem, vertical,reverse, 5, 163;
+	ininventory WhirlWindCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", WhirlWindCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "LASERSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BerzerkChargeCooldownItem, vertical,reverse, 25, 163;
+	ininventory BerzerkChargeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BerzerkChargeCooldownItem, vertical,reverse, 25, 163;}
+	}
 
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------

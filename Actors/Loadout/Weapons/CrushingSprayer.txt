@@ -12,7 +12,7 @@ weapon.ammotype "CrushingSprayer_Ammo"
 inventory.icon "FTONI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

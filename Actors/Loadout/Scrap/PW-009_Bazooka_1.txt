@@ -21,7 +21,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "BazookaRoundClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

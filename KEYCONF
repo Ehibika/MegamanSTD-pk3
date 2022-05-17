@@ -1,22 +1,18 @@
 clearplayerclasses
 addplayerclass STDMegaman
+addplayerclass MegamanX
+addplayerclass MegamanEXE
+addplayerclass Massimo
 //=====
 
 addkeysection "Extra" Extraoptions
 addmenukey "Reload " +reload
 addmenukey "Zoom " +zoom
+addmenukey "Ability " +user1
 
 defaultbind B +reload
 defaultbind N +zoom
-
-addkeysection "PSI Keys" commoptions
-addmenukey "'PSI Slot 1' " +user1
-addmenukey "'PSI Slot 2' " +user2
-addmenukey "'PSI Slot 3' " +user3
-addmenukey "'PSI Slot 4'" +user4
+defaultbind q +user1
 alias 
 
-defaultbind q +user1
-defaultbind e +user2
-defaultbind r +user3
-defaultbind f +user4
+

@@ -33,7 +33,7 @@ LISTMENU "MainMenu"
 		Font "DBIGFONT", "MenuGreen" // [C]
 		TextItem "Player Setup", "p", "PlayerMenu"
 		TextItem "Loadout", "t", "EditLoadOutMenu" //
-		TextItem "Database", "d", "N_DataBaseMenu" //
+		//TextItem "Database", "d", "N_DataBaseMenu" //
 		//Font "DBIGFONT", "MenuGreen" // [C]
 		//TextItem "Class Help", "h", "ReadThisMenu"
 		Font "DBIGFONT", "MenuWhite" //
@@ -82,9 +82,9 @@ ListMenu "PlayerMenu"//[v5c edit]
 	}
 	
 	Linespacing 14
-	ValueText "Suit", "Class"
+	ValueText "Class", "Class"
 	TextItem "Loadout", "w", "EditLoadOutMenu"
-	TextItem "Emblem", "e" , "EditEmblemMenu"
+	//TextItem "Emblem", "e" , "EditEmblemMenu"
 	ValueText "Skin", "Skin"
 	ValueText "Gender", "Gender", "Gender"
 	ValueText "Autoaim", "Autoaim", "Autoaim"

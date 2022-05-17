@@ -21,7 +21,7 @@ inventory.icon "THRII"
 weapon.ammotype "ThriceGunClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Weapon.slotnumber 2
 States

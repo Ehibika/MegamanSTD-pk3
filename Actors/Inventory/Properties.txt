@@ -1,0 +1,5 @@
+actor Pro_BusterMastery : Once {}
+actor Pro_MachineGunMastery : Once {}
+actor Pro_SprayerMastery : Once {}
+actor Pro_LauncherMastery : Once {}
+actor Pro_MeleeMastery : Once {}

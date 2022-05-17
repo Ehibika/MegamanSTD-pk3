@@ -1,0 +1,304 @@
+actor Ability2_Massimo : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "BerzerkCharge"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "LASERSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+HSPR M 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,0.4*FVM)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+
+Fire:
+"####" N 0 A_PlaySoundEx("weapon/xbcharge","Weapon")
+"####" N 0 A_ScaleVelocity(0.4)
+"####" N 1 Offset(0,110)
+"####" N 1 Offset(0,96)
+"####" N 1 Offset(0,82)
+"####" N 1 Offset(0,70)
+"####" N 1 Offset(0,58)
+"####" N 1 Offset(0,46)
+"####" N 1 Offset(0,32)
+"####" N 7 
+"####" NOP 2
+"####" "#" 0 A_PlaySoundEx("weapon/HardBuster6","Weapon")
+"####" "#" 0 A_PlaySoundEx("weapon/coilexplode", "SoundSlot6")
+"####" P 0 A_FireCustomMissile("BerzerkChargeDamagerStart",0,0,8,0)
+"####" PP 1 A_FireCustomMissile("BerzerkChargeBurstStart",0,0,8,0)
+"####" QR 2
+"####" A 0 A_GiveInventory("BerzerkChargeCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" B 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" R 1
+End:
+"####" R 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" R 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_Massimo : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("BerzerkChargeAbility",1)
+fail
+}
+}
+
+actor BerzerkChargeAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("BerzerkChargeCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+Actor BerzerkChargeTimer : Powerup{inventory.amount 1 powerup.duration 35}
+
+Actor BerzerkChargehitDelay : powerprotection
+{
+Powerup.duration 7
+Damagefactor "BerzerkCharge", 0
+}
+
+Const Int BerzerkChargeRange = 50;
+Const Int BZKCHR_HIGHDMG = 250;
+Const Int BZKCHR_LOWDMG = 35;
+
+actor BerzerkChargeDamagerStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_SpawnItemEx("BerzerkChargeDamager",0,0,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+actor BerzerkChargeDamager : FastProjectileBase
+{
+    PROJECTILE
+    damagetype "BerzerkCharge"
+    Obituary "$OB_BerzerkCharge"
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +RIPPER
+    +SERVERSIDEONLY
+    RenderStyle None
+    Damage (0) 
+    Radius 10
+    Height 10
+    speed 15 
+    scale 2.5
+    states
+    {
+        Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > BerzerkChargeRange,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("BerzerkChargeDamager",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_Explode(CallACS("MassimoDamageRamp",BZKCHR_LOWDMG,BZKCHR_HIGHDMG),32,0,0,32)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_Explode(CallACS("MassimoDamageRamp",BZKCHR_LOWDMG,BZKCHR_HIGHDMG),32,0,0,32)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_Explode(CallACS("MassimoDamageRamp",BZKCHR_LOWDMG,BZKCHR_HIGHDMG),32,0,0,32)
+        stop
+
+        
+    }
+}
+
+actor BerzerkChargeBurstStart //: BasicHelper
+{
+    +MISSILE
+    -SOLID
+    +NOCLIP
+    +NOINTERACTION
+    +NOGRAVITY
+    +DONTBLAST
+    +DONTREFLECT
+    +THRUACTORS
+    RenderStyle none
+    Radius 2
+    Height 2
+
+    Speed 15
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
+        TNT1 A 1 A_SpawnItemEx("BerzerkChargeBurst",0,0,0,momx,momy,momz,0,8)
+        stop
+    }
+}
+
+actor BerzerkChargeBurst : FastProjectileBase//FastProj to match damager hitbox
+{
+    +MISSILE
+    +NOGRAVITY
+    +SKYEXPLODE
+    +EXPLODEONWATER
+    +DONTSPLASH
+    +PAINLESS
+    +CLIENTSIDEONLY
+    +THRUACTORS
+    RenderStyle None
+    Damage (0)
+    Radius 4
+    Height 4
+    Speed 15
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 A_JumpIf(Pitch > BerzerkChargeRange,"Death2")
+        TNT1 A 0 A_SetPitch(Pitch+1)
+        TNT1 A 0 A_SpawnItemEx("BerzerkChargeBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("BerzerkChargeFX",0,0,0,0,0,0,0,1)
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 A_SpawnItemEx("BerzerkChargeEndFX",0,0,0,0,0,0,0,1)
+        stop
+    Death2:
+        TNT1 A 0 A_Stop
+        TNT1 A 0 A_SpawnItemEx("BerzerkChargeEndFX",0,0,0,0,0,0,0,1)
+        stop
+    }
+}
+
+
+actor BerzerkChargeFX : BasicGraphicEffect
+{
+ReactionTime 6
+renderstyle "add"
+speed 25
+scale 5.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+MBEA A 3
+MBEA AAAAA 2 A_SetScale(ScaleX-0.5)
+FXLoop:
+MBEA A 2 A_SetScale(ScaleX-0.5)
+MBEA A 0 A_Fadeout
+MBEA A 0 A_CountDown
+loop
+}
+}
+
+actor BerzerkChargeEndFX : BerzerkChargeFX
+{
+States
+{
+Spawn:
+CRBM A 0
+TNT1 A 0 A_PlaySoundEx("weapon/Mirrordeflect","Weapon")
+ASEX AABCDEF 1
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor BerzerkChargeCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("BerzerkChargeCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BerzerkChargeCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor BerzerkChargeCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("BerzerkChargeCooldownItem",420)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("BerzerkChargeCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor BerzerkChargeCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 420
+}

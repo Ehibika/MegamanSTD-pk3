@@ -419,6 +419,9 @@ stop
 Death:
 TNT1 A 1
 stop
+Perish:
+TNT1 A 1
+stop
 }
 }
 

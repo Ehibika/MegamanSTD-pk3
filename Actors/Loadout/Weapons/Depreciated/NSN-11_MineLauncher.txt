@@ -25,7 +25,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "MineLauncherClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Weapon.slotnumber 2
 States

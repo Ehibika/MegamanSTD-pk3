@@ -11,7 +11,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "LightWaveCannon_Ammo"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Var int User_Spread;
 States
@@ -47,21 +47,12 @@ Fire:
 0G_H B 2 Offset(4,28)
 0G_H C 2 Offset(8,24)
 0G_H B 2 Offset(4,28)
-0G_H A 2 A_WeaponReady(WRF_NOPRIMARY)
 0G_H A 0 A_Giveinventory("LightWaveCannonCST",1)
-/*
-0G_H D 10 A_PlaySound("weapon/AutoReload1",4,1.0)
-0G_H D 0 A_PlaySound("weapon/AutoReload2",1,0.75)
-0G_H D 2 Offset(-6,44)
-0G_H D 2 Offset(-6,44)
-0G_H D 6 A_WeaponReady(14)
-0G_H A 8 A_PlaySound("weapon/AutoReload3",1,0.75)
-*/
 "####" A 0 A_Refire("Fire")
 Goto Ready.Wep
 
 Fire.Buffer:
-"####" A 1
+"####" A 1 A_WeaponReady(WRF_NOPRIMARY|WRF_ALLOWRELOAD)
 "####" A 0 A_Refire("Fire")
 Goto Ready.Wep
 

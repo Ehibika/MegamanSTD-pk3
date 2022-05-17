@@ -18,7 +18,7 @@ inventory.icon "CARBI"
 weapon.ammotype "MediRifleClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

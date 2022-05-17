@@ -1,7 +1,15 @@
 actor ConShotTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
+actor RefireBuffer : Powerup {inventory.amount 1 Powerup.Duration 5}
 actor FiringSpeed : PowerSpeed {inventory.amount 1 Powerup.Duration 17 Speed 0.5 +POWERSPEED.NOTRAIL}
 
+actor AltCooldownFlag : Once {}
+actor AbilityCooldownFlag : Once {}
 
+actor AbilityAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 1
+}
 //[+]========================================================================[+]
 //-------------------------|Projectile TRanslation Script|---------------------
 //[+]========================================================================[+]

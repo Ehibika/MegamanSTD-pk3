@@ -1,0 +1,35 @@
+Actor megamanEXE : ClassBase 
+{
+Player.DisplayName "megamanEXE"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsmegamanEXE"
+Player.Startitem "UseAbility1_megamanEXE"
+Player.Startitem "UseAbility2_megamanEXE"
+
++NOSKIN
+States
+{
+Spawn: 
+XSK0 A 0
+XSK0 B 1 
+XSK0 A 1
+GoTo Spawn+2
+See:
+XSK0 BCDE 5
+GoTo Spawn+1
+Missile:
+XSK0 F 5
+XSK0 G 4
+GoTo Spawn+2
+PainFix:
+XSK0 H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsmegamanEXE : Once{}

@@ -13,9 +13,9 @@ OptionMenu "EditLoadOutMenu"
 	StaticText ""
 	StaticText ""
 	
-	Option "Weapon B", "Lo_WepB", "WepOptionsB"
+	Option "Weapon B", "Lo_WepB", "WepOptionsA"
 	StaticText ""
-		Option "Desc:", "Lo_WepB", "WepDescB", "unselectable"
+		Option "Desc:", "Lo_WepB", "WepDescA", "unselectable"
 	StaticText ""
 	StaticText ""
 	StaticText ""
@@ -24,7 +24,9 @@ OptionMenu "EditLoadOutMenu"
 	StaticText ""
 	StaticText ""
 	StaticText ""
-	StaticText "Remember to Bind the reload Key!"
+	StaticText "Remember to Bind the reload and ability Key!"
+	Control 	"Reload",			"+Reload"
+	Control 	"Ability",			"+User1"
 }
 
 
@@ -60,6 +62,31 @@ OptionValue EmblemOptions
 
 OptionValue WepOptionsA
 {
+0, "Military Buster"
+1, "Wind Pressure Buster \cf:Wind:"
+2, "Arrow Buster"
+3, "Shadow Buster"
+4, "Lazer Rifle"
+5, "Triangle Gun"
+6, "HighSpeed Rifle"
+7, "Gatling Gun \cf:Heavy:"
+8, "Shotgun"
+9, "GasEmitter \cf:Toxic:"
+10, "Compressed Sprayer \cf:Wind:"		
+11, "Burning Sprayer \cf:Heat:"		
+12, "Snowy Sprayer \cf:Freeze:"		
+13, "Crushing Sprayer \cf:Matter:"		
+14, "EnergyCannon"		
+15, "Mega Cannon"		
+16, "LightWave Cannon"		
+17, "DrillHead Cannon"		
+18, "Standard Saber"		
+19, "Beam Rapier"		
+20, "Triangular Saber"
+}
+
+OptionValue WepOptionsB
+{
 0, "MilitaryBuster"
 1, "Wind Pressure Buster"
 2, "Arrow Buster"
@@ -83,32 +110,6 @@ OptionValue WepOptionsA
 20, "TriangularSaber"
 }
 
-
-OptionValue WepOptionsB //No Primaries
-{
-0, "Military Buster"
-1, "Wind Pressure Buster"
-2, "Arrow Buster"
-3, "Shadow Buster"
-4, "Lazer Rifle"
-5, "Triangle Gun"
-6, "HighSpeed Rifle"
-7, "Gatling Gun"
-8, "Shotgun"
-9, "GasEmitter"
-10, "Compressed Sprayer"		
-11, "Burning Sprayer"		
-12, "Snowy Sprayer"		
-13, "Crushing Sprayer"		
-14, "EnergyCannon"		
-15, "Mega Cannon"		
-16, "LightWave Cannon"		
-17, "DrillHead Cannon"		
-18, "Standard Saber"		
-19, "Beam Rapier"		
-20, "Triangular Saber"
-}
-
 OptionValue SubWepOptions
 {
 0, "None"
@@ -125,30 +126,31 @@ OptionValue SubWepOptions
 OptionValue WepDescA
 {
 //-1, "Null"
-0, "---"
-1, "Standard issue Assault weapon \n With Solid power but \nconsiderable kickback while firing"
-2, "High Precision Energy Gun,\n pump action weapon that is\n great at long range."
-3, "chargeable beam rail that \ncan obloterate distant foes, has \nconsiderable kickpack on charge shots."
-4, "launches modified minibombs that \nexplode on impact, high \npower but slow"
-5, "A medical weapon, it's shots can heal \n allies but also harm enemies,\n has decent range but slow firing"
-6, "A mid-long ranged weapon that can \nlaunch poisoned darts if given \nthe time to prime, suppressing healing"
-7, "A Flamethrower that periodically \nspews embers that can set enemies \nablaze, dealing damage over time"
-8, "Super electro-lazer that burns \nright through enemies and \ndefenses alike!"
-//9, "Launches small homing missiles, \nhold fire to lock onto \nfoes before firing"
-9, "This heavy weapon can fire a rapid \nvolley of projectiles! slow and \nrequire time to rev up"
+0, "Pemier combat grade Buster weapon"
+1, "Buster Weapon that fires Fast, \n Air blasts, deals wind \nDamage"
+2, "Sniper type Buster weapon that\n Launches precise and powerful beams."
+3, "Trick shot type buster that fires \nSpinning blades that return and\nRicochet off walls."
 
-10, "Standard and well rounded, \ncan fire as quickly as you \ncan pull but may overheat."
-11, "PowerFul spread weapon, \ndeals high damage up close and \nmoderate mid-ranged damage"
-12, "Rapid volley of high velocity \nshots, not the strongest but \nhas excellent coverage"
-13, "3-way icicle shot, has \n amazing cover, making this weapon \nideal in wider areas"
-14, "a non offensive weapon that \nheals damage with a healing stream,\n works best out of combat"
-15, "Take a lunch break and eat this \nself replenishing sandwich. \caall \nharm will Crit you while eating however."
-16, "launches arrow-shaped projectile \nthat follow your reticle, a tricky \nweapon with multiple uses"
-17, "Launches large, superheated projectiles, \ndeals critical damage to foes \non fire"
-18, "Launch a volley of bouncing fireballs, \nweak in power but can easily \noverwhelm targets."
-19, "poisons a target through successive \nhits, deals critical damage to \npoisoned targets as well"
-20, "shoots Proxy mines that explode \nwhen enemies are in range, \nup to two can be out per person."
-21, "Encase an ally in a healing \nshield that reduces a \nsingle hit by half."
+4, "Standar issue machine gun \nwith adequate firepower."
+5, "Machine gun that fires Shots \nin a 3-way pattern."
+6, "Machine gun optimized for faster \nFiring at the expense of power."
+7, "Heavy machine gun with a large \noutput of projectiles."
+8, "Machine gun that fires \na repeating shotgun spread."
+
+9, "Sprayer that emits a constant \nStream of corrosive gas, \nDeals toxic damage and inflicts poison"
+10, "Burst Sprayer that emits \nA Blast of air to repell foes \nand yourself, deals wind damage."
+11, "Sprayer that emits a constant \nStream of Fire, \nDeals Heat damage and inflicts Burn"
+12, "Sprayer that emits a constant \nStream of Freezing material, \nDeals Freeze damage and inflicts Frostbite"
+13, "Burst Sprayer that emits \nA Destructive Blast, \ndeals Matter damage."
+
+14, "Launcher that fires \nexplosive energy."
+15, "Launcher that fires \nan exploding missile"
+16, "Launcher that fires \nFar reaching energy blasts"
+17, "Launcher that fires \nan exploding drill that \nbores through enemies."
+
+18, "Standard issue beam saber \nthat deals extra damage \nat it's tip"
+19, "Narrow but far reaching \nbeam saber that does extra \ndamage at it's tip"
+20, "Wide swinging beam saber."
 }
 
 OptionValue WepDescB
@@ -309,3 +311,4 @@ OptionValue PSIDetailDesc
 1,"Launch a fast moving \nprojectile that explodes \non impact, can \nset foes ablaze"
 
 }
+

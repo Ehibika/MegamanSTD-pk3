@@ -1,7 +1,7 @@
 
 #include "Actors/SourceActors.txt"
 #include "Actors/BaseFlags.txt"
-#include "Actors/Nullifiers/ReplacingStuff.txt"
+#include "Actors/Loadout/ConstList.txt"
 
 #include "actors/Classes/ClassBase/classbase0.txt"
 #include "actors/Classes/ClassBase/classbase1.txt"
@@ -10,7 +10,9 @@
 #include "actors/Classes/ClassBase/classbaseTID.txt"
 #include "actors/Classes/ClassBase/classbase-flags.txt"
 
-#include "Actors/Loadout/ConstList.txt"
+#include "actors/Classes/ClassBase/classbaseStatuses.txt"
+#include "actors/Classes/ClassBase/classbaseStatuses2.txt"
+
 
 //#include "Actors/Loadout/WeaponBase/MasterBase.txt"
 #include "Actors/Loadout/WeaponBase/WeaponBase0.txt"
@@ -21,6 +23,19 @@
 #include "Actors/Classes/Megaman/MegamanClass.txt"
 #include "Actors/Classes/Megaman/Rushcall.txt"
 #include "Actors/Classes/Megaman/CombatSlide.txt"
+
+#include "Actors/Classes/MegamanX/MegamanXClass.txt"
+#include "Actors/Classes/MegamanX/CombatDash.txt"
+#include "Actors/Classes/MegamanX/XChargeShot.txt"
+
+#include "Actors/Classes/MegamanEXE/MegamanEXEClass.txt"
+#include "Actors/Classes/MegamanEXE/GutsPunch.txt"
+#include "Actors/Classes/MegamanEXE/RockCube.txt"
+
+
+#include "Actors/Classes/Massimo/MassimoClass.txt"
+#include "Actors/Classes/Massimo/WhirlWind.txt"
+#include "Actors/Classes/Massimo/BerzerkCharge.txt"
 
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
@@ -114,6 +129,7 @@
 #include "Actors/inventory/KeyItems.txt"
 #include "Actors/inventory/PlayerIcons.txt"
 #include "Actors/inventory/Armor.txt"
+#include "Actors/inventory/Properties.txt"
 
 //misc
 

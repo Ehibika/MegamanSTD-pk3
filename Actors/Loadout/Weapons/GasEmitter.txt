@@ -12,7 +12,7 @@ weapon.ammotype "GasEmitter_Ammo"
 inventory.icon "FTONI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {
@@ -283,7 +283,7 @@ damage (0)
 reactiontime 1
 scale 1.5
 RenderStyle "Translucent"
-Alpha 0.8
+Alpha 0.6
 States
 {
 Spawn:

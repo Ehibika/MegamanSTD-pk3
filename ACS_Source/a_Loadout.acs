@@ -55,7 +55,7 @@ if ((ClassifyActor(0) & ACTOR_BOT))
 //===|Check Weapon A
 if(WepA_Num >= 0)
 	{
-		log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
+		//log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
 		GiveInventory(MasterWepList[WepA_Num][1],1);		
 	}
 
@@ -64,7 +64,7 @@ if(WepB_Num >= 0)
 	{
 	if(WepA_Num != WepB_Num)
 	{
-		log(s:"Get Second = ", s:MasterWepList[WepB_Num][1]);
+		//log(s:"Get Second = ", s:MasterWepList[WepB_Num][1]);
 	GiveInventory(strParam(s:MasterWepList[WepB_Num][1],i:2),1);
 	}
 	else //Doubled weapon, you get a military buster or Wind Pressure Buster
@@ -85,3 +85,54 @@ if	 (MasterWepList[WepA_Num][4] == "MEDICAL")
 delay(1);
 }
 
+Function int STD_WhichWeapon(void) // Which STD weapon is the player currently using.  From MasterWepList array
+{
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+	If(CheckWeapon2(MasterWepList[i][1]))
+		{
+		If(MasterWepList[i][3] > 0.0){Return i;}
+		}
+	}
+Return -1;
+}
+
+Function str STD_WhichWeaponName(void) //Find the weapon the player is currently using and return the name of it
+{
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+	If(CheckWeapon2(MasterWepList[i][1]))
+		{
+		If(MasterWepList[i][3] > 0.0){Return MasterWepList[i][1];}
+		}
+	}
+Return "";
+}
+
+
+//#region -=- Extra Weapon Functions
+#region -=- Extra Weapon Functions
+
+function bool CheckWeapon2(str weapon) {
+	//return (CheckWeapon(weapon)||CheckWeapon(AddSuffix(weapon,"2")));
+	return (CheckWeapon(weapon)||(weapon==SubtractSuffix(GetWeapon())));
+}
+
+function str SubtractSuffix(str string)  {
+	return StrLeft(string,StrLen(string)-1);
+}
+
+function bool CheckInventory2(str inventory_item) {
+	return (CheckInventory(inventory_item)
+		||CheckInventory(AddSuffix(inventory_item,"1"))
+		||CheckInventory(AddSuffix(inventory_item,"2"))
+		||CheckInventory(AddSuffix(inventory_item,"3"))
+		||CheckInventory(AddSuffix(inventory_item,"4"))
+		);
+}
+
+function str AddSuffix(str string, str suffix)  {
+	return StrParam(s:string,s:suffix);
+}
+#endregion
+//#endregion

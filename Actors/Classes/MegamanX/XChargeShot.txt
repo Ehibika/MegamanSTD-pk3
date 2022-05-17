@@ -1,0 +1,241 @@
+actor Ability2_MegamanX : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "Dash Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "BDASWI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+XBUS A 0 
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_GiveInventory("WeaponCharge")
+"####" A 0 A_PlaySoundEx("weapon/xbcharge","Weapon")
+Ready1:
+"####" DDAA 1 A_WeaponReady
+goto Ready1
+
+
+Fire:
+"####" A 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" A 0 A_FireCustomMissile("XChargeShotRound",0,0,4,4,0,0)
+"####" A 0 A_TakeInventory("WeaponCharge",999)
+"####" BCA 2
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
+"####" A 0 A_GiveInventory("XChargeShotCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+//AltFire:
+//"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+
+	Sound.BusterCharge:
+		TNT1 A 9 A_PlaySoundEx("weapon/adapterchargeloop","Weapon",0)
+		TNT1 A 1 A_JumpIfInventory("WeaponCharge",1,"Sound.BusterCharge")
+        stop
+}
+}
+//====
+
+actor UseAbility2_MegamanX : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("XChargeShotAbility",1)
+fail
+}
+}
+
+actor XChargeShotAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("XChargeShotCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor XChargeShotRound : fastProjectileBase
+{
+Obituary "$OB_XChargeShot"
+DamageType "XChargeShot"
+Speed 96
+Damage (20)
+scale 3.5
+radius 14
+height 18
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+XSHO DEF 1 A_SpawnItemEx("XChargeShotTrail",-85,0,-momz,momx,momy,momz,0,9)
+Goto Spawn2
+Death:
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Explode(45,96,0,0,48)
+TNT1 A 0 A_Spawnitemex("XChargeShotPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 1 A_Spawnitemex("XChargeShotSource")
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor XChargeShotTrail : ExplosionBase
+{
+Obituary "$OB_XChargeShotBUSTER"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+actor XChargeShotTrail_FX : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+XSHO G 1
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor XChargeShotTrail_FX1 : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+XSHO H 1
+stop
+}
+}
+
+actor XChargeShotPuff1 : FXActor_A
+{
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+SHFX LMNOP 1
+stop
+}
+}
+
+actor XChargeShotSource : ExplosionBase //
+{
+States
+{
+Spawn:
+MINB A 0 
+MINB A 0 ACS_NamedExecuteAlways("BLASTKNOCKBACK",0,-90,60,220)
+TNT1 AA 1 
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor XChargeShotCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("XChargeShotCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("XChargeShotCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor XChargeShotCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("XChargeShotCooldownItem",122)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("XChargeShotCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor XChargeShotCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 122
+}

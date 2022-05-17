@@ -27,7 +27,7 @@ weapon.ammotype "IceCapsuleClip"
 weapon.ammotype2 "IceCapsuleClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

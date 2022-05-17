@@ -28,7 +28,7 @@ weapon.ammotype "LongBombClip"
 weapon.ammotype2 "LongBombClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 States
 {

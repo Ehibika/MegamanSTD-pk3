@@ -1,0 +1,285 @@
+actor Ability2_megamanEXE : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "RockCube Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "RKCUBEI"
+Dropitem ""
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
++WEAPON.NOAUTOFIRE
+States
+{
+
+Ready:
+XB20 B 0 
+"####" B 0 A_SpawnItemEX("RockCubeSpawnVisual",80,0,16,0)
+"####" B 1 A_WeaponReady
+goto ready
+
+Fire:
+
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_SpawnItemEX("RockCube",80,0,16,1)
+"####" C 7 
+"####" BA 2 
+"####" C 0 A_GiveInventory("RockCubeCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" B 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" B 1
+End:
+"####" B 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" B 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_megamanEXE : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("RockCubeAbility",1)
+fail
+}
+}
+
+actor RockCubeAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("RockCubeCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+
+actor RockCube
+{
+height 64
+radius 32
+scale 2.0
++NOTARGETSWITCH
++DONTRIP
+painsound "misc/devilpain"
+painchance 256
+damagefactor "GutsPunch", 1000.0
+
+damagefactor "StandardSaberEdge", 0.3
+damagefactor "StandardSaberTip", 0.3
+damagefactor "BeamRapireEdge", 0.3
+damagefactor "BeamRapireTip", 0.3
+damagefactor "TriangularBladeEdge", 0.3
+damagefactor "TriangularBladeTip", 0.3
+
+translation "0:255=0:255"
+
+//Item 1
++FORCEYBILLBOARD
+-SHOOTABLE
++SOLID
++THRUSPECIES
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++MISSILE
+species "MovingPlatform"
++THRUSPECIES
+
+//Concrete Shot
++NOTAUTOAIMED
++CANTSEEK
++NOBLOOD
++DONTRIP
+Health 250
+Mass 9999
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode")
+TNT1 D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,2,1)
+TNT1 A 1 A_SpawnItemEX("RockCubeVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_Stop
+TNT1 A 0 Thing_ChangeTID(0,ACS_NamedExecuteWithResult("core_gettarget")+4500)
+TNT1 A 0 A_ChangeFlag(MISSILE, 0)
+TNT1 A 0 A_ChangeFlag(THRUGHOST,0)
+TNT1 A 0 A_ChangeFlag(SHOOTABLE,1)
+Spawn2:
+TNT1 A 1 A_SpawnItemEX("RockCubeVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+wait
+
+Pain:
+TNT1 A 2 A_Pain
+goto Spawn2
+
+Death.GutsPunch:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_ChangeFlag(SHOOTABLE,0)
+TNT1 A 0 A_ChangeFlag(SOLID,0)
+TNT1 A 2 A_Pain
+TNT1 A 0 A_RadiusGive("GutsPunchBreaker",192,RGF_PLAYERS) //see GutsPunch.txt for this actor
+goto DeathEnd
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_ChangeFlag(SHOOTABLE,0)
+TNT1 A 0 A_ChangeFlag(SOLID,0)
+TNT1 A 2 A_Pain
+DeathEnd:
+TNT1 A 0 A_JumpIfInTargetInventory("LightTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"Colored")
+TNT1 A 1 A_Jump(256,"NotColored")
+wait
+NotColored:
+TNT1 A 0 A_SpawnItemEX("ExplosionEffect1",0,0,32,0,0,0,0)
+TNT1 AAAAA 0 A_SpawnItemEx("RockCubeFX",0,0,32,random(1,5),random(-10,10),random(8,12),random(0,359))
+TNT1 A 10
+stop
+Colored:
+TNT1 A 0 A_SpawnItemEX("ExplosionEffect1",0,0,32,0,0,0,0,1)
+TNT1 AAAAA 0 A_SpawnItemEx("RockCubeFX",0,0,32,random(1,5),random(-10,10),random(8,12),random(0,359),1)
+TNT1 A 10
+stop
+}
+}
+
+actor RockCubeFX
+{
+translation "192:192=4:4", "198:198=88:88"
+PROJECTILE
++DONTSPLASH
++CLIENTSIDEONLY
++THRUACTORS
+-NOGRAVITY
+Damage (0)
+Height 3
+Radius 3
+Speed 5
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 
+TNT1 A 0 A_Jump(256,"Debris1","Debris2","Debris3","Debris4")
+Debris1:
+TNT1 A 1
+XU00 F -1
+Debris2:
+TNT1 A 1
+XU00 G -1
+Debris3:
+TNT1 A 1
+XU00 H -1
+Debris4:
+TNT1 A 1
+XU00 I -1
+stop
+}
+}
+
+actor RockCubeSpawnVisual : BasicGraphicEffect
+{
+renderstyle "add"
+alpha 0.5
+scale 2.0
+States
+{
+Spawn:
+XU00 B 0
+XU00 B 0 A_GiveInventory("ProjectileFXCode",1)
+XU00 B 2
+stop
+}
+}
+
+actor RockCubeVisual
+{
+PROJECTILE
++NOINTERACTION
++FORCEYBILLBOARD
++NOCLIP
+scale 2.0
++CLIENTSIDEONLY
+height 0
+radius 0
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_JumpIf(CallACS("MMBN_OpenGLCheck"),"OpenGL")
+TNT1 A 0 A_JumpIf(!CallACS("MMBN_OpenGLCheck"),"Software")
+TNT1 A 1
+stop
+OpenGL:
+XU00 C 1
+stop
+Software:
+XU00 D 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor RockCubeCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("RockCubeCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("RockCubeCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor RockCubeCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("RockCubeCooldownItem",175)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("RockCubeCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor RockCubeCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 175
+}

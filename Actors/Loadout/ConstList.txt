@@ -168,3 +168,9 @@ const int RG_LOS = 8;
 //=======|Targeting Constants|==========
 const int TG_TEAM = 1;
 const int TG_ENEMY = 2;
+//=======|StatusGuard Constants|==========
+const int STATUS_MINOR = 1;
+const int STATUS_MAJOR = 2;
+const int STATUS_SPECIALTY = 4;
+const int STATUS_STATS = 8;
+const int STATUS_TAUNT = 16;

@@ -76,6 +76,11 @@ weapon/VoltSpear VOLTS
 weapon/Rebound REBOUND
 weapon/ObjectHit HARDHIT
 
+//Megamanx
+weapon/xbcharge xcharge
+weapon/xbshoot xshot
+weapon/xbmid xmidshot
+
 //Slick
 sprinkler/place SPRPUT
 sprinkler/shot SPRSHT

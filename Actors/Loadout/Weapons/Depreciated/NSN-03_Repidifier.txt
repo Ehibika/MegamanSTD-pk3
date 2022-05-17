@@ -18,7 +18,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "RepidifierClip"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
-+WEAPON.NOAUTOFIRE
+//+WEAPON.NOAUTOFIRE
 +WEAPON.NOAUTOAIM
 Var int User_Spread;
 Weapon.slotnumber 2
