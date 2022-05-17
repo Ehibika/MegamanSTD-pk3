@@ -1,0 +1,428 @@
+#library "DMGNUM"
+#include "zcommon.acs"
+
+script "damagenumbers_notifier" (void) CLIENTSIDE
+{
+if(GetUserCvar(ConsolePlayerNumber(),"trill_dm_notification")){
+	Log(s:StrParam(
+	s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), s:"Damage display \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), s:"enabled. Type \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), s:"ddoptions\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+	s:" in console for available options."));
+	}
+}
+
+#DEFINE NOSPECTATORMODE true
+
+int PlayerLastHitNoise[64];
+
+script "DamageNumbers_Open" OPEN{
+	for(int i = 0; i < 64; i++){
+		SetCvar(StrParam(s:"Player_", i:i, s:"_Script"),false);
+	}
+	Delay(35);
+	for(i = 0; i < 64; i++){
+		if(!IsNetworkGame()){i = 65;}
+		if(GetCvar(StrParam(s:"Player_", i:i, s:"_Script"))==false && NamedExecuteClientScript("DamageNumbers_Watcher",i,Timer())){NamedExecuteClientScript("damagenumbers_notifier",i); SetCvar(StrParam(s:"Player_", i:i, s:"_Script"),true);}
+	}
+}
+
+script "DamageNumbers_GetValue" (int type) CLIENTSIDE{
+	int Result = 1;
+	if(type == 0){
+		Result = GetUserVariable(0,"user_random");
+	}
+	else{
+		Result = GetUserVariable(0,"user_angle");
+	}
+	SetResultValue(Result);
+}
+
+script "DamageNumbers_SpawnNumbers" (int type, int number) CLIENTSIDE{
+	str typeString = "Damage";
+	if(type == 1){typeString = "Heal";}
+	if(number < 10){
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"Number", i:number),1);
+	}
+	else if(number < 100){
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberX", i:number % 10),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"Number", i:number % 10, s:"X"),1);
+	}
+	else if(number < 1000){
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberXX", i:number % 10),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberX", i:number % 10, s:"X"),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"Number", i:number % 10, s:"XX"),1);
+	}
+	else{
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberXXX", i:number % 10),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberXX", i:number % 10, s:"X"),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"NumberX", i:number % 10, s:"XX"),1);
+		number /= 10;
+		GiveInventory(StrParam(s:"Spawn", s:typeString, s:"Number", i:number % 10, s:"XXX"),1);
+	}
+}
+
+script "DamageNumbers_Unload" UNLOADING{
+	for(int i = 0; i < 64; i++){
+		SetCvar(StrParam(s:"Player_", i:i, s:"_DamageDone"),0);
+		SetCvar(StrParam(s:"Player_", i:i, s:"_KnocksTaken"),0);
+	}
+}
+
+script "DamageNumbers_Disconnect" (int goner) DISCONNECT{
+	if (!PlayerIsSpectator(goner)){
+		SetCvar(StrParam(s:"Player_", i:goner, s:"_DamageDone"),0);
+		SetCvar(StrParam(s:"Player_", i:goner, s:"_KnocksTaken"),0);
+		SetCvar(StrParam(s:"Player_", i:goner, s:"_Script"),false);
+	}
+}
+
+script "DamageNumbers_Watcher" (int mapTimer) CLIENTSIDE{
+	if(Timer()<5){
+	Delay(35);
+	}
+	
+	int cpn = ConsolePlayerNumber();
+	SetHudSize(600, 450, 0);
+	int cam;
+	str lastHit = "";
+	str dmgDone = "";
+	str totalDmg = "";
+	str DPS = "";
+	str frags = "";
+	str lastKnock = "";
+	str kckDone = "";
+	str totalKck = "";
+	str deaths = "";
+	bool cvarAndServer;
+	bool serverAndCondition;
+	bool combined;
+	int buttons;
+	while(true){
+		if(GetUserCvar(cpn,"trill_dm_scoreboarddisable")){
+			buttons = GetPlayerInput(cpn, INPUT_BUTTONS);
+			}
+		else{
+			buttons = 0;
+			}
+		cam = CheckPlayerCamera(cpn);
+		cvarAndServer = GetUserCvar(cpn,"trill_dm_acsdisplay") && NOSPECTATORMODE;
+		serverAndCondition = GetUserCvar(cpn,"trill_dm_acsdisplay") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
+		combined = cvarAndServer || serverAndCondition;
+		if(!(buttons & BT_SHOWSCORES) && cam>=1000 && cam<=1063 && combined){
+			if(GetUserCvar(cpn,"trill_dm_showlasthit")){
+				lastHit = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_lasthitmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:CheckActorInventory(cam, "DM_LastHit"), s:" (", i:CheckActorInventory(cam, "DM_LastHitAmount"), s:")");
+			}
+			else{lastHit = "";}
+			if(GetUserCvar(cpn,"trill_dm_showdamagedone")){
+				dmgDone = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_damagemessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:CheckActorInventory(cam, "DM_DamageDone"));
+			}
+			else{dmgDone = "";}
+			if(GetUserCvar(cpn,"trill_dm_showtotaldamage")){
+				totalDmg = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_totalmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:GetCvar(StrParam(s:"Player_", i:cam-1000, s:"_DamageDone")));
+			}
+			else{totalDmg = "";}
+			if(GetUserCvar(cpn,"trill_dm_showdps")){
+				DPS = CleanDecimal(StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_dpsmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), f:FixedDiv(CheckActorInventory(cam, "DM_DPSDamage") << 16,FixedDiv((mapTimer-CheckActorInventory(cam,"DM_FirstInstanceOfDamage")) << 16, 35.0))));
+			}
+			else{DPS = "";}
+			if(GetUserCvar(cpn,"trill_dm_showfrags")){
+				frags = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_fragsmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:GetPlayerScore(cam-1000,SCORE_FRAGS));
+			}
+			else{frags = "";}
+			if(GetUserCvar(cpn,"trill_dm_showlastknock")){
+				lastKnock = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_lastknockmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:CheckActorInventory(cam, "DM_LastKnock"), s:" (", i:CheckActorInventory(cam, "DM_LastKnockAmount"), s:")");
+			}
+			else{lastKnock = "";}
+			if(GetUserCvar(cpn,"trill_dm_showknockstaken")){
+				kckDone = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_knocksmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:CheckActorInventory(cam, "DM_KnocksTaken"));
+			}
+			else{kckDone = "";}
+			if(GetUserCvar(cpn,"trill_dm_showtotalknocks")){
+				totalKck = StrParam(s:"\n\c", s:GetUserCvarString(cpn,"trill_dm_texthighlights"), s:GetUserCvarString(cpn,"trill_dm_totalknocksmessage"), s:" \c", s:GetUserCvarString(cpn,"trill_dm_textnumbers"), i:GetCvar(StrParam(s:"Player_", i:cam-1000, s:"_KnocksTaken")));
+			}
+			else{totalKck = "";}
+			HudMessage( 
+				s:lastHit,
+				s:dmgDone,
+				s:totalDmg,
+				s:frags,
+				s:DPS,
+				s:"\n",
+				s:lastKnock,
+				s:kckDone,
+				s:totalKck;
+				HUDMSG_PLAIN, -9999, CR_WHITE, 0.1, 225.1, 1.0 / 35 + 3);
+			}
+		Delay(1);
+		mapTimer++;
+		}
+	}
+
+function str CleanDecimal(str string){
+	int dec = -1;
+	for(int i = 0; i < StrLen(string); i++){
+		if(GetChar(string,i)=='.'){
+			dec = i;
+			break;
+		}
+	}
+	if(dec == -1){return StrParam(s:string, s:".00");}
+	else{
+		return StrLeft(string, dec+3);
+	}
+	return string;
+}
+
+script "DamageNumbers_Enter" ENTER{
+	int team = GetPlayerInfo(PlayerNumber(),PLAYERINFO_TEAM);
+	if(team == 255){team = 4;}
+	int oldHP = GetActorProperty(ActivatorTID(),APROP_Health);
+	int diff = 0;
+	while(GetActorProperty(ActivatorTID(),APROP_Health)>0 && PlayerInGame(PlayerNumber())){
+		diff = GetActorProperty(ActivatorTID(),APROP_Health) - oldHP;
+		if(diff < 0){
+			oldHP = GetActorProperty(ActivatorTID(),APROP_Health);
+		}
+		else if(diff > 0){
+			oldHP = GetActorProperty(ActivatorTID(),APROP_Health);
+			
+			if(diff > 9999){diff = 9999;}
+			if(team < 4){ACS_NamedExecuteAlways("DamageNumbers_HealNumber",0,diff,1);}
+			else{ACS_NamedExecuteAlways("DamageNumbers_HealNumber",0,diff,2);}
+		}
+		Delay(1);
+	}
+}
+
+script "DamageNumbers_Respawn" RESPAWN{
+	HudMessage(s:""; HUDMSG_PLAIN,-9998,CR_GOLD,0.5,0.75,5.0);
+	ACS_NamedExecuteAlways("DamageNumbers_Enter",0);
+}
+
+script "DamageNumbers_Death" DEATH{
+	NamedExecuteClientScript("DamageNumbers_Printout",PlayerNumber(),PlayerNumber());
+}
+
+script "DamageNumbers_Printout" (int playerNum) CLIENTSIDE{
+	if(NOSPECTATORMODE && GetUserCvar(ConsolePlayerNumber(),"trill_dm_showdeathprintout")){
+		HudMessage(
+			s:StrParam(s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"Your last hit did \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:CheckActorInventory(playerNum+1000,"DM_LastHit"), 
+			s:" \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"damage\n", 
+			s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"You did \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:CheckActorInventory(playerNum+1000,"DM_DamageDone"), 
+			s:" \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"damage that life\n", 
+			s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"Your total damage done is: \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:GetCvar(StrParam(s:"Player_", i:playerNum, s:"_DamageDone")),
+			s:"\n\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"You have \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:GetPlayerScore(playerNum,SCORE_FRAGS),
+			s:" \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"frag(s)"),
+			s:"\n\n\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"Your last knock was \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:CheckActorInventory(playerNum+1000,"DM_LastKnock"), 
+			s:" \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"damage\n", 
+			s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"You took \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:CheckActorInventory(playerNum+1000,"DM_KnocksTaken"), 
+			s:" \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"damage that life\n", 
+			s:"\c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_texthighlights"), 
+			s:"Your total damage taken is: \c", s:GetUserCvarString(ConsolePlayerNumber(),"trill_dm_textnumbers"), 
+			i:GetCvar(StrParam(s:"Player_", i:playerNum, s:"_KnocksTaken"));
+			HUDMSG_PLAIN|HUDMSG_LOG,-9998,CR_GOLD,1.5,0.75,5.0);
+	}
+}
+
+script "DamageNumbers_Trigger" (int type, int arg1, int arg2) EVENT{
+	if(type == 6){
+		for(int i = 0; i < 64; i++){
+			if(PlayerInGame(i)){
+				NamedExecuteClientScript("DamageNumbers_Printout",i,i);
+				}
+			}
+		}
+	else if(type == 9){ 
+		Delay(3);
+		if(IsNetworkGame()){
+			if(GetCvar(StrParam(s:"Player_", i:arg1, s:"_Script"))==false && NamedExecuteClientScript("DamageNumbers_Watcher",arg1,Timer())){NamedExecuteClientScript("damagenumbers_notifier",arg1); SetCvar(StrParam(s:"Player_", i:arg1, s:"_Script"),true);}
+			}
+		}
+	else if(type == 11){
+		
+		}
+	}
+
+script "DamageNumbers_Trigger_11" (int type, int arg1, int SourceTID)
+{
+
+if(ActivatorTID() < 1000 || ActivatorTID() > 1063){terminate;}
+		int oldTID = ActivatorTID();
+
+		int shooterTeam = 4;
+		int team = 850;
+		SetActivator(SourceTID);
+		if((ActivatorTID() >= 1000 && ActivatorTID() <= 1063) && ActivatorTID() != oldTID){
+			int shooter = ActivatorTID();
+			shooterTeam = GetPlayerInfo(shooter-1000,PLAYERINFO_TEAM);
+			team = GetPlayerInfo(shooter-1000,PLAYERINFO_TEAM) + 230;
+			if(shooterTeam > 3){team =  850;}
+			
+			if(Timer() != PlayerLastHitNoise[PlayerNumber()]){
+				PlayerLastHitNoise[PlayerNumber()] = Timer();
+				ACS_NamedExecuteAlways("DamageNumbers_HitNoise",0);
+				}
+			
+			if(GetGamemodeState()!=1){
+				SetCvar(StrParam(s:"Player_", i:PlayerNumber(), s:"_DamageDone"),GetCvar(StrParam(s:"Player_", i:PlayerNumber(), s:"_DamageDone"))+min(arg1,GetActorProperty(oldTID,APROP_Health)));
+				SetCvar(StrParam(s:"Player_", i:oldTID-1000, s:"_KnocksTaken"),GetCvar(StrParam(s:"Player_", i:oldTID-1000, s:"_KnocksTaken"))+min(arg1,GetActorProperty(oldTID,APROP_Health)));
+			}
+			GiveActorInventory(oldTID,"DM_KnocksTaken",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+			if(CheckActorInventory(oldTID,"DM_LastKnockCheck")>0){
+				GiveActorInventory(oldTID,"DM_LastKnockAmount",1);
+				GiveActorInventory(oldTID,"DM_LastKnock",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+				if(GetActorProperty(oldTID,APROP_Health)>0){
+					GiveActorInventory(oldTID,"DM_LastKnockCheck",1);
+				}
+			}
+			else{
+				SetActorInventory(oldTID,"DM_LastKnockAmount",1);
+				SetActorInventory(oldTID,"DM_LastKnock",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+				if(GetActorProperty(oldTID,APROP_Health)>0){
+					GiveActorInventory(oldTID,"DM_LastKnockCheck",1);
+				}
+			}
+			if(GetActorProperty(ActivatorTID(),APROP_Health)>0){
+				GiveInventory("DM_DamageDone",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+				if(CheckInventory("DM_LastHitCheck")>0){
+					GiveInventory("DM_LastHitAmount",1);
+					GiveInventory("DM_LastHit",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+					GiveInventory("DM_LastHitCheck",1);
+				}
+				else{
+					SetInventory("DM_LastHitAmount",1);
+					SetInventory("DM_LastHit",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+					GiveInventory("DM_LastHitCheck",1);
+				}
+				if(CheckInventory("DM_FirstInstanceOfDamage")<=0 || CheckInventory("DM_FirstInstanceOfDamageCheck")==0){
+					SetInventory("DM_FirstInstanceOfDamage",Timer());
+					SetInventory("DM_DPSDamage",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+					GiveInventory("DM_FirstInstanceOfDamageCheck",1);
+				}
+				else{
+					GiveInventory("DM_DPSDamage",min(arg1,GetActorProperty(oldTID,APROP_Health)));
+					GiveInventory("DM_FirstInstanceOfDamageCheck",1);
+				}
+			}
+		}
+		if(shooterTeam == 255){shooterTeam = 4;}
+			
+		SetActivator(oldTID);
+
+		if(arg1 > 9999){arg1 = 9999;}
+		if(arg1 > 0){
+			ACS_NamedExecuteAlways("DamageNumbers_DamageNumber",0,arg1, team);
+			}
+}
+
+
+script "DamageNumbers_DamageNumber" (int arg1, int team) CLIENTSIDE
+{
+int cpn = ConsolePlayerNumber();
+bool cvarAndServer = GetUserCvar(cpn,"trill_dm_damagenumbers") && NOSPECTATORMODE;
+bool serverAndCondition = GetUserCvar(cpn,"trill_dm_damagenumbers") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
+bool combined = cvarAndServer || serverAndCondition;
+if(combined){
+	int newTID = UniqueTID();
+	SpawnForced("DamageNumberWatcher",GetActorX(0),GetActorY(0),GetActorZ(0),newTID);
+	SetUserVariable(newTID,"user_amount",arg1);
+	SetUserVariable(newTID,"user_color",team);
+	Thing_ChangeTID(newTID,0);
+	}
+}
+
+script "DamageNumbers_HealNumber" (int arg1, int type) CLIENTSIDE
+{
+int cpn = ConsolePlayerNumber();
+bool cvarAndServer = GetUserCvar(cpn,"trill_dm_healnumbers") && NOSPECTATORMODE;
+bool serverAndCondition = GetUserCvar(cpn,"trill_dm_healnumbers") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
+bool combined = cvarAndServer || serverAndCondition;
+if(combined){
+	switch(type){
+		case 1:
+			SetInventory("DM_NumberAmount",arg1);
+			GiveInventory("SpawnHealNumberWatcherTeam",1);
+			break;
+		case 2:
+			SetInventory("DM_NumberAmount",arg1);
+			GiveInventory("SpawnHealNumberWatcher",1);
+			break;
+		}
+	}
+}
+
+script "DamageNumbers_GrabAmount" (void)
+{
+SetActivatorToTarget(0);
+int result = CheckInventory("DM_NumberAmount");
+SetResultValue(result);
+}
+	
+script "DamageNumbers_HitNoise" (void) CLIENTSIDE
+{
+int cpn = ConsolePlayerNumber();
+bool cvarAndServer = GetUserCvar(cpn,"trill_dm_hitsound") && NOSPECTATORMODE;
+bool serverAndCondition = GetUserCvar(cpn,"trill_dm_hitsound") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
+bool combined = cvarAndServer || serverAndCondition;
+if(combined){
+	int volume = GetUserCvar(cpn,"trill_dm_hitsoundvolume");
+	if(volume > 127){volume = 127;}
+	if(volume < 0){volume = 0;}
+	LocalAmbientSound("acs/hitnoise",volume);
+	}
+}
+
+function void SetActorInventory(str tid, str inv, int amt){
+	int oldamt = CheckActorInventory(tid,inv);
+	if(oldamt>amt){
+		TakeActorInventory(tid,inv, oldamt-amt);
+		}
+	else{
+		GiveActorInventory(tid,inv, amt-oldamt);
+		}
+	}
+
+function void SetInventory(str inv, int amt){
+	int oldamt = CheckInventory(inv);
+	if(oldamt>amt){
+		TakeInventory(inv, oldamt-amt);
+		}
+	else{
+		GiveInventory(inv, amt-oldamt);
+		}
+	}
+
+function int max(int x, int y){
+	if(x > y){
+		return x;
+		}
+	return y;
+	}
+
+function int min(int x, int y){
+	if(x < y){
+		return x;
+		}
+	return y;
+	}

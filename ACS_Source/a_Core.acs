@@ -371,17 +371,6 @@ script "SprayerAlpha"  (int Value) CLIENTSIDE
 
 }
 
-Script "WepSpeedMod" (int Value)
-{
-int FixedValue = Value<<16;
-if(Value != GetActorProperty(0,APROP_SPEED))
-	{
-	//log(i:Value,s:" ",i:GetActorProperty(0,APROP_SPEED),s:" ",f:Value,s:" ",f:GetActorProperty(0,APROP_SPEED));
-	SetActorPRoperty(0,APROP_SPEED,Value);
-	}
-
-}
-
 Function bool GetMaxEntities(void)
 {
 	int ret = GetCVAR("sv_MaxClients");

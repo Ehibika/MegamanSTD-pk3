@@ -18,12 +18,8 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
-//===
-TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("FrostbiteMark",1,"Nope")
-//===
-TNT1 A 0 A_Jumpifinventory("TempPoisonProof",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("PoisonProof",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+TNT1 A 0 A_Jumpifinventory("Pro_ToxicResistance",1,"Nope")
 //==
 TNT1 A 0 A_GiveInventory("PoisonMark",1)
 TNT1 A 0 A_GiveInventory("PoisonFade",1)
@@ -273,12 +269,8 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Sustain")
-//===
-TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("FrostbiteMark",1,"Nope")
-//===
-TNT1 A 0 A_Jumpifinventory("TempBurnProof",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("BurnProof",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("Pro_FireResistance",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
 //==
 TNT1 A 0 A_GiveInventory("BurnMark",1)
 TNT1 A 0 A_GiveInventory("BurnFade",1)
@@ -433,12 +425,8 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("FrostbiteMark",1,"Sustain")
-//===
-TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("FrostbiteMark",1,"Nope")
-//===
-TNT1 A 0 A_Jumpifinventory("TempFrostProof",1,"Nope")
-TNT1 A 0 A_Jumpifinventory("FrostProof",1,"Nope")
+TNT1 A 0 A_Jumpifinventory("Pro_IceResistance",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
 //==
 TNT1 A 0 A_GiveInventory("FrostbiteMark",1)
 TNT1 A 0 A_GiveInventory("FrostbiteFade",1)

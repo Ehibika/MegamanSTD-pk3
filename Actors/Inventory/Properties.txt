@@ -3,3 +3,12 @@ actor Pro_MachineGunMastery : Once {}
 actor Pro_SprayerMastery : Once {}
 actor Pro_LauncherMastery : Once {}
 actor Pro_MeleeMastery : Once {}
+
+actor Pro_FireResistance : Once {}
+actor Pro_IceResistance : Once {}
+actor Pro_AquaResistance : Once {}
+actor Pro_ToxicResistance : Once {}
+actor Pro_ElecResistance : Once {}
+actor Pro_WindResistance : Once {}
+actor Pro_BreakResistance : Once {} //Should be redundant
+actor Pro_EuclidResistance : Once {}

@@ -1,0 +1,40 @@
+/* -=- Paintype Records -=-
+ * storage and reference of data related to painstates, 
+ *
+ * 
+
+*/
+#library "A_Pain"
+#include "zcommon.acs"
+
+#LIBDEFINE PAINCOUNT 7
+
+//Element Bitflags
+// Weapon bitFlags
+#LIBDEFINE ELM_NULL 0.0
+#LIBDEFINE ELM_FIRE 1.0
+#LIBDEFINE ELM_ICE 2.0
+#LIBDEFINE ELM_AQUA 4.0
+#LIBDEFINE ELM_TOXIC 8.0
+#LIBDEFINE ELM_ELEC 16.0
+#LIBDEFINE ELM_WIND 32.0
+#LIBDEFINE ELM_BREAK	64.0
+#LIBDEFINE ELM_EUCLID 128.0
+#LIBDEFINE ELM_BLADE 256.0 //just in case
+
+str PainRecord[PAINCOUNT][2] = {
+/*
+ * This contains all info regarding damagetypes with an element attached to them. anything without an element is assumed to be
+ * Null.
+
+*/
+//    DamageTypeName, DamageTypeElement/Flags,  
+/*0*/{"GasEmitter",ELM_TOXIC},
+/*1*/{"CompressedSpray",ELM_WIND},
+/*2*/{"BurningSpray",ELM_FIRE},
+/*3*/{"SnowySpray",ELM_ICE},
+/*4*/{"CrushingSpray",ELM_BREAK},
+/*5*/{"DrillHead",ELM_BREAK},
+/*6*/{"WindPressureBuster",ELM_WIND},
+
+};

@@ -4,14 +4,31 @@
 
 #import "a_Core.acs"
 #import "a_Loadout.acs"
+#import "a_Properties.acs"
 
 //#region -=- Hit Event -=-
 #region -=- Hit Event -=-
 script "MSTD_HitEvents" (int type, int arg1, int arg2) EVENT
 {
 int Damage = arg1;
+str PainType = arg2;
+int SourceTID;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
+
+SetActivator(0, AAPTR_DAMAGE_SOURCE);
+SourceTID = ActivatorTID();
+
+//Check for damage properties on the opposing player
+
+//==Mastery Damage Bonus ==
+//Also to avoid boosting self damage
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += Damage*0.3>>16;}}
+
+
+SetActivator(0, AAPTR_DAMAGE_TARGET);
+//Check for damage properties on the recieving player
+if(CheckForResistance(arg2)){Damage = Damage*0.5>>16;}
 
 
 if(CheckInventory("LT_Armor"))
@@ -30,7 +47,7 @@ if(CheckInventory("LT_Armor"))
 	if(Damage<=0){Damage = 1; GiveInventory("HealthBonus",1);}
 	*/
 	}
-
+ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);
 SetResultValue(Damage);
 }
 }
@@ -688,4 +705,19 @@ if(CheckInventory("PoisonMark")
     //if(CheckInventory("CleanseTag"))
     //{Output = Output | STATUS_STATS;}
 SetResultValue(Output & Input);
+}
+
+Script "WepSpeedMod" (int Value)
+{
+int FixedValue = Value<<16;
+//Check for mastery
+
+if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; log(s:"Got Mastery!");}
+
+if(Value != GetActorProperty(0,APROP_SPEED))
+	{
+	//log(i:Value,s:" ",i:GetActorProperty(0,APROP_SPEED),s:" ",f:Value,s:" ",f:GetActorProperty(0,APROP_SPEED));
+	SetActorPRoperty(0,APROP_SPEED,Value);
+	}
+
 }

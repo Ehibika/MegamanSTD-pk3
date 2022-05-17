@@ -4,6 +4,7 @@ Const float SG_SprAngRev = SRev-SG_SprAng;
 Const float SG_SprD_Ang = SG_SprAng/1.5;
 Const float SG_SprD_AngRev = SRev-(SG_SprAng/1.5);
 
+const float SG_SPD = 0.8; 
 
 actor ShotGunWep : WepMasterBase
 {
@@ -46,6 +47,12 @@ Fire:
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_PlaySoundEx("weapon/HardBuster1","Weapon")
+"####" A 0 A_FireCustomMissile("ShotGunShot",fRandom(-(SG_SPD),(SG_SPD)),1,4,4,0,fRandom(-(SG_SPD),(SG_SPD)))
+"####" A 0 A_FireCustomMissile("ShotGunShot",-12+fRandom(-(SG_SPD),(SG_SPD)),0,4,4,0,fRandom(-(SG_SPD),(SG_SPD)))
+"####" A 0 A_FireCustomMissile("ShotGunShot",12+fRandom(-(SG_SPD),(SG_SPD)),0,4,4,0,fRandom(-(SG_SPD),(SG_SPD)))
+"####" A 0 A_FireCustomMissile("ShotGunShot",-24+fRandom(-(SG_SPD),(SG_SPD)),0,4,4,0,fRandom(-(SG_SPD),(SG_SPD)))
+"####" A 0 A_FireCustomMissile("ShotGunShot",24+fRandom(-(SG_SPD),(SG_SPD)),0,4,4,0,fRandom(-(SG_SPD),(SG_SPD)))
+/*
 "####" A 0 A_FireCustomMissile("ShotGunShot",0,2,0,8)
 //"####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprAng,0,0,8,0,0)
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_Ang,0,0,8,0,SG_SprD_Ang)
@@ -55,6 +62,7 @@ Fire:
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_AngRev,0,0,8,0,SG_SprD_AngRev)
 //"####" A 0 A_FireCustomMissile("ShotGunShot",0,0,0,8,0,SG_SprAngRev)
 "####" A 0 A_FireCustomMissile("ShotGunShot",SG_SprD_AngRev,0,0,8,0,SG_SprD_Ang)
+*/
 //--
 "####" A 0 A_Giveinventory("ShotgunCST")
 "####" BC 1 A_WeaponReady(WRF_NOPRIMARY)
@@ -105,7 +113,7 @@ inventory.maxamount 35
 actor ShotgunCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 9
+Powerup.Duration 12
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
@@ -117,7 +125,7 @@ actor ShotGunShot : fastProjectileBase
 Obituary "$OB_SHOTGUN"
 DamageType "ShotgunP"
 Speed 80
-Damage (6)
+Damage (8)
 radius 3
 
 MissileHeight 16

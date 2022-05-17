@@ -109,6 +109,28 @@ For(int i = 0; i < WEAPONLIST; i++)
 Return "";
 }
 
+Function int STD_WhichWeaponFlags(void) //Find the weapon the player is currently using and return Their BitFlags
+{
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+	If(CheckWeapon2(MasterWepList[i][1]))
+		{
+		If(MasterWepList[i][3] > 0.0){Return MasterWepList[i][3];}
+		}
+	}
+Return 0;
+}
+
+Function int GetThisWeaponType(void) //Checks for the current weapon type by checking for it's bitflag
+{
+int WepFlags = STD_WhichWeaponFlags();
+if(WepFlags & WF_BUSTER) return WF_BUSTER;
+else if(WepFlags & WF_MACHINEGUN) return WF_MACHINEGUN;
+else if(WepFlags & WF_SPRAYER) return WF_SPRAYER;
+else if(WepFlags & WF_LAUNCHER) return WF_LAUNCHER;
+else if(WepFlags & WF_MELEE) return WF_MELEE;
+return 0.0;
+}
 
 //#region -=- Extra Weapon Functions
 #region -=- Extra Weapon Functions

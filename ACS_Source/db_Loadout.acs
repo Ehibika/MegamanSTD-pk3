@@ -92,7 +92,7 @@ str MasterWepList[WEAPONLIST][6] = {
 /*14*/{"Energy Cannon","EnergyCannonWep","EnergyCannon_Ammo", WF_LAUNCHER,"EnergyCannon",""},
 /*15*/{"Mega Cannon","MegaCannonWep","MegaCannon_Ammo", WF_LAUNCHER,"MegaCannon",""},
 /*16*/{"LightWave Cannon","LightWaveCannonWep","LightWaveCannon_Ammo", WF_LAUNCHER,"LightWaveCannon",""},
-/*17*/{"DrillHeadC annon","DrillHeadCannonWep","DrillHeadCannon_Ammo", WF_LAUNCHER,"DrillHead",""},
+/*17*/{"DrillHead Cannon","DrillHeadCannonWep","DrillHeadCannon_Ammo", WF_LAUNCHER,"DrillHead",""},
 
 /*18*/{"Standard Saber","StandardSaberWep","StandardSaber_Ammo", WF_MELEE,"StandardSaberEdge","StandardSaberTip"},
 /*19*/{"Beam Rapier","BeamRapierWep","BeamRapier_Ammo", WF_MELEE,"BeamRapierEdge","BeamRapierTip"},

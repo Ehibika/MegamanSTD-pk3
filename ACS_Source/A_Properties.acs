@@ -1,0 +1,91 @@
+/* -=- Properties -=-
+ * Code that handles the Processing of class properties, 
+ *
+ * 
+
+*/
+
+#library "A_Properties"
+#include "zcommon.acs"
+#include "8bdmlib.acs"
+#import "DB_Properties.acs"
+#import "A_Core.acs"
+#import "db_Loadout.acs"
+#import "A_Loadout.acs"
+#import "A_Pain.acs"
+
+Function int MasteryCheck (int ThisWepType)
+{
+if(!ThisWepType){return 0;}
+//First we will gather all the masteries we have and combine them as a bitflag
+int MasteryFlag;
+
+if(CheckProp(MasterProPList[0][PROP_NAME])){MasteryFlag = MasteryFlag|WF_BUSTER;}
+if(CheckProp(MasterProPList[1][PROP_NAME])){MasteryFlag = MasteryFlag| WF_MACHINEGUN;}
+if(CheckProp(MasterProPList[2][PROP_NAME])){MasteryFlag = MasteryFlag| WF_SPRAYER;}
+if(CheckProp(MasterProPList[3][PROP_NAME])){MasteryFlag = MasteryFlag| WF_LAUNCHER;}
+if(CheckProp(MasterProPList[4][PROP_NAME])){MasteryFlag = MasteryFlag| WF_MELEE;}
+log(f:ThisWepType,s:" : ",f:MasteryFlag);
+if(ThisWepType & MasteryFlag){return 1;}
+return 0;
+}
+
+
+
+Function bool CheckProp(str PropName)
+{
+if(CheckInventory(StrParam(s:"Pro_",s:PropName)))
+    {
+    log(s:"got ",s:StrParam(s:"Pro_",s:PropName));
+    Return true;
+    }
+
+return false;
+}
+
+Function bool CheckMasteryDamage(str PainType)
+{
+int WepFlag;
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+	If(MasterWepList[i][4] == PainType || MasterWepList[i][5] == PainType)
+		{
+        //found our weapon paintype, now see if the player has a mastery for this weapon.
+        WepFlag = MasterWepList[i][3];      
+		}
+	}
+
+Return MasteryCheck(WepFlag);
+}
+
+Function Bool CheckForResistance(str PainType)
+{
+int ElementFlag;
+For(int i = 0; i < PAINCOUNT; i++)
+	{
+	If(PainRecord[i][0] == PainType)
+		{
+        //found our weapon paintype
+        ElementFlag = PainRecord[i][1];      
+		}
+	}
+if(!ElementFlag){Return 0;}
+
+//now see if the player has Resistance To this Element
+
+Switch(ElementFlag)
+    {
+    Case ELM_FIRE: return CheckProp(MasterProPList[5][PROP_NAME]); break;
+    Case ELM_ICE: return CheckProp(MasterProPList[6][PROP_NAME]); break;
+    Case ELM_AQUA: return CheckProp(MasterProPList[7][PROP_NAME]); break;
+    Case ELM_TOXIC: return CheckProp(MasterProPList[8][PROP_NAME]); break;
+    Case ELM_ELEC: return CheckProp(MasterProPList[9][PROP_NAME]); break;
+    Case ELM_WIND: return CheckProp(MasterProPList[10][PROP_NAME]); break;
+    Case ELM_WIND: return CheckProp(MasterProPList[11][PROP_NAME]); break;
+    Case ELM_BREAK:	return CheckProp(MasterProPList[12][PROP_NAME]); break;
+    Case ELM_EUCLID: return CheckProp(MasterProPList[13][PROP_NAME]); break;
+    Case ELM_BLADE:  return CheckProp(MasterProPList[14][PROP_NAME]); break;
+    }
+
+return 0;
+}

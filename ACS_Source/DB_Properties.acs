@@ -1,0 +1,42 @@
+/* -=- Properties data -=-
+ * contains constants and variables used by the Property system. 
+ *
+ * 
+
+*/
+#library "db_Properties"
+#include "zcommon.acs"
+
+
+#LIBDEFINE PROPMAX 13
+
+
+#LIBDEFINE PROP_NAME 0
+#LIBDEFINE PROP_DISPLAYNAME 1
+#LIBDEFINE PROP_FLAG 3
+// Property bitFlags
+#LIBDEFINE PF_NULL 0.0
+#LIBDEFINE PF_STARTUP 1.0 //Checked at startup
+#LIBDEFINE PF_ONHITSELF 2.0 //Checked by the damage event when the wielder takes damage
+#LIBDEFINE PF_ONHITFOE 4.0 //Checked by the damage event when you damage someone
+
+//Master Property List
+str MasterProPList[PROPMAX][6] = {
+
+//    PropertyName, DisplayName, Ammo Name, Property Flags, PainType1, Paintype2 
+/*0*/{"BusterMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+/*1*/{"MachineGunMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+/*2*/{"SprayerMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+/*3*/{"LauncherMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+/*4*/{"MeleeMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+
+/*5*/{"FireResistance","Fire Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*6*/{"IceResistance","Ice Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*7*/{"AquaResistance","Aqua Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*8*/{"ToxicResistance","Toxic Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*9*/{"ElecResistance","Elec Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*10*/{"WindResistance","Wind Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*11*/{"BreakResistance","Break Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""}, 
+/*12*/{"EuclidResistance","Euclid Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+
+};

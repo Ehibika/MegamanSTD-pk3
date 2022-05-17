@@ -11,6 +11,8 @@ Player.Startitem "IsMegaman"
 Player.Startitem "UseAbility1_STDMegaman"
 Player.Startitem "UseAbility2_STDMegaman"
 
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_FireResistance"
 +NOSKIN
 States
 {
