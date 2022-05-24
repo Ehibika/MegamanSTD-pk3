@@ -3,34 +3,41 @@ actor ClassBase0 : PlayerPawn
 player.displayname "megaman"
 player.soundclass "megaman"
 player.damagescreencolor "yellow"
-player.forwardmove 0.5, 1.0
-player.sidemove 0.5, 1.0
+player.forwardmove 1.2, 0.6
+player.sidemove 1.2 0.6
 player.jumpz 10
+Player.MaxHealth 100
 player.colorrange 0 0
-//player.startitem "MegaBuster"
-//player.startitem "BusterAmmo", 3
+player.startitem "MegaBuster"
+player.startitem "BusterAmmo", 3
+player.startitem "BaseFlagPack", 1
 mass 9999
 gravity 0.8
 +NODAMAGETHRUST
 +DONTBLAST
 +NOBLOOD
 +QUICKTORETALIATE
-+DONTHARMSPECIES
 +THRUSPECIES
-
++DONTHARMSPECIES
++USEDAMAGEEVENTSCRIPT 
 damagefactor "Dummy", 0.0
 Player.MaxSkinSizeFactor 0, 0
 scale 2.5
 bloodtype "MegamanBlood"
+var int user_hp;
 
-Var int User_STargTID;
-Var int User_angleDistRegister;
-Var int User_STargRange;
-
+var int User_STargTID;
+var int User_angleDistRegister;
+var int User_STargRange;
 var int user_wepangle;
 var int user_weppitch;
 var int user_wepangle2;
 
+var int user_RemoteX;
+var int user_RemoteY;
+var int user_RemoteZ;
+
+var int User_TempShotVar;
 States
 {
 SuperSpawn:
@@ -44,6 +51,8 @@ SuperClassDeath:
 wait
 
 MegamanPain:
+"----" A 0 ACS_NamedExecuteWithResult("core_decdmg_begin")
+"----" A 0 A_GiveInventory("ClassPainPickup", 1)
 "----" A 0 A_Pain
 "----" A 1 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
 "----" A 1 A_Recoil(1)
@@ -52,19 +61,20 @@ MegamanPain:
 goto SuperSpawn
 
 MegamanDeath:
-"----" A 0 A_Pain
-"----" A 1 
-"----" A 2
+"----" A 0 ACS_NamedExecuteWithResult("core_decdmg_begin")
+"----" AAAAAAAAAAAAAAAAAAAA 1 A_JumpIfInventory("CriticalDeath",1,"MegamanGib")
 MegamanExplode:
-"----" H 2
-TNT1 A 4 A_SpawnItemEx("NGS_DeathEffectActor", 0, 0, 32,0,0,0,0,SXF_TRANSFERTRANSLATION)
-TNT1 A 0 A_playsoundex("weapon/Wrecker","body")//A_PlayerScream
-Goto MegamanErase
+TNT1 A 0 A_SpawnItemEx("FakeDeathFX", 0, 0, 32)
 MegamanFall:
 TNT1 A 0 A_PlayerScream
 MegamanErase:
+Death.DeadSpectate:
 TNT1 A 1 A_CheckPlayerDone
 wait
+MegamanGib:
+TNT1 A 0 A_GiveInventory("CriticalDeathGiver", 1)
+TNT1 A 0 A_SpawnItemEx("FakeDeathFX", 0, 0, 32)
+goto MegamanErase
 
 // SINGLEPLAYER STUFF
 TheEnd: // Used in the original ending

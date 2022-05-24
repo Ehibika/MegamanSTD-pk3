@@ -121,7 +121,7 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Effect Actors|-------------------------------
 //[+]========================================================================[+]
-actor XChargeShotTrail : ExplosionBase
+actor XChargeShotTrail : BasicExplosion
 {
 Obituary "$OB_XChargeShotBUSTER"
 damagetype "MegaBuster"
@@ -180,7 +180,7 @@ stop
 }
 }
 
-actor XChargeShotSource : ExplosionBase //
+actor XChargeShotSource : BasicExplosion //
 {
 States
 {

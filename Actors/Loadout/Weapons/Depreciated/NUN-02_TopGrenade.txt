@@ -182,7 +182,7 @@ stop
 	actor TopGrenadeProjectile_BLUE : TopGrenadeProjectile{Designatedteam 0}
 	actor TopGrenadeProjectile_RED : TopGrenadeProjectile{Designatedteam 1 translation "204:204=40:40", "206:206=41:41", "40:40=197:197", "43:43=194:194"}
 
-actor TopGrenadeThrustSource : ExplosionBase //now just the FX due to desynch
+actor TopGrenadeThrustSource : BasicExplosion //now just the FX due to desynch
 {
 States
 {

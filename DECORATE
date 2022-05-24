@@ -3,6 +3,17 @@
 #include "Actors/BaseFlags.txt"
 #include "Actors/Loadout/ConstList.txt"
 
+//inventories
+#include "Actors/inventory/TinyBar.txt"
+#include "Actors/inventory/Giverpackage.txt"
+#include "Actors/inventory/InputTriggers.txt"
+#include "Actors/inventory/ItemGiver.txt"
+#include "Actors/inventory/KeyItems.txt"
+#include "Actors/inventory/PlayerIcons.txt"
+#include "Actors/inventory/Armor.txt"
+#include "Actors/inventory/Properties.txt"
+#include "Actors/inventory/ArcTargeter.txt"
+
 #include "actors/Classes/ClassBase/classbase0.txt"
 #include "actors/Classes/ClassBase/classbase1.txt"
 #include "actors/Classes/ClassBase/classbase2.txt"
@@ -36,6 +47,24 @@
 #include "Actors/Classes/Massimo/MassimoClass.txt"
 #include "Actors/Classes/Massimo/WhirlWind.txt"
 #include "Actors/Classes/Massimo/BerzerkCharge.txt"
+
+#include "Actors/Classes/Marino/MarinoClass.txt"
+
+#include "Actors/Classes/Spider/SpiderClass.txt"
+
+#include "Actors/Classes/Cinnamon/CinnamonClass.txt"
+
+#include "Actors/Classes/Alia/AliaClass.txt"
+#include "Actors/Classes/Alia/ShiningRay.txt"
+#include "Actors/Classes/Alia/ThunderDancer.txt"
+
+#include "Actors/Classes/Zero/ZeroClass.txt"
+#include "Actors/Classes/Zero/Ryuenjin.txt"
+#include "Actors/Classes/Zero/Rekkoha.txt"
+
+#include "Actors/Classes/Axl/AxlClass.txt"
+#include "Actors/Classes/Axl/TacticalRoll.txt"
+#include "Actors/Classes/Axl/BlastLauncher.txt"
 
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
@@ -120,16 +149,7 @@
 #include "Actors/Loadout/Psionics/PKLifeUp.txt"
 */
 
-//inventories
 
-#include "Actors/inventory/TinyBar.txt"
-#include "Actors/inventory/Giverpackage.txt"
-#include "Actors/inventory/InputTriggers.txt"
-#include "Actors/inventory/ItemGiver.txt"
-#include "Actors/inventory/KeyItems.txt"
-#include "Actors/inventory/PlayerIcons.txt"
-#include "Actors/inventory/Armor.txt"
-#include "Actors/inventory/Properties.txt"
 
 //misc
 

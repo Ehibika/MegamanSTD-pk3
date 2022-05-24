@@ -216,7 +216,7 @@ stop
 //--------------------------------|Effect Actors|------------------------------
 //[+]========================================================================[+]
 // [+++]=============================[+++]
-actor GrenadeExplosion : ExplosionBase //now just the FX due to desynch
+actor GrenadeExplosion : BasicExplosion //now just the FX due to desynch
 {
 States
 {
@@ -229,7 +229,7 @@ stop
 }
 }
 
-actor SLAMCannonThrustSource : ExplosionBase //now just the FX due to desynch
+actor SLAMCannonThrustSource : BasicExplosion //now just the FX due to desynch
 {
 States
 {

@@ -3,6 +3,12 @@ addplayerclass STDMegaman
 addplayerclass MegamanX
 addplayerclass MegamanEXE
 addplayerclass Massimo
+addplayerclass Marino
+addplayerclass Spider
+addplayerclass Cinnamon
+addplayerclass Alia
+addplayerclass Zero
+addplayerclass Axl
 //=====
 
 addkeysection "Extra" Extraoptions

@@ -243,7 +243,7 @@ Stop
 	Damagetype "SentryShotRED"
 	}
 
-actor BuddySentryThrustSource : ExplosionBase //now just the FX due to desynch
+actor BuddySentryThrustSource : BasicExplosion //now just the FX due to desynch
 {
 States
 {

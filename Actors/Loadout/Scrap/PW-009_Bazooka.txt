@@ -156,7 +156,7 @@ stop
 	{
 	}
 	
-actor BazookaRoundBlast : ExplosionBase
+actor BazookaRoundBlast : BasicExplosion
 {
 States
 {
@@ -171,7 +171,7 @@ stop
 }
 
 
-actor BazookaRoundFakeBlast : ExplosionBase //when hitting shields
+actor BazookaRoundFakeBlast : BasicExplosion //when hitting shields
 {
 States
 {

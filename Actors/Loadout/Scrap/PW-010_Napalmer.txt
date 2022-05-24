@@ -179,7 +179,7 @@ stop
 	actor NapalmerProjectile_BLUE : NapalmerProjectile{}
 	actor NapalmerProjectile_RED : NapalmerProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 // [+++]=============================[+++]
-actor NapalmerExplosion : ExplosionBase
+actor NapalmerExplosion : BasicExplosion
 {
 DamageType "Incendiary"
 States
@@ -207,7 +207,7 @@ stop
 }
 }
 
-actor NapalmerFakeExplosion : ExplosionBase
+actor NapalmerFakeExplosion : BasicExplosion
 {
 DamageType "Incendiary"
 States

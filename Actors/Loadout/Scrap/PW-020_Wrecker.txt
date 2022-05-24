@@ -156,7 +156,7 @@ stop
 	{
 	}
 	
-actor WreckerRoundBlast : ExplosionBase
+actor WreckerRoundBlast : BasicExplosion
 {
 States
 {
@@ -175,7 +175,7 @@ stop
 }
 
 
-actor WreckerRoundFakeBlast : ExplosionBase //when hitting shields
+actor WreckerRoundFakeBlast : BasicExplosion //when hitting shields
 {
 States
 {
@@ -232,7 +232,7 @@ stop
 	actor WreckerBombProjectile_RED : WreckerBombProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 	
 	// [+++]=============================[+++]
-actor WreckerBombExplosion : ExplosionBase
+actor WreckerBombExplosion : BasicExplosion
 {
 States
 {
@@ -245,7 +245,7 @@ stop
 }
 }
 
-actor WreckerBombFakeExplosion : ExplosionBase
+actor WreckerBombFakeExplosion : BasicExplosion
 {
 States
 {

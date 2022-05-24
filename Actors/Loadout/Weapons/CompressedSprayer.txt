@@ -273,7 +273,7 @@ stop
 }
 }
 
-actor CompressedBlastSource : ExplosionBase //
+actor CompressedBlastSource : BasicExplosion //
 {
 States
 {

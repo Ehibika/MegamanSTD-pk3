@@ -174,7 +174,7 @@ stop
 	actor GrenadeProjectile_BLUE : GrenadeProjectile{}
 	actor GrenadeProjectile_RED : GrenadeProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 // [+++]=============================[+++]
-actor GrenadeExplosion : ExplosionBase //now just the FX due to desynch
+actor GrenadeExplosion : BasicExplosion //now just the FX due to desynch
 {
 States
 {

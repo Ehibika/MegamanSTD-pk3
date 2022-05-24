@@ -189,7 +189,7 @@ stop
 	
 
 
-actor PainTrainBlast : ExplosionBase
+actor PainTrainBlast : BasicExplosion
 {
 scale 2.2
 States
@@ -205,7 +205,7 @@ stop
 }
 
 
-actor PainTrainFakeBlast : ExplosionBase //when hitting shields
+actor PainTrainFakeBlast : BasicExplosion //when hitting shields
 {
 scale 2.2
 States

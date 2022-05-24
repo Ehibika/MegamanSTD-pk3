@@ -140,7 +140,7 @@ stop
 }
 
 
-actor EnergyCannonTrail : ExplosionBase
+actor EnergyCannonTrail : BasicExplosion
 {
 Obituary "$OB_ENERGYCANNON"
 damagetype "EnergyCannon"

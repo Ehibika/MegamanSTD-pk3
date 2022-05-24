@@ -125,7 +125,7 @@ stop
 }
 
 
-actor MegarifleTrail : ExplosionBase
+actor MegarifleTrail : BasicExplosion
 {
 Obituary "$OB_MegaBuster"
 damagetype "MegaBuster"

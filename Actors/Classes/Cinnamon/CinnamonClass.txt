@@ -1,0 +1,37 @@
+Actor Cinnamon : ClassBase 
+{
+Player.DisplayName "Cinnamon"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsCinnamon"
+Player.Startitem "UseAbility1_Cinnamon"
+Player.Startitem "UseAbility2_Cinnamon"
+
+Player.Startitem "PRO_MeleeMastery"
+
++NOSKIN
+States
+{
+Spawn: 
+CIXM A 0
+CIXM B 1 
+CIXM A 1
+GoTo Spawn+2
+See:
+CIXM BCDE 5
+GoTo Spawn+1
+Missile:
+CIXM F 5
+CIXM G 4
+GoTo Spawn+2
+PainFix:
+CIXM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsCinnamon : Once{}

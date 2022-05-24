@@ -7,10 +7,9 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 7
+#LIBDEFINE PAINCOUNT 9
 
 //Element Bitflags
-// Weapon bitFlags
 #LIBDEFINE ELM_NULL 0.0
 #LIBDEFINE ELM_FIRE 1.0
 #LIBDEFINE ELM_ICE 2.0
@@ -36,5 +35,23 @@ str PainRecord[PAINCOUNT][2] = {
 /*4*/{"CrushingSpray",ELM_BREAK},
 /*5*/{"DrillHead",ELM_BREAK},
 /*6*/{"WindPressureBuster",ELM_WIND},
+/*7*/{"RyuenjinEdge",ELM_BLADE},
+/*8*/{"RyuenjinTip",ELM_BLADE},
+};
 
+
+#LIBDEFINE CRITCOUNT 3
+//Crit Bitflags
+#LIBDEFINE CRIT_NULL 0.0
+#LIBDEFINE CRIT_ALWAYS 1.0
+#LIBDEFINE CRIT_CONDITION 2.0
+str CritRecord[CRITCOUNT][2] = {
+/*
+ * This contains all info regarding damagetypes that either always crit, or can crit under specific conditions
+
+*/
+//    DamageTypeName, DamageTypeElement/Flags,  
+/*0*/{"StandardSaberTip",CRIT_ALWAYS},
+/*1*/{"BeamRapierTip",CRIT_ALWAYS},
+/*2*/{"RyuenjinTip",CRIT_ALWAYS},
 };

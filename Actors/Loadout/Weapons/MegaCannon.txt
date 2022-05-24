@@ -139,7 +139,7 @@ stop
 }
 }
 
-actor MegaExplosion : ExplosionBase //now just the FX due to desynch
+actor MegaExplosion : BasicExplosion //now just the FX due to desynch
 {
 scale 4.0
 States
@@ -153,7 +153,7 @@ stop
 }
 }
 
-actor MegaExplosion2 : ExplosionBase //now just the FX due to desynch
+actor MegaExplosion2 : BasicExplosion //now just the FX due to desynch
 {
 scale 3.0
 States
@@ -166,7 +166,7 @@ stop
 }
 }
 
-actor MegaSource : ExplosionBase //
+actor MegaSource : BasicExplosion //
 {
 States
 {

@@ -1,0 +1,39 @@
+Actor Marino : ClassBase 
+{
+Player.DisplayName "Marino"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsMarino"
+Player.Startitem "UseAbility1_Marino"
+Player.Startitem "UseAbility2_Marino"
+
+Player.Startitem "Pro_Speedrunner"
+Player.Startitem "Pro_Acrobat"
+Player.Startitem "Pro_Assassin"
+
++NOSKIN
+States
+{
+Spawn: 
+ARXM A 0
+ARXM B 1 
+ARXM A 1
+GoTo Spawn+2
+See:
+ARXM BCDE 5
+GoTo Spawn+1
+Missile:
+ARXM F 5
+ARXM G 4
+GoTo Spawn+2
+PainFix:
+ARXM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsMarino : Once{}

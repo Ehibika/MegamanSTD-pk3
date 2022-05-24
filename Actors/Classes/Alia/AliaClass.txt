@@ -1,0 +1,37 @@
+Actor Alia : ClassBase 
+{
+Player.DisplayName "Alia"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsAlia"
+Player.Startitem "UseAbility1_Alia"
+Player.Startitem "UseAbility2_Alia"
+
+Player.Startitem "PRO_MeleeMastery"
+
++NOSKIN
+States
+{
+Spawn: 
+LXCM A 0
+LXCM B 1 
+LXCM A 1
+GoTo Spawn+2
+See:
+LXCM BCDE 5
+GoTo Spawn+1
+Missile:
+LXCM F 5
+LXCM G 4
+GoTo Spawn+2
+PainFix:
+LXCM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsAlia : Once{}

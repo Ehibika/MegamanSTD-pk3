@@ -100,7 +100,7 @@ stop
 }
 
 
-actor N_HyperBombExplosion : ExplosionBase
+actor N_HyperBombExplosion : BasicExplosion
 {
 States
 {
@@ -115,7 +115,7 @@ stop
 }
 }
 /*
-actor N_HyperBombFakeExplosion : ExplosionBase
+actor N_HyperBombFakeExplosion : BasicExplosion
 {
 States
 {

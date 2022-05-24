@@ -33,7 +33,7 @@ script "REAPPLICATOR" RESPAWN
 		//GiveInventory("InputChecker",1);
 		ACS_NamedExecuteAlways("TEAMSPECIES",0);
 		ACS_NamedExecuteAlways("MSTD_ClassSetup",0);
-		//ACS_NamedExecuteAlways("IconScanner",0);
+		ACS_NamedExecuteAlways("MSTD_PropertySetup",0);
 		//ACS_NamedExecuteAlways("AltTrigger",0);
 		//ACS_NamedExecuteAlways("HitHealthDecay",0);
 		
@@ -519,4 +519,49 @@ FinalOut = ABC + OutputLow;
 //FinalOut = ( ((Input - InputLow)/(InputHigh - InputLow))*(OutputHigh - OutputLow) + OutputLow);
 
 return FinalOut;
+}
+
+Function int GetHealthPercent (int Pointer, int Type, int perval)
+{
+int HealthPercent;
+int PlayerCurrentHealth;
+int PlayerMaxHealth;
+int MaxHPCache;
+int TargTID;
+
+if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
+else {TargTID = ActivatorTID();}
+
+if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
+else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
+
+MaxHPCache = GetActorProperty(TargTID,APROP_SpawnHealth); 
+
+	
+if(MaxHPCache<=0){PlayerMaxHealth = 1; }
+else{PlayerMaxHealth = MaxHPCache;}
+
+// Type 0 = current percentage of health
+// Type 1 = Value of Health at that percentage
+// Type 2 = Current Remaining HP
+
+Switch (Type)
+	{
+	default : HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth); Break;
+	Case 1 : HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16; Break;
+	Case 2 : HealthPercent = PlayerCurrentHealth; Break;
+	}
+
+return HealthPercent;
+}
+
+
+//Jump Switcher
+script "MSTD_JumpToggle" (Int Toggle)
+{
+
+int pln = ActivatorTID() - 1000;
+
+if (Toggle >= 1){SetActorProperty(ActivatorTID(),APROP_JUMPZ,PlayerJumpZ[pln]); TakeInventory("CannotJump",99);}
+Else {SetActorProperty(ActivatorTID(),APROP_JUMPZ,0); GiveInventory("CannotJump",1);}
 }

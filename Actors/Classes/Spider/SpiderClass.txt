@@ -1,0 +1,37 @@
+Actor Spider : ClassBase 
+{
+Player.DisplayName "Spider"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsSpider"
+Player.Startitem "UseAbility1_Spider"
+Player.Startitem "UseAbility2_Spider"
+
+Player.Startitem "PRO_MeleeMastery"
+
++NOSKIN
+States
+{
+Spawn: 
+SPXM A 0
+SPXM B 1 
+SPXM A 1
+GoTo Spawn+2
+See:
+SPXM BCDE 5
+GoTo Spawn+1
+Missile:
+SPXM F 5
+SPXM G 4
+GoTo Spawn+2
+PainFix:
+SPXM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsSpider : Once{}

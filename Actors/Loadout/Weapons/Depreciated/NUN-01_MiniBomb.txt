@@ -69,7 +69,7 @@ stop
 	actor MiniBombProjectile_RED : MiniBombProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 	
 	// [+++]=============================[+++]
-actor MiniBombThrustSource : ExplosionBase //now just the FX due to desynch
+actor MiniBombThrustSource : BasicExplosion //now just the FX due to desynch
 {
 States
 {
@@ -82,7 +82,7 @@ stop
 }
 }
 	
-actor MiniBombExplosion : ExplosionBase
+actor MiniBombExplosion : BasicExplosion
 {
 States
 {
@@ -95,7 +95,7 @@ stop
 }
 }
 
-actor MiniBombFakeExplosion : ExplosionBase
+actor MiniBombFakeExplosion : BasicExplosion
 {
 States
 {

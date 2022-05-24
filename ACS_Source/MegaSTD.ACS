@@ -5,6 +5,7 @@
 #import "a_Core.acs"
 #import "a_Loadout.acs"
 #import "a_Properties.acs"
+#import "db_Properties.acs"
 
 //#region -=- Hit Event -=-
 #region -=- Hit Event -=-
@@ -23,13 +24,18 @@ SourceTID = ActivatorTID();
 
 //==Mastery Damage Bonus ==
 //Also to avoid boosting self damage
-if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += Damage*0.3>>16;}}
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += Damage*0.2>>16;}}
 
+//==Assassin Crit Bonus==
+if(CheckForCrit(arg2)){Damage += Damage*0.5>>16;}
 
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //Check for damage properties on the recieving player
+//==Elemental Resistance modifier ==
 if(CheckForResistance(arg2)){Damage = Damage*0.5>>16;}
 
+//==Blade Mastermodifier ==
+if(CheckForBladeMaster(arg2)){Damage = Damage*0.5>>16;}
 
 if(CheckInventory("LT_Armor"))
 	{
@@ -49,6 +55,9 @@ if(CheckInventory("LT_Armor"))
 	}
 ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);
 SetResultValue(Damage);
+
+//==Speedrunner==
+//if(CheckSpeedrunnerLoss()){TakeInventory("PowerSpeedRunner",9); LocalAmbientSound("support/StatDown",127);}
 }
 }
 #endregion
@@ -332,36 +341,8 @@ Str TinyBarSprite[21] = {
 
 Script "MSTD_HealthPercent" (int Pointer, int Type, int perval)
 {
-int HealthPercent;
-int PlayerCurrentHealth;
-int PlayerMaxHealth;
-int MaxHPCache;
-int TargTID;
 
-if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
-else {TargTID = ActivatorTID();}
-
-if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
-else{PlayerCurrentHealth = GetActorProperty(TargTID,APROP_Health);}
-
-MaxHPCache = GetActorProperty(TargTID,APROP_SpawnHealth); 
-
-	
-if(MaxHPCache<=0){PlayerMaxHealth = 1; }
-else{PlayerMaxHealth = MaxHPCache;}
-
-// Type 0 = current percentage of health
-// Type 1 = Value of Health at that percentage
-// Type 2 = Current Remaining HP
-
-Switch (Type)
-	{
-	default : HealthPercent = ((PlayerCurrentHealth*100)/PlayerMaxHealth); Break;
-	Case 1 : HealthPercent = (fixeddiv(PlayerMaxHealth,100)*perval) >> 16; Break;
-	Case 2 : HealthPercent = PlayerCurrentHealth; Break;
-	}
-
-SetResultValue(HealthPercent);
+SetResultValue(GetHealthPercent(Pointer,Type,perval));
 }
 
 Script "MSTD_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal ) //to be phased out
@@ -712,12 +693,38 @@ Script "WepSpeedMod" (int Value)
 int FixedValue = Value<<16;
 //Check for mastery
 
+if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.8; log(s:"Got Hefty!");}
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; log(s:"Got Mastery!");}
+if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; log(s:"Got Speedrunner!");}
 
 if(Value != GetActorProperty(0,APROP_SPEED))
 	{
 	//log(i:Value,s:" ",i:GetActorProperty(0,APROP_SPEED),s:" ",f:Value,s:" ",f:GetActorProperty(0,APROP_SPEED));
 	SetActorPRoperty(0,APROP_SPEED,Value);
+	//TriggerAcrobatCheck();
 	}
 
+}
+
+Script "DetectFlicker" (void)
+{
+
+bool FlickerState;
+
+SetActorProperty(0,Aprop_Renderstyle,STYLE_None);
+FlickerState = false;
+
+while(GetActorProperty(0, APROP_HEALTH)>0
+&& CheckInventory("EvasionState") > 0
+    ){
+        Delay(2);
+
+        Switch(FlickerState)
+            {
+                case 0: SetActorProperty(0,Aprop_Renderstyle,STYLE_Translucent); FlickerState = true; break;
+                case 1: SetActorProperty(0,Aprop_Renderstyle,STYLE_None); FlickerState = false; break;
+            }
+    }
+
+    SetActorProperty(0,Aprop_Renderstyle,STYLE_Translucent);
 }

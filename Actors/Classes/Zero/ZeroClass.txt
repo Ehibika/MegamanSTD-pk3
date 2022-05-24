@@ -1,0 +1,39 @@
+Actor Zero : ClassBase 
+{
+Player.DisplayName "Zero"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsZero"
+Player.Startitem "UseAbility1_Zero"
+Player.Startitem "UseAbility2_Zero"
+
+Player.Startitem "PRO_MeleeMastery"
+Player.Startitem "PRO_BladeMaster"
+Player.Startitem "Pro_Speedrunner"
+
++NOSKIN
+States
+{
+Spawn: 
+ZERO A 0
+ZERO B 1 
+ZERO A 1
+GoTo Spawn+2
+See:
+ZERO BCDE 5
+GoTo Spawn+1
+Missile:
+ZERO F 5
+ZERO G 4
+GoTo Spawn+2
+PainFix:
+ZERO H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsZero : Once{}

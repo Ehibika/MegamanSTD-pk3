@@ -49,7 +49,7 @@
 #LIBDEFINE WF_MELEE 16.0
 #LIBDEFINE WF_NOBOT 32.0
 #LIBDEFINE WF_MEDICAL	64.0
-#LIBDEFINE WF_1 128.0
+#LIBDEFINE WF_BLADE 128.0
 #LIBDEFINE WF_2 256.0
 #LIBDEFINE WF_3	512.0
 #LIBDEFINE WF_4 1024.0
@@ -75,7 +75,7 @@ str MasterWepList[WEAPONLIST][6] = {
 /*0*/{"Military Buster","MilitaryBusterWep","MilitaryBuster_Ammo", WF_BUSTER,"MilitaryBuster",""},
 /*1*/{"WindPressure Buster", "WindPressureBusterWep","WindPressureBuster_Ammo", WF_BUSTER,"WindPressureBuster",""},
 /*2*/{"Arrow Buster","ArrowBusterWep","ArrowBuster_Ammo",WF_BUSTER,"ArrowBuster","NOBOT"},
-/*3*/{"Shadow Buster", "ShadowBusterWep","ShadowBuster_Ammo", WF_BUSTER,"ShadowBuster",""},
+/*3*/{"Shadow Buster", "ShadowBusterWep","ShadowBuster_Ammo", WF_BUSTER|WF_BLADE,"ShadowBuster",""},
 
 /*4*/{"Lazer Rifle","LazerRifleWep","LazerRifle_Ammo", WF_MACHINEGUN,"LazerRifle",""},
 /*5*/{"Triangle Gun","TriangleGunWep","TriangleGun_Ammo", WF_MACHINEGUN,"TriangleGun",""},

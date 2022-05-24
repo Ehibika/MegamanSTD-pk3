@@ -145,7 +145,7 @@ stop
 }
 }
 
-actor DrillHeadExplosion : ExplosionBase //now just the FX due to desynch
+actor DrillHeadExplosion : BasicExplosion //now just the FX due to desynch
 {
 scale 3.0
 States
@@ -159,7 +159,7 @@ stop
 }
 }
 
-actor DrillHeadSource : ExplosionBase //
+actor DrillHeadSource : BasicExplosion //
 {
 States
 {

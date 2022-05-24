@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE PROPMAX 13
+#LIBDEFINE PROPMAX 20
 
 
 #LIBDEFINE PROP_NAME 0
@@ -38,5 +38,15 @@ str MasterProPList[PROPMAX][6] = {
 /*10*/{"WindResistance","Wind Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
 /*11*/{"BreakResistance","Break Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""}, 
 /*12*/{"EuclidResistance","Euclid Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+
+/*13*/{"BladeMaster","Blade Master","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*14*/{"Speedrunner","Speedrunner","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*15*/{"Acrobat","Acrobat","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+/*16*/{"Hefty","Hefty","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+
+/*17*/{"LightWeight","LightWeight","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+/*18*/{"HeavyWeight","HeavyWeight","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+
+/*19*/{"Assassin","Assassin","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
 
 };

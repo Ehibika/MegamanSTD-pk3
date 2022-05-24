@@ -134,6 +134,38 @@ InInventory IsMassimo, 1
 	ininventory BerzerkChargeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BerzerkChargeCooldownItem, vertical,reverse, 25, 163;}
 	}
 
+InInventory IsAlia, 1
+	{
+	DrawImage "BRIGHSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ShiningRayCooldownItem, vertical,reverse, 5, 163;
+	ininventory ShiningRayCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ShiningRayCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "LIGHTNI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ThunderDancerCooldownItem, vertical,reverse, 25, 163;
+	ininventory ThunderDancerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ThunderDancerCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsAxl, 1
+	{
+	DrawImage "BDASWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", TacticalRollCooldownItem, vertical,reverse, 5, 163;
+	ininventory TacticalRollCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", TacticalRollCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BOMBSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BlastLauncherCooldownItem, vertical,reverse, 25, 163;
+	ininventory BlastLauncherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlastLauncherCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsZero, 1
+	{
+	DrawImage "FSWORDI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RyuenjinCooldownItem, vertical,reverse, 5, 163;
+	ininventory RyuenjinCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RyuenjinCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "REKKOI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RekkohaCooldownItem, vertical,reverse, 25, 163;
+	ininventory RekkohaCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RekkohaCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

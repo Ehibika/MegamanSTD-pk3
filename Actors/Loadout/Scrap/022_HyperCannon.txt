@@ -131,7 +131,7 @@ stop
 	actor HyperCannonProjectile_BLUE : HyperCannonProjectile{}
 	actor HyperCannonProjectile_RED : HyperCannonProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 // [+++]=============================[+++]
-actor HyperCannonExplosion : ExplosionBase
+actor HyperCannonExplosion : BasicExplosion
 {
 States
 {

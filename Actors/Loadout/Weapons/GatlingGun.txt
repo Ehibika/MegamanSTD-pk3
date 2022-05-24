@@ -33,7 +33,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 "####" A 1 A_Lower
 Loop
 Select:
-TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Launcher_MSPD*FVM)
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,HeavyWep_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 "####" A 1 A_Raise
 Loop
@@ -132,7 +132,7 @@ stop
 }
 
 
-actor GatlingGunTrail : ExplosionBase
+actor GatlingGunTrail : BasicExplosion
 {
 Obituary "$OB_GATLINGGUN"
 States

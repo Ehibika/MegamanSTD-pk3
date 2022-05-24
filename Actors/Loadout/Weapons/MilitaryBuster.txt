@@ -152,7 +152,7 @@ stop
 }
 }
 
-actor MilitaryTrail : ExplosionBase
+actor MilitaryTrail : BasicExplosion
 {
 Obituary "$OB_MILITARYBUSTER"
 damagetype "MegaBuster"

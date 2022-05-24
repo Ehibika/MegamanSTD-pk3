@@ -153,7 +153,7 @@ stop
 }
 }
 
-actor WindPressureTrail : ExplosionBase
+actor WindPressureTrail : BasicExplosion
 {
 Obituary "$OB_WINDPRESSUREBUSTER"
 damagetype "MegaBuster"

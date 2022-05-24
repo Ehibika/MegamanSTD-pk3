@@ -72,7 +72,7 @@ stop
 	actor MegaHealBombProjectile_RED : MegaHealBombProjectile{translation "192:192=54:54", "198:198=42:42" , "196:196=170:170"}
 	
 	// [+++]=============================[+++]
-actor MegaHealBombExplosion : ExplosionBase
+actor MegaHealBombExplosion : BasicExplosion
 {
 States
 {

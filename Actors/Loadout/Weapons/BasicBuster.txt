@@ -142,7 +142,7 @@ stop
 }
 }
 
-actor BlasterTrail_F : ExplosionBase
+actor BlasterTrail_F : BasicExplosion
 {
 Obituary "$OB_MegaBuster"
 damagetype "MegaBuster"

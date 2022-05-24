@@ -146,7 +146,7 @@ stop
 //--------------------------------|Effect Actors|------------------------------
 //[+]========================================================================[+]
 // [+++]=============================[+++]
-actor TAGMissileExplosion : ExplosionBase //now just the FX due to desynch
+actor TAGMissileExplosion : BasicExplosion //now just the FX due to desynch
 {
 scale 3.0
 States
@@ -160,7 +160,7 @@ stop
 }
 }
 
-actor TAGMissileSource : ExplosionBase //
+actor TAGMissileSource : BasicExplosion //
 {
 States
 {
@@ -172,7 +172,7 @@ stop
 }
 }
 
-actor TAGMissileSource2 : ExplosionBase //
+actor TAGMissileSource2 : BasicExplosion //
 {
 States
 {

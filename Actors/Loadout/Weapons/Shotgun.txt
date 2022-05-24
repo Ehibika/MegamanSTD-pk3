@@ -154,7 +154,7 @@ stop
 }
 
 
-actor ShotGunTrail : ExplosionBase
+actor ShotGunTrail : BasicExplosion
 {
 Obituary "$OB_SHOTGUN"
 States

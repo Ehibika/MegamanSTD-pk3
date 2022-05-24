@@ -1,0 +1,39 @@
+Actor Axl : ClassBase 
+{
+Player.DisplayName "Axl"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsAxl"
+Player.Startitem "UseAbility1_Axl"
+Player.Startitem "UseAbility2_Axl"
+
+Player.Startitem "PRO_MachineGunMastery"
+Player.Startitem "PRO_SprayerMastery"
+Player.Startitem "PRO_LauncherMastery"
+
++NOSKIN
+States
+{
+Spawn: 
+AXLS A 0
+AXLS B 1 
+AXLS A 1
+GoTo Spawn+2
+See:
+AXLS BCDE 5
+GoTo Spawn+1
+Missile:
+AXLS F 5
+AXLS G 4
+GoTo Spawn+2
+PainFix:
+AXLS H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsAxl : Once{}

@@ -132,7 +132,7 @@ stop
 }
 
 
-actor LazerRifleTrail : ExplosionBase
+actor LazerRifleTrail : BasicExplosion
 {
 Obituary "$OB_LAZERRIFLE"
 States

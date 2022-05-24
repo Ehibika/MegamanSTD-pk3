@@ -136,7 +136,7 @@ stop
 }
 
 
-actor TriangleGunTrail : ExplosionBase
+actor TriangleGunTrail : BasicExplosion
 {
 Obituary "$OB_TRIANGLEGUN"
 States

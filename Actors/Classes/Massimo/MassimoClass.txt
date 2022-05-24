@@ -11,6 +11,7 @@ Player.Startitem "UseAbility1_Massimo"
 Player.Startitem "UseAbility2_Massimo"
 
 Player.Startitem "PRO_LauncherMastery"
+Player.Startitem "PRO_Hefty"
 
 +NOSKIN
 States

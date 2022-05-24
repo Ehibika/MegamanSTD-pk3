@@ -25,7 +25,7 @@ if(CheckProp(MasterProPList[1][PROP_NAME])){MasteryFlag = MasteryFlag| WF_MACHIN
 if(CheckProp(MasterProPList[2][PROP_NAME])){MasteryFlag = MasteryFlag| WF_SPRAYER;}
 if(CheckProp(MasterProPList[3][PROP_NAME])){MasteryFlag = MasteryFlag| WF_LAUNCHER;}
 if(CheckProp(MasterProPList[4][PROP_NAME])){MasteryFlag = MasteryFlag| WF_MELEE;}
-log(f:ThisWepType,s:" : ",f:MasteryFlag);
+//log(f:ThisWepType,s:" : ",f:MasteryFlag);
 if(ThisWepType & MasteryFlag){return 1;}
 return 0;
 }
@@ -36,15 +36,41 @@ Function bool CheckProp(str PropName)
 {
 if(CheckInventory(StrParam(s:"Pro_",s:PropName)))
     {
-    log(s:"got ",s:StrParam(s:"Pro_",s:PropName));
+    //log(s:"got ",s:StrParam(s:"Pro_",s:PropName));
     Return true;
     }
 
 return false;
 }
 
+Function bool CheckPlayerProp(int P, str PropName)
+{
+if(CheckActorInventory(P+1000,StrParam(s:"Pro_",s:PropName)))
+    {
+    //log(s:"got ",s:StrParam(s:"Pro_",s:PropName));
+    Return true;
+    }
+
+return false;
+}
+
+Function bool CheckPropRange(int A, int B)
+{
+For(int h = A; h <= B; h++)
+	{
+    if(CheckProp(MasterProPList[h][PROP_NAME]))
+        {
+        Return true;
+        }
+    }
+return false;
+}
+
 Function bool CheckMasteryDamage(str PainType)
 {
+//First Check for the flags
+if(!CheckPropRange(0,4)){Return 0;}
+
 int WepFlag;
 For(int i = 0; i < WEAPONLIST; i++)
 	{
@@ -60,6 +86,9 @@ Return MasteryCheck(WepFlag);
 
 Function Bool CheckForResistance(str PainType)
 {
+//First Check for the flags
+if(!CheckPropRange(5,12)){Return 0;}
+
 int ElementFlag;
 For(int i = 0; i < PAINCOUNT; i++)
 	{
@@ -88,4 +117,140 @@ Switch(ElementFlag)
     }
 
 return 0;
+}
+
+
+
+Function Bool CheckForBladeMaster(str PainType)
+{
+if(!CheckProp(MasterProPList[13][PROP_NAME])){Return 0;}
+//First, check to see if we are carrying a melee or blade weapon
+int ThisWeapon = STD_WhichWeapon();
+If(!(MasterWepList[ThisWeapon][3] & WF_MELEE) && !(MasterWepList[ThisWeapon][3] & WF_BLADE)){Return 0;}
+
+
+//then Check for weapon pain
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+    If(MasterWepList[i][4] == PainType || MasterWepList[i][5] == PainType)
+		{
+        If(MasterWepList[i][3] & WF_MELEE || MasterWepList[i][3] & WF_BLADE)
+            {
+            //This is melee damage, don't reduce it.
+            Return 0;   
+            }
+ 
+		}
+	}
+
+//Next check for anything blade elemental
+int ElementFlag;
+For(int j = 0; j < PAINCOUNT; j++)
+	{
+	If(PainRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        ElementFlag = PainRecord[j][1];      
+		}
+	}
+if(ElementFlag & ELM_BLADE || ElementFlag & ELM_BREAK){Return 0;}
+
+return 1;
+}
+
+
+Script "MSTD_PropertySetup" ENTER
+{
+
+//Initiates all the passive scripts this class needs
+Delay(1);
+//if(CheckProp(MasterProPList[14][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Speedrunner",0,0);}
+//if(CheckProp(MasterProPList[15][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Acrobat",0,0);}
+if(CheckProp(MasterProPList[15][PROP_NAME])){PlayerJumpZ[PlayerNumber()]+=5.0; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}
+
+}
+
+Script "Passive_Speedrunner" (Void)
+{
+/*
+Checks the user's HP every second and gives them the speed boost if they are above
+Half health and don't already have it. the passive is lost upon taking damage.
+*/
+while(GetActorProperty(0,APROP_HEALTH) > 0)
+    {
+    //log(i:GetHealthPercent(0,0,0) );
+    if(GetHealthPercent(0,0,0) > 50 && !CheckInventory("PowerSpeedRunner")){GiveInventory("PowerSpeedRunner",1); LocalAmbientSound("support/Statup",127);}
+    delay(35);
+    }
+
+}
+
+Function Bool CheckSpeedrunnerLoss(void)
+{
+if(GetHealthPercent(0,0,0) <= 50 && CheckInventory("PowerSpeedRunner")){Return 1;}
+Return 0;
+}
+
+
+Script "Passive_Acrobat" (Void)
+{
+/*
+So long as we have movespeed of 1.0 or more, or we have a speedbuff, this passive will be in effect
+*/
+
+
+while(GetActorProperty(0,APROP_HEALTH) > 0)
+    {
+    TriggerAcrobatCheck();
+    //log(f:PlayerJumpZ[PlayerNumber()]);
+    delay(25);
+    }
+}
+
+Function void TriggerAcrobatCheck (void)
+{
+int HighJump = 15.0;
+int NoHighJump = 10.0;
+    if(CheckProp(MasterProPList[15][PROP_NAME]) && !CheckInventory("CannotJump"))
+    {
+       if(CheckAcrobatCriteria()) 
+        {
+        if(GetActorProperty(0,APROP_JUMPZ) != HighJump){PlayerJumpZ[PlayerNumber()] = HighJump; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}
+        }
+    else
+        {
+        if(GetActorProperty(0,APROP_JUMPZ) != NoHighJump){PlayerJumpZ[PlayerNumber()] = NoHighJump; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}      
+        } 
+    }
+}
+
+Function Bool CheckAcrobatCriteria(void)
+{
+
+//Dequalifiers
+if(CheckInventory("FrostBiteMark")){Return 0;}
+
+if(GetActorProperty(0,APROP_SPEED) >= 1.0 
+|| CheckInventory("PowerSpeedRunner")
+){Return 1;}
+Return 0;
+}
+
+
+Function Bool CheckForCrit(str PainType)
+{
+if(!CheckProp(MasterProPList[19][PROP_NAME])){Return 0;}
+//Checks if the damage would be critical damage
+int CritFlag;
+For(int j = 0; j < CRITCOUNT; j++)
+	{
+	If(CritRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        CritFlag = CritRecord[j][1];      
+		}
+	}
+if(CritFlag & CRIT_ALWAYS){Return 1;}
+
+Return 0;
 }

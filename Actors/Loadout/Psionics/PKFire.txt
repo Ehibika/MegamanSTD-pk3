@@ -77,7 +77,7 @@ stop
 }
 
 	// [+++]=============================[+++]
-    actor FireIThrustSource : ExplosionBase //now just the FX due to desynch
+    actor FireIThrustSource : BasicExplosion //now just the FX due to desynch
     {
     States
     {
@@ -90,7 +90,7 @@ stop
     }
     }
         
-    actor FireIExplosion : ExplosionBase
+    actor FireIExplosion : BasicExplosion
     {
     Damagetype "PKFire"
     States
@@ -104,7 +104,7 @@ stop
     }
     }
     
-    actor FireIFakeExplosion : ExplosionBase
+    actor FireIFakeExplosion : BasicExplosion
     {
     States
     {
@@ -157,7 +157,7 @@ stop
 }
 
 	// [+++]=============================[+++]
-    actor FireIIThrustSource : ExplosionBase //now just the FX due to desynch
+    actor FireIIThrustSource : BasicExplosion //now just the FX due to desynch
     {
     States
     {
@@ -170,7 +170,7 @@ stop
     }
     }
         
-    actor FireIIExplosion : ExplosionBase
+    actor FireIIExplosion : BasicExplosion
     {
     Damagetype "PKFire"
     States
@@ -184,7 +184,7 @@ stop
     }
     }
     
-    actor FireIIFakeExplosion : ExplosionBase
+    actor FireIIFakeExplosion : BasicExplosion
     {
     States
     {
@@ -243,7 +243,7 @@ stop
 }
 
 
-actor FireIIIExplosion : ExplosionBase
+actor FireIIIExplosion : BasicExplosion
 {
 Damagetype "PKFire"
 States
@@ -257,7 +257,7 @@ stop
 }
 }
 
-actor FireIIIThrustSource : ExplosionBase //now just the FX due to desynch
+actor FireIIIThrustSource : BasicExplosion //now just the FX due to desynch
 {
 States
 {
@@ -270,7 +270,7 @@ stop
 }
 }
 
-actor FireIII_FireField : ExplosionBase
+actor FireIII_FireField : BasicExplosion
 {
 Damagetype "PKFire"
 ReactionTime 21

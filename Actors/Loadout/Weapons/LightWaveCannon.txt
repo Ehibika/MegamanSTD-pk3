@@ -139,7 +139,7 @@ stop
 }
 
 
-actor LightCannonTrail : ExplosionBase
+actor LightCannonTrail : BasicExplosion
 {
 Obituary "$OB_LIGHTWAVECANNON"
 States
