@@ -10,6 +10,11 @@ Player.Startitem "IsMegamanX"
 Player.Startitem "UseAbility1_MegamanX"
 Player.Startitem "UseAbility2_MegamanX"
 
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_SprayerMastery"
+Player.Startitem "PRO_BusterMastery"
+
+
 +NOSKIN
 States
 {

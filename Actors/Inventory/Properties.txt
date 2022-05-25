@@ -22,3 +22,4 @@ actor Pro_LightWeight : Once {}
 actor Pro_HeavyWeight : Once {}
 
 actor Pro_Assassin : Once {}
+actor Pro_UnderShirt : Once {}

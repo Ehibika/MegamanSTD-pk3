@@ -69,7 +69,7 @@ actor BlastLauncher
 {
 PROJECTILE
 damagetype "Explosion"
-Obituary "$OB_Hyperbomb"
+Obituary "$OB_BLASTLAUNCHER"
 radius 4
 height 4
 scale 2.0

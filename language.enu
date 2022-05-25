@@ -23,6 +23,22 @@ OB_STANDARDSABER = "%k Eliminated %o with the STANDARD SABER";
 OB_BEAMRAPIER = "%k Eliminated %o with the BEAM RAPIER";		
 OB_TRIANGULARSABER = "%k Eliminated %o with the TRIANGULAR SABER";
 
+// -=- Ability obituaries -=-
+OB_BLASTLAUNCHER = "%k Blew %o up with a Blast launcher bomb";
+
+OB_RYUENJIN = "%k Scorched %o's Ryuenjin Technique";
+OB_REKKOHA = "%k was destroyed by %o's Rekkoha";
+
+OB_GUTSPUNCH = "%k Got Punched by %o";
+
+OB_HYPERDIVE = "%k Got Struck down by %o's Hyper Dive";
+OB_SCATTEREDFLOWER = "%k Got Struck down by %o's Scattered Flower Technique";
+
+OB_SHININGRAYBOMB = "%k was Vaporized by %o's Shining ray Bomb";
+OB_THUNDERDANCER = "%k was Electrified by %o's Thunder Dancer";
+
+OB_WHIRLWIND = "%k was Severed by %o's Whirlwind";
+OB_BERZERKCHARGE = "%k was Eradicated by %o's Berzerk Charge";
 //#region old
 //DOT Obituaries
 OB_Burner = "%k Eliminated %o";
@@ -84,3 +100,8 @@ MNU_JOIN4 = "\c[MenuOrange]Class \c-Text";
 MNU_JOIN5 = "\c[MenuYellow]Class \c-Specific Menu";
 MNU_JOIN6 = "\c-Auto Select";//"\c[MenuBlue]Auto\c--Select";
 MNU_JOIN7 = "\c[MenuCyan]Original Selection";
+
+
+//Properties
+PROP1_NAME = "Buster Mastery";
+PROP1_DESC = "Increased movespeed and power of buster weapons.";

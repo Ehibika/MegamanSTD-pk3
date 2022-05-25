@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE PROPMAX 20
+#LIBDEFINE PROPMAX 21
 
 
 #LIBDEFINE PROP_NAME 0
@@ -23,30 +23,31 @@
 //Master Property List
 str MasterProPList[PROPMAX][6] = {
 
-//    PropertyName, DisplayName, Ammo Name, Property Flags, PainType1, Paintype2 
-/*0*/{"BusterMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
-/*1*/{"MachineGunMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
-/*2*/{"SprayerMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
-/*3*/{"LauncherMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
-/*4*/{"MeleeMastery","Buster Mastery","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITFOE,"MilitaryBuster",""},
+//    PropertyName, DisplayName, 'blank' , Property Flags, 'blank', 'blank' 
+/*0*/{"BusterMastery","Buster Mastery","---", PF_STARTUP|PF_ONHITFOE,"----",""},
+/*1*/{"MachineGunMastery","Buster Mastery","---", PF_STARTUP|PF_ONHITFOE,"----",""},
+/*2*/{"SprayerMastery","Buster Mastery","---", PF_STARTUP|PF_ONHITFOE,"----",""},
+/*3*/{"LauncherMastery","Buster Mastery","---", PF_STARTUP|PF_ONHITFOE,"----",""},
+/*4*/{"MeleeMastery","Buster Mastery","---", PF_STARTUP|PF_ONHITFOE,"----",""},
 
-/*5*/{"FireResistance","Fire Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*6*/{"IceResistance","Ice Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*7*/{"AquaResistance","Aqua Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*8*/{"ToxicResistance","Toxic Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*9*/{"ElecResistance","Elec Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*10*/{"WindResistance","Wind Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*11*/{"BreakResistance","Break Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""}, 
-/*12*/{"EuclidResistance","Euclid Resistance","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
+/*5*/{"FireResistance","Fire Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*6*/{"IceResistance","Ice Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*7*/{"AquaResistance","Aqua Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*8*/{"ToxicResistance","Toxic Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*9*/{"ElecResistance","Elec Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*10*/{"WindResistance","Wind Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*11*/{"BreakResistance","Break Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""}, 
+/*12*/{"EuclidResistance","Euclid Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
 
-/*13*/{"BladeMaster","Blade Master","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*14*/{"Speedrunner","Speedrunner","MilitaryBuster_Ammo", PF_STARTUP|PF_ONHITSELF,"MilitaryBuster",""},
-/*15*/{"Acrobat","Acrobat","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
-/*16*/{"Hefty","Hefty","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+/*13*/{"BladeMaster","Blade Master","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*14*/{"Speedrunner","Speedrunner","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*15*/{"Acrobat","Acrobat","---", PF_STARTUP,"----",""},
+/*16*/{"Hefty","Hefty","---", PF_STARTUP,"----",""},
 
-/*17*/{"LightWeight","LightWeight","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
-/*18*/{"HeavyWeight","HeavyWeight","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+/*17*/{"LightWeight","LightWeight","---", PF_STARTUP,"----",""},
+/*18*/{"HeavyWeight","HeavyWeight","---", PF_STARTUP,"----",""},
 
-/*19*/{"Assassin","Assassin","MilitaryBuster_Ammo", PF_STARTUP,"MilitaryBuster",""},
+/*19*/{"Assassin","Assassin","---", PF_STARTUP,"----",""},
+/*20*/{"Undershirt","Undershirt","---", PF_STARTUP|PF_ONHITSELF,"----",""},
 
 };

@@ -1,14 +1,20 @@
 clearplayerclasses
 addplayerclass STDMegaman
+
 addplayerclass MegamanX
-addplayerclass MegamanEXE
-addplayerclass Massimo
-addplayerclass Marino
-addplayerclass Spider
-addplayerclass Cinnamon
-addplayerclass Alia
 addplayerclass Zero
 addplayerclass Axl
+addplayerclass Massimo
+addplayerclass Marino
+addplayerclass Cinnamon
+addplayerclass Alia
+p
+addplayerclass MegamanEXE
+
+
+//addplayerclass Spider
+
+
 //=====
 
 addkeysection "Extra" Extraoptions

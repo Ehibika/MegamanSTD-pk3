@@ -49,6 +49,8 @@
 #include "Actors/Classes/Massimo/BerzerkCharge.txt"
 
 #include "Actors/Classes/Marino/MarinoClass.txt"
+#include "Actors/Classes/Marino/HyperDive.txt"
+#include "Actors/Classes/Marino/ScatteredFlower.txt"
 
 #include "Actors/Classes/Spider/SpiderClass.txt"
 

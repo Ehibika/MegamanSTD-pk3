@@ -9,7 +9,7 @@ actor Ability2_Alia : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_THUNDERDANCER"
 Tag "HyperBomb Ability"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "LIGHTNI"
@@ -70,6 +70,7 @@ actor ThunderDancer
 PROJECTILE
 +BRIGHT
 damagetype "SparkShock" //lazy
+Obituary "$OB_THUNDERDANCER"
 scale 1.5
 +RIPPER
 Speed 60
@@ -107,8 +108,6 @@ alpha 0.8
 
 actor ThunderShockTrail : BasicExplosion
 {
-Obituary "$OB_THUNDERSHOCK"
-damagetype "ThunderShock"
 States
 {
 Spawn:

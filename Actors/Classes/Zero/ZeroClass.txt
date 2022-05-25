@@ -26,8 +26,13 @@ See:
 ZERO BCDE 5
 GoTo Spawn+1
 Missile:
-ZERO F 5
+ZERO F 1 A_JumpIf(Callacs("CheckMeleeWep")==1,"Melee")
+ZERO F 4
 ZERO G 4
+GoTo Spawn+2
+Melee:
+ZERO H 5
+ZERO I 4
 GoTo Spawn+2
 PainFix:
 ZERO H 0 

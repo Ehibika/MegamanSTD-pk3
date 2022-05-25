@@ -84,6 +84,20 @@ For(int i = 0; i < WEAPONLIST; i++)
 Return MasteryCheck(WepFlag);
 }
 
+Function bool CheckForElement (str PainType, int ElementFlag)
+{
+//Check to see if the given paintype is of a specific element
+For(int i = 0; i < PAINCOUNT; i++)
+	{
+	If(PainRecord[i][0] == PainType)
+		{
+        //found our weapon paintype
+        if(ElementFlag == PainRecord[i][1]) Return 1;      
+		}
+	}
+Return 0;
+}
+
 Function Bool CheckForResistance(str PainType)
 {
 //First Check for the flags
@@ -167,9 +181,32 @@ Delay(1);
 //if(CheckProp(MasterProPList[14][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Speedrunner",0,0);}
 //if(CheckProp(MasterProPList[15][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Acrobat",0,0);}
 if(CheckProp(MasterProPList[15][PROP_NAME])){PlayerJumpZ[PlayerNumber()]+=5.0; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}
+if(CheckProp(MasterProPList[20][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Undershirt",0,0);}
 
 }
 
+Script "Passive_Undershirt" (void)
+{
+int HPMax = GetActorProperty(0,APROP_SPAWNHEALTH);
+int HPNow = GetActorProperty(0,APROP_HEALTH);
+/*
+The undershirfFlag is taken by damage events, when the player doesn't have it,
+this script waits untill they get back to full HP to restore the undershirfFlag
+*/
+GiveInventory("UndershirtFlag",1);
+while(GetActorProperty(0,APROP_HEALTH) > 0)
+    {
+    
+    if(!CheckInventory("UndershirtFlag"))
+        {
+        HPNow = GetActorProperty(0,APROP_HEALTH);
+        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);localAmbientSound("item/Refill",127);}
+        }
+    delay(17);
+    }
+}
+
+//#region -=- depreciated -=-
 Script "Passive_Speedrunner" (Void)
 {
 /*
@@ -235,7 +272,7 @@ if(GetActorProperty(0,APROP_SPEED) >= 1.0
 ){Return 1;}
 Return 0;
 }
-
+//#endregion
 
 Function Bool CheckForCrit(str PainType)
 {

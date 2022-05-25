@@ -4,8 +4,10 @@
 
 #import "a_Core.acs"
 #import "a_Loadout.acs"
+#import "db_Loadout.acs"
 #import "a_Properties.acs"
 #import "db_Properties.acs"
+#import "A_Pain.acs"
 
 //#region -=- Hit Event -=-
 #region -=- Hit Event -=-
@@ -17,10 +19,9 @@ int SourceTID;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
+//===============|Check for damage properties on the opposing player|===============
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
 SourceTID = ActivatorTID();
-
-//Check for damage properties on the opposing player
 
 //==Mastery Damage Bonus ==
 //Also to avoid boosting self damage
@@ -29,13 +30,24 @@ if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMas
 //==Assassin Crit Bonus==
 if(CheckForCrit(arg2)){Damage += Damage*0.5>>16;}
 
+//===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
-//Check for damage properties on the recieving player
 //==Elemental Resistance modifier ==
 if(CheckForResistance(arg2)){Damage = Damage*0.5>>16;}
 
 //==Blade Mastermodifier ==
 if(CheckForBladeMaster(arg2)){Damage = Damage*0.5>>16;}
+
+if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
+	{
+	if(!CheckForElement(arg2,ELM_BREAK))
+		{
+		Damage = GetActorProperty(0,APROP_HEALTH)-1;
+		GiveInventory("TacticalRollEvasion_On",1);
+		TakeInventory("UndershirtFlag",99);
+		localAmbientSound("Body/ArmorPain",127);
+		}
+	}
 
 if(CheckInventory("LT_Armor"))
 	{
@@ -459,6 +471,8 @@ int PlayerX;
 int PlayerY;
 int pitch;
 
+int SubThrustForce,SubThrustForceH;
+
 int FinalForce;
 int FinalForceH;
 
@@ -499,15 +513,33 @@ For(int q = 0;q < GetMaxEntities(); q++)
 			//VectorAngle(xyDistance(0, targetTID), GetActorZ(0) - GetActorZ(targetTID) >> 16);
 			//log(s:"pitch relative to player ",i:q,s:" is ", f:pitch);
 			//log(s:"Height is  ",i:ActHeight);
+
+			//LightWeight & HeavyWeight modifiers
+			SubThrustForce = ThrustForce;
+			SubThrustForceH = ThrustForceH;
+
+			if(CheckPlayerProp(q,MasterProPList[17][PROP_NAME]))
+				{
+				SubThrustForce += SubThrustForce*0.5>>16;;
+				SubThrustForceH += SubThrustForceH*0.5>>16;;
+				}
+
+			if(CheckPlayerProp(q,MasterProPList[18][PROP_NAME]))
+				{//log(s:"HeavyWeight  ");
+				SubThrustForce -= SubThrustForce*0.5>>16;; if(SubThrustForce < 0){SubThrustForce = 0;}
+				SubThrustForceH -= SubThrustForceH*0.5>>16;; if(SubThrustForceH < 0){SubThrustForceH = 0;}
+				}
+
+
 			if(xyzDistance(0, targetTID) > BASEBLASTMIN)
 			{
-			FinalForce = ceil(FixedMul(ThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
-			FinalForceH = ceil(FixedMul(ThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+			FinalForce = ceil(FixedMul(SubThrustForce << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
+			FinalForceH = ceil(FixedMul(SubThrustForceH << 16, 1.0 - FixedDiv(Dist, MaxRadius)));
 			}
 			Else
 			{
-			FinalForce = ThrustForce;
-			FinalForceH = ThrustForceH;
+			FinalForce = SubThrustForce;
+			FinalForceH = SubThrustForceH;
 			}
 			ZThrust = (sin(pitch)*-FinalForce); //GetActorPitch(targetTID)
 			XYThrust = (cos(pitch)*-FinalForceH);
@@ -614,6 +646,8 @@ thing_damage2(TID,damage,"OB_Burner");
 script "HitKnockBack" (int force)
 {
 int pusher = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
+if(CheckProp(MasterProPList[17][PROP_NAME])){force += force*0.5>>16;} //Lightweight
+if(CheckProp(MasterProPList[18][PROP_NAME])){force -= force*0.5>>16; if(force<0){force = 0;}} //HeavyWeight
 int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
 ThrustThing(Vang, force, 1, 0);
 }
@@ -641,8 +675,8 @@ Script "SniperBusterRamp" (int hitCap, int MinDam, int MaxDam)
 SetActivatorToTarget(0);
 str WepName = STD_WhichWeaponName();
 str WepName2 = StrLeft(WepName,StrLen(WepName)-StrLen("Wep"));
-log(s:WepName);
-log(s:WepName2);
+//log(s:WepName);
+//log(s:WepName2);
 int ItemCount = CheckInventory(StrParam(s:WepName2,s:"_HitCounter"));
 if(ItemCount > hitCap){ItemCount = hitCap;}
 int Output = ValueMap(ItemCount,0,hitCap,MinDam,MaxDam);
@@ -693,9 +727,9 @@ Script "WepSpeedMod" (int Value)
 int FixedValue = Value<<16;
 //Check for mastery
 
-if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.8; log(s:"Got Hefty!");}
-if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; log(s:"Got Mastery!");}
-if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; log(s:"Got Speedrunner!");}
+if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.8; /*log(s:"Got Hefty!");*/}
+if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
+if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*log(s:"Got Speedrunner!");*/}
 
 if(Value != GetActorProperty(0,APROP_SPEED))
 	{
@@ -727,4 +761,12 @@ while(GetActorProperty(0, APROP_HEALTH)>0
     }
 
     SetActorProperty(0,Aprop_Renderstyle,STYLE_Translucent);
+}
+
+
+Script "CheckMeleeWep" (void)
+{
+int Output;
+if(GetThisWeaponType() & WF_MELEE){Output = true;}
+SetResultValue(Output);
 }

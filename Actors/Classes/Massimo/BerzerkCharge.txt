@@ -3,7 +3,7 @@ actor Ability2_Massimo : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_BERZERKCHARGE"
 Tag "BerzerkCharge"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "LASERSI"
@@ -37,7 +37,7 @@ Fire:
 "####" "#" 0 A_PlaySoundEx("weapon/HardBuster6","Weapon")
 "####" "#" 0 A_PlaySoundEx("weapon/coilexplode", "SoundSlot6")
 "####" P 0 A_FireCustomMissile("BerzerkChargeDamagerStart",0,0,8,0)
-"####" PP 1 A_FireCustomMissile("BerzerkChargeBurstStart",0,0,8,0)
+"####" P 1 A_FireCustomMissile("BerzerkChargeBurstStart",0,0,8,0)
 "####" QR 2
 "####" A 0 A_GiveInventory("BerzerkChargeCooldown")
 "####" A 0 A_GiveInventory("RefireBuffer")
@@ -122,7 +122,7 @@ actor BerzerkChargeDamager : FastProjectileBase
 {
     PROJECTILE
     damagetype "BerzerkCharge"
-    Obituary "$OB_BerzerkCharge"
+    Obituary "$OB_BERZERKCHARGE"
     +SKYEXPLODE
     +EXPLODEONWATER
     +RIPPER

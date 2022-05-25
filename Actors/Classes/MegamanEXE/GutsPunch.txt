@@ -3,7 +3,7 @@ actor Ability1_megamanEXE : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_GUTSPUNCH"
 Tag "HyperBomb Ability"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "HARDSI"
@@ -77,10 +77,10 @@ PROJECTILE
 damagetype "GutsPunch"
 Obituary "$OB_GUTSPUNCH"
 reactiontime 1
-damage (65)
+damage (85)
 Radius 20
 Height 20
-speed 60
+speed 96
 scale 2.5
 States
 {
@@ -90,7 +90,7 @@ XP00 E 0 A_GiveInventory("ProjectileCode",1)
 MMFX C 1 A_CountDown
 wait
 Death:
-MMFX C 0 A_Explode(65,40,0)
+MMFX C 0 A_Explode(85,96,0,0,96)
 goto XDeath
 XDeath:
 MMFX C 0 A_GiveInventory("ProjectileDCode",1)

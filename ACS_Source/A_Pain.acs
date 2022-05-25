@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 9
+#LIBDEFINE PAINCOUNT 11
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -35,8 +35,10 @@ str PainRecord[PAINCOUNT][2] = {
 /*4*/{"CrushingSpray",ELM_BREAK},
 /*5*/{"DrillHead",ELM_BREAK},
 /*6*/{"WindPressureBuster",ELM_WIND},
-/*7*/{"RyuenjinEdge",ELM_BLADE},
-/*8*/{"RyuenjinTip",ELM_BLADE},
+/*7*/{"RyuenjinEdge",ELM_FIRE|ELM_BLADE},
+/*8*/{"RyuenjinTip",ELM_FIRE|ELM_BLADE},
+/*9*/{"ScatteredFlower",ELM_TOXIC},
+/*10*/{"GutsPunch",ELM_BREAK},
 };
 
 

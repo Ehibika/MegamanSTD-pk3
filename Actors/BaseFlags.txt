@@ -5,6 +5,9 @@ actor FiringSpeed : PowerSpeed {inventory.amount 1 Powerup.Duration 17 Speed 0.5
 
 actor PowerSpeedRunner : PowerSpeed {inventory.amount 1 Powerup.Duration 0x7FFFFFFC Speed 1.2 }
 
+
+actor UndershirtFlag : Once {}
+
 actor AltCooldownFlag : Once {}
 actor AbilityCooldownFlag : Once {}
 

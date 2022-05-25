@@ -38,7 +38,7 @@ user noarchive int Lo_PsiDetail = 1;
 //===|Database server variables|===
 user noarchive int WepADataBase = 0; 
 user noarchive int WepBDataBase = 0; 
-user noarchive int SubWepDataBase = 0; 
+user noarchive int PropertyDataBase = 0; 
 
 user noarchive int MechGlossindex = 0; 
-user noarchive int Roleindex = 0; 
+user noarchive string DB_Class = ""; 

@@ -3,7 +3,7 @@ actor Ability1_Zero : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_RYUENJIN"
 Tag "Ryuenjin"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "FSWORDI"
@@ -128,6 +128,7 @@ actor Ryuenjin_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "RyuenjinEdge"
+Obituary "$OB_RYUENJIN"
 damage (55)
 height 10
 radius 10
@@ -160,6 +161,7 @@ actor Ryuenjin_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "RyuenjinTip"
+Obituary "$OB_RYUENJIN"
 damage (95)
 height 10
 radius 10

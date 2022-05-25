@@ -166,6 +166,17 @@ InInventory IsZero, 1
 	DrawBar "ALTEMP", "ALTHBAR1", RekkohaCooldownItem, vertical,reverse, 25, 163;
 	ininventory RekkohaCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RekkohaCooldownItem, vertical,reverse, 25, 163;}
 	}
+
+InInventory IsMarino, 1
+	{
+	DrawImage "CHARSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", HyperDiveCooldownItem, vertical,reverse, 5, 163;
+	ininventory HyperDiveCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HyperDiveCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "YAMASI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;
+	ininventory ScatteredFlowerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

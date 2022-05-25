@@ -3,7 +3,7 @@ actor Ability1_Alia : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_SHININGRAYBOMB"
 Tag "HyperBomb Ability"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "BRIGHSI"
@@ -123,6 +123,7 @@ PROJECTILE
 +FORCEXYBILLBOARD
 +BRIGHT
 //-NOGRAVITY
+Obituary "$OB_SHININGRAYBOMB"
 Speed 70
 Damage (10)
 radius 5
@@ -150,8 +151,6 @@ stop
 
 actor SLTrail : BasicExplosion
 {
-Obituary "$OB_MILITARYBUSTER"
-damagetype "MegaBuster"
 States
 {
 Spawn:

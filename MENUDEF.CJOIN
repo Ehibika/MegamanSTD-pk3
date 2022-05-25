@@ -4,19 +4,20 @@ OptionMenu ZA_JoinMenu
 	Title "JOIN GAME"
 
 	StaticText"You are spectating."
-	StaticText""
-	StaticText""
-	StaticText""
-	StaticText""
-	StaticText""
 	StaticText"$MNU_JOIN1"
 	StaticText""
+	StaticText "===============================================================",1
+	Option "Class", "playerclass", "ClassNames"
+	Option "Properties", "playerclass", "ClassProperties"
 	StaticText""
-	StaticText"--Class--"
-	JoinMenuPlayerClassOption
+	StaticText""
+	StaticText""
 	Option "Primary", "Lo_WepA", "WepOptionsA"
 	Option "Secondary", "Lo_WepB", "WepOptionsA"
-	Command "       Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
+	JoinMenuPlayerClassOption
+	Command "Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
 	StaticText""
 	
 }
@@ -25,23 +26,25 @@ OptionMenu ZA_JoinTeamMenu
 {
 	Title "JOIN TEAMGAME"
 
-	StaticText""
-	StaticText""
-	StaticText""
 	StaticText"$MNU_JOIN1"//$MNU_CHELP_EQUALLINE
+	StaticText""
 	StaticText""
 	StaticText"$MNU_JOIN2"
 	StaticText""
-	StaticText""
+	StaticText "===============================================================",1
 	Command "$MNU_JOIN6", "menu_autoselect"
+	Option "Class", "playerclass", "ClassNames"
+	Option "Properties", "playerclass", "ClassProperties"
 	StaticText""
-	JoinMenuTeamOption
-	StaticText"--Class--"
-	JoinMenuPlayerClassOption
+	StaticText""
+	StaticText""
 	Option "Primary", "Lo_WepA", "WepOptionsA"
 	Option "Secondary", "Lo_WepB", "WepOptionsA"
-	StaticText""
-	Command "       Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
+	JoinMenuTeamOption
+	JoinMenuPlayerClassOption
+	Command "Join game", "menu_joingamewithclass"
+	StaticText "===============================================================",1
 	StaticText""
 }
 

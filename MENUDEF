@@ -33,7 +33,7 @@ LISTMENU "MainMenu"
 		Font "DBIGFONT", "MenuGreen" // [C]
 		TextItem "Player Setup", "p", "PlayerMenu"
 		TextItem "Loadout", "t", "EditLoadOutMenu" //
-		//TextItem "Database", "d", "N_DataBaseMenu" //
+		TextItem "Database", "d", "N_DataBaseMenu" //
 		//Font "DBIGFONT", "MenuGreen" // [C]
 		//TextItem "Class Help", "h", "ReadThisMenu"
 		Font "DBIGFONT", "MenuWhite" //
@@ -96,12 +96,12 @@ ListMenu "PlayerMenu"//[v5c edit]
 
 listmenu "N_DataBaseMenu"
 {
-	StaticPatch 108,31, "Neumodian Enterprises Database"//94,2
+	StaticPatch 108,31, "Super Team Dive Database"//94,2
 	Position 97,72
-	TextItem "Suit Database", "d4", "SuitDatabase"
-	TextItem "Primary Weapon Database", "d1", "WepADataMenu"
-	TextItem "Secondary Weapon Database", "d1", "WepBDataMenu"
-	TextItem "SubWeapon Database", "d2", "SubWepDataMenu"
+	TextItem "Class Database", "d4", "ClassDatabase"
+	TextItem "Weapon Database", "d1", "WepDataMenu"
+    TextItem "Property Database", "d1", "PropertyDataMenu"
+	//TextItem "SubWeapon Database", "d2", "SubWepDataMenu"
 	TextItem "Mechanics Glossary", "d3", "MechGlossMenu"
 	
 }
