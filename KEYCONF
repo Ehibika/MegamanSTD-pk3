@@ -1,5 +1,6 @@
 clearplayerclasses
 addplayerclass STDMegaman
+addplayerclass FireMan
 
 addplayerclass MegamanX
 addplayerclass Zero
@@ -8,7 +9,6 @@ addplayerclass Massimo
 addplayerclass Marino
 addplayerclass Cinnamon
 addplayerclass Alia
-p
 addplayerclass MegamanEXE
 
 
@@ -27,4 +27,5 @@ defaultbind N +zoom
 defaultbind q +user1
 alias 
 
+alias !MSTD_justjoin "closemenu;join"
 

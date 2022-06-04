@@ -6,83 +6,177 @@ statusbar fullscreen, forcescaled
 InInventory not NoHealthBar, 1
 {
 
-	//DrawImage "NEUMHUD", 0, 19;
-	//InInventory WilyTeamFlag, 1 {DrawImage "NEUMHUDR", 0, 19;}
-	DrawImage "ALTHUD", 60, 140; 
-	InInventory WilyTeamFlag, 1 {DrawImage "ALTHUD_R", 60, 140;}
-
+	DrawImage "NEHUDH", 0, 140;
+	InInventory WilyTeamFlag, 1 {DrawImage "NEHUDHR", 0, 140;}
+	DrawImage "ALTHUD", 0, 161; 
+	InInventory WilyTeamFlag, 1 {DrawImage "ALTHUD_R", 0, 161;}
+	DrawImage "ALTHUD", 20, 161; 
+	InInventory WilyTeamFlag, 1 {DrawImage "ALTHUD_R", 20, 161;}
+	DrawImage weaponicon, 37,135; //58, 132;
+	DrawSelectedInventory INDEXFONT ,18, 161, 31, 161, white;
+	DrawBar "NHLTHB", "NBARE", Health, Horizontal, 8,152;//39, 114;
+	DrawBar "NARMR", "NNOBAR", Basicarmor, Horizontal, 8,152;//39, 114;
 	
-	//DrawBar "NHLTHV", "NBAREV", Health, vertical, 20, 30;
-	//DrawBar "NARMRV", "NNOVAR", Basicarmor, vertical, 20, 30;
-//DrawImage "CTSUP", 0, 140;
-DrawNumber 3, smallfont, white, Health,fillzeros, alignment(Left), 11, 140; //72
-DrawImage weaponicon, 0, 150;	
-DrawSelectedInventory INDEXFONT ,0, 160, 13, 160, white;
-InInventory not NoClipBar, 1{DrawNumber 3, smallfont, white, Ammo1, alignment(left), 11, 150;}
+	DrawNumber 3, CONFONT, UNTRANSLATED, Health,fillzeros, alignment(Left), 3,135;//10, 116; //72
+
+
+InInventory not NoClipBar, 1{
+DrawNumber 3, smallfont, white, Ammo1, alignment(left), 48,135;//27, 132;
+}
+
 
 //#region -=- later reference -=-
 /*
 
 //Abilities
-DrawImage "MEGABALI", 62, 145;
-DrawBar "ALTEMP", "ALTHBAR1", MinibombCooldownitem, vertical,reverse, 65, 142;
-ininventory MinibombCooldownitem ,1 {DrawBar "ALTEMP", "ALTHBAR", MinibombCooldownitem, vertical,reverse, 65, 142;}
+DrawImage "MEGABALI", 2, 166;
+DrawBar "ALTEMP", "ALTHBAR1", MinibombCooldownitem, vertical,reverse, 5, 163;
+ininventory MinibombCooldownitem ,1 {DrawBar "ALTEMP", "ALTHBAR", MinibombCooldownitem, vertical,reverse, 5, 163;}
 
-//heatBar
-DrawImage "HEATBASE", 11, 160;
-DrawBar "HTBAR3", "NOHEATBR", BP_Fuel, Horizontal, 26, 160;
-ininventory BP_Fuel ,35 {DrawBar "HTBAR4", "NOHEATBR", BP_Fuel, Horizontal, 26, 160;}
+//heatBar & resobar
+DrawImage "RESO02", 26, 161;
+DrawBar "SRESO1", "NORESO2", BP_Fuel, Horizontal, 42, 161;
+ininventory BP_Fuel ,35 {DrawBar "SRESO2", "NORESO2", BP_Fuel, Horizontal, 42, 161;}
 
-DrawImage "HEATBASE", 11, 160;
-DrawBar "NOHEATBR", "HTBAR4", RotaryShellCooldownitem, Horizontal,reverse, 26, 160;
-ininventory RotaryShellCooldownitem ,1 {DrawBar "NOHEATBR", "HTBAR1", RotaryShellCooldownitem, Horizontal,reverse, 26, 160;}
+DrawImage "RESO02", 26, 161;
+DrawBar "NORESO2", "SRESO2", RotaryShellCooldownitem, Horizontal,reverse, 42, 161;
+ininventory RotaryShellCooldownitem ,1 {DrawBar "BLRESO2", "SRESO1", RotaryShellCooldownitem, Horizontal,reverse, 42, 161;}
 
-DrawImage "HEATBASE", 11, 150;
-DrawBar "HTBAR1", "NOHEATBR", BeamPowerLevel, Horizontal, 26, 150;
-ininventory BeamPowerLevel ,100 {DrawBar "HTBAR2", "NOHEATBR", BeamPowerLevel, Horizontal, 26, 150;}
-ininventory BeamPowerLevel ,1 {DrawBar "HTBAR3", "BLHEATBR", BeamHoldTimer, Horizontal, 26, 150;}
+DrawImage "HEATBASE", 46, 137;
+DrawBar "HTBAR1", "NOHEATBR", BeamPowerLevel, Horizontal, 61, 137;
+ininventory BeamPowerLevel ,100 {DrawBar "HTBAR4", "NOHEATBR", BeamPowerLevel, Horizontal, 61, 137;}
+ininventory BeamPowerLevel ,1 {DrawBar "HTBAR3", "BLHEATBR", BeamHoldTimer, Horizontal, 61, 137;}
 
 ininventory HasPSI ,1
 	{
-	DrawImage "CTDEF", 0, 160;
-	DrawNumber 3, smallfont, white, PsychicPoints, alignment(left), 11, 160;
+	//DrawImage "RESO01", 17, 161;
+	DrawBar "PSYBAR1", "NBARE", PsychicPointReso, Horizontal, 18, 161; //33
+	ininventory PsychicPoints ,1 {DrawBar "PSYBAR2", "NNOBAR", PsychicPoints, Horizontal, 18, 161;}
 	}
+
 */
 //#endregion
-
 //[+]======================================[+]
 //--------------|Emblem huds|---------------
 //[+]======================================[+]
-InInventory PlayerIconFlag,1 {InInventory not PlayerIconFlag,2 {DrawImage "SE00A0", 5, 150;}}
-InInventory PlayerIconFlag,2 {InInventory not PlayerIconFlag,3 {DrawImage "SE00B0", 5, 150;}}
-InInventory PlayerIconFlag,3 {InInventory not PlayerIconFlag,4 {DrawImage "SE00C0", 5, 150;}}
-InInventory PlayerIconFlag,4 {InInventory not PlayerIconFlag,5 {DrawImage "SE00D0", 5, 150;}}
-InInventory PlayerIconFlag,5 {InInventory not PlayerIconFlag,6 {DrawImage "SE00E0", 5, 150;}}
-InInventory PlayerIconFlag,6 {InInventory not PlayerIconFlag,7 {DrawImage "SE00F0", 5, 150;}}
-InInventory PlayerIconFlag,7 {InInventory not PlayerIconFlag,8 {DrawImage "SE00G0", 5, 150;}}
-InInventory PlayerIconFlag,8 {InInventory not PlayerIconFlag,9 {DrawImage "SE00H0", 5, 150;}}
-InInventory PlayerIconFlag,9 {InInventory not PlayerIconFlag,10 {DrawImage "SE00I0", 5, 150;}}
-InInventory PlayerIconFlag,10 {InInventory not PlayerIconFlag,11 {DrawImage "SE00J0", 5, 150;}}
-InInventory PlayerIconFlag,11 {InInventory not PlayerIconFlag,12 {DrawImage "SE00K0", 5, 150;}}
-InInventory PlayerIconFlag,12 {InInventory not PlayerIconFlag,13 {DrawImage "SE00L0", 5, 150;}}
-InInventory PlayerIconFlag,13 {InInventory not PlayerIconFlag,14 {DrawImage "SE00M0", 5, 150;}}
-InInventory PlayerIconFlag,14 {InInventory not PlayerIconFlag,15 {DrawImage "SE00N0", 5, 150;}}
-InInventory PlayerIconFlag,15 {InInventory not PlayerIconFlag,16 {DrawImage "SE00O0", 5, 150;}}
-InInventory PlayerIconFlag,16 {InInventory not PlayerIconFlag,17 {DrawImage "SE00P0", 5, 150;}}
-InInventory PlayerIconFlag,17 {InInventory not PlayerIconFlag,18 {DrawImage "SE00Q0", 5, 150;}}
-InInventory PlayerIconFlag,18 {InInventory not PlayerIconFlag,19 {DrawImage "SE00R0", 5, 150;}}
-InInventory PlayerIconFlag,19 {InInventory not PlayerIconFlag,20 {DrawImage "SE00S0", 5, 150;}}
-InInventory PlayerIconFlag,20 {InInventory not PlayerIconFlag,21 {DrawImage "SE00T0", 5, 150;}}
-InInventory PlayerIconFlag,21 {InInventory not PlayerIconFlag,22 {DrawImage "SE00U0", 5, 150;}}
-InInventory PlayerIconFlag,22 {InInventory not PlayerIconFlag,23 {DrawImage "SE00V0", 5, 150;}}
-InInventory PlayerIconFlag,23 {InInventory not PlayerIconFlag,24 {DrawImage "SE00W0", 5, 150;}}
-InInventory PlayerIconFlag,24 {InInventory not PlayerIconFlag,25 {DrawImage "SE00X0", 5, 150;}}
-InInventory PlayerIconFlag,25 {InInventory not PlayerIconFlag,26 {DrawImage "SE00Y0", 5, 150;}}
-InInventory PlayerIconFlag,26 {InInventory not PlayerIconFlag,27 {DrawImage "SE00Z0", 5, 150;}}
+InInventory PlayerIconFlag,1 {InInventory not PlayerIconFlag,2 {DrawImage "SE00A0", 87, 156;}}
+InInventory PlayerIconFlag,2 {InInventory not PlayerIconFlag,3 {DrawImage "SE00B0", 87, 156;}}
+InInventory PlayerIconFlag,3 {InInventory not PlayerIconFlag,4 {DrawImage "SE00C0", 87, 156;}}
+InInventory PlayerIconFlag,4 {InInventory not PlayerIconFlag,5 {DrawImage "SE00D0", 87, 156;}}
+InInventory PlayerIconFlag,5 {InInventory not PlayerIconFlag,6 {DrawImage "SE00E0", 87, 156;}}
+InInventory PlayerIconFlag,6 {InInventory not PlayerIconFlag,7 {DrawImage "SE00F0", 87, 156;}}
+InInventory PlayerIconFlag,7 {InInventory not PlayerIconFlag,8 {DrawImage "SE00G0", 87, 156;}}
+InInventory PlayerIconFlag,8 {InInventory not PlayerIconFlag,9 {DrawImage "SE00H0", 87, 156;}}
+InInventory PlayerIconFlag,9 {InInventory not PlayerIconFlag,10 {DrawImage "SE00I0", 87, 156;}}
+InInventory PlayerIconFlag,10 {InInventory not PlayerIconFlag,11 {DrawImage "SE00J0", 87, 156;}}
+InInventory PlayerIconFlag,11 {InInventory not PlayerIconFlag,12 {DrawImage "SE00K0", 87, 156;}}
+InInventory PlayerIconFlag,12 {InInventory not PlayerIconFlag,13 {DrawImage "SE00L0", 87, 156;}}
+InInventory PlayerIconFlag,13 {InInventory not PlayerIconFlag,14 {DrawImage "SE00M0", 87, 156;}}
+InInventory PlayerIconFlag,14 {InInventory not PlayerIconFlag,15 {DrawImage "SE00N0", 87, 156;}}
+InInventory PlayerIconFlag,15 {InInventory not PlayerIconFlag,16 {DrawImage "SE00O0", 87, 156;}}
+InInventory PlayerIconFlag,16 {InInventory not PlayerIconFlag,17 {DrawImage "SE00P0", 87, 156;}}
+InInventory PlayerIconFlag,17 {InInventory not PlayerIconFlag,18 {DrawImage "SE00Q0", 87, 156;}}
+InInventory PlayerIconFlag,18 {InInventory not PlayerIconFlag,19 {DrawImage "SE00R0", 87, 156;}}
+InInventory PlayerIconFlag,19 {InInventory not PlayerIconFlag,20 {DrawImage "SE00S0", 87, 156;}}
+InInventory PlayerIconFlag,20 {InInventory not PlayerIconFlag,21 {DrawImage "SE00T0", 87, 156;}}
+InInventory PlayerIconFlag,21 {InInventory not PlayerIconFlag,22 {DrawImage "SE00U0", 87, 156;}}
+InInventory PlayerIconFlag,22 {InInventory not PlayerIconFlag,23 {DrawImage "SE00V0", 87, 156;}}
+InInventory PlayerIconFlag,23 {InInventory not PlayerIconFlag,24 {DrawImage "SE00W0", 87, 156;}}
+InInventory PlayerIconFlag,24 {InInventory not PlayerIconFlag,25 {DrawImage "SE00X0", 87, 156;}}
+InInventory PlayerIconFlag,25 {InInventory not PlayerIconFlag,26 {DrawImage "SE00Y0", 87, 156;}}
+InInventory PlayerIconFlag,26 {InInventory not PlayerIconFlag,27 {DrawImage "SE00Z0", 87, 156;}}
+
 //[+]======================================[+]
-//--------------|AltFire huds|---------------
+//--------------|ClassHuds huds|---------------
 //[+]======================================[+]
 
+InInventory IsMegaman, 1
+	{
+	DrawImage "CHARSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", CombatSlideCooldownItem, vertical,reverse, 5, 163;
+	ininventory CombatSlideCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CombatSlideCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "RCOIL", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RushCallCooldownItem, vertical,reverse, 25, 163;
+	ininventory RushCallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RushCallCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMegamanX, 1
+	{
+	DrawImage "BDASWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", CombatDashCooldownItem, vertical,reverse, 5, 163;
+	ininventory CombatDashCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CombatDashCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BUSTI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", XChargeShotCooldownItem, vertical,reverse, 25, 163;
+	ininventory XChargeShotCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", XChargeShotCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMegamanEXE, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", GutsPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory GutsPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GutsPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "RKCUBEI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RockCubeCooldownItem, vertical,reverse, 25, 163;
+	ininventory RockCubeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RockCubeCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMassimo, 1
+	{
+	DrawImage "TOMASI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", WhirlWindCooldownItem, vertical,reverse, 5, 163;
+	ininventory WhirlWindCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", WhirlWindCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "LASERSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BerzerkChargeCooldownItem, vertical,reverse, 25, 163;
+	ininventory BerzerkChargeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BerzerkChargeCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsAlia, 1
+	{
+	DrawImage "BRIGHSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ShiningRayCooldownItem, vertical,reverse, 5, 163;
+	ininventory ShiningRayCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ShiningRayCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "FLMBSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", MeltCreeperCooldownItem, vertical,reverse, 25, 163;
+	ininventory MeltCreeperCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", MeltCreeperCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsAxl, 1
+	{
+	DrawImage "BDASWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", TacticalRollCooldownItem, vertical,reverse, 5, 163;
+	ininventory TacticalRollCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", TacticalRollCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BOMBSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BlastLauncherCooldownItem, vertical,reverse, 25, 163;
+	ininventory BlastLauncherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlastLauncherCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsZero, 1
+	{
+	DrawImage "FSWORDI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RyuenjinCooldownItem, vertical,reverse, 5, 163;
+	ininventory RyuenjinCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RyuenjinCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "REKKOI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RekkohaCooldownItem, vertical,reverse, 25, 163;
+	ininventory RekkohaCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RekkohaCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsMarino, 1
+	{
+	DrawImage "CHARSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", HyperDiveCooldownItem, vertical,reverse, 5, 163;
+	ininventory HyperDiveCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HyperDiveCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "YAMASI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;
+	ininventory ScatteredFlowerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]
@@ -90,5 +184,6 @@ InInventory PlayerIconFlag,26 {InInventory not PlayerIconFlag,27 {DrawImage "SE0
 //[+]======================================[+]
 //-----------|Weapon Resource Bars|-----------
 //[+]======================================[+]
+
 
 }}

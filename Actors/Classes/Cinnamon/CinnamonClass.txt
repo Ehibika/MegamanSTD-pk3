@@ -2,15 +2,17 @@ Actor Cinnamon : ClassBase
 {
 Player.DisplayName "Cinnamon"
 Player.SoundClass "megaman"
-Health 100
-Player.MaxHealth 100
+Health 125
+Player.MaxHealth 125
 Player.JumpZ 10
 
 Player.Startitem "IsCinnamon"
 Player.Startitem "UseAbility1_Cinnamon"
 Player.Startitem "UseAbility2_Cinnamon"
 
-Player.Startitem "PRO_MeleeMastery"
+Player.Startitem "Pro_TeamMedic"
+Player.Startitem "Pro_ElementalGuard"
+Player.Startitem "Pro_ToxicResistance"
 
 +NOSKIN
 States

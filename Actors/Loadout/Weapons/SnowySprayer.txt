@@ -111,7 +111,7 @@ Damagefactor "SnowySpray", 0
 actor SnowySprayerCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 8
+Powerup.Duration 5
 powerup.type "ConShotTimer"
 }
 
@@ -119,8 +119,8 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int SnowySprayRange = 20;
-Const float SnowySpray_DMG = 6;
+Const Int SnowySprayRange = 30;
+Const float SnowySpray_DMG = 10;
 
 actor SnowySprayDamagerStart //: BasicHelper
 {

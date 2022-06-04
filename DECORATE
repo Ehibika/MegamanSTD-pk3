@@ -4,7 +4,6 @@
 #include "Actors/Loadout/ConstList.txt"
 
 //inventories
-#include "Actors/inventory/TinyBar.txt"
 #include "Actors/inventory/Giverpackage.txt"
 #include "Actors/inventory/InputTriggers.txt"
 #include "Actors/inventory/ItemGiver.txt"
@@ -13,6 +12,7 @@
 #include "Actors/inventory/Armor.txt"
 #include "Actors/inventory/Properties.txt"
 #include "Actors/inventory/ArcTargeter.txt"
+#include "Actors/inventory/HealerUtilities.txt"
 
 #include "actors/Classes/ClassBase/classbase0.txt"
 #include "actors/Classes/ClassBase/classbase1.txt"
@@ -55,10 +55,12 @@
 #include "Actors/Classes/Spider/SpiderClass.txt"
 
 #include "Actors/Classes/Cinnamon/CinnamonClass.txt"
+#include "Actors/Classes/Cinnamon/SyringeToss.txt"
+#include "Actors/Classes/Cinnamon/AngelAura.txt"
 
 #include "Actors/Classes/Alia/AliaClass.txt"
 #include "Actors/Classes/Alia/ShiningRay.txt"
-#include "Actors/Classes/Alia/ThunderDancer.txt"
+#include "Actors/Classes/Alia/MeltCreeper.txt"
 
 #include "Actors/Classes/Zero/ZeroClass.txt"
 #include "Actors/Classes/Zero/Ryuenjin.txt"
@@ -67,6 +69,11 @@
 #include "Actors/Classes/Axl/AxlClass.txt"
 #include "Actors/Classes/Axl/TacticalRoll.txt"
 #include "Actors/Classes/Axl/BlastLauncher.txt"
+
+
+#include "Actors/Classes/Fireman/FiremanClass.txt"
+#include "Actors/Classes/Fireman/Fireball.txt"
+#include "Actors/Classes/Fireman/FireStorm.txt"
 
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
@@ -103,12 +110,26 @@
 #include "Actors/Loadout/Weapons/BeamRapier.txt"
 #include "Actors/Loadout/Weapons/TriangularSaber.txt"
 
+#include "Actors/Loadout/Weapons/FireballBuster.txt"
+#include "Actors/Loadout/Weapons/AtomicBuster.txt"
+#include "Actors/Loadout/Weapons/RepairGun.txt"
+#include "Actors/Loadout/Weapons/ViperBuster.txt"
+#include "Actors/Loadout/Weapons/ViperRifle.txt"
+#include "Actors/Loadout/Weapons/ThriceGun.txt"
+
+#include "Actors/Loadout/Weapons/MediBuster.txt"
+#include "Actors/Loadout/Weapons/ScrewShooter.txt"
+#include "Actors/Loadout/Weapons/BoltDriver.txt"
+#include "Actors/Loadout/Weapons/RepairSprayer.txt"
+#include "Actors/Loadout/Weapons/RepairLauncher.txt"
+
+
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-02_HiPEgun.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-03_HiPERBeam.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-04_SLAMCannon.txt"
-#include "Actors/Loadout/Weapons/depreciated/NWN-05_MediCarbine.txt"
+#include "Actors/Loadout/Weapons/depreciated/NWN-05_MediBuster.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-06_Crossbow.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-07_FlameTongue.txt"
 #include "Actors/Loadout/Weapons/depreciated/NWN-08_VoltSpear.txt"

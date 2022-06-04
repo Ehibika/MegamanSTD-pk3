@@ -84,6 +84,13 @@ Powerup.Duration 35
 powerup.type "ConShotTimer"
 }
 
+Actor RekkohaProtect : powerprotection
+{
+Powerup.duration 17
+Damagefactor "Rekkoha", 0
+}
+
+
 actor RekkohaShot
 {
 PROJECTILE

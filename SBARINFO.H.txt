@@ -107,7 +107,7 @@ InInventory IsMegamanX, 1
 	DrawBar "ALTEMP", "ALTHBAR1", CombatDashCooldownItem, vertical,reverse, 5, 163;
 	ininventory CombatDashCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CombatDashCooldownItem, vertical,reverse, 5, 163;}
 
-	//DrawImage "RCOIL", 22, 166;
+	DrawImage "BUSTI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", XChargeShotCooldownItem, vertical,reverse, 25, 163;
 	ininventory XChargeShotCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", XChargeShotCooldownItem, vertical,reverse, 25, 163;}
 	}
@@ -140,9 +140,9 @@ InInventory IsAlia, 1
 	DrawBar "ALTEMP", "ALTHBAR1", ShiningRayCooldownItem, vertical,reverse, 5, 163;
 	ininventory ShiningRayCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ShiningRayCooldownItem, vertical,reverse, 5, 163;}
 
-	DrawImage "LIGHTNI", 22, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", ThunderDancerCooldownItem, vertical,reverse, 25, 163;
-	ininventory ThunderDancerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ThunderDancerCooldownItem, vertical,reverse, 25, 163;}
+	DrawImage "FLMBSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", MeltCreeperCooldownItem, vertical,reverse, 25, 163;
+	ininventory MeltCreeperCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", MeltCreeperCooldownItem, vertical,reverse, 25, 163;}
 	}
 
 InInventory IsAxl, 1
@@ -176,6 +176,33 @@ InInventory IsMarino, 1
 	DrawImage "YAMASI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;
 	ininventory ScatteredFlowerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+
+InInventory IsCinnamon, 1
+	{
+	DrawImage "NEEDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SyringeTossCooldownItem, vertical,reverse, 5, 163;
+	ininventory SyringeTossCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SyringeTossCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "HFLAI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AngelAuraCooldownItem, vertical,reverse, 25, 163;
+	ininventory AngelAuraCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AngelAuraCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+InInventory IsFireman, 1
+	{
+	DrawImage "FLMBSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FireBallCooldownItem, vertical,reverse, 5, 163;
+	ininventory FireBallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireBallCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "FIRESI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FireStormCooldownItem, vertical,reverse, 25, 163;
+	ininventory FireStormCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireStormCooldownItem, vertical,reverse, 25, 163;}
+
+	//DrawImage "RESO02", 26, 161;
+	DrawBar "FIRMBR", "NORESO", FiremanHeat, Horizontal, 42, 161;
 	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------

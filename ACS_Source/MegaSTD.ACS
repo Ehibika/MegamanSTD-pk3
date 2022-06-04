@@ -16,6 +16,8 @@ script "MSTD_HitEvents" (int type, int arg1, int arg2) EVENT
 int Damage = arg1;
 str PainType = arg2;
 int SourceTID;
+
+bool CritHit,Assassin,FireCrit,PoisonCrit;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
@@ -28,15 +30,19 @@ SourceTID = ActivatorTID();
 if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += Damage*0.2>>16;}}
 
 //==Assassin Crit Bonus==
-if(CheckForCrit(arg2)){Damage += Damage*0.5>>16;}
+if(CheckForCrit(arg2)){CritHit = true;}
+if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
 if(CheckForResistance(arg2)){Damage = Damage*0.5>>16;}
 
-//==Blade Mastermodifier ==
-if(CheckForBladeMaster(arg2)){Damage = Damage*0.5>>16;}
+//==|Elemental Guard modifier|==
+if(CheckForElementalGuard(arg2)){Damage = Damage*0.75>>16;}
+
+//==Blade Parrymodifier ==
+if(CheckForBladeParry(arg2)){Damage = Damage*0.5>>16;}
 
 if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 	{
@@ -48,6 +54,16 @@ if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 		localAmbientSound("Body/ArmorPain",127);
 		}
 	}
+
+//===|conditional status crits|====
+if(CheckForFireCrit(arg2)){FireCrit = true; }
+if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][PROP_NAME])){CritHit = true;}}
+
+//===============|End Damage Calculations|===============
+if(FireCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
+if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
+if(Assassin)
+	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.5>>16;}}
 
 if(CheckInventory("LT_Armor"))
 	{
@@ -65,6 +81,17 @@ if(CheckInventory("LT_Armor"))
 	if(Damage<=0){Damage = 1; GiveInventory("HealthBonus",1);}
 	*/
 	}
+	
+
+//===============|Post Calculation Passives|===============
+
+//==Fireman Class Passive==
+SetActivator(0, AAPTR_DAMAGE_SOURCE);
+if(CheckInventory("IsFireman") && CheckForElement(arg2,ELM_FIRE)){GiveInventory("FiremanHeat",arg1*0.5>>16);}
+SetActivator(0, AAPTR_DAMAGE_TARGET);
+
+
+if(Damage>0){TakeInventory("HealRampPower",9);GiveInventory("HealRampPower",1);}
 ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);
 SetResultValue(Damage);
 
@@ -194,23 +221,24 @@ Bool GiveClearance;
 If(ActivatorTID() <= 999)
 	{
 	//log(s:"an Actor");
-	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Returns the target of the activator
+	FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget"); //Returns the target of the activator
 	}
 Else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499))
 	{
 	//log(s:"an EntiTID");
-	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Actor is a player spawed entity, Returns the target of the activator
+	FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget"); //Actor is a player spawed entity, Returns the target of the activator
 	}
 Else If(ActivatorTID() >= M_EntityTID && ActivatorTID() <= (M_EntityTID+6499))
 	{
 	//log(s:"an M_EntiTID");
-	FiringPlayer= ACS_ExecuteWithResult(257, 0); //Actor is a player spawed entity, Returns the target of the activator
+	FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget"); //Actor is a player spawed entity, Returns the target of the activator
 	}
 else
 	{
 	//log(s:"a Player");
 	FiringPlayer=ActivatorTID();
 	}
+
 PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
 For(int i = 0;i < GetMaxEntities(); i++)
 	{
@@ -333,7 +361,7 @@ Str TinyBarSprite[21] = {
             Target_TID = p+1000;
             If(PlayerInGame(p)
                 && p+1000 != ActivatorTID()
-                && (xyzDistance(ViewerTID,Target_TID) < 900) 
+                && (xyzDistance(ViewerTID,Target_TID) < 1900) 
                 && PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM)
                 && Checksight(ViewerTID,Target_TID,0))
                 {
@@ -385,9 +413,9 @@ int TeamGame = ACS_ExecuteWithResult(975, 1);
 
 
 // - Returns the target of the activator -
-if(ActivatorTID() <= 999){FiringPlayer= ACS_ExecuteWithResult(257, 0); }
+if(ActivatorTID() <= 999){FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget"); }
 // - Actor is a player spawed entity, Returns the target of the activator
-else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499)){FiringPlayer= ACS_ExecuteWithResult(257, 0); }
+else If(ActivatorTID() >= EntityTID && ActivatorTID() <= (EntityTID+6499)){FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget"); }
 else{FiringPlayer=ActivatorTID();}
 
 PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
@@ -450,7 +478,7 @@ int AdditiveForce;
 
 	if(ActivatorTID() == 0)
 	{
-		userTID = ACS_ExecuteWithResult(257, 0);
+		userTID = ACS_NamedExecuteWithResult("core_gettarget");
 		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
 	}
 	else
@@ -637,10 +665,16 @@ SpawnNewWepFunc("BigHealth_MSTD");
 }
 
 //Damage Over Time Script
-script "DotDamager" (int damage, int TID)
+script "DotDamager" (int damage, int TID, int Type)
 {
 setactivator(0,AAPTR_TARGET);
-thing_damage2(TID,damage,"OB_Burner");
+str DamType;
+Switch(Type)
+	{
+	default: DamType = "FireDOT"; Break;
+	Case 1: DamType = "PoisonDOT"; Break;
+	}
+thing_damage2(TID,damage,DamType);
 }
 
 script "HitKnockBack" (int force)
@@ -769,4 +803,80 @@ Script "CheckMeleeWep" (void)
 int Output;
 if(GetThisWeaponType() & WF_MELEE){Output = true;}
 SetResultValue(Output);
+}
+
+
+script "HealerShotIdentify"  (VOID) 
+{
+
+	int FiringPlayer= ACS_NamedExecuteWithResult("Core_GetTarget", 0) - 1000;
+    int TracerPlayer= ACS_NamedExecuteWithResult("Core_GetTracer", 0) - 1000;
+    int Output;
+    if( GetPlayerInfo(TracerPlayer, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))
+    {
+        Output = 1;
+    }
+
+    setResultValue(Output);
+}
+
+//======|Damage Faloff Formula Script
+Script "DamageRate" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
+{
+int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_NamedExecuteWithResult("core_gettarget"))-DistStart)/RampRate);
+SetResultValue(Damage);
+}
+
+Script "DamageRate2" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
+{
+int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_NamedExecuteWithResult("core_gettarget"))-DistStart)/RampRate);
+SetResultValue(Damage);
+}
+
+
+Script "DMinMax" (int MinD, int MaxD)
+{ //Picks the highest of the 2 values
+int Output = MinD;
+if(MaxD > MinD) {Output = MaxD;}
+SetResultValue(Output);
+}
+
+Script "DMGR" (int DMG1, int Range1, int DMG2, int Range2) //Damage Rate Script
+{
+
+//Range 1 is the closest range threshold, Range 2 is the furthest
+
+int Dist = xyzdistance(0, ACS_NamedExecuteWithResult("Core_GetTarget", 0));
+int Damage;
+if(Dist <= Range1*ZDMETER) //Within effective range
+	{Damage = DMG1;}
+else if(Dist <= Range2*ZDMETER) //Beyond effective range
+	{
+	Damage = DMG2;
+	}
+SetResultValue(Damage);
+}
+
+Script "HealRamp" (Int HealMin, Int HealMax, int Pointer)
+{
+if(Pointer!=0){SetActivator(0,Pointer);}
+int timeMax = 245;
+int rampPerc = (GetActorPowerupTics(0,"HealRampPower")*100)/timeMax;
+//log(i:GetActorPowerupTics(0,"HealStall_A"));
+//log(i:rampPerc);
+int output = (HealMax*(100 - rampPerc))/100;
+//log(i:output);
+
+if (output < HealMin){output = HealMin;}
+if (output > HealMax){output = HealMax;}
+SetResultValue(output);
+}
+
+Script "WeaponReload" (void)
+{
+int ThisWeapon = STD_WhichWeapon();
+str WepAmmoName = MasterWepList[ThisWeapon][2];
+int WepAmmoCount = GetAmmoCapacity(WepAmmoName);
+
+GiveInventory(WepAmmoName,WepAmmoCount);
 }

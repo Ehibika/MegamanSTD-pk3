@@ -11,8 +11,8 @@ Player.Startitem "UseAbility1_Zero"
 Player.Startitem "UseAbility2_Zero"
 
 Player.Startitem "PRO_MeleeMastery"
-Player.Startitem "PRO_BladeMaster"
-Player.Startitem "Pro_Speedrunner"
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_BladeParry"
 
 +NOSKIN
 States

@@ -16,12 +16,12 @@ states
 {
 Pickup:
 TNT1 A 0 A_JumpIf(CheckClass("BigHealth"),"Pickup.BigHealth")
-//TNT1 A 0 A_JumpIf(CheckClass("SmallHealth"),"Pickup.SmallHealth")
+TNT1 A 0 A_JumpIf(CheckClass("SmallHealth"),"Pickup.SmallHealth")
 TNT1 A 0 A_JumpIf(CheckClass("MegaHealth"),"Pickup.BigHealth")
 
-TNT1 A 0 A_JumpIf(CheckClass("BigWeaponEnergy"),"Pickup.BigHealth")
+//TNT1 A 0 A_JumpIf(CheckClass("BigWeaponEnergy"),"Pickup.BigHealth")
 //TNT1 A 0 A_JumpIf(CheckClass("WeaponEnergy"),"Pickup.SmallHealth")
-TNT1 A 0 A_JumpIf(CheckClass("MegaWeaponEnergy"),"Pickup.BigHealth")
+//TNT1 A 0 A_JumpIf(CheckClass("MegaWeaponEnergy"),"Pickup.BigHealth")
 
 TNT1 A 0 A_JumpIf(CheckClass("ETank"),"Pickup.BigHealth")
 TNT1 A 0 A_JumpIf(CheckClass("MTank"),"Pickup.BigHealth")

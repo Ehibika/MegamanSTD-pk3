@@ -20,7 +20,7 @@ Fire:
 CKIC C 0 A_PlaySoundEx("weapon/BreakDash","Weapon")
 "####" C 0 A_GiveInventory("TacticalRollEvasion_On")
 "####" C 0 SetPlayerProperty(0,1,0)
-"####" BBAAAAAAAAAAAA 1 A_ChangeVelocity(15,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
+"####" BBAAAAAAAAAAAA 1 A_ChangeVelocity(35,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
 "####" A 0 SetPlayerProperty(0,0,0)
 "####" BC 2
 "####" C 0 A_GiveInventory("TacticalRollCooldown")

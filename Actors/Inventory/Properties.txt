@@ -13,7 +13,7 @@ actor Pro_WindResistance : Once {}
 actor Pro_BreakResistance : Once {} //Should be redundant
 actor Pro_EuclidResistance : Once {}
 
-actor Pro_BladeMaster : Once {}
+actor Pro_BladeParry : Once {}
 actor Pro_Speedrunner : Once {}
 actor Pro_Acrobat : Once {}
 actor Pro_Hefty : Once {}
@@ -23,3 +23,7 @@ actor Pro_HeavyWeight : Once {}
 
 actor Pro_Assassin : Once {}
 actor Pro_UnderShirt : Once {}
+
+actor Pro_ElementalGuard : Once {}
+actor Pro_TeamMedic : Once {}
+

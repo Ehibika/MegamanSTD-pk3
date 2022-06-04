@@ -24,8 +24,8 @@ HSPR U 0 A_PlaySoundEx("weapon/chargekick","Weapon")
 "####" U 0 A_GiveInventory("BreakDashCharge", 8)
 Fire.DashLoop:
 "####" W 0 A_GiveInventory("HyperDiveSpeed", 1)
-"####" W 0 A_SpawnItemEx("BreakDashFX", cos(pitch)*16+sin(-pitch)*12, 8, sin(-pitch)*16+32, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM)
-"####" W 0 A_SpawnItemEx("BreakDashSparkFX", 0, 0, 0, 0, 0, -2)
+//"####" W 0 A_SpawnItemEx("HyperDiveFX", cos(pitch)*16+sin(-pitch)*12, 8, sin(-pitch)*16+32, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM)
+"####" W 0 A_SpawnItemEx("HyperDiveSparkFX", 0, 0, 0, 0, 0, -2)
 "####" W 1 A_FireCustomMissile("HyperDiveCheck", 0, 0, 0, 0)
 "####" W 0 A_JumpIfInventory("BreakDashRecoil", 1, "Fire.Recoil")
 "####" W 0 A_TakeInventory("BreakDashCharge", 1)
@@ -118,6 +118,55 @@ actor HyperDiveCheck : FastProjectile
     Death:
         TNT1 A 0 A_SpawnItemEx("BreakDashQuake")
         TNT1 A 0 A_GiveToTarget("BreakDashRecoil", 1)
+        stop
+    }
+}
+
+actor HyperDiveFX
+{
+    +NOINTERACTION
+    +NOGRAVITY
+    +CLIENTSIDEONLY
+    +FORCEXYBILLBOARD
+    -SOLID
+    scale 2.5
+    height 0
+    radius 0
+    States
+    {
+    Spawn:
+        CKIC D 0
+        CKIC D 1
+        stop
+    }
+}
+
+actor HyperDiveSparkFX
+{
+    PROJECTILE
+    +CLIENTSIDEONLY
+    +RIPPER
+    damage (0)
+    height 2
+    radius 1
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 AAAAA 0 A_SpawnItemEx("HyperDiveSpark", 0, 0, 0, -frandom(8, 16), 0, frandom(4, 16), frandom(-20, 20))
+        stop
+    }
+}
+
+actor HyperDiveSpark : HyperDiveFX
+{
+    States
+    {
+    Spawn:
+        CKIC EFF 1
         stop
     }
 }

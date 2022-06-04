@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE WEAPONLIST 21
+#LIBDEFINE WEAPONLIST 31
 #LIBDEFINE SUBWEAPONLIST_MAX 7
 #LIBDEFINE PSILIST 5
 
@@ -50,7 +50,7 @@
 #LIBDEFINE WF_NOBOT 32.0
 #LIBDEFINE WF_MEDICAL	64.0
 #LIBDEFINE WF_BLADE 128.0
-#LIBDEFINE WF_2 256.0
+#LIBDEFINE WF_HARMLESS 256.0
 #LIBDEFINE WF_3	512.0
 #LIBDEFINE WF_4 1024.0
 #LIBDEFINE WF_5 2048.0
@@ -97,4 +97,16 @@ str MasterWepList[WEAPONLIST][6] = {
 /*18*/{"Standard Saber","StandardSaberWep","StandardSaber_Ammo", WF_MELEE,"StandardSaberEdge","StandardSaberTip"},
 /*19*/{"Beam Rapier","BeamRapierWep","BeamRapier_Ammo", WF_MELEE,"BeamRapierEdge","BeamRapierTip"},
 /*20*/{"Triangular Saber","TriangularSaberWep","TriangularSaber_Ammo", WF_MELEE,"TriangularSaberEdge","TriangularSaberTip"},
+
+/*21*/{"FireballBuster","FireballBusterWep","FireballBuster_Ammo", WF_BUSTER,"FireballBuster",""},
+/*22*/{"AtomicBuster","AtomicBusterWep","AtomicBuster_Ammo", WF_BUSTER,"AtomicBuster",""},
+/*23*/{"RepairGun","RepairGunWep","RepairGun_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairGun",""},
+/*24*/{"ViperRifle","ViperRifleWep","ViperRifle_Ammo", WF_MACHINEGUN,"ViperRifle",""},
+
+/*25*/{"ThriceGun","ThriceGunWep","ThriceGun_Ammo", WF_MACHINEGUN,"ThriceGun",""},
+/*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL,"MediBuster",""},
+/*27*/{"ScrewShooter","ScrewShooterWep","ScrewShooter_Ammo", WF_MACHINEGUN|WF_MEDICAL,"ScrewShooter",""},
+/*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL,"BoltDriver",""},
+/*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairSprayer",""},
+/*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairLauncher",""},
 };

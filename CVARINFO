@@ -41,4 +41,4 @@ user noarchive int WepBDataBase = 0;
 user noarchive int PropertyDataBase = 0; 
 
 user noarchive int MechGlossindex = 0; 
-user noarchive string DB_Class = ""; 
+user noarchive string DB_Class = "MegamanSTD"; 

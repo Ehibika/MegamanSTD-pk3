@@ -4,6 +4,19 @@
 actor HealStall_A : powerup {Inventory.amount 1 powerup.duration -7}
 actor HealStall_B : powerup {Inventory.amount 1 powerup.duration -2}
 
+
+actor HealRampPower : powerup {Inventory.amount 1 powerup.duration 350}
+
+actor HealStaller : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("HealRampPower")
+stop
+}
+}
+
 actor DetoxLevel : inventory {Inventory.amount 1 Inventory.Maxamount 100}
 
 

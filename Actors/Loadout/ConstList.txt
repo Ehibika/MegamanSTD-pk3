@@ -6,6 +6,9 @@ const int Aim_ArcScale = 20;
 Const int FVM = 65536; //Fixed Value Multiple
 Const float FVMF = 65536.0;
 
+Const int WRF_ALLOWINPUTS = WRF_ALLOWRELOAD|WRF_ALLOWZOOM;
+Const int WRF_RELOADING = WRF_ALLOWRELOAD|WRF_ALLOWZOOM|WRF_NOPRIMARY|WRF_NOBOB;
+
 //====|MoveSpeedModifiers|====
 const float Buster_MSPD = 0.8;
 const float Sprayer_MSPD = 0.8;
@@ -16,6 +19,7 @@ const float Launcher_MSPD = 0.6;
 const float LightWep_MSPD = 0.9;
 const float HeavyWep_MSPD = 0.6;
 
+const float HRifle_MSPD = 0.7;
 //====|Damage falloff range constants|====
 Const int Range1 = 275; //close quarters
 Const int Range2 = 450; // mid range
@@ -37,7 +41,7 @@ const int RifleSightRange = RifleRange/25;
  const int HR_DAM1 = 25;
  const int HR_DAM2 = 125;
 //==|SLAM Cannon|==
-//==|MediCarbine|==
+//==|MediBuster|==
 //==|CrossBow|==
 //==|VoltSpear|==
 Const int VS_Min = 3;

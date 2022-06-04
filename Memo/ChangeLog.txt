@@ -60,10 +60,10 @@
 ==Booster Pack==
 [+]fixed the fuel bug
 
-==MediCarbine==
+==MediBuster==
 [+]Projectile speed increased from 150 to 300
 [+]Minimum healing increased from 15 to 30
-[+]thanks to Jaxof7's code, Medicarbine has aim assist for allies to make healing more consistent
+[+]thanks to Jaxof7's code, MediBuster has aim assist for allies to make healing more consistent
 
 ==Mending Tool==
 [+]Greatly optimized it's functionality with the Help of Jaxof7's code
@@ -90,7 +90,7 @@
 [+] fixed issue with weapon stalling while trying to fire on an empty clip
 [+] hud graphic was modified
 
-== MediCarbine ==
+== MediBuster ==
 [+] hud graphic was modified
 
 ==Slam Cannon==
@@ -112,7 +112,7 @@
 [+] proxymines placed near another proxymine tied to you will erase the pre-existing proxy mine.
 
 ==TAG Missile==
-[+] improved targeting system by using similar code employed by Mending Tool and Medicarbine
+[+] improved targeting system by using similar code employed by Mending Tool and MediBuster
 [+] Missile now speed up when foes are 450 map units away from it
 [+] homing ramps up faster while rushing
 [+] projectile speed reduced from 20 to 15
@@ -198,7 +198,7 @@
 ==ThriceGun==
 [+] Added a 10 frame prefire delay with sound effect
 
-==Medicarbine==
+==MediBuster==
 [+] addressed the bug where it heals deployables.
 
 [+]====================|Beta A5|========================[+]
@@ -289,7 +289,7 @@
 ==BuddySentry==
 [+] Shots possess blast knockback to them
 
-==MediCarbine==
+==MediBuster==
 [+] minimum damage increased from 24 to 30
 [+] maximum damage increased from 32 to 45
 [+] Maximum healing increased from 80 to 200

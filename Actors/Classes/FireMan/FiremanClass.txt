@@ -1,0 +1,49 @@
+Actor Fireman : ClassBase
+{
+Player.DisplayName "Fireman"
+Player.SoundClass "megaman"
+Health 125
+Player.MaxHealth 125
+Player.JumpZ 10
+
+Player.Startitem "IsFireman"
+Player.Startitem "UseAbility1_Fireman"
+Player.Startitem "UseAbility2_Fireman"
+
+Player.Startitem "Pro_FireResistance"
+Player.Startitem "Pro_SprayerMastery"
+//===|Fireman Class Passive: FlashFire|===
+
++NOSKIN
+States
+{
+Spawn: 
+FIRM A 0 //A_JumpIfHealthLower(45,"SpawnStrong")
+FIRM B 1 //A_JumpIfHealthLower(45,"SpawnStrong")
+FIRM A 1 //A_JumpIfHealthLower(45,"SpawnStrong")
+GoTo Spawn+2
+//SpawnStrong:
+//FIRM A 45
+//FIRM A 1 A_GiveInventory("FiremanHeat", 5)
+//Goto Spawn
+See:
+FIRM BCDE 5
+GoTo Spawn+1
+Missile:
+FIRM F 5
+FIRM G 4
+GoTo Spawn+2
+PainFix:
+FIRM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsFireman : Once{}
+
+actor FiremanHeat : Inventory
+{
+inventory.amount 1
+inventory.maxamount 100
+}

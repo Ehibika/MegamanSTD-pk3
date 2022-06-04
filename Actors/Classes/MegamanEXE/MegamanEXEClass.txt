@@ -11,7 +11,7 @@ Player.Startitem "UseAbility1_megamanEXE"
 Player.Startitem "UseAbility2_megamanEXE"
 
 Player.Startitem "PRO_BusterMastery"
-Player.Startitem "PRO_BladeMaster"
+Player.Startitem "PRO_BladeParry"
 Player.Startitem "PRO_Undershirt"
 
 +NOSKIN

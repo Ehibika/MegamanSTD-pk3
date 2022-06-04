@@ -17,6 +17,7 @@ Altfire.ChangeWait:
 goto Ready
 
 
+Zoom:
 User1:
 "####" "#" 0 ACS_NamedExecuteWithResult("UseClassAbility",2)
 "####" "#" 1 A_Jump(256,"User1.ChangeWait")

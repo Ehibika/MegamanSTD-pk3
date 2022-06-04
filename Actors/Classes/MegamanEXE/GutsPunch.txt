@@ -122,6 +122,7 @@ stop
 actor GutsPunchDebris : FastProjectileBase
 {
 Obituary "$OB_SUPERARM"
+damagetype "GutsPunch"
 Damage (35)
 Radius 10
 Height 10

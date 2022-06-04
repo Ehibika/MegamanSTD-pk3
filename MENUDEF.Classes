@@ -10,19 +10,22 @@ OptionString ClassNames
 "Cinnamon", "Cinnamon" 
 "Alia", "Alia" 
 "MegamanEXE", "MegamanEXE" 
+"FireMan", "FireMan" 
 }
 
 OptionString ClassProperties
 {
 "MegamanSTD", "BusterMastery \nSpeedrunner \nLightweight" //Megaman
 "MegamanX", "BusterMastery \n---- \n----" //MegamanX
-"Zero", "MeleeMastery \nBlade Master \nSpeedRunner" //Zero
+"Zero", "BusterMastery \nMeleeMastery \nnBlade Parry" //Zero
 "Axl", "MachineGunMastery \nLauncherMastery \nSprayerMastery" //Axl
 "Massimo", "LauncherMastery \nHefty \nHeavyWeight" //Massimo
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
-"Cinnamon", "---- \n---- \n----" //Cinnamon
-"Alia", "---- \n---- \n----" //Alia
-"MegamanEXE", "BusterMastery \nBlade Master \nUndershirt" //Megaman.EXE
+"Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
+"Alia", "BusterMastery \nSprayerMastery \n----" //Alia
+"MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
+"FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
+
 }
 
 OptionString Class_HP
@@ -33,9 +36,10 @@ OptionString Class_HP
 "Axl", "100" 
 "Massimo", "200" 
 "Marino", "100" 
-"Cinnamon", "100" 
+"Cinnamon", "125" 
 "Alia", "100" 
 "MegamanEXE", "100" 
+"Fireman", "100" 
 }
 
 
@@ -47,9 +51,10 @@ OptionString Class_Altfire
 "Axl", "Tactical Roll" 
 "Massimo", "WhirlWind" 
 "Marino", "Hyper Dive" 
-"Cinnamon", "---" 
+"Cinnamon", "Syringe Toss" 
 "Alia", "Shinging Ray StickyBomb" 
 "MegamanEXE", "GutsPunch" 
+"Fireman", "FireBall" 
 }
 
 
@@ -62,9 +67,10 @@ OptionString Class_AltfireInfo
 "Axl"       , "Perform a short dodge roll \nthat allows you to escape \ndamage." 
 "Massimo"   , "Pull out an axe and execute \na wide swing with heavy \nknockback" 
 "Marino"    , "Execute a dive kick with \ngreat speed" 
-"Cinnamon"  , "---" 
+"Cinnamon"  , "Throw a syringe that injects \na deadly poison into enemies, \nthis deals critical damage \non already poisoned foes." 
 "Alia"      , "Toss a sticky bomb that \nunleashes shining explosions \nin a radial spread" 
 "MegamanEXE", "Execute a high impact \npunch that deals Break damage" 
+"Fireman", "Execute a high impact \npunch that deals Break damage" 
 }
 
 
@@ -76,9 +82,10 @@ OptionString Class_Ability
 "Axl", "Blast Launcher" 
 "Massimo", "BerzerkDrive" 
 "Marino", "ScatteredFlower" 
-"Cinnamon", "---" 
-"Alia", "Thunder Dancer" 
+"Cinnamon", "Angel Aura" 
+"Alia", "Melt Creeper" 
 "MegamanEXE", "RockCube" 
+"Fireman", "FireStorm" 
 }
 
 OptionString Class_AbilityInfo
@@ -89,8 +96,9 @@ OptionString Class_AbilityInfo
 "Zero"          , "Strike the ground to \ncause a wave of energy beams to \nrain down in a cone before \nyou." 
 "Axl"           , "Toss an explosive on \na fuse that deals high damage." 
 "Massimo"       , "Unleash a high powered \nwave motion beam that deals \nmore damage the less health \nyou have." 
-"Marino"        , "Toss a volley of daggers \that will stun the opponent \upon impact." 
-"Cinnamon"      , "---" 
-"Alia"          , "Launch a spread of electrical \nbeams that can stun, \ninflicts Elec damage." 
+"Marino"        , "Toss a volley of daggers \nthat will stun the opponent \upon impact." 
+"Cinnamon"      , "Cast a healing aura at a \nteammate or yourself, gradually \nhealing the target and \nsurrounding teammates." 
+"Alia"          , "launch a projectile that \tcreates a long wall of fire, \tyou can control the shape \tthrough your aim." 
 "MegamanEXE"    , "Place down a solid rock cube \nthat blocks shots" 
+"Fireman"    , "Place down a solid rock cube \nthat blocks shots" 
 }

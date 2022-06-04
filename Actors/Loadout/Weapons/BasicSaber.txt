@@ -338,3 +338,16 @@ FLEX F 0 A_Countdown
 loop
 }
 }
+
+actor CritEffectSpawner : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+stop
+}
+}

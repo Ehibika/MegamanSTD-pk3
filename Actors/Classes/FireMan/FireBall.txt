@@ -1,0 +1,166 @@
+actor Ability1_Fireman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "whatanicetag"
+weapon.ammotype2 "BusterAmmo"
+inventory.icon "FLMBSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+FIRB A 0 
+"####" A 1
+goto Fire
+
+Fire:
+FIRB A 0 A_PlaySoundEx("weapon/firestorm","Weapon")
+"####" A 0 A_FireCustomMissile("FireBallSTD",0,1,8,0)
+"####" BCD 2
+"####" A 1 A_GiveInventory("FireBallCooldown")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" C 1
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_Fireman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("FireBallAbility",1)
+fail
+}
+}
+
+actor FireBallAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("FireBallCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+// A PROJECTILE
+//=================
+
+actor FireBallSTD
+{
+PROJECTILE
++NOEXPLODEFLOOR
+Damage (25)
+scale 2.5
+-NOGRAVITY
++HEXENBOUNCE
+-BOUNCEONWALLS
+DamageType "FiremanBall"
+bouncefactor 1.0
+radius 18
+height 18
+Reactiontime 100
+speed 40
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+Spawn2:
+FIRE D 0 A_SpawnItemEx("FireBallFX")
+FIRE D 1 A_CountDown
+loop
+Crash:
+FIRE D 0 A_SpawnItemEx("ExplosionEffect1")
+FIRE D 0 A_GiveToTarget("FiremanHeat",25)
+stop
+Death:
+FIRE D 0 A_SpawnItemEx("ExplosionEffect1")
+stop
+}
+}
+
+actor FireBallFX
+{
++NOINTERACTION
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+-SOLID
++NOGRAVITY
+RenderStyle "translucent"
+Alpha 0.75
+Scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+TNT1 A 2
+FIRE DEF 1 A_FadeOut
+stop
+}
+}
+
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor FireBallCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("FireBallCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("FireBallCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor FireBallCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("FireBallCooldownItem",35)
+TNT1 A 0 A_Spawnitemex("FireBallCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor FireBallCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 35
+}

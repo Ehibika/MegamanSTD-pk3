@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE PROPMAX 21
+#LIBDEFINE PROPMAX 23
 
 
 #LIBDEFINE PROP_NAME 0
@@ -39,7 +39,7 @@ str MasterProPList[PROPMAX][6] = {
 /*11*/{"BreakResistance","Break Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""}, 
 /*12*/{"EuclidResistance","Euclid Resistance","---", PF_STARTUP|PF_ONHITSELF,"----",""},
 
-/*13*/{"BladeMaster","Blade Master","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+/*13*/{"BladeParry","Blade Parry","---", PF_STARTUP|PF_ONHITSELF,"----",""},
 /*14*/{"Speedrunner","Speedrunner","---", PF_STARTUP|PF_ONHITSELF,"----",""},
 /*15*/{"Acrobat","Acrobat","---", PF_STARTUP,"----",""},
 /*16*/{"Hefty","Hefty","---", PF_STARTUP,"----",""},
@@ -47,7 +47,10 @@ str MasterProPList[PROPMAX][6] = {
 /*17*/{"LightWeight","LightWeight","---", PF_STARTUP,"----",""},
 /*18*/{"HeavyWeight","HeavyWeight","---", PF_STARTUP,"----",""},
 
-/*19*/{"Assassin","Assassin","---", PF_STARTUP,"----",""},
+/*19*/{"Assassin","Assassin","---", PF_ONHITFOE,"----",""},
 /*20*/{"Undershirt","Undershirt","---", PF_STARTUP|PF_ONHITSELF,"----",""},
+
+/*21*/{"ElementalGuard","Elemental Guard","---",PF_ONHITSELF,"----",""},
+/*22*/{"TeamMedic","Team Medic","---", PF_STARTUP,"----",""},
 
 };

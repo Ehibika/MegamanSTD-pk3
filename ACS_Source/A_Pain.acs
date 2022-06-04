@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 11
+#LIBDEFINE PAINCOUNT 20
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -39,14 +39,25 @@ str PainRecord[PAINCOUNT][2] = {
 /*8*/{"RyuenjinTip",ELM_FIRE|ELM_BLADE},
 /*9*/{"ScatteredFlower",ELM_TOXIC},
 /*10*/{"GutsPunch",ELM_BREAK},
+/*11*/{"FireballBuster",ELM_FIRE},
+/*12*/{"AtomicBuster",ELM_FIRE},
+/*13*/{"FiremanBall",ELM_FIRE},
+/*14*/{"FireStormBoss",ELM_FIRE},
+/*15*/{"FireStormTrail",ELM_FIRE},
+/*16*/{"MeltCreeper",ELM_FIRE},
+/*17*/{"FireDOT",ELM_FIRE},
+/*18*/{"PoisonDOT",ELM_TOXIC},
+/*19*/{"SyringeToss",ELM_TOXIC},
 };
 
 
-#LIBDEFINE CRITCOUNT 3
+#LIBDEFINE CRITCOUNT 6
 //Crit Bitflags
 #LIBDEFINE CRIT_NULL 0.0
 #LIBDEFINE CRIT_ALWAYS 1.0
 #LIBDEFINE CRIT_CONDITION 2.0
+#LIBDEFINE CRIT_BURNSTATUS 4.0
+#LIBDEFINE CRIT_POISONSTATUS 8.0
 str CritRecord[CRITCOUNT][2] = {
 /*
  * This contains all info regarding damagetypes that either always crit, or can crit under specific conditions
@@ -56,4 +67,45 @@ str CritRecord[CRITCOUNT][2] = {
 /*0*/{"StandardSaberTip",CRIT_ALWAYS},
 /*1*/{"BeamRapierTip",CRIT_ALWAYS},
 /*2*/{"RyuenjinTip",CRIT_ALWAYS},
+/*3*/{"AtomicBuster",CRIT_CONDITION|CRIT_BURNSTATUS},
+/*4*/{"ViperRifle",CRIT_CONDITION|CRIT_POISONSTATUS},
+/*5*/{"SyringeToss",CRIT_CONDITION|CRIT_POISONSTATUS},
+
 };
+
+
+Function Bool CheckForFireCrit(int PainType)
+{
+if(CheckInventory("BurnMark"))
+    {
+    Int CritFlag;
+    For(int j = 0; j < CRITCOUNT; j++)
+	{
+	If(CritRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        CritFlag = CritRecord[j][1];      
+		}
+	}
+    if(CritFlag & CRIT_BURNSTATUS){Return 1;}
+    }
+return 0;
+}
+
+Function Bool CheckForPoisonCrit(int PainType)
+{
+if(CheckInventory("PoisonMark"))
+    {
+    Int CritFlag;
+    For(int j = 0; j < CRITCOUNT; j++)
+	{
+	If(CritRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        CritFlag = CritRecord[j][1];      
+		}
+	}
+    if(CritFlag & CRIT_POISONSTATUS){Return 1;}
+    }
+return 0;
+}

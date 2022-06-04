@@ -232,11 +232,11 @@ Function Void TargeterVision (int ConP) {
 			
 			if(t>0) {
 			if(checkActorInventory(ConP+1000,"TargHolder")) {
-				HudMessageOnActorZPlusAllign(ConP+1000,1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTE0", "Target", 0, CR_UNTRANSLATED);
+				HudMessageOnActorZPlusAllign(ConP+1000,1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTA0", "Target", 0, CR_UNTRANSLATED);
 				}
 				else
 				{
-				HudMessageOnActorZPlusAllign(ConP+1000,1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTF0", "Target", 0, CR_UNTRANSLATED);
+				HudMessageOnActorZPlusAllign(ConP+1000,1000-1+t, PLAYER_CENTER, 103, 0, 0, 0, 0, T_Range, "JUSTB0", "Target", 0, CR_UNTRANSLATED);
 				}
 				//
 			}
@@ -246,12 +246,12 @@ Function Void TargeterVision (int ConP) {
 			
 			for(i=0;i<ownerNumber;i++) {
 				if(CheckActorInventory(1000+i,"Discorded")) {
-					HudMessageOnActorZPlusAllign(ConP+1000,1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTE0", "Discord", 0, CR_UNTRANSLATED);
+					HudMessageOnActorZPlusAllign(ConP+1000,1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTA0", "Discord", 0, CR_UNTRANSLATED);
 				}
 			}
 			for(i=ownerNumber+1;i<GetMaxEntities();i++) {
 				if(CheckActorInventory(1000+i,"Discorded")) {
-					HudMessageOnActorZPlusAllign(ConP+1000,1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTF0", "Discord", 0, CR_UNTRANSLATED);
+					HudMessageOnActorZPlusAllign(ConP+1000,1000+i, PLAYER_CENTER, 200+i, 0, 0, 0, -10, 9000, "JUSTB0", "Discord", 0, CR_UNTRANSLATED);
 				}
 			}
 			

@@ -6,7 +6,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 Obituary "$OB_MEGABUSTER"
 Tag "Dash Ability"
 weapon.ammotype2 "AbilityAmmo"
-inventory.icon "BDASWI"
+inventory.icon "BUSTI"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {

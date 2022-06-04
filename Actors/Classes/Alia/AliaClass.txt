@@ -2,15 +2,17 @@ Actor Alia : ClassBase
 {
 Player.DisplayName "Alia"
 Player.SoundClass "megaman"
-Health 100
-Player.MaxHealth 100
+Health 125
+Player.MaxHealth 125
 Player.JumpZ 10
 
 Player.Startitem "IsAlia"
 Player.Startitem "UseAbility1_Alia"
 Player.Startitem "UseAbility2_Alia"
 
-Player.Startitem "PRO_MeleeMastery"
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_SprayerMastery"
+Player.Startitem "Pro_TeamMedic"
 
 +NOSKIN
 States

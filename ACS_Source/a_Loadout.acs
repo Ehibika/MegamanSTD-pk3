@@ -137,7 +137,7 @@ return 0.0;
 
 function bool CheckWeapon2(str weapon) {
 	//return (CheckWeapon(weapon)||CheckWeapon(AddSuffix(weapon,"2")));
-	return (CheckWeapon(weapon)||(weapon==SubtractSuffix(GetWeapon())));
+	return (CheckWeapon(weapon)||(StrIcmp(weapon,SubtractSuffix(GetWeapon()))==0));
 }
 
 function str SubtractSuffix(str string)  {

@@ -2,13 +2,13 @@
 utilizing smart medical rounds, this light rifle can offer treatment to allies from a
 distance, and still double as a combat tool when necessary. it might not be
 the best at offense but when you need to heal and deal at a moments notice. nothing
-makes it easier than Neumodian's own Medicarbine!
+makes it easier than Neumodian's own MediBuster!
 
 *///===========================
 
-actor MediCarbine : WepMasterBase
+actor MediBuster : WepMasterBase
 {
-Tag "MediCarbine"
+Tag "MediBuster"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 6
 scale 2.0
@@ -143,7 +143,7 @@ stop
 }
 }
 
-actor MediCarbine2 : MediCarbine
+actor MediBuster2 : MediBuster
 {weapon.slotnumber 2}
 
 //[+]========================================================================[+]

@@ -565,3 +565,11 @@ int pln = ActivatorTID() - 1000;
 if (Toggle >= 1){SetActorProperty(ActivatorTID(),APROP_JUMPZ,PlayerJumpZ[pln]); TakeInventory("CannotJump",99);}
 Else {SetActorProperty(ActivatorTID(),APROP_JUMPZ,0); GiveInventory("CannotJump",1);}
 }
+
+script "CSLT_AngleGrab" (Void)
+{
+int FiringPlayer= ACS_ExecuteWithResult(257, 0);
+int Output = 360 * (GetActorAngle(FiringPlayer));
+Setresultvalue(Output >> 16);
+//--
+}

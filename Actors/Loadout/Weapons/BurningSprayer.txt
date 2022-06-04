@@ -111,7 +111,7 @@ Damagefactor "BurningSpray", 0
 actor BurningSprayerCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 8
+Powerup.Duration 5
 powerup.type "ConShotTimer"
 }
 
@@ -119,8 +119,8 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int BurningSprayerRange = 20;
-Const float BurningSprayer_DMG = 6;
+Const Int BurningSprayerRange = 30;
+Const float BurningSprayer_DMG = 8;
 
 actor BurningSprayerDamagerStart //: BasicHelper
 {

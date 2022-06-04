@@ -111,7 +111,7 @@ Damagefactor "GasEmitter", 0
 actor GasEmitterCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 8
+Powerup.Duration 5
 powerup.type "ConShotTimer"
 }
 
@@ -119,8 +119,8 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int GasEmitterRange = 20;
-Const float GasEmitter_DMG = 6;
+Const Int GasEmitterRange = 30;
+Const float GasEmitter_DMG = 8;
 
 actor GasEmitterDamagerStart //: BasicHelper
 {

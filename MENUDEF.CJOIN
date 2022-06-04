@@ -7,8 +7,9 @@ OptionMenu ZA_JoinMenu
 	StaticText"$MNU_JOIN1"
 	StaticText""
 	StaticText "===============================================================",1
+	Command "Join Game", "!mstd_justjoin"
 	Option "Class", "playerclass", "ClassNames"
-	Option "Properties", "playerclass", "ClassProperties"
+	Option "Properties", "playerclass", "ClassProperties", "unselectable"
 	StaticText""
 	StaticText""
 	StaticText""
@@ -31,10 +32,11 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText""
 	StaticText"$MNU_JOIN2"
 	StaticText""
-	StaticText "===============================================================",1
 	Command "$MNU_JOIN6", "menu_autoselect"
+	StaticText "===============================================================",1
+	Command "Join Game", "!mstd_justjoin"
 	Option "Class", "playerclass", "ClassNames"
-	Option "Properties", "playerclass", "ClassProperties"
+	Option "Properties", "playerclass", "ClassProperties", "unselectable"
 	StaticText""
 	StaticText""
 	StaticText""

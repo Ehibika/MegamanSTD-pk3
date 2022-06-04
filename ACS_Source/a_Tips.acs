@@ -19,7 +19,7 @@ str Tips[TIPCOUNT] = {
 "with the tag missile, it cannot tag enemies that are too close to you, so best not to use it in close quarters.",
 "With the Light Screen, don't use it only to camp at long ranges. it can be a great asset for close quarters combat, and make for combat space during larger team fights",
 "with the light screen, explosives that hit it directly will have their AOE damage suppressed.",
-"With the medicarbine, keep in mind that it's not weak when it comes to damage dealing, and bypasses barriers",
+"With the MediBuster, keep in mind that it's not weak when it comes to damage dealing, and bypasses barriers",
 "With the HiPE Gun, it can fire it's shots quickly but is rather slow to reload. consider keeping a readily available sidearm like the buster gun or repidifier handy",
 
 "With the repidifier, it's steady damage output and hitscan properties makes it a great tool for poking at foes from a distance, use it to keep the pressure on fleeing opponents",
@@ -68,7 +68,7 @@ str Tips[TIPCOUNT] = {
 
 "with the booster pack, use it with long ranged or explosive weapons to give your team air support, watch for enemy snipers and tag missiles!",
 "looking to play a medic? consider the light screen subweapon to help rescue teammates from harm or certain doom, don't just use it for your own safety",
-"looking to play a medic? remember that using both the mending tool and medicarbine in one loadout might not be as practical as you think, build around one or the other instead",
+"looking to play a medic? remember that using both the mending tool and MediBuster in one loadout might not be as practical as you think, build around one or the other instead",
 "With the mending tool, pair it with an explosive sub like minibomb or top grenade to get in some supportive damage while you heal.",
 "looking to play a medic? remember that while poison stops your healing, you can still cure it after using medical tools on poisoned targets long enough.",
 "With the crossbow, remember that all primed bolts do is poison, they aren't any stronger than regular darts. so when your target is poisoned, lay in on them with regular shots",

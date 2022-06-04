@@ -27,7 +27,7 @@ str WeaponList[WEAPONLIST_MAX][5] = {
 {"TAG Missile","TAGMissile", "HEAVY","----","----"},
 {"SLAM Cannon", "SLAMCannon", "HEAVY","----","----"},
 {"Thrice Gun","ThriceGun", "LIGHT","----","----"},
-{"MediCarbine","MediCarbine", "LIGHT","MEDICAL","----"},
+{"MediBuster","MediBuster", "LIGHT","MEDICAL","----"},
 {"Mending Tool","MendingTool", "LIGHT","MEDICAL","----"},
 {"Subwich","SubWich", "LIGHT","----","----"},
 {"Crossbow","NMDCrossbow", "LIGHT","----","----"},

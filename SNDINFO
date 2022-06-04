@@ -40,8 +40,11 @@ $volume weapon/Wrecker 1.5
 
 weapon/OrbSpawn CRYSSHOT
 weapon/OrbBounce CRYSBIT
-
+support/HealPulse HEALPULS
 Support/Heal1 Recov1 
+Support/Heal2 Recov2 
+Support/Heal3 Recov3 
+Support/Heal4 Recov4 
 $volume Support/Heal1 0.5
 Support/Barrier BARUP
 Support/Barrier2 BARRUP

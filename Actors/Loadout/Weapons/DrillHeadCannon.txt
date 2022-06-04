@@ -5,7 +5,7 @@ Tag "DrillHeadCannon"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 15
 Obituary "$OB_DRILLHEADCANNON"
-inventory.icon "BLASI"
+inventory.icon "TAGMI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "DrillHeadCannon_Ammo"
@@ -116,7 +116,7 @@ Damagefactor "DrillHead", 0
 actor DrillHeadCannonShot : FastProjectileBase
 {
 Speed 64
-Damage (35)
+Damage (45)
 +RIPPER
 Obituary "$OB_DRILLHEADCANNON"
 damagetype "DrillHead"

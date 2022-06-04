@@ -46,6 +46,16 @@ OptionValue WepInto_Class
 18, "\cf:Melee::\cjSaber\cf:"		
 19, "\cf:Melee::\cjSaber\cf:"	
 20, "\cf:Melee::\cjSaber\cf:"
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue WepInto_Category
@@ -71,6 +81,16 @@ OptionValue WepInto_Category
 18, "\cf:Null:"		
 19, "\cf:Null:"	
 20, "\cf:Null:"
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue WepInto_Damage
@@ -96,6 +116,16 @@ OptionValue WepInto_Damage
 18, "\cG ****"		
 19, "\cG ****"	
 20, "\cG ****"
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue WepInto_Rate
@@ -121,6 +151,16 @@ OptionValue WepInto_Rate
 18, "\cf ***"		
 19, "\cf ***"	
 20, "\cf ***"
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue WepInfo_Desc
@@ -147,6 +187,16 @@ OptionValue WepInfo_Desc
 18, "Standard issue Saber type weapon \nwith a wide swing arc, striking \nfoes at the sweet spot at \nedge of the swing deals \ncritical damage"		
 19, "A Longer saber type weapon with \nnarrower swings that reach further"		
 20, "A wider saber type weapon with a \ngreater swing arc, but lacks \nthe sweetspot at it's tip."
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 
@@ -244,7 +294,7 @@ OptionValue PropertyList
 //11, "BreakResistance" 
 12, "EuclidResistance"
 
-13, "BladeMaster"
+13, "BladeParry"
 14, "Speedrunner"
 15, "Acrobat"
 16, "Hefty"
@@ -253,6 +303,9 @@ OptionValue PropertyList
 18, "HeavyWeight"
 
 19, "Assassin"
+20, "Undershirt"
+21, "Elemental Guard"
+22, "Team Medic"
 }
 
 OptionValue Propertyinfo
@@ -282,6 +335,10 @@ OptionValue Propertyinfo
 18, "Decreases the intensity of \nknockback effects"
 
 19, "Increased the power of Critical \nHits"
+20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
+21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
+22, "When equipped with a repair weapon, \nyou will passively regenerate HP."
+
 }
 
 

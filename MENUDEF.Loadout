@@ -76,7 +76,7 @@ OptionValue WepOptionsA
 8, "Shotgun"
 9, "GasEmitter \cf:Toxic:"
 10, "Compressed Sprayer \cf:Wind:"		
-11, "Burning Sprayer \cf:Heat:"		
+11, "Burning Sprayer \cf:Fire:"		
 12, "Snowy Sprayer \cf:Freeze:"		
 13, "Crushing Sprayer \cf:Break:"		
 14, "EnergyCannon"		
@@ -86,6 +86,16 @@ OptionValue WepOptionsA
 18, "Standard Saber"		
 19, "Beam Rapier"		
 20, "Triangular Saber"
+21, "FireballBuster \cf:Fire:"
+22, "AtomicBuster \cf:Fire:"
+23, "\cdRepairGun :Repair:"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "\cdMediBuster :Repair:"
+27, "\cdScrewShooter :Repair:"
+28, "\cdBoltDriver :Repair:"
+29, "\cdRepairSprayer :Repair:"
+30, "\cdRepairLauncher :Repair:"
 }
 
 OptionValue WepOptionsB
@@ -111,6 +121,16 @@ OptionValue WepOptionsB
 18, "Standard Saber"		
 19, "Beam Rapier"		
 20, "Triangular Saber"
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue SubWepOptions
@@ -154,6 +174,17 @@ OptionValue WepDescA
 18, "Standard issue beam saber \nthat deals extra damage \nat it's tip"
 19, "Narrow but far reaching \nbeam saber that does extra \ndamage at it's tip"
 20, "Wide swinging beam saber."
+
+21, "FireballBuster"
+22, "AtomicBuster"
+23, "RepairGun"
+24, "ViperRifle"
+25, "ThriceGun"
+26, "MediBuster"
+27, "ScrewShooter"
+28, "BoltDriver "
+29, "RepairSprayer"
+30, "RepairLauncher"
 }
 
 OptionValue WepDescB

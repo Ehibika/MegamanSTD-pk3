@@ -1,0 +1,191 @@
+actor Ability1_Cinnamon : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_SYRINGETOSSBOMB"
+Tag "HyperBomb Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "NEEDSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+HSPR M 0 
+"####" M 1
+goto Fire
+
+Fire:
+"####" FFGGG 1
+"####" A 0 A_PlaySoundEX("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("SyringeTossShot",0,1,8,0)
+"####" IJK 2
+"####" K 8
+"####" A 1 A_GiveInventory("SyringeTossCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" K 1
+End:
+"####" K 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+
+
+actor UseAbility1_Cinnamon : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("SyringeTossAbility",1)
+fail
+}
+}
+
+actor SyringeTossAbility : CustomInventory
+{
+states
+{
+Pickup: 
+TNT1 A 0 A_JumpIfInventory("SyringeTossCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+actor SyringeTossShot : fastProjectileBase
+{
+Obituary "$OB_SYRINGETOSS"
+DamageType "SyringeToss" //ViperRifle
+Speed 96
+Damage (35)
+radius 3
+height 3
+scale 1.0
+reactiontime 20
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+TNT1 A 0 A_SpawnItemEx("SyringeTossTrailFX",0,0,0,momx,momy,momz,0,9)
+Spawn3:
+TNT1 A 0 A_CountDown
+TNT1 A 1 
+Goto Spawn2
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1 A_Spawnitemex("BlasterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|------------------------------
+//[+]========================================================================[+]
+actor SyringeTossTrailFX : BasicExplosion
+{
+Obituary "$OB_SYRINGETOSS"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("SyringeTossGraphic",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("SyringeTossTrail_1",random(-5,5),random(-5,5),random(-5,5),-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("SyringeTossTrail_1",random(-5,5),random(-5,5),random(-5,5),-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("SyringeTossTrail_1",random(-5,5),random(-5,5),random(-5,5),-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("SyringeTossTrail_1",random(-5,5),random(-5,5),random(-5,5),-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+actor SyringeTossGraphic : FXActor_A
+{
+scale 3.5
+Alpha 1.0
+States
+{
+Spawn:
+CRBM A 0
+NEDC A 1
+stop
+}
+}
+
+actor SyringeTossTrail_1 : SyringeTossGraphic
+{
+scale 0.6
+Alpha 0.9
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 1 A_Changevelocity(random(-1,1),random(-1,1),random(1,2),CVF_RELATIVE|CVF_REPLACE)
+SBUB AAA 1
+SBUB B 2
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor SyringeTossCooler : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("SyringeTossCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("SyringeTossCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor SyringeTossCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("SyringeTossCooldownItem",122)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("SyringeTossCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor SyringeTossCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 122
+}

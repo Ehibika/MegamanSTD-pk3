@@ -3,8 +3,8 @@ actor ClassBase0 : PlayerPawn
 player.displayname "megaman"
 player.soundclass "megaman"
 player.damagescreencolor "yellow"
-player.forwardmove 1.2, 0.6
-player.sidemove 1.2 0.6
+player.forwardmove 1.6, 0.8
+player.sidemove 1.6 0.8
 player.jumpz 10
 Player.MaxHealth 100
 player.colorrange 0 0

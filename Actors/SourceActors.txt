@@ -91,27 +91,6 @@ actor BasicExplosion2 : BasicExplosion
 +SPECTRAL //version with spectral breeching
 }
 
-Actor BasicHelper
-{
-+NOINTERACTION
--SOLID
-+MISSILE
-radius 1
-height 1
-+NOGRAVITY
-+DONTBLAST
-+DONTREFLECT
-renderstyle none
-States
-{
-Spawn:
-TNT1 A 1
-stop
-Death:
-TNT1 A 1
-stop
-}
-}
 
 actor HitscanBulletBase : FastprojectileBase
 {
