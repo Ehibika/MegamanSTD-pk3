@@ -51,9 +51,9 @@ Goto FlameShot
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
 "####" L 0 A_PlaySoundEx("weapon/waveburner","Weapon")
 "####" B 0 A_Giveinventory("FlameThrowerShooter")
-"####" C 2 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" C 2 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Refire
-"####" B 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" B 1 A_WeaponReady(WRF_FIRING)
 goto Ready
 FlameShot:
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
@@ -62,9 +62,9 @@ FlameShot:
 "####" B 0 A_Giveinventory("FlameThrowerShooter")
 "####" B 0 A_Giveinventory("FlameShotShooter")
 "####" B 0 A_Giveinventory("FlameShotTimer")
-"####" C 2 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" C 2 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Refire("Hold")
-"####" B 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" B 1 A_WeaponReady(WRF_FIRING)
 goto Ready
 
 

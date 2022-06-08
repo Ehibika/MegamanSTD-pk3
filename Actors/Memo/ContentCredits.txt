@@ -1,0 +1,40 @@
+/*===================================
+
+General credits:
+A lot of code has come from the works of Jaxof7, Russle/Lego, Trillster
+
+Most sprites have been yanked from various project, mostly forms of CBM and Megaman SinglePlayer
+
+
+Specific Credits:
+
+Hansungkee:
+--Super Adaptor Megaman Skin (From V-Classes)
+--X Projectile and hud sprites
+--Command Mission cast skins
+
+
+PRBlaster:
+--Alia Class
+--Fireman Class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+====================================*/

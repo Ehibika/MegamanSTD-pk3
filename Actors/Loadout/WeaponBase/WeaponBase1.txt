@@ -20,9 +20,10 @@ goto Ready
 Zoom:
 User1:
 "####" "#" 0 ACS_NamedExecuteWithResult("UseClassAbility",2)
-"####" "#" 1 A_Jump(256,"User1.ChangeWait")
-goto User1.ChangeWait
+"####" "#" 1 A_Jump(256,"Zoom.ChangeWait")
+goto Zoom.ChangeWait
 
+Zoom.ChangeWait:
 User1.ChangeWait:
 "####" "#####" 1 A_WeaponReady(WRF_NOPRIMARY|WRF_NOSECONDARY)
 "####" "#" 1 A_Jump(256,"Ready")

@@ -75,6 +75,16 @@
 #include "Actors/Classes/Fireman/Fireball.txt"
 #include "Actors/Classes/Fireman/FireStorm.txt"
 
+
+#include "Actors/Classes/SuperMegaman/SMegamanClass.txt"
+#include "Actors/Classes/SuperMegaman/SuperBooster.txt"
+#include "Actors/Classes/SuperMegaman/RocketBuster.txt"
+
+
+#include "Actors/Classes/Auto/AutoClass.txt"
+#include "Actors/Classes/Auto/HealthGenerator.txt"
+#include "Actors/Classes/Auto/AutoSentry.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"
@@ -123,6 +133,7 @@
 #include "Actors/Loadout/Weapons/RepairSprayer.txt"
 #include "Actors/Loadout/Weapons/RepairLauncher.txt"
 
+#include "Actors/Loadout/Weapons/Replislasher.txt"
 
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"

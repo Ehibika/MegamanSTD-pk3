@@ -2,6 +2,8 @@
 OptionString ClassNames
 {
 "MegamanSTD", "Megaman" 
+"SuperMegaman", "Super Megaman" 
+"AutoSTD", "Auto" 
 "MegamanX", "Megaman X" 
 "Zero", "Zero" 
 "Axl", "Axl" 
@@ -16,13 +18,15 @@ OptionString ClassNames
 OptionString ClassProperties
 {
 "MegamanSTD", "BusterMastery \nSpeedrunner \nLightweight" //Megaman
+"SuperMegaman", "BusterMastery \nSpeedrunner \nLightweight" //SuperMegaman
+"AutoSTD", "LauncherMastery \nHeavyWeight \nTeam Medic" //Auto
 "MegamanX", "BusterMastery \n---- \n----" //MegamanX
-"Zero", "BusterMastery \nMeleeMastery \nnBlade Parry" //Zero
+"Zero", "BusterMastery \nMeleeMastery \nBlade Parry" //Zero
 "Axl", "MachineGunMastery \nLauncherMastery \nSprayerMastery" //Axl
 "Massimo", "LauncherMastery \nHefty \nHeavyWeight" //Massimo
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
-"Alia", "BusterMastery \nSprayerMastery \n----" //Alia
+"Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 
@@ -31,6 +35,8 @@ OptionString ClassProperties
 OptionString Class_HP
 {
 "MegamanSTD", "100" 
+"SuperMegaman", "100" 
+"AutoSTD", "100" 
 "MegamanX", "100" 
 "Zero", "100" 
 "Axl", "100" 
@@ -46,6 +52,8 @@ OptionString Class_HP
 OptionString Class_Altfire
 {
 "MegamanSTD", "Combat Slide" 
+"SuperMegaman", "Rocket Buster" 
+"AutoSTD", "Health Generator" 
 "MegamanX", "CombatDash" 
 "Zero", "Ryuenjin" 
 "Axl", "Tactical Roll" 
@@ -62,6 +70,8 @@ OptionString Class_AltfireInfo
 {
 //-1,       "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
 "MegamanSTD", "Perform a Quick Slide while \non the ground" 
+"SuperMegaman", "Launch a rocket popelled \nhoming fist, once launched \nyou'll have to wait for it \nto return." 
+"AutoSTD"   , "Toss down a platform that \nspawns health pickup overtime." 
 "MegamanX"  , "Dash through the air" 
 "Zero"      , "Execute a flaming uppercut \nwith your Z-saber, deals \nfire damage" 
 "Axl"       , "Perform a short dodge roll \nthat allows you to escape \ndamage." 
@@ -77,6 +87,8 @@ OptionString Class_AltfireInfo
 OptionString Class_Ability
 {
 "MegamanSTD", "Rush Call" 
+"SuperMegaman", "Super Booster" 
+"AutoSTD", "AutoSentry" 
 "MegamanX", "ChargeShot" 
 "Zero", "Rekkoha" 
 "Axl", "Blast Launcher" 
@@ -92,6 +104,8 @@ OptionString Class_AbilityInfo
 {
 //-1,           "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
 "MegamanSTD"    , "Call rush to a designated \narea, can offer a boost to \nthe you or a teammate." 
+"SuperMegaman"  , "Activate boosters to take \nflight, use again to turn \nthem off." 
+"AutoSTD"       , "Deploy a sentry gun that \nfires screws at enemies in \nit's line of sight." 
 "MegamanX"      , "Pull out your puster to \nexecute a charge shot. deals \narea damage and can be used \nfor blast jumping" 
 "Zero"          , "Strike the ground to \ncause a wave of energy beams to \nrain down in a cone before \nyou." 
 "Axl"           , "Toss an explosive on \na fuse that deals high damage." 

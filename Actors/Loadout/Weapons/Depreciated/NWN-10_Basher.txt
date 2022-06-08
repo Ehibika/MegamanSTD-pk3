@@ -87,7 +87,7 @@ Fire1:
 "####" B 0 A_Jumpifinventory("WeaponHeat_B",100,"OverHeatStart")
 
 "####" CDBB 2 
-"####" D 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" D 1 A_WeaponReady(WRF_FIRING)
 //"####" B 0 A_Giveinventory("FiringSpeedDown",1)
 
 "####" C 0 A_REfire("Revup")
@@ -113,7 +113,7 @@ Fire2:
 "####" B 0 A_Jumpifinventory("WeaponHeat_B",100,"OverHeatStart")
 
 "####" CDB 2 
-"####" D 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" D 1 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Giveinventory("FiringSpeedDown",1)
 
 "####" C 0 A_REfire("Revup")
@@ -138,7 +138,7 @@ Fire3:
 "####" B 0 A_Jumpifinventory("WeaponHeat_B",100,"OverHeatStart")
 
 "####" CD 2 
-"####" D 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" D 1 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Giveinventory("FiringSpeedDown",1)
 
 "####" C 0 A_REfire("Revup")
@@ -161,7 +161,7 @@ Fire4:
 "####" B 0 A_Jumpifinventory("WeaponHeat_B",100,"OverHeatStart")
 
 "####" CD 1 
-"####" D 1 A_WeaponReady(WRF_NOSWITCH|WRF_NOPRIMARY)
+"####" D 1 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Giveinventory("FiringSpeedDown",1)
 
 "####" C 0 A_REfire("Fire4")

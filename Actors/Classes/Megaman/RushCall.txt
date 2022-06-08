@@ -252,6 +252,7 @@ TNT1 A 0 A_TakeFromTarget("RushCallCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("RushCallCooldownItem",1,"Spawn")
 Death:
 DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
 TNT1 A 0
 stop
 }
@@ -269,6 +270,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Giveinventory("RushCallCooldownItem",85)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
 TNT1 A 0 A_Spawnitemex("RushCallCooler")
 stop
 Nope:

@@ -115,6 +115,19 @@ MNU_JOIN6 = "\c-Auto Select";//"\c[MenuBlue]Auto\c--Select";
 MNU_JOIN7 = "\c[MenuCyan]Original Selection";
 
 
+MNU_JOIN8 = "\c[HelpMenuCol]Join Game";
+
 //Properties
-PROP1_NAME = "Buster Mastery";
-PROP1_DESC = "Increased movespeed and power of buster weapons.";
+CLASS_NAME = "\c[MenuYellow]Class \c-:";
+CLASS_PROP = "\c[MenuYellow]Properties \c-:";
+WEP_NAMEA = "\c[MenuOrange]Wep A \c-:";
+WEP_NAMEB = "\c[MenuOrange]Wep B \c-:";
+WEP_DESC = "\c[MenuOrange]Desc \c-:";
+
+WEP_BUSTER = "\c[MenuRed]Busters \c-:";
+WEP_MGUNS = "\c[MenuOrange]M.Guns \c-:";
+WEP_SPRAYER = "\c[MenuYellow]Sprayers \c-:";
+WEP_LAUNCHER = "\c[MenuGreen]Launchers \c-:";
+WEP_MELEE = "\c[MenuBlue]Melee \c-:";
+
+RELOADNOTICE = "\c[HelpMenuCol]Remember to Bind the reload and ability Key!";

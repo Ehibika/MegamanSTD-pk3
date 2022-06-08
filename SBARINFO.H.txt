@@ -204,6 +204,31 @@ InInventory IsFireman, 1
 	//DrawImage "RESO02", 26, 161;
 	DrawBar "FIRMBR", "NORESO", FiremanHeat, Horizontal, 42, 161;
 	}
+
+InInventory IsSuperMegaman, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RocketPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory RocketPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RocketPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ADAPSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SuperBoosterCooldownItem, vertical,reverse, 25, 163;
+	ininventory SuperBoosterCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SuperBoosterCooldownItem, vertical,reverse, 25, 163;}
+
+	DrawBar "SRESO1", "NORESO2", BP_Fuel, Horizontal, 42, 161;
+	ininventory BP_Fuel ,35 {DrawBar "SRESO2", "NORESO2", BP_Fuel, Horizontal, 42, 161;}
+	}
+
+InInventory IsAuto, 1
+	{
+	DrawImage "HGENI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;
+	ininventory HealthGeneratorCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "TRETI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AutoSentryCooldownItem, vertical,reverse, 25, 163;
+	ininventory AutoSentryCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AutoSentryCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

@@ -1,6 +1,6 @@
 
 //Weapons
-OptionMenu "EditLoadOutMenu"
+OptionMenu "EditLoadOutMenu_old"
 {
 	Title "Loadouts"
 	
@@ -29,73 +29,43 @@ OptionMenu "EditLoadOutMenu"
 	StaticText ""
 	StaticText "Remember to Bind the reload and ability Key!"
 	Control 	"Reload",			"+Reload"
-	Control 	"Ability",			"+User1"
-}
-
-
-OptionValue EmblemOptions
-{
-0, "Dot"
-1, "\cqBullets"
-2, "\cqSlug"
-3, "\cqLarge Bullet"
-4, "\ccBuster Gun"
-5, "\ceShield"
-6, "\cwHeavy Weapons Guy"
-7, "\cwMuscle"
-8, "\cdHealer"
-9, "\cdHealer 2"
-10, "\cdMedical cross"
-11, "\cdpill"
-12, "\csCrosshair 1"
-13, "\csCrosshair 2"
-14, "\ctskull"
-15, "\ctDagger"
-16, "\ctCobra"
-17, "\cnScout"
-18, "\cnJetpack"
-19, "\caSuits:spade"
-20, "\caSuits:Club"
-21, "\caSuits:Diamond"
-22, "\caSuits:Heart"
-23, "\chChess:Rook"
-24, "\chChess:Bishop"
-25, "\chChess:knight"
+	Control 	"Ability",			"+Zoom"
 }
 
 OptionValue WepOptionsA
 {
 0, "Military Buster"
-1, "Wind Pressure Buster \cf:Wind:"
+1, "Wind Pressure Buster \c[Teal]:Wind:"
 2, "Arrow Buster"
-3, "Shadow Buster \cf:Blade::Light:"
+3, "Shadow Buster \c[Olive]:Blade:\c[Gold]:Light:"
 4, "Lazer Rifle"
 5, "Triangle Gun"
-6, "HighSpeed Rifle \cf:Light:"
-7, "Gatling Gun \cf:Heavy:"
+6, "HighSpeed Rifle \c[Gold]:Light:"
+7, "Gatling Gun \c[DarkGray]:Heavy:"
 8, "Shotgun"
-9, "GasEmitter \cf:Toxic:"
-10, "Compressed Sprayer \cf:Wind:"		
-11, "Burning Sprayer \cf:Fire:"		
-12, "Snowy Sprayer \cf:Freeze:"		
-13, "Crushing Sprayer \cf:Break:"		
+9, "GasEmitter \c[DarkGreen]:Toxic:"
+10, "Compressed Sprayer \c[Teal]:Wind:"		
+11, "Burning Sprayer \c[MenuRed]:Fire:"		
+12, "Snowy Sprayer \c[MenuCyan]:Ice:"		
+13, "Crushing Sprayer \c[MenuOrange]:Break:"		
 14, "EnergyCannon"		
 15, "Mega Cannon"		
 16, "LightWave Cannon"		
-17, "DrillHead Cannon \cf:Break:"		
+17, "DrillHead Cannon \c[MenuOrange]:Break:"		
 18, "Standard Saber"		
 19, "Beam Rapier"		
 20, "Triangular Saber"
-21, "FireballBuster \cf:Fire:"
-22, "AtomicBuster \cf:Fire:"
-23, "\cdRepairGun :Repair:"
-24, "ViperRifle"
-25, "ThriceGun"
-26, "\cdMediBuster :Repair:"
-27, "\cdScrewShooter :Repair:"
-28, "\cdBoltDriver :Repair:"
-29, "\cdRepairSprayer :Repair:"
-30, "\cdRepairLauncher :Repair:"
+21, "Fireball Buster \c[MenuRed]:Fire:"
+22, "Atomic Buster \c[MenuRed]:Fire:"
+23, "RepairGun \c[MenuGreen]:Repair:"
+24, "Viper Rifle \c[DarkGreen]:Toxic:"
+25, "Thrice Gun \c[MenuCyan]:Ice:"
+26, "MediBuster \c[MenuGreen]:Repair:"
+27, "Screw Shooter \c[MenuGreen]:Repair:"
+28, "Bolt Driver \c[MenuGreen]:Repair:"
+29, "Repair Sprayer \c[MenuGreen]:Repair:"
+30, "Repair Launcher \c[MenuGreen]:Repair:"
+31, "Replislasher \c[Teal]:Wind:"
 }
 
 OptionValue WepOptionsB
@@ -131,20 +101,69 @@ OptionValue WepOptionsB
 28, "BoltDriver "
 29, "RepairSprayer"
 30, "RepairLauncher"
+31, "Replislasher"
 }
 
-OptionValue SubWepOptions
+OptionValue WepOptions_Busters
 {
-0, "None"
-
-1, "Minibomb \cf::PB=\cj10\cf::"
-//2, "TopGrenade \cf::PB=\cj15\cf::"
-2, "\cnLight Screen \cf::PB=\cj15\cf::"
-3, "\cnPower Dart \cf::PB=\cj25\cf::"
-4, "\ciGrappling Hook \cf::PB=\cj15\cf::"
-5, "\cdHeal Patch \cf::PB=\cj20\cf::"
-6, "Hyper Bomb \cf::PB=\cj20\cf::"
+0, "Military Buster"
+1, "Wind Pressure Buster \c[Teal]:Wind:"
+2, "Arrow Buster"
+3, "Shadow Buster \c[Olive]:Blade:\c[Gold]:Light:"
+21, "Fireball Buster \c[MenuRed]:Fire:"
+22, "Atomic Buster \c[MenuRed]:Fire:"
+26, "MediBuster \c[MenuGreen]:Repair:"
 }
+
+
+OptionValue WepOptions_MGuns
+{
+4, "Lazer Rifle"
+5, "Triangle Gun"
+6, "HighSpeed Rifle \c[Gold]:Light:"
+7, "Gatling Gun \c[DarkGray]:Heavy:"
+8, "Shotgun"
+23, "RepairGun \c[MenuGreen]:Repair:"
+24, "Viper Rifle \c[DarkGreen]:Toxic:"
+25, "Thrice Gun \c[MenuCyan]:Ice:"
+27, "Screw Shooter \c[MenuGreen]:Repair:"
+28, "Bolt Driver \c[MenuGreen]:Repair:"
+}
+
+OptionValue WepOptions_Sprayers
+{
+9, "GasEmitter \c[DarkGreen]:Toxic:"
+10, "Compressed Sprayer \c[Teal]:Wind:"		
+11, "Burning Sprayer \c[MenuRed]:Fire:"		
+12, "Snowy Sprayer \c[MenuCyan]:Ice:"		
+13, "Crushing Sprayer \c[MenuOrange]:Break:"	
+29, "Repair Sprayer \c[MenuGreen]:Repair:"
+}
+
+OptionValue WepOptions_Launchers
+{
+14, "EnergyCannon"		
+15, "Mega Cannon"		
+16, "LightWave Cannon"		
+17, "DrillHead Cannon \c[MenuOrange]:Break:"	
+30, "Repair Launcher \c[MenuGreen]:Repair:"
+}
+
+OptionValue WepOptions_Melee
+{
+18, "Standard Saber"		
+19, "Beam Rapier"		
+20, "Triangular Saber"
+31, "Replislasher \c[Teal]:Wind:"
+}
+
+
+
+
+
+
+
+
 
 OptionValue WepDescA
 {
@@ -175,16 +194,17 @@ OptionValue WepDescA
 19, "Narrow but far reaching \nbeam saber that does extra \ndamage at it's tip"
 20, "Wide swinging beam saber."
 
-21, "FireballBuster"
-22, "AtomicBuster"
-23, "RepairGun"
-24, "ViperRifle"
-25, "ThriceGun"
-26, "MediBuster"
-27, "ScrewShooter"
-28, "BoltDriver "
-29, "RepairSprayer"
-30, "RepairLauncher"
+21, "Launches bouncing fireballs \nthat can burn targets"
+22, "Fires superheated blasts \nthat deal critical damage \non burning foes"
+23, "Targets and fixes allies \nwith a continuous healing \nstream"
+24, "Launches poisonous projectiles \nthat deal critical damage \nto poisoned foes"
+25, "Fires a trio of icicles \nthat deal heavy damage."
+26, "Launches swift projectiles \nthat damage foes and \nrepair allies."
+27, "Shoots screws that can \ndamage foes or repair allies"
+28, "Launches a burst of screws \nthat can damage foes or \nrepair allies "
+29, "Sprays healing waves \nthat can repair allies"
+30, "Launches arching projectiles \nthat can repair allies"
+31, "unleashes shockwaves \nwith each swing."
 }
 
 OptionValue WepDescB
@@ -203,146 +223,43 @@ OptionValue WepDescB
 21, "Encase an ally in a healing \nshield that reduces a \nsingle hit by half."
 }
 
-OptionValue SubWepDesc
+
+
+OptionMenu "EditLoadOutMenu"
 {
-//-1, "Null"
-0, "---"
-1, "Throwing explosive that detonates \non the floor, ride the blast \nto get to high places."
-//2, "Heat Seeking Gyro Explosive that \nPursues players in sight, usefull \n around corners."
-2, "a defensive bunker you can \nshoot through, has limited health."
-3, "Inject an allie with the power of \ncritical hits! hold to \nselect your target."
-4, "reach distant places with great ease! \nbe mindfull of your momentum however."
-5, "adheres to surfaces or players \nto emit a healing aura, \nit's destructable so beware"
-6, "Destructive, High caliber thrown \nExplosive that can demolish \nFoes in an instant"
-}
-
-OptionMenu "EditEmblemMenu"
-{
-    Title "Emblem"
-	StaticText ""
-	StaticText ""
-	StaticText ""
-		Option "Emblem", "Lo_Emblem", "EmblemOptions"
-}
-
-
-//Psionics
-
-OptionMenu "EditPsionicsMenu"
-{
-	Title "Psionics"
+	Title "Loadouts"
 	
-	TextField	"Power Budget", "Sv_PowerBudget","unselectable"
-	StaticText ""
-	Option "Slot 1:", "Lo_PsiA", "PSIOptions"
-	Option "PP Cost:", "Lo_PsiA", "PSICostOptions" , "unselectable"
-	Option "_", "Lo_PsiA", "PSILevelOptions" , "unselectable"
-	Slider "Level", "Lo_PsiPowerA" , 1 , 5 , 1 
-	
-	Option "Slot 2:", "Lo_PsiB", "PSIOptions"
-	Option "PP Cost:", "Lo_PsiB", "PSICostOptions" , "unselectable"
-	Option "_", "Lo_PsiB", "PSILevelOptions" , "unselectable"
-	Slider "Level", "Lo_PsiPowerB" , 1 , 5 , 1 
-
-	Option "Slot 3:", "Lo_PsiC", "PSIOptions"
-	Option "PP Cost:", "Lo_PsiC", "PSICostOptions" , "unselectable"
-	Option "_", "Lo_PsiC", "PSILevelOptions" , "unselectable"
-	Slider "Level", "Lo_PsiPowerC" , 1 , 5 , 1 
-
-	Option "Slot 4:", "Lo_PsiD", "PSIOptions"
-	Option "PP Cost:", "Lo_PsiD", "PSICostOptions" , "unselectable"
-	Option "_", "Lo_PsiD", "PSILevelOptions" , "unselectable"
-	Slider "Level", "Lo_PsiPowerD" , 1 , 5 , 1 
-	StaticText "======================================"
-	Option "-", "Lo_PsiDetail", "PSIDetailName"
-	//StaticText ""
-		Option "Desc:", "Lo_PsiDetail", "PSIDetailDesc", "unselectable"
+	Option "$CLASS_NAME", "playerclass", "ClassNames"
+	Option "$CLASS_PROP", "playerclass", "ClassProperties" , "unselectable"
+	StaticText""
+	StaticText""
+	StaticText""
+	StaticText "===============================================================",1
+	Option "$WEP_NAMEA", "Lo_WepA", "WepOptionsA"
+	Option "$WEP_DESC", "Lo_WepA", "WepDescA", "unselectable"
 	StaticText ""
 	StaticText ""
 	StaticText ""
+
+	Option "$WEP_BUSTER", "Lo_WepA", "WepOptions_Busters"
+	Option "$WEP_MGUNS", "Lo_WepA", "WepOptions_Mguns"
+	Option "$WEP_SPRAYER", "Lo_WepA", "WepOptions_Sprayers"
+	Option "$WEP_LAUNCHER", "Lo_WepA", "WepOptions_Launchers"
+	Option "$WEP_MELEE", "Lo_WepA", "WepOptions_Melee"
+	StaticText "===============================================================",1
+	Option "$WEP_NAMEB", "Lo_WepB", "WepOptionsA"
+	Option "$WEP_DESC", "Lo_WepB", "WepDescA", "unselectable"
 	StaticText ""
+	StaticText ""
+	StaticText ""
+
+	Option "$WEP_BUSTER", "Lo_WepB", "WepOptions_Busters"
+	Option "$WEP_MGUNS", "Lo_WepB", "WepOptions_Mguns"
+	Option "$WEP_SPRAYER", "Lo_WepB", "WepOptions_Sprayers"
+	Option "$WEP_LAUNCHER", "Lo_WepB", "WepOptions_Launchers"
+	Option "$WEP_MELEE", "Lo_WepB", "WepOptions_Melee"
+	StaticText "===============================================================",1
+	StaticText "$RELOADNOTICE"
+	Control 	"Reload",			"+Reload"
+	Control 	"Ability",			"+Zoom"
 }
-
-OptionValue PSIOptions
-{
-0, "None"
-
-1, "PK Fire \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
-2, "PK Freeze \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
-3, "PK Thunder \cf::PB=\cj10\cf:\cj20\cf:\cj30\cf:\cj--\cf:\cj55\cf::"
-4, "\cdPK Lifeup \cf::PB=\cj15\cf:\cj20\cf:\cj25\cf:\cj35\cf:\cj55\cf::"
-}
-
-OptionValue PSICostOptions
-{
-0, "  0   0   0   0   0"
-1, "  1   2   3   -   5"
-2, "  1   2   3   -   5"
-3, "  1   2   3   -   5"
-4, "  1   2   3   3   4"
-}
-
-OptionValue PSIPBOptions
-{
-0, "  0   0   0   0   0"
-1, "  10   20   30   -   55"
-2, "  10   20   30   -   55"
-3, "  10   20   30   -   55"
-4, "  10   15   25   -35   55"
-}
-
-OptionValue PSILevelOptions
-{
-0, "  I   II   III   V   X"
-
-1, "  I   II   III   -   X"
-2, "  I   II   III   -   X"
-3, "  I   II   III   -   X"
-4, "  I   II   III   V   X"
-}
-
-OptionValue PSIPowerBudget
-{
-0, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj10\cf   \cfX=\cj10\cf"
-
-1, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj-\cf   \cfX=\cj10\cf"
-2, "  I   II   III   -   X"
-3, "  I   II   III   -   X"
-4, "  \cfI=\cj10\cf   \cfII=\cj10\cf   \cfIII=\cj10\cf   \cfV=\cj10\cf   \cfX=\cj10\cf"
-}
-
-
-OptionValue PSIDetailName
-{
-0, "None"
-
-1,"PK Fire Alpha (I) \cf::PB=\cj10\cf:: \cd::PP=\cj1\cf::"
-2, "PK Fire Beta (II) \cf::PB=\cj20\cf:: \cd::PP=\cj2\cf::"
-3, "PK Fire Gamma (III) \cf::PB=\cj30\cf:: \cd::PP=\cj3\cf::"
-4, "PK Fire Omega (X) \cf::PB=\cj55\cf:: \cd::PP=\cj4\cf::"
-
-5, "PK Freeze Alpha (I) \cf::PB=\cj10\cf::"
-6, "PK Freeze Beta (II) \cf::PB=\cj20\cf::"
-7, "PK Freeze Gamma (III) \cf::PB=\cj30\cf::"
-8, "PK Freeze Omega (X) \cf::PB=\cj55\cf::"
-
-9, "PK Thunder Alpha (I) \cf::PB=\cj10\cf::"
-10, "PK Thunder Beta (II) \cf::PB=\cj20\cf::"
-11, "PK Thunder Gamma (III) \cf::PB=\cj30\cf::"
-12, "PK Thunder Omega (X) \cf::PB=\cj55\cf::"
-
-13, "\cdPK Lifeup Alpha (I) \cf::PB=\cj15\cf::"
-14, "\cdPK Lifeup Beta (II) \cf::PB=\cj20\cf::"
-15, "\cdPK Lifeup Gamma (III) \cf::PB=\cj25\cf::"
-16, "\cdPK Lifeup Sigma (V) \cf::PB=\cj35\cf::"
-17, "\cdPK Lifeup Omega (X) \cf::PB=\cj55\cf::"
-}
-
-OptionValue PSIDetailDesc
-{
-0, "None"
-
-1,"Launch a fast moving \nprojectile that explodes \non impact, can \nset foes ablaze"
-
-}
-

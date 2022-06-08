@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 20
+#LIBDEFINE PAINCOUNT 22
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -48,10 +48,32 @@ str PainRecord[PAINCOUNT][2] = {
 /*17*/{"FireDOT",ELM_FIRE},
 /*18*/{"PoisonDOT",ELM_TOXIC},
 /*19*/{"SyringeToss",ELM_TOXIC},
+/*20*/{"ReplislasherEdge",ELM_WIND},
+/*21*/{"ReplislasherTip",ELM_WIND},
+
 };
 
 
-#LIBDEFINE CRITCOUNT 6
+Function Bool CheckForFrostBiteHitstun(int PainType)
+{
+if(CheckInventory("FrostbiteMark"))
+    {
+    Int PainFlag;
+    For(int j = 0; j < PAINCOUNT; j++)
+	{
+	If(PainRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        PainFlag = PainRecord[j][1];      
+		}
+	}
+    if(PainFlag & ELM_ICE){Return 1;}
+    }
+return 0;
+}
+
+
+#LIBDEFINE CRITCOUNT 7
 //Crit Bitflags
 #LIBDEFINE CRIT_NULL 0.0
 #LIBDEFINE CRIT_ALWAYS 1.0
@@ -70,7 +92,7 @@ str CritRecord[CRITCOUNT][2] = {
 /*3*/{"AtomicBuster",CRIT_CONDITION|CRIT_BURNSTATUS},
 /*4*/{"ViperRifle",CRIT_CONDITION|CRIT_POISONSTATUS},
 /*5*/{"SyringeToss",CRIT_CONDITION|CRIT_POISONSTATUS},
-
+/*6*/{"ReplislasherTip",CRIT_ALWAYS},
 };
 
 
@@ -109,3 +131,5 @@ if(CheckInventory("PoisonMark"))
     }
 return 0;
 }
+
+

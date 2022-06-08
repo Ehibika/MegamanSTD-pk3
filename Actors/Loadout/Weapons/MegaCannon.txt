@@ -22,7 +22,7 @@ stop
 
 Ready:
 Ready.Wep:
-0G_H A 1 A_WeaponReady(WRF_ALLOWRELOAD)
+0G_H A 1 A_WeaponReady(WRF_ALLOWINPUTS)
 "####" A 0 A_Jumpifinventory("MegaCannon_Ammo",1,"Ready.Core")
 Goto Reload
 //===============
@@ -59,24 +59,26 @@ Goto Ready.Wep
 NoAmmo:
 "####" A 1
 "####" A 0 A_Jumpifinventory("MegaCannon_Ammo",1,"Ready")
-Reload:
+Goto Reload
 
-"####" A 1 Offset(0,32)
-"####" A 1 Offset(0,46)
-"####" A 1 Offset(0,58)
-"####" A 1 Offset(0,70)
-"####" A 1 Offset(0,82)
+Reload.Hold:
 "####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
-"####" A 32 
+"####" A 0 A_JumpIfNoAmmo("Reload.FirstLoop")
+Goto Reload.loop
+
+Reload.FirstLoop:
+"####" A 32 A_WeaponReady(WRF_RELOADING) 
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 0 A_Giveinventory("WeaponSingleReloader",1)
+"####" A 1 A_JumpIf(CallACS("CheckAmmoFull")==0,"Reload.Loop")
+Reload.Loop:
+"####" A 28 A_WeaponReady(WRF_CYCLERELOADING) 
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 0 A_Giveinventory("WeaponSingleReloader",1)
+"####" A 1 A_JumpIf(CallACS("CheckAmmoFull")==0,"Reload.Loop")
 "####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
-"####" A 1 Offset(0,82)
-"####" A 1 Offset(0,70)
-"####" A 1 Offset(0,58)
-"####" A 1 Offset(0,46)
-"####" A 1 Offset(0,32)
-"####" A 0 A_Giveinventory("MegaCannon_Ammo",7)
-"####" A 1 A_Refire("Fire")
-Goto Ready.Wep
+goto Reload.Rise2
+
 Flash:
 TNT1 A 5 
 stop
@@ -100,7 +102,7 @@ inventory.maxamount 7
 actor MegaCannonCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 20
+Powerup.Duration 28
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]

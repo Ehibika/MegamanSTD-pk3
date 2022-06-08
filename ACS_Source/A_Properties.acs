@@ -218,7 +218,7 @@ if(!CheckForTeamMedic()){Terminate;}
 int HPMax = GetActorProperty(0,APROP_SPAWNHEALTH);
 while(GetActorProperty(0,APROP_HEALTH) > 0)
     {
-    log(i:GetActorPowerupTics(0,"HealRampPower"));
+    //log(i:GetActorPowerupTics(0,"HealRampPower"));
     if(GetActorPowerupTics(0,"HealRampPower")<315 && GetActorProperty(0,APROP_HEALTH) < GetActorProperty(0,APROP_SPAWNHEALTH))
         {
         if(CheckInventory("PoisonMark")){GiveInventory("DetoxLevel",5);GiveInventory("DetoxEfectSpawn",1);}
@@ -339,6 +339,7 @@ Return 0;
 
 Function bool CheckForElementalGuard (str PainType)
 {
+if(!CheckProp(MasterProPList[21][PROP_NAME])){Return 0;}
 //Check to see if the damage is any of the elements this property
 //Suppresses.
 For(int i = 0; i < PAINCOUNT; i++)

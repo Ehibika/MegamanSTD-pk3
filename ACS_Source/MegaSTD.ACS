@@ -33,6 +33,9 @@ if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMas
 if(CheckForCrit(arg2)){CritHit = true;}
 if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
+
+//===|FrostBite Hitstun|===
+if(CheckForFrostBiteHitstun(arg2)){GiveInventory("FrostbiteHitstun",1);}
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
@@ -872,11 +875,90 @@ if (output > HealMax){output = HealMax;}
 SetResultValue(output);
 }
 
-Script "WeaponReload" (void)
+Script "WeaponReload" (int AmmoCount)
 {
 int ThisWeapon = STD_WhichWeapon();
 str WepAmmoName = MasterWepList[ThisWeapon][2];
 int WepAmmoCount = GetAmmoCapacity(WepAmmoName);
 
-GiveInventory(WepAmmoName,WepAmmoCount);
+if(!AmmoCount || AmmoCount>WepAmmoCount){AmmoCount = WepAmmoCount;}
+
+GiveInventory(WepAmmoName,AmmoCount);
+}
+
+Script "CheckAmmoFull" (void)
+{
+int ThisWeapon = STD_WhichWeapon();
+str WepAmmoName = MasterWepList[ThisWeapon][2];
+int WepAmmoCount = GetAmmoCapacity(WepAmmoName);
+
+SetResultValue(CheckInventory(WepAmmoName) == WepAmmoCount);
+}
+
+Script "TurretReticleWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "TurretReticleHold") > 0
+	){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+Script "HealthGenSyncher" (void) 
+{
+	int BaseTID = ActivatorTID();
+	int Owner = ACS_NamedExecuteWithResult("core_gettarget")-1000;
+	int Team = GetPlayerInfo(Owner, PLAYERINFO_TEAM);
+	str BaseName = "HealthGenBase";
+			switch(Team)
+			{
+			Case 0:
+			BaseName = StrParam(s:BaseName,s:"_B");
+			break;
+			Case 1:
+			BaseName = StrParam(s:BaseName,s:"_R");
+			break;
+			Case 2:
+			BaseName = StrParam(s:BaseName,s:"_G");
+			break;
+			Case 3:
+			BaseName = StrParam(s:BaseName,s:"_O");
+			break;
+			}
+		
+
+	while(ThingCountName(BaseName,BaseTID)){
+		Delay(1);
+	}
+	
+	// Remove
+	Thing_Remove(0);
+}
+
+
+
+script "TrapSensorIdentify"  (VOID) 
+{
+
+	int SensorPlayer= ACS_NamedExecuteWithResult("Core_GetTarget", 0) - 1000;
+    int FiringPlayer= ACS_NamedExecuteWithResult("Core_GetMaster", 0) - 1000;
+    int Output;
+    if( GetPlayerInfo(SensorPlayer, PLAYERINFO_TEAM) == GetPlayerInfo(FiringPlayer, PLAYERINFO_TEAM))
+    {
+        Output = 1;
+    }
+
+    setResultValue(Output);
+}
+
+
+script "TIDCOUNTER" (int Tid)
+{
+setresultvalue(thingcount(T_NONE,Tid));
 }

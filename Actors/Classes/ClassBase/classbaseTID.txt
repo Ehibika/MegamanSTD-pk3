@@ -24,6 +24,18 @@ actor DetoxLevel : inventory {Inventory.amount 1 Inventory.Maxamount 100}
 //------------------------|Miscellaneous Actors|--------------------------------
 //[+]========================================================================[+]
 
+
+
+actor FrostbiteHitstun : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_ScaleVelocity(0.75)
+stop
+}
+}
+
 actor ExplodeDeathFX  //These are decorative.
 {
 PROJECTILE

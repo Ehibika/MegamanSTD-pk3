@@ -7,11 +7,15 @@ Const int FVM = 65536; //Fixed Value Multiple
 Const float FVMF = 65536.0;
 
 Const int WRF_ALLOWINPUTS = WRF_ALLOWRELOAD|WRF_ALLOWZOOM;
-Const int WRF_RELOADING = WRF_ALLOWRELOAD|WRF_ALLOWZOOM|WRF_NOPRIMARY|WRF_NOBOB;
-
+Const int WRF_ALLOWONLYINPUTS = WRF_NOPRIMARY|WRF_ALLOWRELOAD|WRF_ALLOWZOOM;
+Const int WRF_RELOADING = WRF_ALLOWZOOM|WRF_NOPRIMARY|WRF_NOBOB;
+Const int WRF_PRERELOADING = WRF_ALLOWZOOM|WRF_NOPRIMARY;
+Const int WRF_STARTRELOADING = WRF_NOSECONDARY|WRF_NOPRIMARY|WRF_NOBOB;
+Const int WRF_CYCLERELOADING = WRF_ALLOWZOOM|WRF_NOBOB;
+Const int WRF_FIRING = WRF_NOSWITCH|WRF_NOPRIMARY|WRF_ALLOWZOOM;
 //====|MoveSpeedModifiers|====
 const float Buster_MSPD = 0.8;
-const float Sprayer_MSPD = 0.8;
+const float Sprayer_MSPD = 0.9;
 const float Rifle_MSPD = 0.8;
 const float Melee_MSPD = 1.0;
 const float Launcher_MSPD = 0.6;
@@ -20,6 +24,9 @@ const float LightWep_MSPD = 0.9;
 const float HeavyWep_MSPD = 0.6;
 
 const float HRifle_MSPD = 0.7;
+//====|Range Constants|====
+Const int SprayerRange = 25;
+
 //====|Damage falloff range constants|====
 Const int Range1 = 275; //close quarters
 Const int Range2 = 450; // mid range

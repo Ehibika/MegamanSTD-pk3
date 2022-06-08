@@ -7,17 +7,17 @@ OptionMenu ZA_JoinMenu
 	StaticText"$MNU_JOIN1"
 	StaticText""
 	StaticText "===============================================================",1
-	Command "Join Game", "!mstd_justjoin"
-	Option "Class", "playerclass", "ClassNames"
-	Option "Properties", "playerclass", "ClassProperties", "unselectable"
+	Command "$MNU_JOIN8", "!mstd_justjoin"
+	Option "$CLASS_NAME", "playerclass", "ClassNames"
+	Option "$CLASS_PROP", "playerclass", "ClassProperties", "unselectable"
 	StaticText""
 	StaticText""
 	StaticText""
-	Option "Primary", "Lo_WepA", "WepOptionsA"
-	Option "Secondary", "Lo_WepB", "WepOptionsA"
+	Option "$WEP_NAMEA", "Lo_WepA", "WepOptionsA"
+	Option "$WEP_NAMEB", "Lo_WepB", "WepOptionsA"
 	StaticText "===============================================================",1
 	JoinMenuPlayerClassOption
-	Command "Join game", "menu_joingamewithclass"
+	Command "$MNU_JOIN8", "menu_joingamewithclass"
 	StaticText "===============================================================",1
 	StaticText""
 	
@@ -34,18 +34,18 @@ OptionMenu ZA_JoinTeamMenu
 	StaticText""
 	Command "$MNU_JOIN6", "menu_autoselect"
 	StaticText "===============================================================",1
-	Command "Join Game", "!mstd_justjoin"
-	Option "Class", "playerclass", "ClassNames"
-	Option "Properties", "playerclass", "ClassProperties", "unselectable"
+	Command "$MNU_JOIN8", "!mstd_justjoin"
+	Option "$CLASS_NAME", "playerclass", "ClassNames"
+	Option "$CLASS_PROP", "playerclass", "ClassProperties", "unselectable"
 	StaticText""
 	StaticText""
 	StaticText""
-	Option "Primary", "Lo_WepA", "WepOptionsA"
-	Option "Secondary", "Lo_WepB", "WepOptionsA"
+	Option "$WEP_NAMEA", "Lo_WepA", "WepOptionsA"
+	Option "$WEP_NAMEB", "Lo_WepB", "WepOptionsA"
 	StaticText "===============================================================",1
 	JoinMenuTeamOption
 	JoinMenuPlayerClassOption
-	Command "Join game", "menu_joingamewithclass"
+	Command "$MNU_JOIN8", "menu_joingamewithclass"
 	StaticText "===============================================================",1
 	StaticText""
 }

@@ -1,0 +1,42 @@
+
+Actor SuperMegaman : ClassBase //replaces Megaman
+{
+Player.DisplayName "Super Megaman"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsSuperMegaman"
+Player.Startitem "UseAbility1_SuperMegaman"
+Player.Startitem "UseAbility2_SuperMegaman"
+
+Player.Startitem "BP_Fuel" ,100
+
+Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_Hefty"
+Player.Startitem "Pro_Acrobat"
+
++NOSKIN
+States
+{
+Spawn: 
+SMEG A 0
+SMEG B 1 
+SMEG A 1
+GoTo Spawn+2
+See:
+SMEG BCDE 5
+GoTo Spawn+1
+Missile:
+SMEG F 5
+SMEG G 4
+GoTo Spawn+2
+PainFix:
+SMEG H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsSuperMegaman : Once{}

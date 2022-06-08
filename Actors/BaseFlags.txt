@@ -32,6 +32,16 @@ TNT1 A 0 ACS_NamedExecuteWithResult("WeaponReload",0)
 stop
 }
 }
+
+actor WeaponSingleReloader : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteWithResult("WeaponReload",1)
+stop
+}
+}
 //[+]========================================================================[+]
 //-------------------------|Projectile TRanslation Script|---------------------
 //[+]========================================================================[+]

@@ -56,20 +56,46 @@ int pln = playerNumber();
 		{
 		switch(GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM))
 			{
-		case 0:
-		setactorproperty(0,APROP_SPECIES,"BLUEMember");
-		break;
-		
-		case 1:
-		setactorproperty(0,APROP_SPECIES,"REDMember");
-		break;
+			Case 0:
+			SetActorProperty(0,APROP_SPECIES,"LightMember");
+			break;
+			Case 1:
+			SetActorProperty(0,APROP_SPECIES,"WilyMember");
+			break;
+			Case 2:
+			SetActorProperty(0,APROP_SPECIES,"CossackMember");
+			break;
+			Case 3:
+			SetActorProperty(0,APROP_SPECIES,"KingMember");
+			break;
 			}
 		}
 		Else{setactorproperty(0,APROP_SPECIES,strparam(s:"Player",i:playernumber()));}
+	ACS_NamedExecuteAlways("SetClientSpecies",0,GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM));
 // Stores the players starting Jump Height on spawn
 PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
 }
 
+
+Script "SetClientSpecies" (int Num) Clientside
+{
+	switch(Num)
+		{
+		Case 0:
+		SetActorProperty(0,APROP_SPECIES,"LightMember");
+		break;
+		Case 1:
+		SetActorProperty(0,APROP_SPECIES,"WilyMember");
+		break;
+		Case 2:
+		SetActorProperty(0,APROP_SPECIES,"CossackMember");
+		break;
+		Case 3:
+		SetActorProperty(0,APROP_SPECIES,"KingMember");
+		break;
+		}
+		ACS_NamedExecuteAlways("core_synccolors", 0);
+}
 
 /*
 Script "IconScanner" Enter Clientside

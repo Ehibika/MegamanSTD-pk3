@@ -1,0 +1,40 @@
+
+Actor AutoSTD : ClassBase //replaces Megaman
+{
+Player.DisplayName "Auto"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsAuto"
+Player.Startitem "UseAbility1_AutoSTD"
+Player.Startitem "UseAbility2_AutoSTD"
+
+Player.Startitem "Pro_LauncherMastery"
+Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_TeamMedic"
+
++NOSKIN
+States
+{
+Spawn: 
+AUT6 A 0
+AUT6 B 1 
+AUT6 A 1
+GoTo Spawn+2
+See:
+AUT6 BCDE 5
+GoTo Spawn+1
+Missile:
+AUT6 F 5
+AUT6 G 4
+GoTo Spawn+2
+PainFix:
+AUT6 H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsAuto : Once{}

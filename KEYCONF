@@ -1,5 +1,7 @@
 clearplayerclasses
 addplayerclass STDMegaman
+addplayerclass SuperMegaman
+addplayerclass AutoSTD
 addplayerclass FireMan
 
 addplayerclass MegamanX
@@ -19,12 +21,10 @@ addplayerclass MegamanEXE
 
 addkeysection "Extra" Extraoptions
 addmenukey "Reload " +reload
-addmenukey "Zoom " +zoom
-addmenukey "Ability " +user1
+addmenukey "Ability " +zoom
 
 defaultbind B +reload
 defaultbind N +zoom
-defaultbind q +user1
 alias 
 
 alias !MSTD_justjoin "closemenu;join"
