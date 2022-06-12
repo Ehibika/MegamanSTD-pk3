@@ -48,7 +48,7 @@ if(CheckForGutsy()){Guts = true;}
 if(CheckForDetermined(arg2))
 	{
 	Determined = true;
-	DB_Determined = MassimoDamageRamp(0,Damage*0.3>>16,-1);
+	DB_Determined = MassimoDamageRamp(0,Damage*0.2>>16,-1);
 	}
 
 //Reduce harm from blast weapons on yourself
@@ -85,7 +85,7 @@ if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][
 if(FireCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(Assassin)
-	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.5>>16;}}
+	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.3>>16;}}
 
 if(Determined){Damage += DB_Determined;}
 if(Guts){Damage = Damage*0.5>>16;}
@@ -94,24 +94,7 @@ if(Guts){Damage = Damage*0.5>>16;}
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
 
 //Stop breaks on damage for all but the following
-if(!CheckForDontStop(arg2)){TakeInventory("StopMark",9);}
-
-if(CheckInventory("LT_Armor"))
-	{
-	TakeInventory("LT_Armor",arg1);
-	GiveInventory("OverHealHealth",arg1);
-	//I can change the end damage, but I'm resorting to
-	//my old Damage interception tricks just so hits still
-	//Trigger painstates.
-	
-	/*
-	Damage -= CheckInventory("LT_Armor");
-	TakeInventory("LT_Armor",arg1);
-	
-	if(Damage<=0){Damage = 1; GiveInventory("HealthBonus",1);}
-	*/
-	}
-	
+//if(!CheckForDontStop(arg2)){TakeInventory("StopMark",9);} //edit- not anymore
 
 //===============|Post Calculation Passives|===============
 
@@ -893,7 +876,7 @@ Script "WepSpeedMod" (int Value)
 int FixedValue = Value<<16;
 //Check for mastery
 
-if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.8; /*log(s:"Got Hefty!");*/}
+if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.7; /*log(s:"Got Hefty!");*/}
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
 if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*log(s:"Got Speedrunner!");*/}
 
