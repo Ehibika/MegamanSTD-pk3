@@ -90,7 +90,7 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int EnergyCannon_DMG = 45;
+Const int EnergyCannon_DMG = 140;
 Const int EnergyCannon_RAD = 128;
 Const int EnergyCannon_RADMin = 32;
 

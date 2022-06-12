@@ -145,7 +145,7 @@ actor SlashStart
 PROJECTILE
 +RIPPER
 damagetype "Slash1"
-damage (35)
+damage (100)
 height 5
 radius 5
 Speed 25
@@ -177,7 +177,7 @@ actor SlashTip
 PROJECTILE
 +RIPPER
 damagetype "Slash2"
-damage (75)
+damage (150)
 height 5
 radius 5
 Speed 26

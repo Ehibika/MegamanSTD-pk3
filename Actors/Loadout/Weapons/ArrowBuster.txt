@@ -114,7 +114,7 @@ actor ArrowBusterRound : fastProjectileBase
 Obituary "$OB_ARROWBUSTER"
 DamageType "ArrowBuster"
 Speed 128
-Damage (65)
+Damage (100)
 radius 8
 height 8
 scale 1.0
@@ -151,7 +151,7 @@ actor ArrowBusterDamager : FastProjectileBase
     +EXPLODEONWATER
     +HITTRACER
     RenderStyle None
-    Damage (CallACS("SniperBusterRamp",3,30,100))
+    Damage (CallACS("SniperBusterRamp",3,50,200))
     Radius 10
     Height 10
     speed 3000 //15 * ArrowBusterRange(200)

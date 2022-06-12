@@ -92,7 +92,7 @@ powerup.type "ConShotTimer"
 actor FireballBusterRound : ProjectileBase
 {
 Speed 35
-Damage (22)
+Damage (25)
 +NOEXPLODEFLOOR
 +BOUNCEONWALLS
 -NOGRAVITY

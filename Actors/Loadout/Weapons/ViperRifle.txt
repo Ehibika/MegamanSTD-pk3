@@ -87,7 +87,7 @@ actor ViperRifleShot : fastProjectileBase
 Obituary "$OB_VIPERRIFLE"
 DamageType "ViperRifle" //ViperRifle
 Speed 96
-Damage (12)
+Damage (25)
 radius 3
 
 MissileHeight 16

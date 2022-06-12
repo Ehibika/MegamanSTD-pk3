@@ -92,7 +92,7 @@ actor ScrewShooterShot : fastProjectileBase
 Obituary "$OB_SCREWSHOOTER"
 DamageType "ScrewShooter"
 Speed 96
-Damage (18)
+Damage (25)
 radius 3
 
 MissileHeight 16

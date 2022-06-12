@@ -101,7 +101,7 @@ Obituary "$OB_THRICEGUN"
 DamageType "ThriceGun"
 
 Speed 96
-Damage (45)
+Damage (75)
 radius 10
 height 12
 scale 2.5

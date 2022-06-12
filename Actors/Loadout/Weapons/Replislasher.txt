@@ -197,7 +197,7 @@ PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
 Obituary "$OB_REPLISLASHER"
-damage (35)
+damage (100)
 height 5
 radius 5
 Speed 25
@@ -230,7 +230,7 @@ PROJECTILE
 +RIPPER
 damagetype "ReplislasherTip"
 Obituary "$OB_REPLISLASHER"
-damage (75)
+damage (150)
 height 5
 radius 5
 Speed 26
@@ -256,7 +256,7 @@ PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
 Obituary "$OB_REPLISLASHER"
-damage (15 + CallACS("DamageRate",20,180,36) )
+damage (50 + CallACS("DamageRate",50,180,12) )
 height 5
 radius 5
 Speed 64

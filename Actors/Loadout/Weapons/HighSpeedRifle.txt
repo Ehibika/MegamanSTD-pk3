@@ -93,7 +93,7 @@ actor HighSpeedRifleShot : fastProjectileBase
 Obituary "$OB_HIGHSPEEDRIFLE"
 DamageType "HighSpeedRifle"
 Speed 120
-Damage (14)
+Damage (25)
 radius 3
 
 MissileHeight 16

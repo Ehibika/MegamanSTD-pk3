@@ -85,7 +85,7 @@ actor BasicBusterRound : fastProjectileBase
 Obituary "$OB_Blaster"
 DamageType "SingleShot2"
 Speed 100
-Damage (32)
+Damage (50)
 radius 3
 
 MissileHeight 16

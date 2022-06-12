@@ -93,7 +93,7 @@ powerup.type "ConShotTimer"
 actor AtomicBusterRound : ProjectileBase
 {
 Speed 64
-Damage (30)
+Damage (50)
 radius 12
 Damagetype "AtomicBuster"
 //MissileHeight 16

@@ -111,7 +111,7 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 
 Const Int SnowySprayRange = SprayerRange+10;
-Const float SnowySpray_DMG = 8;
+Const float SnowySpray_DMG = 20;
 Const float SnowySpray_RAD = 64;
 
 actor SnowySprayDamagerStart //: BasicHelper

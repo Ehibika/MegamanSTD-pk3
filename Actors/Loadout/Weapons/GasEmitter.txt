@@ -114,7 +114,7 @@ powerup.type "ConShotTimer"
 
 
 Const Int GasEmitterRange = SprayerRange;
-Const float GasEmitter_DMG = 8;
+Const float GasEmitter_DMG = 20;
 Const float GasEmitter_RAD = 64;
 
 

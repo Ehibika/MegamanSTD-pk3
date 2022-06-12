@@ -111,7 +111,7 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 
 Const Int BurningSprayerRange = SprayerRange;
-Const float BurningSprayer_DMG = 4;
+Const float BurningSprayer_DMG = 12;
 Const float BurningSprayer_RAD = 48;
 
 actor BurningSprayerDamagerStart //: BasicHelper

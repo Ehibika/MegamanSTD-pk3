@@ -89,7 +89,7 @@ powerup.type "ConShotTimer"
 
 Const Int CrushingSprayerRange = 30;
 Const Int CrushingSprayerFXRange = 20;
-Const float CrushingSprayer_DMG = 45;
+Const float CrushingSprayer_DMG = 100;
 
 actor CrushingSprayerDamagerStart //: BasicHelper
 {

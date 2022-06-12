@@ -140,7 +140,7 @@ PROJECTILE
 +RIPPER
 damagetype "BeamRapierEdge"
 Obituary "$OB_BEAMRAPIER"
-damage (35)
+damage (100)
 height 5
 radius 5
 Speed 25
@@ -173,7 +173,7 @@ PROJECTILE
 +RIPPER
 damagetype "BeamRapierTip"
 Obituary "$OB_BEAMRAPIER"
-damage (75)
+damage (150)
 height 5
 radius 5
 Speed 26

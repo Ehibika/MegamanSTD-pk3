@@ -92,7 +92,7 @@ powerup.type "ConShotTimer"
 actor ViperBusterRound : ProjectileBase
 {
 Speed 96
-Damage (22)
+Damage (25)
 radius 12
 Damagetype "ViperBuster"
 //MissileHeight 16

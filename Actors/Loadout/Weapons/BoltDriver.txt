@@ -125,7 +125,7 @@ actor BoltDriverShot : fastProjectileBase
 Obituary "$OB_BOLTDRIVER"
 DamageType "BoltDriver"
 Speed 96
-Damage (6)
+Damage (10)
 radius 3
 
 MissileHeight 16
