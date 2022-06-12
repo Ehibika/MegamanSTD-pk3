@@ -3,8 +3,8 @@ Actor AutoSTD : ClassBase //replaces Megaman
 {
 Player.DisplayName "Auto"
 Player.SoundClass "megaman"
-Health 150
-Player.MaxHealth 150
+Health 300
+Player.MaxHealth 300
 Player.JumpZ 10
 
 Player.Startitem "IsAuto"

@@ -218,7 +218,7 @@ actor AutoSentryBullet : fastProjectileBase
 Obituary "$OB_AUTOSENTRY"
 DamageType "AutoSentry"
 Speed 96
-Damage (4)
+Damage (10)
 radius 3
 
 MissileHeight 16

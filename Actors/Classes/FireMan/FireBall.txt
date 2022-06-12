@@ -80,7 +80,7 @@ stop
 actor FireBallSTD
 {
 PROJECTILE
-Damage (25)
+Damage (50)
 scale 2.5
 -NOGRAVITY
 Obituary "$OB_FIREBALL"

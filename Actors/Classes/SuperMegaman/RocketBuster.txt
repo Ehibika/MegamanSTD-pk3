@@ -118,7 +118,7 @@ actor AdaptorFist2
 	Radius 10
 	Height 10
 	scale 2.5
-	damage (45)
+	damage (50)
 	damagetype "SuperAdaptor"
 	Obituary "$OB_SUPERADAPTOR"
 	speed 50

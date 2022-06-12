@@ -108,7 +108,7 @@ actor HyperDiveCheck : FastProjectile
     height 16
     radius 16
     speed 64
-    Damage (45)
+    Damage (50)
     States
     {
     Spawn:

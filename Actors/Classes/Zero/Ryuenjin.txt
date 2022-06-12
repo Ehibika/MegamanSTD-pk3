@@ -129,7 +129,7 @@ PROJECTILE
 +RIPPER
 damagetype "RyuenjinEdge"
 Obituary "$OB_RYUENJIN"
-damage (55)
+damage (50)
 height 10
 radius 10
 Speed 25
@@ -162,7 +162,7 @@ PROJECTILE
 +RIPPER
 damagetype "RyuenjinTip"
 Obituary "$OB_RYUENJIN"
-damage (95)
+damage (100)
 height 10
 radius 10
 Speed 26

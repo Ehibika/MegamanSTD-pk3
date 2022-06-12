@@ -203,7 +203,7 @@ stop
 actor WeakFireStorm : FireStorm
 {
 DamageType "FireStormBoss"
-damage (20)
+damage (50)
 speed 64
 States
 {
@@ -221,7 +221,7 @@ stop
 
 actor MidFireStorm : WeakFireStorm
 {
-damage (35)
+damage (100)
 speed 64
 States
 {
@@ -240,7 +240,7 @@ stop
 
 actor StrongFireStorm : WeakFireStorm
 {
-damage (50)
+damage (150)
 speed 64
 States
 {
@@ -258,7 +258,7 @@ stop
 
 actor RealFireStorm : WeakFireStorm
 {
-damage (75)
+damage (200)
 speed 64
 States
 {
@@ -308,7 +308,7 @@ stop
 
 actor SuperFireStorm : FireStorm
 {
-damage (110)
+damage (225)
 speed 70
 States
 {

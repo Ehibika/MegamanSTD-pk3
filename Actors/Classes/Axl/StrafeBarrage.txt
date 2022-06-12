@@ -172,7 +172,7 @@ actor StrafeBarrageShot : fastProjectileBase
 Obituary "$OB_STRAFEBARRAGE"
 DamageType "StrafeBarrage"
 Speed 128
-Damage (16)
+Damage (40)
 radius 3
 
 MissileHeight 16

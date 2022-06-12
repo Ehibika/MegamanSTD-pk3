@@ -2,8 +2,8 @@ Actor megamanEXE : ClassBase
 {
 Player.DisplayName "megamanEXE"
 Player.SoundClass "megaman"
-Health 100
-Player.MaxHealth 100
+Health 250
+Player.MaxHealth 250
 Player.JumpZ 10
 
 Player.Startitem "IsmegamanEXE"

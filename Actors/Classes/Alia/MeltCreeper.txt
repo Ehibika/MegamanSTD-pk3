@@ -196,7 +196,7 @@ DamageType "MeltCreeper"
 +FLOORHUGGER
 Radius 20
 Height 26
-Damage (5)
+Damage (12)
 Speed 0
 Scale 3.5
 reactiontime 70

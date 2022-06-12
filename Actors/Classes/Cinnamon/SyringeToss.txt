@@ -68,7 +68,7 @@ actor SyringeTossShot : fastProjectileBase
 Obituary "$OB_SYRINGETOSS"
 DamageType "SyringeToss" //ViperRifle
 Speed 96
-Damage (35)
+Damage (80)
 radius 8
 height 12
 scale 1.0
