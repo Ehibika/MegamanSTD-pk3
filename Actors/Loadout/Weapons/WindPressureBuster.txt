@@ -103,7 +103,7 @@ actor WindPressureBusterRound : fastProjectileBase
 Obituary "$OB_WINDPRESSUREBUSTER"
 DamageType "WindPressureBuster"
 Speed 128
-Damage (64)
+Damage (50)
 radius 8
 height 8
 scale 1.0

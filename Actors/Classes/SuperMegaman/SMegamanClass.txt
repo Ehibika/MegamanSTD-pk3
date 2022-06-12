@@ -3,8 +3,8 @@ Actor SuperMegaman : ClassBase //replaces Megaman
 {
 Player.DisplayName "Super Megaman"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsSuperMegaman"

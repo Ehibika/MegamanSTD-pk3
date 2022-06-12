@@ -100,8 +100,8 @@ powerup.type "ConShotTimer"
 Const Int RepairLauncherAOE = 128;
 Const int RGI_RepairLauncher = 2;
 
-Const int RepairLauncher_MinHeal = 65;
-Const int RepairLauncher_MaxHeal = 150;
+Const int RepairLauncher_MinHeal = 100;
+Const int RepairLauncher_MaxHeal = 200;
 
 	actor RepairLauncherAim : GolfBallAim{ Speed 128 Gravity 3.0}
 

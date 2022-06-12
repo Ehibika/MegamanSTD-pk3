@@ -100,7 +100,7 @@ actor MilitaryBusterRound : fastProjectileBase
 Obituary "$OB_Military"
 DamageType "MilitaryBuster"
 Speed 96
-Damage (80)
+Damage (60)
 scale 1.0
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition

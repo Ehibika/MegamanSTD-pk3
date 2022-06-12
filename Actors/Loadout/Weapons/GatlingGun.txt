@@ -116,7 +116,7 @@ actor GatlingGunShot : fastProjectileBase
 Obituary "$OB_GATLINGGUN"
 DamageType "GatlingGunP"
 Speed 80
-Damage (20)
+Damage (10)
 radius 3
 
 height 3

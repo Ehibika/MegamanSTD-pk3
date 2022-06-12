@@ -2,8 +2,8 @@ Actor Axl : ClassBase
 {
 Player.DisplayName "Axl"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsAxl"

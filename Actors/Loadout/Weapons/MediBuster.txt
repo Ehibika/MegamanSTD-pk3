@@ -92,8 +92,8 @@ actor MedibusterHealTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int Medibuster_MinHeal = 45;
-Const int Medibuster_MaxHeal = 100;
+Const int Medibuster_MinHeal = 50;
+Const int Medibuster_MaxHeal = 150;
 
 actor MediBusterRoundStart //: BasicHelper
 {

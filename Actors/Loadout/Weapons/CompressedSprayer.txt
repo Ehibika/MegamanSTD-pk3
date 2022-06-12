@@ -90,7 +90,7 @@ powerup.type "ConShotTimer"
 
 Const Int CompressedSprayerRange = 25;
 Const Int CompressedSprayerFXRange = 10;
-Const float CompressedSprayer_DMG = 20;
+Const float CompressedSprayer_DMG = 25;
 
 actor CompressedSprayerDamagerStart //: BasicHelper
 {

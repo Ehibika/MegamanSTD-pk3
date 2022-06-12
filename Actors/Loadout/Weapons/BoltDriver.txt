@@ -117,8 +117,8 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int BoltDriver_MinHeal = 10;
-Const int BoltDriver_MaxHeal = 18;
+Const int BoltDriver_MinHeal = 11;
+Const int BoltDriver_MaxHeal = 20;
 
 actor BoltDriverShot : fastProjectileBase
 {

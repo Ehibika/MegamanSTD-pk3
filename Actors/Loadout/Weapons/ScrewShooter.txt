@@ -68,8 +68,8 @@ actor ScrewShooterWep2 : ScrewShooterWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-Const int ScrewShooter_MinHeal = 10;
-Const int ScrewShooter_MaxHeal = 18;
+Const int ScrewShooter_MinHeal = 25;
+Const int ScrewShooter_MaxHeal = 50;
 
 actor ScrewShooter_Ammo : Ammo
 {

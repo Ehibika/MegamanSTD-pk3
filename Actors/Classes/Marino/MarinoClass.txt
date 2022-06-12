@@ -2,8 +2,8 @@ Actor Marino : ClassBase
 {
 Player.DisplayName "Marino"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 175
+Player.MaxHealth 175
 Player.JumpZ 10
 
 Player.Startitem "IsMarino"

@@ -133,8 +133,8 @@ actor RepairGunhealDelay : Powerup {inventory.amount 1 Powerup.Duration 7}
 //-----------------------------|Effect Actors|------------------------------
 //[+]========================================================================[+]
 
-Const int RepairGun_MinHeal = 5;
-Const int RepairGun_MaxHeal = 15;
+Const int RepairGun_MinHeal = 10;
+Const int RepairGun_MaxHeal = 30;
 
 actor HealBeam_HealActor : ProjectileBase
 {

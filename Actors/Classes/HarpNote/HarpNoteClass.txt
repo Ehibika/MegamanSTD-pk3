@@ -3,8 +3,8 @@ Actor HarpNote : ClassBase
 {
 Player.DisplayName "harpnote"
 Player.SoundClass "Megaman"
-Health 250
-Player.MaxHealth 250
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsHarpNote"

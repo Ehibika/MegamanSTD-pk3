@@ -119,8 +119,8 @@ Const Int RPAOE2 = RepairSprayerFXAOE/2;
 Const float RepairSprayer_DMG = 8;
 Const int RGI_RepairSprayer = 1;
 
-Const int RepairSprayer_MinHeal = 7;
-Const int RepairSprayer_MaxHeal = 15;
+Const int RepairSprayer_MinHeal = 14;
+Const int RepairSprayer_MaxHeal = 30;
 
 actor RepairSprayerHealerStart //: BasicHelper
 {

@@ -91,7 +91,7 @@ Damagefactor "BerzerkCharge", 0
 
 Const Int BerzerkChargeRange = 50;
 Const Int BZKCHR_HIGHDMG = 250;
-Const Int BZKCHR_LOWDMG = 35;
+Const Int BZKCHR_LOWDMG = 50;
 
 actor BerzerkChargeDamagerStart //: BasicHelper
 {

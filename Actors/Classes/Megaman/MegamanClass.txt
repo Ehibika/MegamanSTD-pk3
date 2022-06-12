@@ -3,8 +3,8 @@ Actor STDMegaman : ClassBase //replaces Megaman
 {
 Player.DisplayName "megaman"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsMegaman"
