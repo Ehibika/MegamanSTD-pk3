@@ -21,7 +21,7 @@ int angleDistRegister; // replaced with User_angleDistRegister
 
 
 
-script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
+script "TracerTargeter" (int TargType, int TargRange, int TargAngle) {
 	int ownerNumber = PlayerNumber();
 	int team;
 	int x;
@@ -30,6 +30,8 @@ script "TracerTargeter" (int TargType, int TargRange, int TargMove) {
 	int angle;
 	int pitch;
 	int i;
+
+	if(!TargAngle){TargAngle = MAX_TARGET_ANGLE;}
 	
 	str WepName = getweapon();
 	//log(s:WepName);
@@ -131,7 +133,7 @@ function void TargeterTeam(int team, int x, int y, int z, int angle, int pitch, 
 
 function void Targeter(int x, int y, int z, int angle, int pitch, int i) {
 	int target = i+1000;
-	if(CheckActorInventory(target,"Discorded")==0
+	if(CheckActorInventory(target,"isDead")==0
 		&& GetActorProperty(target,APROP_HEALTH)>0
 		&& CheckSight(0,target,CSF_NOFAKEFLOORS)) {
 		int xDist = GetActorX(target) - x;

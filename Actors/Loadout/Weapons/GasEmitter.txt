@@ -36,6 +36,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 Loop
 Fire:
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" B 0 A_Gunflash("Sound.SprayerSound")
 
 hold:
 "####" B 0
@@ -44,7 +45,7 @@ hold:
 "####" B 0 A_Jump(256,"hold.Bullet")
 Goto hold.Bullet
 hold.Bullet:
-"####" L 0 A_PlaySoundEx("weapon/waveburner","Weapon")
+//"####" L 0 A_PlaySoundEx("weapon/WaterWave","Weapon")
 //"####" B 0 A_FireCustomMissile("GasEmitterBurst",0,1,0,0)
 //"####" B 0 A_FireCustomMissile("GasEmitterDamagerStart",0,0,0,0)
 "####" B 0 A_FireCustomMissile("GasEmitterCloud",0,1,0,0)
@@ -54,7 +55,7 @@ hold.Bullet:
 "####" B 1 A_WeaponReady(WRF_FIRING)
 goto Ready.Wep
 hold.Effect:
-"####" L 0 A_PlaySoundEx("weapon/waveburner","Weapon")
+//"####" L 0 A_PlaySoundEx("weapon/WaterWave","Weapon")
 //"####" B 0 A_FireCustomMissile("GasEmitterBurst",0,0,0,0)
 "####" B 0 A_FireCustomMissile("GasEmitterCloud",0,0,0,0)
 "####" C 2 A_WeaponReady(WRF_FIRING)
@@ -72,6 +73,11 @@ NoAmmo:
 "####" B 1
 "####" B 0 A_Jumpifinventory("GasEmitter_Ammo",1,"Ready")
 Goto Reload
+
+Sound.SprayerSound:
+TNT1 A 9 A_PlaySoundEx("weapon/WaterWave","Weapon",0)
+TNT1 A 1 A_JumpIfInventory("ConShotTimer",1,"Sound.SprayerSound")
+stop
 
 Flash:
 TNT1 A 5 

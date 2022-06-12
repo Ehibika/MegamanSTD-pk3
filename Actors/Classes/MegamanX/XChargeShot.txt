@@ -244,7 +244,7 @@ actor XChargeShotCooler : WatcherBase // Coolers are a type of watcher actor tha
 States
 {
 Spawn:
-TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("XChargeShotCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("XChargeShotCooldownItem",1,"Spawn")

@@ -27,6 +27,10 @@ const float LightWep_MSPD = 0.9;
 const float HeavyWep_MSPD = 0.5;
 
 const float HRifle_MSPD = 0.7;
+//====|TracerTargeter Angles|====
+const float TTA_Default = 0.005;
+const float TTA_Precise = 0.0005;
+const float TTA_SuperPrecise = 0.00005;
 //====|Range Constants|====
 Const int SprayerRange = 25;
 

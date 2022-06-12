@@ -880,6 +880,8 @@ if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.7; /*log(s:"Got Hefty!")
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
 if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*log(s:"Got Speedrunner!");*/}
 
+IsBladeParryActive();
+
 if(Value != GetActorProperty(0,APROP_SPEED))
 	{
 	//log(i:Value,s:" ",i:GetActorProperty(0,APROP_SPEED),s:" ",f:Value,s:" ",f:GetActorProperty(0,APROP_SPEED));

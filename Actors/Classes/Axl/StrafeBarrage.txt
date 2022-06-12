@@ -257,7 +257,7 @@ actor StrafeBarrageTimerWatcher : WatcherBase
 States
 {
 Spawn:
-TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("StrafeBarrageTimerItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("StrafeBarrageTimerItem",1,"Spawn")
@@ -303,7 +303,7 @@ actor StrafeBarrageCooler : WatcherBase
 States
 {
 Spawn:
-TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("StrafeBarrageCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("StrafeBarrageCooldownItem",1,"Spawn")
