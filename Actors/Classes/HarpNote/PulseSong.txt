@@ -100,7 +100,7 @@ actor PulseSongWatcher : BasicHelper
     {
     Spawn:
         TNT1 A 0
-        TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"Death")
+        TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"Death")
         TNT1 A 7 A_GiveToTarget("PulseSongPulseActor")
         TNT1 A 0 A_CountDown
         loop
@@ -343,7 +343,7 @@ actor PulseSongCooler : WatcherBase // Coolers are a type of watcher actor that 
 States
 {
 Spawn:
-TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("PulseSongCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("PulseSongCooldownItem",1,"Spawn")

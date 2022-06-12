@@ -532,6 +532,7 @@ actor EvasionState : BasePowerPro
     -PICKUP
     inventory.amount 1 
     Powerup.Duration -3
+    damagefactor "Normal", 0.0
     /*
     no point in defining painstates, the spectral flag protects from all harm except
     for missiles with spectral. so attacks that breech the evasion state of detect

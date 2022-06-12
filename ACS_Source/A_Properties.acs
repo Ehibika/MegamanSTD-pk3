@@ -195,13 +195,14 @@ The undershirfFlag is taken by damage events, when the player doesn't have it,
 this script waits untill they get back to full HP to restore the undershirfFlag
 */
 GiveInventory("UndershirtFlag",1);
+GiveInventory("UnderShirtFX_On",1);
 while(GetActorProperty(0,APROP_HEALTH) > 0)
     {
     
     if(!CheckInventory("UndershirtFlag"))
         {
         HPNow = GetActorProperty(0,APROP_HEALTH);
-        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);localAmbientSound("item/Refill",127);}
+        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);GiveInventory("UnderShirtFX_On",1);localAmbientSound("item/Refill",127);}
         }
     delay(17);
     }
@@ -399,3 +400,74 @@ For(int i = 0; i < WEAPONLIST; i++)
 	}
 return 0;
 }
+
+
+
+
+Script "BladeParryWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "InBladeParry") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
+Function void IsBladeParryActive(void)
+{
+Bool BladeParry;
+if(CheckProp(MasterProPList[13][PROP_NAME]))
+        {
+        int ThisWeapon = STD_WhichWeapon();
+        If((MasterWepList[ThisWeapon][3] & WF_MELEE) || (MasterWepList[ThisWeapon][3] & WF_BLADE)){BladeParry = 1;}
+        }
+
+if(BladeParry)
+    {GiveInventory("BladeParryFX_On",1);}
+else
+    {GiveInventory("BladeParryFX_Off",1);}
+}
+
+
+Script "UnderShirtWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "UndershirtFlag") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+
+Script "overhealFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+		while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "OverhealFlag") > 0)
+	{
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+

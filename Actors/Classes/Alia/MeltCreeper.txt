@@ -277,7 +277,7 @@ actor MeltCreeperCooler : WatcherBase
 States
 {
 Spawn:
-TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("MeltCreeperCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("MeltCreeperCooldownItem",1,"Spawn")
