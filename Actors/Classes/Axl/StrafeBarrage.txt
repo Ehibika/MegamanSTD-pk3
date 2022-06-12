@@ -1,0 +1,344 @@
+const float STFBR_SPD = 1.4; 
+
+actor Ability2_Axl : SubWepMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 80
+weapon.ammotype "StrafeBarrage_Ammo"
+
+Weapon.AmmoUse2 1
+Weapon.AmmoGive 80
+weapon.ammotype2 "StrafeBarrage_Ammo"
+
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_STRAFEBARRAGE"
+Tag "Strafe Barrage"
+inventory.icon "REPII"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+-WEAPON.NOAUTOFIRE
+Weapon.SlotPriority 5
+States
+{
+
+Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,1.2*FVM)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+
+Deselect:
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 A 0 A_GiveInventory("StrafeBarrageCooldown")
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+
+Ready:
+STFB D 0 
+"####" D 1 Offset(0,110)
+"####" D 1 Offset(0,96)
+"####" D 1 Offset(0,82)
+"####" D 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_GiveInventory("StrafeBarrageTimer")
+"####" A 0 A_PlaySoundEx("weapon/Trigger","Weapon")
+"####" C 0 A_Jump(256,"Ready.Subwep")
+Ready.Subwep:
+STFB A 1 A_WeaponReady
+"####" A 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
+goto Ready.Subwep
+
+Fire:
+"####" A 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" A 0 A_JumpIfInventory("TacticalRollCooldownItem",1,"Fire2")
+"####" A 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" B 0 A_FireCustomMissile("StrafeBarrageShot",fRandom(-(STFBR_SPD),(STFBR_SPD)),1,4,4,0,fRandom(-(STFBR_SPD),(STFBR_SPD)))
+"####" BA 1 A_WeaponReady(WRF_FIRING)
+"####" A 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" C 0 A_FireCustomMissile("StrafeBarrageShot",fRandom(-(STFBR_SPD),(STFBR_SPD)),1,-4,4,0,fRandom(-(STFBR_SPD),(STFBR_SPD)))
+"####" CA 1 A_WeaponReady(WRF_FIRING)
+"####" A 0 
+goto Fire.After
+
+Fire2:
+"####" A 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" A 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" B 0 A_FireCustomMissile("StrafeBarrageShot",fRandom(-(STFBR_SPD),(STFBR_SPD)),1,4,4,0,fRandom(-(STFBR_SPD),(STFBR_SPD)))
+"####" BA 1 
+"####" A 0 A_PlaySoundEx("weapon/HardBuster3","Weapon")
+"####" C 0 A_FireCustomMissile("StrafeBarrageShot",fRandom(-(STFBR_SPD),(STFBR_SPD)),1,-4,4,0,fRandom(-(STFBR_SPD),(STFBR_SPD)))
+"####" CA 1 
+"####" A 0 
+goto Fire.After
+
+Fire.After:
+"####" A 0 //A_Giveinventory("StrafeBarrageCST")
+"####" A 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" A 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
+"####" C 0 A_REfire
+goto Ready.Subwep
+
+Fire.Finish:
+STFB A 0
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
+"####" A 0 A_GiveInventory("StrafeBarrageCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+Altfire: //Tactical Roll is built into this ability
+"####" A 0 A_JumpIfInventory("TacticalRollCooldownItem",1,"NoAmmo")
+"####" A 0 A_JumpIfNoAmmo("Fire.Finish")
+CKIC C 0 A_PlaySoundEx("weapon/BreakDash","Weapon")
+"####" C 0 A_GiveInventory("TacticalRollEvasion_On")
+"####" C 0 SetPlayerProperty(0,1,0)
+"####" BBAAAAAAAAAAAA 1 A_ChangeVelocity(35,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
+"####" A 0 SetPlayerProperty(0,0,0)
+"####" BC 2
+"####" C 0 A_GiveInventory("TacticalRollCooldown")
+"####" A 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" C 0 A_Jump(256,"Ready.Subwep")
+goto Ready.Subwep
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready.Subwep")
+Goto Ready.Subwep
+
+End:
+"####" B 0 A_PlaySoundEx("misc/fakereloadshort","Weapon")
+"####" B 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" B 0 
+Goto End
+}
+}
+
+//====
+
+actor UseAbility2_Axl : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("StrafeBarrageAbility",1)
+fail
+}
+}
+
+actor StrafeBarrageAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("StrafeBarrageCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+
+actor StrafeBarrage_Ammo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 80
+}
+
+actor StrafeBarrageCST : PowerupGiver
+{
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 3
+powerup.type "ConShotTimer"
+}
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor StrafeBarrageShot : fastProjectileBase
+{
+Obituary "$OB_STRAFEBARRAGE"
+DamageType "StrafeBarrage"
+Speed 128
+Damage (16)
+radius 3
+
+MissileHeight 16
+height 3
+scale 1.0
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+
+reactiontime 20
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrail",0,0,0,momx,momy,momz,0,9)
+Spawn3:
+TNT1 A 0 A_CountDown
+TNT1 A 1 
+Goto Spawn2
+Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1 A_Spawnitemex("BlasterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+actor StrafeBarrageTrail : BasicExplosion
+{
+Obituary "$OB_STRAFEBARRAGE"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX1",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.1,-momy*0.1,-momz*0.1,0,9)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.3,-momy*0.3,-momz*0.3,0,9)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.5,-momy*0.5,-momz*0.5,0,9)
+TNT1 A 0 A_SpawnItemEx("StrafeBarrageTrailX",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+
+TNT1 A 1 
+stop
+}
+}
+
+actor StrafeBarrageTrailX : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+AXLB A 1
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor StrafeBarrageTrailX1 : FXActor_A
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+AXLB A 1
+stop
+}
+}
+
+
+
+actor StrafeBarrageTimerWatcher : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("StrafeBarrageTimerItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("StrafeBarrageTimerItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_GiveToTarget("AbilityTimeout")
+TNT1 A 0
+stop
+}
+}
+
+actor StrafeBarrageTimer : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("StrafeBarrageTimerItem",175)
+TNT1 A 0 A_Spawnitemex("StrafeBarrageTimerWatcher")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor StrafeBarrageTimerItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 175
+}
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor StrafeBarrageCooler : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("StrafeBarrageCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("StrafeBarrageCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor StrafeBarrageCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("StrafeBarrageCooldownItem",280)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("StrafeBarrageCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor StrafeBarrageCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 280
+}

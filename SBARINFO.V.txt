@@ -15,7 +15,7 @@ InInventory not NoHealthBar, 1
 	DrawImage weaponicon, 37,135; //58, 132;
 	DrawSelectedInventory INDEXFONT ,18, 161, 31, 161, white;
 	DrawBar "NHLTHB", "NBARE", Health, Horizontal, 8,152;//39, 114;
-	DrawBar "NARMR", "NNOBAR", Basicarmor, Horizontal, 8,152;//39, 114;
+	DrawBar "NARMR", "NNOBAR", OverhealValue, Horizontal, 8,152;//39, 114;
 	
 	DrawNumber 3, CONFONT, UNTRANSLATED, Health,fillzeros, alignment(Left), 3,135;//10, 116; //72
 
@@ -89,7 +89,6 @@ InInventory PlayerIconFlag,26 {InInventory not PlayerIconFlag,27 {DrawImage "SE0
 //[+]======================================[+]
 //--------------|ClassHuds huds|---------------
 //[+]======================================[+]
-
 InInventory IsMegaman, 1
 	{
 	DrawImage "CHARSI", 2, 166;
@@ -151,9 +150,11 @@ InInventory IsAxl, 1
 	DrawBar "ALTEMP", "ALTHBAR1", TacticalRollCooldownItem, vertical,reverse, 5, 163;
 	ininventory TacticalRollCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", TacticalRollCooldownItem, vertical,reverse, 5, 163;}
 
-	DrawImage "BOMBSI", 22, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", BlastLauncherCooldownItem, vertical,reverse, 25, 163;
-	ininventory BlastLauncherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlastLauncherCooldownItem, vertical,reverse, 25, 163;}
+	DrawImage "REPII", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", StrafeBarrageCooldownItem, vertical,reverse, 25, 163;
+	ininventory StrafeBarrageCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", StrafeBarrageCooldownItem, vertical,reverse, 25, 163;}
+
+	ininventory Ability2_Axl ,1 {DrawBar "SRESO2", "NORESO2", StrafeBarrageTimerItem, Horizontal, 42, 161;}
 	}
 
 InInventory IsZero, 1
@@ -176,6 +177,73 @@ InInventory IsMarino, 1
 	DrawImage "YAMASI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;
 	ininventory ScatteredFlowerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ScatteredFlowerCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+
+InInventory IsCinnamon, 1
+	{
+	DrawImage "NEEDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SyringeTossCooldownItem, vertical,reverse, 5, 163;
+	ininventory SyringeTossCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SyringeTossCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "HFLAI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AngelAuraCooldownItem, vertical,reverse, 25, 163;
+	ininventory AngelAuraCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AngelAuraCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+InInventory IsFireman, 1
+	{
+	DrawImage "FLMBSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FireBallCooldownItem, vertical,reverse, 5, 163;
+	ininventory FireBallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireBallCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "FIRESI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FireStormCooldownItem, vertical,reverse, 25, 163;
+	ininventory FireStormCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireStormCooldownItem, vertical,reverse, 25, 163;}
+
+	//DrawImage "RESO02", 26, 161;
+	DrawBar "FIRMBR", "NORESO", FiremanHeat, Horizontal, 42, 161;
+	}
+
+InInventory IsSuperMegaman, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RocketPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory RocketPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RocketPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ADAPSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SuperBoosterCooldownItem, vertical,reverse, 25, 163;
+	ininventory SuperBoosterCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SuperBoosterCooldownItem, vertical,reverse, 25, 163;}
+
+	DrawBar "SRESO1", "NORESO2", BP_Fuel, Horizontal, 42, 161;
+	ininventory BP_Fuel ,35 {DrawBar "SRESO2", "NORESO2", BP_Fuel, Horizontal, 42, 161;}
+	}
+
+InInventory IsAuto, 1
+	{
+	DrawImage "HGENI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;
+	ininventory HealthGeneratorCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "TRETI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AutoSentryCooldownItem, vertical,reverse, 25, 163;
+	ininventory AutoSentryCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AutoSentryCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+
+
+InInventory IsHarpNote, 1
+	{
+	DrawImage "SCHSWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", GuitarMachineGunCooldownItem, vertical,reverse, 5, 163;
+	ininventory GuitarMachineGunCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GuitarMachineGunCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "PLSNGI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", PulseSongCooldownItem, vertical,reverse, 25, 163;
+	ininventory PulseSongCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", PulseSongCooldownItem, vertical,reverse, 25, 163;}
+
+	ininventory Ability1_HarpNote ,1 {DrawBar "SRESO2", "NORESO2", GuitarMachineGunTimerItem, Horizontal, 42, 161;}
 	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------

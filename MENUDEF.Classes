@@ -1,9 +1,9 @@
 
 OptionString ClassNames
 {
-"MegamanSTD", "Megaman" 
+"Megaman", "Megaman" 
 "SuperMegaman", "Super Megaman" 
-"AutoSTD", "Auto" 
+//"AutoSTD" , "Auto" 
 "MegamanX", "Megaman X" 
 "Zero", "Zero" 
 "Axl", "Axl" 
@@ -13,47 +13,49 @@ OptionString ClassNames
 "Alia", "Alia" 
 "MegamanEXE", "MegamanEXE" 
 "FireMan", "FireMan" 
+"HarpNote", "HarpNote" 
 }
 
 OptionString ClassProperties
 {
-"MegamanSTD", "BusterMastery \nSpeedrunner \nLightweight" //Megaman
-"SuperMegaman", "BusterMastery \nSpeedrunner \nLightweight" //SuperMegaman
-"AutoSTD", "LauncherMastery \nHeavyWeight \nTeam Medic" //Auto
-"MegamanX", "BusterMastery \n---- \n----" //MegamanX
+"Megaman", "BusterMastery \nSpeedrunner \nLightweight" //Megaman
+"SuperMegaman", "HeavyWeight \nHefty \nAcrobat" //SuperMegaman
+//"AutoSTD" , "LauncherMastery \nHeavyWeight \nTeam Medic" //Auto
+"MegamanX", "BusterMastery \nSubTank \nDetermined" //MegamanX
 "Zero", "BusterMastery \nMeleeMastery \nBlade Parry" //Zero
-"Axl", "MachineGunMastery \nLauncherMastery \nSprayerMastery" //Axl
-"Massimo", "LauncherMastery \nHefty \nHeavyWeight" //Massimo
+"Axl", "MachineGunMastery \nSprayerMastery \nAcrobat" //Axl
+"Massimo", "LauncherMastery \nHefty \nDetermined" //Massimo
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
-
+"HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
 }
 
 OptionString Class_HP
 {
-"MegamanSTD", "100" 
+"Megaman", "100" 
 "SuperMegaman", "100" 
-"AutoSTD", "100" 
-"MegamanX", "100" 
+//"AutoSTD" , "100" 
+"MegamanX", "125" 
 "Zero", "100" 
 "Axl", "100" 
 "Massimo", "200" 
 "Marino", "100" 
-"Cinnamon", "125" 
-"Alia", "100" 
+"Cinnamon", "150" 
+"Alia", "125" 
 "MegamanEXE", "100" 
-"Fireman", "100" 
+"Fireman", "125" 
+"HarpNote", "100" 
 }
 
 
 OptionString Class_Altfire
 {
-"MegamanSTD", "Combat Slide" 
+"Megaman", "Combat Slide" 
 "SuperMegaman", "Rocket Buster" 
-"AutoSTD", "Health Generator" 
+//"AutoSTD" , "Health Generator" 
 "MegamanX", "CombatDash" 
 "Zero", "Ryuenjin" 
 "Axl", "Tactical Roll" 
@@ -63,15 +65,16 @@ OptionString Class_Altfire
 "Alia", "Shinging Ray StickyBomb" 
 "MegamanEXE", "GutsPunch" 
 "Fireman", "FireBall" 
+"HarpNote", "Guitar Machine gun" 
 }
 
 
 OptionString Class_AltfireInfo
 {
 //-1,       "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
-"MegamanSTD", "Perform a Quick Slide while \non the ground" 
+"Megaman", "Perform a Quick Slide while \non the ground" 
 "SuperMegaman", "Launch a rocket popelled \nhoming fist, once launched \nyou'll have to wait for it \nto return." 
-"AutoSTD"   , "Toss down a platform that \nspawns health pickup overtime." 
+//"AutoSTD"    , "Toss down a platform that \nspawns health pickup overtime." 
 "MegamanX"  , "Dash through the air" 
 "Zero"      , "Execute a flaming uppercut \nwith your Z-saber, deals \nfire damage" 
 "Axl"       , "Perform a short dodge roll \nthat allows you to escape \ndamage." 
@@ -80,39 +83,42 @@ OptionString Class_AltfireInfo
 "Cinnamon"  , "Throw a syringe that injects \na deadly poison into enemies, \nthis deals critical damage \non already poisoned foes." 
 "Alia"      , "Toss a sticky bomb that \nunleashes shining explosions \nin a radial spread" 
 "MegamanEXE", "Execute a high impact \npunch that deals Break damage" 
-"Fireman", "Execute a high impact \npunch that deals Break damage" 
+"Fireman"   , "Lob a fireball that \nexplodes on impact, generating \nmeter on hit." 
+"HarpNote"  , "Launch Binding guitar \nstrings to inflict Stop on \neveryone in their path, afterwards \nyou can launch a barrage \nof piercing music notes at them." 
 }
 
 
 OptionString Class_Ability
 {
-"MegamanSTD", "Rush Call" 
+"Megaman", "Rush Call" 
 "SuperMegaman", "Super Booster" 
-"AutoSTD", "AutoSentry" 
+//"AutoSTD" , "AutoSentry" 
 "MegamanX", "ChargeShot" 
 "Zero", "Rekkoha" 
-"Axl", "Blast Launcher" 
+"Axl", "Strafe Barrage" 
 "Massimo", "BerzerkDrive" 
 "Marino", "ScatteredFlower" 
 "Cinnamon", "Angel Aura" 
 "Alia", "Melt Creeper" 
 "MegamanEXE", "RockCube" 
 "Fireman", "FireStorm" 
+"HarpNote", "Pulse Song" 
 }
 
 OptionString Class_AbilityInfo
 {
 //-1,           "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
-"MegamanSTD"    , "Call rush to a designated \narea, can offer a boost to \nthe you or a teammate." 
+"Megaman"    , "Call rush to a designated \narea, can offer a boost to \nthe you or a teammate." 
 "SuperMegaman"  , "Activate boosters to take \nflight, use again to turn \nthem off." 
-"AutoSTD"       , "Deploy a sentry gun that \nfires screws at enemies in \nit's line of sight." 
+//"AutoSTD"        , "Deploy a sentry gun that \nfires screws at enemies in \nit's line of sight." 
 "MegamanX"      , "Pull out your puster to \nexecute a charge shot. deals \narea damage and can be used \nfor blast jumping" 
 "Zero"          , "Strike the ground to \ncause a wave of energy beams to \nrain down in a cone before \nyou." 
-"Axl"           , "Toss an explosive on \na fuse that deals high damage." 
+"Axl"           , "Pull out a pair of dual \npistols with high firerate and \nmovement, damage delt \nexpedites the cooldown on \ntactical roll." 
 "Massimo"       , "Unleash a high powered \nwave motion beam that deals \nmore damage the less health \nyou have." 
 "Marino"        , "Toss a volley of daggers \nthat will stun the opponent \upon impact." 
 "Cinnamon"      , "Cast a healing aura at a \nteammate or yourself, gradually \nhealing the target and \nsurrounding teammates." 
 "Alia"          , "launch a projectile that \tcreates a long wall of fire, \tyou can control the shape \tthrough your aim." 
 "MegamanEXE"    , "Place down a solid rock cube \nthat blocks shots" 
-"Fireman"    , "Place down a solid rock cube \nthat blocks shots" 
+"Fireman"       , "Launch a powerful fire \nblast of varying intensity depending \non the amount of meter \nyou have, at high ammounts \nit leaves a trail of fire in \nit's wake." 
+"HarpNote"      , "Emit a strange sound that \nweakens nearby foes, temporarily \nreducing the damage \nthey deal by 75%. " 
 }

@@ -196,6 +196,7 @@ actor RS_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
+Obituary "$OB_REPLISLASHER"
 damage (35)
 height 5
 radius 5
@@ -228,6 +229,7 @@ actor RS_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "ReplislasherTip"
+Obituary "$OB_REPLISLASHER"
 damage (75)
 height 5
 radius 5
@@ -253,6 +255,7 @@ actor RS_BladeWavePart
 PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
+Obituary "$OB_REPLISLASHER"
 damage (15 + CallACS("DamageRate",20,180,36) )
 height 5
 radius 5

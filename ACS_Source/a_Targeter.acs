@@ -192,17 +192,6 @@ function int WrapAround(int i)
 }
 
 
-function int getSelfTeam(void)
-{
-if (GetCVar("teamplay")==1||GetCVar("teamlms")==1||GetCVar("teampossession")==1
-||GetCVar("teamgame")==1){
-	Return PlayerTeam();
-} else if (GetCVar("cooperative")==1) {
-	Return TEAM_COOP;
-}
-Return TEAM_NONE;
-}
-
 function void adjustActorInventory(int actor, str item, int quantity) {
 	int diff = quantity-CheckActorInventory(actor,item);
 	if(diff>0) {

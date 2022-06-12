@@ -3,7 +3,7 @@ actor NeumodianWepBase2 : NeumodianWepBase1
 {
     States
     {
-  
+ 
     Reload:
     "####" "#" 1 A_WeaponReady(WRF_PRERELOADING)
     //"####" "#" 1 A_Refire("Reload")

@@ -41,7 +41,7 @@ TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
 Loop
 Select:
 TNT1 B 0 ACS_NamedExecuteAlways("MSTD_MedivisionScript",0,1)
-TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Rifle_MSPD*FVM)
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,LightWep_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 "####" A 1 A_Raise
 Loop
@@ -101,6 +101,7 @@ actor BoltDriverWep2 : BoltDriverWep
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
+
 actor BoltDriver_Ammo : Ammo
 {
 inventory.amount 1
@@ -116,6 +117,8 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
+Const int BoltDriver_MinHeal = 10;
+Const int BoltDriver_MaxHeal = 18;
 
 actor BoltDriverShot : fastProjectileBase
 {
@@ -151,12 +154,12 @@ Goto Spawn2
     stop
 
     TeamHeal:
-    TNT1 A 1 A_Spawnitemex("ScrewShotHealer",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
+    TNT1 A 1 A_Spawnitemex("BoltDriverHealer",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION|SXF_TRANSFERPOINTERS)
     stop
 }
 }
 
-actor ScrewShotHealer : ProjectileBase
+actor BoltDriverHealer : ProjectileBase
 {
 +DONTBLAST
 +SKYEXPLODE
@@ -179,10 +182,10 @@ Goto Death
 
 Heal:
 TNT1 A 0 A_JumpifInventory("PoisonMark",1,"HealBlock",AAPTR_TRACER)
-TNT1 A 0 A_SetArg(0,CallACS("HealRamp",5,15,AAPTR_TRACER))
+TNT1 A 0 A_SetArg(0,CallACS("HealRamp",BoltDriver_MinHeal,BoltDriver_MaxHeal,AAPTR_TRACER))
 //TNT1 A 0 A_SetArg(1,CallACS("DamageRate",20,50,10))
-TNT1 A 0 ACS_NamedExecuteAlways("MSTD_HealPointer",0,AAPTR_TRACER,args[0]-args[1])
-TNT1 A 0 A_GiveInventory("ScrewShotHealFeedback",1,AAPTR_TRACER)
+TNT1 A 0 ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,AAPTR_TRACER,args[0]-args[1],25)
+TNT1 A 0 A_GiveInventory("BoltDriverHealFeedback",1,AAPTR_TRACER)
 TNT1 A 5
 Goto Death
 HealBlock:
@@ -265,7 +268,7 @@ stop
 }
 }
 
-actor ScrewShotHealFeedback : CustomInventory
+actor BoltDriverHealFeedback : CustomInventory
 {
 inventory.amount 1
 Inventory.MaxAmount 100

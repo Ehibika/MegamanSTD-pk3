@@ -139,6 +139,7 @@ actor SS_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "StandardSaberEdge"
+Obituary "$OB_STANDARDSABER"
 damage (35)
 height 5
 radius 5
@@ -171,6 +172,7 @@ actor SS_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "StandardSaberTip"
+Obituary "$OB_STANDARDSABER"
 damage (75)
 height 5
 radius 5

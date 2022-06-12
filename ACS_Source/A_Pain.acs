@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 22
+#LIBDEFINE PAINCOUNT 28
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -20,6 +20,8 @@
 #LIBDEFINE ELM_BREAK	64.0
 #LIBDEFINE ELM_EUCLID 128.0
 #LIBDEFINE ELM_BLADE 256.0 //just in case
+#LIBDEFINE ELM_EXPLOSION 512.0
+#LIBDEFINE ELM_DONTSTOP 1024.0
 
 str PainRecord[PAINCOUNT][2] = {
 /*
@@ -33,7 +35,7 @@ str PainRecord[PAINCOUNT][2] = {
 /*2*/{"BurningSpray",ELM_FIRE},
 /*3*/{"SnowySpray",ELM_ICE},
 /*4*/{"CrushingSpray",ELM_BREAK},
-/*5*/{"DrillHead",ELM_BREAK},
+/*5*/{"DrillHead",ELM_BREAK|ELM_EXPLOSION},
 /*6*/{"WindPressureBuster",ELM_WIND},
 /*7*/{"RyuenjinEdge",ELM_FIRE|ELM_BLADE},
 /*8*/{"RyuenjinTip",ELM_FIRE|ELM_BLADE},
@@ -45,12 +47,17 @@ str PainRecord[PAINCOUNT][2] = {
 /*14*/{"FireStormBoss",ELM_FIRE},
 /*15*/{"FireStormTrail",ELM_FIRE},
 /*16*/{"MeltCreeper",ELM_FIRE},
-/*17*/{"FireDOT",ELM_FIRE},
-/*18*/{"PoisonDOT",ELM_TOXIC},
+/*17*/{"FireDOT",ELM_FIRE|ELM_DONTSTOP},
+/*18*/{"PoisonDOT",ELM_TOXIC|ELM_DONTSTOP},
 /*19*/{"SyringeToss",ELM_TOXIC},
 /*20*/{"ReplislasherEdge",ELM_WIND},
 /*21*/{"ReplislasherTip",ELM_WIND},
-
+/*22*/{"MegaCannon",ELM_EXPLOSION},
+/*23*/{"EnergyCannon",ELM_EXPLOSION},
+/*24*/{"LightWaveCannon",ELM_EXPLOSION},
+/*25*/{"GuitarMachineGun",ELM_DONTSTOP},
+/*26*/{"GuitarMachineGun2",ELM_DONTSTOP},
+/*27*/{"PulseSong",ELM_DONTSTOP},
 };
 
 
@@ -69,6 +76,37 @@ if(CheckInventory("FrostbiteMark"))
 	}
     if(PainFlag & ELM_ICE){Return 1;}
     }
+return 0;
+}
+
+Function Bool CheckForSelfBlastGuard(int PainType)
+{
+    Int PainFlag;
+    For(int j = 0; j < PAINCOUNT; j++)
+	{
+	If(PainRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        PainFlag = PainRecord[j][1];      
+		}
+	}
+    if(PainFlag & ELM_EXPLOSION){Return 1;}
+return 0;
+}
+
+Function Bool CheckForDontStop(int PainType)
+{
+//Damage types that won't break the stop status
+    Int PainFlag;
+    For(int j = 0; j < PAINCOUNT; j++)
+	{
+	If(PainRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        PainFlag = PainRecord[j][1];      
+		}
+	}
+    if(PainFlag & ELM_DONTSTOP || PainFlag & ELM_EUCLID){Return 1;}
 return 0;
 }
 
@@ -133,3 +171,33 @@ return 0;
 }
 
 
+#LIBDEFINE IGNORECOUNT 10
+str PainIgnore[IGNORECOUNT][1] = {
+/*
+ * Painstates that the damageevent doesn't process at all
+
+*/
+//    DamageTypeName, DamageTypeElement/Flags,  
+/*0*/{"Drowning"},
+/*1*/{"Slime"},
+/*2*/{"Fire"},
+/*3*/{"Crush"},
+/*4*/{"Telefrag"},
+/*5*/{"Falling"},
+/*6*/{"Suicide"},
+/*7*/{"Exit"},
+/*8*/{"Ice"},
+/*9*/{"InstantDeath"},
+};
+
+Function Bool CheckForIgnore(int PainType)
+{
+    For(int j = 0; j < IGNORECOUNT; j++)
+	{
+	If(PainIgnore[j][0] == PainType)
+		{
+        Return 1;   
+		}
+	}
+return 0;
+}

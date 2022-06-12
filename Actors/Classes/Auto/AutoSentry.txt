@@ -3,7 +3,7 @@ actor Ability2_AutoSTD : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_AUTOSENTRY"
 Tag "AutoSentry Ability"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "TRETI"
@@ -90,10 +90,16 @@ actor AutoSentry : BasicDeployable
 //==
 speed 1
 DamageFactor "Sentryshot", 0
+
+//Break Weakness
+damagefactor "DrillHead", 10.0
+damagefactor "CrushingSpray", 10.0
+damagefactor "SuperAdaptor", 10.0
+
 scale 1.5
 height 20
 Radius 22
-Health 100
+Health 175
 gravity 999
 reactiontime 256
 PainChance 256
@@ -164,12 +170,12 @@ TRET A 0 //A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT) //res
 TRET A 0 A_FaceTracer(0,0)
 TRET A 0 A_Changevelocity(0,0,0,CVF_REPLACE) //Prevents movement
 TNT1 A 0 A_Stop
-TRET A 1 A_GiveInventory("TurretReticleSpawner",1,AAPTR_TRACER)
+TRET A 1 //A_GiveInventory("TurretReticleSpawner",1,AAPTR_TRACER)
 TRET A 0 A_SpawnItemEx("AutoSentryBullet", cos(-pitch)*15,0,20+(sin(pitch)*15), cos(pitch+1), 0, sin(pitch+1), 0, SXF_MULTIPLYSPEED|SXF_TRANSFERPOINTERS)
 TRET A 0 A_PlaySoundEx("weapon/BasherShot","Body")
 
 Afterfire:
-TRET AAA 1 A_GiveInventory("TurretReticleSpawner",1,AAPTR_TRACER)//A_Changevelocity(0,0,0,CVF_REPLACE) //Prevents movement
+TRET AAA 1 //A_GiveInventory("TurretReticleSpawner",1,AAPTR_TRACER)//A_Changevelocity(0,0,0,CVF_REPLACE) //Prevents movement
 TRET A 0 A_Jumpifinventory("CutterFlag",999,2,AAPTR_TRACER) //
 TRET A 0 A_JumpIfTargetInLOS ("Missile", 0, JLOSF_PROJECTILE,BSEN_ForgetRange  )//JLOSF_PROJECTILE
 TRET A 0 
@@ -177,12 +183,10 @@ TRET A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_NULL)
 Goto Scan
 
 Deploy.Pain:
-TRET A 1 A_Stop//
-TRET A 0 A_SpawnItemEx("PainFX",-5,0,3,0,0,0)
-TRET A 0 A_PlaySoundEx("misc/mm4pain", "Voice")
-TRET A 0 A_JumpIfTargetInLOS ("Missile", 0, JLOSF_PROJECTILE,BSEN_DetectRange  )
-TRET A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT) //reset target to master
-TRET A 0 A_jumpifinventory("WeaponCharge",BSEN_Warm+1,"Scan")
+TRET A 3 A_Stop//
+TRET A 1 A_JumpIfTargetInLOS ("Missile", 0, JLOSF_PROJECTILE,BSEN_DetectRange  )
+TRET A 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT) //reset target to master
+TRET A 1 A_jumpifinventory("WeaponCharge",BSEN_Warm+1,"Scan")
 Goto Warmup
 
 Deploy.Death:

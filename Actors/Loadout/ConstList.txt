@@ -3,6 +3,9 @@ const int Aim_OverHead = 35;
 const int Aim_ArcOverHead = 15;
 const int Aim_ArcScale = 20;
 
+const int BlastThrust = 64;
+const int BlastThrustRad = 250;
+
 Const int FVM = 65536; //Fixed Value Multiple
 Const float FVMF = 65536.0;
 
@@ -15,13 +18,13 @@ Const int WRF_CYCLERELOADING = WRF_ALLOWZOOM|WRF_NOBOB;
 Const int WRF_FIRING = WRF_NOSWITCH|WRF_NOPRIMARY|WRF_ALLOWZOOM;
 //====|MoveSpeedModifiers|====
 const float Buster_MSPD = 0.8;
-const float Sprayer_MSPD = 0.9;
+const float Sprayer_MSPD = 0.8;
 const float Rifle_MSPD = 0.8;
 const float Melee_MSPD = 1.0;
 const float Launcher_MSPD = 0.6;
 
 const float LightWep_MSPD = 0.9;
-const float HeavyWep_MSPD = 0.6;
+const float HeavyWep_MSPD = 0.5;
 
 const float HRifle_MSPD = 0.7;
 //====|Range Constants|====

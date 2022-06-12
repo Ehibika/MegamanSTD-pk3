@@ -139,6 +139,7 @@ actor BR_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "BeamRapierEdge"
+Obituary "$OB_BEAMRAPIER"
 damage (35)
 height 5
 radius 5
@@ -171,6 +172,7 @@ actor BR_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "BeamRapierTip"
+Obituary "$OB_BEAMRAPIER"
 damage (75)
 height 5
 radius 5

@@ -5,7 +5,7 @@ actor HealStall_A : powerup {Inventory.amount 1 powerup.duration -7}
 actor HealStall_B : powerup {Inventory.amount 1 powerup.duration -2}
 
 
-actor HealRampPower : powerup {Inventory.amount 1 powerup.duration 350}
+actor HealRampPower : powerup {Inventory.amount 1 powerup.duration 525}
 
 actor HealStaller : CustomInventory
 {

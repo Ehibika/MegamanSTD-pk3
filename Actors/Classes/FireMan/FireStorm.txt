@@ -3,7 +3,7 @@ actor Ability2_Fireman : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_FIRESTORMTRAIL"
 Tag "whatanicetag"
 weapon.ammotype2 "BusterAmmo"
 inventory.icon "FIRESI"
@@ -12,9 +12,18 @@ States
 {
 
 Ready:
+FIRB A 0
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+Ready1:
 FIRB A 0 A_JumpIfInventory("FiremanHeat",100,"Ready2")
 "####" A 1 A_WeaponReady
-goto Ready
+goto Ready1
 
 Ready2:
 FIRB A 0 A_SpawnItemEx("FiremanHeated", random(8, 64), 0, random(0, 64), 0, 0, 0, random(0, 359))
@@ -35,6 +44,14 @@ FIRB A 0 A_PlaySoundEx("weapon/firestorm","Weapon")
 "####" A 0 A_TakeInventory("FiremanHeat",25)
 "####" A 1 A_FireCustomMissile("MidFireStorm",0,1,8,0)
 "####" BCD 3
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("FireStormCooldown")
 "####" A 0 A_Jump(256,"End")
 goto End
@@ -44,6 +61,14 @@ FIRB A 0 A_PlaySoundEx("weapon/flamesword","Weapon")
 "####" A 0 A_TakeInventory("FiremanHeat",50)
 "####" A 1 A_FireCustomMissile("StrongFireStorm",0,1,8,0)
 "####" BCD 3
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("FireStormCooldown")
 "####" A 0 A_Jump(256,"End")
 Goto End
@@ -53,6 +78,14 @@ FIRB A 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
 "####" A 0 A_TakeInventory("FiremanHeat",75)
 "####" A 1 A_FireCustomMissile("RealFireStorm",0,1,8,0)
 "####" BCD 3
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("FireStormCooldown")
 "####" A 0 A_Jump(256,"End")
 Goto End
@@ -61,6 +94,14 @@ FIRB A 0 A_PlaySoundEx("weapon/pharaoh2","Weapon")
 "####" A 0 A_TakeInventory("FiremanHeat",100)
 "####" A 1 A_FireCustomMissile("SuperFireStorm",0,1,8,0)
 "####" BCD 3
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("FireStormCooldown")
 "####" A 0 A_Jump(256,"End")
 Goto End
@@ -306,7 +347,7 @@ stop
 
 actor FollowUpFire2_Trail : BasicExplosion
 {
-Obituary "$OB_MILITARYBUSTER"
+Obituary "$OB_FIRESTORMTRAIL"
 damagetype "MegaBuster"
 States
 {
@@ -372,7 +413,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("FireStormCooldownItem",250)
+TNT1 A 0 A_Giveinventory("FireStormCooldownItem",87)
 TNT1 A 0 A_Spawnitemex("FireStormCooler")
 stop
 Nope:
@@ -385,5 +426,5 @@ stop
 actor FireStormCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 250
+inventory.maxamount 87
 }

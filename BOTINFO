@@ -1,0 +1,240 @@
+clearbots
+
+{
+	name = "\cnMegaman"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "STDMegaman"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnSuper Megaman"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "SuperMegaman"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnFireMan"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "FireMan"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnMegaman X"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "MegamanX"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnZero"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Zero"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnAxl"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Axl"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnMassimo"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Massimo"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnMarino"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Marino"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnCinnamon"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Cinnamon"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnAlia"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Alia"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnMegaman.EXE"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "MegamanEXE"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+
+{
+	name = "\cnHarpNote"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "HarpNote"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}

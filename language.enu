@@ -32,6 +32,7 @@ OB_MEDIBUSTER = "%k Eliminated %o with the MediBuster";
 OB_SCREWSHOOTER = "%k Eliminated %o with the ScrewShooter";
 OB_BOLTDRIVER = "%k Eliminated %o with the BoltDriver";
 OB_REPAIRSPRAYER = "%k Eliminated %o with the RepairSprayer";
+OB_REPLISLASHER = "%k Eliminated %o with the Replislasher";
 
 // -=- Ability obituaries -=-
 OB_BLASTLAUNCHER = "%k Blew %o up with a Blast launcher bomb";
@@ -52,6 +53,20 @@ OB_WHIRLWIND = "%o was Severed by %k's Whirlwind";
 OB_BERZERKCHARGE = "%o was Eradicated by %k's Berzerk Charge";
 
 OB_FIRESTORMTRAIL = "%o Melted under %k's Melt Creeper";
+
+OB_STRAFEBARRAGE = "%k Wiped %o Out with Strafe Barrage!";
+
+OB_GUITARMACHINEGUN = "%k Was Bound by %o's Guitar Machine Gun!";
+
+OB_AUTOSENTRY = "%k Was gunned down by %o's auto Sentry!";
+
+OB_SYRINGETOSS = "%k Got a Deadly Dose from %o's Syringe Toss!";
+
+OB_FIREBALL = "%k Got Scorched %o's Fireball!";
+OB_FIRESTORMTRAIL = "%k got Incinerated by %o's FireStorm!";
+
+OB_XCHARGESHOT = "%k was Blasted by %o's Charge Shot!";
+
 //#region old
 //DOT Obituaries
 OB_Burner = "%k Eliminated %o";

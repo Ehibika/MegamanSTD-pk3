@@ -254,6 +254,10 @@ OptionValue PropertyList
 20, "Undershirt"
 21, "Elemental Guard"
 22, "Team Medic"
+23, "SubTank"
+
+24, "Gutsy"
+25, "Determined"
 }
 
 OptionValue Propertyinfo
@@ -286,7 +290,10 @@ OptionValue Propertyinfo
 20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
 21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
 22, "When equipped with a repair weapon, \nyou will passively regenerate HP."
+23, "Can overheal off of health \npickups on the map."
 
+24, "Damage increases while under \na negative effect"
+25, "weapon damage increases when \nHP is low."
 }
 
 

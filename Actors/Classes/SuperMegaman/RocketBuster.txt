@@ -3,7 +3,7 @@ actor Ability1_SuperMegaman : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_SUPERADAPTOR"
 Tag "Dash Ability"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "BUSTI"
@@ -146,7 +146,7 @@ actor AdaptorFist2
 
 actor FistTrailFX : BasicExplosion
 {
-Obituary "$OB_MILITARYBUSTER"
+Obituary "$OB_SUPERADAPTOR"
 damagetype "MegaBuster"
 States
 {

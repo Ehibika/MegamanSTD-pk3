@@ -68,7 +68,7 @@
 
 #include "Actors/Classes/Axl/AxlClass.txt"
 #include "Actors/Classes/Axl/TacticalRoll.txt"
-#include "Actors/Classes/Axl/BlastLauncher.txt"
+#include "Actors/Classes/Axl/StrafeBarrage.txt"
 
 
 #include "Actors/Classes/Fireman/FiremanClass.txt"
@@ -84,6 +84,10 @@
 #include "Actors/Classes/Auto/AutoClass.txt"
 #include "Actors/Classes/Auto/HealthGenerator.txt"
 #include "Actors/Classes/Auto/AutoSentry.txt"
+
+#include "Actors/Classes/HarpNote/HarpNoteClass.txt"
+#include "Actors/Classes/HarpNote/GuitarMachineGun.txt"
+#include "Actors/Classes/HarpNote/PulseSong.txt"
 
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"

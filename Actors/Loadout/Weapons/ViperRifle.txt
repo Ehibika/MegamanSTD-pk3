@@ -75,7 +75,7 @@ inventory.maxamount 50
 actor ViperRifleCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 4
+Powerup.Duration 3
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]

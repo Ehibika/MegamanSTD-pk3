@@ -101,7 +101,7 @@ powerup.type "ConShotTimer"
 actor WindPressureBusterRound : fastProjectileBase
 {
 Obituary "$OB_WINDPRESSUREBUSTER"
-DamageType "SingleShot2"
+DamageType "WindPressureBuster"
 Speed 128
 Damage (22)
 radius 8

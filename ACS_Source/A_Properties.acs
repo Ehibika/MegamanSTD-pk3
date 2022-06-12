@@ -219,7 +219,7 @@ int HPMax = GetActorProperty(0,APROP_SPAWNHEALTH);
 while(GetActorProperty(0,APROP_HEALTH) > 0)
     {
     //log(i:GetActorPowerupTics(0,"HealRampPower"));
-    if(GetActorPowerupTics(0,"HealRampPower")<315 && GetActorProperty(0,APROP_HEALTH) < GetActorProperty(0,APROP_SPAWNHEALTH))
+    if(GetActorPowerupTics(0,"HealRampPower")<490 && GetActorProperty(0,APROP_HEALTH) < GetActorProperty(0,APROP_SPAWNHEALTH))
         {
         if(CheckInventory("PoisonMark")){GiveInventory("DetoxLevel",5);GiveInventory("DetoxEfectSpawn",1);}
         else{HealThing(1,HPMax);}
@@ -354,4 +354,48 @@ For(int i = 0; i < PAINCOUNT; i++)
 		}
 	}
 Return 0;
+}
+
+Function bool CheckForGutsy (void)
+{
+if(!CheckProp(MasterProPList[24][PROP_NAME])){Return 0;}
+/*
+Check if you are under a major status, if so, then return positive.
+*/
+if(CheckInventory("PoisonMark")
+||CheckInventory("BurnMark")
+||CheckInventory("FrostbiteMark")){Return 1;}
+Return 0;
+}
+
+Function bool CheckForDetermined (str PainType)
+{
+if(!CheckProp(MasterProPList[25][PROP_NAME])){Return 0;}
+/*
+Check if you are below full health, Determined kicks in at that point
+
+also confirm if we are doing weapon damage.
+*/
+if(!CheckForWeaponDamage(PainType)){Return 0;}
+
+
+int HPPer = GetHealthPercent(-1,0,0);
+if(HPPer<100){Return 1;}
+Return 0;
+}
+
+Function Bool CheckForWeaponDamage(str PainType)
+{
+//Confirm if the painstate can only come from a weapon.
+
+//start with checking if it matches the currently wielded weapon
+int ThisWeapon = STD_WhichWeapon();
+If(MasterWepList[ThisWeapon][4] == PainType || MasterWepList[ThisWeapon][5] == PainType){Return 1;}
+
+//No? the check all weapons
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+    If(MasterWepList[i][4] == PainType || MasterWepList[i][5] == PainType){Return 1;}
+	}
+return 0;
 }

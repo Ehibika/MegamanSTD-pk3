@@ -26,4 +26,7 @@ actor Pro_UnderShirt : Once {}
 
 actor Pro_ElementalGuard : Once {}
 actor Pro_TeamMedic : Once {}
+actor Pro_SubTank : Once {}
+actor Pro_Gutsy : Once {}
+actor Pro_Determined : Once {}
 

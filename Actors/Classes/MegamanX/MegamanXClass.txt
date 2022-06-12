@@ -2,8 +2,8 @@ Actor MegamanX : ClassBase
 {
 Player.DisplayName "megamanX"
 Player.SoundClass "megaman"
-Health 100
-Player.MaxHealth 100
+Health 125
+Player.MaxHealth 125
 Player.JumpZ 10
 
 Player.Startitem "IsMegamanX"
@@ -11,8 +11,8 @@ Player.Startitem "UseAbility1_MegamanX"
 Player.Startitem "UseAbility2_MegamanX"
 
 Player.Startitem "PRO_BusterMastery"
-Player.Startitem "PRO_SprayerMastery"
-Player.Startitem "PRO_BusterMastery"
+Player.Startitem "Pro_SubTank"
+Player.Startitem "Pro_Determined"
 
 
 +NOSKIN

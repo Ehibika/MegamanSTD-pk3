@@ -94,12 +94,12 @@ Pain.CrushingSpray:
 "----" H 0 A_GiveInventory("CrushingSprayhitDelay",1)
 "----" H 0
 Goto Pain+1
-
+/*
 Pain.DrillHead:
 "----" H 0 A_GiveInventory("DrillHeadProtect",1)
 "----" H 0
 Goto Pain+1
-
+*/
 Pain.Slash1:
 "----" H 0 A_GiveInventory("Slash1Protect", 1)
 Goto Pain+1
@@ -210,17 +210,25 @@ Pain.Rekkoha:
 Goto Pain+1
 
 
+
+
 Pain.ScatteredFlower:
 "----" H 0 //A_Giveinventory("PoisonStatusFastBuild")
-"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
-"----" H 0 A_GiveInventory("Shocked",1)
+"----" H 0 //A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_GiveInventory("StunStatusProc",1)
 "----" H 0
 Goto Pain+1
 
-Pain.FireStormBoss:
+
 Pain.FiremanBall:
+"----" H 0 A_GiveToTarget("FiremanHeat", 25)
+Pain.FireStormBoss:
 "----" H 0 A_Giveinventory("BurnStatusProc")
 Goto Pain+1
+
+Death.FiremanBall:
+"----" H 0 A_GiveToTarget("FiremanHeat", 25)
+Goto Death
 
 Pain.FireStormTrail:
 "----" H 0 A_GiveInventory("FireStormTrailhitDelay",1)
@@ -230,6 +238,7 @@ Goto Pain+1
 
 Pain.MeltCreeper:
 "----" H 0 A_GiveInventory("MeltCreeperhitDelay",1)
+"----" H 0 A_GiveInventory("MeltCreeperStun",1)
 "----" H 0 A_Giveinventory("BurnStatusFastBuild")
 "----" H 0
 Goto Pain+1
@@ -238,6 +247,30 @@ Pain.SyringeToss:
 "----" H 0 A_Giveinventory("PoisonStatusProc")
 "----" H 0
 Goto Pain+1
+
+Pain.StrafeBarrage:
+"----" H 0 A_TakeFromTarget("TacticalRollCooldownItem",5)
+"----" H 0
+Goto Pain+1
+Death.StrafeBarrage:
+"----" H 0 A_TakeFromTarget("TacticalRollCooldownItem",999)
+"----" H 0 A_GiveToTarget("StrafeBarrageTimerItem",35)
+"----" H 0 
+Goto Death
+
+Pain.GuitarMachineGun:
+"----" H 0 A_GiveInventory("GuitarMachineGunHitDelay", 1)
+"----" H 0 A_GiveInventory("StopStatusProc", 1)
+Goto Pain+1
+
+Pain.GuitarMachineGun2:
+"----" H 0 A_GiveInventory("GuitarMachineGun2_HitDelay", 1)
+Goto Pain+1
+
+Pain.PulseSong:
+"----" H 0 A_GiveInventory("PulseSongNerfInitiate", 1)
+Goto Pain+1
+
 
 /*
 Pain.Freezer2:

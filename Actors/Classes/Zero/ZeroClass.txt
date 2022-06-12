@@ -31,8 +31,8 @@ ZERO F 4
 ZERO G 4
 GoTo Spawn+2
 Melee:
-ZERO H 5
-ZERO I 4
+ZERO I 5
+ZERO J 4
 GoTo Spawn+2
 PainFix:
 ZERO H 0 

@@ -250,21 +250,27 @@ stop
 }
 }
 
-
-
-actor MeltCreeperAbility : CustomInventory
+actor MeltCreeperStun : CustomInventory
 {
-states
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
 {
-Pickup: 
-TNT1 A 0 A_JumpIfInventory("MeltCreeperCooldownItem",1,"Nope")
-TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("Pro_FireResistance",1,"Nope")
+TNT1 A 0 A_GiveInventory("StunStatusProc",1)
 stop
 Nope:
-TNT1 A 0 ACS_Execute(979,0)
+TNT1 A 0
 stop
 }
 }
+
+
 
 actor MeltCreeperCooler : WatcherBase 
 {

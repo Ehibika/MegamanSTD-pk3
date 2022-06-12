@@ -1,4 +1,4 @@
-misc/DeathSound Super5
+'misc/DeathSound Super5
 //BusterGuns
 weapon/HardBuster1 SKULSHOT
 weapon/HardBuster2 FMS
@@ -92,6 +92,14 @@ sprinkler/shot SPRSHT
 
 //Psionics
 PSI/Cast PSICAST
+
+// Harp Note //
+string/shot STRSHT
+machine/string MSGSTR
+guitar/note HNGTR1
+pulse/song PULSONG
+sf/appear SFAPEAR
+sf/explode SFEXPL
 
 weapon/AutoReload1 armret $limit weapon/AutoReload1 0//fakerel2
 weapon/AutoReload2 S_M9_I1 $limit weapon/AutoReload2 0

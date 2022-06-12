@@ -3,7 +3,7 @@ actor Ability1_Fireman : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_FIREBALL"
 Tag "whatanicetag"
 weapon.ammotype2 "BusterAmmo"
 inventory.icon "FLMBSI"
@@ -13,6 +13,13 @@ States
 
 Ready:
 FIRB A 0 
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
 "####" A 1
 goto Fire
 
@@ -20,6 +27,14 @@ Fire:
 FIRB A 0 A_PlaySoundEx("weapon/firestorm","Weapon")
 "####" A 0 A_FireCustomMissile("FireBallSTD",0,1,8,0)
 "####" BCD 2
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("FireBallCooldown")
 "####" A 0 A_Jump(256,"End")
 goto End
@@ -65,14 +80,11 @@ stop
 actor FireBallSTD
 {
 PROJECTILE
-+NOEXPLODEFLOOR
 Damage (25)
 scale 2.5
 -NOGRAVITY
-+HEXENBOUNCE
--BOUNCEONWALLS
+Obituary "$OB_FIREBALL"
 DamageType "FiremanBall"
-bouncefactor 1.0
 radius 18
 height 18
 Reactiontime 100
@@ -86,12 +98,13 @@ Spawn2:
 FIRE D 0 A_SpawnItemEx("FireBallFX")
 FIRE D 1 A_CountDown
 loop
-Crash:
-FIRE D 0 A_SpawnItemEx("ExplosionEffect1")
-FIRE D 0 A_GiveToTarget("FiremanHeat",25)
-stop
+//Crash:
+//FIRE D 0 A_SpawnItemEx("ExplosionEffect1")
+//FIRE D 0 A_GiveToTarget("FiremanHeat",25)
+//stop
 Death:
-FIRE D 0 A_SpawnItemEx("ExplosionEffect1")
+FIRE D 0 A_SpawnItemEx("ExplosionEffect2",0,0,0,0,0,0,1)
+TNT1 A 5 A_Explode(10,64,0,0,64)
 stop
 }
 }
@@ -149,7 +162,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("FireBallCooldownItem",35)
+TNT1 A 0 A_Giveinventory("FireBallCooldownItem",105)
 TNT1 A 0 A_Spawnitemex("FireBallCooler")
 stop
 Nope:
@@ -162,5 +175,5 @@ stop
 actor FireBallCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 35
+inventory.maxamount 105
 }

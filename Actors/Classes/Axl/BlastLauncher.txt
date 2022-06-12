@@ -3,7 +3,7 @@ actor Ability2_Axl : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_BLASTLAUNCHER"
 Tag "BlastLauncher"
 weapon.ammotype2 "AbilityAmmo"
 inventory.icon "BOMBSI"
@@ -175,7 +175,7 @@ stop
 actor BlastLauncherExplosion : BasicExplosion
 {
 damagetype "SelfDestruct"
-Obituary "$OB_SELFDESTRUCT"
+Obituary "$OB_BLASTLAUNCHER"
 States
 {
 Spawn:

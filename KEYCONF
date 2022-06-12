@@ -1,7 +1,7 @@
 clearplayerclasses
 addplayerclass STDMegaman
 addplayerclass SuperMegaman
-addplayerclass AutoSTD
+//addplayerclass AutoSTD
 addplayerclass FireMan
 
 addplayerclass MegamanX
@@ -12,6 +12,7 @@ addplayerclass Marino
 addplayerclass Cinnamon
 addplayerclass Alia
 addplayerclass MegamanEXE
+addplayerclass HarpNote
 
 
 //addplayerclass Spider

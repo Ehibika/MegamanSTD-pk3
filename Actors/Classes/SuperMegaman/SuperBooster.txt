@@ -305,7 +305,7 @@ TNT1 A 0 A_TakeFromTarget("SuperBoosterCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("SuperBoosterCooldownItem",1,"Spawn")
 Death:
 DeathTake:
-TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
 TNT1 A 0
 stop
 }

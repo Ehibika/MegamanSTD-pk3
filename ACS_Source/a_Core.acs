@@ -556,6 +556,7 @@ int MaxHPCache;
 int TargTID;
 
 if(Pointer>0){TargTID = ACS_NamedExecuteWithResult("core_getptrtid",Pointer);}
+else if (Pointer<0){TargTID =0;}
 else {TargTID = ActivatorTID();}
 
 if(GetActorProperty(TargTID,APROP_HEALTH)<=0){PlayerCurrentHealth = 1; }
@@ -598,4 +599,15 @@ int FiringPlayer= ACS_ExecuteWithResult(257, 0);
 int Output = 360 * (GetActorAngle(FiringPlayer));
 Setresultvalue(Output >> 16);
 //--
+}
+
+function int getSelfTeam(void)
+{
+if (GetCVar("teamplay")==1||GetCVar("teamlms")==1||GetCVar("teampossession")==1
+||GetCVar("teamgame")==1){
+	Return PlayerTeam();
+} else if (GetCVar("cooperative")==1) {
+	Return TEAM_COOP;
+}
+Return TEAM_NONE;
 }

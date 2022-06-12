@@ -82,6 +82,7 @@ actor MilitaryBuster_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 15
+Ammo.BackpackMaxAmount 30
 }
 
 actor MilitaryBusterCST : PowerupGiver

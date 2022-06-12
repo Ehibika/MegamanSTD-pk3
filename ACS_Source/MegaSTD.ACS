@@ -13,11 +13,15 @@
 #region -=- Hit Event -=-
 script "MSTD_HitEvents" (int type, int arg1, int arg2) EVENT
 {
+if(CheckForIgnore(arg2)){Terminate;}
+
 int Damage = arg1;
 str PainType = arg2;
 int SourceTID;
+int VictimHP = GetActorProperty(0,APROP_HEALTH);
 
-bool CritHit,Assassin,FireCrit,PoisonCrit;
+bool CritHit,Assassin,FireCrit,PoisonCrit,Guts,Determined;
+int DB_Determined,DB_Guts;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
@@ -36,6 +40,21 @@ if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 //===|FrostBite Hitstun|===
 if(CheckForFrostBiteHitstun(arg2)){GiveInventory("FrostbiteHitstun",1);}
+
+//===|Guts Boost|===
+if(CheckForGutsy()){Guts = true;}
+//===|Determined Boost|===
+
+if(CheckForDetermined(arg2))
+	{
+	Determined = true;
+	DB_Determined = MassimoDamageRamp(0,Damage*0.3>>16,-1);
+	}
+
+//Reduce harm from blast weapons on yourself
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = Damage*0.5>>16;}}
+
+
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
@@ -68,11 +87,19 @@ if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(Assassin)
 	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.5>>16;}}
 
+if(Determined){Damage += DB_Determined;}
+if(Guts){Damage = Damage*0.5>>16;}
+
+//Poison damage is no longer fatal
+if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
+
+//Stop breaks on damage for all but the following
+if(!CheckForDontStop(arg2)){TakeInventory("StopMark",9);}
+
 if(CheckInventory("LT_Armor"))
 	{
 	TakeInventory("LT_Armor",arg1);
 	GiveInventory("OverHealHealth",arg1);
-	
 	//I can change the end damage, but I'm resorting to
 	//my old Damage interception tricks just so hits still
 	//Trigger painstates.
@@ -388,7 +415,7 @@ Script "MSTD_HealthPercent" (int Pointer, int Type, int perval)
 SetResultValue(GetHealthPercent(Pointer,Type,perval));
 }
 
-Script "MSTD_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal ) //to be phased out
+Script "MSTD_Basic(Over)Heal" (int Pointer, int HealAmount, int Overheal ) 
 {
 int OverhealMax = Overheal+100;
 if(OverhealMax<=100){OverhealMax=101;}
@@ -445,7 +472,8 @@ int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
-    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
+    if(GetActorProperty(0,APROP_Health)<MaxHealth && GetActorProperty(0,APROP_Health)>0)
+	{HealThing(1,MaxHealth); PayEXP++;}
 	}
 	
 }
@@ -459,16 +487,109 @@ int MaxHealth = GetActorProperty(0,APROP_SPAWNHEALTH);
 if(MaxHealth==0){MaxHealth=100;}
 for(int g=1;g<=HealAmount;g++)
     {
-    if(GetActorProperty(0,APROP_Health)<MaxHealth){HealThing(1,MaxHealth); PayEXP++;}
+    if(GetActorProperty(0,APROP_Health)<MaxHealth && GetActorProperty(0,APROP_Health)>0)
+		{HealThing(1,MaxHealth); PayEXP++;}
 	}
 	
 }
+
+Script "MSTD_OverhealDrain" (Int Tick)
+{
+if(GetActorProperty(0,APROP_HEALTH) > Tick){SetActorProperty(0,APROP_HEALTH,(GetActorProperty(0,APROP_HEALTH)-Tick));
+	GiveInventory("DaDiBuffer",Tick);}
+}
+
 
 #endregion
 //#endregion
 
 //#region -=- Blast Knockback -=-
 #region -=- Blast Knockback -=-
+
+//From Jaxof7, as well...most stuff here is.
+int Boom_TargetTID;
+int Boom_TargetTeam;
+int Boom_X;
+int Boom_Y;
+int Boom_Z;
+
+Script "Save_Boom" (void) 
+{
+Boom_X = GetActorX(0);
+Boom_Y = GetActorY(0);
+Boom_Z = GetActorZ(0);
+SetActivator(0,AAPTR_TARGET);
+Boom_TargetTID = ActivatorTID();
+Boom_TargetTeam = getSelfTeam();
+}
+
+
+Script "Boom_IsMine" (void) 
+{
+SetResultValue(BoomIsMineFunc());
+}
+
+function bool BoomIsMineFunc(void)  {
+	return (ActivatorTID()==Boom_TargetTID);
+}
+
+Script "Boom_IsEnemy" (void) 
+{
+SetResultValue(BoomIsEnemyFunc());
+}
+
+function bool BoomIsEnemyFunc(void)  {
+	if(BoomIsMineFunc()) return false;
+	if(Boom_TargetTeam==TEAM_NONE) return true;
+	return(Boom_TargetTeam!=getSelfTeam());
+}
+
+Script "Boom_IsAlly" (void) 
+{
+SetResultValue(BoomIsAllyFunc());
+}
+
+function bool BoomIsAllyFunc(void)  {
+	if(BoomIsMineFunc()) return false;
+	if(Boom_TargetTeam==TEAM_NONE) return false;
+	return(Boom_TargetTeam==getSelfTeam());
+}
+
+Script "BlastKnockback2" (int force, int range) 
+{
+int xDist = GetActorX(0) - Boom_X;
+int yDist = GetActorY(0) - Boom_Y;
+int angle = VectorAngle(xDist,yDist);
+int xyDist = VectorLength(xDist,yDist);
+int zDist = GetActorCenterZ(0) - Boom_Z;
+//int zDist = GetActorZ(0) - Boom_Z;
+int pitch = VectorAngle(xyDist,zDist);
+int dist = VectorLength(xyDist,zDist);
+
+			if(CheckPlayerProp(playernumber(),MasterProPList[17][PROP_NAME])){force += force*0.5>>16; if(force < 0){force = 0;};}
+			if(CheckPlayerProp(playernumber(),MasterProPList[18][PROP_NAME])){force -= force*0.5>>16; if(force < 0){force = 0;};}
+
+dist >>= 16;
+//Printbold(i:dist,s:" ",i:range,s:" ",i:force);
+if(dist<range) {
+	dist = max(dist-36,0);
+	range = max(range-36,1);
+	force = (force*(range-dist)/range);
+	//Printbold(i:dist,s:" ",i:range,s:" ",i:force);
+	ThrustThing3Db(0,angle,pitch,force,force*5/2);
+}
+}
+
+function void ThrustThing3Db(int tid, int angle, int pitch, int force, int zForce)  {
+	//PrintBold(f:pitch);
+	ThrustThing(angle>>8,(cos(pitch)*force)>>16,0,tid);
+	ThrustThingZ(tid,(sin(pitch)*zForce)>>16,0,0);
+}
+
+function int GetActorCenterZ(int tid)  {
+	return(GetActorZ(tid) + GetActorProperty(tid,APROP_Height)/2);
+}
+
 Script "BlastKnockback" (int BlastThrust, int ThrustForceH, int MaxRadius)
 {
 int userTID;
@@ -682,6 +803,7 @@ thing_damage2(TID,damage,DamType);
 
 script "HitKnockBack" (int force)
 {
+if(!ACS_NamedExecuteWithResult("MSTD_ActorClassifier",0,2)){Terminate;}
 int pusher = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
 if(CheckProp(MasterProPList[17][PROP_NAME])){force += force*0.5>>16;} //Lightweight
 if(CheckProp(MasterProPList[18][PROP_NAME])){force -= force*0.5>>16; if(force<0){force = 0;}} //HeavyWeight
@@ -702,10 +824,17 @@ SetResultValue(OpenGLCvarClient());
 
 Script "MassimoDamageRamp" (int MinDam, int MaxDam)
 {
-int HealthPer = ACS_NamedExecuteWithResult("MSTD_HealthPercent",AAPTR_TARGET);
-int Output = ValueMap(HealthPer,100,0,MinDam,MaxDam);
-SetResultValue(Output);
+SetResultValue(MassimoDamageRamp(MinDam,MaxDam,AAPTR_TARGET));
 }
+
+function int MassimoDamageRamp(int MinDam, int MaxDam, int Pointer)
+{
+int HealthPer = GetHealthPercent(Pointer,0,0);
+int Output = ValueMap(HealthPer,100,0,MinDam,MaxDam);
+return(Output);
+}
+
+
 
 Script "SniperBusterRamp" (int hitCap, int MinDam, int MaxDam)
 {
@@ -863,12 +992,12 @@ SetResultValue(Damage);
 Script "HealRamp" (Int HealMin, Int HealMax, int Pointer)
 {
 if(Pointer!=0){SetActivator(0,Pointer);}
-int timeMax = 245;
-int rampPerc = (GetActorPowerupTics(0,"HealRampPower")*100)/timeMax;
-//log(i:GetActorPowerupTics(0,"HealStall_A"));
-//log(i:rampPerc);
+int HitTime = GetActorPowerupTics(0,"HealRampPower");
+int timeMax = 350;
+int rampPerc = (HitTime*100)/timeMax;
+
 int output = (HealMax*(100 - rampPerc))/100;
-//log(i:output);
+
 
 if (output < HealMin){output = HealMin;}
 if (output > HealMax){output = HealMax;}
@@ -961,4 +1090,27 @@ script "TrapSensorIdentify"  (VOID)
 script "TIDCOUNTER" (int Tid)
 {
 setresultvalue(thingcount(T_NONE,Tid));
+}
+
+script "GetWeaponCharge" (void)
+{
+setresultvalue(CheckInventory("WeaponCharge"));
+}
+
+
+Script "StunnedFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "StunMark") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
 }

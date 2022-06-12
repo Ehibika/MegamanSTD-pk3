@@ -102,7 +102,7 @@ listmenu "N_DataBaseMenu"
 	TextItem "Weapon Database", "d1", "WepDataMenu"
     TextItem "Property Database", "d1", "PropertyDataMenu"
 	//TextItem "SubWeapon Database", "d2", "SubWepDataMenu"
-	TextItem "Mechanics Glossary", "d3", "MechGlossMenu"
+	//TextItem "Mechanics Glossary", "d3", "MechGlossMenu"
 	
 }
 

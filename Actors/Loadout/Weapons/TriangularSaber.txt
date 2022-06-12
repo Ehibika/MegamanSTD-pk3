@@ -140,6 +140,7 @@ actor TS_BladeStart
 PROJECTILE
 +RIPPER
 damagetype "TriangularSaberEdge"
+Obituary "$OB_TRIANGULARSABER"
 damage (45)
 height 5
 radius 5
@@ -172,6 +173,7 @@ actor TS_BladeTip
 PROJECTILE
 +RIPPER
 damagetype "TriangularSaberTip"
+Obituary "$OB_TRIANGULARSABER"
 damage (35)
 height 5
 radius 5

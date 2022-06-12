@@ -12,7 +12,7 @@ Player.Startitem "UseAbility2_Axl"
 
 Player.Startitem "PRO_MachineGunMastery"
 Player.Startitem "PRO_SprayerMastery"
-Player.Startitem "PRO_LauncherMastery"
+Player.Startitem "Pro_Acrobat"
 
 +NOSKIN
 States

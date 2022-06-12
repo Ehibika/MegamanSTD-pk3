@@ -551,3 +551,130 @@ FCRA IJKL 1
 stop
 }
 }
+
+
+//[+]=========================[+]
+//-----------|Stop|------------
+//[+]=========================[+]
+actor StopStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("StopMark",1,"Sustain")
+TNT1 A 0 A_Jumpifinventory("Pro_EuclidResistance",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+//==
+TNT1 A 0 A_GiveInventory("StopMark",1)
+PLAY H 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,1)
+PLAY H 0 ACS_NamedExecuteAlways("core_freezeplayer",0,0,1)
+TNT1 A 0 A_SpawnItemEx("STDStopWatcher")
+TNT1 A 0 A_Playsoundex("support/Negative","Soundslot8")
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("StopMark",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor StopMark : Powerup
+{
+inventory.amount 1
+powerup.duration -3
+}
+
+
+actor STDStopWatcher
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+Renderstyle none
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Warp(AAPTR_TARGET, 0.0,0.0,0.0,0.0,WARPF_NOCHECKPOSITION)
+TNT1 A 0 A_SpawnItemEx("TimeStopGFX", random(8, 64), 0, random(0, 64), 0, 0, 0, random(0, 359))
+TNT1 A 0 A_JumpIfInTargetInventory("StopMark", 1, "Spawn")
+TNT1 A 5 A_GiveToTarget("TimeUnstopped")
+stop
+}
+}
+
+//[+]=========================[+]
+//-----------|Stun|------------
+//[+]=========================[+]
+actor StunStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("StunGuard",1,"Nope")
+//TNT1 A 0 A_Jumpifinventory("Pro_EuclidResistance",1,"Nope")
+//TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+//==
+TNT1 A 0 A_GiveInventory("StunMark",1)
+TNT1 A 0 A_GiveInventory("StunGuard",1)
+TNT1 A 0 A_Stop
+TNT1 A 0 A_SpawnItemEx("StunnedFX")
+//TNT1 A 0 A_Playsoundex("support/Negative","Soundslot8")
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor StunMark : PowerSpeed
+{
+inventory.amount 1
+powerup.duration 35
+Speed 0.0
+}
+
+actor StunGuard : Powerup
+{
+inventory.amount 1
+powerup.duration 70
+}
+
+actor StunnedFX : BasicClientside
+{
+scale 2.5
+Translation "192:192=104:104", "198:198=110:110", "195:195=130:130"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("StunnedFXWarper",0)
+Spawn2:
+DSBL CCCDDD 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+loop
+Death:
+DSBL DZDCZCDZDCZC 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}

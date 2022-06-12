@@ -9,13 +9,14 @@ Actor BasicDeployable : ClassBase
 +SOLID
 +NODAMAGETHRUST
 +NOTARGETSWITCH
-+NOBLOOD
+-NOBLOOD
 +MOVEWITHSECTOR
 +DONTSPLASH
 +NOEXPLODEFLOOR
 +STEPMISSILE
 +DONTREFLECT
 +NOTAUTOAIMED
+Bloodtype "ActorHitFX"
 speed 0
 Damage(0)
 Maxstepheight 7
@@ -47,4 +48,23 @@ ClassDeath:
 wait
 
 }
+}
+
+actor ActorHitFX
+{
+  Radius 1
+  Height 1
+  Scale 2.5
+  Renderstyle Add
+  +NOGRAVITY
+  +NOINTERACTION
+  States
+  {
+  Spawn:
+    MMFX A 0 bright
+    MMFX A 1 bright A_Stop
+    MMFX A 0 bright A_PlaySound ("Misc/Metdie")
+    MMFX A 1 bright
+    stop
+  }
 }

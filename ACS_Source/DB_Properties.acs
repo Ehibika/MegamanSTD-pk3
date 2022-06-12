@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE PROPMAX 23
+#LIBDEFINE PROPMAX 26
 
 
 #LIBDEFINE PROP_NAME 0
@@ -52,5 +52,8 @@ str MasterProPList[PROPMAX][6] = {
 
 /*21*/{"ElementalGuard","Elemental Guard","---",PF_ONHITSELF,"----",""},
 /*22*/{"TeamMedic","Team Medic","---", PF_STARTUP,"----",""},
+/*23*/{"SubTank","SubTank","---", PF_STARTUP,"----",""},
+/*24*/{"Gutsy","Gutsy","---", PF_ONHITFOE,"----",""},
+/*25*/{"Determined","Determined","---", PF_ONHITFOE,"----",""},
 
 };

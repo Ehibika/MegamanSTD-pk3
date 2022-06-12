@@ -15,7 +15,7 @@ InInventory not NoHealthBar, 1
 	DrawImage weaponicon, 37,135; //58, 132;
 	DrawSelectedInventory INDEXFONT ,18, 161, 31, 161, white;
 	DrawBar "NHLTHB", "NBARE", Health, Horizontal, 8,152;//39, 114;
-	DrawBar "NARMR", "NNOBAR", Basicarmor, Horizontal, 8,152;//39, 114;
+	DrawBar "NARMR", "NNOBAR", OverhealValue, Horizontal, 8,152;//39, 114;
 	
 	DrawNumber 3, CONFONT, UNTRANSLATED, Health,fillzeros, alignment(Left), 3,135;//10, 116; //72
 
@@ -151,9 +151,11 @@ InInventory IsAxl, 1
 	DrawBar "ALTEMP", "ALTHBAR1", TacticalRollCooldownItem, vertical,reverse, 5, 163;
 	ininventory TacticalRollCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", TacticalRollCooldownItem, vertical,reverse, 5, 163;}
 
-	DrawImage "BOMBSI", 22, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", BlastLauncherCooldownItem, vertical,reverse, 25, 163;
-	ininventory BlastLauncherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlastLauncherCooldownItem, vertical,reverse, 25, 163;}
+	DrawImage "REPII", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", StrafeBarrageCooldownItem, vertical,reverse, 25, 163;
+	ininventory StrafeBarrageCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", StrafeBarrageCooldownItem, vertical,reverse, 25, 163;}
+
+	ininventory Ability2_Axl ,1 {DrawBar "SRESO2", "NORESO2", StrafeBarrageTimerItem, Horizontal, 42, 161;}
 	}
 
 InInventory IsZero, 1
@@ -228,6 +230,20 @@ InInventory IsAuto, 1
 	DrawImage "TRETI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", AutoSentryCooldownItem, vertical,reverse, 25, 163;
 	ininventory AutoSentryCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AutoSentryCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+
+InInventory IsHarpNote, 1
+	{
+	DrawImage "SCHSWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", GuitarMachineGunCooldownItem, vertical,reverse, 5, 163;
+	ininventory GuitarMachineGunCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GuitarMachineGunCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "PLSNGI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", PulseSongCooldownItem, vertical,reverse, 25, 163;
+	ininventory PulseSongCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", PulseSongCooldownItem, vertical,reverse, 25, 163;}
+
+	ininventory Ability1_HarpNote ,1 {DrawBar "SRESO2", "NORESO2", GuitarMachineGunTimerItem, Horizontal, 42, 161;}
 	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
