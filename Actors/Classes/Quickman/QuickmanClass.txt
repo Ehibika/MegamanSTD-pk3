@@ -2,8 +2,8 @@ Actor Quickman : ClassBase
 {
 Player.DisplayName "Quickman"
 Player.SoundClass "megaman"
-Health 85
-Player.MaxHealth 85
+Health 175
+Player.MaxHealth 175
 Player.JumpZ 10
 
 Player.Startitem "IsQuickman"

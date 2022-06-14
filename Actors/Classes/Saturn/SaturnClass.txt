@@ -2,8 +2,8 @@ Actor Saturn : ClassBase
 {
 Player.DisplayName "Saturn"
 Player.SoundClass "megaman"
-Health 125
-Player.MaxHealth 125
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsSaturn"

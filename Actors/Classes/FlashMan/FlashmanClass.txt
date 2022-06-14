@@ -2,8 +2,8 @@ Actor FlashMan : ClassBase
 {
 Player.DisplayName "FlashMan"
 Player.SoundClass "megaman"
-Health 125
-Player.MaxHealth 125
+Health 175
+Player.MaxHealth 175
 Player.JumpZ 10
 
 Player.Startitem "IsFlashMan"

@@ -2,8 +2,8 @@ Actor Gutsman : ClassBase
 {
 Player.DisplayName "gutsman"
 Player.SoundClass "megaman"
-Health 150
-Player.MaxHealth 150
+Health 300
+Player.MaxHealth 300
 Player.JumpZ 10
 
 Player.Startitem "IsGutsman"
