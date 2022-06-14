@@ -16,8 +16,12 @@ addplayerclass HarpNote
 
 
 //addplayerclass Spider
-
-
+addplayerclass Centaurman
+addplayerclass FlashMan
+addplayerclass Iceman
+addplayerclass GutsMan
+addplayerclass QuickMan
+addplayerclass Saturn
 //=====
 
 addkeysection "Extra" Extraoptions

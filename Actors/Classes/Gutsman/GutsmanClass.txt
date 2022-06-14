@@ -1,0 +1,41 @@
+Actor Gutsman : ClassBase
+{
+Player.DisplayName "gutsman"
+Player.SoundClass "megaman"
+Health 150
+Player.MaxHealth 150
+Player.JumpZ 10
+
+Player.Startitem "IsGutsman"
+Player.Startitem "UseAbility1_Gutsman" 
+Player.Startitem "UseAbility2_Gutsman"
+
+Player.Startitem "Pro_Gutsy"
+Player.Startitem "PRO_Hefty"
+Player.Startitem "Pro_HeavyWeight"
+
++NOSKIN
+States
+{
+Spawn: 
+GUTS A 0
+GUTS B 1 
+GUTS A 1 
+GoTo Spawn+2
+See:
+GUTS BCDE 5
+GoTo Spawn+1
+Missile:
+GUTS F 0
+GUTS F 5
+GUTS G 4 
+Goto Spawn+2
+PainFix:
+GUTS H 0 
+GoTo PainFrames
+}
+}
+
+Actor IsGutsman : Once{}
+
+

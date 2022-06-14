@@ -30,8 +30,9 @@ actor Pro_SubTank : Once {}
 actor Pro_Gutsy : Once {}
 actor Pro_Determined : Once {}
 
-
-
+actor Pro_Marksman : Once {}
+actor Pro_Heater : Once {}
+actor Pro_Refrigerate : Once {}
 
 //================================
 

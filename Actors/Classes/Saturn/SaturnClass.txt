@@ -1,0 +1,42 @@
+Actor Saturn : ClassBase
+{
+Player.DisplayName "Saturn"
+Player.SoundClass "megaman"
+Health 125
+Player.MaxHealth 125
+Player.JumpZ 10
+
+Player.Startitem "IsSaturn"
+Player.Startitem "UseAbility1_Saturn"
+Player.Startitem "UseAbility2_Saturn"
+
+Player.Startitem "Pro_EuclidResistance"
+Player.Startitem "Pro_Acrobat"
+Player.Startitem "Pro_Speedrunner"
+
+
++NOSKIN
+States
+{
+Spawn: 
+SATU A 0
+SATU B 1 
+SATU A 1 
+GoTo Spawn+2
+See:
+SATU BCDE 5
+GoTo Spawn+1
+Missile:
+SATU F 0
+SATU F 5
+SATU G 4 
+Goto Spawn+2
+PainFix:
+SATU H 0 
+GoTo PainFrames
+}
+}
+
+Actor IsSaturn : Once{}
+
+

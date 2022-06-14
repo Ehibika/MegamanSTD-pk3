@@ -92,7 +92,7 @@ For(int i = 0; i < PAINCOUNT; i++)
 	If(PainRecord[i][0] == PainType)
 		{
         //found our weapon paintype
-        if(ElementFlag == PainRecord[i][1]) Return 1;      
+        if(ElementFlag & PainRecord[i][1]) Return 1;      
 		}
 	}
 Return 0;
@@ -401,7 +401,36 @@ For(int i = 0; i < WEAPONLIST; i++)
 return 0;
 }
 
+#LIBDEFINE MARKSMANSTART 640
+#LIBDEFINE MARKSMANEND 960
+Function bool CheckForMarksman (int TargTID)
+{
+if(!CheckProp(MasterProPList[26][PROP_NAME])){Return 0;}
+/*
+Check if the distance between the shooter and their target is great enough
+for this property to work.
+*/
+if(xyzDistance(0, TargTID) > MARKSMANSTART){Return 1;}
+Return 0;
+}
 
+Function bool CheckForHeater (str PainType)
+{
+if(!CheckProp(MasterProPList[27][PROP_NAME])){Return 0;}
+/*
+if this damage is wind or water based, return true.
+*/
+Return CheckForElement(PainType,ELM_WIND|ELM_AQUA);
+}
+
+Function bool CheckForRefrigerate (str PainType)
+{
+if(!CheckProp(MasterProPList[28][PROP_NAME])){Return 0;}
+/*
+if this damage is wind or water based, return true.
+*/
+Return CheckForElement(PainType,ELM_WIND|ELM_AQUA);
+}
 
 
 Script "BladeParryWarper" (void) CLIENTSIDE

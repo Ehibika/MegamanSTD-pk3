@@ -18,10 +18,11 @@ if(CheckForIgnore(arg2)){Terminate;}
 int Damage = arg1;
 str PainType = arg2;
 int SourceTID;
+int VictimTID = ActivatorTID();
 int VictimHP = GetActorProperty(0,APROP_HEALTH);
 
-bool CritHit,Assassin,FireCrit,PoisonCrit,Guts,Determined;
-int DB_Determined,DB_Guts;
+bool CritHit,Assassin,FireCrit,PoisonCrit,Guts,Determined,Marksman;
+int DB_Determined,DB_Guts,DB_Marksman;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
@@ -39,21 +40,30 @@ if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 
 //===|FrostBite Hitstun|===
-if(CheckForFrostBiteHitstun(arg2)){GiveInventory("FrostbiteHitstun",1);}
+if(CheckForFrostBiteHitstun(arg2)){GiveActorInventory(VictimTID,"FrostbiteHitstun",1);}
 
 //===|Guts Boost|===
 if(CheckForGutsy()){Guts = true;}
-//===|Determined Boost|===
 
+//===|Determined Boost|===
 if(CheckForDetermined(arg2))
 	{
 	Determined = true;
 	DB_Determined = MassimoDamageRamp(0,Damage*0.2>>16,-1);
 	}
-
+//===|Marksman Boost|===
+if(CheckForMarksman(VictimTID))
+	{
+	Marksman = true;
+	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,Damage*0.2>>16,Damage*0.5>>16);
+	if(DB_Marksman > Damage*0.5>>16){DB_Marksman = Damage*0.5>>16;}
+	}
 //Reduce harm from blast weapons on yourself
 if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = Damage*0.5>>16;}}
 
+//====|Heater/Refrigerate|======
+if(CheckForHeater(arg2)){GiveActorInventory(VictimTID,"BurnStatusFastBuild",1);}
+if(CheckForREfrigerate(arg2)){log(s:"chill");GiveActorInventory(VictimTID,"FrostbiteStatusFastBuild",1);}
 
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
@@ -77,6 +87,7 @@ if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 		}
 	}
 
+
 //===|conditional status crits|====
 if(CheckForFireCrit(arg2)){FireCrit = true; }
 if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][PROP_NAME])){CritHit = true;}}
@@ -89,7 +100,7 @@ if(Assassin)
 
 if(Determined){Damage += DB_Determined;}
 if(Guts){Damage = Damage*0.5>>16;}
-
+if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
 
@@ -940,14 +951,13 @@ script "HealerShotIdentify"  (VOID)
 //======|Damage Faloff Formula Script
 Script "DamageRate" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
 {
-int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_NamedExecuteWithResult("core_gettarget"))-DistStart)/RampRate);
-SetResultValue(Damage);
+SetResultValue(DamageRate(ModDamage, DistStart, RampRate));
 }
 
-Script "DamageRate2" (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
+function int DamageRate (int ModDamage, int DistStart, int RampRate) //DamageDropoff Script
 {
 int Damage = NoNeg(ModDamage - NoNeg(xyzdistance(0, ACS_NamedExecuteWithResult("core_gettarget"))-DistStart)/RampRate);
-SetResultValue(Damage);
+return(Damage);
 }
 
 

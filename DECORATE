@@ -89,6 +89,28 @@
 #include "Actors/Classes/HarpNote/GuitarMachineGun.txt"
 #include "Actors/Classes/HarpNote/PulseSong.txt"
 
+#include "Actors/Classes/Centaurman/CentaurmanClass.txt"
+#include "Actors/Classes/Centaurman/StopArrow.txt"
+
+#include "Actors/Classes/Flashman/FlashmanClass.txt"
+#include "Actors/Classes/Flashman/FlashPoint.txt"
+
+#include "Actors/Classes/Iceman/IcemanClass.txt"
+#include "Actors/Classes/Iceman/IceSlasher.txt"
+#include "Actors/Classes/Iceman/FootHolderLift.txt"
+
+#include "Actors/Classes/Gutsman/GutsmanClass.txt"
+#include "Actors/Classes/Gutsman/PicketMen.txt"
+#include "Actors/Classes/Gutsman/SuperArm.txt"
+
+#include "Actors/Classes/Quickman/QuickmanClass.txt"
+#include "Actors/Classes/Quickman/QuickBlaster.txt"
+#include "Actors/Classes/Quickman/AtomicSpeed.txt"
+
+#include "Actors/Classes/Saturn/SaturnClass.txt"
+#include "Actors/Classes/Saturn/RingWarp.txt"
+#include "Actors/Classes/Saturn/BlackHoleSpread.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

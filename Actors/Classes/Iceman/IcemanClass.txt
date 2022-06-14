@@ -1,0 +1,42 @@
+Actor Iceman : ClassBase
+{
+Player.DisplayName "iceman"
+Player.SoundClass "megaman"
+Health 85
+Player.MaxHealth 85
+Player.JumpZ 10
+
+Player.Startitem "IsIceman"
+Player.Startitem "UseAbility1_Iceman"
+Player.Startitem "UseAbility2_Iceman"
+
+Player.Startitem "Pro_SubTank"
+Player.Startitem "Pro_IceResistance"
+Player.Startitem "Pro_Refrigerate"
+
+
++NOSKIN
+States
+{
+Spawn: 
+ICEM A 0
+ICEM B 1 
+ICEM A 1 
+GoTo Spawn+2
+See:
+ICEM BCDE 5
+GoTo Spawn+1
+Missile:
+ICEM F 0
+ICEM F 5
+ICEM G 4 
+Goto Spawn+2
+PainFix:
+ICEM H 0 
+GoTo PainFrames
+}
+}
+
+Actor IsIceman : Once{}
+
+

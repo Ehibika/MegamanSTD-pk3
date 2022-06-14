@@ -1,0 +1,39 @@
+Actor CentaurMan : ClassBase 
+{
+Player.DisplayName "CentaurMan"
+Player.SoundClass "megaman"
+Health 100
+Player.MaxHealth 100
+Player.JumpZ 10
+
+Player.Startitem "IsCentaurMan"
+Player.Startitem "UseAbility1_CentaurMan"
+Player.Startitem "UseAbility2_CentaurMan"
+
+Player.Startitem "PRO_Marksman"
+Player.Startitem "PRO_EuclidResistance"
+Player.Startitem "Pro_Hefty"
+
++NOSKIN
+States
+{
+Spawn: 
+CENT A 0
+CENT B 1 
+CENT A 1
+GoTo Spawn+2
+See:
+CENT BCDE 5
+GoTo Spawn+1
+Missile:
+CENT F 5
+CENT G 4
+GoTo Spawn+2
+PainFix:
+CENT H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsCentaurMan : Once{}

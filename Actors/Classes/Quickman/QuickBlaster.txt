@@ -1,0 +1,158 @@
+actor Ability1_Quickman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "whatanicetag"
+weapon.ammotype2 "BusterAmmo"
+inventory.icon "BOMBSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+QUMN A 1 A_WeaponReady
+goto Ready
+
+Fire:
+QUMN A 0 A_PlaySoundEx("weapon/atomicfire","Weapon")
+"####" ABABABABABABAB 1 A_FireCustomMissile("QuickBlasterSTD",random(-8,8),0,8,0,0,random(-5,5))
+"####" A 25
+"####" A 1 A_GiveInventory("QuickBlasterCooldown")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+Goto Fire
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_Quickman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("QuickBlasterAbility",1)
+fail
+}
+}
+
+actor QuickBlasterAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_CheckFloor("Pickup2")
+goto Nope
+
+Pickup2:
+TNT1 A 0 A_JumpIfInventory("QuickBlasterCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+// A PROJECTILE
+//=================
+
+actor QuickBlasterSTD
+{
+PROJECTILE
+Damage (3)
+scale 2.5
+damagetype "QuickBoomerang"
+Obituary "$OB_QUICKBOOMERANG"
+radius 18
+height 18
+speed 50
+states
+{
+Spawn:
+QUIC AABBCCDD 1 A_SpawnItemEx("QuickBlasterFX")
+loop
+Death:
+TNT1 A 0 A_SpawnItemEx("ExplosionEffect1")
+stop
+Crash:
+TNT1 A 0 A_SpawnItemEx("ExplosionEffect1")
+TNT1 A 1 A_GiveToTarget("GoingFastAmmo",1)
+stop
+}
+}
+
+actor QuickBlasterFX
+{
++NOINTERACTION
++FORCEXYBILLBOARD
++CLIENTSIDEONLY
+-SOLID
++NOGRAVITY
+RenderStyle "add"
+Alpha 0.75
+Scale 1.5
+States
+{
+Spawn:
+QUIC AABBCCDD 1 A_FadeOut
+stop
+}
+}
+
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor QuickBlasterCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("QuickBlasterCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("QuickBlasterCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor QuickBlasterCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("QuickBlasterCooldownItem",250)
+TNT1 A 0 A_Spawnitemex("QuickBlasterCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor QuickBlasterCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 250
+}
