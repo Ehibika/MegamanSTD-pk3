@@ -1,0 +1,86 @@
+Actor Quickman : ClassBase
+{
+Player.DisplayName "Quickman"
+Player.SoundClass "megaman"
+Health 85
+Player.MaxHealth 85
+Player.JumpZ 10
+
+Player.Startitem "IsQuickman"
+Player.Startitem "UseAbility1_Quickman"
+Player.Startitem "UseAbility2_Quickman"
+
++NOSKIN
+States
+{
+Spawn: 
+QUIM A 0
+QUIM B 1 
+QUIM A 1
+GoTo Spawn+2
+See:
+QUIM BCDE 5 A_GiveInventory("QuickBlasterCheck", 1)
+GoTo Spawn+1
+Missile:
+QUIM F 0
+QUIM F 5
+QUIM G 4 
+Goto Spawn+2
+PainFix:
+QUIM H 0 A_TakeInventory("GoingFastAmmo", 3)
+GoTo PainFrames
+}
+}
+
+Actor IsQuickman : Once{}
+
+
+actor QuickBlasterCheck : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++INVENTORY.AUTOACTIVATE
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("GoingFastAmmo",14,"NormalFast")
+TNT1 A 0 A_JumpIfInventory("GoingFastAmmo",28,"VeryFast")
+TNT1 A 0
+stop
+NormalFast:
+TNT1 A 0 A_JumpIfInventory("GoingFastAmmo",28,"VeryFast")
+TNT1 A 0 A_GiveInventory("NSpeedUp",1)
+stop
+VeryFast:
+TNT1 A 0 A_GiveInventory("VSpeedUp",1)
+stop
+}
+}
+
+actor GoingFastAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
++INVENTORY.IGNORESKILL
+}
+
+actor ASpeedUp : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 1.2
+Powerup.Duration 5
+}
+
+actor NSpeedUp : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 1.5
+Powerup.Duration 5
+}
+
+actor VSpeedUp : PowerSpeed
+{
++POWERSPEED.NOTRAIL
+Speed 2.0
+Powerup.Duration 5
+}

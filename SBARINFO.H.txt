@@ -245,6 +245,30 @@ InInventory IsHarpNote, 1
 
 	ininventory Ability1_HarpNote ,1 {DrawBar "SRESO2", "NORESO2", GuitarMachineGunTimerItem, Horizontal, 42, 161;}
 	}
+
+InInventory IsIceMan, 1
+	{
+	DrawImage "ICESI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", IceSlasherCooldownItem, vertical,reverse, 5, 163;
+	ininventory IceSlasherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", IceSlasherCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ITEM1", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FootHolderLiftCooldownItem, vertical,reverse, 25, 163;
+	ininventory FootHolderLiftCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FootHolderLiftCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+InInventory IsGutsman, 1
+	{
+	DrawImage "SARMSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SuperArmCooldownItem, vertical,reverse, 5, 163;
+	ininventory SuperArmCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SuperArmCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "RSEARCH", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", PicketMenCooldownItem, vertical,reverse, 25, 163;
+	ininventory PicketMenCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", PicketMenCooldownItem, vertical,reverse, 25, 163;}
+
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

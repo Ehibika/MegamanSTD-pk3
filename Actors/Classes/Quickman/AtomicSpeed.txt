@@ -1,0 +1,122 @@
+actor Ability2_Quickman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "whatanicetag"
+weapon.ammotype2 "BusterAmmo"
+inventory.icon "BOMBSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+QUMN A 0 
+"####" A 1
+goto Fire
+
+Fire:
+QUMN A 0 A_PlaySoundEx("weapon/watershieldburst", "Weapon")
+QUMN A 0 A_ChangeFlag(SHOOTABLE, 0)
+"####" ACACACAC 1
+Goto AtomicSpeedLoop
+AtomicSpeedLoop:
+QUMN A 0 A_GiveInventory("FireStormAmmo",1)
+QUMN A 0 A_GiveInventory("ASpeedUp",1)
+QUMN ACAC 2 A_JumpIfInventory("FireStormAmmo", 28, "AtomicSpeedEnd")
+loop
+AtomicSpeedEnd:
+QUMN A 1 A_ChangeFlag(SHOOTABLE, 1)
+"####" A 1 A_TakeInventory("FireStormAmmo",999)
+"####" D 1 A_GiveInventory("AtomicSpeedCooldown")
+"####" D 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" C 1
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_Quickman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("AtomicSpeedAbility",1)
+fail
+}
+}
+
+actor AtomicSpeedAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_CheckFloor("Pickup2")
+goto Nope
+
+Pickup2:
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+// :blink:
+//=================
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor AtomicSpeedCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("AtomicSpeedCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("AtomicSpeedCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor AtomicSpeedCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("AtomicSpeedCooldownItem",1000)
+TNT1 A 0 A_Spawnitemex("AtomicSpeedCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor AtomicSpeedCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 1000
+}

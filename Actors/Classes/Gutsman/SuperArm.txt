@@ -1,0 +1,265 @@
+actor Ability1_Gutsman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "whatanicetag"
+weapon.ammotype2 "BusterAmmo"
+inventory.icon "BOMBSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+GUTA A 0 
+GUTA A 0 A_PlaySoundEx("weapon/superarmuse","Weapon")
+GUTA B 1 A_SpawnItemEx("GutrockPickingup",34 + 32,0,-28,-7,0,12,0,SXF_NOCHECKPOSITION)
+GUTA B 1
+"####" CC 1
+"####" DD 1
+"####" EE 1 
+Ready2:
+"####" E 0 A_SpawnItemEx("TempGutrock", 0, 0, 56 + 20, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"####" E 1 A_WeaponReady
+goto Ready2
+
+AltFire:
+GUTA B 1 A_SpawnItemEx("GutrockPickingup",0, 0, 56 + 20,7,0,-12,0,SXF_NOCHECKPOSITION)
+"####" EE 1
+"####" DD 1
+"####" CC 1
+GUTA A 0 A_PlaySoundEx("weapon/crackerthrow", "Voice")
+//"####" L 0 A_FireCustomMissile("SuperBlockStart",0,1,8,0)
+"####" B 0 A_SpawnItemEX("SupaArmRock",80,0,16,1)
+"####" L 15
+"####" A 1 A_GiveInventory("SuperArmCooldown")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+Fire:
+GUTA B 0
+"####" CC 1
+"####" DD 1
+"####" EE 1
+TNT1 AAAAA 1
+//GUTA A 0 A_FireCustomMissile("GutrockSTD",0,1,8,0)
+"####" B 0 A_FireCustomMissile("GutrockSTD",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+GUTA A 0 A_TakeInventory("BlockGrabbed",1)
+GUTA FGHIJKLM 2
+"####" A 1 A_GiveInventory("SuperArmCooldown")
+goto End
+
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_Gutsman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("SuperArmAbility",1)
+fail
+}
+}
+
+actor SuperArmAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_CheckFloor("Pickup2")
+goto Nope
+
+Pickup2:
+TNT1 A 0 A_JumpIfInventory("SuperArmCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+// Painlol
+//=================
+actor BlockGrabbed : Once {}
+
+
+
+
+actor SuperBlockStart
+{
+-SOLID
++FORCEYBILLBOARD
++CLIENTSIDEONLY
+height 32
+radius 16
+scale 3.5
+renderstyle "translucent" 
+alpha 0.50
+States
+{
+Spawn:
+SARM A 50
+TNT1 AAA 1 A_SpawnItemEx("GutrockFX",0,0,0,random(-10,10),random(-10,10),random(5,10),random(0,360))
+TNT1 A 1 A_SpawnItemEx("SupaArmRock")
+stop
+}
+}
+
+actor SupaArmRock : RockCube
+{
+
+}
+
+/*
+actor SupaArmRock : RockCube
+{
++SOLID
++SHOOTABLE
++NOTAUTOAIMED
+-NOGRAVITY
+Height 40
+scale 3.5
+radius 32
+Health 200
+painchance 256
+obituary "%o Rock"
+mass 999999999
+damagefactor "GrabTheBlock", 999
+speed 0
+States
+{
+Spawn:
+SARM A 1
+loop
+Pain:
+SARM A 1 A_PlaySoundEx("weapon/devilpain","Voice")
+TNT1 A 1
+SARM A 1
+Goto Spawn
+Death:
+TNT1 AAAAAA 1 A_SpawnItemEx("GutrockFX",0,0,0,random(-10,10),random(-10,10),random(5,10),random(0,360))
+stop
+}
+}
+*/
+
+actor GutrockSTD
+{
+PROJECTILE
+-NOGRAVITY
+Damage (85)
+damagetype "GutsPunch"
+Obituary "$OB_SUPERARM"
+Height 30
+Radius 30
+Speed 64
+scale 2.5
+Gravity 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+Spawn2:
+SARM A 1
+loop
+Crash:
+SARM AAAAAAAAAAAA 0 A_SpawnItemEx("GutrockFX",0,0,0,random(-10,10),random(-10,10),random(5,10),random(0,360))
+TNT1 A 3 A_PlaySoundEx("weapon/superarmhit", "Voice")
+stop
+Death:
+TNT1 A 0 A_SpawnItemEX("ExplosionEffect2",0,0,32,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEX("SuperArmBlast",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_PlaySoundEx("weapon/Napalm", "SoundSlot6")
+TNT1 A 0 A_PlaySoundEx("weapon/superarmhit", "Voice")
+TNT1 A 17 A_Quake(6,17,0,300)
+stop
+}
+}
+
+actor SuperArmBlast : BasicExplosion
+{
+Damage(0)
++SERVERSIDEONLY
+ReactionTime 6
+damagetype "GutsPunch"
+Obituary "$OB_SUPERARM"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SetArg(0,45)
+Spawn.Loop:
+SARM A 0 A_SpawnItemEx("SuperArmBossDebris2", 0, -16, 32, 1, 0, 0, args[0], SXF_TRANSFERTRANSLATION|SXF_MULTIPLYSPEED)
+SARM A 0 A_SpawnItemEx("SuperArmBossDebris2", 0, 16, 16, 1, 0, 0, args[0], SXF_TRANSFERTRANSLATION|SXF_MULTIPLYSPEED)
+SARM A 0 A_SpawnItemEx("SuperArmBossDebris1", 0, -16, 16, 1, 0, 0, args[0], SXF_TRANSFERTRANSLATION|SXF_MULTIPLYSPEED)
+SARM A 0 A_SpawnItemEx("SuperArmBossDebris1", 0, 16, 32, 1, 0, 0, args[0], SXF_TRANSFERTRANSLATION|SXF_MULTIPLYSPEED)
+
+TNT1 A 0 A_SetArg(0,args[0]-15)
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0 
+stop
+}
+}
+
+actor SuperArmBossDebris1 : GutsPunchDebris {Damage 8}
+actor SuperArmBossDebris2 : GutsPunchDebris2 {Damage 8}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor SuperArmCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("SuperArmCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("SuperArmCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor SuperArmCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("SuperArmCooldownItem",140)
+TNT1 A 0 A_Spawnitemex("SuperArmCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor SuperArmCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 140
+}

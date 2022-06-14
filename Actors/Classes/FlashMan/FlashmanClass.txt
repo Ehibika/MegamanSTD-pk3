@@ -1,0 +1,39 @@
+Actor FlashMan : ClassBase 
+{
+Player.DisplayName "FlashMan"
+Player.SoundClass "megaman"
+Health 125
+Player.MaxHealth 125
+Player.JumpZ 10
+
+Player.Startitem "IsFlashMan"
+Player.Startitem "UseAbility1_FlashMan"
+Player.Startitem "UseAbility2_FlashMan"
+
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_SprayerMastery"
+Player.Startitem "Pro_TeamMedic"
+
++NOSKIN
+States
+{
+Spawn: 
+FLSM A 0
+FLSM B 1 
+FLSM A 1
+GoTo Spawn+2
+See:
+FLSM BCDE 5
+GoTo Spawn+1
+Missile:
+FLSM F 5
+FLSM G 4
+GoTo Spawn+2
+PainFix:
+FLSM H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsFlashMan : Once{}
