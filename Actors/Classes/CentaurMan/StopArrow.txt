@@ -4,9 +4,9 @@ Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 Obituary "$OB_STOPARROW"
-Tag "Dash Ability"
+Tag "Stop Arrow"
 weapon.ammotype2 "AbilityAmmo"
-inventory.icon "BUSTI"
+inventory.icon "ARROWSH"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {

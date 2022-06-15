@@ -1,0 +1,194 @@
+Const int FLSBLK_SPD = 288;
+
+actor Ability1_FlashMan : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "Flash Blink"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "CENTSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+TNT1 A 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+
+Fire:
+TNT1 A 0 A_PlaySoundEx("weapon/CentaurFlash","Weapon")
+"####" A 0 A_GiveInventory("FlashBlinkStartup", 1)
+"####" A 0 A_SpawnItemEX("RingWarpEffect",0,0,32)
+"####" A 0 A_GiveInventory("BreakDashCharge", 3)
+Fire.DashLoop:
+"####" A 0 A_GiveInventory("FlashBlinkSpeed", 1)
+"####" A 1 A_FireCustomMissile("FlashBlinkCheck", 0, 0, 0, 0)
+"####" A 0 A_JumpIfInventory("BreakDashRecoil", 1, "Fire.Recoil")
+"####" A 0 A_TakeInventory("BreakDashCharge", 1)
+"####" A 0 A_JumpIfInventory("BreakDashCharge", 1, "Fire.DashLoop")
+goto Fire.Conclude
+Fire.Recoil:
+"####" A 0 A_TakeInventory("BreakDashCharge", 100)
+Fire.Conclude:
+"####" A 1 A_GiveInventory("FlashBlinkEnder", 1)
+"####" A 0 A_SpawnItemEX("RingWarpEffect",0,0,32)
+"####" A 0 A_GiveInventory("FlashBlinkCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_FlashMan : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("FlashBlinkAbility",1)
+fail
+}
+}
+
+actor FlashBlinkAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("FlashBlinkCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+actor FlashBlinkStartup : CustomInventory
+{
+States
+{
+Pickup:
+"####" A 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,2)
+"####" A 0 ACS_NamedExecuteAlways("core_freezeplayer",0,0,1)
+"####" A 0 A_TakeInventory("UnSolid",1)
+"####" A 0 A_ChangeFlag("NONSHOOTABLE",1)
+"####" A 0 A_ChangeFlag("SOLID",0)
+"####" A 0 A_ChangeFlag("THRUACTORS",1)
+"####" A 0 A_SetTranslucent(0.0,0)
+stop
+}
+}
+
+actor FlashBlinkEnder : CustomInventory
+{
+States
+{
+Pickup:
+"####" A 0 A_Stop
+"####" A 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,0)
+"####" A 0 ACS_NamedExecuteAlways("core_freezeplayer",0,0,0)
+"####" A 0 A_SpawnItemEx("ReSolidifier")
+"####" A 0 A_ChangeFlag("NONSHOOTABLE",0)
+"####" A 0 A_ChangeFlag("THRUACTORS",0)
+"####" A 0 A_SetTranslucent(1.0,0)
+stop
+}
+}
+
+actor FlashBlinkSpeed : CustomInventory
+{
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_CheckFloor("Floor")
+        TNT1 A 0 A_ChangeVelocity(FLSBLK_SPD*cos(pitch), 0, (FLSBLK_SPD/1)*sin(-pitch), CVF_RELATIVE|CVF_REPLACE)
+        stop
+    Floor:
+        TNT1 A 0 A_ChangeVelocity(FLSBLK_SPD*cos(pitch), 0, ((FLSBLK_SPD/1)*sin(-pitch) > 0) * (FLSBLK_SPD/1)*sin(-pitch), CVF_RELATIVE|CVF_REPLACE)
+        stop
+    }
+}
+
+actor FlashBlinkCheck : FastProjectile
+{
+    PROJECTILE
+    Obituary "$OB_FLASHBLINK"
+    Damagetype "BreakDash"
+    height 16
+    radius 16
+    speed 32
+    Damage (45)
+    States
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 1
+        stop
+    Death:
+        TNT1 A 0 
+        TNT1 A 0 A_GiveToTarget("BreakDashRecoil", 1)
+        stop
+    }
+}
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor FlashBlinkCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("FlashBlinkCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("FlashBlinkCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor FlashBlinkCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("FlashBlinkCooldownItem",122)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("FlashBlinkCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor FlashBlinkCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 122
+}

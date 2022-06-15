@@ -2,13 +2,17 @@ Actor Quickman : ClassBase
 {
 Player.DisplayName "Quickman"
 Player.SoundClass "megaman"
-Health 85
-Player.MaxHealth 85
+Health 100
+Player.MaxHealth 100
 Player.JumpZ 10
 
 Player.Startitem "IsQuickman"
 Player.Startitem "UseAbility1_Quickman"
 Player.Startitem "UseAbility2_Quickman"
+
+Player.Startitem "Pro_Speedrunner"
+Player.Startitem "Pro_Acrobat"
+//===|Quickman Class Passive: Atomic Speed|===
 
 +NOSKIN
 States

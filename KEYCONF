@@ -21,7 +21,7 @@ addplayerclass FlashMan
 addplayerclass Iceman
 addplayerclass GutsMan
 addplayerclass QuickMan
-addplayerclass Saturn
+//addplayerclass Saturn
 //=====
 
 addkeysection "Extra" Extraoptions

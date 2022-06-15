@@ -1,3 +1,6 @@
+const float QB_SPD = 3.2; 
+const float QB_SPD2 = 2.8; 
+
 actor Ability1_Quickman : AbilityMasterBase
 {
 Weapon.AmmoUse2 1
@@ -6,19 +9,37 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 Obituary "$OB_MEGABUSTER"
 Tag "whatanicetag"
 weapon.ammotype2 "BusterAmmo"
-inventory.icon "BOMBSI"
+inventory.icon "QUICKSI"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {
 
 Ready:
-QUMN A 1 A_WeaponReady
-goto Ready
+QUMN A 1 
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,32)
+goto Fire
 
 Fire:
-QUMN A 0 A_PlaySoundEx("weapon/atomicfire","Weapon")
-"####" ABABABABABABAB 1 A_FireCustomMissile("QuickBlasterSTD",random(-8,8),0,8,0,0,random(-5,5))
-"####" A 25
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+QUMN A 0 A_PlaySoundEx("weapon/basshot","Weapon")
+"####" AB 1 A_FireCustomMissile("QuickBlasterSTD",frandom(-(QB_SPD),(QB_SPD)),0,8,0,0,frandom(-(QB_SPD2),(QB_SPD2)))
+"####" A 7
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,110)
 "####" A 1 A_GiveInventory("QuickBlasterCooldown")
 "####" A 0 A_Jump(256,"End")
 goto End
@@ -49,10 +70,6 @@ actor QuickBlasterAbility : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_CheckFloor("Pickup2")
-goto Nope
-
-Pickup2:
 TNT1 A 0 A_JumpIfInventory("QuickBlasterCooldownItem",1,"Nope")
 TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
 stop
@@ -69,13 +86,13 @@ stop
 actor QuickBlasterSTD
 {
 PROJECTILE
-Damage (3)
+Damage (8)
 scale 2.5
-damagetype "QuickBoomerang"
+damagetype "QuickBoomerangBoss"
 Obituary "$OB_QUICKBOOMERANG"
-radius 18
-height 18
-speed 50
+radius 6
+height 12
+speed 64
 states
 {
 Spawn:
@@ -86,9 +103,46 @@ TNT1 A 0 A_SpawnItemEx("ExplosionEffect1")
 stop
 Crash:
 TNT1 A 0 A_SpawnItemEx("ExplosionEffect1")
-TNT1 A 1 A_GiveToTarget("GoingFastAmmo",1)
+//TNT1 A 1 A_GiveToTarget("AtomicSpeedResource",5)
 stop
 }
+}
+
+actor AtomicSpeedUp : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_GiveInventory("AtomicSpeedResource",1)
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedResource",87,"Levelup1")
+stop
+
+Levelup1:
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedResource",175,"Levelup2")
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedLevel",1,"Nope")
+TNT1 A 0 A_GiveInventory("AtomicSpeedLevel",1)
+TNT1 A 0 A_PlaySoundEx("item/Refill","SoundSlot7")
+TNT1 A 0 ACS_NamedExecuteWithResult("SpeedUpdate",0.1*FVM)
+stop
+
+Levelup2:
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedLevel",2,"Nope")
+TNT1 A 0 A_GiveInventory("AtomicSpeedLevel",1)
+TNT1 A 0 A_PlaySoundEx("item/Refill","SoundSlot7")
+TNT1 A 0 ACS_NamedExecuteAlways("SpeedUpdate",0.1*FVM)
+stop
+
+
+Nope:
+TNT1 A 0 
+stop
+}
+}
+
+actor AtomicSpeedLevel : inventory
+{
+inventory.amount 1
+inventory.maxamount 2
 }
 
 actor QuickBlasterFX
@@ -141,7 +195,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("QuickBlasterCooldownItem",250)
+TNT1 A 0 A_Giveinventory("QuickBlasterCooldownItem",140)
 TNT1 A 0 A_Spawnitemex("QuickBlasterCooler")
 stop
 Nope:
@@ -154,5 +208,5 @@ stop
 actor QuickBlasterCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 250
+inventory.maxamount 140
 }
