@@ -29,6 +29,7 @@ Loop
 Fire:
 SAHD A 0 A_PlaySoundEx("weapon/ringboomerang","Weapon")
 "####" A 0 A_FireCustomMissile("RingWarp",0,1,8,0)
+"####" F 0 A_GiveInventory("RingWarpCooldown")
 "####" BCDE 2
 TNT1 A 7
 Goto Warp
@@ -41,7 +42,6 @@ SAHD F 1 A_TakeInventory("RollingCutterFlag",1)
 SAHD F 0 A_SpawnItemEX("RingWarpEffect")
 SAHD F 1 A_TakeInventory("CutterFlag",999)
 SAHD F 0 A_TakeInventory("CanWarp",999)
-"####" F 1 A_GiveInventory("RingWarpCooldown")
 "####" F 1 A_TakeInventory("AbilityActiveFlag",9)
 "####" F 0 
 Goto End
@@ -73,10 +73,6 @@ actor RingWarpAbility : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_CheckFloor("Pickup2")
-goto Nope
-
-Pickup2:
 TNT1 A 0 A_JumpIfInventory("RingWarpCooldownItem",1,"Nope")
 TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
 stop
@@ -101,8 +97,8 @@ actor RingWarp
 {
 PROJECTILE
 Translation "198:198=223:223", "192:192=215:215"
-Radius 12
-Height 12
+Radius 24
+Height 50
 scale 2.5
 damage (35)
 +RIPPER
@@ -113,11 +109,13 @@ damage (35)
 meleerange 12
 damagetype "RingWarp"
 Obituary "$OB_RINGBOOMERANG"
-speed 56
+speed 64
 reactiontime 20
 States
 {
 Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileCode")
 SARI A 0 Thing_Remove(ACS_ExecuteWithResult(257,0)+4400)
 SARI A 1 Thing_ChangeTID(0,4400+ACS_ExecuteWithResult(257,0))
 Goto Spawn2

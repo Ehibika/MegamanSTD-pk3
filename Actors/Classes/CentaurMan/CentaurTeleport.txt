@@ -1,0 +1,258 @@
+actor Ability1_Centaurman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "Centaur Teleport"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "COPYVI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+CENH C 0 
+CENH CDE 1
+"####" F 1 A_JumpifInventory("ExitUnitItem",1,"Ready2")
+"####" F 0 A_Jump(256,"AltFire.On")
+Goto AltFire.On
+
+Ready2:
+"####" F 1 A_WeaponReady
+goto Ready2
+
+AltFire:
+CENH FGH 1
+"####" F 0
+"####" F 1 A_JumpifInventory("ExitUnitItem",1,"AltFire.Off")
+"####" F 0 A_Jump(256,"AltFire.On")
+Goto AltFire.On
+
+Fire:
+CENH FGH 1
+"####" F 0 A_PlaySoundEx("weapon/centaurvanish","Weapon")
+"####" F 0 A_TakeInventory("ExitUnitItem",99)
+"####" F 7
+goto Fire.After
+
+AltFire.On:
+"####" F 0 A_PlaySoundEx("weapon/centaurvanish","Weapon")
+"####" F 1 ACS_NamedExecuteAlways("TeleportSpotMark",0)
+"####" F 1 A_GiveInventory("TeleportFX_Spawn")
+"####" F 0 A_GiveInventory("ExitUnitItem")
+"####" F 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+AltFire.Off:
+"####" F 0 A_SpawnItemEX("TeleportSwitcher")
+"####" F 2 A_PlaySoundEx("weapon/centaurvanish","Weapon")
+"####" F 0 A_SpawnItemEX("RingWarpEffect")
+"####" F 0 A_SpawnItemEX("CentaurTeleportCooldown")
+"####" F 0 ACS_NamedExecuteAlways("Core_ExitUnit",0)
+"####" F 0 A_TakeInventory("ExitUnitItem",99)
+"####" F 5 
+"####" F 0 A_Jump(256,"Fire.After")
+Goto Fire.After
+
+Fire.After:
+CENH FEDC 1
+Goto End
+
+
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_Centaurman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("CentaurTeleportAbility",1)
+fail
+}
+}
+
+actor CentaurTeleportAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("CentaurTeleportCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+actor TeleportSwitcher : BasicHelper
+{
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Stop
+TNT1 D 0 ACS_NamedExecuteWithResult("GiveEntiTID",0,2)
+TNT1 A 35
+TNT1 D 0 A_GiveToTarget("ExitUnitItem")
+TNT1 A 1 ACS_NamedExecuteWithResult("TeleportSpotMark2",0)
+TNT1 A 17
+stop
+}
+}
+
+actor TeleportFX_Spawn : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEX("TeleportFX_1",0,0,28)
+TNT1 A 0 A_SpawnItemEX("TeleportFX_2",0,0,28)
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor TeleportFX_1 : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+ASEX E 1 
+ASEX E 0 A_SetScale(ScaleX-0.3,ScaleY+0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor TeleportFX_2 : BasicClientside
+{
+-NOINTERACTION
+-NOGRAVITY
+scale 2
+Gravity 0.5
+ReactionTime 8
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+ASEX E 1 
+ASEX F 0 A_SetScale(ScaleX+0.3,ScaleY-0.3)
+TNT1 A 0 A_Fadeout
+TNT1 A 0 A_CountDown
+loop
+
+Death:
+TNT1 A 0
+stop
+}
+}
+
+
+actor ExitUnitCentaurGhost
+{
+    +NOCLIP
+    +NOGRAVITY
+    Radius 1
+    Height 1
+    renderstyle "translucent"
+    Scale 2.5
+    States
+    {
+    Spawn:
+        TNT1 A 1
+        wait
+    Appear:
+        EXIT D 0 A_SetTranslucent(1.0)
+        EXIT DEFG 1
+        CENW A 2 A_SetTranslucent(0.9)
+        CENW B 2 A_SetTranslucent(0.7)
+        CENW C 2 A_SetTranslucent(0.9)
+        CENW B 2 A_SetTranslucent(0.7)
+        goto Appear+5
+    Vanish:
+        EXIT D 0 A_SetTranslucent(1.0)
+        EXIT KL 2
+        goto Spawn
+    }
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor CentaurTeleportCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("CentaurTeleportCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("CentaurTeleportCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor CentaurTeleportCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("CentaurTeleportCooldownItem",280)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("CentaurTeleportCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor CentaurTeleportCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 280
+}

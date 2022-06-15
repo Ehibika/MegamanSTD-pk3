@@ -10,9 +10,9 @@ Player.Startitem "IsFlashMan"
 Player.Startitem "UseAbility1_FlashMan"
 Player.Startitem "UseAbility2_FlashMan"
 
-Player.Startitem "PRO_BusterMastery"
-Player.Startitem "PRO_SprayerMastery"
-Player.Startitem "Pro_TeamMedic"
+Player.Startitem "PRO_MachineGunMastery"
+Player.Startitem "Pro_BusterMastery"
+Player.Startitem "PRO_EuclidMastery"
 
 +NOSKIN
 States

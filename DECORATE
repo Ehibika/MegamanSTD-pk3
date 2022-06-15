@@ -90,9 +90,11 @@
 #include "Actors/Classes/HarpNote/PulseSong.txt"
 
 #include "Actors/Classes/Centaurman/CentaurmanClass.txt"
+#include "Actors/Classes/Centaurman/CentaurTeleport.txt"
 #include "Actors/Classes/Centaurman/StopArrow.txt"
 
 #include "Actors/Classes/Flashman/FlashmanClass.txt"
+#include "Actors/Classes/Flashman/FlashBlink.txt"
 #include "Actors/Classes/Flashman/FlashPoint.txt"
 
 #include "Actors/Classes/Iceman/IcemanClass.txt"

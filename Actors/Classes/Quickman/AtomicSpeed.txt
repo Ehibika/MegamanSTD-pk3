@@ -6,7 +6,7 @@ Inventory.Pickupmessage "$PU_MEGABUSTER"
 Obituary "$OB_MEGABUSTER"
 Tag "whatanicetag"
 weapon.ammotype2 "BusterAmmo"
-inventory.icon "BOMBSI"
+inventory.icon "BDASWI"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {
@@ -16,20 +16,29 @@ QUMN A 0
 "####" A 1
 goto Fire
 
+Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,1.2*FVM)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+
 Fire:
 QUMN A 0 A_PlaySoundEx("weapon/watershieldburst", "Weapon")
-QUMN A 0 A_ChangeFlag(SHOOTABLE, 0)
+QUMN A 0 A_GiveInventory("AtomicSpeedEvasion_On",1)
 "####" ACACACAC 1
 Goto AtomicSpeedLoop
 AtomicSpeedLoop:
-QUMN A 0 A_GiveInventory("FireStormAmmo",1)
-QUMN A 0 A_GiveInventory("ASpeedUp",1)
-QUMN ACAC 2 A_JumpIfInventory("FireStormAmmo", 28, "AtomicSpeedEnd")
-loop
+QUMN AC 2 A_TakeInventory("AtomicSpeedResource",2)
+QUMN A 1 A_JumpIfInventory("AtomicSpeedResource", 1, "AtomicSpeedLoop")
+goto AtomicSpeedEnd
 AtomicSpeedEnd:
-QUMN A 1 A_ChangeFlag(SHOOTABLE, 1)
-"####" A 1 A_TakeInventory("FireStormAmmo",999)
-"####" D 1 A_GiveInventory("AtomicSpeedCooldown")
+QUMN A 7 A_GiveInventory("AtomicSpeedEvasion_Off",1)
+"####" A 1 A_TakeInventory("AtomicSpeedLevel",9)
+"####" A 1 A_GiveInventory("AtomicSpeedCooldown")
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,110)
 "####" D 0 A_Jump(256,"End")
 goto End
 
@@ -58,7 +67,8 @@ actor AtomicSpeedAbility : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_CheckFloor("Pickup2")
+TNT1 A 0 
+TNT1 A 0 A_JumpIfInventory("AtomicSpeedResource",35,"Pickup2")
 goto Nope
 
 Pickup2:
@@ -71,10 +81,61 @@ TNT1 A 0 ACS_Execute(979,0)
 stop
 }
 }
+
+
 //=================
 // :blink:
 //=================
 
+actor AtomicSpeedResource : inventory
+{
+inventory.amount 1
+inventory.maxamount 175 // up to 5 seconds worth of invulnerability
+}
+
+actor AtomicSpeed_Evade : PowerupGiver
+{ 
++INVENTORY.AUTOACTIVATE
+Powerup.Duration 175
+powerup.type "EvasionState"
+}
+
+actor AtomicSpeedEvasion_On : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 1 A_ChangeFlag("Spectral",1)
+TNT1 A 0 A_GiveInventory("AtomicSpeed_Evade")
+TNT1 A 0 A_SpawnItemEx("AtomicSpeedWatcher")
+TNT1 A 0 ACS_NamedExecuteAlways("DetectFlicker",0)
+
+stop
+}
+}
+
+actor AtomicSpeedEvasion_Off : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+TNT1 A 1 A_ChangeFlag("Spectral",0)
+TNT1 A 1 A_TakeInventory("EvasionState",9)
+stop
+}
+}
 //[+]========================================================================[+]
 //------------------------------|Cooldown Actors|------------------------------
 //[+]========================================================================[+]
@@ -105,7 +166,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("AtomicSpeedCooldownItem",1000)
+TNT1 A 0 A_Giveinventory("AtomicSpeedCooldownItem",175)
 TNT1 A 0 A_Spawnitemex("AtomicSpeedCooler")
 stop
 Nope:
@@ -118,5 +179,5 @@ stop
 actor AtomicSpeedCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 1000
+inventory.maxamount 175
 }

@@ -114,6 +114,10 @@ SetActivator(0, AAPTR_DAMAGE_SOURCE);
 if(CheckInventory("IsFireman") && CheckForElement(arg2,ELM_FIRE)){GiveInventory("FiremanHeat",arg1*0.5>>16);}
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 
+//==Quickman Class Passive==
+SetActivator(0, AAPTR_DAMAGE_SOURCE);
+if(CheckInventory("IsQuickMan")){GiveInventory("AtomicSpeedResource",(arg1*0.3>>16)+1);GiveInventory("AtomicSpeedUp",1);}
+SetActivator(0, AAPTR_DAMAGE_TARGET);
 
 if(Damage>0){TakeInventory("HealRampPower",9);GiveInventory("HealRampPower",1);}
 ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);
@@ -893,6 +897,9 @@ if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*lo
 
 IsBladeParryActive();
 
+//Quickman's Speed passive
+if(CheckInventory("IsQuickman")){Value += 0.1*CheckInventory("AtomicSpeedLevel");}
+
 if(Value != GetActorProperty(0,APROP_SPEED))
 	{
 	//log(i:Value,s:" ",i:GetActorProperty(0,APROP_SPEED),s:" ",f:Value,s:" ",f:GetActorProperty(0,APROP_SPEED));
@@ -900,6 +907,14 @@ if(Value != GetActorProperty(0,APROP_SPEED))
 	//TriggerAcrobatCheck();
 	}
 
+}
+
+script "SpeedUpdate" (int Value)
+{
+//used to change weapon speeds without switching weapons, this stuff will usually be counted
+//on actual weapon switches, like quickman's class passive
+
+SetActorPRoperty(0,APROP_SPEED,GetActorProperty(0,APROP_SPEED)+Value);
 }
 
 Script "DetectFlicker" (void)
@@ -1108,4 +1123,40 @@ Script "StunnedFXWarper" (void) CLIENTSIDE
     SetActorState(0,"Death");
     Delay(17);
 	Thing_Remove(0);
+}
+
+Script "TeleportSpotMark" (void)
+{
+    int pln = PlayerNumber();
+    int tid = pln+1000;
+    int ang = GetActorAngle(tid);
+    If(ThingCount(0, pln+PLN_EXITUNITIMAGE)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITIMAGE);
+    }
+    SpawnSpotForced("ExitUnitCentaurGhost",ActivatorTID(),pln+PLN_EXITUNITIMAGE,ang>>8);
+
+    If(ThingCount(0, pln+PLN_EXITUNITPOINT)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITPOINT);
+    }
+    SpawnSpotForced("TeleportDest2",ActivatorTID(),pln+PLN_EXITUNITPOINT,ang>>8);
+}
+
+Script "TeleportSpotMark2" (void)
+{
+    int pln = ACS_NamedExecuteWithResult("Core_GetTarget",0)-1000;
+    int tid = pln+1000;
+    int ang = GetActorAngle(0);
+    If(ThingCount(0, pln+PLN_EXITUNITIMAGE)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITIMAGE);
+    }
+    SpawnSpotForced("ExitUnitCentaurGhost",ActivatorTID(),pln+PLN_EXITUNITIMAGE,ang>>8);
+
+    If(ThingCount(0, pln+PLN_EXITUNITPOINT)>0)
+    {
+        Thing_Remove(pln+PLN_EXITUNITPOINT);
+    }
+    SpawnSpotForced("TeleportDest2",ActivatorTID(),pln+PLN_EXITUNITPOINT,ang>>8);
 }

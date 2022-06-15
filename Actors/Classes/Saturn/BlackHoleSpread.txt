@@ -22,10 +22,10 @@ SAHD A 1 A_WeaponReady
 goto Ready2
 
 Fire:
-SAHD F 0 A_PlaySoundEx("weapon/chillshot","Weapon")
+SAHD F 0 A_PlaySoundEx("weapon/ringboomerang","Weapon")
 "####" F 0 A_FireCustomMissile("BlackHoleSTD",0,0,8,0)
+"####" D 0 A_GiveInventory("BlackHoleSpreadCooldown")
 "####" BCDE 3
-"####" D 1 A_GiveInventory("BlackHoleSpreadCooldown")
 "####" D 0 A_Jump(256,"End")
 goto End
 
@@ -54,10 +54,6 @@ actor BlackHoleSpreadAbility : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_CheckFloor("Pickup2")
-goto Nope
-
-Pickup2:
 TNT1 A 0 A_JumpIfInventory("BlackHoleSpreadCooldownItem",1,"Nope")
 TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
 stop
@@ -74,8 +70,8 @@ actor BlackHoleSTD
 {
 PROJECTILE
 Translation "198:198=223:223", "192:192=215:215"
-Radius 12
-Height 12
+Radius 24
+Height 50
 scale 2.5
 damage (18)
 +HEXENBOUNCE
@@ -86,10 +82,12 @@ damage (18)
 meleerange 12
 damagetype "RingWarp"
 Obituary "$OB_RINGBOOMERANG"
-speed 50
+speed 64
 States
 {
 Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode")
 SARI ABABAB 2
 Goto Death
 Death:
@@ -101,21 +99,34 @@ stop
 actor BlackHoleSpreader : BlackHoleSTD
 {
 speed 0
-reactiontime 65
+reactiontime 20
 +THRUACTORS
 States
 {
 Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode")
 SARI A 0 A_Stop
+SpawnLoop:
 SARI A 0 A_Countdown
-SARI AB 3 A_SetArg(0,args[0]-20.0)
+SARI A 3 A_SetArg(0,args[0]-10.0)
 SARI A 0 A_PlaySoundEx("misc/devilfire","Weapon")
-SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+60)
-SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+-60)
-SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+120)
-SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+-120)
-SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+180)
-SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,64,0,0,args[0]+0)
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+60,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+-60,1|SXF_MULTIPLYSPEED)
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+120,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+-120,1|SXF_MULTIPLYSPEED)
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+180,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+0,1|SXF_MULTIPLYSPEED)
+SARI B 3 A_SetArg(0,args[0]-10.0)
+SARI A 0 A_Countdown
+SARI A 0 A_PlaySoundEx("misc/devilfire","Weapon")
+SARI A 0 A_PlaySoundEx("misc/devilfire","Weapon")
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+60,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+-60,1|SXF_MULTIPLYSPEED)
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+120,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+-120,1|SXF_MULTIPLYSPEED)
+SARI B 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+180,1|SXF_MULTIPLYSPEED)
+SARI A 0 A_SpawnItemEx("BlackHoleShot",0,0,10,1,0,0,args[0]+0,1|SXF_MULTIPLYSPEED)
 loop
 Death:
 MMFX BCDE 2
@@ -129,10 +140,10 @@ PROJECTILE
 +LOOKALLAROUND
 +SKYEXPLODE
 +DONTBLAST
-damagetype "Buster"
+damagetype "BlackHoleShot"
 Obituary "$OB_BLACKHOLE"
 seesound "weapon/mbuster"
-Speed 60
+Speed 32
 Damage (10)
 radius 5
 height 5
@@ -141,6 +152,7 @@ reactiontime 10
 States
 {
 Spawn:
+TNT1 A 0
 BASB A 1 A_Countdown
 loop
 Death:
@@ -178,7 +190,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("BlackHoleSpreadCooldownItem",400)
+TNT1 A 0 A_Giveinventory("BlackHoleSpreadCooldownItem",210)
 TNT1 A 0 A_Spawnitemex("BlackHoleSpreadCooler")
 stop
 Nope:
@@ -191,5 +203,5 @@ stop
 actor BlackHoleSpreadCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 400
+inventory.maxamount 210
 }
