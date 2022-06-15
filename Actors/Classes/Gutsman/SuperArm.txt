@@ -208,7 +208,7 @@ actor GutrockSTD
 {
 PROJECTILE
 -NOGRAVITY
-Damage (125)
+Damage (175)
 damagetype "GutsPunch"
 Obituary "$OB_SUPERARM"
 Height 30
@@ -270,8 +270,8 @@ stop
 }
 }
 
-actor SuperArmBossDebris1 : GutsPunchDebris {Speed 96 Damage (8)}
-actor SuperArmBossDebris2 : GutsPunchDebris2 {Speed 80 Damage (8)}
+actor SuperArmBossDebris1 : GutsPunchDebris {Speed 96 Damage (24)}
+actor SuperArmBossDebris2 : GutsPunchDebris2 {Speed 80 Damage (24)}
 
 //[+]========================================================================[+]
 //------------------------------|Cooldown Actors|------------------------------
