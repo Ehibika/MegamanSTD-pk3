@@ -67,6 +67,8 @@ OptionValue WepOptionsA
 30, "Repair Launcher \c[MenuGreen]:Repair:"
 31, "Replislasher \c[Teal]:Wind:"
 32, "ElectriggerV \c[MenuYellow]:Elec:"
+33, "VioletZapper \c[MenuYellow]:Elec:"
+34, "HawkPrecisionBuster \c[MenuYellow]:Elec:"
 }
 
 OptionValue WepOptionsB
@@ -104,6 +106,8 @@ OptionValue WepOptionsB
 30, "RepairLauncher"
 31, "Replislasher"
 32, "ElectriggerV"
+33, "VioletZapper"
+34, "HawkPrecisionBuster"
 }
 
 OptionValue WepOptions_Busters
@@ -115,6 +119,7 @@ OptionValue WepOptions_Busters
 21, "Fireball Buster \c[MenuRed]:Fire:"
 22, "Atomic Buster \c[MenuRed]:Fire:"
 26, "MediBuster \c[MenuGreen]:Repair:"
+34, "HawkPrecisionBuster \c[MenuYellow]:Elec:"
 }
 
 
@@ -130,6 +135,7 @@ OptionValue WepOptions_MGuns
 25, "Thrice Gun \c[MenuCyan]:Ice:"
 27, "Screw Shooter \c[MenuGreen]:Repair:"
 28, "Bolt Driver \c[MenuGreen]:Repair:"
+33, "VioletZapper \c[MenuYellow]:Elec:"
 }
 
 OptionValue WepOptions_Sprayers

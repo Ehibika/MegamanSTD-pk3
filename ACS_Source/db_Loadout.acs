@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE WEAPONLIST 33
+#LIBDEFINE WEAPONLIST 35
 #LIBDEFINE SUBWEAPONLIST_MAX 7
 #LIBDEFINE PSILIST 5
 
@@ -111,4 +111,6 @@ str MasterWepList[WEAPONLIST][6] = {
 /*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairLauncher",""},
 /*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherTip"},
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},
+/*33*/{"VioletZapper","VioletZapperWep","VioletZapper_Ammo", WF_MACHINEGUN,"VioletZapper",""},
+/*34*/{"HawkPrecisionBuster","HawkPrecisionBusterWep","HawkPrecisionBuster_Ammo", WF_BUSTER,"HawkPrecisionBuster",""},
 };

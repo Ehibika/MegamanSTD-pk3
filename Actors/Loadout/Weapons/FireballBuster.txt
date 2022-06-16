@@ -82,7 +82,7 @@ inventory.maxamount 20
 actor FireballBusterCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 7
+Powerup.Duration 5
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
@@ -91,7 +91,7 @@ powerup.type "ConShotTimer"
 
 actor FireballBusterRound : ProjectileBase
 {
-Speed 35
+Speed 20
 Damage (22)
 +NOEXPLODEFLOOR
 +BOUNCEONWALLS
