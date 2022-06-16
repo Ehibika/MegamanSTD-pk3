@@ -166,6 +166,9 @@
 #include "Actors/Loadout/Weapons/RepairLauncher.txt"
 
 #include "Actors/Loadout/Weapons/Replislasher.txt"
+#include "Actors/Loadout/Weapons/ElectriggerV.txt"
+#include "Actors/Loadout/Weapons/VioletZapper.txt"
+#include "Actors/Loadout/Weapons/HawkPrecisionBuster.txt"
 
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"
