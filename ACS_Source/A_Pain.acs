@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 28
+#LIBDEFINE PAINCOUNT 31
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -58,6 +58,9 @@ str PainRecord[PAINCOUNT][2] = {
 /*25*/{"GuitarMachineGun",ELM_DONTSTOP},
 /*26*/{"GuitarMachineGun2",ELM_DONTSTOP},
 /*27*/{"PulseSong",ELM_DONTSTOP},
+/*28*/{"DashPunchWall",ELM_BREAK},
+/*29*/{"DashPunch",ELM_BREAK},
+/*30*/{"ElectricSparkBoss",ELM_ELEC},
 };
 
 

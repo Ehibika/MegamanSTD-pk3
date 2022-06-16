@@ -319,6 +319,17 @@ InInventory IsSaturn, 1
 	ininventory BlackHoleSpreadCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlackHoleSpreadCooldownItem, vertical,reverse, 25, 163;}
 
 	}
+
+InInventory IsSparkMandrill, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", DashPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory DashPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", DashPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ESPARK", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ElectricSparkCooldownItem, vertical,reverse, 25, 163;
+	ininventory ElectricSparkCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ElectricSparkCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

@@ -99,7 +99,7 @@ if(Assassin)
 	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.3>>16;}}
 
 if(Determined){Damage += DB_Determined;}
-if(Guts){Damage = Damage*0.5>>16;}
+if(Guts){Damage += Damage*0.5>>16;}
 if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}

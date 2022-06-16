@@ -8,7 +8,7 @@ Tag "Military Buster"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 15
 
-Obituary "$OB_MILITARYBUSTER"
+Obituary "$OB_MILITARYBUSTERBUSTER"
 inventory.icon "BSTRI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -97,7 +97,7 @@ powerup.type "ConShotTimer"
 
 actor MilitaryBusterRound : fastProjectileBase
 {
-Obituary "$OB_Military"
+Obituary "$OB_MILITARYBUSTER"
 DamageType "MilitaryBuster"
 Speed 96
 Damage (60)
@@ -144,7 +144,7 @@ stop
 
 actor MilitaryTrail : BasicExplosion
 {
-Obituary "$OB_MILITARYBUSTER"
+Obituary "$OB_MILITARYBUSTERBUSTER"
 damagetype "MegaBuster"
 States
 {

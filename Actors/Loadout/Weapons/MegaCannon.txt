@@ -108,9 +108,9 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int MegaCannon_DMG = 120;
+Const int MegaCannon_DMG = 90;
 Const int MegaCannon_RAD = 160;
-Const int MegaCannon_RADMin = 64;
+Const int MegaCannon_RADMin = 32;
 actor MegaCannonShot : FastProjectileBase
 {
 Speed 48

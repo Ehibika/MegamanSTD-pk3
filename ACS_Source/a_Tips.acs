@@ -3,137 +3,63 @@
  *
  * 
 
+\cg\cf
+
+The \cg\cf Property 
 */
 #library "A_Tips"
 #include "zcommon.acs"
 
-#DEFINE TIPCOUNT 110
+#DEFINE TIPCOUNT 40
 
 str Tips[TIPCOUNT] = { 
+//====|Weapon Tips|======
+"The \cgCompresses sprayer\cf deals weak damage but it's knockback can be usefull for safe mobility or enemy displacement.",
+"The \cgmilitary buster\cf is considered the 'stock' version of it's weapon class, it got great raw power without much fuss",
+"The \cgLazer Rifle\cf is considered the 'stock' version of it's weapon class, it deals swift and reliable damage",
+"the \cgWindpressure Buster\cf Fires high velocity shots that deal wind damage.",
+"The \cgArrow Buster\cf deals increasing damage with each successful hit, missing a shot resets it's counter.",
+"Ballistic Launchers like the \cgMega Cannon\cf are like traditional FPS rocket launchers",
+"Energy launchers like the \cgLightwave Cannon\cf can provide sustained splash damage through fast moving projectiles",
+"Line sprayers like the \cgBurning Sprayer\cf deal damage across an area instantaneously.",
+"Particle Sprayers like the \cgGas emitter\cf spew free floating particles that act as lingering damage sources.",
+"Many melee weapons deal extra damage if you hit foes at the tip of the swing arc, this is called the \cgSweetspot\cf, and is considered critical damage",
+//====|Property Tips|======
+"The \cgLightweight\cf property increases the intensity of knockback, meaning you can blast jump higher and further, but be blown away more easily!",
+"The \cgHeavyWeight\cf property Decreases the intensity of knockback, making you much harder to displace but also making blast jumping less effective",
+"The \cgSubtank\cf property lets you gain overhealth off of health pickups, and in modes without health pickups, starts you off with a full compliment of overhealth.",
+"The \cgRefrigerate\cf Property causes wind and water weapons to inflict the Frostbite status.",
+"The \cgHeater\cf Property causes wind and water weapons to inflict the burn status.",
+"The \cgContaminate\cf Property causes wind and water weapons to inflict the poison status.",
+"The \cgBlade Parry\cf Property reduces projectile damage by 50% when a melee/blade weapon is in hand, it won't protect you against other melee/blade weapons and is useless against break damage.",
+"The \cgAssassin\cf Property boosts the power of critical hits, making devistating attacks even more lethal.",
+"The \cgElement guard\cf Property reduces Fire, Water, Ice, and Elec damage, making you just a bit more durable all around.",
+"The \cgSpeedRunner\cf Property boosts the movespeed on high movespeed weapons even higher, it even stacks with weapon masteries too!",
+"The \cgAcrobat\cf Property makes you jump higher!",
+"The \cgGutsy\cf Property amplifies weapon damage while under a status effect",
+"The \cgDetermined\cf Property amplifies weapon damage when health is low",
+"The \cgMarksman\cf Property grants bonus weapon damage when hitting faraway opponents, the greater the distance the greater the power!",
+"The \cgTeam medic\cf Property lets you passively heal while you have a Repair weapon equipped, wielders of this property make for self efficient healers.",
+"The \cgUndershirt\cf Property will let you hang on against a fatal hit at 1 HP, the effect is restored if you can recover to full health again.",
+"The \cgFirst Barrier\cf Property grants you a regenerating shield that will block a single hit when up, doesn't work against break damage however.",
 
-"With the Minibomb, throw it at your feet while jumping to propel yourself high and far! you will take some damage however so take care.",
-"you are resistant to knockback from explosions while you are on the floor, so when faced against one, stand your ground!",
-"Many explosives like the Minibomb and the Slam Cannon do significantly more damage on direct hits",
-"with the Tag missile, It's possible to blast jump off of it",
-"with the tag missile, the homing on it's missiles start weak but become more accurate over time. use it at long ranges for the best results",
-"with the tag missile, it cannot tag enemies that are too close to you, so best not to use it in close quarters.",
-"With the Light Screen, don't use it only to camp at long ranges. it can be a great asset for close quarters combat, and make for combat space during larger team fights",
-"with the light screen, explosives that hit it directly will have their AOE damage suppressed.",
-"With the MediBuster, keep in mind that it's not weak when it comes to damage dealing, and bypasses barriers",
-"With the HiPE Gun, it can fire it's shots quickly but is rather slow to reload. consider keeping a readily available sidearm like the buster gun or repidifier handy",
 
-"With the repidifier, it's steady damage output and hitscan properties makes it a great tool for poking at foes from a distance, use it to keep the pressure on fleeing opponents",
-"with the buster gun, try to find a rhythm with firing so that you don't overheat constantly.",
-"with the mine launcher, remember that it mines have knockback on it's explosions place them in angles that will knock them off track, perhaps even into other proxy mines",
-"with the mine launcher, you can only have 4 mines out, and spawning a 5th will erase the earliest one still active",
-"with the mine launcher, remember that explosion knockback is stronger on airborn foes, so place it near areas where opponents will have to jump or get off the ground",
-"if flankers are getting on your nerves, use the mine launcher to set up proxy mines on the routes they will take, they'll never know what hit them at first!",
-"proxy mines cloak themselves when armed, leaving them in a transparent, team colored tint, be perceptive of these when entering flank routes",
-"with the mine launcher, the mines cloake themselves to have a team colored tint, you could place it on areas with matching colors to help it blend in even more.",
-"with the Thrice gun, shots at point blank range are highly damaging, leaving foes with nearly half their health. keep it handy if you know you're going to get into up-close fights in the future.",
-"with the Thrice gun, take advantage of it's wide shot spread to deal with foes that like to strafe a lot",
-
-"Most forms of healing recover less on allies that have recently been damaged, so don't assume someone is invincible because they are under a heal beam",
-"with the subwich, remember that you will be rattled if shot while eating it, so eating in the heat of combat might lead to a short lunch break",
-"There are no random critical hits, but they can be gained through certain conditions, enemies with statuses can take critical hits from certain weapons",
-"with the health generator, it grows in efficiency for every other time it spawns health, it can level up 5 times",
-"with the health generator,be mindfull of where you place them, you don't want them all in one spot or else explosives will clear them easily",
-"with the health generator, keep them within your sight as the pickups can be used by enemy players.",
-"with the health generator, if you are under heavy fire, try standing on top of it to feed off the spawning health. it's not a fool-proof strategy but it can save you in a pinch!",
-"design your loadout based on what you wish to achieve and what your team has, remember that you cannot do everything on your own",
-"With the grappling hook, try using it at an angle on ceilings or walls to launch youself with the momentum.",
-"With the light screen, it can block enemy grappling hooks. use it to deny popular hook spots.",
-
-"The lightscreen has finite health, and lets out sparks when it's running low",
-"With the Booster pack, use it in short bursts to take shortcuts around the map",
-"With the booster pack, use it to fly up high to pelt your foes from above! take care however as you aren't totally safe yourself",
-"With the blitzer, keep in mind that it does strong damage at mid range, don't use it only for point blank shots",
-"with the slam cannon, it's solid AOE damage output comes at the cost of it being a slow to reload, pair it with a sidearm that can be ready to shoot when you run out during combat.",
-"with the blitzer, it's reloads rather quickly, so it pairs well with slower weapons",
-"with the repidifier, it's large clip, quick reload, and high rate of fire makes it a pretty reliable weapon to have. it lacks burst damage potential however",
-"With the FlameTongue, it's damage may be low but it pushes foes back constantly. making this an excellent tool for area control",
-"with the health generator, keep in mind that the health it spawns can be utilized by enemies. try using that to make the device act as a lure for roaming opponents",
-"deployables like the health generator, light screen, and proximity mines persist after you die.",
-
-"Top grenades can be shot down but will explode upon doing so. if one is on your tail then get some distance before you destroy it",
-"self Healing is generally hard to come by, thus having a team medic is important.",
-"With the top grenade, you can detonate it early by shooting at it or hitting it with an explosive.",
-"with the top grenade, use it to manipulate your foes movements, they will likely flee from it which will make their movements predictable",
-"if a top grenade is after you, shoot it down or get to a high location quickly.",
-"with the Sentry Gear, place sentries far apart from one another, two turrets close together might as well be one target",
-"with the Sentry Gear, remember that the sentries work best as support fire options, they can't hold an area by themselves",
-"the sentries spawned by the sentry gear are quite frail, so frail that many weapons can shatter them in a single hit",
-"the Tag Missile is an excellent choice against booster pack players, use it to knock those chumps out of the sky!",
-"with the booster pack, try to fly around in short bursts while taking shortcuts and direct route to save on fuel",
-
-"with the booster pack, use it with long ranged or explosive weapons to give your team air support, watch for enemy snipers and tag missiles!",
-"looking to play a medic? consider the light screen subweapon to help rescue teammates from harm or certain doom, don't just use it for your own safety",
-"looking to play a medic? remember that using both the mending tool and MediBuster in one loadout might not be as practical as you think, build around one or the other instead",
-"With the mending tool, pair it with an explosive sub like minibomb or top grenade to get in some supportive damage while you heal.",
-"looking to play a medic? remember that while poison stops your healing, you can still cure it after using medical tools on poisoned targets long enough.",
-"With the crossbow, remember that all primed bolts do is poison, they aren't any stronger than regular darts. so when your target is poisoned, lay in on them with regular shots",
-"with the crossbow, it's projectiles are slower than the Hi.P.E Gun's, so be prepared to lead a little more",
-"with the crossbow, poisoning a medic can be as impactfull as poisoning the one they are healing. if the team has no other medic or a health generator, then they are doomed!",
-"With the FlameTongue, keep in mind that it's close ranged damage output is low compared to the bliter, thrice gun, and even the Hi.P.E gun. so don't just run at foes with it",
-"with the Hotshot, it's fireballs can set foes on fire if 3 of them connect back to back, so keeping a crisperizer handy is wise.",
-
-"Looking to play as a Marksman? The Hi.P.E gun offers increadible ranged burst damage and works comfortably in mid-close range. it can take a while to reload though",
-"Looking to play as a Marksman? keeping a repidifier handy can be great for cleaning up weakened foes. it's hitscan and has infinite range with some spread",
-"Looking to play as a Marksman? the crossbow's bolt action firing style makes it great for sustained damage. it's projectiles are a little slower than the Hi.P.E gun's however",
-"Looking to play as a Marksman? consider the crossbow if the enemy team has a lot of healing. it's primed shots can poison targets to interfear with healing.",
-"Looking to play as a Marksman? the Heat Ray's hitscan damage and lack of fall off gives it more range than anything else. consequentially it's a bit too slow for close quarters engagements.",
-"Looking to play as a Marksman? consider subweapons like minibomb or grappling hook to help secure the high ground. minibomb can also be used for some additional damage when you need it.",
-"Looking to play as a Flanker? the stinger is great for both burst damage and poisoning foes. use it as a hit and run weapon.",
-"Looking to play as a Flanker? the crossbow's swift rate of fire, constant uptime, effectiveness at close range, and poisoning properties make it a very versatile option",
-"Looking to play as a Flanker? the combined power of the flametongue and the crisperizer can yield a lot of burst damage, and remember that the flametongue shoots embers",
-"With the FlameTongue, it's got more reach than you'd expect, but it deals less damage the further away your foe is.",
-
-"Looking to play on the frontline? the lightscreen is almost mandatory for the job, as it lets you create an advantageous spot to fight around",
-"Looking to play on the frontline? if you have enough support fire from the team, consider using weapons that are more control based like the flametongue or slam cannon",
-"Looking to play on the frontline? try to initiate a fight with a well placed light screen so your team can safely back you up.",
-"Looking to play on the frontline? the repidifier's hitscan properties and consistent damage can be great for softening up targets so long ranged classes on the team can finish them",
-"Looking to play on the frontline? remember that your goal is to hold ground. don't chase after fleeing targets, let your team clean them up",
-"With the flametongue, remember that it has a lot of pushback, making it a prime weapon for body blocking",
-"With the grappling hook, you can detatch early by pressing altfire to ride the momentum you have. this even discounts the cooldown for you!",
-"With the Power Dart, think about who you want to crit boost. players wielding minibombs or the slam cannon can be great candidate as they can easily wipe groups with it",
-"With the Power Dart, think about who you want to crit boost. a crack shot with the Hi.P.E gun or Crossbow can quickly eliminate players one by one with 3X damage",
-"With the Power Dart, using it on an already crit boosted ally extends the crit boost duration",
-
-"An enemy player with the power dart can orchestrate a team wipe at a moments notice, making them a genuine menace to consider",
-"the Heal patch's healing effect doesn't stack with multiples, so it's ideal to spread them out",
-"The heal patch can be attached to enemies, giving them a disadvantage in close quarters combat as they will inadvertedly heal your allies",
-"if an enemy heal patch is on you, blast jumping can help remove it. be sure to shoot it off allies as well",
-"if an ally heal patch is on you, nearby teammates will likely stay within your vicinity. so prepare to have your personal space violated for a bit",
-"with the heal patch, try sticking it on flankers to give them a source of healing as they head off.",
-"The heal patch is very slow at detoxification, as such poison is an effective counter against it in particular",
-"The cure spray grants status protection as well as health regen, use it before or during a team fight for best results",
-"with Rotary Shell, it's effective against projectiles but weak to explosives, so be wary of enemies using minibomb or slam cannon",
-"Rotary shell can allow a smart player to act as something of a tank with the assistance of a medic or the subwich.",
-
-"when deciding your loadout, concider centering it around a primary weapon, if your primary is the Hi.P.E gun, think about what would compliment it and how you intend to use it.",
-"when deciding your loadout, don't hesitate to change some things as the game plays out. always adapt to both your enemy's lineup, your team's lineup, and the map's characteristicts",
-"always be observant about player behavior. itentifying predictable actions can help with leading shots onto your target",
-"When crit boosted, you emit a distinct noise while the effect is going. so don't bother with trying to be sneaky.",
-"Shielded weapons are great for entering enemy controlled positions, move in with it out to take the initial shots",
-"If you find yourself in situations where ranged damage dealers are everywhere, keep a blitzer or blaster on hand to use the shield while they are out of your effective range",
-"shield health recovers quickly while the weapon is offhand. always allow your projected shield to recover when you don't need it.",
-"need a defensive build? combine both the lightscreen or rotary shell with a shielded weapon to double your defenses. and use the other shields to allow your shielded weapon to heal",
-"if you have a marksman on the team using the Heatray, consider using the flametongue to set foes on fire for him. to crit, work together and you'll make quick work of the enemy team",
-"The protector can prevent status inducing shots from inflicting their status, making it quite handy against marksmen wielding the crossbow or heat ray",
-
-"know when to fold, there's no shame in falling back to regroup with teamates",
-"Sustained damage output is always important in a push. if the majority of your teammates are built for flanking or defense then consider working with weapons like the blaster",
-"if you come up to a difficult composition, try everything you can to thwart it. more often than not the tools for victory are available to you.",
-"",
-"",
-"",
-"",
-"",
-"",
-"",
+//====|Mechanics Tips|======
+"The act of \cgBlast jumping\cf is to ride the concussive force of some projectiles to cover heights and distances, some are safe while others inflict self damage.",
+"Being stunned only halts movement, you can still attack, use abilities, and even dash when under the effect.",
+"The \cgFrostBite\cf Status slows you down, and causes ice damage to stagger your movement further.",
+"The \cgBurn\cf status rapidly eats away at health for a short time, it also makes you vulnerable to critical hits against certain weapons.",
+"The \cgPoison\cf Status slowly eats away at your health and absorbs any healing you revieve, eventually healing will cure it.",
+"The \cgStop\cf status is characterized by the victim being suspended in place sparkly, it's a rare but devastating condition that leaves you utterly vulnerable.",
+"\cgBreak\cf Damage has the innate property of bypassing all defensive properties, be they barriers, modifiers like from \cgBlade Parry\cf, or protective properties like \cgUndershirt\cf",
+"Overheal is temporary health that can be gained through some healing weapons and abilities, it decays over time so be quick about using it when you have it!",
+"Overhealed characters have a barrier-like visual surrounding them, Overhealth \cg is not considered a defensive property\cf thus \cgBreak\cf Damage has no special effect against it.",
+"Weapon masteries provide a boost in that weapons onhand movespeed and a 30% damage increase for that weapon, characters with masteries fight most efficiently with those weapons.",
+"Weapon masteries do not effect the healing potential of \cgRepair\cf weapons, so chose based on what works for the situation.",
+"A \cgCritical Hit\cf has a distinct sound and audio cue, and only occurs under specific conditions, like landing a sweetspot on a saber.",
 };
 
-script 199 (VOID)//DEATH 
+script "HeresATip" DEATH 
 {
 Int cln = PlayerNumber();
 
@@ -143,6 +69,6 @@ SetHudSize(656,496,0);
 SetFont("SMALLFONT");
 //hudmessage(s:"PROTIP: ",s:Tips[random(0,TIPCOUNT)]; HUDMSG_FADEINOUT|HUDMSG_LOG, 665, CR_GREEN, 400.0, 585.0, 5.0, 3.5, 1.0);
 
-hudmessage(s:"Tip: ",s:Tips[random(0,TIPCOUNT-1)]; HUDMSG_FADEINOUT|HUDMSG_LOG, 665, CR_YELLOW, 328.0, 485.0, 5.0, 3.5, 1.0);
+hudmessage(s:"Tip: ",s:Tips[random(0,TIPCOUNT-1)]; HUDMSG_FADEINOUT|HUDMSG_LOG, 665, CR_YELLOW, 328.0, 445.0, 5.0, 3.5, 1.0);
 
 }

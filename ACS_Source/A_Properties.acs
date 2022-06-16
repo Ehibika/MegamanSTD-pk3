@@ -183,7 +183,7 @@ Delay(1);
 if(CheckProp(MasterProPList[15][PROP_NAME])){PlayerJumpZ[PlayerNumber()]+=5.0; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}
 if(CheckProp(MasterProPList[20][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Undershirt",0,0);}
 if(CheckProp(MasterProPList[22][PROP_NAME])){ACS_NamedExecuteAlways("Passive_TeamMedic",0,0);}
-
+if(CheckProp(MasterProPList[23][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Subtank",0,0);}
 }
 
 Script "Passive_Undershirt" (void)
@@ -227,6 +227,16 @@ while(GetActorProperty(0,APROP_HEALTH) > 0)
         }
     delay(5);
     }
+}
+
+Script "Passive_Subtank" (void)
+{
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+    {
+    ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,0,ACS_NamedExecuteWithResult("MSTD_HealthPercent",0,1,50),50);
+    GiveInventory("SubTankDelay",1);
+    }
+
 }
 
 //#region -=- depreciated -=-
@@ -500,3 +510,24 @@ Script "overhealFXWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "GutsyRageFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	    &&(
+        CheckActorInventory(Player, "FrostbiteMark") > 0
+        ||CheckActorInventory(Player, "BurnMark") > 0
+        ||CheckActorInventory(Player, "PoisonMark") > 0
+        ||CheckActorInventory(Player, "StunMark") > 0
+        )
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}

@@ -135,7 +135,7 @@ Loop
 Loop
 XDeath:
 Crash:
-TNT1 A 0 A_JumpifCloser(100,"MeatshotFX")
+TNT1 A 0 //A_JumpifCloser(100,"MeatshotFX")
 Death:
 TRIC A 1 A_Spawnitemex("ThriceGunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop

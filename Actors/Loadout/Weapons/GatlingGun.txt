@@ -4,7 +4,7 @@ actor GatlingGunWep : WepMasterBase
 {
 Tag "GatlingGun"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 120
+Weapon.AmmoGive 180
 
 Obituary "$OB_GATLINGGUN"
 inventory.icon "BASHI"
@@ -44,13 +44,30 @@ Fire:
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_PlaySoundEx("weapon/BasherShot","Weapon")
 "####" A 0 A_Giveinventory("GattlingGunCST")
+"####" A 0 A_Jumpifinventory("WeaponCharge",7,"Fire.MaxSpeed")
+"####" A 0 A_Jumpifinventory("WeaponCharge",3,"Fire.Speed2")
+goto Fire.Speed1
+
+Fire.Speed1:
+"####" B 1 A_FireCustomMissile("GatlingGunShot",fRandom(-(BST_SPD),(BST_SPD)),1,4,4,0,fRandom(-(BST_SPD),(BST_SPD)))
+"####" CA 1 A_WeaponReady(WRF_FIRING)
+"####" A 5 A_Giveinventory("WeaponCharge")
+goto Fire.EndCycle
+
+
+Fire.Speed2:
+"####" B 1 A_FireCustomMissile("GatlingGunShot",fRandom(-(BST_SPD),(BST_SPD)),1,4,4,0,fRandom(-(BST_SPD),(BST_SPD)))
+"####" C 1 A_FireCustomMissile("GatlingGunShot",fRandom(-(GATT_SPD),(GATT_SPD)),0,4,4,0,fRandom(-(GATT_SPD),(GATT_SPD)))
 "####" A 0 A_Giveinventory("WeaponCharge")
+"####" A 4 A_WeaponReady(WRF_FIRING)
+goto Fire.EndCycle
+
+Fire.MaxSpeed:
 "####" B 1 A_FireCustomMissile("GatlingGunShot",fRandom(-(BST_SPD),(BST_SPD)),1,4,4,0,fRandom(-(BST_SPD),(BST_SPD)))
 "####" CA 1 A_FireCustomMissile("GatlingGunShot",fRandom(-(GATT_SPD),(GATT_SPD)),0,4,4,0,fRandom(-(GATT_SPD),(GATT_SPD)))
 "####" A 0 A_WeaponReady(WRF_FIRING)
-Fire.Cycle:
-"####" A 0 A_Jumpifinventory("WeaponCharge",7,"Fire.EndCycle")
-"####" A 1 a_SetTics(7 - CallACS("GetWeaponCharge"))
+goto Fire.EndCycle
+
 Fire.EndCycle:
 "####" C 0 A_REfire
 "####" A 0 A_TakeInventory("WeaponCharge",999)
@@ -98,7 +115,7 @@ actor GatlingGunWep2 : GatlingGunWep
 actor GatlingGun_Ammo : Ammo
 {
 inventory.amount 1
-inventory.maxamount 120
+inventory.maxamount 180
 }
 
 actor GattlingGunCST : PowerupGiver
@@ -116,7 +133,7 @@ actor GatlingGunShot : fastProjectileBase
 Obituary "$OB_GATLINGGUN"
 DamageType "GatlingGunP"
 Speed 80
-Damage (10)
+Damage (5)
 radius 3
 
 height 3

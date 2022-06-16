@@ -67,6 +67,10 @@ OB_FIRESTORMTRAIL = "%k got Incinerated by %o's FireStorm!";
 
 OB_XCHARGESHOT = "%k was Blasted by %o's Charge Shot!";
 
+OB_ELECSPARK = "%k was sparkled by %o's Electric Spark";
+OB_DASHPUNCH= "%k was sent flying by %o's Dash Punch";
+OB_SOLIDSLAM = "%o was slam bammed into a object by %k Dash Punch";
+
 //#region old
 //DOT Obituaries
 OB_Burner = "%k Eliminated %o";

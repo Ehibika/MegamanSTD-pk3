@@ -78,7 +78,7 @@ inventory.maxamount 35
 actor MegaRifleShot : fastProjectileBase
 {
 Obituary "$OB_MegaRifle"
-DamageType "SingleShot2"
+DamageType "LazerRifle"
 Speed 80
 Damage (10)
 radius 3

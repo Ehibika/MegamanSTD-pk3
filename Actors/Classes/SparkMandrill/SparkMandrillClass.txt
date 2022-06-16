@@ -1,0 +1,39 @@
+Actor SparkMandrill : ClassBase 
+{
+Player.DisplayName "Spark Mandrill"
+Player.SoundClass "SparkMandrill"
+Health 350
+Player.MaxHealth 350
+Player.JumpZ 10
+
+Player.Startitem "IsSparkMandrill"
+Player.Startitem "UseAbility1_SparkMandrill"
+Player.Startitem "UseAbility2_SparkMandrill"
+
+Player.Startitem "PRO_ElectricResistance"
+Player.Startitem "PRO_Hefty"
+Player.Startitem "PRO_Gutsy"
+
++NOSKIN
+States
+{
+Spawn: 
+SPMD A 0
+SPMD B 1 
+SPMD A 1
+GoTo Spawn+2
+See:
+SPMD BCDE 5
+GoTo Spawn+1
+Missile:
+SPMD F 5
+SPMD G 4
+GoTo Spawn+2
+PainFix:
+SPMD H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsSparkMandrill : Once{}

@@ -114,7 +114,7 @@ Damagefactor "DrillHead", 0
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int DrillHeadCannon_DMG = 90;
+Const int DrillHeadCannon_DMG = 70;
 Const int DrillHeadCannon_RAD = 128;
 Const int DrillHeadCannon_RADMin = 32;
 actor DrillHeadCannonShot : FastProjectileBase

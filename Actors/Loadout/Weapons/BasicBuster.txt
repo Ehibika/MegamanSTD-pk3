@@ -83,7 +83,7 @@ inventory.maxamount 10
 actor BasicBusterRound : fastProjectileBase
 {
 Obituary "$OB_Blaster"
-DamageType "SingleShot2"
+DamageType "MilitaryBuster"
 Speed 100
 Damage (50)
 radius 3

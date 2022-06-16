@@ -13,14 +13,14 @@ addplayerclass Cinnamon
 addplayerclass Alia
 addplayerclass MegamanEXE
 addplayerclass HarpNote
-
-
-//addplayerclass Spider
 addplayerclass Centaurman
 addplayerclass FlashMan
 addplayerclass Iceman
 addplayerclass GutsMan
 addplayerclass QuickMan
+addplayerclass SparkMandrill
+
+//addplayerclass Spider
 //addplayerclass Saturn
 //=====
 

@@ -14,6 +14,12 @@ OptionString ClassNames
 "MegamanEXE", "MegamanEXE" 
 "FireMan", "FireMan" 
 "HarpNote", "HarpNote" 
+"Centaurman", "Centaurman"
+"FlashMan", "FlashMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"QuickMan", "QuickMan"
+"Spark Mandrill", "Spark Mandrill" 
 }
 
 OptionString ClassProperties
@@ -24,30 +30,42 @@ OptionString ClassProperties
 "MegamanX", "BusterMastery \nSubTank \nDetermined" //MegamanX
 "Zero", "BusterMastery \nMeleeMastery \nBlade Parry" //Zero
 "Axl", "MachineGunMastery \nSprayerMastery \nAcrobat" //Axl
-"Massimo", "LauncherMastery \nHefty \nDetermined" //Massimo
+"Massimo", "LauncherMastery \nHefty \nHeavyweight" //Massimo
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
+"Centaurman", "Marksman \nEuclidResistance \nHefty"
+"FlashMan", "MachineGunMastery \nBusterMastery \nEuclidResistance"
+"Iceman", "IceResistance \nSubTank \nRefrigerate"
+"GutsMan", "Gutsy \nHefty \nHeavyWeight"
+"QuickMan", "Speedrunner \nAcrobat \n\cAtomic Speed"
+"Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
 }
 
 OptionString Class_HP
 {
-"Megaman", "100" 
-"SuperMegaman", "100" 
-//"AutoSTD" , "100" 
-"MegamanX", "125" 
-"Zero", "100" 
-"Axl", "100" 
-"Massimo", "200" 
-"Marino", "100" 
-"Cinnamon", "150" 
-"Alia", "125" 
-"MegamanEXE", "100" 
-"Fireman", "125" 
-"HarpNote", "100" 
+"Megaman", "200" 
+"SuperMegaman", "200" 
+//"AutoSTD" , "250" 
+"MegamanX", "250" 
+"Zero", "175" 
+"Axl", "200" 
+"Massimo", "350" 
+"Marino", "175" 
+"Cinnamon", "300" 
+"Alia", "250" 
+"MegamanEXE", "175" 
+"Fireman", "250" 
+"HarpNote", "200" 
+"Centaurman", "175"
+"FlashMan", "175"
+"Iceman", "250"
+"GutsMan", "350"
+"QuickMan", "175"
+"Spark Mandrill", "350" 
 }
 
 
@@ -66,6 +84,12 @@ OptionString Class_Altfire
 "MegamanEXE", "GutsPunch" 
 "Fireman", "FireBall" 
 "HarpNote", "Guitar Machine gun" 
+"Centaurman", "Centaurman"
+"FlashMan", "FlashMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"QuickMan", "QuickMan"
+"Spark Mandrill", "Dash Punch" 
 }
 
 
@@ -85,6 +109,12 @@ OptionString Class_AltfireInfo
 "MegamanEXE", "Execute a high impact \npunch that deals Break damage" 
 "Fireman"   , "Lob a fireball that \nexplodes on impact, generating \nmeter on hit." 
 "HarpNote"  , "Launch Binding guitar \nstrings to inflict Stop on \neveryone in their path, afterwards \nyou can launch a barrage \nof piercing music notes at them." 
+"Centaurman", "Centaurman"
+"FlashMan", "FlashMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"QuickMan", "QuickMan"
+"Spark Mandrill", "Fully commits to a \ndevestating punch that \nsends the foe flying, and the foes\ncollision with a solid will \nstun and do additional damage." 
 }
 
 
@@ -103,6 +133,12 @@ OptionString Class_Ability
 "MegamanEXE", "RockCube" 
 "Fireman", "FireStorm" 
 "HarpNote", "Pulse Song" 
+"Centaurman", "Centaurman"
+"FlashMan", "FlashMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"QuickMan", "QuickMan"
+"Spark Mandrill", "Electric Spark" 
 }
 
 OptionString Class_AbilityInfo
@@ -121,4 +157,10 @@ OptionString Class_AbilityInfo
 "MegamanEXE"    , "Place down a solid rock cube \nthat blocks shots" 
 "Fireman"       , "Launch a powerful fire \nblast of varying intensity depending \non the amount of meter \nyou have, at high ammounts \nit leaves a trail of fire in \nit's wake." 
 "HarpNote"      , "Emit a strange sound that \nweakens nearby foes, temporarily \nreducing the damage \nthey deal by 75%. " 
+"Centaurman", "Centaurman"
+"FlashMan", "FlashMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"QuickMan", "QuickMan"
+"Spark Mandrill" , "Unleashes a wave of \nelectric sparks that crawl \non the floor and split \nwith contact with a wall. " 
 }

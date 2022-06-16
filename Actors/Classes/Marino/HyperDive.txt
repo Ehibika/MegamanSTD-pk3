@@ -100,7 +100,7 @@ actor HyperDiveSpeed : CustomInventory
     }
 }
 
-actor HyperDiveCheck : FastProjectile
+actor HyperDiveCheck : FastProjectileBase
 {
     PROJECTILE
     Obituary "$OB_HYPERDIVE"

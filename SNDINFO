@@ -109,6 +109,8 @@ weapon/centaurvanish CENPORT
 weapon/centaurarrowfly CENARFLY
 weapon/centaurcharge CENCHARG
 
+Misc/Bonk BONK1
+
 weapon/AutoReload1 armret $limit weapon/AutoReload1 0//fakerel2
 weapon/AutoReload2 S_M9_I1 $limit weapon/AutoReload2 0
 weapon/AutoReload3 S_M9_I2 $limit weapon/AutoReload3 0

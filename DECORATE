@@ -113,6 +113,10 @@
 #include "Actors/Classes/Saturn/RingWarp.txt"
 #include "Actors/Classes/Saturn/BlackHoleSpread.txt"
 
+#include "actors/Classes/SparkMandrill/SparkMandrillClass.txt"
+#include "actors/Classes/SparkMandrill/DashPunch.txt"
+#include "actors/Classes/SparkMandrill/ElectricSpark.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

@@ -1,0 +1,15 @@
+$playersound	sparkmandrill	male	*grunt		FATLAND
+$playersound	sparkmandrill	male	*land		FATLAND
+$playersound	sparkmandrill	male	*death		MEGADEAT
+$playersound	sparkmandrill	male	*xdeath		MEGADEAT
+$playersound	sparkmandrill	male	*gibbed		MEGADEAT
+$playersound	sparkmandrill	male	*pain100	MEGAPAIN
+$playersound	sparkmandrill	male	*pain75		MEGAPAIN
+$playersound	sparkmandrill	male	*pain50		MEGAPAIN
+$playersound	sparkmandrill	male	*pain25		MEGAPAIN
+$playersound	sparkmandrill	male	*jump		dsnone
+$playersound	sparkmandrill	male	*fist		dsnone
+$playersound	sparkmandrill	male	*usefail	LAND
+$playersound	sparkmandrill	male	*taunt		dsnone
+$playersound	sparkmandrill	male	*critpain	CRITIHIT
+$playersound	sparkmandrill	male	*critdeth	CRITDIE

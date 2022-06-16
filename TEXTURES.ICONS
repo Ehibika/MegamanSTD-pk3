@@ -403,4 +403,11 @@ Graphic "PLSNGI", 30, 30
 	Patch "HPSJI0", 0, 0
 }
 
+Graphic "ESPARK", 30, 30
+{
+	XScale 2.000
+	YScale 2.000
+	Patch "ELSPI0", 0, 0
+}
+
 // End of texture definitions

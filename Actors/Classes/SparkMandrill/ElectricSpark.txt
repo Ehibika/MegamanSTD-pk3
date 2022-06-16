@@ -1,0 +1,189 @@
+actor Ability2_SparkMandrill : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Tag "Electric Spark Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "ESPARK"
+Dropitem ""
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
++WEAPON.NOAUTOFIRE
+States
+{
+
+Ready:
+SMHD A 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+Fire:
+"####" BCD 3
+"####" A 0 A_PlaySoundEx("weapon/sparkshock","Weapon")
+"####" A 0 A_PlaySoundEx("weapon/breakdashimpact","SoundSlot6")
+"####" A 0 SetPlayerProperty(0,1,4)
+"####" A 0 A_Quake(6,17,0,300)
+"####" A 0 ThrustThingZ(0, -125, 0, 0)
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,0,SXF_NOCHECKPOSITION)
+"####" D 5
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,15,SXF_NOCHECKPOSITION)
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,-15,SXF_NOCHECKPOSITION)
+/*"####" D 8
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,30,SXF_NOCHECKPOSITION)
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,0,SXF_NOCHECKPOSITION)
+"####" A 0 A_SpawnItemEx("ElectricSparkProj",50,0,11,25,0,0,-30,SXF_NOCHECKPOSITION)*/
+"####" A 0 SetPlayerProperty(0,0,4)
+"####" D 2
+"####" A 20
+"####" C 0 A_GiveInventory("ElectricSparkCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" B 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_SparkMandrill : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("ElectricSparkAbility",1)
+fail
+}
+}
+
+actor ElectricSparkAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("ElectricSparkCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+
+actor ElectricSparkProj : ProjectileBase
+{
+PROJECTILE
+Damage (60)
+Height 22
+Radius 22
+Scale 2.5
+Obituary "$OB_ELECSPARK"
+damagetype "ElectricSparkBoss"
++FloorHugger
++NoExplodeFloor
+ReactionTime 17
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+ELSP A 1 A_ChangeFlag("FLOORHUGGER",0)
+ELSP A 0 A_ChangeFlag("SLIDESONWALLS",0)
+GoTo Looping
+Looping:
+ELSP A 2 A_ChangeVelocity(25,0,0,CVF_RELATIVE|CVF_REPLACE) 
+ELSP A 0 A_JumpIf(z-floorz>0, "Air")
+ELSP B 2 A_CountDown
+ELSP A 0 A_JumpIf(z-floorz>0, "Air")
+Loop
+Death:
+ELSP A 0 A_SpawnItemEx("ElectricSparkSplit",0,0,0,25,0,0,-90)
+ELSP A 0 A_SpawnItemEx("ElectricSparkSplit",0,0,0,25,0,0,90)
+stop
+Air:
+ELSP A 1 A_ChangeVelocity(0,0,-25,CVF_RELATIVE|CVF_REPLACE) 
+ELSP A 0 A_JumpIf(z-floorz==0, "Looping")
+ELSP A 1
+ELSP A 0 A_JumpIf(z-floorz==0, "Looping")
+ELSP B 1
+ELSP A 0 A_JumpIf(z-floorz==0, "Looping")
+ELSP B 1 
+ELSP A 0 A_JumpIf(z-floorz==0, "Looping")
+loop
+Crash:
+TNT1 A 1
+stop
+}
+}
+
+actor ElectricSparkSplit : ElectricSparkProj
+{
+-FloorHugger
++SLIDESONWALLS
++BOUNCEONWALLS
+BounceCount 0
+BounceFactor 1.0
+Radius 21
+States
+{
+Death:
+TNT1 A 1 A_SpawnItemEx("ExplosionEffect1",0,0,32)
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor ElectricSparkCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("ElectricSparkCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ElectricSparkCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricSparkCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("ElectricSparkCooldownItem",105)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("ElectricSparkCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricSparkCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 105
+}
