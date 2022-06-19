@@ -1,0 +1,131 @@
+actor Ability1_gutsman : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_GUTSPUNCHBOSS"
+Tag "HyperBomb Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "HARDSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+XB20 A 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+Fire:
+/*
+XB20 A 0 A_PlaySoundEx("weapon/napalm","Weapon")
+"####" A 0 A_Quake(2,14,0,8,"none")
+"####" A 0 A_FireCustomMissile("GutsPunchBoss",0,0,-8,0)
+"####" A 5 
+"####" A 0 A_TakeInventory("GutsPunchBossBreakFlag",999)
+"####" DE 1
+"####" F 16
+"####" ED 2
+*/
+GUTP F 0 A_PlaySoundEx("weapon/napalm","Weapon")
+GUTP F 0 A_FireCustomMissile("GutsPunch",0,0,-8,0)
+GUTP F 0 A_GiveInventory("GutsPunchBreakFlag",1)
+GUTP F 2 Offset(-28,8) A_Quake(2,14,0,8,"none")
+GUTP EEEE 2 Offset(-56,-16)
+GUTP E 2 Offset(-56,-16)
+GUTP E 2 Offset(-56,-16)A_TakeInventory("GutsPunchBreakFlag",99)
+GUTP E 2 Offset(-32,2)
+GUTP E 2 Offset(-12,20)
+GUTP E 2 A_WeaponReady(14)
+"####" C 0 A_GiveInventory("GutsPunchBossCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_gutsman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("GutsPunchBossAbility",1)
+fail
+}
+}
+
+actor GutsPunchBossAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("GutsPunchBossCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+
+//=================
+//=================
+
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor GutsPunchBossCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("GutsPunchBossCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("GutsPunchBossCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor GutsPunchBossCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("GutsPunchBossCooldownItem",85)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("GutsPunchBossCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor GutsPunchBossCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 85
+}

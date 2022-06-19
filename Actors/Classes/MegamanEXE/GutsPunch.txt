@@ -1,3 +1,4 @@
+/*
 actor Ability1_megamanEXE : AbilityMasterBase
 {
 Weapon.AmmoUse2 1
@@ -64,6 +65,7 @@ TNT1 A 0 ACS_Execute(979,0)
 stop
 }
 }
+*/
 //=================
 //=================
 

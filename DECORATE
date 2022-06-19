@@ -41,6 +41,7 @@
 
 #include "Actors/Classes/MegamanEXE/MegamanEXEClass.txt"
 #include "Actors/Classes/MegamanEXE/GutsPunch.txt"
+#include "Actors/Classes/MegamanEXE/Minibomb.txt"
 #include "Actors/Classes/MegamanEXE/RockCube.txt"
 
 
@@ -104,6 +105,7 @@
 #include "Actors/Classes/Gutsman/GutsmanClass.txt"
 #include "Actors/Classes/Gutsman/PicketMen.txt"
 #include "Actors/Classes/Gutsman/SuperArm.txt"
+#include "Actors/Classes/Gutsman/GutsPunchBoss.txt"
 
 #include "Actors/Classes/Quickman/QuickmanClass.txt"
 #include "Actors/Classes/Quickman/QuickBlaster.txt"

@@ -90,6 +90,7 @@ PROJECTILE
 Damage (20)
 scale 2.5
 damagetype "IceSlasherBoss"
+Obituary "OB_ICESLASHER"
 +RIPPER
 radius 18
 height 18

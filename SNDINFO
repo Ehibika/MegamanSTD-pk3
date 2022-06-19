@@ -52,6 +52,7 @@ weapon/rollheal ROLLHEA1
 weapon/rollhealing ROLLHEA2
 weapon/rollheal2 HEAL01
 support/Negative NEGSTAT
+support/TimeStop FLASH5
 support/Statup STATUP
 support/StatDown STATDOWN
 support/Healdiode1 HEALDIO1

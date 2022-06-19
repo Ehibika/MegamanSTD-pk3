@@ -60,9 +60,9 @@ goto End
 AltFire:
 "####" "#" 0 A_JumpIfInventory("CombatDashCooldownItem",1,"NoAmmo")
 HSPR A 0 A_PlaySoundEx("weapon/BreakDash","SoundSlot6")
-"####" A 0 SetPlayerProperty(0,1,0)
+"####" A 0 A_GiveInventory("DashSet_A")
 "####" BBCCCCCC 1 A_ChangeVelocity(35,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
-"####" C 0 SetPlayerProperty(0,0,0)
+"####" C 0 A_GiveInventory("DashSetOff")
 "####" BA 2
 "####" A 0 A_GiveInventory("CombatDashCooldown")
 "####" A 0 A_GiveInventory("RefireBuffer")

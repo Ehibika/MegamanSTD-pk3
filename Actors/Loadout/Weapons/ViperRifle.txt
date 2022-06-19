@@ -6,7 +6,7 @@ Weapon.AmmoUse 1
 Weapon.AmmoGive 50
 
 Obituary "$OB_VIPERRIFLE"
-inventory.icon "REPII"
+inventory.icon "STNGI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "ViperRifle_Ammo"

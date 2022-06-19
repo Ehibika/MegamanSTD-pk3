@@ -5,18 +5,18 @@
 
 function bool ProjTeamColorCvar(void)
 {
-	//return (getCvar("PKMN_CV_ProjTeamColor")>0);
+	//return (getCvar("MSTD_CV_ProjTeamColor")>0);
 	return (ProjTeamColorCvarServer()&&ProjTeamColorCvarClient());
 }
 
 function bool ProjTeamColorCvarClient(void)
 {
-	return (getUserCvar(ConsolePlayerNumber(),"PKMN_CV_ProjTeamColor")>0);
+	return (getUserCvar(ConsolePlayerNumber(),"MSTD_CV_ProjTeamColor")>0);
 }
 
 function bool ProjTeamColorCvarServer(void)
 {
-	return (getCvar("PKMN_sv_projteamcolor")>0);
+	return (getCvar("MSTD_SV_ProJTeamColor")>0);
 }
 
 script "Set_Projectile_Translation" (int i) CLIENTSIDE

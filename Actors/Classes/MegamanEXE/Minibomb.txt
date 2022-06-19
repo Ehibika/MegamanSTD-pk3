@@ -1,0 +1,183 @@
+actor Ability1_megamanEXE : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MINIBOMB"
+Tag "MiniBomb Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "MINIBI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+XB20 A 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+Fire:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("MiniBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_megamanEXE : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("MinibombAbility",1)
+fail
+}
+}
+
+actor MinibombAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("MinibombCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+Const int Minibomb_DMG = 50;
+Const int Minibomb_RAD = 128;
+Const int Minibomb_RADMin = 32;
+
+actor MiniBomb 
+{
+PROJECTILE
+damagetype "MiniBomb"
+Obituary "$OB_MiniBomb"
+radius 4
+height 4
+scale 2.0
+-NOGRAVITY
++DOOMBOUNCE
++BOUNCEONCEILINGS
+-BOUNCEONFLOORS
++MTHRUSPECIES
++NOTARGETSWITCH
++MBFBOUNCER
+speed 35
+gravity 1.5
+Damage (0)
+wallbouncefactor 0.8
+BounceFactor 0.3
+reactiontime 25
+States
+{
+Spawn:
+XS00 S 0
+TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+XS00 BCDEF 1 A_SpawnItemEX("MinibombTrail",0,0,5,0,0,0,0,SXF_TRANSFERTRANSLATION,0)
+XS00 B 0 //A_CountDown
+Goto Spawn2
+
+Death:
+NAPC D 0 A_Explode(Minibomb_DMG, Minibomb_RAD, 1,0,Minibomb_RADMin)
+NAPA D 0 ACS_NamedExecuteWithResult("Save_Boom")
+NAPA D 0 A_RadiusGive("Minibomb_Knockback",Minibomb_RAD,RGF_PLAYERS)
+NAPC A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
+TNT1 A 10 A_SpawnItemEx("ExplosionEffect2",0,0,0,0,0,0,0,1)
+TNT1 A 1
+stop
+}
+}
+
+actor Minibomb_Knockback : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup2")
+TNT1 A 0 A_JumpIf(CallACS("Boom_IsEnemy"),"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad)
+stop
+}
+}
+
+actor MinibombTrail : BasicClientside
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 2
+MINB IIIIII 1
+MINB IIIIII 1 A_Fadeout
+stop
+}
+}
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor MiniBombCooler : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("MiniBombCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("MiniBombCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor MiniBombCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("MiniBombCooldownItem",85)
+TNT1 A 0 A_Spawnitemex("MiniBombCooler")
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor MiniBombCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 85
+}

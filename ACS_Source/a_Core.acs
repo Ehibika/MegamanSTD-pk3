@@ -611,3 +611,96 @@ if (GetCVar("teamplay")==1||GetCVar("teamlms")==1||GetCVar("teampossession")==1
 }
 Return TEAM_NONE;
 }
+
+
+function int fDistanceVal(int x, int y, int z)
+{
+	int len;
+	
+	int ang = vectorangle(x,y);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	else len = fixeddiv(x, cos(ang));
+
+	ang = vectorangle(len, z);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(z, sin(ang));
+	else len = fixeddiv(len, cos(ang));
+	
+	//print(f:len);
+	return len;
+}
+
+function int WrapAround(int i)
+{
+	if(i<-0.5) return i+1.0;
+	if(i>0.5) return i-1.0;
+	return i;
+}
+
+function int fDistanceVal1(int ang, int x, int y)
+{
+	int len;
+	
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	else len = fixeddiv(x, cos(ang));
+
+	//print(f:len);
+	return len;
+}
+
+function int fDistanceVal2(int ang, int len, int z)
+{
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(z, sin(ang));
+	else len = fixeddiv(len, cos(ang));
+
+	//print(f:len);
+	return len;
+}
+
+
+function int pitchAdjust(int i)
+{
+	if(i>0.0) return 1.0-i;
+	return -i;
+}
+
+function bool isDifferentTeams (int team, int targetNumber)
+{
+	return (team != GetPlayerInfo(targetNumber, PLAYERINFO_TEAM));
+}
+
+
+script 143 (int ID, int Swap)
+{
+	if(Swap==1){
+		if(ClassifyActor(ID) & ACTOR_PLAYER){
+			if(GetCVar("teamlms")==1||GetCVar("ctf")==1||GetCVar("teamplay")==1||GetCVar("oneflagctf")==1||GetCVar("teampossession")==1||GetCVar("teamgame")==1 ){
+				SetResultValue(GetPlayerInfo(ID-1000,PLAYERINFO_TEAM));
+				terminate;
+			}
+		}
+		SetResultValue(TEAM_NONE);
+		terminate;
+	}
+
+	if(!(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER)){
+		SetActivatorToTarget(0);
+	}
+	if(ClassifyActor(ActivatorTID()) & ACTOR_PLAYER) {
+		if(GetCVar("teamlms")==1||GetCVar("ctf")==1||GetCVar("teamplay")==1||GetCVar("oneflagctf")==1||GetCVar("teampossession")==1||GetCVar("teamgame")==1 ){
+			SetResultValue(PlayerTeam());
+			terminate;
+		}
+	}
+	SetResultValue(TEAM_NONE);
+}
+
+script "MSTD_IsPlayerAlive" (int TID)
+{
+	SetActivator(TID);
+	if(PlayerNumber() == -1 || CheckInventory("IsDead") || !PlayerInGame(PlayerNumber())){
+		SetResultValue(0);
+	}
+	else{
+		SetResultValue(1);
+	}
+}

@@ -79,7 +79,7 @@ inventory.maxamount 40
 actor TriangleGunCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 7
+Powerup.Duration 4
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
@@ -90,8 +90,8 @@ actor TriangleGunShot : fastProjectileBase
 {
 Obituary "$OB_TRIANGLEGUN"
 DamageType "TriangleGun"
-Speed 80
-Damage (45)
+Speed 64
+Damage (20)
 radius 3
 
 MissileHeight 16
@@ -100,7 +100,7 @@ scale 1.0
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition
 
-reactiontime 7
+reactiontime 10
 States
 {
 Spawn:
@@ -140,13 +140,13 @@ stop
 
 actor TriangleGunTrailX : FXActor_B
 {
-scale 1.5
+scale 2.5
 Alpha 0.9
 States
 {
 Spawn:
 CRBM A 0
-BSTG A 1
+AXLB A 1
 //BSTG AAAAA 1 A_Fadeout
 stop
 }
@@ -154,13 +154,13 @@ stop
 
 actor TriangleGunTrailX1 : FXActor_A
 {
-scale 1.5
+scale 2.5
 Alpha 0.9
 States
 {
 Spawn:
 BUST A 0
-BUST A 1
+AXLB A 1
 stop
 }
 }

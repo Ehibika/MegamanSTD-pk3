@@ -2,8 +2,8 @@ Actor Iceman : ClassBase
 {
 Player.DisplayName "iceman"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 300
+Player.MaxHealth 300
 Player.JumpZ 10
 
 Player.Startitem "IsIceman"
@@ -12,7 +12,7 @@ Player.Startitem "UseAbility2_Iceman"
 
 Player.Startitem "Pro_SubTank"
 Player.Startitem "Pro_IceResistance"
-Player.Startitem "Pro_Refrigerate"
+Player.Startitem "Pro_ElementalGuard"
 
 
 +NOSKIN

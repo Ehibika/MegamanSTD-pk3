@@ -19,19 +19,19 @@ Player.Startitem "Pro_Determined"
 States
 {
 Spawn: 
-MMXS A 0
-MMXS B 1 
-MMXS A 1
+MMNX A 0
+MMNX B 1 
+MMNX A 1
 GoTo Spawn+2
 See:
-MMXS BCDE 5
+MMNX BCDE 5
 GoTo Spawn+1
 Missile:
-MMXS F 5
-MMXS G 4
+MMNX F 5
+MMNX G 4
 GoTo Spawn+2
 PainFix:
-MMXS H 0 
+MMNX H 0 
 GoTo PainFrames
 }
 }

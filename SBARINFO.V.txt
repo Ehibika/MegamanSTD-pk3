@@ -245,6 +245,92 @@ InInventory IsHarpNote, 1
 
 	ininventory Ability1_HarpNote ,1 {DrawBar "SRESO2", "NORESO2", GuitarMachineGunTimerItem, Horizontal, 42, 161;}
 	}
+
+
+InInventory IsCentaurMan, 1
+	{
+	DrawImage "ARROWSH", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", StopArrowCooldownItem, vertical,reverse, 5, 163;
+	ininventory StopArrowCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", StopArrowCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "COPYVI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", CentaurTeleportCooldownItem, vertical,reverse, 25, 163;
+	ininventory CentaurTeleportCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CentaurTeleportCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsFlashMan, 1
+	{
+	DrawImage "CENTSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FlashBlinkCooldownItem, vertical,reverse, 5, 163;
+	ininventory FlashBlinkCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FlashBlinkCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "FLASHSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FlashPointCooldownItem, vertical,reverse, 25, 163;
+	ininventory FlashPointCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FlashPointCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsIceMan, 1
+	{
+	DrawImage "ICESI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", IceSlasherCooldownItem, vertical,reverse, 5, 163;
+	ininventory IceSlasherCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", IceSlasherCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ITEM1", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", FootHolderLiftCooldownItem, vertical,reverse, 25, 163;
+	ininventory FootHolderLiftCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FootHolderLiftCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+InInventory IsGutsman, 1
+	{
+	DrawImage "SARMSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SuperArmCooldownItem, vertical,reverse, 5, 163;
+	ininventory SuperArmCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SuperArmCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "RSEARCH", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", PicketMenCooldownItem, vertical,reverse, 25, 163;
+	ininventory PicketMenCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", PicketMenCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+
+InInventory IsQuickman, 1
+	{
+	DrawImage "QUICKSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", QuickBlasterCooldownItem, vertical,reverse, 5, 163;
+	ininventory QuickBlasterCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", QuickBlasterCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BDASWI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AtomicSpeedCooldownItem, vertical,reverse, 25, 163;
+	ininventory AtomicSpeedCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AtomicSpeedCooldownItem, vertical,reverse, 25, 163;}
+
+	DrawBar "SRESO1", "NORESO2", AtomicSpeedResource, Horizontal, 42, 161;
+	ininventory AtomicSpeedResource ,35 {DrawBar "SRESO2", "NORESO2", AtomicSpeedResource, Horizontal, 42, 161;}
+	}
+
+
+InInventory IsSaturn, 1
+	{
+	DrawImage "RINGSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", RingWarpCooldownItem, vertical,reverse, 5, 163;
+	ininventory RingWarpCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RingWarpCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BHOLWI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BlackHoleSpreadCooldownItem, vertical,reverse, 25, 163;
+	ininventory BlackHoleSpreadCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BlackHoleSpreadCooldownItem, vertical,reverse, 25, 163;}
+
+	}
+
+InInventory IsSparkMandrill, 1
+	{
+	DrawImage "HARDSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", DashPunchCooldownItem, vertical,reverse, 5, 163;
+	ininventory DashPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", DashPunchCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "ESPARK", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ElectricSparkCooldownItem, vertical,reverse, 25, 163;
+	ininventory ElectricSparkCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ElectricSparkCooldownItem, vertical,reverse, 25, 163;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

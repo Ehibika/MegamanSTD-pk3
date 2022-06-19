@@ -1,17 +1,11 @@
-server noarchive bool PKMN_SV_ProJTeamColor = true;
-user bool PKMN_CV_ProjTeamColor = true;
+server noarchive bool MSTD_SV_ProJTeamColor = true;
+user bool MSTD_CV_ProjTeamColor = true;
 
-server bool sv_nointernalrespawn = false;
-server bool sv_allowhitdecay = false;
-server int sv_Respawntimer = 5;
-
-server int sv_LMSPrepTime = 30;
-//===|loadout server variables|===
-
-server int Sv_PowerBudget = 35;
-user noarchive bool CanViewClass = true; 
 user bool unselectable = False; 
+server noarchive bool MSTD_DDLoaded = true;
 
+server bool MSTD_SmallAmmoHealth = false;
+server bool MSTD_BigAmmoHealth = true;
 //===|Weapon loadout server variables|===
 
 user noarchive int Lo_WepA = 0;
@@ -41,4 +35,4 @@ user noarchive int WepBDataBase = 0;
 user noarchive int PropertyDataBase = 0; 
 
 user noarchive int MechGlossindex = 0; 
-user noarchive string DB_Class = "MegamanSTD"; 
+user noarchive string DB_Class = "Megaman"; 

@@ -56,6 +56,7 @@ ininventory HasPSI ,1
 
 */
 //#endregion
+
 //[+]======================================[+]
 //--------------|Emblem huds|---------------
 //[+]======================================[+]
@@ -114,9 +115,9 @@ InInventory IsMegamanX, 1
 
 InInventory IsMegamanEXE, 1
 	{
-	DrawImage "HARDSI", 2, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", GutsPunchCooldownItem, vertical,reverse, 5, 163;
-	ininventory GutsPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GutsPunchCooldownItem, vertical,reverse, 5, 163;}
+	DrawImage "MINIBI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", MinibombCooldownItem, vertical,reverse, 5, 163;
+	ininventory MinibombCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", MinibombCooldownItem, vertical,reverse, 5, 163;}
 
 	DrawImage "RKCUBEI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", RockCubeCooldownItem, vertical,reverse, 25, 163;
@@ -286,9 +287,9 @@ InInventory IsGutsman, 1
 	DrawBar "ALTEMP", "ALTHBAR1", SuperArmCooldownItem, vertical,reverse, 5, 163;
 	ininventory SuperArmCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SuperArmCooldownItem, vertical,reverse, 5, 163;}
 
-	DrawImage "RSEARCH", 22, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", PicketMenCooldownItem, vertical,reverse, 25, 163;
-	ininventory PicketMenCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", PicketMenCooldownItem, vertical,reverse, 25, 163;}
+	DrawImage "HARDSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", GutsPunchBossCooldownItem, vertical,reverse, 25, 163;
+	ininventory GutsPunchBossCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GutsPunchBossCooldownItem, vertical,reverse, 25, 163;}
 
 	}
 

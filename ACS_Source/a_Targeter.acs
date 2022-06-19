@@ -160,7 +160,7 @@ function void Targeter(int x, int y, int z, int angle, int pitch, int i) {
 	}
 }
 
-
+/*
 function int fDistanceVal1(int ang, int x, int y)
 {
 	int len;
@@ -192,7 +192,7 @@ function int WrapAround(int i)
 	if(i>0.5) return i-1.0;
 	return i;
 }
-
+*/
 
 function void adjustActorInventory(int actor, str item, int quantity) {
 	int diff = quantity-CheckActorInventory(actor,item);

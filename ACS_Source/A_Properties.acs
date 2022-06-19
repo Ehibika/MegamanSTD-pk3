@@ -195,14 +195,14 @@ The undershirfFlag is taken by damage events, when the player doesn't have it,
 this script waits untill they get back to full HP to restore the undershirfFlag
 */
 GiveInventory("UndershirtFlag",1);
-GiveInventory("UnderShirtFX_On",1);
+//GiveInventory("UnderShirtFX_On",1);
 while(GetActorProperty(0,APROP_HEALTH) > 0)
     {
     
     if(!CheckInventory("UndershirtFlag"))
         {
         HPNow = GetActorProperty(0,APROP_HEALTH);
-        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);GiveInventory("UnderShirtFX_On",1);localAmbientSound("item/Refill",127);}
+        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);/*GiveInventory("UnderShirtFX_On",1)*/;localAmbientSound("item/Refill",127);}
         }
     delay(17);
     }
@@ -231,7 +231,7 @@ while(GetActorProperty(0,APROP_HEALTH) > 0)
 
 Script "Passive_Subtank" (void)
 {
-if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1)
+if(GetCvar("BuckShot")==1)
     {
     ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,0,ACS_NamedExecuteWithResult("MSTD_HealthPercent",0,1,50),50);
     GiveInventory("SubTankDelay",1);

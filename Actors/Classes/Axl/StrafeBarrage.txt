@@ -100,9 +100,9 @@ Altfire: //Tactical Roll is built into this ability
 "####" A 0 A_JumpIfNoAmmo("Fire.Finish")
 CKIC C 0 A_PlaySoundEx("weapon/BreakDash","Weapon")
 "####" C 0 A_GiveInventory("TacticalRollEvasion_On")
-"####" C 0 SetPlayerProperty(0,1,0)
+"####" C 0 A_GiveInventory("DashSet_A")
 "####" BBAAAAAAAAAAAA 1 A_ChangeVelocity(35,0,momz,CVF_RELATIVE|CVF_REPLACE)//A_Recoil(-20)
-"####" A 0 SetPlayerProperty(0,0,0)
+"####" A 0 A_GiveInventory("DashSetOff")
 "####" BC 2
 "####" C 0 A_GiveInventory("TacticalRollCooldown")
 "####" A 0 A_JumpIfNoAmmo("Fire.Finish")

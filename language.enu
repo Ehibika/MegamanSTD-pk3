@@ -33,6 +33,9 @@ OB_SCREWSHOOTER = "%k Eliminated %o with the ScrewShooter";
 OB_BOLTDRIVER = "%k Eliminated %o with the BoltDriver";
 OB_REPAIRSPRAYER = "%k Eliminated %o with the RepairSprayer";
 OB_REPLISLASHER = "%k Eliminated %o with the Replislasher";
+OB_ELECTRIGGERV = "%k Eliminated %o with the ElectriggerV";
+OB_VIOLETZAPPER = "%k Eliminated %o with the VioletZapper";
+OB_HAWKPRECISIONBUSTER = "%k Eliminated %o with the HawkPrecisionBuster";
 
 // -=- Ability obituaries -=-
 OB_BLASTLAUNCHER = "%k Blew %o up with a Blast launcher bomb";

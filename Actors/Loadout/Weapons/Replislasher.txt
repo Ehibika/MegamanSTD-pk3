@@ -6,7 +6,7 @@ Weapon.AmmoUse 1
 Weapon.AmmoGive 10
 
 Obituary "$OB_REPLISLASHER"
-inventory.icon "BLASI"
+inventory.icon "REPSLI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "MeleeAmmo"

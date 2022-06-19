@@ -9,7 +9,7 @@ scale 2.0
 Obituary "$OB_REPAIRSPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "RepairSprayer_Ammo"
-inventory.icon "FTONI"
+inventory.icon "MENDI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
 //+WEAPON.NOAUTOFIRE

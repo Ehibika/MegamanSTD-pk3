@@ -108,8 +108,8 @@ actor ShadowBusterRound : ProjectileBase
 +BOUNCEONWALLS
 Obituary "$OB_SHADOWBUSTER"
 DamageType "ShadowBuster"
-Speed 64
-Damage (50)
+Speed 32
+Damage (25)
 +RIPPER
 Radius 7
 Height 7

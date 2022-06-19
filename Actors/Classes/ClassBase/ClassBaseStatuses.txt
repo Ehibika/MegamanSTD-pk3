@@ -33,7 +33,7 @@ TNT1 A 0 A_GiveInventory("PoisonMark",1)
 stop
 
 Gutsy:
-TNT1 A 0 A_SpawnItemEX("GutsyRageFX")
+TNT1 A 0 //A_SpawnItemEX("GutsyRageFX")
 stop
 
 Nope:
@@ -285,7 +285,7 @@ TNT1 A 0 A_Jumpifinventory("PRO_Gutsy",1,"Gutsy")
 stop
 
 Gutsy:
-TNT1 A 0 A_SpawnItemEX("GutsyRageFX")
+TNT1 A 0 //A_SpawnItemEX("GutsyRageFX")
 stop
 
 Sustain:
@@ -447,7 +447,7 @@ TNT1 A 0 A_Jumpifinventory("PRO_Gutsy",1,"Gutsy")
 stop
 
 Gutsy:
-TNT1 A 0 A_SpawnItemEX("GutsyRageFX")
+TNT1 A 0 //A_SpawnItemEX("GutsyRageFX")
 stop
 
 Sustain:
@@ -587,10 +587,11 @@ TNT1 A 0 A_Jumpifinventory("Pro_EuclidResistance",1,"Nope")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
 //==
 TNT1 A 0 A_GiveInventory("StopMark",1)
+TNT1 A 0 A_GiveInventory("StopCount",100)
 PLAY H 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,1)
 PLAY H 0 ACS_NamedExecuteAlways("core_freezeplayer",0,0,1)
 TNT1 A 0 A_SpawnItemEx("STDStopWatcher")
-TNT1 A 0 A_Playsoundex("support/Negative","Soundslot8")
+TNT1 A 0 A_Playsoundex("support/TimeStop","Soundslot8")
 stop
 
 Sustain:
@@ -609,6 +610,12 @@ inventory.amount 1
 powerup.duration -3
 }
 
+actor StopCount : inventory
+{
+inventory.amount 1
+inventory.Maxamount 100
+}
+
 
 actor STDStopWatcher
 {
@@ -625,8 +632,20 @@ Spawn:
 TNT1 A 0
 TNT1 A 1 A_Warp(AAPTR_TARGET, 0.0,0.0,0.0,0.0,WARPF_NOCHECKPOSITION)
 TNT1 A 0 A_SpawnItemEx("TimeStopGFX", random(8, 64), 0, random(0, 64), 0, 0, 0, random(0, 359))
-TNT1 A 0 A_JumpIfInTargetInventory("StopMark", 1, "Spawn")
+goto Spawn.Check1
+
+Spawn.Check1:
+TNT1 A 0 A_JumpIfInTargetInventory("StopMark", 1, "Spawn.Check2")
+goto Death
+
+Spawn.Check2:
+TNT1 A 0 A_JumpIfInTargetInventory("StopCount", 1, "Spawn")
+goto Death
+
+Death:
 TNT1 A 5 A_GiveToTarget("TimeUnstopped")
+TNT1 A 0 A_TakefromTarget("StopMark",999)
+TNT1 A 1 A_TakefromTarget("StopCount",999)
 stop
 }
 }
@@ -658,7 +677,7 @@ TNT1 A 0 A_Jumpifinventory("PRO_Gutsy",1,"Gutsy")
 stop
 
 Gutsy:
-TNT1 A 0 A_SpawnItemEX("GutsyRageFX")
+TNT1 A 0 //A_SpawnItemEX("GutsyRageFX")
 stop
 
 Nope:

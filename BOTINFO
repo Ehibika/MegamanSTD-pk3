@@ -12,7 +12,7 @@ clearbots
 	color = "00 00 00"
 	gender = "male"
 	skin = "Base"
-	class = "STDMegaman"
+	class = "Megaman"
 	revealed = true
 	script = "humanbot"
 	chatlump = "chats/BOTMEGA.txt"
@@ -233,6 +233,120 @@ clearbots
 	gender = "male"
 	skin = "Base"
 	class = "HarpNote"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnCentaurman"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Centaurman"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnFlashMan"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "FlashMan"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnIceman"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Iceman"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnGutsMan"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "GutsMan"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnQuickMan"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "QuickMan"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}
+
+{
+	name = "\cnSparkMandrill"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "SparkMandrill"
 	revealed = true
 	script = "humanbot"
 	chatlump = "chats/BOTMEGA.txt"

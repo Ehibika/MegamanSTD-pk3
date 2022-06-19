@@ -258,6 +258,10 @@ OptionValue PropertyList
 
 24, "Gutsy"
 25, "Determined"
+
+26, "Marksman"
+27, "Heater"
+28, "Refrigerate"
 }
 
 OptionValue Propertyinfo
@@ -290,10 +294,14 @@ OptionValue Propertyinfo
 20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
 21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
 22, "When equipped with a repair weapon, \nyou will passively regenerate HP."
-23, "Can overheal off of health \npickups on the map."
+23, "Can overheal off of health \npickups on the map. gains overheal \nahead of time in modes \nwhere pickups don't spawn."
 
 24, "Damage increases while under \na negative effect"
 25, "weapon damage increases when \nHP is low."
+
+26, "weapon damage increases when \nthe further away you are from \nyour target"
+27, "Weapon Damage from Wind and \nAqua weapons will now inflict \nBurn"
+28, "Weapon Damage from Wind and \nAqua weapons will now inflict \nFrostbite"
 }
 
 
@@ -394,6 +402,14 @@ OptionMenu "ClassDatabase"
 	StaticText ""
 	StaticText ""
 	StaticText ""
-
+	StaticText ""
+	
+		Option "Passive", "DB_Class", "Class_PassiveInfo"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
 
 }

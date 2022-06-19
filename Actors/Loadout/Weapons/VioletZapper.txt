@@ -87,7 +87,7 @@ actor VioletZapperShot : fastProjectileBase
 Obituary "$OB_VIOLETZAPPER"
 DamageType "VioletZapper"
 Speed 26
-Damage (18)
+Damage (35)
 radius 8
 
 MissileHeight 16

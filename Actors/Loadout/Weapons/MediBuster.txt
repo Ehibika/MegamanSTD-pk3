@@ -5,7 +5,7 @@ Weapon.AmmoUse 1
 Weapon.AmmoGive 10
 
 Obituary "$OB_MediBuster"
-inventory.icon "BLASI"
+inventory.icon "MENDI"
 scale 2.0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 weapon.ammotype "MediBuster_Ammo"
@@ -310,6 +310,19 @@ stop
 }
 */
 
+actor MediBusterPuff1 : FXActor_A
+{
+scale 1.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("RepairGunBeamFX_1", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),1)
+SHFX LMNOP 1
+stop
+}
+}
 
 actor MediBuster_HealStarter : CustomInventory
 {

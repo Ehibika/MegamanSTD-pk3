@@ -32,7 +32,7 @@ SourceTID = ActivatorTID();
 
 //==Mastery Damage Bonus ==
 //Also to avoid boosting self damage
-if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += Damage*0.2>>16;}}
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,0.2);}}
 
 //==Assassin Crit Bonus==
 if(CheckForCrit(arg2)){CritHit = true;}
@@ -49,32 +49,33 @@ if(CheckForGutsy()){Guts = true;}
 if(CheckForDetermined(arg2))
 	{
 	Determined = true;
-	DB_Determined = MassimoDamageRamp(0,Damage*0.2>>16,-1);
+	DB_Determined = MassimoDamageRamp(0,DamageModify(Damage,0.2),-1);
 	}
 //===|Marksman Boost|===
 if(CheckForMarksman(VictimTID))
 	{
 	Marksman = true;
-	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,Damage*0.2>>16,Damage*0.5>>16);
-	if(DB_Marksman > Damage*0.5>>16){DB_Marksman = Damage*0.5>>16;}
+	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,0.2),DamageModify(Damage,0.5));
+	DB_Marksman = RoundToNth(DB_Marksman,5);
+	if(DB_Marksman > DamageModify(Damage,0.5)){DB_Marksman = DamageModify(Damage,0.5);}
 	}
 //Reduce harm from blast weapons on yourself
-if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = Damage*0.5>>16;}}
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = DamageModify(Damage,0.5);}}
 
 //====|Heater/Refrigerate|======
 if(CheckForHeater(arg2)){GiveActorInventory(VictimTID,"BurnStatusFastBuild",1);}
-if(CheckForREfrigerate(arg2)){log(s:"chill");GiveActorInventory(VictimTID,"FrostbiteStatusFastBuild",1);}
+if(CheckForREfrigerate(arg2)){GiveActorInventory(VictimTID,"FrostbiteStatusFastBuild",1);}
 
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
-if(CheckForResistance(arg2)){Damage = Damage*0.5>>16;}
+if(CheckForResistance(arg2)){Damage = DamageModify(Damage,0.6);}
 
 //==|Elemental Guard modifier|==
-if(CheckForElementalGuard(arg2)){Damage = Damage*0.75>>16;}
+if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,0.75);}
 
 //==Blade Parrymodifier ==
-if(CheckForBladeParry(arg2)){Damage = Damage*0.5>>16;}
+if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);;}
 
 if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 	{
@@ -104,8 +105,9 @@ if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
 
-//Stop breaks on damage for all but the following
-//if(!CheckForDontStop(arg2)){TakeInventory("StopMark",9);} //edit- not anymore
+//Stopped chharacters are freed once they take 100 damage, however the following won't
+//increment this count.
+if(!CheckForDontStop(arg2)){TakeInventory("StopCount",Damage);} 
 
 //===============|Post Calculation Passives|===============
 
@@ -120,13 +122,46 @@ if(CheckInventory("IsQuickMan")){GiveInventory("AtomicSpeedResource",(arg1*0.3>>
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 
 if(Damage>0){TakeInventory("HealRampPower",9);GiveInventory("HealRampPower",1);}
-ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);
+if(GetCvar("MSTD_DDLoaded")){ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);}
 SetResultValue(Damage);
 
 //==Speedrunner==
 //if(CheckSpeedrunnerLoss()){TakeInventory("PowerSpeedRunner",9); LocalAmbientSound("support/StatDown",127);}
 }
 }
+
+Function int DamageModify(int DMG, int Mult)
+{
+DMG = DMG<<16;
+Mult = Mult+0.0001;
+int output = FixedMul(DMG,Mult)>>16;
+
+return output;
+}
+
+Function int RoundToNth (int Input, int Nth)
+{
+int output = (Input/Nth)*Nth;
+//Input = Input>>16;
+//Nth = Nth>>16;
+//int output = FixedMul(Round(FixedDiv(Input,Nth)),Nth);
+return output;
+}
+
+//Confirms if Trills DamageDisplay is loaded in
+
+Script "TrillDDCheck" OPEN
+{
+SpawnForced("DM_DamageDone",0,0,0,564,0);
+if (ThingCount(T_NONE,564))
+	{
+	Thing_Remove(564);
+	SetCvar("MSTD_DDLoaded",true);
+	}
+else{SetCvar("MSTD_DDLoaded",false);}
+
+}
+
 #endregion
 //#endregion
 
@@ -781,9 +816,30 @@ script "Spawn_SmallHealth_MSTD" (void)
 SpawnNewWepFunc("SmallHealth_MSTD");
 }
 
+script "Spawn_SmallHealth2_MSTD" (void)
+{
+SpawnNewWepFunc("SmallHealth2_MSTD");
+}
+
 script "Spawn_BigHealth_MSTD" (void)
 {
 SpawnNewWepFunc("BigHealth_MSTD");
+}
+
+script "Spawn_BigHealth2_MSTD" (void)
+{
+SpawnNewWepFunc("BigHealth2_MSTD");
+}
+
+Script "CheckForAmmoHealth" (int Type)
+{
+int output;
+Switch(Type)
+	{
+	default: Output = GetCvar("MSTD_SmallAmmoHealth"); Break;
+	case 1: Output = GetCvar("MSTD_BigAmmoHealth"); Break;
+	}
+SetResultValue(output);
 }
 
 //Damage Over Time Script
@@ -895,7 +951,7 @@ if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.7; /*log(s:"Got Hefty!")
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
 if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*log(s:"Got Speedrunner!");*/}
 
-IsBladeParryActive();
+//IsBladeParryActive();
 
 //Quickman's Speed passive
 if(CheckInventory("IsQuickman")){Value += 0.1*CheckInventory("AtomicSpeedLevel");}
@@ -1159,4 +1215,96 @@ Script "TeleportSpotMark2" (void)
         Thing_Remove(pln+PLN_EXITUNITPOINT);
     }
     SpawnSpotForced("TeleportDest2",ActivatorTID(),pln+PLN_EXITUNITPOINT,ang>>8);
+}
+
+
+
+//Hitscan based suck/blow, by jax
+script "MSTD_SuctionCode" (int distRange, int angleRange, int suckPower, int type)
+{
+	distRange <<= 16;
+	angleRange <<= 8;
+	int owner = ACS_NamedExecuteWithResult("MSTD_GetPointerTID_147",2);
+	if(CheckActorInventory(owner,"NoSourcePushFlag"))terminate;//$CBM (Fishy)
+	int angle = GetActorAngle(owner);
+	int pitch = pitchAdjust(GetActorPitch(owner));
+	int team = ACS_ExecuteWithResult(143, 0);
+	int x = GetActorX(0);
+	int y = GetActorY(0);
+	int z = GetActorZ(0);
+
+	int xDist;
+	int yDist;
+	int zDist;
+	int angleDist;
+	int pitchDist;
+	int dist;
+
+	for(int i=0; i<MAX_PLAYERS; i++) {
+		if(owner == 1000 + i)
+			continue;
+		if(CheckActorInventory(1000 +i, "NoPushFlag")){continue;}
+		if((team==TEAM_NONE||isDifferentTeams(team,i))&&CheckSight(0,1000+i,0)) {
+			xDist = GetActorX(1000+i) - x;
+			yDist = GetActorY(1000+i) - y;
+			angleDist = VectorAngle(xDist,yDist);
+			if(abs(WrapAround(angleDist-angle))<angleRange){
+				dist = fDistanceVal1(angleDist, xDist, yDist);
+				zDist = GetActorZ(1000+i) + 28.0 - z;
+				pitchDist = VectorAngle(dist, zDist);
+				if(abs(WrapAround(pitchDist-pitch))<angleRange) {
+					dist = fDistanceVal2(pitchDist, dist, zDist);
+					if(dist<distRange) {
+						ThrustThing((angle >> 8), suckPower, 1, 1000+i);
+						if(type>0){
+							GiveActorInventory(1000+i,"TempPitProtect_P",1);
+						}
+						switch(abs(type)) {
+						//	case 101://Targeter Type
+						//		GiveActorInventory(1000+i,"HomingLockGiver",1);
+						//		break;
+						//	case 20://Dynamo
+						//		GiveActorInventory(1000+i,"HomingLockGiver",1);
+						//		break;
+							case 4://HSH Suck Cold
+								GiveActorInventory(1000+i,"IcemanSlowPickup",1);
+								break;
+							case 2://Dust Suck
+								if(ACS_NamedExecuteWithResult("MSTD_IsPlayerAlive",i+1000)){
+									//GiveActorInventory(owner,"CrushEmAmmo",2);
+								}
+								break;
+							case 1://Null for Negative 1
+								break;
+							default://Blow
+								Log(i:type,s:" >> Invalid Number for script C_JAX_SUCKRECODE (422)");
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+script "MSTD_GetPointerTID_147" (int Swap)
+{
+	Switch(Swap) {
+		Default:
+			Log(i:Swap,s:" >> Invalid Pointer for MSTD_GetPointerTID_147");
+			break;
+		Case 0://Default
+			break;
+		Case 1://Null
+		Case 2://Target
+		Case 4://Master
+		Case 8://Tracer
+		Case 16://Player_GetTarget
+		Case 32://Player_GetConversation
+		Case 16384://FriendPlayer
+			SetActivator(0,Swap);
+			break;
+	}
+	SetResultValue(ActivatorTID());
 }

@@ -1,7 +1,7 @@
 Actor Massimo : ClassBase 
 {
 Player.DisplayName "Massimo"
-Player.SoundClass "megaman"
+Player.SoundClass "sparkmandrill"
 Health 350
 Player.MaxHealth 350
 Player.JumpZ 10

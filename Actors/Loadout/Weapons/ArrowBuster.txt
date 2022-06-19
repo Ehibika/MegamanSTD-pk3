@@ -151,7 +151,7 @@ actor ArrowBusterDamager : FastProjectileBase
     +EXPLODEONWATER
     +HITTRACER
     RenderStyle None
-    Damage (CallACS("SniperBusterRamp",3,50,200))
+    Damage (CallACS("SniperBusterRamp",3,50,150))
     Radius 10
     Height 10
     speed 3000 //15 * ArrowBusterRange(200)

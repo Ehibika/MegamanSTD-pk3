@@ -1,9 +1,17 @@
 clearplayerclasses
+//====|Classic
 addplayerclass STDMegaman
 addplayerclass SuperMegaman
 //addplayerclass AutoSTD
 addplayerclass FireMan
+addplayerclass Centaurman
+addplayerclass FlashMan
+addplayerclass Iceman
+addplayerclass GutsMan
+addplayerclass QuickMan
+//addplayerclass Saturn
 
+//====|X
 addplayerclass MegamanX
 addplayerclass Zero
 addplayerclass Axl
@@ -11,17 +19,18 @@ addplayerclass Massimo
 addplayerclass Marino
 addplayerclass Cinnamon
 addplayerclass Alia
-addplayerclass MegamanEXE
-addplayerclass HarpNote
-addplayerclass Centaurman
-addplayerclass FlashMan
-addplayerclass Iceman
-addplayerclass GutsMan
-addplayerclass QuickMan
 addplayerclass SparkMandrill
-
 //addplayerclass Spider
-//addplayerclass Saturn
+
+//====|Battle Network
+addplayerclass MegamanEXE
+
+//====|Starforce
+addplayerclass HarpNote
+
+
+
+
 //=====
 
 addkeysection "Extra" Extraoptions

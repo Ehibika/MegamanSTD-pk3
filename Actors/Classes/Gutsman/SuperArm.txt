@@ -1,4 +1,4 @@
-actor Ability1_Gutsman : AbilityMasterBase
+actor Ability2_Gutsman : AbilityMasterBase
 {
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
@@ -12,54 +12,113 @@ States
 {
 
 Ready:
-GUTA A 0 
+GUTP A 0 
+
+GUTP A 0  A_PlaySoundEx("weapon/superarmuse","Weapon")
+GUTP A 1 Offset(0,80)A_SpawnItemEx("RockCubeVisualPickup",34 + 32,0,-28,-7,0,12,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+GUTP A 1 Offset(0,80)//A_SpawnItemEx("TempGutrock",16,0,316,0,0,0,0,33)
+GUTP B 1 Offset(-20,131)//A_SpawnItemEx("TempGutrock",14,0,286,0,0,0,0,33)
+GUTP B 1 Offset(-20,131)//A_SpawnItemEx("TempGutrock",12,0,256,0,0,0,0,33)
+GUTP B 1 Offset(-10,83)//A_SpawnItemEx("TempGutrock",10,0,226,0,0,0,0,33)
+GUTP B 1 Offset(-10,83)//A_SpawnItemEx("TempGutrock",8,0,196,0,0,0,0,33)
+GUTP B 0 A_GiveInventory("BlockGrabbed")
+GUTP B 0 A_GiveInventory("SuperArmCooldown")
+// Never knew you could do this!
+
+/*
 GUTA A 0 A_PlaySoundEx("weapon/superarmuse","Weapon")
-GUTA B 1 A_SpawnItemEx("GutrockPickingup",34 + 32,0,-28,-7,0,12,0,SXF_NOCHECKPOSITION)
+GUTA B 1 A_SpawnItemEx("RockCubeVisualPickup",34 + 32,0,-28,-7,0,12,0,SXF_NOCHECKPOSITION)
 GUTA B 1
 "####" CC 1
 "####" DD 1
 "####" EE 1 
+*/
+
 Ready2:
-"####" E 0 A_SpawnItemEx("TempGutrock", 0, 0, 56 + 20, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
-"####" E 0 A_FireCustomMissile("SuperArmAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
-"####" E 1 A_WeaponReady
+"####" B 0 A_SpawnItemEx("TempGutrock", 0, 0, 56 + 20, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"####" B 0 A_FireCustomMissile("SuperArmAimPath",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" B 1 A_WeaponReady
 goto Ready2
 
+Deselect:
+GUTP A 0 A_JumpIfInventory("BlockGrabbed",1,"DeselectToss")
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Goto Deselect+1
+DeselectToss:
+"####" B 0 A_FireCustomMissile("GutrockSTD",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+GUTP A 0 A_TakeInventory("BlockGrabbed",1)
+GUTP C 2 Offset(1,33)A_PlaySound("weapon/GutThrow",4,0.7)
+GUTP C 2 Offset(-70,74)
+GUTP C 2 Offset(-121,114)
+GUTP D 2 Offset(1,33)
+GUTP D 2 Offset(-21,56)
+GUTP D 2 Offset(-37,84)
+TNT1 A 6
+GUTP A 2 Offset(6,92)
+GUTP A 2 Offset(4,72)
+GUTP A 2 Offset(2,52)
+GUTP A 0 A_WeaponReady(14)
+Goto Deselect+1
+
 AltFire:
-GUTA B 1 A_SpawnItemEx("GutrockPickingup",0, 0, 56 + 20,7,0,-12,0,SXF_NOCHECKPOSITION)
+/*
+GUTA B 1 A_SpawnItemEx("RockCubeVisualPickup",0, 0, 56 + 20,7,0,-12,0,SXF_NOCHECKPOSITION)
 "####" EE 1
 "####" DD 1
 "####" CC 1
 GUTA A 0 A_PlaySoundEx("weapon/crackerthrow", "Voice")
+*/
 //"####" L 0 A_FireCustomMissile("SuperBlockStart",0,1,8,0)
+GUTP B 1 Offset(-10,83)A_SpawnItemEx("RockCubeVisualPickup",0, 0, 56 + 20,7,0,-12,0,SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+GUTP B 1 Offset(-10,83)//A_SpawnItemEx("TempGutrock",8,0,196,0,0,0,0,33)
+GUTP B 1 Offset(-20,131)//A_SpawnItemEx("TempGutrock",12,0,256,0,0,0,0,33)
+GUTP B 1 Offset(-20,131)//A_SpawnItemEx("TempGutrock",14,0,286,0,0,0,0,33)
+GUTP A 1 Offset(0,80)//A_SpawnItemEx("TempGutrock",16,0,316,0,0,0,0,33)
+GUTP A 1 Offset(0,80)
+
 "####" B 0 A_SpawnItemEX("SupaArmRock",80,0,16,1)
-"####" L 15
-"####" A 1 A_GiveInventory("SuperArmCooldown")
+"####" A 15
+//"####" A 1 A_GiveInventory("SuperArmCooldown")
 "####" A 0 A_Jump(256,"End")
 goto End
 
 Fire:
+/*
 GUTA B 0
 "####" CC 1
 "####" DD 1
 "####" EE 1
 TNT1 AAAAA 1
+*/
 //GUTA A 0 A_FireCustomMissile("GutrockSTD",0,1,8,0)
+
 "####" B 0 A_FireCustomMissile("GutrockSTD",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
-GUTA A 0 A_TakeInventory("BlockGrabbed",1)
-GUTA FGHIJKLM 2
-"####" A 1 A_GiveInventory("SuperArmCooldown")
+GUTP A 0 A_TakeInventory("BlockGrabbed",1)
+GUTP C 2 Offset(1,33)A_PlaySound("weapon/GutThrow",4,0.7)
+GUTP C 2 Offset(-70,74)
+GUTP C 2 Offset(-121,114)
+GUTP D 2 Offset(1,33)
+GUTP D 2 Offset(-21,56)
+GUTP D 2 Offset(-37,84)
+TNT1 A 6
+GUTP A 2 Offset(6,92)
+GUTP A 2 Offset(4,72)
+GUTP A 2 Offset(2,52)
+//GUTA FGHIJKLM 2
+//"####" A 1 A_GiveInventory("SuperArmCooldown")
 goto End
 
 End:
-"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
-"####" C 0 
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
 Goto End
 }
 }
 //====
 
-actor UseAbility1_Gutsman : CustomInventory
+actor UseAbility2_Gutsman : CustomInventory
 {
 states
 {
@@ -79,7 +138,7 @@ goto Nope
 
 Pickup2:
 TNT1 A 0 A_JumpIfInventory("SuperArmCooldownItem",1,"Nope")
-TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
 stop
 
 Nope:
@@ -168,7 +227,37 @@ stop
 
 actor SupaArmRock : RockCube
 {
+Args 3
+}
 
+actor RockCubeVisualCarry : RockCubeVisual
+{
+states
+{
+OpenGL:
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+XU00 C 7
+stop
+Software:
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+XU00 D 7
+stop
+}
+}
+
+actor RockCubeVisualPickup : RockCubeVisual
+{
+states
+{
+OpenGL:
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+XU00 C 7
+stop
+Software:
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+XU00 D 7
+stop
+}
 }
 
 /*
@@ -222,11 +311,11 @@ Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 Spawn2:
-SARM A 1
+TNT1 A 1 A_SpawnItemEX("RockCubeVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
 loop
 Crash:
 TNT1 A 0 A_SpawnItemEX("ExplosionEffect2",0,0,32,0,0,0,0,1)
-SARM AAAAAAAAAAAA 0 A_SpawnItemEx("GutrockFX",0,0,0,random(-10,10),random(-10,10),random(5,10),random(0,360))
+SARM AAAAAAAAAAAA 0 A_SpawnItemEx("GutrockFX",0,0,0,random(-10,10),random(-10,10),random(5,10),random(0,360),0,1)
 TNT1 A 0 A_PlaySoundEx("weapon/Napalm", "SoundSlot6")
 TNT1 A 0 A_PlaySoundEx("weapon/superarmhit", "Voice")
 TNT1 A 17 A_Quake(6,17,0,300)

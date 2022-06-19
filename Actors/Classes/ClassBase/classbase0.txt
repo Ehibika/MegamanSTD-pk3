@@ -2,7 +2,7 @@ actor ClassBase0 : PlayerPawn
 {
 player.displayname "megaman"
 player.soundclass "megaman"
-player.damagescreencolor "yellow"
+player.damagescreencolor "yellow", 0.1
 player.forwardmove 1.6, 0.8
 player.sidemove 1.6 0.8
 player.jumpz 10

@@ -27,7 +27,7 @@ ZSAB GHIJJJ 2
 ZSAB J 1 A_ChangeFlag("SHOOTABLE",1)
 ZSAB QR 2
 ZBUS I 1
-ZBUS A 5 SetPlayerProperty(0,0,0)
+ZBUS A 5 A_GiveInventory("DashSetOff")
 "####" C 0 A_GiveInventory("RyuenjinCooldown")
 "####" C 0 A_GiveInventory("RefireBuffer")
 "####" C 0 A_Jump(256,"End")

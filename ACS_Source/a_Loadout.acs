@@ -23,6 +23,8 @@ int WepB_Num = GetUserCvar(pln,"Lo_WepB");
 bool PickDone = False;
 bool BotPick = False;
 
+bool GotHarmless;
+
 int picknum;
 int pickRollcount;
 
@@ -56,12 +58,18 @@ if ((ClassifyActor(0) & ACTOR_BOT))
 if(WepA_Num >= 0)
 	{
 		//log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
-		GiveInventory(MasterWepList[WepA_Num][1],1);		
+		GiveInventory(MasterWepList[WepA_Num][1],1);	
+		if(MasterWepList[WepA_Num][3] & WF_HARMLESS){GotHarmless = true;}
+			
 	}
 
 //===|Check Weapon B
 if(WepB_Num >= 0)
 	{
+	if(GotHarmless && (MasterWepList[WepB_Num][3] & WF_HARMLESS))
+	//Can't have two harmless weapons, setting wep B to a military buster
+	{WepB_Num = MILITARYBUSTER;}
+
 	if(WepA_Num != WepB_Num)
 	{
 		//log(s:"Get Second = ", s:MasterWepList[WepB_Num][1]);
@@ -84,6 +92,7 @@ if	 (MasterWepList[WepA_Num][4] == "MEDICAL")
 	
 delay(1);
 }
+
 
 Function int STD_WhichWeapon(void) // Which STD weapon is the player currently using.  From MasterWepList array
 {
