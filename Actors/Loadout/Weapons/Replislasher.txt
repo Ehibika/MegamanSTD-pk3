@@ -136,7 +136,7 @@ actor RS_BladeWatcher
 }
 
 
-actor RS_WaveLauncher
+actor RS_WaveLauncher 
 {
     PROJECTILE
     +NOINTERACTION
@@ -191,9 +191,8 @@ actor RS_WaveLauncher
 }
 */
 
-actor RS_BladeStart 
+actor RS_BladeStart : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
 Obituary "$OB_REPLISLASHER"
@@ -224,9 +223,8 @@ stop
 }
 }
 
-actor RS_BladeTip
+actor RS_BladeTip : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "ReplislasherTip"
 Obituary "$OB_REPLISLASHER"
@@ -250,9 +248,8 @@ stop
 }
 }
 
-actor RS_BladeWavePart 
+actor RS_BladeWavePart : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "ReplislasherEdge"
 Obituary "$OB_REPLISLASHER"

@@ -142,6 +142,11 @@ if(!CheckProp(MasterProPList[13][PROP_NAME])){Return 0;}
 int ThisWeapon = STD_WhichWeapon();
 If(!(MasterWepList[ThisWeapon][3] & WF_MELEE) && !(MasterWepList[ThisWeapon][3] & WF_BLADE)){Return 0;}
 
+//Now check if it is a tossshield, if so, then we need to confirm it is inhand
+If(MasterWepList[ThisWeapon][3] & WF_TOSSSHIELD)
+    {
+    if(CheckInventory(MasterWepList[ThisWeapon][2])){Return 0;}
+    }
 
 //then Check for weapon pain
 For(int i = 0; i < WEAPONLIST; i++)
