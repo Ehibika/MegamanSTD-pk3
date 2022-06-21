@@ -276,7 +276,7 @@ damage (0)
 reactiontime 1
 scale 2.0
 RenderStyle "Translucent"
-Alpha 0.8
+Alpha 0.6
 States
 {
 Spawn:

@@ -134,9 +134,8 @@ actor SS_BladeWatcher
 }
 
 
-actor SS_BladeStart 
+actor SS_BladeStart : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "StandardSaberEdge"
 Obituary "$OB_STANDARDSABER"
@@ -167,9 +166,8 @@ stop
 }
 }
 
-actor SS_BladeTip
+actor SS_BladeTip : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "StandardSaberTip"
 Obituary "$OB_STANDARDSABER"

@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE WEAPONLIST 35
+#LIBDEFINE WEAPONLIST 39
 #LIBDEFINE SUBWEAPONLIST_MAX 7
 #LIBDEFINE PSILIST 5
 
@@ -52,7 +52,7 @@
 #LIBDEFINE WF_BLADE 128.0
 #LIBDEFINE WF_HARMLESS 256.0
 #LIBDEFINE WF_EXPLOSION	512.0
-#LIBDEFINE WF_4 1024.0
+#LIBDEFINE WF_TOSSSHIELD 1024.0
 #LIBDEFINE WF_FORBIDDEN 2048.0
 #LIBDEFINE WF_6 4096.0
 #LIBDEFINE WF_7 8192.0
@@ -94,9 +94,9 @@ str MasterWepList[WEAPONLIST][6] = {
 /*16*/{"LightWave Cannon","LightWaveCannonWep","LightWaveCannon_Ammo", WF_LAUNCHER,"LightWaveCannon",""},
 /*17*/{"DrillHead Cannon","DrillHeadCannonWep","DrillHeadCannon_Ammo", WF_LAUNCHER,"DrillHead",""},
 
-/*18*/{"Standard Saber","StandardSaberWep","StandardSaber_Ammo", WF_MELEE,"StandardSaberEdge","StandardSaberTip"},
-/*19*/{"Beam Rapier","BeamRapierWep","BeamRapier_Ammo", WF_MELEE,"BeamRapierEdge","BeamRapierTip"},
-/*20*/{"Triangular Saber","TriangularSaberWep","TriangularSaber_Ammo", WF_MELEE,"TriangularSaberEdge","TriangularSaberTip"},
+/*18*/{"Standard Saber","StandardSaberWep","MeleeAmmo", WF_MELEE,"StandardSaberEdge","StandardSaberTip"},
+/*19*/{"Beam Rapier","BeamRapierWep","MeleeAmmo", WF_MELEE,"BeamRapierEdge","BeamRapierTip"},
+/*20*/{"Triangular Saber","TriangularSaberWep","MeleeAmmo", WF_MELEE,"TriangularSaberEdge","TriangularSaberTip"},
 
 /*21*/{"FireballBuster","FireballBusterWep","FireballBuster_Ammo", WF_BUSTER,"FireballBuster",""},
 /*22*/{"AtomicBuster","AtomicBusterWep","AtomicBuster_Ammo", WF_BUSTER,"AtomicBuster",""},
@@ -113,4 +113,8 @@ str MasterWepList[WEAPONLIST][6] = {
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},
 /*33*/{"VioletZapper","VioletZapperWep","VioletZapper_Ammo", WF_MACHINEGUN,"VioletZapper",""},
 /*34*/{"HawkPrecisionBuster","HawkPrecisionBusterWep","HawkPrecisionBuster_Ammo", WF_BUSTER,"HawkPrecisionBuster",""},
+/*35*/{"AbsoluteFreeze","AbsoluteFreezeWep","AbsoluteFreeze_Ammo", WF_LAUNCHER,"AbsoluteFreezeDirect","AbsoluteFreeze"},
+/*36*/{"TurboLauncher","TurboLauncherWep","TurboLauncher_Ammo", WF_LAUNCHER,"TurboLauncher",""},
+/*37*/{"Roaster","RoasterWep","Roaster_Ammo", WF_LAUNCHER,"Roaster",""},
+/*38*/{"TossShield","TossShieldWep","TossShield_WaitCount", WF_MELEE|WF_TOSSSHIELD,"TossShield",""},
 };

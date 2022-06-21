@@ -171,6 +171,10 @@
 #include "Actors/Loadout/Weapons/ElectriggerV.txt"
 #include "Actors/Loadout/Weapons/VioletZapper.txt"
 #include "Actors/Loadout/Weapons/HawkPrecisionBuster.txt"
+#include "Actors/Loadout/Weapons/AbsoluteFreeze.txt"
+#include "Actors/Loadout/Weapons/TurboLauncher.txt"
+#include "Actors/Loadout/Weapons/Roaster.txt"
+#include "Actors/Loadout/Weapons/TossShield.txt"
 
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"
