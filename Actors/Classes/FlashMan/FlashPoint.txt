@@ -435,7 +435,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("FlashPointCooldownItem",280)
+TNT1 A 0 A_Giveinventory("FlashPointCooldownItem",525)
 TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
 TNT1 A 0 A_Spawnitemex("FlashPointCooler")
 stop
@@ -449,5 +449,5 @@ stop
 actor FlashPointCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 280
+inventory.maxamount 525
 }

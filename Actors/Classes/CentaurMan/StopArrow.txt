@@ -275,7 +275,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("StopArrowCooldownItem",122)
+TNT1 A 0 A_Giveinventory("StopArrowCooldownItem",525)
 TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
 TNT1 A 0 A_Spawnitemex("StopArrowCooler")
 stop
@@ -289,5 +289,5 @@ stop
 actor StopArrowCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 122
+inventory.maxamount 525
 }

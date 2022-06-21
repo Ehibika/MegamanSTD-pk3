@@ -32,7 +32,7 @@ SourceTID = ActivatorTID();
 
 //==Mastery Damage Bonus ==
 //Also to avoid boosting self damage
-if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,0.2);}}
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,0.1);}}
 
 //==Assassin Crit Bonus==
 if(CheckForCrit(arg2)){CritHit = true;}
@@ -40,7 +40,7 @@ if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 
 //===|FrostBite Hitstun|===
-if(CheckForFrostBiteHitstun(arg2)){GiveActorInventory(VictimTID,"FrostbiteHitstun",1);}
+//if(CheckForFrostBiteHitstun(arg2)){GiveActorInventory(VictimTID,"FrostbiteHitstun",1);}
 
 //===|Guts Boost|===
 if(CheckForGutsy()){Guts = true;}
@@ -55,9 +55,9 @@ if(CheckForDetermined(arg2))
 if(CheckForMarksman(VictimTID))
 	{
 	Marksman = true;
-	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,0.2),DamageModify(Damage,0.5));
+	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,0.0),DamageModify(Damage,0.2));
 	DB_Marksman = RoundToNth(DB_Marksman,5);
-	if(DB_Marksman > DamageModify(Damage,0.5)){DB_Marksman = DamageModify(Damage,0.5);}
+	if(DB_Marksman > DamageModify(Damage,0.2)){DB_Marksman = DamageModify(Damage,0.2);}
 	}
 //Reduce harm from blast weapons on yourself
 if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = DamageModify(Damage,0.5);}}
@@ -69,13 +69,13 @@ if(CheckForREfrigerate(arg2)){GiveActorInventory(VictimTID,"FrostbiteStatusFastB
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
-if(CheckForResistance(arg2)){Damage = DamageModify(Damage,0.6);}
+if(CheckForResistance(arg2)){Damage = DamageModify(Damage,0.9);}
 
 //==|Elemental Guard modifier|==
-if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,0.75);}
+if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,0.9);}
 
 //==Blade Parrymodifier ==
-if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);;}
+if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.9);;}
 
 if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 	{
@@ -97,10 +97,10 @@ if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][
 if(FireCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(Assassin)
-	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.3>>16;}}
+	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.1>>16;}}
 
 if(Determined){Damage += DB_Determined;}
-if(Guts){Damage += Damage*0.5>>16;}
+if(Guts){Damage += Damage*0.2>>16;}
 if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}

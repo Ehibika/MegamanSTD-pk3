@@ -58,6 +58,7 @@ if ((ClassifyActor(0) & ACTOR_BOT))
 if(WepA_Num >= 0)
 	{
 		//log(s:"Get First = ", s:MasterWepList[WepA_Num][1]);
+		if(MasterWepList[WepA_Num][3] & WF_FORBIDDEN){WepA_Num = MILITARYBUSTER;}
 		GiveInventory(MasterWepList[WepA_Num][1],1);	
 		if(MasterWepList[WepA_Num][3] & WF_HARMLESS){GotHarmless = true;}
 			
@@ -66,6 +67,7 @@ if(WepA_Num >= 0)
 //===|Check Weapon B
 if(WepB_Num >= 0)
 	{
+	if(MasterWepList[WepB_Num][3] & WF_FORBIDDEN){WepB_Num = MILITARYBUSTER;}
 	if(GotHarmless && (MasterWepList[WepB_Num][3] & WF_HARMLESS))
 	//Can't have two harmless weapons, setting wep B to a military buster
 	{WepB_Num = MILITARYBUSTER;}

@@ -282,7 +282,7 @@ Goto Pain+1
 
 
 Pain.ScatteredFlower:
-"----" H 0 A_Giveinventory("PoisonStatusFastBuild")
+"----" H 0 A_Giveinventory("PoisonStatusSlowBuild")
 "----" H 0 //A_SpawnItemEx("ShockFX",4,0,32)
 "----" H 0 //A_GiveInventory("StunStatusProc",1)
 "----" H 0
@@ -307,7 +307,7 @@ Goto Pain+1
 
 Pain.MeltCreeper:
 "----" H 0 A_GiveInventory("MeltCreeperhitDelay",1)
-"----" H 0 A_GiveInventory("MeltCreeperStun",1)
+"----" H 0 //A_GiveInventory("MeltCreeperStun",1)
 "----" H 0 A_Giveinventory("BurnStatusFastBuild")
 "----" H 0
 Goto Pain+1

@@ -53,7 +53,7 @@
 #LIBDEFINE WF_HARMLESS 256.0
 #LIBDEFINE WF_EXPLOSION	512.0
 #LIBDEFINE WF_4 1024.0
-#LIBDEFINE WF_5 2048.0
+#LIBDEFINE WF_FORBIDDEN 2048.0
 #LIBDEFINE WF_6 4096.0
 #LIBDEFINE WF_7 8192.0
 #LIBDEFINE WF_8 16384.0
@@ -100,15 +100,15 @@ str MasterWepList[WEAPONLIST][6] = {
 
 /*21*/{"FireballBuster","FireballBusterWep","FireballBuster_Ammo", WF_BUSTER,"FireballBuster",""},
 /*22*/{"AtomicBuster","AtomicBusterWep","AtomicBuster_Ammo", WF_BUSTER,"AtomicBuster",""},
-/*23*/{"RepairGun","RepairGunWep","RepairGun_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairGun",""},
+/*23*/{"RepairGun","RepairGunWep","RepairGun_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS|WF_FORBIDDEN,"RepairGun",""},
 /*24*/{"ViperRifle","ViperRifleWep","ViperRifle_Ammo", WF_MACHINEGUN,"ViperRifle",""},
 
 /*25*/{"ThriceGun","ThriceGunWep","ThriceGun_Ammo", WF_MACHINEGUN,"ThriceGun",""},
-/*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL,"MediBuster",""},
-/*27*/{"ScrewShooter","ScrewShooterWep","ScrewShooter_Ammo", WF_MACHINEGUN|WF_MEDICAL,"ScrewShooter",""},
-/*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL,"BoltDriver",""},
-/*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairSprayer",""},
-/*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairLauncher",""},
+/*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL|WF_FORBIDDEN,"MediBuster",""},
+/*27*/{"ScrewShooter","ScrewShooterWep","ScrewShooter_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_FORBIDDEN,"ScrewShooter",""},
+/*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_FORBIDDEN,"BoltDriver",""},
+/*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS|WF_FORBIDDEN,"RepairSprayer",""},
+/*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS|WF_FORBIDDEN,"RepairLauncher",""},
 /*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherTip"},
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},
 /*33*/{"VioletZapper","VioletZapperWep","VioletZapper_Ammo", WF_MACHINEGUN,"VioletZapper",""},

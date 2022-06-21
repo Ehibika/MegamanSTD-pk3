@@ -31,7 +31,7 @@ str Tips[TIPCOUNT] = {
 "The \cgRefrigerate\cf Property causes wind and water weapons to inflict the Frostbite status.",
 "The \cgHeater\cf Property causes wind and water weapons to inflict the burn status.",
 "The \cgContaminate\cf Property causes wind and water weapons to inflict the poison status.",
-"The \cgBlade Parry\cf Property reduces projectile damage by 50% when a melee/blade weapon is in hand, it won't protect you against other melee/blade weapons and is useless against break damage.",
+"The \cgBlade Parry\cf Property reduces projectile damage by 10% when a melee/blade weapon is in hand, it won't protect you against other melee/blade weapons and is useless against break damage.",
 "The \cgAssassin\cf Property boosts the power of critical hits, making devistating attacks even more lethal.",
 "The \cgElement guard\cf Property reduces Fire, Water, Ice, and Elec damage, making you just a bit more durable all around.",
 "The \cgSpeedRunner\cf Property boosts the movespeed on high movespeed weapons even higher, it even stacks with weapon masteries too!",
@@ -54,7 +54,7 @@ str Tips[TIPCOUNT] = {
 "\cgBreak\cf Damage has the innate property of bypassing all defensive properties, be they barriers, modifiers like from \cgBlade Parry\cf, or protective properties like \cgUndershirt\cf",
 "Overheal is temporary health that can be gained through some healing weapons and abilities, it decays over time so be quick about using it when you have it!",
 "Overhealed characters have a barrier-like visual surrounding them, Overhealth \cg is not considered a defensive property\cf thus \cgBreak\cf Damage has no special effect against it.",
-"Weapon masteries provide a boost in that weapons onhand movespeed and a 30% damage increase for that weapon, characters with masteries fight most efficiently with those weapons.",
+"Weapon masteries provide a boost in that weapons onhand movespeed and a 10% damage increase for that weapon, characters with masteries fight most efficiently with those weapons.",
 "Weapon masteries do not effect the healing potential of \cgRepair\cf weapons, so chose based on what works for the situation.",
 "A \cgCritical Hit\cf has a distinct sound and audio cue, and only occurs under specific conditions, like landing a sweetspot on a saber.",
 };

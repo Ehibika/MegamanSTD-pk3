@@ -273,14 +273,14 @@ OptionValue Propertyinfo
 3, "Improves the movespeed and power \nof Launcher Class Weapons \nwhile wielding them."
 4, "Improves the movespeed and power \nof Melee Class Weapons while \nwielding them."
 
-5, "Cut Fire Damage recieved in half \nand blocks the Burn status"
-6, "Cut Ice Damage recieved in half \nand blocks the Frostbite status"
-7, "Cut Aqua Damage recieved in half."
-8, "Cut Toxic Damage recieved in half \nand blocks the Poison status"
-9, "Cut Elec Damage recieved in half."
-10, "Cut Wind Damage recieved in half."
+5, "Cut Fire Damage recieved by 10% \nand blocks the Burn status"
+6, "Cut Ice Damage recieved by 10% \nand blocks the Frostbite status"
+7, "Cut Aqua Damage recieved by 10%."
+8, "Cut Toxic Damage recieved by 10% \nand blocks the Poison status"
+9, "Cut Elec Damage recieved by 10%."
+10, "Cut Wind Damage recieved by 10%."
 //11, "Does nothing, Breaking damage breaches all defenses" 
-12, "Cut Euclid Damage recieved in half\nand blocks the Stop and \nSlow statuses."
+12, "Cut Euclid Damage recieved by 10%\nand blocks the Stop and \nSlow statuses."
 
 13, "Take reduced non-melee/non Blade \ndamage while a melee/Blade \nweapon is in hand"
 14, "Move Faster while wielding lighter \nweaponry"
@@ -292,7 +292,7 @@ OptionValue Propertyinfo
 
 19, "Increased the power of Critical \nHits"
 20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
-21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
+21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 10%"
 22, "When equipped with a repair weapon, \nyou will passively regenerate HP."
 23, "Can overheal off of health \npickups on the map. gains overheal \nahead of time in modes \nwhere pickups don't spawn."
 
@@ -403,7 +403,7 @@ OptionMenu "ClassDatabase"
 	StaticText ""
 	StaticText ""
 	StaticText ""
-	
+
 		Option "Passive", "DB_Class", "Class_PassiveInfo"
 	StaticText ""
 	StaticText ""

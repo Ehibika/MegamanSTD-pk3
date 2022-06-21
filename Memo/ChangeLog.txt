@@ -12,22 +12,56 @@
 ==|Mechanic Changes|==
 [+] Stop Status now breaks once the victim has recieved 100 damage while stopped
 [+++] euclid damage does not add to this counter.
+[+++] Stop Status duration reduced from 3 seconds > 1 second
+
+[+] Frostbite slow reduced from 33% > 15%
+[+++] Frostbite Duration reduced from 5 seconds > 2.5 seconds
+[+++] Ice damage no longer applies hitston on targets under frostbite
+
+[+] Poison no longer deals dot damage
+
+[+] Burn no longer deals dot damage
+[+++] Burn now increases damage recieved by 10%
+
+[+] Stun now only reduced movement by 50% instead of 100%
+[+++] Stun no longer removes all momentum
+[+++] AfterStun protection increased from 2 second > 5
+
+
+
 
 ==|Property Changes|==
-[+]Elemental resistances now only lower their respective damage by 40%
-[+]Blade parry now only lowers damage by 40%
+[+]Weapon masteries now only increase weapon damage by 10%
+[+]Elemental resistances now only lower their respective damage by 10%
+[+]Blade parry now only lowers damage by 10%
+[+]Marksman damage bonus now only goes from 0% > 20%
+[+]Elemental Guard now only reduces damage by 10%
+[+]Assassin now only boost damage by 10%
+[+]Gutsy now only boosts damage by 20%
+
 
 ==|Class Changes|==
 
 [++]Marino[++]
 [+]Scattered flower now inflicts poison instead of a stun.
+[+]Scattered Flower's damage per shot increased from 5 > 25
 
 [++]Spark Mandrill[++]
 [+]Dash punch thrust speed decreased from 48 > 32
 [+]Dash punch hitbox size increased
 
 [++]Harp Note[++]
-[+]Damage nerf on Pulse song reduced from 75% > 4%
+[+]Pulse Song has been reworked, now launches a projectile that deals damage over time in an area.
+[+]Cooldown on pulse song increased from 10 seconds > 15 seconds
+[+]Cooldown on Guitar Machine gun increased from 7 seconds > 15 seconds
+
+[++]Centaurman[++]
+[+] Cooldown on stop arrow increased from 3 seconds > 15 second
+
+[++]FlashMan[++]
+[+] Fixed the issue of his arc indicator being absent on flashpoint
+[+] Flashpoint cooldown increased from 8 seconds > 15 seconds
+
 
 [++]IceMan[++]
 [+] "Refrigerate" property has been swapped for "Element Guard"
@@ -36,6 +70,13 @@
 [++]Megaman.EXE[++]
 [+] Ability "Gutspunch" has been removed
 [+] NEW Ability "Minibomb" gained
+[+] "Undershirt" Property has been swapped out for "Blade Mastery"
+
+[++]Cinnamon[++]
+[+] HP has been reduced from 300 > 175
+[+] Angel Aura's healing rate has been reduced from 116 per second > 50 per
+[+] Angel Aura's Self healing rate has been reduced from 70 per second > ~30
+[+] Angel aura's cooldown increased from 8 seconds > 15 seconds
 
 [++]Gutsman[++]
 [+] Ability "Picketman" has been removed
@@ -45,14 +86,17 @@
 [+] Superarm rocks are thrown on weapon swap
 [+] NEW Ability "GutsPunch" gained
 
+[++]Alia[++]
+[+] Melt Creeper no longer inflicts stun
+
 ==|Weapon Changes|==
-
-[++]Screw Shooter[++]
-[+]Base healing reduced from 25 > 10
-[+]Max healing reduced from 50 > 20
-
-[++]Bolt Driver[++]
-[+]Overheal increased from half to full
+[+] The following have been pulled from the roster
+[+++] Screw Shooter
+[+++] Bolt Driver
+[+++] Repair gun
+[+++] Medipistol
+[+++] Repair sprayer
+[+++] Repair launcher
 
 [++]Snowy Sprayer[++]
 [+] Damage reduced from 20 > 10

@@ -266,15 +266,15 @@ TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",AAPTR_TARGET)>=150,"Death")
 TNT1 A 0 A_SetArg(0,CallACS("HealRamp",AngelAura_MinHeal,AngelAura_MaxHeal,AAPTR_TARGET))
 TNT1 A 1 ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,AAPTR_TARGET,args[0],50)
 TNT1 A 0 A_GiveInventory("ScrewShotHealFeedback",1,AAPTR_TARGET)
-TNT1 A 3 A_CountDown
+TNT1 A 7 A_CountDown
 Goto Spawn.Loop
 HealBlock:
 TNT1 A 0 A_GiveInventory("DetoxLevel",15,AAPTR_TARGET)
 TNT1 A 0 A_GiveInventory("DetoxEfectSpawn",1,AAPTR_TARGET)
-TNT1 A 3 A_CountDown
+TNT1 A 7 A_CountDown
 Goto Spawn.Loop
 HealSkip:
-TNT1 A 3 A_CountDown
+TNT1 A 7 A_CountDown
 Goto Spawn.Loop
 
 Death:
@@ -297,15 +297,15 @@ TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",AAPTR_TARGET)>=150,"Death")
 TNT1 A 0 A_SetArg(0,CallACS("HealRamp",AngelAura_MinHeal,AngelAura_MaxHeal,AAPTR_TARGET))
 TNT1 A 1 ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,AAPTR_TARGET,args[0],50)
 TNT1 A 0 A_GiveInventory("ScrewShotHealFeedback",1,AAPTR_TARGET)
-TNT1 A 5 A_CountDown
+TNT1 A 10 A_CountDown
 Goto Spawn.Loop
 HealBlock:
 TNT1 A 0 A_GiveInventory("DetoxLevel",15,AAPTR_TARGET)
 TNT1 A 0 A_GiveInventory("DetoxEfectSpawn",1,AAPTR_TARGET)
-TNT1 A 5 A_CountDown
+TNT1 A 10 A_CountDown
 Goto Spawn.Loop
 HealSkip:
-TNT1 A 5 A_CountDown
+TNT1 A 10 A_CountDown
 Goto Spawn.Loop
 
 Death:
@@ -434,7 +434,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("AngelAuraCooldownItem",280)
+TNT1 A 0 A_Giveinventory("AngelAuraCooldownItem",525)
 TNT1 A 0 A_Spawnitemex("AngelAuraCooler")
 stop
 Nope:
@@ -447,5 +447,5 @@ stop
 actor AngelAuraCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 280
+inventory.maxamount 525
 }
