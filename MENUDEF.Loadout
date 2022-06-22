@@ -73,6 +73,7 @@ OptionValue WepOptionsA
 36, "Turbo Launcher \c[MenuRed]:Fire:"
 37, "Roaster \c[MenuRed]:Fire:"
 38, "Toss Shield"
+
 }
 
 OptionValue WepOptionsB
