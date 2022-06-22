@@ -69,6 +69,10 @@ OptionValue WepOptionsA
 32, "ElectriggerV \c[MenuYellow]:Elec:"
 33, "Violet Zapper \c[MenuYellow]:Elec:"
 34, "Hawk Precision Buster \c[MenuYellow]:Elec:"
+35, "Absolute Freeze \c[MenuCyan]:Ice:"
+36, "Turbo Launcher \c[MenuRed]:Fire:"
+37, "Roaster \c[MenuRed]:Fire:"
+38, "Toss Shield"
 }
 
 OptionValue WepOptionsB
@@ -108,6 +112,10 @@ OptionValue WepOptionsB
 32, "ElectriggerV"
 33, "Violet Zapper"
 34, "Hawk Precision Buster"
+35, "Absolute Freeze"
+36, "Turbo Launcher"
+37, "Roaster"
+38, "Toss Shield"
 }
 
 OptionValue WepOptions_Busters
@@ -156,6 +164,10 @@ OptionValue WepOptions_Launchers
 16, "LightWave Cannon"		
 17, "DrillHead Cannon \c[MenuOrange]:Break:"	
 30, "Repair Launcher \c[MenuGreen]:Repair:"
+35, "Absolute Freeze \c[MenuCyan]:Ice:"
+36, "Turbo Launcher \c[MenuRed]:Fire:"
+37, "Roaster \c[MenuRed]:Fire:"
+
 }
 
 OptionValue WepOptions_Melee
@@ -164,6 +176,7 @@ OptionValue WepOptions_Melee
 19, "Beam Rapier"		
 20, "Triangular Saber"
 31, "Replislasher \c[Teal]:Wind:"
+38, "Toss Shield"
 }
 
 
