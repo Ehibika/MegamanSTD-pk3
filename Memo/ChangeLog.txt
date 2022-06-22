@@ -13,21 +13,45 @@
 [+] Stop Status now breaks once the victim has recieved 100 damage while stopped
 [+++] euclid damage does not add to this counter.
 
+[+] Frostbite slow reduced from 33% > 15%
+[+++] Ice damage no longer applies hitston on targets under frostbite
+
+[+] Poison no longer deals dot damage
+
+[+] AfterStun protection increased from 2 second > 5
+
+
+
+
 ==|Property Changes|==
-[+]Elemental resistances now only lower their respective damage by 40%
-[+]Blade parry now only lowers damage by 40%
+[+]Weapon masteries now only increase weapon damage by 10%
+[+]Elemental resistances now only lower their respective damage by 10%
+[+]Blade parry now only lowers damage by 10%
+[+]Marksman damage bonus now only goes from 0% > 20%
+[+]Elemental Guard now only reduces damage by 10%
+[+]Assassin now only boost damage by 10%
+[+]Gutsy now only boosts damage by 20%
+
 
 ==|Class Changes|==
 
 [++]Marino[++]
 [+]Scattered flower now inflicts poison instead of a stun.
+[+]Scattered Flower's damage per shot increased from 5 > 25
 
 [++]Spark Mandrill[++]
 [+]Dash punch thrust speed decreased from 48 > 32
 [+]Dash punch hitbox size increased
 
 [++]Harp Note[++]
-[+]Damage nerf on Pulse song reduced from 75% > 4%
+[+]Pulse Song has been reworked, now launches a projectile that deals damage over time in an area.
+
+[++]Centaurman[++]
+[+] Cooldown on stop arrow increased from 3 seconds > 9 second
+
+[++]FlashMan[++]
+[+] Fixed the issue of his arc indicator being absent on flashpoint
+
 
 [++]IceMan[++]
 [+] "Refrigerate" property has been swapped for "Element Guard"
@@ -45,6 +69,12 @@
 [+] Superarm rocks are thrown on weapon swap
 [+] NEW Ability "GutsPunch" gained
 
+[++]Cinnamon[++]
+[+] HP decreased from 300 > 250
+
+[++]Alia[++]
+[+] Melt Creeper no longer inflicts stun
+
 ==|Weapon Changes|==
 
 [++]Screw Shooter[++]
@@ -53,6 +83,11 @@
 
 [++]Bolt Driver[++]
 [+]Overheal increased from half to full
+
+[+] New Weapons
+[+++] Absolute Freeze
+[+++] Turbo Launcher
+[+++] Roaster
 
 [++]Snowy Sprayer[++]
 [+] Damage reduced from 20 > 10

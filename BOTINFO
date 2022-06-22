@@ -2,12 +2,12 @@ clearbots
 
 {
 	name = "\cnMegaman"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -22,12 +22,12 @@ clearbots
 
 {
 	name = "\cnSuper Megaman"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -42,12 +42,12 @@ clearbots
 
 {
 	name = "\cnFireMan"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -62,12 +62,12 @@ clearbots
 
 {
 	name = "\cnMegaman X"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -82,12 +82,12 @@ clearbots
 
 {
 	name = "\cnZero"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -102,12 +102,12 @@ clearbots
 
 {
 	name = "\cnAxl"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -122,12 +122,12 @@ clearbots
 
 {
 	name = "\cnMassimo"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -142,12 +142,12 @@ clearbots
 
 {
 	name = "\cnMarino"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -162,12 +162,12 @@ clearbots
 
 {
 	name = "\cnCinnamon"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -182,12 +182,12 @@ clearbots
 
 {
 	name = "\cnAlia"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -202,12 +202,12 @@ clearbots
 
 {
 	name = "\cnMegaman.EXE"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -222,12 +222,12 @@ clearbots
 
 {
 	name = "\cnHarpNote"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -241,12 +241,12 @@ clearbots
 
 {
 	name = "\cnCentaurman"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -260,12 +260,12 @@ clearbots
 
 {
 	name = "\cnFlashMan"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -279,12 +279,12 @@ clearbots
 
 {
 	name = "\cnIceman"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -298,12 +298,12 @@ clearbots
 
 {
 	name = "\cnGutsMan"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -317,12 +317,12 @@ clearbots
 
 {
 	name = "\cnQuickMan"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"
@@ -336,12 +336,12 @@ clearbots
 
 {
 	name = "\cnSparkMandrill"
-	accuracy = 1
-	intellect = 2
+	accuracy = 4
+	intellect = 4
 	evade = 2
-	anticipation = 2
-	reactiontime = 2
-	perception = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
 	favoriteweapon = "MegaBusterWep"
 	color = "00 00 00"
 	gender = "male"

@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 38
+#LIBDEFINE PAINCOUNT 42
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -68,6 +68,10 @@ str PainRecord[PAINCOUNT][2] = {
 /*35*/{"IceSlasherBoss",ELM_ICE},
 /*36*/{"FlashPoint",ELM_EUCLID},
 /*37*/{"StopArrow",ELM_EUCLID},
+/*38*/{"AbsoluteFreeze",ELM_ICE},
+/*39*/{"AbsoluteFreezeDirect",ELM_ICE},
+/*40*/{"TurboLauncher",ELM_FIRE},
+/*41*/{"Roaster",ELM_FIRE},
 
 };
 
@@ -122,13 +126,14 @@ return 0;
 }
 
 
-#LIBDEFINE CRITCOUNT 7
+#LIBDEFINE CRITCOUNT 9
 //Crit Bitflags
 #LIBDEFINE CRIT_NULL 0.0
 #LIBDEFINE CRIT_ALWAYS 1.0
 #LIBDEFINE CRIT_CONDITION 2.0
 #LIBDEFINE CRIT_BURNSTATUS 4.0
 #LIBDEFINE CRIT_POISONSTATUS 8.0
+#LIBDEFINE CRIT_FROSTBITESTATUS 16.0
 str CritRecord[CRITCOUNT][2] = {
 /*
  * This contains all info regarding damagetypes that either always crit, or can crit under specific conditions
@@ -142,6 +147,9 @@ str CritRecord[CRITCOUNT][2] = {
 /*4*/{"ViperRifle",CRIT_CONDITION|CRIT_POISONSTATUS},
 /*5*/{"SyringeToss",CRIT_CONDITION|CRIT_POISONSTATUS},
 /*6*/{"ReplislasherTip",CRIT_ALWAYS},
+/*7*/{"AbsoluteFreezeDirect",CRIT_CONDITION|CRIT_FROSTBITESTATUS},
+/*8*/{"Roaster",CRIT_CONDITION|CRIT_BURNSTATUS},
+
 };
 
 
@@ -177,6 +185,24 @@ if(CheckInventory("PoisonMark"))
 		}
 	}
     if(CritFlag & CRIT_POISONSTATUS){Return 1;}
+    }
+return 0;
+}
+
+Function Bool CheckForFrostbiteCrit(int PainType)
+{
+if(CheckInventory("FrostbiteMark"))
+    {
+    Int CritFlag;
+    For(int j = 0; j < CRITCOUNT; j++)
+	{
+	If(CritRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        CritFlag = CritRecord[j][1];      
+		}
+	}
+    if(CritFlag & CRIT_FROSTBITESTATUS){Return 1;}
     }
 return 0;
 }

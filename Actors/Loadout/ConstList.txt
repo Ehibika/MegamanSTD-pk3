@@ -6,6 +6,9 @@ const int Aim_ArcScale = 20;
 const int BlastThrust = 64;
 const int BlastThrustRad = 250;
 
+const int TossSieldReturnArea = 64;
+
+
 Const int FVM = 65536; //Fixed Value Multiple
 Const float FVMF = 65536.0;
 

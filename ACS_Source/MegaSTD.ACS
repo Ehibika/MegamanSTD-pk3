@@ -21,7 +21,7 @@ int SourceTID;
 int VictimTID = ActivatorTID();
 int VictimHP = GetActorProperty(0,APROP_HEALTH);
 
-bool CritHit,Assassin,FireCrit,PoisonCrit,Guts,Determined,Marksman;
+bool CritHit,Assassin,FireCrit,PoisonCrit,FrostBiteCrit,Guts,Determined,Marksman;
 int DB_Determined,DB_Guts,DB_Marksman;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
@@ -40,7 +40,7 @@ if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 
 //===|FrostBite Hitstun|===
-if(CheckForFrostBiteHitstun(arg2)){GiveActorInventory(VictimTID,"FrostbiteHitstun",1);}
+//if(CheckForFrostBiteHitstun(arg2)){GiveActorInventory(VictimTID,"FrostbiteHitstun",1);}
 
 //===|Guts Boost|===
 if(CheckForGutsy()){Guts = true;}
@@ -75,7 +75,7 @@ if(CheckForResistance(arg2)){Damage = DamageModify(Damage,0.6);}
 if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,0.75);}
 
 //==Blade Parrymodifier ==
-if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);;}
+if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);}
 
 if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 	{
@@ -92,15 +92,17 @@ if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 //===|conditional status crits|====
 if(CheckForFireCrit(arg2)){FireCrit = true; }
 if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][PROP_NAME])){CritHit = true;}}
+if(CheckForFrostbiteCrit(arg2)){FrostBiteCrit = true; }
 
 //===============|End Damage Calculations|===============
 if(FireCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
+if(FrostBiteCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
 if(Assassin)
-	{if(PoisonCrit || PoisonCrit || CritHit){Damage += Damage*0.3>>16;}}
+	{if(PoisonCrit || FireCrit || FrostBiteCrit || CritHit){Damage += DamageModify(Damage,0.2)}}
 
 if(Determined){Damage += DB_Determined;}
-if(Guts){Damage += Damage*0.5>>16;}
+if(Guts){Damage += DamageModify(Damage,0.2)>16;}
 if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
@@ -113,7 +115,10 @@ if(!CheckForDontStop(arg2)){TakeInventory("StopCount",Damage);}
 
 //==Fireman Class Passive==
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
-if(CheckInventory("IsFireman") && CheckForElement(arg2,ELM_FIRE)){GiveInventory("FiremanHeat",arg1*0.5>>16);}
+if(CheckInventory("IsFireman") 
+	&& CheckForElement(arg2,ELM_FIRE) 
+	&& IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False)
+	{GiveInventory("FiremanHeat",arg1*0.5>>16);}
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 
 //==Quickman Class Passive==
@@ -1309,4 +1314,32 @@ script "MSTD_GetPointerTID_147" (int Swap)
 			break;
 	}
 	SetResultValue(ActivatorTID());
+}
+
+
+Script "SynchTargetSpecies" (void) 
+{
+	int BaseTID = ActivatorTID();
+	int Owner = ACS_NamedExecuteWithResult("core_gettarget")-1000;
+	int Team = GetPlayerInfo(Owner, PLAYERINFO_TEAM);
+
+	If(ACS_ExecuteWithResult(975, 1))
+		{
+		switch(Team)
+			{
+			Case 0:
+			SetActorProperty(0,APROP_SPECIES,"LightMember");
+			break;
+			Case 1:
+			SetActorProperty(0,APROP_SPECIES,"WilyMember");
+			break;
+			Case 2:
+			SetActorProperty(0,APROP_SPECIES,"CossackMember");
+			break;
+			Case 3:
+			SetActorProperty(0,APROP_SPECIES,"KingMember");
+			break;
+			}
+		}
+		Else{setactorproperty(0,APROP_SPECIES,strparam(s:"Player",i:Owner));}
 }

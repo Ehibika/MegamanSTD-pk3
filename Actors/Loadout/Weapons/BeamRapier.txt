@@ -134,9 +134,8 @@ actor BR_BladeWatcher
 }
 
 
-actor BR_BladeStart 
+actor BR_BladeStart : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "BeamRapierEdge"
 Obituary "$OB_BEAMRAPIER"
@@ -167,9 +166,8 @@ stop
 }
 }
 
-actor BR_BladeTip
+actor BR_BladeTip: ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "BeamRapierTip"
 Obituary "$OB_BEAMRAPIER"

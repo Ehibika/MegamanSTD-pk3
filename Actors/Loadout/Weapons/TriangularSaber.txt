@@ -135,9 +135,8 @@ actor TS_BladeWatcher
 }
 
 
-actor TS_BladeStart 
+actor TS_BladeStart : ProjectileBase
 {
-PROJECTILE
 +RIPPER
 damagetype "TriangularSaberEdge"
 Obituary "$OB_TRIANGULARSABER"
@@ -168,9 +167,9 @@ stop
 }
 }
 
-actor TS_BladeTip
+actor TS_BladeTip : ProjectileBase
 {
-PROJECTILE
+
 +RIPPER
 damagetype "TriangularSaberTip"
 Obituary "$OB_TRIANGULARSABER"
