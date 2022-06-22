@@ -31,6 +31,19 @@ const float HRifle_MSPD = 0.7;
 const float TTA_Default = 0.005;
 const float TTA_Precise = 0.0005;
 const float TTA_SuperPrecise = 0.00005;
+
+//====|ActorClassifier Flags|====
+Const int ACF_NONE = 0;
+Const int ACF_WORLD = 1;
+Const int ACF_PLAYER = 2;
+Const int ACF_BOT = 3;
+Const int ACF_VOODOODOLL = 4;
+Const int ACF_MONSTER = 5;
+Const int ACF_ALIVE = 6;
+Const int ACF_DEAD = 7;
+Const int ACF_MISSILE = 8;
+Const int ACF_GENERIC = 9;
+
 //====|Range Constants|====
 Const int SprayerRange = 25;
 

@@ -140,8 +140,8 @@ actor ElectriggerVDamager : FastProjectileBase
         TNT1 A 0
         stop
     Crash:
-    XDeath:
     TNT1 A 1 A_SpawnItemEx("ElectriggerVChainer",0,0,0,0,0,0,0,SXF_TRANSFERPOINTERS|SXF_NOCHECKPOSITION)
+    XDeath:
     Death:
     TNT1 A 0
     stop

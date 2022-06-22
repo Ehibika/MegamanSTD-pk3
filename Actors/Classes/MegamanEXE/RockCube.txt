@@ -109,7 +109,6 @@ species "MovingPlatform"
 //Concrete Shot
 +NOTAUTOAIMED
 +CANTSEEK
-+NOBLOOD
 +DONTRIP
 Health 500
 Mass 9999

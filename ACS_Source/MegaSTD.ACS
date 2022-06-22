@@ -919,6 +919,8 @@ Int Output;
 
 if(Pointer!=0){SetActivator(0,Pointer);}
 
+if(!(ClassifyActor(0) & ACTOR_PLAYER))
+	{Output = Output | STATUS_MAJOR;}
 
 if(CheckInventory("PoisonMark")
 ||CheckInventory("BurnMark")
