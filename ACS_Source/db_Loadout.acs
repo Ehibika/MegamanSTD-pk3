@@ -80,7 +80,7 @@ str MasterWepList[WEAPONLIST][6] = {
 /*4*/{"Lazer Rifle","LazerRifleWep","LazerRifle_Ammo", WF_MACHINEGUN,"LazerRifle",""},
 /*5*/{"Triangle Gun","TriangleGunWep","TriangleGun_Ammo", WF_MACHINEGUN,"TriangleGun",""},
 /*6*/{"HighSpeed Rifle","HighSpeedRifleWep","HighSpeedRifle_Ammo", WF_MACHINEGUN,"HighSpeedRifle",""},
-/*7*/{"GatlingGun","GatlingGunWep","GatlingGun_Ammo", WF_MACHINEGUN,"GatlingGunP",""},
+/*7*/{"GatlingGun","GatlingGunWep","GatlingGun_Ammo", WF_MACHINEGUN|WF_FORBIDDEN,"GatlingGunP",""},
 /*8*/{"Shotgun","ShotgunWep","Shotgun_Ammo",WF_MACHINEGUN,"ShotgunP",""},
 
 /*9*/{"Gas Emitter","GasEmitterWep","GasEmitter_Ammo", WF_SPRAYER,"GasEmitter",""},

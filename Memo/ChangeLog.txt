@@ -97,12 +97,19 @@
 [+++] Medipistol
 [+++] Repair sprayer
 [+++] Repair launcher
+[+++] Gattling Gun
+
+[+] New Weapons
+[+++] Absolute Freeze
+[+++] Turbo Launcher
+[+++] Roaster
 
 [++]Snowy Sprayer[++]
 [+] Damage reduced from 20 > 10
 
 [++]Shadow Buster[++]
 [+] Projectile Velocity reduced from 64 > 32
+[+] Ammo reduced from 45 > 25
 
 [++]ElectriggerZ[++]
 [+]Now has a chain lightning effect where it can leap from target to target

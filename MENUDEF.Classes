@@ -34,12 +34,12 @@ OptionString ClassProperties
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
-"MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
+"MegamanEXE", "BusterMastery \nBlade Parry \nBladeMastery" //Megaman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
 "Centaurman", "Marksman \nEuclidResistance \nHefty"
 "FlashMan", "MachineGunMastery \nBusterMastery \nEuclidResistance"
-"Iceman", "IceResistance \nSubTank \nRefrigerate"
+"Iceman", "IceResistance \nSubTank \nElemental Guard"
 "GutsMan", "Gutsy \nHefty \nHeavyWeight"
 "QuickMan", "Speedrunner \nAcrobat \n\cGAtomic Speed"
 "Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
@@ -55,7 +55,7 @@ OptionString Class_HP
 "Axl", "200" 
 "Massimo", "350" 
 "Marino", "175" 
-"Cinnamon", "300" 
+"Cinnamon", "175" 
 "Alia", "250" 
 "MegamanEXE", "175" 
 "Fireman", "250" 

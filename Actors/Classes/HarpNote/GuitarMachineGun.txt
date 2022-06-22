@@ -66,9 +66,12 @@ goto Ready.Subwep
 
 Zoom:
 "####" A 0 A_JumpIfInventory("PulseSongCooldownItem",1,"NoAmmo")
-"####" A 0 A_PlaySoundEx("pulse/song","SoundSlot6")
+"####" A 0 A_PlaySoundEx("string/shot","SoundSlot6")
+"####" A 0 A_FireCustomMissile("PulseSongShot",0,0,4,4,0,0)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
 "####" A 0 A_GiveInventory("PulseSongCooldown")
-"####" A 7 A_SpawnItemEX("PulseSongWatcher")
 "####" A 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
 goto Ready.Subwep
 

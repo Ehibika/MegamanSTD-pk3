@@ -96,7 +96,7 @@ stop
 }
 //=================
 //=================
-Const int PulseSongAOE = 350;
+Const int PulseSongAOE = 128;
 Const int PulseSong_DMG = 10;
 
 actor PulseSongShot : ProjectileBase

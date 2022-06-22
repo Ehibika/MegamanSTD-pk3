@@ -4,7 +4,7 @@ actor SnowySprayerWep : WepMasterBase
 {
 Tag "SnowySprayer"
 Weapon.AmmoUse 1
-Weapon.AmmoGive 45
+Weapon.AmmoGive 20
 scale 2.0
 Obituary "$OB_SNOWYSPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
@@ -89,7 +89,7 @@ actor SnowySprayerWep2 : SnowySprayerWep
 actor SnowySprayer_Ammo : Ammo
 {
 inventory.amount 1
-inventory.maxamount 45
+inventory.maxamount 20
 +INVENTORY.IGNORESKILL
 }
 
@@ -276,7 +276,7 @@ damage (0)
 reactiontime 1
 scale 2.0
 RenderStyle "Translucent"
-Alpha 0.6
+Alpha 0.5
 States
 {
 Spawn:
