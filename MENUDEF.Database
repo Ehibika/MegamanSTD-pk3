@@ -283,14 +283,14 @@ OptionValue Propertyinfo
 12, "Cut Euclid Damage recieved in half\nand blocks the Stop and \nSlow statuses."
 
 13, "Take reduced non-melee/non Blade \ndamage while a melee/Blade \nweapon is in hand"
-14, "Move Faster while wielding lighter \nweaponry"
+14, "Increases weapon speed with for all but launchers and heavy weapons."
 15, "Jump height is increased"
 16, "Unaffected by weapon speed modifiers."
 
 17, "Increases the intensity of \nknockback effects"
 18, "Decreases the intensity of \nknockback effects"
 
-19, "Increased the power of Critical \nHits"
+19, "Deal increased damage to targets \nat or above full Health"
 20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
 21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
 22, "When equipped with a repair weapon, \nyou will passively regenerate HP."

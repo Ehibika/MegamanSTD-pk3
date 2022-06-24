@@ -167,7 +167,7 @@ TNT1 A 1 A_SpawnItemEx("SlashTipFX2",0,0,0,0,0,0,0,SXF_ABSOLUTEMOMENTUM)
 Goto Death
 
 Death:
-TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+TNT1 A 0 
 stop
 }
 }
@@ -192,12 +192,12 @@ TNT1 A 0 A_SpawnItemEx("SlashTip",0,0,0,momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SX
 TNT1 A 1 A_SpawnItemEx("SlashTipFX2",0,0,0,0,0,0,0,SXF_ABSOLUTEMOMENTUM)
 Goto Death
 Death:
-TNT1 A 0 A_SpawnItemEx("OilPitIgnite",0,0,8)
+TNT1 A 0 
 stop
 }
 }
 
-actor SlashEdgeFX : BasicNOTClientside
+actor SlashEdgeFX : BasicGraphicEffect
 {
 scale 2.5
 XScale 4.0

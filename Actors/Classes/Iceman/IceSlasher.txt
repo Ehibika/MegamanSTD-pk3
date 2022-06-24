@@ -3,7 +3,7 @@ actor Ability1_Iceman : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_MEGABUSTER"
+Obituary "$OB_ICESLASHER"
 Tag "whatanicetag"
 weapon.ammotype2 "BusterAmmo"
 inventory.icon "ICESI"
@@ -90,7 +90,7 @@ PROJECTILE
 Damage (20)
 scale 2.5
 damagetype "IceSlasherBoss"
-Obituary "OB_ICESLASHER"
+Obituary "$OB_ICESLASHER"
 +RIPPER
 radius 18
 height 18

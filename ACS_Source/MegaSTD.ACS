@@ -20,6 +20,7 @@ str PainType = arg2;
 int SourceTID;
 int VictimTID = ActivatorTID();
 int VictimHP = GetActorProperty(0,APROP_HEALTH);
+int VictimHPPer = GetHealthPercent(0,0,0);
 
 bool CritHit,Assassin,FireCrit,PoisonCrit,FrostBiteCrit,Guts,Determined,Marksman;
 int DB_Determined,DB_Guts,DB_Marksman;
@@ -32,11 +33,11 @@ SourceTID = ActivatorTID();
 
 //==Mastery Damage Bonus ==
 //Also to avoid boosting self damage
-if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,0.2);}}
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,P_MASTERYDAMAGE);}}
 
-//==Assassin Crit Bonus==
+//==Assassin Bonus==
 if(CheckForCrit(arg2)){CritHit = true;}
-if(CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
+if(VictimHPPer >= 100 && CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
 
 
 //===|FrostBite Hitstun|===
@@ -49,15 +50,15 @@ if(CheckForGutsy()){Guts = true;}
 if(CheckForDetermined(arg2))
 	{
 	Determined = true;
-	DB_Determined = MassimoDamageRamp(0,DamageModify(Damage,0.2),-1);
+	DB_Determined = MassimoDamageRamp(0,DamageModify(Damage,P_DETERMINED),-1);
 	}
 //===|Marksman Boost|===
 if(CheckForMarksman(VictimTID))
 	{
 	Marksman = true;
-	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,0.2),DamageModify(Damage,0.5));
+	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,P_MARKSMANLOW),DamageModify(Damage,P_MARKSMANHIGH));
 	DB_Marksman = RoundToNth(DB_Marksman,5);
-	if(DB_Marksman > DamageModify(Damage,0.5)){DB_Marksman = DamageModify(Damage,0.5);}
+	if(DB_Marksman > DamageModify(Damage,P_MARKSMANHIGH)){DB_Marksman = DamageModify(Damage,P_MARKSMANHIGH);}
 	}
 //Reduce harm from blast weapons on yourself
 if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForSelfBlastGuard(arg2)){Damage = DamageModify(Damage,0.5);}}
@@ -69,10 +70,10 @@ if(CheckForREfrigerate(arg2)){GiveActorInventory(VictimTID,"FrostbiteStatusFastB
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 //==Elemental Resistance modifier ==
-if(CheckForResistance(arg2)){Damage = DamageModify(Damage,0.6);}
+if(CheckForResistance(arg2)){Damage = DamageModify(Damage,P_RESISTANCE);}
 
 //==|Elemental Guard modifier|==
-if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,0.75);}
+if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,P_ELMGUARD);}
 
 //==Blade Parrymodifier ==
 if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);}
@@ -95,14 +96,17 @@ if(CheckForPoisonCrit(arg2)){PoisonCrit = true; if(CheckProp(MasterProPList[19][
 if(CheckForFrostbiteCrit(arg2)){FrostBiteCrit = true; }
 
 //===============|End Damage Calculations|===============
-if(FireCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
-if(PoisonCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
-if(FrostBiteCrit){Damage = Damage*3.0>>16;Giveinventory("CritEffectSpawner",1);}
+if(FireCrit){Damage = DamageModify(Damage,P_CRIT);Giveinventory("CritEffectSpawner",1);}
+if(PoisonCrit){Damage = DamageModify(Damage,P_CRIT);Giveinventory("CritEffectSpawner",1);}
+if(FrostBiteCrit){Damage = DamageModify(Damage,P_CRIT);Giveinventory("CritEffectSpawner",1);}
 if(Assassin)
-	{if(PoisonCrit || FireCrit || FrostBiteCrit || CritHit){Damage += DamageModify(Damage,0.2)}}
+	{Damage += DamageModify(Damage,P_ASSASSIN);
+	if(!CritHit){Giveinventory("CritEffectSpawner",1);}
+	}
+	//{if(PoisonCrit || FireCrit || FrostBiteCrit || CritHit){Damage += DamageModify(Damage,0.2);}}
 
 if(Determined){Damage += DB_Determined;}
-if(Guts){Damage += DamageModify(Damage,0.2)>16;}
+if(Guts){Damage += DamageModify(Damage,P_GUTSY);}
 if(Marksman){Damage += DB_Marksman;}
 //Poison damage is no longer fatal
 if(arg2 == "PoisonDOT"){ if(Damage>=VictimHP){Damage = VictimHP-1;}}
@@ -956,12 +960,17 @@ int FixedValue = Value<<16;
 
 if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.7; /*log(s:"Got Hefty!");*/}
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
-if(CheckProp(MasterProPList[14][PROP_NAME]) && Value >= 0.9) {Value += 0.2; /*log(s:"Got Speedrunner!");*/}
+if(CheckProp(MasterProPList[14][PROP_NAME])) 
+	{
+	/*log(s:"Got Speedrunner!");*/
+	if(Value >= 0.9)Value += 0.2; 
+	else if(Value >= 0.7)Value += 0.1;
+	}
 
 //IsBladeParryActive();
 
 //Quickman's Speed passive
-if(CheckInventory("IsQuickman")){Value += 0.1*CheckInventory("AtomicSpeedLevel");}
+if(CheckInventory("IsQuickman")){Value += 0.2*CheckInventory("AtomicSpeedLevel");}
 
 if(Value != GetActorProperty(0,APROP_SPEED))
 	{
@@ -1342,4 +1351,71 @@ Script "SynchTargetSpecies" (void)
 			}
 		}
 		Else{setactorproperty(0,APROP_SPECIES,strparam(s:"Player",i:Owner));}
+}
+
+//WallJump scripts from CSCCDC and CBM.
+
+Script "CSCACS_WallJump" (void)
+{
+Delay(2);
+int Buttons;
+int OlDButtons;
+int WallJumpLimit = CheckInventory("WallJumpLimit");
+If(WallJumpLimit == 0){SetInventory("WallJumpLimit", 10); WallJumpLimit = 10;}
+While(GetActorProperty(0,APROP_Health) > 0 && CheckInventory("CanWallJumpFlag"))
+	{
+	Buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+	if(CheckInventory("JumpCancler")==0 && CSLTButtonCheck(Buttons, OldButtons, BT_JUMP)==1) 
+		{
+		If(WallJumpLimit > 0)
+			{
+			GiveInventory("WallJumping",1);
+			Delay(1);
+			If(CheckInventory("WallJumped"))
+				{
+				WallJumpLimit--;
+				TakeInventory("WallJumped", 1);
+				}
+			}
+		Delay(10);
+		}
+
+	If(CheckInventory("JumpCancler") && GetActorVelZ(0) == 0.0){WallJumpLimit = CheckInventory("WallJumpLimit");}
+	OldButtons=Buttons;
+	delay(1);
+	}
+}
+
+script "CSACS_WallJump" (int Force, int BonusJump)
+{
+	//SetActivatorToTarget(0);
+	//int JumpFixAngle = 0;
+	int JumpAngByte = 0;
+	int TotalAngles = 0;
+    if (CheckInventory("WallN") && !CheckInventory("WallS")) {
+		JumpAngByte += 128;
+		TotalAngles++;
+	}
+    if (/*CheckInventory("WallS") &&*/ !CheckInventory("WallN")) {
+		JumpAngByte += 256;
+		TotalAngles++;
+	}
+	if (CheckInventory("WallE") && !CheckInventory("WallW")) {
+	    JumpAngByte += 64;
+		TotalAngles++;
+	}
+	if (CheckInventory("WallW") && !CheckInventory("WallE")) {
+	    JumpAngByte += 192;
+		TotalAngles++;
+	}
+	if (/*CheckInventory("WallS") && */ !CheckInventory("WallN") && CheckInventory("WallE") && !CheckInventory("WallW")) { //Somewhere, a mathematician is crying.
+	    JumpAngByte = 32;
+		TotalAngles = 1;
+	}
+	if (TotalAngles>0) {
+		JumpAngByte /= TotalAngles;
+		ThrustThing(((GetActorAngle(0) >> 8) + JumpAngByte),(Force*GetActorProperty(0,APROP_SPEED))>>16,1);
+		SetActorVelocity(0,GetActorVelX(0),GetActorVelY(0),GetActorProperty(0,APROP_JumpZ)+BonusJump*1.0,0,0);
+		//ThrustThingZ(0,(GetActorProperty(0,APROP_JumpZ) >> 16) * 4 + BonusJump,0,0);
+	}
 }

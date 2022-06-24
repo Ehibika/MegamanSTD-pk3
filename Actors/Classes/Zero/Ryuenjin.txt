@@ -182,7 +182,7 @@ stop
 }
 }
 
-actor Ryuenjin_BladeEdgeFX : BasicNOTClientside
+actor Ryuenjin_BladeEdgeFX : BasicGraphicEffect
 {
 scale 2.5
 XScale 4.5

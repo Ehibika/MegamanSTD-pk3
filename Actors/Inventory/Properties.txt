@@ -37,7 +37,7 @@ actor Pro_Refrigerate : Once {}
 //================================
 
 
-actor BladeParryFX : BasicClientside
+actor BladeParryFX : BaseShieldWarper
 {
 scale 2.7
 alpha 0.6
@@ -85,7 +85,7 @@ stop
 
 
 
-actor UnderShirtFX : BasicClientside
+actor UnderShirtFX : BaseShieldWarper
 {
 scale 2.7
 Xscale 2.9
@@ -120,7 +120,7 @@ stop
 }
 
 
-actor GutsyRageFX : BasicClientside
+actor GutsyRageFX : BaseShieldWarper
 {
 Scale 2.5
 Renderstyle "translucent"

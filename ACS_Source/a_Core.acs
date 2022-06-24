@@ -74,6 +74,7 @@ int pln = playerNumber();
 	ACS_NamedExecuteAlways("SetClientSpecies",0,GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM));
 // Stores the players starting Jump Height on spawn
 PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
+GiveInventory("CanWallJump",1);
 }
 
 

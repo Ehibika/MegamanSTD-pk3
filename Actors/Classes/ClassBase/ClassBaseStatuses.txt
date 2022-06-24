@@ -607,7 +607,7 @@ stop
 actor StopMark : Powerup
 {
 inventory.amount 1
-powerup.duration -1
+powerup.duration 87
 }
 
 actor StopCount : inventory

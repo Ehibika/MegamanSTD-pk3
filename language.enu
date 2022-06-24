@@ -10,7 +10,7 @@ OB_TRIANGLEGUN = "%k Eliminated %o with the TRIANGL EGUN";
 OB_HIGHSPEEDRIFLE = "%k Eliminated %o with the HIGH SPEED RIFLE";
 OB_GATLINGGUN = "%k Eliminated %o with the GATLING GUN";
 OB_SHOTGUN = "%k Eliminated %o with the SHOTGUN";
-OB_GASEMITTER = "%k Eliminated %o with the GASE MITTER";
+OB_GASEMITTER = "%k Eliminated %o with the GAS EMITTER";
 OB_COMPRESSEDSPRAYER = "%k Eliminated %o with the COMPRESSED SPRAYER";		
 OB_BURNINGSPRAYER = "%k Eliminated %o with the BURNING SPRAYER";		
 OB_SNOWYSPRAYER = "%k Eliminated %o with the SNOWY SPRAYER";		
@@ -35,7 +35,11 @@ OB_REPAIRSPRAYER = "%k Eliminated %o with the RepairSprayer";
 OB_REPLISLASHER = "%k Eliminated %o with the Replislasher";
 OB_ELECTRIGGERV = "%k Eliminated %o with the ElectriggerV";
 OB_VIOLETZAPPER = "%k Eliminated %o with the VioletZapper";
-OB_HAWKPRECISIONBUSTER = "%k Eliminated %o with the HawkPrecisionBuster";
+OB_HAWKPRECISIONBUSTER = "%k Eliminated %o with the Hawk Precision Buster";
+OB_ABSOLUTEFREEZE = "%k Eliminated %o with the Absolute Freeze";
+OB_TURBOLAUNCHER = "%k Eliminated %o with the Turbo Launcher";
+OB_ROASTER = "%k Eliminated %o with the Roaster";
+OB_TOSSSHIELD = "%k Eliminated %o with the Toss Shield";
 
 // -=- Ability obituaries -=-
 OB_BLASTLAUNCHER = "%k Blew %o up with a Blast launcher bomb";
@@ -59,19 +63,20 @@ OB_FIRESTORMTRAIL = "%o Melted under %k's Melt Creeper";
 
 OB_STRAFEBARRAGE = "%k Wiped %o Out with Strafe Barrage!";
 
-OB_GUITARMACHINEGUN = "%k Was Bound by %o's Guitar Machine Gun!";
+OB_GUITARMACHINEGUN = "%o Was Bound by %k's Guitar Machine Gun!";
+OB_PULSESONG = "%o Was Mezmerized by %k's Pulse Song!";
 
-OB_AUTOSENTRY = "%k Was gunned down by %o's auto Sentry!";
+OB_AUTOSENTRY = "%o Was gunned down by %k's auto Sentry!";
 
-OB_SYRINGETOSS = "%k Got a Deadly Dose from %o's Syringe Toss!";
+OB_SYRINGETOSS = "%o Got a Deadly Dose from %k's Syringe Toss!";
 
-OB_FIREBALL = "%k Got Scorched %o's Fireball!";
-OB_FIRESTORMTRAIL = "%k got Incinerated by %o's FireStorm!";
+OB_FIREBALL = "%o Got Scorched %k's Fireball!";
+OB_FIRESTORMTRAIL = "%o got Incinerated by %k's FireStorm!";
 
-OB_XCHARGESHOT = "%k was Blasted by %o's Charge Shot!";
+OB_XCHARGESHOT = "%o was Blasted by %k's Charge Shot!";
 
-OB_ELECSPARK = "%k was sparkled by %o's Electric Spark";
-OB_DASHPUNCH= "%k was sent flying by %o's Dash Punch";
+OB_ELECSPARK = "%o was sparkled by %k's Electric Spark";
+OB_DASHPUNCH= "%o was sent flying by %k's Dash Punch";
 OB_SOLIDSLAM = "%o was slam bammed into a object by %k Dash Punch";
 
 //#region old

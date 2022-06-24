@@ -2,36 +2,28 @@
 
 [+]====================|Alpha V.9B|========================[+]
 
-==|BugFixes|==
-[+] fixed the issue with flashman's flashpoint's arc indicator not showing online
-[+] Fixed an issue with iceman's footholder lift being able to hold players in place
-[+] Fixed an issue where the repair gun would detox near instantly due to it skipping it's tic delay
+Various changes from V9 have been rolled back, including most of the nerfs and cooldown changes
 
-[+] for testing purposes, many of the barrier FX have been disabled in the mod.
+==|BugFixes|==
 
 ==|Mechanic Changes|==
-[+] Stop Status now breaks once the victim has recieved 100 damage while stopped
-[+++] euclid damage does not add to this counter.
+[+] Stop duration increased from 1 second > 2.5
 
-[+] Frostbite slow reduced from 33% > 15%
-[+++] Ice damage no longer applies hitston on targets under frostbite
+[+] Frostbite Duration restored to 5 seconds
 
-[+] Poison no longer deals dot damage
+[+] Burn Dot Damage Restored
+[+++] Burn no longer increases damage received
 
-[+] AfterStun protection increased from 2 second > 5
-
-
-
+[+] Stun's movement reductions have been restored
 
 ==|Property Changes|==
-[+]Weapon masteries now only increase weapon damage by 10%
-[+]Elemental resistances now only lower their respective damage by 10%
-[+]Blade parry now only lowers damage by 10%
-[+]Marksman damage bonus now only goes from 0% > 20%
-[+]Elemental Guard now only reduces damage by 10%
-[+]Assassin now only boost damage by 10%
-[+]Gutsy now only boosts damage by 20%
-
+[+]Weapon masteries now increase weapon damage by 40%
+[+]Elemental resistances now lower their respective damage by 40%
+[+]Blade parry now lowers damage by 40%
+[+]Elemental Guard now reduces damage by 25%
+[+]Assassin now grants 30% damage on opponents at or above full HP
+[+]Gutsy now boosts damage by 30%
+[+]Spedrunner now grants a lower speed boost on midweight weapons
 
 ==|Class Changes|==
 
@@ -44,7 +36,11 @@
 [+]Dash punch hitbox size increased
 
 [++]Harp Note[++]
-[+]Pulse Song has been reworked, now launches a projectile that deals damage over time in an area.
+[+]Guitar Machine Gun Shot damage increased from 10 > 25
+[+]Pulse Song's hit rate increased from 5 times per second > 7 times
+[+]Pulse Song's Radius increased from 129 > 192
+[+]Pulse Song's cooldown is now 5 seconds
+[+]Pulse Song's Debuff is restored but at a 25% reduction and a 1.5 sec duration
 
 [++]Centaurman[++]
 [+] Cooldown on stop arrow increased from 3 seconds > 9 second
@@ -52,6 +48,8 @@
 [++]FlashMan[++]
 [+] Fixed the issue of his arc indicator being absent on flashpoint
 
+[++]QuickMan[++]
+[+] Atomic speed grants a stronger speed boost
 
 [++]IceMan[++]
 [+] "Refrigerate" property has been swapped for "Element Guard"
@@ -75,6 +73,10 @@
 [++]Alia[++]
 [+] Melt Creeper no longer inflicts stun
 
+[++]Marino[++]
+[+] Hyperdive can be used while scattered flower is queued without leaving scattered flower
+[+] Scattered flower's Precast and aftercast delay reduced
+
 ==|Weapon Changes|==
 
 [++]Screw Shooter[++]
@@ -84,20 +86,27 @@
 [++]Bolt Driver[++]
 [+]Overheal increased from half to full
 
-[+] New Weapons
-[+++] Absolute Freeze
-[+++] Turbo Launcher
-[+++] Roaster
+[++]Mega Cannon[++]
+[+] Min splash radius increased from 32 > 64
 
 [++]Snowy Sprayer[++]
-[+] Damage reduced from 20 > 10
-
-[++]Shadow Buster[++]
-[+] Projectile Velocity reduced from 64 > 32
+[+] Ammo restored from 20 > 45
 
 [++]ElectriggerZ[++]
-[+]Now has a chain lightning effect where it can leap from target to target
+[+]Chain Lightning now only works off players
 
+[++]Beam Rapier[++]
+[+] increased after swing delay
 
+[++]Gase Mitter[++]
+[+] Finally fixed that blasted typo
+
+[++]Shotgun[++]
+[+] Movespeed increased
+[+] Now labled as a "Lite" weapon
+
+[++]Turbo Launcher[++]
+[+] Now labled as a "Lite" weapon to communicate it's higher movespeed and the fact it
+    Works with the new Speedrunner
 
 //================================================================================*/

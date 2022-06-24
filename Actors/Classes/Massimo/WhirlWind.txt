@@ -165,7 +165,7 @@ stop
 }
 
 
-actor whirlwindEdgeFX : BasicNOTClientside
+actor whirlwindEdgeFX : BasicGraphicEffect
 {
 scale 2.5
 XScale 4.0

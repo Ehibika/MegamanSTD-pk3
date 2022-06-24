@@ -116,5 +116,5 @@ str MasterWepList[WEAPONLIST][6] = {
 /*35*/{"AbsoluteFreeze","AbsoluteFreezeWep","AbsoluteFreeze_Ammo", WF_LAUNCHER,"AbsoluteFreezeDirect","AbsoluteFreeze"},
 /*36*/{"TurboLauncher","TurboLauncherWep","TurboLauncher_Ammo", WF_LAUNCHER,"TurboLauncher",""},
 /*37*/{"Roaster","RoasterWep","Roaster_Ammo", WF_LAUNCHER,"Roaster",""},
-/*38*/{"TossShield","TossShieldWep","TossShield_WaitCount", WF_MELEE|WF_TOSSSHIELD|WF_FORBIDDEN,"TossShield",""},
+/*38*/{"TossShield","TossShieldWep","TossShield_WaitCount", WF_MELEE|WF_TOSSSHIELD,"TossShield",""},
 };

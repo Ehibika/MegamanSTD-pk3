@@ -111,6 +111,7 @@ weapon/centaurarrowfly CENARFLY
 weapon/centaurcharge CENCHARG
 
 Misc/Bonk BONK1
+Misc/WallKick XLAND
 
 weapon/AutoReload1 armret $limit weapon/AutoReload1 0//fakerel2
 weapon/AutoReload2 S_M9_I1 $limit weapon/AutoReload2 0
