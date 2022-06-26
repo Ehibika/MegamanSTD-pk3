@@ -167,6 +167,7 @@ actor ArrowBusterDamager : FastProjectileBase
     
     Death:
     TNT1 A 0
+    TNT1 A 0 A_TakeFromTarget("ArrowBuster_HitCounter",99)
     stop
 
     XDeath:

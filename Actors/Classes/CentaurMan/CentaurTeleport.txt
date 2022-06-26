@@ -49,7 +49,7 @@ AltFire.Off:
 "####" F 0 A_SpawnItemEX("TeleportSwitcher")
 "####" F 2 A_PlaySoundEx("weapon/centaurvanish","Weapon")
 "####" F 0 A_SpawnItemEX("RingWarpEffect")
-"####" F 0 A_SpawnItemEX("CentaurTeleportCooldown")
+"####" F 0 A_GiveInventory("CentaurTeleportCooldown")
 "####" F 0 ACS_NamedExecuteWithResult("Core_ExitUnit",0)
 "####" F 0 A_TakeInventory("ExitUnitItem",99)
 "####" F 5 
@@ -245,7 +245,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("CentaurTeleportCooldownItem",280)
+TNT1 A 0 A_Giveinventory("CentaurTeleportCooldownItem",157)
 TNT1 A 0 A_Giveinventory("AltCooldownFlag")
 TNT1 A 0 A_Spawnitemex("CentaurTeleportCooler")
 stop
@@ -259,5 +259,5 @@ stop
 actor CentaurTeleportCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 280
+inventory.maxamount 157
 }

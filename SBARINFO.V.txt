@@ -331,6 +331,30 @@ InInventory IsSparkMandrill, 1
 	DrawBar "ALTEMP", "ALTHBAR1", ElectricSparkCooldownItem, vertical,reverse, 25, 163;
 	ininventory ElectricSparkCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ElectricSparkCooldownItem, vertical,reverse, 25, 163;}
 	}
+
+
+InInventory IsSearchManEXE, 1
+	{
+	DrawImage "BOMBSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", DynamiteCooldownItem, vertical,reverse, 5, 163;
+	ininventory DynamiteCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", DynamiteCooldownItem, vertical,reverse, 5, 163;}
+	DrawNumber 3, smallfont, white, Dynamite_Charges, alignment(left), 10,166;
+
+	DrawImage "SCOPI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SearchScopeCooldownItem, vertical,reverse, 25, 163;
+	ininventory SearchScopeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SearchScopeCooldownItem, vertical,reverse, 25, 163;}
+	}
+
+InInventory IsVile, 1
+	{
+	DrawImage "VICODI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ElectricShockCooldownItem, vertical,reverse, 5, 163;
+	ininventory ElectricShockCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ElectricShockCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "VICOGI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", ExplosiveRoundCooldownItem, vertical,reverse, 25, 163;
+	ininventory ExplosiveRoundCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ExplosiveRoundCooldownItem, vertical,reverse, 25, 163;}
+	} 
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

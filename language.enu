@@ -79,6 +79,12 @@ OB_ELECSPARK = "%o was sparkled by %k's Electric Spark";
 OB_DASHPUNCH= "%o was sent flying by %k's Dash Punch";
 OB_SOLIDSLAM = "%o was slam bammed into a object by %k Dash Punch";
 
+OB_SEARCHSCOPE = "%o Was sniped by %k's Search Scope";
+OB_DYNAMITE = "%o Stumbled onto %k's Dynamite";
+
+OB_ELECTRICSHOCKROUND = "%o couldn't run in front of %k's Explosive Shock Round."
+OB_EXPLOSIVEROUND = "%k gave the knee of evil to %o using the Explosive Round."
+
 //#region old
 //DOT Obituaries
 OB_Burner = "%k Eliminated %o";

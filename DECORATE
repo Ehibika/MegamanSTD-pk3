@@ -119,6 +119,14 @@
 #include "actors/Classes/SparkMandrill/DashPunch.txt"
 #include "actors/Classes/SparkMandrill/ElectricSpark.txt"
 
+#include "actors/Classes/SearchmanEXE/SearchmanEXEClass.txt"
+#include "actors/Classes/SearchmanEXE/Dynamite.txt"
+#include "actors/Classes/SearchmanEXE/SearchScope.txt"
+
+#include "actors/Classes/Vile/VileClass.txt"
+#include "actors/Classes/Vile/ElectricShockRound.txt"
+#include "actors/Classes/Vile/ExplosiveRound.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

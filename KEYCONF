@@ -15,6 +15,7 @@ addplayerclass QuickMan
 addplayerclass MegamanX
 addplayerclass Zero
 addplayerclass Axl
+addplayerclass Vile
 addplayerclass Massimo
 addplayerclass Marino
 addplayerclass Cinnamon
@@ -24,6 +25,7 @@ addplayerclass SparkMandrill
 
 //====|Battle Network
 addplayerclass MegamanEXE
+addplayerclass SearchmanEXE
 
 //====|Starforce
 addplayerclass HarpNote

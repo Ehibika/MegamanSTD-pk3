@@ -1,0 +1,304 @@
+actor Ability2_Vile : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_ELECTRICSHOCK"
+Tag "Dash Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "VICODI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+VILH F 0 
+"####" F 1 Offset(0,110)
+"####" F 1 Offset(0,96)
+"####" F 1 Offset(0,82)
+"####" F 1 Offset(0,70)
+"####" F 1 Offset(0,58)
+"####" F 1 Offset(0,46)
+"####" F 1 Offset(0,32)
+"####" F 0 A_GiveInventory("WeaponCharge")
+"####" F 0 A_PlaySoundEx("weapon/xbcharge","Weapon")
+Ready1:
+VILH F 0  A_GiveInventory("WeaponCharge",1)
+"####" F 0 A_WeaponReady(WRF_NOPRIMARY)
+"####" F 1 A_JumpIfInventory("WeaponCharge",10,"Ready2")
+goto Ready1
+Ready2:
+"####" E 1 A_WeaponReady
+goto Ready2
+
+Select:
+TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,0.6*FVM)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+"####" B 1 A_Raise
+Loop
+
+Deselect:
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 A 0 A_TakeInventory("WeaponCharge",999)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+
+
+Fire:
+"####" E 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" E 0 A_FireCustomMissile("ElectricShockRound",0,0,4,4,0,0)
+"####" E 0 A_TakeInventory("WeaponCharge",999)
+"####" E 2 Offset(4,28)
+"####" E 2 Offset(8,24)
+"####" E 2 Offset(4,28)
+"####" EDF 1
+"####" F 1 Offset(0,32)
+"####" F 1 Offset(0,46)
+"####" F 1 Offset(0,58)
+"####" F 1 Offset(0,70)
+"####" F 1 Offset(0,82)
+"####" F 1 Offset(0,82)
+"####" F 1 Offset(0,96)
+"####" F 1 Offset(0,110)
+"####" F 0 A_GiveInventory("ElectricShockCooldown")
+"####" F 0 A_GiveInventory("RefireBuffer")
+"####" F 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+VILH H 0 A_JumpIfInventory("ExplosiveRoundCooldownItem",1,"NoAmmo")
+AltFire2:
+VILH B 1 A_FireCustomMissile("ExplosiveRoundAimPath",0,0,8,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+VILH B 0 A_Refire("AltFire2")
+VILH H 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+VILH H 0 A_FireCustomMissile("ExplosiveRound",0,0,8,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+VILH CCB 3
+"####" A 0 A_GiveInventory("ExplosiveRoundCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"Ready1")
+goto Ready1
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready1")
+Goto Ready1
+
+//AltFire:
+//"####" F 1
+End:
+"####" F 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" F 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_Vile : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("ElectricShockAbility",1)
+fail
+}
+}
+
+actor ElectricShockAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("ElectricShockCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor ElectricShockRound : fastProjectileBase
+{
+Obituary "$OB_ELECTRICSHOCK"
+DamageType "ElectricShockRound"
+Speed 64
+Damage (10)
+scale 3.5
+radius 14
+height 18
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+XSH2 BBCC 1 A_SpawnItemEx("ElectricShockTrail",-85,0,-momz,momx,momy,momz,0,9)
+Goto Spawn2
+Death:
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Explode(90,96,0,0,48)
+TNT1 A 0 A_PlaySoundEx("weapon/electricshock","Weapon")
+TNT1 A 0 A_Spawnitemex("ElectricShockPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Spawnitemex("ElectricShockRoundRingFX",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 ACS_NamedExecuteWithResult("Save_Boom")
+TNT1 A 1 A_RadiusGive("ElectricShock_Knockback",BlastThrustRad,RGF_PLAYERS)
+stop
+}
+}
+
+
+actor ElectricShock_Knockback : CustomInventory
+{
+States
+{
+Pickup:
+TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup2")
+//TNT1 A 0 A_JumpIf(CallACS("Boom_IsEnemy"),"Pickup2")
+stop
+Pickup2:
+TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad)
+stop
+}
+}
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor ElectricShockTrail : BasicExplosion
+{
+Obituary "$OB_ELECTRICSHOCK"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("ElectricShockTrail_FX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("ElectricShockTrail_FX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("ElectricShockTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("ElectricShockTrail_FX1",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("ElectricShockTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+actor ElectricShockTrail_FX : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+XSH2 G 1
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor ElectricShockTrail_FX1 : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+XSH2 H 1
+stop
+}
+}
+
+actor ElectricShockPuff1 : FXActor_A
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+SHFX LMNOP 1
+stop
+}
+}
+
+actor ElectricShockRoundRingFX : BasicHelper
+{
+	reactiontime 15
+	var int user_angle;
+	+CLIENTSIDEONLY
+	States
+	{
+		Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_GiveInventory("ProjectileCodeSyncTarget",1)
+		TNT1 A 1
+		SpawnLoop:
+		TNT1 A 0 A_SpawnItemEx("ElectriggerVFX", 96, 0, Random2(8), 4, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SpawnItemEx("ElectriggerVFX", -96, 0, Random2(8), -4, 0, 0, user_angle, 1)
+		TNT1 A 0 A_SetUserVar("user_angle", user_angle + 12)
+		TNT1 A 0 A_Countdown
+		loop
+		Death:
+		TNT1 A 0 
+		stop
+	}
+}
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor ElectricShockCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("ElectricShockCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ElectricShockCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricShockCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("ElectricShockCooldownItem",192)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("ElectricShockCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricShockCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 192
+}

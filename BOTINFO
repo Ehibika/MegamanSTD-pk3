@@ -352,3 +352,22 @@ clearbots
 	chatlump = "chats/BOTMEGA.txt"
 	chatfrequency = 0
 }
+
+{
+	name = "\cnVile"
+	accuracy = 4
+	intellect = 4
+	evade = 2
+	anticipation = 4
+	reactiontime = 4
+	perception = 4
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "Vile"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTMEGA.txt"
+	chatfrequency = 0
+}

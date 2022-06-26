@@ -77,6 +77,15 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [+] Hyperdive can be used while scattered flower is queued without leaving scattered flower
 [+] Scattered flower's Precast and aftercast delay reduced
 
+[++]Marino[++]
+[+] BerzerkCharge Cooldown decreased from 12 seconds > 10 seconds
+[+] BerzerkCharge Beam radius increased from 32 > 48
+[+] BerzerkCharge minimum damage increased from 50 > 100
+[+] Whirlwind damage increased from 50 > 100
+
+[++]Centaurman[++]
+[+] CentaurWarp Cooldown reduced from 8 seconds > 4.5
+[+] HP increased from 175 > 200
 ==|Weapon Changes|==
 
 [++]Screw Shooter[++]

@@ -1,0 +1,141 @@
+actor Ability1_Vile : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_ELECTRICSHOCKROUND"
+Tag "ElectricShockRound"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "VICODI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+BUST B 0 
+"####" B 1 //A_WeaponReady
+goto Fire
+
+Fire:
+VILH H 0 A_PlaySoundEx("weapon/napalm","Weapon")
+VILH DE 3
+VILH H 0 A_FireCustomMissile("ElectricShockRound",0,0,12,0)
+VILH ED 3
+VILH A 10
+"####" C 0 A_GiveInventory("ElectricShockRoundCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" C 1
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility1_Vile : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("ElectricShockRoundAbility",1)
+fail
+}
+}
+
+actor ElectricShockRoundAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("ElectricShockRoundCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+actor ElectricShockRound //MMXSP's Front Runner
+{
+PROJECTILE
++BlOODSPLATTER
++LOOKALLAROUND
++SKYEXPLODE
++DONTBLAST
+Translation "193:193=229:229", "198:198=220:220"
+//seesound "weapon/mbuster"
+Speed 60
+Damage (45)
+damagetype "ElectricShockRound"
+radius 20
+height 20
+scale 2.5
+States
+{
+Spawn:
+XSHO IJK 2
+loop
+Death:
+XSHO W 0 A_Explode(100,128,0,64)
+/*96 = X's ChargeShot (radius), x1.33 = 127.68, rounding into 128.
+(fulldmgradius is 1/2 as always)*/
+XSHO WXYZ 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor ElectricShockRoundCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("ElectricShockRoundCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("ElectricShockRoundCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricShockRoundCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("ElectricShockRoundCooldownItem",210)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("ElectricShockRoundCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor ElectricShockRoundCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 305 //122 (X's CS) * 2.5
+}

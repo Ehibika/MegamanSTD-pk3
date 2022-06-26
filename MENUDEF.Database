@@ -57,6 +57,13 @@ OptionValue WepInto_Class
 29, "\cf:Sprayer::\cjLine\cf:"
 30, "\cf:Launcher::\cjBallistic\cf:"
 31, "\cf:Melee::\cjSaber\cf:"
+32, "\cf:Sprayer::\cjLine\cf:"
+33, "\cf:Machine Gun::\cjStraight Shot\cf:"
+34, "\cf:Buster::\cjSniper Shot\cf:"
+35, "\cf:Launcher::\cjBallistic\cf:"
+36, "\cf:Launcher::\cjBallistic\cf:"
+37, "\cf:Launcher::\cjEnergy\cf:"
+38, "\cf:Melee::\cjToss Shield\cf:"
 }
 
 OptionValue WepInto_Category
@@ -92,6 +99,13 @@ OptionValue WepInto_Category
 28, "\c[MenuGreen]:Repair: "
 29, "\c[MenuGreen]:Repair:"
 31, "\c[Teal]:Wind:"
+32, "\c[MenuYellow]:Elec:"
+33, "\c[MenuYellow]:Elec:"
+34, "\c[MenuYellow]:Elec:"
+35, "\c[MenuCyan]:Ice:"
+36, "\c[MenuRed]:Fire:"
+37, "\c[MenuRed]:Fire:"
+38, "\c[grey]:Null:"
 }
 
 OptionValue WepInto_Damage
@@ -128,6 +142,13 @@ OptionValue WepInto_Damage
 29, "\c[HelpMenuCol] ---"
 30, "\c[HelpMenuCol] ---"
 31, "\c[menuorange] ***"
+32, "\c[menuyellow] *"
+33, "\c[menuorange] **"
+34, "\c[MenuRed] *****"
+35, "\c[MenuRed] ****"
+36, "\c[menuorange] ***"
+37, "\c[MenuRed] ****"
+38, "\c[menuorange] **"
 }
 
 OptionValue WepInto_Rate
@@ -164,6 +185,13 @@ OptionValue WepInto_Rate
 29, "\c[MenuRed] *****"
 30, "\c[menuorange] **"
 31, "\c[menuorange] ***"
+32, "\c[MenuRed] *****"
+33, "\c[MenuRed] *****"
+34, "\c[menuorange] **"
+35, "\c[menuorange] **"
+36, "\c[menuorange] ***"
+37, "\c[menuyellow] *"
+38, "\c[menuorange] **"
 }
 
 OptionValue WepInfo_Desc
@@ -186,7 +214,7 @@ OptionValue WepInfo_Desc
 14, "Standard issue energy type launcher \nthat shoots a steady volley \nof energy rounds, energy \nrounds explode after they \ntravel a set distance"		
 15, "Standard issue Ballistic type \nlauncher that shoots high impact \nmissiles, it's possible to \nride the blast for distance \nat the risk of self damage."		
 16, "Energy Type launcher that fires \nlonger reaching blasts with a \nbit less power."		
-17, "Ballistic type launcher that \nfires drill missiles that bore \nthrough enemy players."		
+17, "Ballistic type launcher that \nfires drill missiles that Deal \nDefense ignoring Break damage."		
 18, "Standard issue Saber type weapon \nwith a wide swing arc, striking \nfoes at the sweet spot at \nedge of the swing deals \ncritical damage"		
 19, "A Longer saber type weapon with \nnarrower swings that reach further"		
 20, "A wider saber type weapon with a \ngreater swing arc, but lacks \nthe sweetspot at it's tip."
@@ -201,6 +229,13 @@ OptionValue WepInfo_Desc
 29, "Sprayer class weapons that \nemmits waves of healing energy to repair allies."
 30, "Ballistic launcher that \nlaunches payloads of healing material \nthat can repair allies."
 31, "Saber type weapon that \nlacks a sweetspot but launches shockwaves \nwith each swing."
+32, "Sprayer class weapon that emits a \ncontinuous stream of electricity \nthat jumps from target to \ntarget."
+33, "Machinegun that Fires Launches a constant volley of electrical spheres"
+34, "Buster that fires concentrated \nbeams of Electricity that Deal\n high damage, but has \na cooldown between shots"
+35, "Ballistic type launcher that \nfires Icicle missiles that can \ninflict frostbite, and deal \ncritical damage on direct \nhits against frostbitten foes."
+36, "A lightweight Ballistic type \nlauncher that fires missiles at \na faster speed and rate than \nother launchers."
+37, "Energy Type launcher that Charges \nup to fire heatwaves that \ndeal critical damage to burning\n Targets."
+38, "A tactical, throwable shield \nthat can be held first to block \nshots, and thrown like a \nboomerang afterwards."
 }
 
 //=================================

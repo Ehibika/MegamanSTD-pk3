@@ -53,7 +53,7 @@ if(CheckForDetermined(arg2))
 	DB_Determined = MassimoDamageRamp(0,DamageModify(Damage,P_DETERMINED),-1);
 	}
 //===|Marksman Boost|===
-if(CheckForMarksman(VictimTID))
+if(CheckForMarksman(arg2,VictimTID))
 	{
 	Marksman = true;
 	DB_Marksman = ValueMap(xyzDistance(0, VictimTID),MARKSMANSTART,MARKSMANEND,DamageModify(Damage,P_MARKSMANLOW),DamageModify(Damage,P_MARKSMANHIGH));
@@ -910,6 +910,15 @@ int ItemCount = CheckInventory(StrParam(s:WepName2,s:"_HitCounter"));
 if(ItemCount > hitCap){ItemCount = hitCap;}
 int Output = ValueMap(ItemCount,0,hitCap,MinDam,MaxDam);
 SetResultValue(Output);
+}
+
+Script "SearchManDamageRamp" (int MinDam, int MaxDam, int MinRange, int MaxRange)
+{
+	int Output = ValueMap(xyzDistance(0, ACS_NamedExecuteWithResult("core_gettarget")),MinRange,MaxRange,MinDam,MaxDam);
+	Output = RoundToNth(Output,5);
+	if(Output > MaxDam){Output = MaxDam;}
+	else if(Output < MinDam){Output = MinDam;}
+	SetResultValue(Output);
 }
 
 

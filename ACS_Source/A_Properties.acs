@@ -418,9 +418,10 @@ return 0;
 
 #LIBDEFINE MARKSMANSTART 640
 #LIBDEFINE MARKSMANEND 960
-Function bool CheckForMarksman (int TargTID)
+Function bool CheckForMarksman (str PainType, int TargTID)
 {
 if(!CheckProp(MasterProPList[26][PROP_NAME])){Return 0;}
+if(!CheckForWeaponDamage(PainType)){Return 0;}
 /*
 Check if the distance between the shooter and their target is great enough
 for this property to work.

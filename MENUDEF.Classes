@@ -12,6 +12,7 @@ OptionString ClassNames
 "Cinnamon", "Cinnamon" 
 "Alia", "Alia" 
 "MegamanEXE", "MegamanEXE" 
+"SearchmanEXE", "SearchmanEXE" 
 "FireMan", "FireMan" 
 "HarpNote", "HarpNote" 
 "Centaurman", "Centaurman"
@@ -20,6 +21,7 @@ OptionString ClassNames
 "GutsMan", "GutsMan"
 "QuickMan", "QuickMan"
 "Spark Mandrill", "Spark Mandrill" 
+"Vile", "Vile"
 }
 
 OptionString ClassProperties
@@ -35,6 +37,7 @@ OptionString ClassProperties
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
+"SearchmanEXE", "BusterMastery \nMarksman \nDetermined" 
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
 "Centaurman", "Marksman \nEuclidResistance \nHefty"
@@ -43,6 +46,7 @@ OptionString ClassProperties
 "GutsMan", "Gutsy \nHefty \nHeavyWeight"
 "QuickMan", "Speedrunner \nAcrobat \n\cGAtomic Speed"
 "Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
+"Vile", "SubTank \nLauncherMastery \nDetermined" //Vile
 }
 
 OptionString Class_HP
@@ -58,14 +62,16 @@ OptionString Class_HP
 "Cinnamon", "175" 
 "Alia", "250" 
 "MegamanEXE", "175" 
+"SearchmanEXE", "175" 
 "Fireman", "250" 
 "HarpNote", "200" 
-"Centaurman", "175"
+"Centaurman", "200"
 "FlashMan", "175"
 "Iceman", "250"
 "GutsMan", "350"
 "QuickMan", "175"
 "Spark Mandrill", "350" 
+"Vile", "275"
 }
 
 
@@ -82,6 +88,7 @@ OptionString Class_Altfire
 "Cinnamon", "Syringe Toss" 
 "Alia", "Shinging Ray StickyBomb" 
 "MegamanEXE", "GutsPunch" 
+"SearchmanEXE", "Dynamite" 
 "Fireman", "FireBall" 
 "HarpNote", "Guitar Machine gun" 
 "Centaurman", "Centaur Warp"
@@ -90,6 +97,7 @@ OptionString Class_Altfire
 "GutsMan", "SuperArm"
 "QuickMan", "Quick Boomerang"
 "Spark Mandrill", "Dash Punch" 
+"Vile", "Electric Shock Round"
 }
 
 
@@ -107,6 +115,7 @@ OptionString Class_AltfireInfo
 "Cinnamon"  , "Throw a syringe that injects \na deadly poison into enemies, \nthis deals critical damage \non already poisoned foes." 
 "Alia"      , "Toss a sticky bomb that \nunleashes shining explosions \nin a radial spread" 
 "MegamanEXE", "Execute a high impact \npunch that deals Break damage" 
+"SearchmanEXE", "Deploy a sticky, \nmotion sensing explosive, \nhas 3 charges." 
 "Fireman"   , "Lob a fireball that \nexplodes on impact, generating \nmeter on hit." 
 "HarpNote"  , "Launch Binding guitar \nstrings to inflict Stop on \neveryone in their path, afterwards \nyou can launch a barrage \nof piercing music notes at them." 
 "Centaurman", "Leave an image at your \nlocation that you can switch \nplaces with or remove"
@@ -115,6 +124,7 @@ OptionString Class_AltfireInfo
 "GutsMan"   , "Pull up a huge rock \nfrom the ground that you can \nplace as cover, or throw as a \nprojectile"
 "QuickMan"  , "Launch a dense flurry \nof quick boomerants, each \nhit charges your \nAtomic Speed meter."
 "Spark Mandrill", "Fully commits to a \ndevestating punch that \nsends the foe flying, and the foes\ncollision with a solid will \nstun and do additional damage." 
+"Vile", "Fires a large projectile \nwith huge radius \nthat stuns opponents." 
 }
 
 
@@ -131,6 +141,7 @@ OptionString Class_Ability
 "Cinnamon", "Angel Aura" 
 "Alia", "Melt Creeper" 
 "MegamanEXE", "RockCube" 
+"SearchManEXE", "SearchScope" 
 "Fireman", "FireStorm" 
 "HarpNote", "Pulse Song" 
 "Centaurman", "Stop Arrow"
@@ -139,6 +150,7 @@ OptionString Class_Ability
 "GutsMan", "Picket Booster"
 "QuickMan", "Atomic Speed"
 "Spark Mandrill", "Electric Spark" 
+"Vile", "Explosive Round" 
 }
 
 OptionString Class_AbilityInfo
@@ -155,6 +167,7 @@ OptionString Class_AbilityInfo
 "Cinnamon"      , "Cast a healing aura at a \nteammate or yourself, gradually \nhealing the target and \nsurrounding teammates." 
 "Alia"          , "launch a projectile that \tcreates a long wall of fire, \tyou can control the shape \tthrough your aim." 
 "MegamanEXE"    , "Place down a solid rock cube \nthat blocks shots" 
+"SearchManEXE"  , "Scope in with a sniper rifle \nto deal intense damage the \nfurther your target is, \nuse altfire to change \nmagnifications." 
 "Fireman"       , "Launch a powerful fire \nblast of varying intensity depending \non the amount of meter \nyou have, at high ammounts \nit leaves a trail of fire in \nit's wake." 
 "HarpNote"      , "Emit a strange sound that \nweakens nearby foes, temporarily \nreducing the damage \nthey deal by 75%. " 
 "Centaurman"    , "Draw a bow to fire a time \nstopping arrow at an opponent."
@@ -163,6 +176,7 @@ OptionString Class_AbilityInfo
 "GutsMan"       , "Summon a picketman that will \nget to work in digging up damage \nboosting powerups, each \ngranting 50% more damage \nfor 5 seconds"
 "QuickMan"      , "Enter atomic speed, becoming \nfast and unshootable untill your \nmeter runs out."
 "Spark Mandrill" , "Unleashes a wave of \nelectric sparks that crawl \non the floor and split \nwith contact with a wall. " 
+"Vile" , "Launches an explosive \nwith great blast radius, \nThis bomb bounces less on walls, \nUse that to hit opponents below!"
 }
 
 OptionString Class_PassiveInfo
@@ -179,6 +193,7 @@ OptionString Class_PassiveInfo
 "Cinnamon"      , "---" 
 "Alia"          , "---" 
 "MegamanEXE"    , "---" 
+"SearchManEXE"    , "---" 
 "Fireman"       , "Gains meter from all forms \nof fire damage, used to \npower FireStorm" 
 "HarpNote"      , "--- " 
 "Centaurman"    , "---"
@@ -187,4 +202,5 @@ OptionString Class_PassiveInfo
 "GutsMan"       , "---"
 "QuickMan"      , "Gain meter from all \nweapon damage, as meter \nfills, movement speed increases"
 "Spark Mandrill" , "---" 
+"Vile" , "---"
 }

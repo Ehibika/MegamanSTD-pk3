@@ -227,6 +227,13 @@ OptionValue WepDescA
 29, "Sprays healing waves \nthat can repair allies"
 30, "Launches arching projectiles \nthat can repair allies"
 31, "unleashes shockwaves \nwith each swing."
+32, "Zaps foes with \nlightning that bounces \nto nearby targets"
+33, "Launch a steady \nstream of slow, electric \nrounds"
+34, "Fires high impact, \nlong ranged bolts \nwith a long delay"
+35, "Launcher that Fires \nFreezing missile, procs \nand crits on frostbite"
+36, "Lightweight launcher \nthat fires fast missiles."
+37, "Chargup launcher that \nfires superheated waves, \ncrits on burning foes."
+38, "A throwable shield \nthat can be heald \nto block shots"
 }
 
 OptionValue WepDescB
