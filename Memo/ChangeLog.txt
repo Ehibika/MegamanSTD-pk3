@@ -16,7 +16,15 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 
 [+] Stun's movement reductions have been restored
 
+[+] Now introduced universal walljumping for all classes!
+[+++] classes can wall jump 10 times before they must land. 
+
 ==|Property Changes|==
+[++] NEW PROPERTIES [++]
+[+] Energy Balancer - Passively refills offhand weapon ammo
+[+] Reserve Tank - Increases Weapon Ammo Capacity
+[+] Specialist - Boosts movespeed of your A Slot wep
+
 [+]Weapon masteries now increase weapon damage by 40%
 [+]Elemental resistances now lower their respective damage by 40%
 [+]Blade parry now lowers damage by 40%
@@ -26,10 +34,14 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [+]Spedrunner now grants a lower speed boost on midweight weapons
 
 ==|Class Changes|==
+[++] NEW CLASSES [++]
+[+] Vile
+[+] Searchman.EXE
+[+] Toadman
 
-[++]Marino[++]
-[+]Scattered flower now inflicts poison instead of a stun.
-[+]Scattered Flower's damage per shot increased from 5 > 25
+[++]Megaman[++]
+[+] Combat Slide is no longer ground locked
+[+] Property "Lightweight" was swapped out for "Energy Balancer"
 
 [++]Spark Mandrill[++]
 [+]Dash punch thrust speed decreased from 48 > 32
@@ -42,12 +54,6 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [+]Pulse Song's cooldown is now 5 seconds
 [+]Pulse Song's Debuff is restored but at a 25% reduction and a 1.5 sec duration
 
-[++]Centaurman[++]
-[+] Cooldown on stop arrow increased from 3 seconds > 9 second
-
-[++]FlashMan[++]
-[+] Fixed the issue of his arc indicator being absent on flashpoint
-
 [++]QuickMan[++]
 [+] Atomic speed grants a stronger speed boost
 
@@ -55,29 +61,13 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [+] "Refrigerate" property has been swapped for "Element Guard"
 [+] HP increased from 250 > 300
 
-[++]Megaman.EXE[++]
-[+] Ability "Gutspunch" has been removed
-[+] NEW Ability "Minibomb" gained
-
-[++]Gutsman[++]
-[+] Ability "Picketman" has been removed
-[+] Ability "superarm" has been moved to the ability key
-[+] Superarm now allows for 3 Rocks to be placed
-[+] Superarm cooldown now starts once a rock is pulled up
-[+] Superarm rocks are thrown on weapon swap
-[+] NEW Ability "GutsPunch" gained
-
 [++]Cinnamon[++]
 [+] HP decreased from 300 > 250
 
-[++]Alia[++]
-[+] Melt Creeper no longer inflicts stun
-
 [++]Marino[++]
-[+] Hyperdive can be used while scattered flower is queued without leaving scattered flower
-[+] Scattered flower's Precast and aftercast delay reduced
+[+] Scattered flower Poison rate increased
 
-[++]Marino[++]
+[++]Massimo[++]
 [+] BerzerkCharge Cooldown decreased from 12 seconds > 10 seconds
 [+] BerzerkCharge Beam radius increased from 32 > 48
 [+] BerzerkCharge minimum damage increased from 50 > 100
@@ -86,7 +76,11 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [++]Centaurman[++]
 [+] CentaurWarp Cooldown reduced from 8 seconds > 4.5
 [+] HP increased from 175 > 200
+[+] Cooldown on stop arrow increased from 3 seconds > 9 second
+
 ==|Weapon Changes|==
+[++] NEW Weapons [++]
+[+] Toss Shield
 
 [++]Screw Shooter[++]
 [+]Base healing reduced from 25 > 10
@@ -118,4 +112,14 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 [+] Now labled as a "Lite" weapon to communicate it's higher movespeed and the fact it
     Works with the new Speedrunner
 
+[++]Roaster[++]
+[+] Reworked to now fire a long, lingering hitbox
+
+[++]ViperRifle[++]
+[+] Poison rate reduced
+
+[++]Shotgun[++]
+[+] Projectile Speed increased from 80 > 160
+[+] Projectile Damage increased from 15 > 20
+[+] Firerate increased
 //================================================================================*/

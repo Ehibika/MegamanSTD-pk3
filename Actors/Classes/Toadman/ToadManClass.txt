@@ -1,0 +1,41 @@
+Actor ToadMan : ClassBase 
+{
+Player.DisplayName "ToadMan"
+Player.SoundClass "Megaman"
+Health 250
+Player.MaxHealth 250
+Player.JumpZ 10
+
+Player.Startitem "IsToadMan"
+Player.Startitem "UseAbility1_ToadMan"
+Player.Startitem "UseAbility2_ToadMan"
+Player.Startitem "AcidRainGenerator_Charges" , 2
+
+
+Player.Startitem "PRO_AquaResistance"
+Player.Startitem "PRO_ToxicResistance"
+Player.Startitem "PRO_Acrobat"
+
++NOSKIN
+States
+{
+Spawn: 
+TOAD A 0
+TOAD B 1 
+TOAD A 1
+GoTo Spawn+2
+See:
+TOAD BCDE 5
+GoTo Spawn+1
+Missile:
+TOAD F 5
+TOAD G 4
+GoTo Spawn+2
+PainFix:
+TOAD H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsToadMan : Once{}

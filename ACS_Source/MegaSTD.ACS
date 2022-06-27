@@ -975,6 +975,7 @@ if(CheckProp(MasterProPList[14][PROP_NAME]))
 	if(Value >= 0.9)Value += 0.2; 
 	else if(Value >= 0.7)Value += 0.1;
 	}
+	if(CheckForSpecialist()) {Value += 0.1; /*log(s:"Got Specialist!");*/}
 
 //IsBladeParryActive();
 

@@ -355,6 +355,19 @@ InInventory IsVile, 1
 	DrawBar "ALTEMP", "ALTHBAR1", ExplosiveRoundCooldownItem, vertical,reverse, 25, 163;
 	ininventory ExplosiveRoundCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", ExplosiveRoundCooldownItem, vertical,reverse, 25, 163;}
 	} 
+	
+InInventory IsToadMan, 1
+	{
+	DrawImage "RAINSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", AcidRainGeneratorCooldownItem, vertical,reverse, 5, 163;
+	ininventory AcidRainGeneratorCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", AcidRainGeneratorCooldownItem, vertical,reverse, 5, 163;}
+	DrawNumber 3, smallfont, white, AcidRainGenerator_Charges, alignment(left), 10,166;
+
+	DrawImage "SOOTHI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", SoothingRainCooldownItem, vertical,reverse, 25, 163;
+	ininventory SoothingRainCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SoothingRainCooldownItem, vertical,reverse, 25, 163;}
+	ininventory Ability2_ToadMan ,1 {DrawBar "SRESO2", "NORESO2", SoothingRainTimerItem, Horizontal, 42, 161;}
+	}
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

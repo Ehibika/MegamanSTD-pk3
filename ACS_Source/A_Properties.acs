@@ -189,6 +189,7 @@ if(CheckProp(MasterProPList[15][PROP_NAME])){PlayerJumpZ[PlayerNumber()]+=5.0; S
 if(CheckProp(MasterProPList[20][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Undershirt",0,0);}
 if(CheckProp(MasterProPList[22][PROP_NAME])){ACS_NamedExecuteAlways("Passive_TeamMedic",0,0);}
 if(CheckProp(MasterProPList[23][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Subtank",0,0);}
+if(CheckProp(MasterProPList[29][PROP_NAME])){ACS_NamedExecuteAlways("Passive_EnergyBalancer",0,0);}
 }
 
 Script "Passive_Undershirt" (void)
@@ -232,6 +233,73 @@ while(GetActorProperty(0,APROP_HEALTH) > 0)
         }
     delay(5);
     }
+}
+
+Script "Passive_EnergyBalancer" (void)
+{
+/*
+First Grab the player's weapons, this is called on spawn so we can just grab their uservariables since they
+shouldn't get changet in that time 
+*/
+delay(5);
+int pln = playernumber();
+int ThisWeapon;
+int WepA_Num = GetUserCvar(pln,"Lo_WepA");
+int WepB_Num = GetUserCvar(pln,"Lo_WepB");
+int PastWep;
+
+str WepA = MasterWepList[WepA_Num][1];
+str WepB = MasterWepList[WepB_Num][1];
+
+Str WepAmmo;
+int WepAmmoCount;
+
+int RefillTimer;
+/*
+Every 5 seconds, we will give the player 50% ammo on whatever weapon they aren't wielding at the moment.
+*/
+
+while(GetActorProperty(0,APROP_HEALTH) > 0)
+    {
+
+    RefillTimer += 17;
+    if(ThisWeapon != STD_WhichWeapon())
+        {
+        ThisWeapon = STD_WhichWeapon();
+        RefillTimer = 0;
+        //log(i:WepA_Num,s:" : ",i:WepB_Num);
+        }
+    
+    If(RefillTimer >= 85)
+        {
+            if(ThisWeapon == WepA_Num)
+            {
+            WepAmmo = MasterWepList[WepB_Num][2];
+            }
+        else if (ThisWeapon == WepB_Num)
+                {
+                WepAmmo = MasterWepList[WepA_Num][2];
+                }
+        else
+            {
+            //you are on an ability, so just replenish the previously replenished weapon.
+            WepAmmo = MasterWepList[PastWep][2];
+            }
+
+            WepAmmoCount = GetAmmoCapacity(WepAmmo);
+            //log(s:WepAmmo,s:" : ",i:WepAmmoCount);
+            if(CheckInventory(WepAmmo) < WepAmmoCount)
+                {
+                GiveInventory(WepAmmo, (WepAmmoCount*0.5)>>16);
+                PastWep = ThisWeapon;
+                localAmbientSound("item/Refill",127);
+                }
+            RefillTimer = 0;
+        }
+    
+    delay(17);
+    }
+
 }
 
 Script "Passive_Subtank" (void)
@@ -446,6 +514,18 @@ if(!CheckProp(MasterProPList[28][PROP_NAME])){Return 0;}
 if this damage is wind or water based, return true.
 */
 Return CheckForElement(PainType,ELM_WIND|ELM_AQUA);
+}
+
+Function Bool CheckForSpecialist(void)
+{
+if(!CheckProp(MasterProPList[31][PROP_NAME])){Return 0;}
+/*
+Check if the given weapon is in the first slot, simply put, it's a weapon without "2" at the end
+*/
+int ThisWeapon = STD_WhichWeapon();
+If(StrIcmp(GetWeapon(),MasterWepList[ThisWeapon][1])==0){Return 1;}
+
+return 0;
 }
 
 

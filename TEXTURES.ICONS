@@ -459,4 +459,11 @@ Sprite "VICOGI", 30, 30
 	Patch "VICOG0", 0, 0
 }
 
+Graphic "SOOTHI", 30, 30
+{
+	XScale 2.000
+	YScale 2.000
+	Patch "SRAIA0", 0, 0
+}
+
 // End of texture definitions

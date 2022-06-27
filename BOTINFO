@@ -371,3 +371,22 @@ clearbots
 	chatlump = "chats/BOTMEGA.txt"
 	chatfrequency = 0
 }
+
+{
+	name = "\cnToad Man"
+	accuracy = 1
+	intellect = 2
+	evade = 2
+	anticipation = 2
+	reactiontime = 2
+	perception = 2
+	favoriteweapon = "MegaBusterWep"
+	color = "00 00 00"
+	gender = "male"
+	skin = "Base"
+	class = "ToadMan"
+	revealed = true
+	script = "humanbot"
+	chatlump = "chats/BOTTOAD.txt" 
+	chatfrequency = 0
+}

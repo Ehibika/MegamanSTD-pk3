@@ -13,7 +13,7 @@ Player.Startitem "UseAbility2_STDMegaman"
 
 Player.Startitem "PRO_BusterMastery"
 Player.Startitem "PRO_Speedrunner"
-Player.Startitem "PRO_LightWeight"
+Player.Startitem "PRO_EnergyBalancer"
 
 +NOSKIN
 States

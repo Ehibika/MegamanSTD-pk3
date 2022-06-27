@@ -78,6 +78,16 @@ actor ViperRifleCST : PowerupGiver
 Powerup.Duration 3
 powerup.type "ConShotTimer"
 }
+
+actor PoisonStatusBuild_ViperRifle : PoisonStatusBuild
+{
+States
+{
+Build:
+TNT1 A 0 A_GiveInventory("PoisonBuildRate",15)
+stop
+}
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

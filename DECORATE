@@ -127,6 +127,10 @@
 #include "actors/Classes/Vile/ElectricShockRound.txt"
 #include "actors/Classes/Vile/ExplosiveRound.txt"
 
+#include "actors/Classes/ToadMan/ToadManClass.txt"
+#include "actors/Classes/ToadMan/AcidRainGenerator.txt"
+#include "actors/Classes/ToadMan/SoothingRain.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

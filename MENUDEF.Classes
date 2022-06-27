@@ -22,6 +22,7 @@ OptionString ClassNames
 "QuickMan", "QuickMan"
 "Spark Mandrill", "Spark Mandrill" 
 "Vile", "Vile"
+"ToadMan", "ToadMan" 
 }
 
 OptionString ClassProperties
@@ -37,7 +38,7 @@ OptionString ClassProperties
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
-"SearchmanEXE", "BusterMastery \nMarksman \nDetermined" 
+"SearchmanEXE", "MachineGunMastery \nMarksman \nEnergyBalancer" //Searchman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
 "Centaurman", "Marksman \nEuclidResistance \nHefty"
@@ -47,6 +48,7 @@ OptionString ClassProperties
 "QuickMan", "Speedrunner \nAcrobat \n\cGAtomic Speed"
 "Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
 "Vile", "SubTank \nLauncherMastery \nDetermined" //Vile
+"ToadMan", "AquaResistance \nToxicReistance \nAcrobat" //ToadMan
 }
 
 OptionString Class_HP
@@ -72,6 +74,7 @@ OptionString Class_HP
 "QuickMan", "175"
 "Spark Mandrill", "350" 
 "Vile", "275"
+"ToadMan", "250" 
 }
 
 
@@ -98,6 +101,7 @@ OptionString Class_Altfire
 "QuickMan", "Quick Boomerang"
 "Spark Mandrill", "Dash Punch" 
 "Vile", "Electric Shock Round"
+"ToadMan", "Acid Rain Generator" 
 }
 
 
@@ -125,6 +129,7 @@ OptionString Class_AltfireInfo
 "QuickMan"  , "Launch a dense flurry \nof quick boomerants, each \nhit charges your \nAtomic Speed meter."
 "Spark Mandrill", "Fully commits to a \ndevestating punch that \nsends the foe flying, and the foes\ncollision with a solid will \nstun and do additional damage." 
 "Vile", "Fires a large projectile \nwith huge radius \nthat stuns opponents." 
+"ToadMan"  , "Places a generator that will  \nconstantly expel acid rain \naround itself. \nUpon taking damage it will stop \nfor a moment."
 }
 
 
@@ -151,6 +156,7 @@ OptionString Class_Ability
 "QuickMan", "Atomic Speed"
 "Spark Mandrill", "Electric Spark" 
 "Vile", "Explosive Round" 
+"ToadMan", "Soothing Rain" 
 }
 
 OptionString Class_AbilityInfo
@@ -177,6 +183,7 @@ OptionString Class_AbilityInfo
 "QuickMan"      , "Enter atomic speed, becoming \nfast and unshootable untill your \nmeter runs out."
 "Spark Mandrill" , "Unleashes a wave of \nelectric sparks that crawl \non the floor and split \nwith contact with a wall. " 
 "Vile" , "Launches an explosive \nwith great blast radius, \nThis bomb bounces less on walls, \nUse that to hit opponents below!"
+"ToadMan"      , "Soothing rain will pour around \nyourself, healing everyone \nin the region. " 
 }
 
 OptionString Class_PassiveInfo
@@ -203,4 +210,5 @@ OptionString Class_PassiveInfo
 "QuickMan"      , "Gain meter from all \nweapon damage, as meter \nfills, movement speed increases"
 "Spark Mandrill" , "---" 
 "Vile" , "---"
+"ToadMan" , "---" 
 }

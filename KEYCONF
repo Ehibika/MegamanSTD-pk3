@@ -10,6 +10,7 @@ addplayerclass Iceman
 addplayerclass GutsMan
 addplayerclass QuickMan
 //addplayerclass Saturn
+addplayerclass ToadMan
 
 //====|X
 addplayerclass MegamanX
