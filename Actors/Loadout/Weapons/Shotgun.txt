@@ -124,6 +124,7 @@ actor ShotGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 6
+Ammo.BackpackMaxAmount 12
 }
 
 actor ShotgunCST : PowerupGiver
@@ -141,7 +142,7 @@ actor ShotGunShot : fastProjectileBase
 Obituary "$OB_SHOTGUN"
 DamageType "ShotgunP"
 Speed 160
-Damage (20)
+Damage (15)
 radius 4
 
 MissileHeight 16

@@ -140,6 +140,7 @@ actor Roaster_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 4
+Ammo.BackpackMaxAmount 6
 }
 
 
@@ -159,9 +160,9 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int Roaster_DMG = 20;
+Const int Roaster_DMG = 10;
 Const int Roaster_RAD = 96;
-Const int Roaster_RADMin = 32;
+Const int Roaster_RADMin = 96;
 
 actor RoasterShot : FastProjectileBase
 {

@@ -15,6 +15,7 @@ HBAL AB 6
 Loop
 Pickup:
 TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("CannotUseHealing",1, "Nope")
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
 TNT1 A 0 A_JumpIfinventory("Pro_SubTank",1, "SubTank")
 TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 
@@ -64,6 +65,7 @@ HBAL AB 6
 Loop
 Pickup:
 TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("CannotUseHealing",1, "Nope")
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
 TNT1 A 0 A_JumpIfinventory("Pro_SubTank",1, "SubTank")
 TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 
@@ -112,6 +114,7 @@ HBAL CD 6
 Loop
 Pickup:
 TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("CannotUseHealing",1, "Nope")
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
 TNT1 A 0 A_JumpIfinventory("Pro_SubTank",1, "SubTank")
 TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 
@@ -161,6 +164,7 @@ HBAL CD 6
 Loop
 Pickup:
 TNT1 A 0
+TNT1 A 0 A_JumpIfinventory("CannotUseHealing",1, "Nope")
 TNT1 A 0 A_JumpIfinventory("PoisonMark",1, "Detox")
 TNT1 A 0 A_JumpIfinventory("Pro_SubTank",1, "SubTank")
 TNT1 A 0 A_JumpIf(CallACS("MSTD_HealthPercent",0)<100,"Healme") 

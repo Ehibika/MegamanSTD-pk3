@@ -14,6 +14,8 @@ Player.Startitem "PRO_ElectricResistance"
 Player.Startitem "PRO_Hefty"
 Player.Startitem "PRO_Gutsy"
 
+Player.Startitem "WeightClass_Heavy"
+
 +NOSKIN
 States
 {

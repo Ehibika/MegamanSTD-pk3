@@ -10,9 +10,10 @@ Player.JumpZ 10
 Player.Startitem "IsAuto"
 Player.Startitem "UseAbility1_AutoSTD"
 Player.Startitem "UseAbility2_AutoSTD"
+Player.Startitem"HealthGenerator_Charges",3
 
 Player.Startitem "Pro_LauncherMastery"
-Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_ReserveTank"
 Player.Startitem "Pro_TeamMedic"
 
 +NOSKIN

@@ -158,7 +158,7 @@ Obituary "$OB_GUITARMACHINEGUN"
 DamageType "GuitarMachineGun2"
 Speed 64
 +RIPPER
-Damage (25)
+Damage (10)
 radius 3
 
 MissileHeight 16

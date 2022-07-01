@@ -14,6 +14,8 @@ Player.Startitem "Pro_TeamMedic"
 Player.Startitem "Pro_ElementalGuard"
 Player.Startitem "Pro_ToxicResistance"
 
+Player.Startitem "WeightClass_Light"
+
 +NOSKIN
 States
 {

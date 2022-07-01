@@ -1,0 +1,45 @@
+Actor Bass : ClassBase 
+{
+Player.DisplayName "Bass"
+Player.SoundClass "megaman"
+Health 200
+Player.MaxHealth 200
+Player.JumpZ 10
+
+Player.Startitem "IsBass"
+Player.Startitem "UseAbility1_Bass"
+Player.Startitem "UseAbility2_Bass"
+
+Player.Startitem "PRO_MachineGunMastery"
+Player.Startitem "Pro_ElementalGuard"
+Player.Startitem "Pro_Spreedrunner"
+
+Player.Startitem "WeightClass_Light"
+
++NOSKIN
+States
+{
+Spawn: 
+BASS A 0
+BASS B 1 
+BASS A 1 A_JumpIfInventory("BoostKickFlag",1,"BassKick")
+GoTo Spawn+2
+See:
+BASS BBBBBCCCCCDDDDDEEEEE 1 A_JumpIfInventory("BoostKickFlag",1,"BassKick")
+GoTo Spawn+1
+Missile:
+BASS FFFFF 1 A_JumpIfInventory("BoostKickFlag",1,"BassKick")
+BASS G 4
+GoTo Spawn+2
+BassKick:
+BASS K 3
+BASS A 0 A_JumpIfInventory("BoostKickFlag",1,"BassKick")
+GoTo Spawn+2
+PainFix:
+BASS H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsBass : Once{}

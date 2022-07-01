@@ -74,6 +74,7 @@ actor TriangleGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 40
+Ammo.BackpackMaxAmount 60
 }
 
 actor TriangleGunCST : PowerupGiver

@@ -12,7 +12,9 @@ Player.Startitem "UseAbility2_Massimo"
 
 Player.Startitem "PRO_LauncherMastery"
 Player.Startitem "PRO_Hefty"
-Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_Determined"
+
+Player.Startitem "WeightClass_Heavy"
 
 +NOSKIN
 States

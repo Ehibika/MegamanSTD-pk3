@@ -121,6 +121,7 @@ actor GatlingGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 180
+Ammo.BackpackMaxAmount 300
 }
 
 actor GattlingGunCST : PowerupGiver
@@ -193,7 +194,7 @@ States
 {
 Spawn:
 CRBM A 0
-BUST A 1
+AXLB A 1
 //BSTG AAAAA 1 A_Fadeout
 stop
 }
@@ -207,7 +208,7 @@ States
 {
 Spawn:
 BUST A 0
-BUST A 1
+AXLB A 1
 stop
 }
 }

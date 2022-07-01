@@ -80,7 +80,7 @@ str MasterWepList[WEAPONLIST][6] = {
 /*4*/{"Lazer Rifle","LazerRifleWep","LazerRifle_Ammo", WF_MACHINEGUN,"LazerRifle",""},
 /*5*/{"Triangle Gun","TriangleGunWep","TriangleGun_Ammo", WF_MACHINEGUN,"TriangleGun",""},
 /*6*/{"HighSpeed Rifle","HighSpeedRifleWep","HighSpeedRifle_Ammo", WF_MACHINEGUN,"HighSpeedRifle",""},
-/*7*/{"GatlingGun","GatlingGunWep","GatlingGun_Ammo", WF_MACHINEGUN|WF_FORBIDDEN,"GatlingGunP",""},
+/*7*/{"GatlingGun","GatlingGunWep","GatlingGun_Ammo", WF_MACHINEGUN,"GatlingGunP",""},
 /*8*/{"Shotgun","ShotgunWep","Shotgun_Ammo",WF_MACHINEGUN,"ShotgunP",""},
 
 /*9*/{"Gas Emitter","GasEmitterWep","GasEmitter_Ammo", WF_SPRAYER,"GasEmitter",""},
@@ -109,7 +109,7 @@ str MasterWepList[WEAPONLIST][6] = {
 /*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL,"BoltDriver",""},
 /*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairSprayer",""},
 /*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairLauncher",""},
-/*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherTip"},
+/*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherWave"},
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},
 /*33*/{"VioletZapper","VioletZapperWep","VioletZapper_Ammo", WF_MACHINEGUN,"VioletZapper",""},
 /*34*/{"HawkPrecisionBuster","HawkPrecisionBusterWep","HawkPrecisionBuster_Ammo", WF_BUSTER,"HawkPrecisionBuster",""},

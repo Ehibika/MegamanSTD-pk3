@@ -83,6 +83,7 @@ actor ShadowBuster_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 10
+Ammo.BackpackMaxAmount 15
 }
 
 actor ShadowBusterCST : PowerupGiver

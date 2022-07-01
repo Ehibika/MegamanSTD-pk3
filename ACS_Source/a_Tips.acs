@@ -25,16 +25,16 @@ str Tips[TIPCOUNT] = {
 "Particle Sprayers like the \cgGas emitter\cf spew free floating particles that act as lingering damage sources.",
 "Many melee weapons deal extra damage if you hit foes at the tip of the swing arc, this is called the \cgSweetspot\cf, and is considered critical damage",
 //====|Property Tips|======
-"The \cgLightweight\cf property increases the intensity of knockback, meaning you can blast jump higher and further, but be blown away more easily!",
-"The \cgHeavyWeight\cf property Decreases the intensity of knockback, making you much harder to displace but also making blast jumping less effective",
+"The \cgReserve Tank\cf property increases the The ammo each weapon can carry!",
+"The \cgEnergy Balancer\cf property Passively restores ammo on your offhand weapon, making it handy for players that switch weapons mid fight a lot.",
 "The \cgSubtank\cf property lets you gain overhealth off of health pickups, and in modes without health pickups, starts you off with a full compliment of overhealth.",
 "The \cgRefrigerate\cf Property causes wind and water weapons to inflict the Frostbite status.",
 "The \cgHeater\cf Property causes wind and water weapons to inflict the burn status.",
 "The \cgContaminate\cf Property causes wind and water weapons to inflict the poison status.",
-"The \cgBlade Parry\cf Property reduces projectile damage by 50% when a melee/blade weapon is in hand, it won't protect you against other melee/blade weapons and is useless against break damage.",
-"The \cgAssassin\cf Property boosts the power of critical hits, making devistating attacks even more lethal.",
+"The \cgBlade Parry\cf Property reduces projectile damage by 40% when a melee/blade weapon is in hand, it won't protect you against other melee/blade weapons and is useless against break damage.",
+"The \cgAssassin\cf Property boosts the power of damage dealt to targets at or above full health, use it to make a strong opening move on someone!",
 "The \cgElement guard\cf Property reduces Fire, Water, Ice, and Elec damage, making you just a bit more durable all around.",
-"The \cgSpeedRunner\cf Property boosts the movespeed on high movespeed weapons even higher, it even stacks with weapon masteries too!",
+"The \cgSpeedRunner\cf Property boosts the movespeed on high and mid movespeed weapons even higher, it even stacks with weapon masteries too!",
 "The \cgAcrobat\cf Property makes you jump higher!",
 "The \cgGutsy\cf Property amplifies weapon damage while under a status effect",
 "The \cgDetermined\cf Property amplifies weapon damage when health is low",
@@ -42,6 +42,7 @@ str Tips[TIPCOUNT] = {
 "The \cgTeam medic\cf Property lets you passively heal while you have a Repair weapon equipped, wielders of this property make for self efficient healers.",
 "The \cgUndershirt\cf Property will let you hang on against a fatal hit at 1 HP, the effect is restored if you can recover to full health again.",
 "The \cgFirst Barrier\cf Property grants you a regenerating shield that will block a single hit when up, doesn't work against break damage however.",
+"The \cgSpecialist\cf Property Grants mastery on your first slot weapon at the expense of your second slot, you'll need to be smart about your loadout choices with this property.",
 
 
 //====|Mechanics Tips|======

@@ -73,7 +73,8 @@
 
 
 #include "Actors/Classes/Fireman/FiremanClass.txt"
-#include "Actors/Classes/Fireman/Fireball.txt"
+//#include "Actors/Classes/Fireman/Fireball.txt"
+#include "Actors/Classes/Fireman/FireArm.txt"
 #include "Actors/Classes/Fireman/FireStorm.txt"
 
 
@@ -130,6 +131,15 @@
 #include "actors/Classes/ToadMan/ToadManClass.txt"
 #include "actors/Classes/ToadMan/AcidRainGenerator.txt"
 #include "actors/Classes/ToadMan/SoothingRain.txt"
+
+
+#include "actors/Classes/Bass/BassClass.txt"
+#include "actors/Classes/Bass/BassBuster.txt"
+#include "actors/Classes/Bass/BoosterCrescentKick.txt"
+
+#include "actors/Classes/Sigma/SigmaClass.txt"
+#include "actors/Classes/Sigma/BladeDash.txt"
+#include "actors/Classes/Sigma/HeadBeams.txt"
 
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"

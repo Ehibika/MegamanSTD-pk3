@@ -1,0 +1,42 @@
+Actor Sigma : ClassBase 
+{
+Player.DisplayName "Sigma"
+Player.SoundClass "megaman"
+Health 275
+Player.MaxHealth 275
+Player.JumpZ 10
+
+Player.Startitem "IsSigma"
+Player.Startitem "UseAbility1_Sigma"
+Player.Startitem "UseAbility2_Sigma"
+
+Player.Startitem "PRO_Hefty"
+Player.Startitem "PRO_MeleeMastery"
+Player.Startitem "PRO_BladeParry"
+
+Player.Startitem "WeightClass_Heavy"
+
++NOSKIN
+States
+{
+Spawn: 
+DRWI A 0
+DRWI B 1 
+DRWI A 1
+Goto Spawn+2
+See:
+DRWI BCDE 5
+GoTo Spawn+1
+Missile:
+DRWI F 1
+DRWI F 4
+DRWI G 4
+GoTo Spawn+2
+PainFix:
+DRWI H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsSigma : Once{}

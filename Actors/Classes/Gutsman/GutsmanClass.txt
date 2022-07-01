@@ -2,8 +2,8 @@ Actor Gutsman : ClassBase
 {
 Player.DisplayName "gutsman"
 Player.SoundClass "sparkmandrill"
-Health 300
-Player.MaxHealth 300
+Health 350
+Player.MaxHealth 350
 Player.JumpZ 10
 
 Player.Startitem "IsGutsman"
@@ -12,7 +12,9 @@ Player.Startitem "UseAbility2_Gutsman"
 
 Player.Startitem "Pro_Gutsy"
 Player.Startitem "PRO_Hefty"
-Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_ReserveTank"
+
+Player.Startitem "WeightClass_Heavy"
 
 +NOSKIN
 States

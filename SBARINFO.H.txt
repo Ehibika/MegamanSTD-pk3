@@ -197,15 +197,17 @@ InInventory IsCinnamon, 1
 InInventory IsFireman, 1
 	{
 	DrawImage "FLMBSI", 2, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", FireBallCooldownItem, vertical,reverse, 5, 163;
-	ininventory FireBallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireBallCooldownItem, vertical,reverse, 5, 163;}
+	DrawBar "ALTEMP", "ALTHBAR1", FireArmCooldownItem, vertical,reverse, 5, 163;
+	ininventory FireArmCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireArmCooldownItem, vertical,reverse, 5, 163;}
 
 	DrawImage "FIRESI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", FireStormCooldownItem, vertical,reverse, 25, 163;
 	ininventory FireStormCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", FireStormCooldownItem, vertical,reverse, 25, 163;}
 
+	ininventory Ability1_Fireman ,1 {DrawBar "SRESO2", "NORESO2", FireArmTimerItem, Horizontal, 42, 171;}
 	//DrawImage "RESO02", 26, 161;
-	DrawBar "FIRMBR", "NORESO", FiremanHeat, Horizontal, 42, 161;
+	DrawBar "FIRMBR2", "NORESO", FiremanHeat, Horizontal, 42, 161;
+	ininventory FiremanHeat ,25 {DrawBar "FIRMBR", "NORESO", FiremanHeat, Horizontal, 42, 161;}
 	}
 
 InInventory IsSuperMegaman, 1
@@ -227,6 +229,7 @@ InInventory IsAuto, 1
 	DrawImage "HGENI", 2, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;
 	ininventory HealthGeneratorCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HealthGeneratorCooldownItem, vertical,reverse, 5, 163;}
+	DrawNumber 3, smallfont, white, HealthGenerator_Charges, alignment(left), 10,166;
 
 	DrawImage "TRETI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", AutoSentryCooldownItem, vertical,reverse, 25, 163;
@@ -367,6 +370,28 @@ InInventory IsToadMan, 1
 	ininventory SoothingRainCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SoothingRainCooldownItem, vertical,reverse, 25, 163;}
 	ininventory Ability2_ToadMan ,1 {DrawBar "SRESO2", "NORESO2", SoothingRainTimerItem, Horizontal, 42, 161;}
 	}
+
+InInventory IsBass, 1
+	{
+	DrawImage "BUSTI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BassBusterCooldownItem, vertical,reverse, 5, 163;
+	ininventory BassBusterCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BassBusterCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "CHARSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BoosterCrescentKickCooldownItem, vertical,reverse, 25, 163;
+	ininventory BoosterCrescentKickCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BoosterCrescentKickCooldownItem, vertical,reverse, 25, 163;}
+	} 
+
+InInventory IsSigma, 1
+	{
+	DrawImage "BDASWI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BladeDashCooldownItem, vertical,reverse, 5, 163;
+	ininventory BladeDashCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BladeDashCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BUSTI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", HeadBeamsCooldownItem, vertical,reverse, 25, 163;
+	ininventory HeadBeamsCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HeadBeamsCooldownItem, vertical,reverse, 25, 163;}
+	} 
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

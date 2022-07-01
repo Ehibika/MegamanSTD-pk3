@@ -17,6 +17,8 @@ stop
 }
 }
 
+actor CannotUseHealing : powerup {Inventory.amount 1 powerup.duration 525}
+
 actor DetoxLevel : inventory {Inventory.amount 1 Inventory.Maxamount 100}
 
 

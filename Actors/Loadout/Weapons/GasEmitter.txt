@@ -97,6 +97,7 @@ actor GasEmitter_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 30
+Ammo.BackpackMaxAmount 45
 +INVENTORY.IGNORESKILL
 }
 
@@ -128,7 +129,7 @@ actor GasEmitterCloud : ProjectileBase
 {
 damagetype "GasEmitter"
 Obituary "$OB_GASEMITTER"
-Speed 48
+Speed 64
 +RIPPER
 +NOEXPLODEFLOOR
 +SLIDESONWALLS

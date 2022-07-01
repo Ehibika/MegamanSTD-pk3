@@ -1,0 +1,187 @@
+actor Ability2_Bass : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_MEGABUSTER"
+Tag "Booster Crescent Kick"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "CHARSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+HSPR A 0 
+"####" A 1 //A_WeaponReady
+goto Fire
+
+Fire:
+BASK A 0 A_PlaySoundEx("weapon/BreakDash","Weapon")
+"####" A 0 A_GiveInventory("BoostKickFlag")
+"####" A 0 A_GiveInventory("DashSet_A")
+"####" ABBCDCDCD 1 A_GiveInventory("BoostKickFunc")
+"####" C 0 //A_ChangeVelocity(35,0,5,CVF_RELATIVE)
+"####" C 0 A_FireCustomMissile("CrescentKickProj",0,0,0,0)
+"####" A 0 A_TakeInventory("BoostKickFlag",9)
+"####" EF 2
+"####" C 0 A_GiveInventory("DashSetOff")
+"####" A 0 A_GiveInventory("BoosterCrescentKickCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+}
+}
+//====
+
+actor UseAbility2_Bass : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("BoosterCrescentKickAbility",1)
+fail
+}
+}
+
+actor BoosterCrescentKickAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("BoosterCrescentKickCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+
+actor BoostKickFlag : Powerup {inventory.amount 1 Powerup.Duration 17}
+
+//=================
+//=================
+
+actor BoostKickFunc : CustomInventory
+{
+    States
+    {
+    Pickup:
+        TNT1 A 0 A_FireCustomMissile("BoosterKickProj",0,0,0,0)
+        TNT1 A 0 A_SpawnItemEx("BoosterKickFX", cos(pitch)*16+sin(-pitch)*12, 8, sin(-pitch)*16+32, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM)
+        TNT1 A 0 A_ChangeVelocity(25,0,10,CVF_RELATIVE|CVF_REPLACE)
+        stop
+    }
+}
+
+actor BoosterKickProj
+{
+Translation "208:208=193:193", "225:225=103:103"
+PROJECTILE
+Radius 28 //14
+Height 30 //25
+scale 2.5
+damage (10)
+damagetype "BoosterKick"
+Obituary "$OB_CHARGEKICK"
+speed 60
++NOEXPLODEFLOOR
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1
+stop
+}
+}
+
+actor BoosterKickFX
+{
+Translation "208:208=193:193", "225:225=103:103"
+    +NOINTERACTION
+    +NOGRAVITY
+    +CLIENTSIDEONLY
+    +FORCEXYBILLBOARD
+    +MISSILE
+    -SOLID
+    scale 2.5
+    height 0
+    radius 0
+    States
+    {
+    Spawn:
+        CKIC D 0
+        TNT1 A 0 A_GiveInventory("ProjectileCode",1)
+        TNT1 A 0 acs_NamedExecuteWithResult("SprayerAlpha",0.2*FVM)
+        CKIC DEF 1
+        stop
+    }
+}
+
+actor CrescentKickProj : BoosterKickProj
+{
+Translation "208:208=102:102", "225:225=107:107"
+Damage (35)
+damagetype "CrescentKick"
+Speed 80
+Scale 3.5
+}
+
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor BoosterCrescentKickCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("BoosterCrescentKickCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BoosterCrescentKickCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor BoosterCrescentKickCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("BoosterCrescentKickCooldownItem",140)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("BoosterCrescentKickCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor BoosterCrescentKickCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 140 //4 seconds
+}

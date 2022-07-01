@@ -11,9 +11,9 @@ Player.Startitem "UseAbility1_SearchmanEXE"
 Player.Startitem "UseAbility2_SearchmanEXE"
 Player.Startitem "Dynamite_Charges",3
 
-Player.Startitem "PRO_MachineGunMastery"
+Player.Startitem "PRO_Specialist"
 Player.Startitem "PRO_Marksman"
-Player.Startitem "PRO_EnergyBalancer"
+Player.Startitem "Pro_Assassin"
 
 +NOSKIN
 States
@@ -25,6 +25,7 @@ AUSS A 1 A_JumpIfInventory("Ability2_SearchmanEXE",1,"Spawn2")
 GoTo Spawn+2
 Spawn2:
 AUSS F 1
+AUSS F 0 A_JumpIfInventory("Ability2_SearchmanEXE",1,"Spawn2")
 GoTo Spawn+2
 See:
 AUSS BCDE 5
@@ -36,6 +37,7 @@ AUSS I 4
 GoTo Spawn+2
 Missile2:
 AUSS F 9
+AUSS F 0 A_JumpIfInventory("Ability2_SearchmanEXE",1,"Missile2")
 GoTo Spawn+2
 PainFix:
 AUSS H 0 

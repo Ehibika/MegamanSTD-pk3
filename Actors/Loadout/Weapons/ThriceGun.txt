@@ -89,6 +89,7 @@ actor ThriceGun_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 3
+Ammo.BackpackMaxAmount 4
 }
 
 actor ThriceGunCST : PowerupGiver

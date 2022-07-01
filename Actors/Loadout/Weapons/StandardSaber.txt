@@ -179,7 +179,7 @@ actor SS_BladeStart : ProjectileBase
 +SERVERSIDEONLY
 damagetype "StandardSaberEdge"
 Obituary "$OB_STANDARDSABER"
-damage (100)
+damage (75)
 height 5
 radius 5
 Speed 25
@@ -212,7 +212,7 @@ actor SS_BladeTip : ProjectileBase
 +SERVERSIDEONLY
 damagetype "StandardSaberTip"
 Obituary "$OB_STANDARDSABER"
-damage (150)
+damage (100)
 height 5
 radius 5
 Speed 26

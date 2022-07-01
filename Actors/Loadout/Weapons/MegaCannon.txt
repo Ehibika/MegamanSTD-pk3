@@ -96,6 +96,7 @@ actor MegaCannon_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 4
+Ammo.BackpackMaxAmount 6
 }
 
 actor MegaCannonCST : PowerupGiver
@@ -109,7 +110,7 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 Const int MegaCannon_DMG = 90;
 Const int MegaCannon_RAD = 160;
-Const int MegaCannon_RADMin = 64;
+Const int MegaCannon_RADMin = 96;
 actor MegaCannonShot : FastProjectileBase
 {
 Speed 48

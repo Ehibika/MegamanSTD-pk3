@@ -35,6 +35,19 @@ SourceTID = ActivatorTID();
 //Also to avoid boosting self damage
 if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False){if(CheckMasteryDamage(arg2)){Damage += DamageModify(Damage,P_MASTERYDAMAGE);}}
 
+//==Specialist Damage Bonus ==
+if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False)
+	{
+		Switch(CheckForSpecialist())
+			{
+			Case 1 : Damage += DamageModify(Damage,P_MASTERYDAMAGE);  break;
+			Case 0 : Damage -= DamageModify(Damage,P_MASTERYDAMAGE);  break;
+			default: break;
+			}	
+	}
+
+
+
 //==Assassin Bonus==
 if(CheckForCrit(arg2)){CritHit = true;}
 if(VictimHPPer >= 100 && CheckProp(MasterProPList[19][PROP_NAME])){Assassin = true;}
@@ -76,7 +89,7 @@ if(CheckForResistance(arg2)){Damage = DamageModify(Damage,P_RESISTANCE);}
 if(CheckForElementalGuard(arg2)){Damage = DamageModify(Damage,P_ELMGUARD);}
 
 //==Blade Parrymodifier ==
-if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,0.6);}
+if(CheckForBladeParry(arg2)){Damage = DamageModify(Damage,P_BLADEPARRY);}
 
 if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 	{
@@ -88,7 +101,6 @@ if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 		localAmbientSound("Body/ArmorPain",127);
 		}
 	}
-
 
 //===|conditional status crits|====
 if(CheckForFireCrit(arg2)){FireCrit = true; }
@@ -122,9 +134,14 @@ SetActivator(0, AAPTR_DAMAGE_SOURCE);
 if(CheckInventory("IsFireman") 
 	&& CheckForElement(arg2,ELM_FIRE) 
 	&& IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False)
-	{GiveInventory("FiremanHeat",arg1*0.5>>16);}
+	{
+	if(CheckInventory("FiremanHeat")<100){GiveInventory("FiremanHeat",DamageModify(Damage,0.2));}
+	}
 SetActivator(0, AAPTR_DAMAGE_TARGET);
-
+if(CheckInventory("IsFireman") && !CheckForElement(arg2,ELM_BREAK) )
+	{
+	Damage = ValueMap(CheckInventory("FiremanHeat"),1,100,DamageModify(Damage,1.0),DamageModify(Damage,0.2));
+	}
 //==Quickman Class Passive==
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
 if(CheckInventory("IsQuickMan")){GiveInventory("AtomicSpeedResource",(arg1*0.3>>16)+1);GiveInventory("AtomicSpeedUp",1);}
@@ -138,6 +155,7 @@ SetResultValue(Damage);
 //if(CheckSpeedrunnerLoss()){TakeInventory("PowerSpeedRunner",9); LocalAmbientSound("support/StatDown",127);}
 }
 }
+
 
 Function int DamageModify(int DMG, int Mult)
 {
@@ -235,7 +253,7 @@ SetResultValue(Output);
 #LIBDEFINE M_ENTITYTID 4900000
 #LIBDEFINE M_ENTITY_CAP 6 //for masterscrub, to reduce the loops
 int M_EntityRecord[64];
-Script "GiveM_EntiTID" (Int EntityID, int EntityCap)
+Script "GiveM_EntiTID" (Int EntityID, int EntityCap, int HasSubEntity)
 {
 /*
 This one allows for multiple entities to be spawned but only up to 9. and if a new one is spawned beyond the cap, the old one get's replaced
@@ -255,10 +273,12 @@ while(!SpawnComplete)
 		if(EntityNum >= EntityCap)
 			{
 				Thing_Remove(M_ETID);
+				if(HasSubEntity){ClearSubEntities(M_ETID);}
 				//ACS_NamedExecuteAlways("Client_Thing_Remove",0,M_ETID);
 				for(int i = 1; i < EntityCap; i++)
 				{
 					Thing_ChangeTID(M_ETID+i,M_ETID+i-1);
+					if(HasSubEntity){ShiftSubEntities(M_ETID+i);}
 					//ACS_NamedExecuteAlways("Client_Thing_ChangeTID",0,M_ETID+i,M_ETID+i-1);
 				}
 				EntityNum = 0;
@@ -269,6 +289,27 @@ while(!SpawnComplete)
 	}
 Thing_ChangeTID(0,M_ETID+EntityNum);
 }
+
+Function void ClearSubEntities (int ENTITID)
+{
+/*
+Some stuff like the autosentry will spawn entities that basically have a higher entityID than them.
+this will clear the next 10 entityID's
+*/
+For(int i = 1;i < 10; i++)
+	{Thing_Remove(ENTITID+(10*i));}
+}
+
+Function void ShiftSubEntities (int ENTITID)
+{
+/*
+Some stuff like the autosentry will spawn entities that basically have a higher entityID than them.
+this will Shift the next 10 entityID's down an entity count
+*/
+For(int i = 1;i < 10; i++)
+	{Thing_ChangeTID(ENTITID+(10*i),ENTITID+(10*i)-1);}
+}
+
 //#endregion
 
 //#region -=- Radius Give -=-
@@ -435,7 +476,8 @@ Str TinyBarSprite[21] = {
                 && p+1000 != ActivatorTID()
                 && (xyzDistance(ViewerTID,Target_TID) < 1900) 
                 && PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM)
-                && Checksight(ViewerTID,Target_TID,0))
+                && Checksight(ViewerTID,Target_TID,0)
+				&& !CheckInventory("BlindMark"))
                 {
                 if(CheckActorInventory(Target_TID,"CannotUseHealing")){SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag,s:"_NoHeal"),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}
                 else{if(ConsolePlayerNumber() == PlayerNumber ()){SpawnForced(StrParam(s:TinyBarHealth(Target_TID),s:TeamTag),GetActorX(Target_TID),GetActorY(Target_TID),GetActorZ(Target_TID) + (65 << 16));}}
@@ -608,8 +650,8 @@ int zDist = GetActorCenterZ(0) - Boom_Z;
 int pitch = VectorAngle(xyDist,zDist);
 int dist = VectorLength(xyDist,zDist);
 
-			if(CheckPlayerProp(playernumber(),MasterProPList[17][PROP_NAME])){force += force*0.5>>16; if(force < 0){force = 0;};}
-			if(CheckPlayerProp(playernumber(),MasterProPList[18][PROP_NAME])){force -= force*0.5>>16; if(force < 0){force = 0;};}
+			if(CheckInventory("WeightClass_Light")){force += force*0.5>>16; if(force < 0){force = 0;};}
+			if(CheckInventory("WeightClass_Heavy")){force -= force*0.5>>16; if(force < 0){force = 0;};}
 
 dist >>= 16;
 //Printbold(i:dist,s:" ",i:range,s:" ",i:force);
@@ -711,14 +753,13 @@ For(int q = 0;q < GetMaxEntities(); q++)
 			//LightWeight & HeavyWeight modifiers
 			SubThrustForce = ThrustForce;
 			SubThrustForceH = ThrustForceH;
-
-			if(CheckPlayerProp(q,MasterProPList[17][PROP_NAME]))
+			if(CheckActorInventory(q+1000,"WeightClass_Light"))
 				{
 				SubThrustForce += SubThrustForce*0.5>>16;;
 				SubThrustForceH += SubThrustForceH*0.5>>16;;
 				}
 
-			if(CheckPlayerProp(q,MasterProPList[18][PROP_NAME]))
+			if(CheckActorInventory(q+1000,"WeightClass_Heavy"))
 				{//log(s:"HeavyWeight  ");
 				SubThrustForce -= SubThrustForce*0.5>>16;; if(SubThrustForce < 0){SubThrustForce = 0;}
 				SubThrustForceH -= SubThrustForceH*0.5>>16;; if(SubThrustForceH < 0){SubThrustForceH = 0;}
@@ -868,10 +909,18 @@ script "HitKnockBack" (int force)
 {
 if(!ACS_NamedExecuteWithResult("MSTD_ActorClassifier",0,2)){Terminate;}
 int pusher = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
-if(CheckProp(MasterProPList[17][PROP_NAME])){force += force*0.5>>16;} //Lightweight
-if(CheckProp(MasterProPList[18][PROP_NAME])){force -= force*0.5>>16; if(force<0){force = 0;}} //HeavyWeight
+if(CheckInventory("WeightClass_Light")){force += force*0.5>>16;} //Lightweight
+if(CheckInventory("WeightClass_Heavy")){force -= force*0.5>>16; if(force<0){force = 0;}} //HeavyWeight
 int Vang = VectorAngle(GetActorX(0) - GetActorX(pusher), GetActorY(0) - GetActorY(pusher)) >> 8;
 ThrustThing(Vang, force, 1, 0);
+}
+
+script "HitKnockUp" (int force, int SetAdd)
+{
+if(!ACS_NamedExecuteWithResult("MSTD_ActorClassifier",0,2)){Terminate;}
+if(CheckInventory("WeightClass_Light")){force += force*0.5>>16;} //Lightweight
+if(CheckInventory("WeightClass_Heavy")){force -= force*0.5>>16; if(force<0){force = 0;}} //HeavyWeight
+ThrustThingZ(0,force,0,SetAdd);
 }
 
 
@@ -975,7 +1024,15 @@ if(CheckProp(MasterProPList[14][PROP_NAME]))
 	if(Value >= 0.9)Value += 0.2; 
 	else if(Value >= 0.7)Value += 0.1;
 	}
-	if(CheckForSpecialist()) {Value += 0.1; /*log(s:"Got Specialist!");*/}
+if(CheckProp(MasterProPList[31][PROP_NAME]))
+		{
+		Switch(CheckForSpecialist())
+			{
+			Case 1 : Value += 0.1; /*log(s:"Got Specialist!");*/ break;
+			Case 0 : Value -= 0.1; /*log(s:"Got Off Specialist!");*/ break;
+			default: /*log(s:"No Specialist!");*/ break;
+			}
+		}
 
 //IsBladeParryActive();
 
@@ -1371,6 +1428,11 @@ Delay(2);
 int Buttons;
 int OlDButtons;
 int WallJumpLimit = CheckInventory("WallJumpLimit");
+
+if(CheckInventory("WeightClass_Light")){SetInventory("WallJumpLimit", 10); WallJumpLimit = 10;}
+else if(CheckInventory("WeightClass_Heavy")){SetInventory("WallJumpLimit", 6); WallJumpLimit = 6;}
+else {SetInventory("WallJumpLimit", 8); WallJumpLimit = 8;}
+
 If(WallJumpLimit == 0){SetInventory("WallJumpLimit", 10); WallJumpLimit = 10;}
 While(GetActorProperty(0,APROP_Health) > 0 && CheckInventory("CanWallJumpFlag"))
 	{
@@ -1429,3 +1491,100 @@ script "CSACS_WallJump" (int Force, int BonusJump)
 		//ThrustThingZ(0,(GetActorProperty(0,APROP_JumpZ) >> 16) * 4 + BonusJump,0,0);
 	}
 }
+
+
+Script "DeployableCore" (void)
+{
+
+		
+int CoreTID = UniqueTID();
+int X,PastX,Y,PastY,Z,PastZ;
+int TIDWait;
+
+//===
+str CoreName = StrParam(s:"Core_",s:GetActorClass(0));
+SpawnForced(CoreName,GetActorX(0),GetActory(0),GetActorz(0),0);
+
+While(TIDWait < 10)
+	{
+	//Wait untill the spawned actor changes it's own TID
+	if(!ThingCount(T_NONE,CoreTID)){TIDWait = 99;}
+	Delay(1);
+	}
+
+
+While(ThingCount(T_NONE,CoreTID) && GetActorProperty(CoreTID, APROP_Health)>0)
+	{
+	
+	X = GetActorX(0);
+	Y = GetActory(0);
+	Z = GetActorz(0);
+		if(X != PastX || Y != PastY || Z != PastZ)
+		{
+		Warp(CoreTID,GetActorX(0),GetActory(0),GetActorz(0),0,WARPF_MOVEPTR|WARPF_ABSOLUTEPOSITION|WARPF_USECALLERANGLE|WARPF_INTERPOLATE);
+		}
+	
+	Delay(1);
+	PastX = X;
+	PastY = Y;
+	PastZ = Z;
+	}
+	
+	SetActorState(0, "Death");
+}
+
+
+
+Script "MSTD_Blinder" (void) ClientSide
+{
+if(consoleplayernumber() != playernumber()){Terminate;}
+	int BrightBlindCount;
+	FadeTo(150,150,150,1.0,0.05);
+	Delay(10);
+	BlinderSet(On);
+	FadeTo(150,150,150,0.0,0.5);
+
+	While(CheckInventory("BlindMark")>0)
+		{
+		BlinderSet(On);
+		Delay(7);
+		}
+	BlinderSet(Off);
+	
+}
+
+Function void BlinderSet (Bool Toggle)
+{
+
+int Mode = STYLE_Translucent;
+if(Toggle){Mode = STYLE_None;}
+
+For(int i = 0;i < GetMaxEntities(); i++)
+	{
+	if(ConsolePlayerNumber() != i)
+	{
+	SetActorProperty(i+1000,Aprop_Renderstyle,Mode);
+	}
+	
+	}
+
+}
+
+
+Script "BlinderFXWarper" (void) CLIENTSIDE
+{
+	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
+	
+	// Loop if shield is active
+	while(GetActorProperty(Player, APROP_HEALTH)>0
+	&& CheckActorInventory(Player, "BlindMark") > 0
+	){
+		Delay(1);
+	}
+	
+    // Remove
+    SetActorState(0,"Death");
+    Delay(17);
+	Thing_Remove(0);
+}
+

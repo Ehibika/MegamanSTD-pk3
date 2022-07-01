@@ -113,9 +113,9 @@ InInventory IsMegamanX, 1
 
 InInventory IsMegamanEXE, 1
 	{
-	DrawImage "HARDSI", 2, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", GutsPunchCooldownItem, vertical,reverse, 5, 163;
-	ininventory GutsPunchCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", GutsPunchCooldownItem, vertical,reverse, 5, 163;}
+	DrawImage "MINIBI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", MinibombCooldownItem, vertical,reverse, 5, 163;
+	ininventory MinibombCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", MinibombCooldownItem, vertical,reverse, 5, 163;}
 
 	DrawImage "RKCUBEI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", RockCubeCooldownItem, vertical,reverse, 25, 163;

@@ -2,8 +2,8 @@ Actor CentaurMan : ClassBase
 {
 Player.DisplayName "CentaurMan"
 Player.SoundClass "megaman"
-Health 200
-Player.MaxHealth 200
+Health 250
+Player.MaxHealth 250
 Player.JumpZ 10
 
 Player.Startitem "IsCentaurMan"
@@ -13,6 +13,8 @@ Player.Startitem "UseAbility2_CentaurMan"
 Player.Startitem "PRO_Marksman"
 Player.Startitem "PRO_EuclidResistance"
 Player.Startitem "Pro_Hefty"
+
+Player.Startitem "WeightClass_Heavy"
 
 +NOSKIN
 States

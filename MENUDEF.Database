@@ -297,6 +297,10 @@ OptionValue PropertyList
 26, "Marksman"
 27, "Heater"
 28, "Refrigerate"
+
+29, "Energy Balancer"
+30, "Reserve Tank"
+31, "Specialist"
 }
 
 OptionValue Propertyinfo
@@ -337,6 +341,10 @@ OptionValue Propertyinfo
 26, "weapon damage increases when \nthe further away you are from \nyour target"
 27, "Weapon Damage from Wind and \nAqua weapons will now inflict \nBurn"
 28, "Weapon Damage from Wind and \nAqua weapons will now inflict \nFrostbite"
+
+29, "Passively reloads your offhand weapon"
+30, "Increases all weapon ammo capacity"
+31, "Improves the movespeed and power \nof your Slot A Weapon while weakening the stats of your Slot B weapon"
 }
 
 

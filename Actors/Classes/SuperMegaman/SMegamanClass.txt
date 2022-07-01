@@ -13,9 +13,11 @@ Player.Startitem "UseAbility2_SuperMegaman"
 
 Player.Startitem "BP_Fuel" ,100
 
-Player.Startitem "Pro_HeavyWeight"
+Player.Startitem "Pro_EnergyBalancer"
 Player.Startitem "Pro_Hefty"
 Player.Startitem "Pro_Acrobat"
+
+Player.Startitem "WeightClass_Heavy"
 
 +NOSKIN
 States

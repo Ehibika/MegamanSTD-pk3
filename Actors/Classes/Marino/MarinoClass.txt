@@ -14,6 +14,8 @@ Player.Startitem "Pro_Speedrunner"
 Player.Startitem "Pro_Acrobat"
 Player.Startitem "Pro_Assassin"
 
+Player.Startitem "WeightClass_Light"
+
 +NOSKIN
 States
 {

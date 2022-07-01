@@ -1,0 +1,270 @@
+actor Ability1_Fireman : AbilityMasterBase
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_FIREARM"
+Tag "whatanicetag"
+weapon.ammotype1 "FiremanHeat"
+inventory.icon "FLMBSI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+-WEAPON.NOAUTOFIRE
+States
+{
+
+Ready:
+FIRB A 0 
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_GiveInventory("FireArmTimer")
+Ready.Subwep:
+"####" A 1 A_WeaponReady(WRF_ALLOWZOOM)
+"####" A 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
+goto Ready.Subwep
+
+Deselect:
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 A 0 A_GiveInventory("FireArmCooldown")
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+
+AltFire:
+Fire:
+//"####" B 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" B 0 A_Gunflash("Sound.SprayerSound")
+"####" B 0 A_GiveInventory("GasEmitterCST",1)
+
+"####" BCD 2
+Hold:
+//"####" B 0 A_JumpIfNoAmmo("Fire.Finish")
+"####" D 1 A_FireCustomMissile("FireArmCloud",fRandom(-(BST_SPD),(BST_SPD)),1,0,0,0,fRandom(-(BST_SPD),(BST_SPD)))
+"####" B 0 A_GiveInventory("GasEmitterCST",1)
+"####" A 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
+"####" B 0 A_Refire("hold")
+goto Ready.Subwep
+
+
+Fire.Finish:
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,110)
+"####" A 1 A_GiveInventory("FireArmCooldown")
+"####" A 0 A_Jump(256,"End")
+goto End
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready.Subwep")
+Goto Ready.Subwep
+
+End:
+"####" C 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" C 0 
+Goto End
+
+Sound.SprayerSound:
+TNT1 A 4 A_PlaySoundEx("weapon/WaveBurner","Weapon",0)
+TNT1 A 1 A_JumpIfInventory("ConShotTimer",1,"Sound.SprayerSound")
+stop
+
+}
+}
+//====
+
+actor UseAbility1_Fireman : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("FireArmAbility",1)
+fail
+}
+}
+
+actor FireArmAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("FireArmCooldownItem",1,"Nope")
+//TNT1 A 0 A_JumpIfInventory("FiremanHeat",25,"Pickup2")
+//stop
+
+//Pickup2:
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+
+actor FireArmCloud : ProjectileBase
+{
+damagetype "FireStormTrail"
+Obituary "$OB_FIREARM"
+Speed 48
++RIPPER
++NOEXPLODEFLOOR
++SLIDESONWALLS
++DOOMBOUNCE
+-NOGRAVITY
+gravity 0.5
+BounceFactor 0.3
+WallBounceFactor 0.1
+Damage (15)
+scale 1.0
+Var Int User_TrailCount;
+Var Int User_TP; //TrailPosition
+radius 15
+height 30
+reactiontime 20
+args 5
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn.Cycle
+Spawn.Cycle:
+TNT1 A 5 A_SpawnItemEx("FireArmFX",random(-5,5),random(-5,5),random(-5,5),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_CountDown
+TNT1 A 0 A_JumpIf( abs(momx*momx)+abs(momy+momy) < args[0],"Spawn.Cycle")
+//TNT1 A 0 A_JumpIf(ReactionTime <= args[0],"Spawn.Cycle")
+TNT1 A 0 A_ScaleVelocity(0.8)
+Goto Spawn.Cycle
+Death:
+TNT1 A 0 //A_GiveInventory("ProjectileDCode",1)
+TNT1 A 1 //A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+actor FireArmFX  
+{
+PROJECTILE
++NOINTERACTION
++NOGRAVITY
++CLIENTSIDEONLY
+height 2
+Radius 2
+damage (0)
+reactiontime 1
+scale 1.5
+RenderStyle "Add"
+Alpha 0.8
+States
+{
+Spawn:
+ICMS A 0 Thrustthingz(0,30,0,0)
+BRNF A 0 //acs_NamedExecuteWithResult("SprayerAlpha",0.2*FVM)
+BRNF ABCDEF 1 //A_Fadein(0.1)
+ICMS C 0 
+stop
+}
+}
+
+
+actor FireArmTimerWatcher : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("FireArmTimerItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("FireArmTimerItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_GiveToTarget("AbilityTimeout")
+TNT1 A 0
+stop
+}
+}
+
+actor FireArmTimer : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("FireArmTimerItem",105)
+TNT1 A 0 A_Spawnitemex("FireArmTimerWatcher")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor FireArmTimerItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 105
+}
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor FireArmCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("FireArmCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("FireArmCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0
+stop
+}
+}
+
+actor FireArmCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("FireArmCooldownItem",280)
+TNT1 A 0 A_Spawnitemex("FireArmCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor FireArmCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 280
+}

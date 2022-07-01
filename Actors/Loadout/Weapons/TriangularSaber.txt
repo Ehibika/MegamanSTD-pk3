@@ -181,7 +181,7 @@ actor TS_BladeStart : ProjectileBase
 +SERVERSIDEONLY
 damagetype "TriangularSaberEdge"
 Obituary "$OB_TRIANGULARSABER"
-damage (125)
+damage (80)
 height 5
 radius 5
 Speed 25

@@ -32,6 +32,7 @@ OB_MEDIBUSTER = "%k Eliminated %o with the MediBuster";
 OB_SCREWSHOOTER = "%k Eliminated %o with the ScrewShooter";
 OB_BOLTDRIVER = "%k Eliminated %o with the BoltDriver";
 OB_REPAIRSPRAYER = "%k Eliminated %o with the RepairSprayer";
+OB_REPAIRLAUNCHER = "%k Eliminated %o with the Repair Launcher";
 OB_REPLISLASHER = "%k Eliminated %o with the Replislasher";
 OB_ELECTRIGGERV = "%k Eliminated %o with the ElectriggerV";
 OB_VIOLETZAPPER = "%k Eliminated %o with the VioletZapper";
@@ -48,6 +49,7 @@ OB_RYUENJIN = "%k Scorched %o's Ryuenjin Technique";
 OB_REKKOHA = "%k was destroyed by %o's Rekkoha";
 
 OB_GUTSPUNCH = "%o Got Punched by %k";
+OB_MINIBOMB = "%0 Got Deleted by %o's minibomb";
 
 OB_HYPERDIVE = "%o Got Struck down by %k's Hyper Dive";
 OB_SCATTEREDFLOWER = "%o Got Struck down by %k's Scattered Flower Technique";
@@ -82,11 +84,16 @@ OB_SOLIDSLAM = "%o was slam bammed into a object by %k Dash Punch";
 OB_SEARCHSCOPE = "%o Was sniped by %k's Search Scope";
 OB_DYNAMITE = "%o Stumbled onto %k's Dynamite";
 
-OB_ELECTRICSHOCKROUND = "%o couldn't run in front of %k's Explosive Shock Round."
-OB_EXPLOSIVEROUND = "%k gave the knee of evil to %o using the Explosive Round."
+OB_ELECTRICSHOCKROUND = "%o couldn't run in front of %k's Explosive Shock Round.";
+OB_EXPLOSIVEROUND = "%k gave the knee of evil to %o using the Explosive Round.";
+
+OB_HEADBEAMS = "%o was caught out by %k's Head Beam.";
+OB_BLADEDASHIMPACT = "%o was Crushed by %k's Blade dash impact.";
+OB_BLADEDASHSABER = "%o was Sliced by %k's Blade dash.";
 
 //#region old
 //DOT Obituaries
+/*
 OB_Burner = "%k Eliminated %o";
 OB_Poisoner = "%k Eliminated %o";
 
@@ -133,6 +140,7 @@ OB_FLAMETONGUE = "%k Eliminated %o";
 OB_SLAMCANNON = "%k Eliminated %o";
 OB_TAGMISSILE = "%k Eliminated %o";
 OB_VoltSpear = "%k Eliminated %o";
+*/
 //#endregion
 
 

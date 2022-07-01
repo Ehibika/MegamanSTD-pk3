@@ -95,6 +95,7 @@ actor ElectriggerV_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 45
+Ammo.BackpackMaxAmount 60
 +INVENTORY.IGNORESKILL
 }
 

@@ -70,6 +70,7 @@ actor ViperRifle_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 50
+Ammo.BackpackMaxAmount 80
 }
 
 actor ViperRifleCST : PowerupGiver

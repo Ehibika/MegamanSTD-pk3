@@ -92,6 +92,7 @@ actor HawkPrecisionBuster_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 4
+Ammo.BackpackMaxAmount 6
 }
 
 actor HawkPrecisionBusterCST : PowerupGiver

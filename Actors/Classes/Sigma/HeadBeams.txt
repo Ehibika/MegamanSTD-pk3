@@ -1,0 +1,256 @@
+actor Ability2_Sigma : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_HeadBeams"
+Tag "Dash Ability"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "BUSTI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+HSPR A 0 
+"####" A 1 Offset(0,110)
+"####" A 1 Offset(0,96)
+"####" A 1 Offset(0,82)
+"####" A 1 Offset(0,70)
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
+"####" A 0 A_GiveInventory("WeaponCharge")
+"####" A 0 A_PlaySoundEx("weapon/xbcharge","Weapon")
+Ready1:
+HSPR A 0 A_GiveInventory("WeaponCharge",1)
+"####" A 0 A_WeaponReady(WRF_NOPRIMARY)
+"####" A 1 A_JumpIfInventory("WeaponCharge",17,"Ready2")
+goto Ready1
+Ready2:
+"####" B 1 A_WeaponReady
+goto Ready2
+
+Deselect:
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 A 0 A_TakeInventory("WeaponCharge",999)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" B 1 A_Lower
+Loop
+
+
+Fire:
+HSPR CD 2
+"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+"####" D 0 A_TakeInventory("WeaponCharge",999)
+"####" DDD 2
+"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+"####" DDD 2
+"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+"####" DDD 2
+"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+"####" D 1 Offset(0,32)
+"####" D 1 Offset(0,46)
+"####" D 1 Offset(0,58)
+"####" D 1 Offset(0,70)
+"####" D 1 Offset(0,82)
+"####" D 1 Offset(0,82)
+"####" D 1 Offset(0,96)
+"####" D 1 Offset(0,110)
+"####" D 0 A_GiveInventory("HeadBeamsCooldown")
+"####" D 0 A_GiveInventory("RefireBuffer")
+"####" D 0 A_Jump(256,"End")
+goto End
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready1")
+Goto Ready1
+
+AltFire:
+"####" A 1
+End:
+"####" A 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" A 0 
+Goto End
+
+	Sound.BusterCharge:
+		TNT1 A 9 A_PlaySoundEx("weapon/adapterchargeloop","Weapon",0)
+		TNT1 A 1 A_JumpIfInventory("WeaponCharge",1,"Sound.BusterCharge")
+        stop
+}
+}
+//====
+
+actor UseAbility2_Sigma : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("HeadBeamsAbility",1)
+fail
+}
+}
+
+actor HeadBeamsAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("HeadBeamsCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor HeadBeamsRound : fastProjectileBase
+{
+Translation "192:192=216:216","4:4=160:160","198:198=24:24"
+Obituary "$OB_HEADBEAMS"
+DamageType "HeadBeams"
+Speed 106 //96 x 1.1 = 105.6, same for a_explode radius (48=52.8)
+Damage (0) //10 | Damage moved to splash ~Bika
+scale 3.5
+radius 14
+height 18
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Goto Spawn2
+Spawn2:
+NDFX CD 2 A_SpawnItemEx("HeadBeamsTrail",-85,0,-momz,momx,momy,momz,0,9)
+Goto Spawn2
+Death:
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Explode(30,96,0,0,64)
+//115 / 4.5 = 25.555...6 | Lets just round up to 120 ~Bika
+TNT1 A 0 A_Spawnitemex("HeadBeamsPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor HeadBeamsTrail : BasicExplosion
+{
+Obituary "$OB_HeadBeams"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("HeadBeamsTrail_FX")
+TNT1 A 0 A_SpawnItemEx("HeadBeamsTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("HeadBeamsTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+actor HeadBeamsTrail_FX : FXActor_B
+{
+Translation "198:198=24:24"
+scale 0.5
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+FGPL ABCDE 1
+stop
+}
+}
+
+actor HeadBeamsTrail_FX1 : FXActor_B
+{
+Translation "192:192=29:29"
+scale 0.5
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+FGPL FGHIJ 1
+stop
+}
+}
+
+actor HeadBeamsPuff1 : FXActor_A
+{
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+SHFX LMNOP 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor HeadBeamsCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("HeadBeamsCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("HeadBeamsCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor HeadBeamsCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("HeadBeamsCooldownItem",175)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("HeadBeamsCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor HeadBeamsCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 175 
+}

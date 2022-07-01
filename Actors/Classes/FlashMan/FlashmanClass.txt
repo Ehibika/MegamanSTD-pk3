@@ -14,6 +14,8 @@ Player.Startitem "PRO_MachineGunMastery"
 Player.Startitem "Pro_BusterMastery"
 Player.Startitem "Pro_EuclidResistance"
 
+Player.Startitem "WeightClass_Light"
+
 +NOSKIN
 States
 {

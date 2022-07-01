@@ -70,6 +70,7 @@ actor LazerRifle_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 80
+Ammo.BackpackMaxAmount 120
 }
 
 actor LazerRifleCST : PowerupGiver

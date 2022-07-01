@@ -181,7 +181,7 @@ actor BR_BladeStart : ProjectileBase
 +SERVERSIDEONLY
 damagetype "BeamRapierEdge"
 Obituary "$OB_BEAMRAPIER"
-damage (100)
+damage (50)
 height 5
 radius 5
 Speed 25
@@ -214,7 +214,7 @@ actor BR_BladeTip: ProjectileBase
 +SERVERSIDEONLY
 damagetype "BeamRapierTip"
 Obituary "$OB_BEAMRAPIER"
-damage (150)
+damage (100)
 height 5
 radius 5
 Speed 26

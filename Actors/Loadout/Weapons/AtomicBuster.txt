@@ -78,6 +78,7 @@ actor AtomicBuster_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 8
+Ammo.BackpackMaxAmount 12
 }
 
 actor AtomicBusterCST : PowerupGiver

@@ -705,3 +705,8 @@ script "MSTD_IsPlayerAlive" (int TID)
 		SetResultValue(1);
 	}
 }
+
+Function void SynchWarperRender (int TID)
+{
+SetActorProperty(0,Aprop_Renderstyle,GetActorProperty(TID, Aprop_Renderstyle));
+}

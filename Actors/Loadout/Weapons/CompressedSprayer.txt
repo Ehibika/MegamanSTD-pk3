@@ -68,6 +68,7 @@ actor CompressedSprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 6
+Ammo.BackpackMaxAmount 8
 +INVENTORY.IGNORESKILL
 }
 

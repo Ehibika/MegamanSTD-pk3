@@ -229,7 +229,7 @@ while(GetActorProperty(0,APROP_HEALTH) > 0)
     if(GetActorPowerupTics(0,"HealRampPower")<490 && GetActorProperty(0,APROP_HEALTH) < GetActorProperty(0,APROP_SPAWNHEALTH))
         {
         if(CheckInventory("PoisonMark")){GiveInventory("DetoxLevel",5);GiveInventory("DetoxEfectSpawn",1);}
-        else{HealThing(1,HPMax);}
+        else{HealThing(2,HPMax);}
         }
     delay(5);
     }
@@ -516,14 +516,16 @@ if this damage is wind or water based, return true.
 Return CheckForElement(PainType,ELM_WIND|ELM_AQUA);
 }
 
-Function Bool CheckForSpecialist(void)
+Function int CheckForSpecialist(void)
 {
-if(!CheckProp(MasterProPList[31][PROP_NAME])){Return 0;}
+if(!CheckProp(MasterProPList[31][PROP_NAME])){Return -1;}
 /*
 Check if the given weapon is in the first slot, simply put, it's a weapon without "2" at the end
 */
 int ThisWeapon = STD_WhichWeapon();
-If(StrIcmp(GetWeapon(),MasterWepList[ThisWeapon][1])==0){Return 1;}
+//log(s:GetWeapon(),s:" : ",s:MasterWepList[ThisWeapon][1]);
+if(ThisWeapon < 0){Return -1;}
+If(StrCmp(GetWeapon(),MasterWepList[ThisWeapon][1])==0){Return 1;}
 
 return 0;
 }
@@ -537,6 +539,7 @@ Script "BladeParryWarper" (void) CLIENTSIDE
 	while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "InBladeParry") > 0
 	){
+        SynchWarperRender(Player);
 		Delay(1);
 	}
 	
@@ -570,6 +573,7 @@ Script "UnderShirtWarper" (void) CLIENTSIDE
 	while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "UndershirtFlag") > 0
 	){
+        SynchWarperRender(Player);
 		Delay(1);
 	}
 	
@@ -587,6 +591,7 @@ Script "overhealFXWarper" (void) CLIENTSIDE
 		while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "OverhealFlag") > 0)
 	{
+        SynchWarperRender(Player);
 		Delay(1);
 	}
 	
@@ -609,6 +614,7 @@ Script "GutsyRageFXWarper" (void) CLIENTSIDE
         ||CheckActorInventory(Player, "StunMark") > 0
         )
 	){
+        SynchWarperRender(Player);
 		Delay(1);
 	}
 	

@@ -1,6 +1,6 @@
-Const Int SearchScopeRange = 300;
+Const Int SearchScopeRange = 230;
 
-Const Int SearchScopeMaxRange = 80;
+Const Int SearchScopeMaxRange = 140;
 Const Int SearchScopeMinRange = 20;
 Const Int SearchScope_DMG1 = 50;
 Const Int SearchScope_DMG2 = 300;

@@ -78,6 +78,7 @@ actor EnergyCannon_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 20
+Ammo.BackpackMaxAmount 40
 }
 
 actor EnergyCannonCST : PowerupGiver

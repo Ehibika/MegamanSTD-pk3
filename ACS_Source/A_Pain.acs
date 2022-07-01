@@ -51,7 +51,7 @@ str PainRecord[PAINCOUNT][2] = {
 /*18*/{"PoisonDOT",ELM_TOXIC|ELM_DONTSTOP},
 /*19*/{"SyringeToss",ELM_TOXIC},
 /*20*/{"ReplislasherEdge",ELM_WIND},
-/*21*/{"ReplislasherTip",ELM_WIND},
+/*21*/{"ReplislasherWave",ELM_WIND},
 /*22*/{"MegaCannon",ELM_EXPLOSION},
 /*23*/{"EnergyCannon",ELM_EXPLOSION},
 /*24*/{"LightWaveCannon",ELM_EXPLOSION},
@@ -126,7 +126,7 @@ return 0;
 }
 
 
-#LIBDEFINE CRITCOUNT 9
+#LIBDEFINE CRITCOUNT 10
 //Crit Bitflags
 #LIBDEFINE CRIT_NULL 0.0
 #LIBDEFINE CRIT_ALWAYS 1.0
@@ -146,9 +146,10 @@ str CritRecord[CRITCOUNT][2] = {
 /*3*/{"AtomicBuster",CRIT_CONDITION|CRIT_BURNSTATUS},
 /*4*/{"ViperRifle",CRIT_CONDITION|CRIT_POISONSTATUS},
 /*5*/{"SyringeToss",CRIT_CONDITION|CRIT_POISONSTATUS},
-/*6*/{"ReplislasherTip",CRIT_ALWAYS},
+/*6*/{"ReplislasherWave",CRIT_ALWAYS},
 /*7*/{"AbsoluteFreezeDirect",CRIT_CONDITION|CRIT_FROSTBITESTATUS},
 /*8*/{"Roaster",CRIT_CONDITION|CRIT_BURNSTATUS},
+/*9*/{"ScatteredFlower",CRIT_CONDITION|CRIT_POISONSTATUS},
 
 };
 

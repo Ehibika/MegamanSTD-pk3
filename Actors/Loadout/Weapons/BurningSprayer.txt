@@ -90,6 +90,7 @@ actor BurningSprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 30
+Ammo.BackpackMaxAmount 60
 +INVENTORY.IGNORESKILL
 }
 
@@ -110,7 +111,7 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int BurningSprayerRange = SprayerRange;
+Const Int BurningSprayerRange = SprayerRange+10;
 Const float BurningSprayer_DMG = 12;
 Const float BurningSprayer_RAD = 48;
 

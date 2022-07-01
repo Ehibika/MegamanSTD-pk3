@@ -61,7 +61,7 @@ TNT1 A 0
 // and then we set them to our tracer pointer.
 TNT1 A 0 A_GiveToTarget("PoisonCritAble",1)
 TNT1 A 0 A_Setuservar("user_OwnerTID",ACS_ExecuteWithResult(257,0))
-TNT1 A 0 A_Setuservar("user_TickDamage",CallACS("MSTD_HealthPercent",AAPTR_TARGET,1,8))
+//TNT1 A 0 A_Setuservar("user_TickDamage",CallACS("MSTD_HealthPercent",AAPTR_TARGET,1,8))
 TNT1 A 0 A_TransferPointer(AAPTR_TARGET,AAPTR_DEFAULT,AAPTR_TARGET,AAPTR_MASTER,PTROP_NOSAFEGUARDS)
 TNT1 A 0 A_ReArrangePointers(AAPTR_DEFAULT,AAPTR_DEFAULT,AAPTR_TARGET)
 Spawn2:
@@ -714,6 +714,95 @@ DSBL CCCDDD 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLAT
 loop
 Death:
 DSBL DZDCZCDZDCZC 1 A_Warp(AAPTR_TARGET,0,0,0,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+stop
+}
+}
+
+//[+]=========================[+]
+//--------|Blind|------------
+//[+]=========================[+]
+
+actor BlindStatusProc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Jumpifinventory("BlindMark",1,"Sustain")
+TNT1 A 0 A_Jumpifinventory("Pro_ElecResistance",1,"Nope")
+TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+//==
+TNT1 A 0 A_GiveInventory("BlindMark",1)
+PLAY H 0 ACS_NamedExecuteAlways("MSTD_Blinder",0)
+TNT1 A 0 A_SpawnItemEx("STDBlindWatcher")
+TNT1 A 0 A_SpawnItemEx("BlinderdFX")
+TNT1 A 0 //A_Playsoundex("support/TimeBlind","Soundslot8")
+stop
+
+Sustain:
+TNT1 A 0 A_GiveInventory("BlindMark",1)
+stop
+
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor BlindMark : Powerup
+{
+inventory.amount 1
+powerup.duration -5
+}
+
+
+actor STDBlindWatcher
+{
+Height 0
+Radius 0
++NOINTERACTION
+-SOLID
++NOGRAVITY
++MISSILE
+Renderstyle none
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 
+TNT1 A 0 //A_SpawnItemEx("TimeStopGFX", random(8, 64), 0, random(0, 64), 0, 0, 0, random(0, 359))
+goto Spawn.Check1
+
+Spawn.Check1:
+TNT1 A 0 A_JumpIfInTargetInventory("BlindMark", 1, "Spawn")
+goto Death
+
+Death:
+TNT1 A 0 A_TakefromTarget("BlindMark",999)
+stop
+}
+}
+
+actor BlinderdFX : BasicClientside
+{
+scale 2.5
+Translation "192:192=104:104", "198:198=110:110", "195:195=130:130"
+speed 7
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 ACS_NamedExecuteAlways("BlinderFXWarper",0)
+Spawn2:
+BNDR AAAAAAABBBBBBB 1 A_Warp(AAPTR_TARGET,0,0,48,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
+loop
+Death:
+BNDR AZAZAZAZBZBZBZ 1 A_Warp(AAPTR_TARGET,0,0,48,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE)
 stop
 }
 }

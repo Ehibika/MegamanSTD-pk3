@@ -3,7 +3,7 @@ OptionString ClassNames
 {
 "Megaman", "Megaman" 
 "SuperMegaman", "Super Megaman" 
-//"AutoSTD" , "Auto" 
+"AutoSTD" , "Auto" 
 "MegamanX", "Megaman X" 
 "Zero", "Zero" 
 "Axl", "Axl" 
@@ -23,39 +23,43 @@ OptionString ClassNames
 "Spark Mandrill", "Spark Mandrill" 
 "Vile", "Vile"
 "ToadMan", "ToadMan" 
+"Bass", "Bass" 
+"Sigma", "Sigma"
 }
 
 OptionString ClassProperties
 {
-"Megaman", "BusterMastery \nSpeedrunner \nLightweight" //Megaman
-"SuperMegaman", "HeavyWeight \nHefty \nAcrobat" //SuperMegaman
-//"AutoSTD" , "LauncherMastery \nHeavyWeight \nTeam Medic" //Auto
+"Megaman", "BusterMastery \nSpeedrunner \nEnergyBalancer" //Megaman
+"SuperMegaman", "EnergyBalancer \nHefty \nAcrobat" //SuperMegaman
+"AutoSTD" , "LauncherMastery \nReserveTank \nTeam Medic" //Auto
 "MegamanX", "BusterMastery \nSubTank \nDetermined" //MegamanX
 "Zero", "BusterMastery \nMeleeMastery \nBlade Parry" //Zero
 "Axl", "MachineGunMastery \nSprayerMastery \nAcrobat" //Axl
-"Massimo", "LauncherMastery \nHefty \nHeavyweight" //Massimo
+"Massimo", "LauncherMastery \nHefty \nDetermined" //Massimo
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
 "MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
-"SearchmanEXE", "MachineGunMastery \nMarksman \nEnergyBalancer" //Searchman.EXE
+"SearchmanEXE", "Specialist \nMarksman \nAssassin" //Searchman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
 "Centaurman", "Marksman \nEuclidResistance \nHefty"
 "FlashMan", "MachineGunMastery \nBusterMastery \nEuclidResistance"
 "Iceman", "IceResistance \nSubTank \nElemental Guard"
-"GutsMan", "Gutsy \nHefty \nHeavyWeight"
+"GutsMan", "Gutsy \nHefty \nReserve Tank"
 "QuickMan", "Speedrunner \nAcrobat \n\cGAtomic Speed"
 "Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
 "Vile", "SubTank \nLauncherMastery \nDetermined" //Vile
 "ToadMan", "AquaResistance \nToxicReistance \nAcrobat" //ToadMan
+"Bass", "MachineGunMastery \nElementalGuard \nSpeedrunner" //Bass
+"Sigma", "Hefty \nMeleeMastery \nBladeParry" //Sigma
 }
 
 OptionString Class_HP
 {
 "Megaman", "200" 
 "SuperMegaman", "200" 
-//"AutoSTD" , "250" 
+"AutoSTD" , "250" 
 "MegamanX", "250" 
 "Zero", "175" 
 "Axl", "200" 
@@ -64,17 +68,19 @@ OptionString Class_HP
 "Cinnamon", "175" 
 "Alia", "250" 
 "MegamanEXE", "175" 
-"SearchmanEXE", "175" 
+"SearchmanEXE", "150" 
 "Fireman", "250" 
 "HarpNote", "200" 
-"Centaurman", "200"
+"Centaurman", "250"
 "FlashMan", "175"
-"Iceman", "250"
+"Iceman", "300"
 "GutsMan", "350"
 "QuickMan", "175"
 "Spark Mandrill", "350" 
-"Vile", "275"
+"Vile", "250"
 "ToadMan", "250" 
+"Bass", "200" 
+"Sigma", "275" 
 }
 
 
@@ -82,7 +88,7 @@ OptionString Class_Altfire
 {
 "Megaman", "Combat Slide" 
 "SuperMegaman", "Rocket Buster" 
-//"AutoSTD" , "Health Generator" 
+"AutoSTD" , "Health Generator" 
 "MegamanX", "CombatDash" 
 "Zero", "Ryuenjin" 
 "Axl", "Tactical Roll" 
@@ -90,18 +96,20 @@ OptionString Class_Altfire
 "Marino", "Hyper Dive" 
 "Cinnamon", "Syringe Toss" 
 "Alia", "Shinging Ray StickyBomb" 
-"MegamanEXE", "GutsPunch" 
+"MegamanEXE", "MiniBomb" 
 "SearchmanEXE", "Dynamite" 
-"Fireman", "FireBall" 
+"Fireman", "FireArm" 
 "HarpNote", "Guitar Machine gun" 
 "Centaurman", "Centaur Warp"
 "FlashMan", "Flash Blink"
 "Iceman", "Ice Slasher"
-"GutsMan", "SuperArm"
+"GutsMan", "GutsPunch"
 "QuickMan", "Quick Boomerang"
 "Spark Mandrill", "Dash Punch" 
 "Vile", "Electric Shock Round"
 "ToadMan", "Acid Rain Generator" 
+"Bass", "Bass Buster" 
+"Sigma", "Blade Dash" 
 }
 
 
@@ -110,7 +118,7 @@ OptionString Class_AltfireInfo
 //-1,       "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
 "Megaman", "Perform a Quick Slide while \non the ground" 
 "SuperMegaman", "Launch a rocket popelled \nhoming fist, once launched \nyou'll have to wait for it \nto return." 
-//"AutoSTD"    , "Toss down a platform that \nspawns health pickup overtime." 
+"AutoSTD"    , "Toss down a platform that \nspawns health pickup overtime." 
 "MegamanX"  , "Dash through the air" 
 "Zero"      , "Execute a flaming uppercut \nwith your Z-saber, deals \nfire damage" 
 "Axl"       , "Perform a short dodge roll \nthat allows you to escape \ndamage." 
@@ -118,18 +126,20 @@ OptionString Class_AltfireInfo
 "Marino"    , "Execute a dive kick with \ngreat speed" 
 "Cinnamon"  , "Throw a syringe that injects \na deadly poison into enemies, \nthis deals critical damage \non already poisoned foes." 
 "Alia"      , "Toss a sticky bomb that \nunleashes shining explosions \nin a radial spread" 
-"MegamanEXE", "Execute a high impact \npunch that deals Break damage" 
+"MegamanEXE", "Toss a mini impact \ngrenade that bounces off walls, you \ncan launch yourself off the \nblast as well." 
 "SearchmanEXE", "Deploy a sticky, \nmotion sensing explosive, \nhas 3 charges." 
-"Fireman"   , "Lob a fireball that \nexplodes on impact, generating \nmeter on hit." 
+"Fireman"   , "Spew lingering flames \nthat deal damage and inflict \nburn, drains meter when used." 
 "HarpNote"  , "Launch Binding guitar \nstrings to inflict Stop on \neveryone in their path, afterwards \nyou can launch a barrage \nof piercing music notes at them." 
 "Centaurman", "Leave an image at your \nlocation that you can switch \nplaces with or remove"
 "FlashMan"  , "Travel across a set \ndistance almost instantaneously"
 "Iceman"    , "Launch a trio of ice \nslashers that inflict Frostbite."
-"GutsMan"   , "Pull up a huge rock \nfrom the ground that you can \nplace as cover, or throw as a \nprojectile"
+"GutsMan"   , "Execute a high impact \npunch that deals Break damage \nand can shatter Rocks."
 "QuickMan"  , "Launch a dense flurry \nof quick boomerants, each \nhit charges your \nAtomic Speed meter."
 "Spark Mandrill", "Fully commits to a \ndevestating punch that \nsends the foe flying, and the foes\ncollision with a solid will \nstun and do additional damage." 
 "Vile", "Fires a large projectile \nwith huge radius \nthat stuns opponents." 
 "ToadMan"  , "Places a generator that will  \nconstantly expel acid rain \naround itself. \nUpon taking damage it will stop \nfor a moment."
+"Bass"		, "Charges a buster attack \nuncharged fires 15 shots, \ncharged fires a single charge shot, \naiming down propels you upwards \nbased if it's uncharged or not, \nIt will also fire exploding bullets." 
+"Sigma"		, "Dash Forward to deal \ncollision damage followed by a \nwide Saber Slash, the slash can \nbe initiated early with mainfire." 
 }
 
 
@@ -137,7 +147,7 @@ OptionString Class_Ability
 {
 "Megaman", "Rush Call" 
 "SuperMegaman", "Super Booster" 
-//"AutoSTD" , "AutoSentry" 
+"AutoSTD" , "AutoSentry" 
 "MegamanX", "ChargeShot" 
 "Zero", "Rekkoha" 
 "Axl", "Strafe Barrage" 
@@ -152,11 +162,13 @@ OptionString Class_Ability
 "Centaurman", "Stop Arrow"
 "FlashMan", "FlashPoint"
 "Iceman", "FootHolder lift"
-"GutsMan", "Picket Booster"
+"GutsMan", "SuperArm"
 "QuickMan", "Atomic Speed"
 "Spark Mandrill", "Electric Spark" 
 "Vile", "Explosive Round" 
 "ToadMan", "Soothing Rain" 
+"Bass", "Booster Crescent Kick" 
+"Sigma", "Head Beams" 
 }
 
 OptionString Class_AbilityInfo
@@ -164,7 +176,7 @@ OptionString Class_AbilityInfo
 //-1,           "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
 "Megaman"    , "Call rush to a designated \narea, can offer a boost to \nthe you or a teammate." 
 "SuperMegaman"  , "Activate boosters to take \nflight, use again to turn \nthem off." 
-//"AutoSTD"        , "Deploy a sentry gun that \nfires screws at enemies in \nit's line of sight." 
+"AutoSTD"        , "Deploy a sentry gun that \nfires screws at enemies in \nit's line of sight." 
 "MegamanX"      , "Pull out your puster to \nexecute a charge shot. deals \narea damage and can be used \nfor blast jumping" 
 "Zero"          , "Strike the ground to \ncause a wave of energy beams to \nrain down in a cone before \nyou." 
 "Axl"           , "Pull out a pair of dual \npistols with high firerate and \nmovement, damage delt \nexpedites the cooldown on \ntactical roll." 
@@ -179,11 +191,13 @@ OptionString Class_AbilityInfo
 "Centaurman"    , "Draw a bow to fire a time \nstopping arrow at an opponent."
 "FlashMan"      , "Aim and launch a time stopping \ngrenade that stops all enemies \nwithin it's blast radius"
 "Iceman"        , "Spawn a footholder that can \nlift you up to higher places"
-"GutsMan"       , "Summon a picketman that will \nget to work in digging up damage \nboosting powerups, each \ngranting 50% more damage \nfor 5 seconds"
+"GutsMan"       , "Pull up a huge rock \nfrom the ground that you can \nplace as cover, or throw as a \nprojectile"
 "QuickMan"      , "Enter atomic speed, becoming \nfast and unshootable untill your \nmeter runs out."
 "Spark Mandrill" , "Unleashes a wave of \nelectric sparks that crawl \non the floor and split \nwith contact with a wall. " 
 "Vile" , "Launches an explosive \nwith great blast radius, \nThis bomb bounces less on walls, \nUse that to hit opponents below!"
 "ToadMan"      , "Soothing rain will pour around \nyourself, healing everyone \nin the region. " 
+"Bass"			, "Perform an upward-diagonal kick \nthat deals knockback and stun, \nthe final kick will propel the user \nforward and deal more knockback." 
+"Sigma"			, "Fires 4 projectiles \nwith each great speed and \ncontact damage but \nlacks in blast damage."
 }
 
 OptionString Class_PassiveInfo
@@ -191,7 +205,7 @@ OptionString Class_PassiveInfo
 //-1,           "--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n--------------------------- \n---------------------------"
 "Megaman"    , "---" 
 "SuperMegaman"  , "---" 
-//"AutoSTD"        , "---" 
+"AutoSTD"        , "---" 
 "MegamanX"      , "---" 
 "Zero"          , "---" 
 "Axl"           , "---" 
@@ -201,7 +215,7 @@ OptionString Class_PassiveInfo
 "Alia"          , "---" 
 "MegamanEXE"    , "---" 
 "SearchManEXE"    , "---" 
-"Fireman"       , "Gains meter from all forms \nof fire damage, used to \npower FireStorm" 
+"Fireman"       , "Poses a meter that builds \novertime and when you deal \nfire damage, grants damage \nresistance as it fills but when \nat max, you'll overheat \nand lose health while being \nunable to heal." 
 "HarpNote"      , "--- " 
 "Centaurman"    , "---"
 "FlashMan"      , "---"
@@ -211,4 +225,6 @@ OptionString Class_PassiveInfo
 "Spark Mandrill" , "---" 
 "Vile" , "---"
 "ToadMan" , "---" 
+"Bass" , "---"
+"Sigma" , "---" 
 }

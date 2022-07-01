@@ -1,0 +1,352 @@
+actor Ability1_Bass : AbilityMasterBase
+{
+Weapon.AmmoUse2 1
+Weapon.AmmoGive2 0
+Inventory.Pickupmessage "$PU_MEGABUSTER"
+Obituary "$OB_BassBuster"
+Tag "Bass Buster"
+weapon.ammotype2 "AbilityAmmo"
+inventory.icon "BUSTI"
++WEAPON.ALLOW_WITH_RESPAWN_INVUL
+States
+{
+
+Ready:
+BASB B 0 
+"####" B 1 Offset(0,110)
+"####" B 1 Offset(0,96)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,32)
+"####" B 0 A_GiveInventory("WeaponCharge")
+"####" B 0 A_PlaySoundEx("weapon/adaptercharge","Weapon")
+Ready1:
+BASB B 0 A_GiveInventory("WeaponCharge",1)
+"####" B 0 A_WeaponReady(WRF_ALLOWZOOM)
+"####" B 1 A_JumpIfInventory("WeaponCharge",34,"Ready2")
+goto Ready1
+Ready2:
+"####" B 0 A_JumpIfInventory("WeaponCharge",35,"Ready3")
+"####" B 0 A_GunFlash("Sound.BusterCharge")
+"####" B 0 A_GiveInventory("WeaponCharge",1)
+Ready3:
+"####" CCEE 1 A_WeaponReady(WRF_ALLOWZOOM)
+goto Ready3
+
+Deselect:
+TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
+TNT1 A 0 A_TakeInventory("WeaponCharge",999)
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+"####" C 1 A_Lower
+Loop
+
+
+Fire:
+BASB B 0 A_JumpIfInventory("WeaponCharge",34,"Fire2")
+"####" B 0 A_GiveInventory("BassBusterLoop",15)
+goto FireL
+FireL:
+"####" B 0 A_PlaySoundEx("weapon/Basshot","Weapon")
+"####" DCB 1 A_JumpIf(pitch>45 && pitch<=90, "FireT")
+"####" B 0 A_FireCustomMissile("BassBusterRound",frandom(-3,3),0,8,0,0,frandom(0,0))
+"####" B 0 A_TakeInventory("BassBusterLoop",1)
+"####" B 0 A_JumpIfInventory("BassBusterLoop",1,"FireL")
+goto FireA
+FireT:
+"####" DCB 1
+"####" B 0 ThrustThingZ(0,30,0,0)
+"####" B 0 A_FireCustomMissile("BassBusterRound2",frandom(-3,3),0,8,0,0,frandom(0,0))
+"####" B 0 A_TakeInventory("BassBusterLoop",1)
+"####" B 0 A_JumpIfInventory("BassBusterLoop",1,"FireL")
+goto FireA
+Fire2:
+"####" DCB 1 A_JumpIf(pitch>45 && pitch<=90, "FireT2")
+"####" B 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" B 0 A_FireCustomMissile("BassBusterRound3",0,0,8,0)
+goto FireA
+FireT2:
+"####" DCB 1
+"####" B 0 //ThrustThingZ(0,150,0,0) //No need, added proper blast jumping ~Bika
+"####" B 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+"####" B 0 A_FireCustomMissile("BassBusterRound4",0,0,8,0)
+goto FireA
+FireA:
+"####" B 0 A_TakeInventory("WeaponCharge",999)
+"####" B 1 Offset(0,32)
+"####" B 1 Offset(0,46)
+"####" B 1 Offset(0,58)
+"####" B 1 Offset(0,70)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,82)
+"####" B 1 Offset(0,96)
+"####" B 1 Offset(0,110)
+"####" B 0 A_GiveInventory("BassBusterCooldown")
+"####" B 0 A_GiveInventory("RefireBuffer")
+"####" B 0 A_Jump(256,"End")
+goto End
+
+zoom:
+BASK A 0 A_PlaySoundEx("weapon/BreakDash","Weapon")
+"####" A 0 A_GiveInventory("BoostKickFlag")
+"####" A 0 A_GiveInventory("DashSet_A")
+"####" ABBCDCDCD 1 A_GiveInventory("BoostKickFunc")
+"####" C 0 //A_ChangeVelocity(35,0,5,CVF_RELATIVE)
+"####" C 0 A_FireCustomMissile("CrescentKickProj",0,0,0,0)
+"####" A 0 A_TakeInventory("BoostKickFlag",9)
+"####" EF 2
+"####" C 0 A_GiveInventory("DashSetOff")
+"####" A 0 A_GiveInventory("BoosterCrescentKickCooldown")
+"####" A 0 A_GiveInventory("RefireBuffer")
+"####" A 0 A_Jump(256,"Ready1")
+goto Ready1
+
+NoAmmo:
+"####" "#" 1
+"####" "#" 0 A_Jump(256,"Ready1")
+Goto Ready1
+
+AltFire:
+"####" B 1
+End:
+"####" B 1 A_TakeInventory("AbilityActiveFlag",9)
+"####" B 0 
+Goto End
+
+	Sound.BusterCharge:
+		TNT1 A 9 A_PlaySoundEx("weapon/adapterchargeloop","Weapon",0)
+		TNT1 A 1 A_JumpIfInventory("WeaponCharge",1,"Sound.BusterCharge")
+        stop
+}
+}
+//====
+
+actor UseAbility1_Bass : CustomInventory
+{
+states
+{
+Use:
+WEA2 A 0 A_GiveInventory("BassBusterAbility",1)
+fail
+}
+}
+
+actor BassBusterAbility : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 A_JumpIfInventory("BassBusterCooldownItem",1,"Nope")
+TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
+stop
+
+Nope:
+TNT1 A 0 ACS_Execute(979,0)
+stop
+}
+}
+//=================
+//=================
+
+//[+]========================================================================[+]
+//--------------------------------|Projectiles |--------------------------------
+//[+]========================================================================[+]
+
+actor BassBusterRound : fastProjectileBase
+{
+Obituary "$OB_BassBuster"
+DamageType "BassBuster"
+Speed 128
+Damage (0)
+scale 2.5
+radius 10
+height 10
+States
+{
+Spawn:
+TNT1 A 0 
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+BASB A 1
+wait
+Death:
+AQBA L 0 A_Explode(10,64,0,0,32) //6, raise your hands if you too thought Bass Buster did 5.
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Spawnitemex("BassBusterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}
+
+
+/* =-= Bika's Notes -=-
+
+Bass is the creation of TheophileCaceres
+
+I opted to make it so the bullets always dealt splash regardless if you were aiming down or not, this is mostly at the
+interest of consistency, plus the radii is small enough to not be too big of a deal. that said, at 15 shots, a full volley
+of 24 rounds could effectively kill a 350 HP class since that's 360 total damage. so naturally I dialed down the damage
+a fair bit.
+
+
+
+*/
+actor BassBusterRound2 : BassBusterRound
+{}
+
+actor BassBusterRound3 : BassBusterRound
+{
+Translation "4:4=192:192", "192:192=193:193", "198:198=103:103"
+Speed 100
+Damage (0) 
+Radius 24
+Height 28
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+Spawn2:
+XSHO IJK 2 //A_SpawnItemEx("BassBusterTrail",-85,0,-momz,momx,momy,momz,0,9)
+loop
+Death:
+AQBA L 0 A_Explode(75,96,0,0,48) 
+AQBA L 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_Spawnitemex("BassBusterPuff2",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 ACS_NamedExecuteWithResult("Save_Boom")
+TNT1 A 1 A_RadiusGive("XChargeShot_Knockback",BlastThrustRad,RGF_PLAYERS)
+stop
+}
+}
+
+actor BassBusterRound4 : BassBusterRound3
+{}
+
+/* =-= Bika's Notes -=-
+Originally, the charge shot was worth 3 uncharge shots in damage. here i made it about worth around half of
+the normal volley.
+*/
+
+actor BassBusterLoop : Inventory {inventory.amount 1 inventory.maxamount 15}
+
+//[+]========================================================================[+]
+//--------------------------------|Effect Actors|-------------------------------
+//[+]========================================================================[+]
+actor BassBusterTrail : BasicExplosion
+{
+Obituary "$OB_BassBuster"
+damagetype "MegaBuster"
+States
+{
+Spawn:
+TNT1 A 0
+AQBA L 0 A_GiveInventory("ProjectileCode",1)
+TNT1 A 0 A_SpawnItemEx("BassBusterTrail_FX",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("BassBusterTrail_FX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("BassBusterTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("BassBusterTrail_FX1",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("BassBusterTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 1 
+stop
+}
+}
+
+actor BassBusterTrail_FX : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+CRBM A 0
+XSHO G 1
+//BSTG AAAAA 1 A_Fadeout
+stop
+}
+}
+
+actor BassBusterTrail_FX1 : FXActor_B
+{
+scale 2.5
+Alpha 0.9
+States
+{
+Spawn:
+BUST A 0
+XSHO H 1
+stop
+}
+}
+
+actor BassBusterPuff1 : FXActor_A
+{
+scale 2.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+SHFX LMNOP 1
+stop
+}
+}
+
+actor BassBusterPuff2 : FXActor_A
+{
+scale 3.5
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+SHFX LMNOP 1
+stop
+}
+}
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor BassBusterCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("BassBusterCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BassBusterCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor BassBusterCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("BassBusterCooldownItem",112)
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+TNT1 A 0 A_Spawnitemex("BassBusterCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor BassBusterCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 112 //3.2 seconds
+}
