@@ -100,6 +100,7 @@ actor DynamiteSpawner
 +SKYEXPLODE
 +ThruActors
 Obituary "$OB_DYNAMITE"
+DamageType "Dynamite"
 radius 8
 height 8
 scale 2.5
@@ -130,6 +131,8 @@ actor Dynamite
 +NOGRAVITY
 +NOCLIP
 +LOOKALLAROUND
+Obituary "$OB_DYNAMITE"
+DamageType "Dynamite"
 scale 2.5
 radius 8
 height 8

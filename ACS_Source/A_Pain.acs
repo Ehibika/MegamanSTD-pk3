@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 42
+#LIBDEFINE PAINCOUNT 51
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -57,7 +57,7 @@ str PainRecord[PAINCOUNT][2] = {
 /*24*/{"LightWaveCannon",ELM_EXPLOSION},
 /*25*/{"GuitarMachineGun",ELM_DONTSTOP},
 /*26*/{"GuitarMachineGun2",ELM_DONTSTOP},
-/*27*/{"PulseSong",ELM_DONTSTOP},
+/*27*/{"PulseSong",ELM_DONTSTOP|ELM_EXPLOSION},
 /*28*/{"DashPunchWall",ELM_BREAK},
 /*29*/{"DashPunch",ELM_BREAK},
 /*30*/{"ElectricSparkBoss",ELM_ELEC},
@@ -66,13 +66,21 @@ str PainRecord[PAINCOUNT][2] = {
 /*33*/{"HawkPrecisionBuster",ELM_ELEC},
 /*34*/{"ThriceGun",ELM_ICE},
 /*35*/{"IceSlasherBoss",ELM_ICE},
-/*36*/{"FlashPoint",ELM_EUCLID},
+/*36*/{"FlashPoint",ELM_EUCLID|ELM_EXPLOSION},
 /*37*/{"StopArrow",ELM_EUCLID},
 /*38*/{"AbsoluteFreeze",ELM_ICE},
-/*39*/{"AbsoluteFreezeDirect",ELM_ICE},
-/*40*/{"TurboLauncher",ELM_FIRE},
-/*41*/{"Roaster",ELM_FIRE},
-
+/*39*/{"AbsoluteFreezeDirect",ELM_ICE|ELM_EXPLOSION},
+/*40*/{"TurboLauncher",ELM_FIRE|ELM_EXPLOSION},
+/*41*/{"Roaster",ELM_FIRE|ELM_EXPLOSION},
+/*42*/{"XChargeShot",ELM_EXPLOSION},
+/*43*/{"ElectricShockRound",ELM_ELEC|ELM_EXPLOSION},
+/*44*/{"ExplosiveRound",ELM_FIRE|ELM_EXPLOSION},
+/*45*/{"MiniBomb",ELM_EXPLOSION},
+/*46*/{"BassBuster",ELM_EXPLOSION},
+/*47*/{"FireStormBoss",ELM_FIRE|ELM_EXPLOSION},
+/*48*/{"ShiningRayBomb",ELM_EXPLOSION},
+/*49*/{"HeadBeams",ELM_EXPLOSION},
+/*50*/{"Dynamite",ELM_EXPLOSION},
 };
 
 

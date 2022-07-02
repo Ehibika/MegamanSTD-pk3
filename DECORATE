@@ -141,6 +141,9 @@
 #include "actors/Classes/Sigma/BladeDash.txt"
 #include "actors/Classes/Sigma/HeadBeams.txt"
 
+#include "actors/Classes/Knightman/KnightmanClass.txt"
+#include "actors/Classes/Knightman/KnightShield.txt"
+
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

@@ -143,6 +143,7 @@ PROJECTILE
 +FORCEXYBILLBOARD
 +BRIGHT
 //-NOGRAVITY
+DamageType "ShiningRayBomb"
 Obituary "$OB_SHININGRAYBOMB"
 Speed 70
 Damage (25)
