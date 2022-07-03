@@ -91,7 +91,7 @@ stop
 //=================
 Const Int SoothingRainAOE = 256;
 Const Int SR_AOE = SoothingRainAOE;
-Const int RGI_SoothingRain = 4;
+Const int RGI_SoothingRain = 7;
 Const int SoothingRain_MinHeal = 5;
 Const int SoothingRain_MaxHeal = 15;
 
@@ -263,7 +263,7 @@ actor SoothingRainHealer//: BasicHelper
 }
 
 
-actor RadiusGiveItem_4 : CustomInventory
+actor RadiusGiveItem_7 : CustomInventory
 {
 States
 {

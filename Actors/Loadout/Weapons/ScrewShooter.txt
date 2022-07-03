@@ -248,7 +248,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 AA 0 A_SpawnItemEx("HelpingHandBeamFX_1",random(-24,24),random(-32,32),random(30,34),0,0,Random(1,4))
+TNT1 AA 0 A_SpawnItemEx("HealFX3",random(-24,24),random(-32,32),random(30,34),0,0,Random(1,4))
 TNT1 A 0 A_PlaySoundEx("item/energyup","SoundSlot7")
 TNT1 A 0
 stop

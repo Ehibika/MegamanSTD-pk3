@@ -113,7 +113,6 @@ loop
 Pickup:
 TNT1 A 1 A_ChangeFlag("Spectral",1)
 TNT1 A 0 A_GiveInventory("AtomicSpeed_Evade")
-TNT1 A 0 A_SpawnItemEx("AtomicSpeedWatcher")
 TNT1 A 0 ACS_NamedExecuteAlways("DetectFlicker",0)
 
 stop

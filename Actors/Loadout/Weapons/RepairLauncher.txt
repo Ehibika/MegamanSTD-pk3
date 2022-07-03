@@ -115,6 +115,8 @@ actor RepairLauncherCST : PowerupGiver
 Powerup.Duration 20
 powerup.type "ConShotTimer"
 }
+
+actor RepairLauncherhealDelay : Powerup {inventory.amount 1 Powerup.Duration 7}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]

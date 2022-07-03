@@ -59,7 +59,7 @@ DW18 A 1
 "####" E 1 OffSet(1,31)
 "####" E 1 OffSet(-43,43)
 "####" E 1 OffSet(-102,53)
-"####" A 0 A_GiveInventory("MeleeSwingBuffer")
+"####" A 0 //A_GiveInventory("MeleeSwingBuffer")
 TNT1 A 17
 "####" A 0 A_Jump(256,"End")
 goto End

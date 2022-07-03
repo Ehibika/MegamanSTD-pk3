@@ -19,7 +19,6 @@ goto Fire
 Fire:
 KINH D 3 A_PlaySoundEx("misc/kingchop","Weapon")
 KINH H 1 A_FireCustomMissile("whirlwindWatcher",0,0,0,0,0,0)
-KINH H 0 A_GiveInventory("BlueRageSwingGuard",1)
 KINH H 1 OffSet(-40,34)
 KINH H 1 OffSet(-82,36)
 KINH H 1 OffSet(-126,38)

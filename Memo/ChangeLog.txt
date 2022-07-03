@@ -2,12 +2,11 @@
 
 [+]====================|Alpha V.10|========================[+]
 
-Various changes from V9 have been rolled back, including most of the nerfs and cooldown changes
-
 ==|BugFixes|==
 
 ==|Mechanic Changes|==
 [+] "Weight" is now a class specific attribute, taking over the function of the "Heavyweight" and "Lightweight" properties.
+[+] added a new "Blind" status, which causes the victim to be unable to see players
 
 ==|Property Changes|==
 [+] Team Medic recovery rate increased from 7 per second to 14 per second
@@ -53,6 +52,7 @@ Various changes from V9 have been rolled back, including most of the nerfs and c
 
 [+]Harpnote[+]
 [+] GuitarMachineGun damage reduced from 25 > 10
+[+] Pulse song now inflicts blind instead of the damage debuff
 
 [+]Fireman[+]
 [+] Class Passive now applies Damage resistance as meter fills
