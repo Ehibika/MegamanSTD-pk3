@@ -144,6 +144,10 @@
 #include "actors/Classes/Knightman/KnightmanClass.txt"
 #include "actors/Classes/Knightman/KnightShield.txt"
 
+
+#include "actors/Classes/BrightMan/BrightManClass.txt"
+#include "actors/Classes/BrightMan/BrightShock.txt"
+#include "actors/Classes/BrightMan/BrightBulb.txt"
 //Loadout
 #include "Actors/Loadout/Weapons/BasicBuster.txt"
 #include "Actors/Loadout/Weapons/BasicRifle.txt"

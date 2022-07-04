@@ -1,0 +1,39 @@
+Actor BrightMan : ClassBase 
+{
+Player.DisplayName "BrightMan"
+Player.SoundClass "megaman"
+Health 250
+Player.MaxHealth 250
+Player.JumpZ 10
+
+Player.Startitem "IsBrightMan"
+Player.Startitem "UseAbility1_BrightMan"
+Player.Startitem "UseAbility2_BrightMan"
+
+Player.Startitem "PRO_BusterMastery"
+Player.Startitem "PRO_ElecResistance"
+//Player.Startitem "Pro_Hefty"
+
++NOSKIN
+States
+{
+Spawn: 
+BRIG A 0
+BRIG B 1 
+BRIG A 1
+GoTo Spawn+2
+See:
+BRIG BCDE 5
+GoTo Spawn+1
+Missile:
+BRIG F 5
+BRIG G 4
+GoTo Spawn+2
+PainFix:
+BRIG H 0 
+GoTo PainFrames
+}
+}
+
+
+Actor IsBrightMan : Once{}

@@ -1690,3 +1690,52 @@ script "MSTD_istargetclient" (void) CLIENTSIDE
 		SetResultValue(0);
 	}
 }
+
+
+script "CSLT_flashstopperlight" (int maxRange)
+{
+	if(maxRange == 0){terminate;}
+    maxRange = maxRange << 16;
+
+	int targetTID;
+	int angle;
+	int targetAngle;
+	int xDist, yDist, Dist;
+	int userTID;
+	int userTeam = -1;
+	int userCount = 0;
+	int PreBlind = CheckInventory("BlindMark");
+	int BlindFactor;
+	int FiringPlayer= ACS_NamedExecuteWithResult("core_gettarget");
+	int PlayersTeam = GetPlayerInfo(FiringPlayer-1000, PLAYERINFO_TEAM);
+
+	for(int p = 0;p < GetMaxEntities(); p++)
+	{
+		if(PlayersTeam == GetPlayerInfo(p, PLAYERINFO_TEAM)
+			|| FiringPlayer == P+1000
+			||!PlayerInGame(p))
+		{
+			continue;
+		}
+		targetTID = p+1000;
+        xDist = abs(GetActorX(0)-GetActorX(targetTID)) < maxRange;
+        yDist = abs(GetActorY(0)-GetActorY(targetTID)) < maxRange;
+		if(xDist && yDist && CheckSight(0,targetTID,0))//&& userTID != targetTID
+		{	
+			angle = VectorAngle(GetActorX(0) - GetActorX(targetTID), GetActorY(0) - GetActorY(targetTID)) + 1.0;
+            targetAngle = GetActorAngle(targetTID) + 1.0;
+
+			if(angle-0.15 < targetAngle && angle+0.15 > targetAngle) {
+			    userCount++;					
+				GiveActorInventory(targetTID, "BlindStatusProc", 1);
+                //if(!PreBlind)GiveActorInventory(targetTID, "CSLT_Blind", 1);
+            }
+			else
+				{
+				//GiveActorInventory(targetTID, "BrightBlind", 1);
+				//if(!PreBlind)GiveActorInventory(targetTID, "CSLT_QuickBlind", 1);
+				}
+		}
+	}
+	SetResultValue(userCount); // Returns amount of players caught in the pull
+} // end of core_flashstopperlight
