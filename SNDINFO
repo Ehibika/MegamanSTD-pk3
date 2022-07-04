@@ -110,6 +110,14 @@ weapon/centaurvanish CENPORT
 weapon/centaurarrowfly CENARFLY
 weapon/centaurcharge CENCHARG
 
+//KnightMan
+rfclass/knightshot KNIGSHOT
+rfclass/knightreturn KNIRETRN
+rfclass/knightgrab BOOMERNG
+rfclass/knightquake quake
+rfclass/knightswing KGSWIN
+rfclass/knightlaunch BURNDOWN
+
 Misc/Bonk BONK1
 Misc/WallKick XLAND
 

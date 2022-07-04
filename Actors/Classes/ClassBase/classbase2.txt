@@ -264,8 +264,25 @@ pain.TossShield:
 "----" H 0 A_GiveInventory("TossShieldProtect",1)
 Goto Pain+1
 
+Pain.AquaBuster:
+"----" H 0 //A_Giveinventory("AquaBusterSOAKInitiate")
+"----" H 0
+Goto Pain+1
 
-
+Pain.AncientRelicEdge:
+"----" H 0 A_GiveInventory("AncientRelicEdgeProtect", 1)
+"----" H 0 A_Giveinventory("BurnStatusFastBuild")
+Goto Pain+1
+Pain.AncientRelicTip:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+"----" H 0 A_GiveInventory("AncientRelicTipProtect", 1)
+"----" H 0 A_Giveinventory("BurnStatusProc")
+Goto Pain+1
+Death.AncientRelicTip:
+"----" H 0 A_SpawnItemEX("PowerStrikeFX2",0,0,28)
+Death.AncientRelicEdge:
+"----" H 0 
+Goto Death
 
 
 Pain.GutsPunch:
@@ -454,6 +471,15 @@ Goto Pain+1
 pain.CrescentKick:
 "----" H 0 A_GiveInventory("StunStatusProc",1)
 "----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,70)
+Goto Pain+1
+
+Pain.KnightWrecker:
+"----" H 0 A_GiveInventory("StunStatusProc",1)
+"----" H 0 ACS_NamedExecuteAlways("HitKnockUp",0,5,1)
+Goto Pain+1
+Pain.KnightWreckerSwing:
+"----" H 0 A_GiveInventory("KnightWreckerSwingProtect",1)
+"----" H 0 ACS_NamedExecuteAlways("HitKnockBack",0,45)
 Goto Pain+1
 }
 }

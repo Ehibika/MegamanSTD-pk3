@@ -530,6 +530,15 @@ If(StrCmp(GetWeapon(),MasterWepList[ThisWeapon][1])==0){Return 1;}
 return 0;
 }
 
+Function bool CheckForRecharge (str PainType)
+{
+if(!CheckProp(MasterProPList[32][PROP_NAME])){Return 0;}
+/*
+if this damage is Elec based, return true.
+*/
+Return CheckForElement(PainType,ELM_ELEC);
+}
+
 
 Script "BladeParryWarper" (void) CLIENTSIDE
 {

@@ -73,6 +73,8 @@ OptionValue WepOptionsA
 36, "Turbo Launcher \c[MenuRed]:Fire:\c[Gold]:Lite:"
 37, "Roaster \c[MenuRed]:Fire:"
 38, "Toss Shield"
+39, "Ancient Relic\c[MenuRed]:Fire: \c[DarkGray]:Heavy:"
+40, "Aqua Buster \c[MenuBlue]:Aqua:"
 }
 
 OptionValue WepOptionsB
@@ -116,6 +118,8 @@ OptionValue WepOptionsB
 36, "Turbo Launcher"
 37, "Roaster"
 38, "Toss Shield"
+39, "Ancient Relic"
+40, "Aqua Buster"
 }
 
 OptionValue WepOptions_Busters
@@ -128,6 +132,7 @@ OptionValue WepOptions_Busters
 22, "Atomic Buster \c[MenuRed]:Fire:"
 26, "MediBuster \c[MenuGreen]:Repair:"
 34, "HawkPrecisionBuster \c[MenuYellow]:Elec:"
+40, "Aqua Buster \c[MenuBlue]:Aqua:"
 }
 
 
@@ -177,6 +182,7 @@ OptionValue WepOptions_Melee
 20, "Triangular Saber"
 31, "Replislasher \c[Teal]:Wind:"
 38, "Toss Shield"
+39, "Ancient Relic\c[MenuRed]:Fire: \c[DarkGray]:Heavy:"
 }
 
 
@@ -234,6 +240,8 @@ OptionValue WepDescA
 36, "Lightweight launcher \nthat fires fast missiles."
 37, "Chargup launcher that \nfires superheated waves, \ncrits on burning foes."
 38, "A throwable shield \nthat can be heald \nto block shots"
+39, "Lobs Blobs of Water \nthat Deal Splash Damage"
+40, "Hefty, fiery sword \nthat burns and crits \non burns"
 }
 
 OptionValue WepDescB
@@ -250,6 +258,7 @@ OptionValue WepDescB
 19, "poisons a target through successive \nhits, deals critical damage to \npoisoned targets as well"
 20, "shoots Proxy mines that explode \nwhen enemies are in range, \nup to two can be out per person."
 21, "Encase an ally in a healing \nshield that reduces a \nsingle hit by half."
+
 }
 
 

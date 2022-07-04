@@ -343,7 +343,7 @@ int cpn = ConsolePlayerNumber();
 bool cvarAndServer = GetUserCvar(cpn,"trill_dm_damagenumbers") && NOSPECTATORMODE;
 bool serverAndCondition = GetUserCvar(cpn,"trill_dm_damagenumbers") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
 bool combined = cvarAndServer || serverAndCondition;
-if(combined){
+if(combined && !CheckActorInventory(cpn+1000,"BlindMark")){
 	int newTID = UniqueTID();
 	SpawnForced("DamageNumberWatcher",GetActorX(0),GetActorY(0),GetActorZ(0),newTID);
 	SetUserVariable(newTID,"user_amount",arg1);
@@ -358,7 +358,7 @@ int cpn = ConsolePlayerNumber();
 bool cvarAndServer = GetUserCvar(cpn,"trill_dm_healnumbers") && NOSPECTATORMODE;
 bool serverAndCondition = GetUserCvar(cpn,"trill_dm_healnumbers") && PlayerIsSpectator(cpn)==1 && !NOSPECTATORMODE;
 bool combined = cvarAndServer || serverAndCondition;
-if(combined){
+if(combined && !CheckActorInventory(cpn+1000,"BlindMark")){
 	switch(type){
 		case 1:
 			SetInventory("DM_NumberAmount",arg1);

@@ -86,11 +86,6 @@ damagefactor "BeamRapireTip", 0.3
 damagefactor "TriangularBladeEdge", 0.3
 damagefactor "TriangularBladeTip", 0.3
 
-//Break Weakness
-damagefactor "DrillHead", 10.0
-damagefactor "CrushingSpray", 10.0
-damagefactor "SuperAdaptor", 10.0
-
 
 translation "0:255=0:255"
 
@@ -118,6 +113,7 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode")
+TNT1 A 0 A_GiveInventory("BreakWeakness")
 TNT1 D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,2,args[0])
 TNT1 A 1 A_SpawnItemEX("RockCubeVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
 TNT1 A 0 A_Stop

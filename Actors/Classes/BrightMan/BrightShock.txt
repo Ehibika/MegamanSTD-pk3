@@ -3,10 +3,10 @@ actor Ability1_BrightMan : AbilityMasterBase
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-Obituary "$OB_XCHARGESHOT"
+Obituary "$OB_BRIGHTSHOCK"
 Tag "BrightShock"
 weapon.ammotype2 "AbilityAmmo"
-inventory.icon "BUSTI"
+inventory.icon "TBOLSI"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {
@@ -40,7 +40,7 @@ Fire:
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,82)
 "####" A 1 Offset(0,110)
-"####" A 0 A_GiveInventory("XChargeShotCooldown")
+"####" A 0 A_GiveInventory("BrightShockCooldown")
 "####" A 0 A_GiveInventory("RefireBuffer")
 "####" A 0 A_Jump(256,"End")
 goto End
@@ -70,17 +70,17 @@ actor UseAbility1_BrightMan : CustomInventory
 states
 {
 Use:
-WEA2 A 0 A_GiveInventory("XChargeShotAbility",1)
+WEA2 A 0 A_GiveInventory("BrightShockAbility",1)
 fail
 }
 }
 
-actor XChargeShotAbility : CustomInventory
+actor BrightShockAbility : CustomInventory
 {
 states
 {
 Pickup:
-TNT1 A 0 A_JumpIfInventory("XChargeShotCooldownItem",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("BrightShockCooldownItem",1,"Nope")
 TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,1)
 stop
 
@@ -100,6 +100,9 @@ Const int BrightShock_MinRad = 96;
 
 actor BrightShockOrb 
 {
+var int user_PierceRipper[1];
+var int user_RippedPlayer[64];
+
 +MISSILE
 -SHOOTABLE
 +NOGRAVITY
@@ -111,10 +114,10 @@ actor BrightShockOrb
 Health 500
 Painchance 250
 
-Obituary "$OB_XCHARGESHOT"
-DamageType "XChargeShot"
+Obituary "$OB_BRIGHTSHOCK"
+DamageType "BrightShock"
 Speed 24
-Damage (5)
+Damage (50)
 scale 4.5
 radius 20
 height 40
@@ -142,7 +145,9 @@ Goto Spawn2
 
 Detonate:
 AQBA L 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_Explode(100+(500-Health),BrightShock_Rad,0,0,BrightShock_MinRad)
+AQBA L 0 A_PlaySoundEx("weapon/lightningbolt","Weapon")
+TNT1 A 0 A_Spawnitemex("BrightShockExplosion",0,0,height/2,0,0,0,0,SXF_TRANSFERTRANSLATION,0,500-Health)
+//A_Explode(100+(500-Health),BrightShock_Rad,0,0,BrightShock_MinRad)
 TNT1 A 0 A_Spawnitemex("BrightShockAOEFX",0,0,height/2,0,0,0,0,SXF_TRANSFERTRANSLATION)
 TNT1 A 0 A_Spawnitemex("BrightShockPuff",0,0,height/2,0,0,0,0,SXF_TRANSFERTRANSLATION)
 
@@ -150,16 +155,27 @@ goto Death
 
 Death:
 AQBA L 0 A_GiveInventory("ProjectileDCode",1)
-TNT1 A 0 A_Spawnitemex("XChargeShotPuff1",0,0,height/2,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 0 A_Spawnitemex("BrightShockPuff",0,0,height/2,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
 
-
+actor BrightShockExplosion : BasicExplosion
+{
+Obituary "$OB_BRIGHTSHOCK"
+damagetype "BrightShock"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(100+(TID),BrightShock_Rad,0,0,BrightShock_MinRad)
+stop
+}
+}
 
 actor BrightShockTrail : BasicExplosion
 {
-Obituary "$OB_XCHARGESHOT"
+Obituary "$OB_BRIGHTSHOCK"
 damagetype "MegaBuster"
 States
 {
@@ -170,10 +186,10 @@ AQBA L 0 A_GiveInventory("ProjectileCode",1)
 TNT1 A 0 A_SpawnItemEx("BrightShockTrail_FX",0,0,0,momx,momy,momz,0,9)
 
 /*
-TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
-TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
-TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
-TNT1 A 0 A_SpawnItemEx("XChargeShotTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+TNT1 A 0 A_SpawnItemEx("BrightShockTrail_FX",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
+TNT1 A 0 A_SpawnItemEx("BrightShockTrail_FX1",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
+TNT1 A 0 A_SpawnItemEx("BrightShockTrail_FX1",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
+TNT1 A 0 A_SpawnItemEx("BrightShockTrail_FX1",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
 TNT1 A 1 
 */
 stop
@@ -293,4 +309,53 @@ Death:
 TNT1 A 0 
 stop
 }
+}
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor BrightShockCooler : WatcherBase // Coolers are a type of watcher actor that handle weapon cooldowns
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("BrightShockCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BrightShockCooldownItem",1,"Spawn")
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor BrightShockCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_Giveinventory("BrightShockCooldownItem",122)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Spawnitemex("BrightShockCooler")
+stop
+Nope:
+//BUST B 0 A_PlaySoundEx("weapon/heat3","Item")
+TNT1 A 0
+stop
+}
+}
+
+actor BrightShockCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 122
 }

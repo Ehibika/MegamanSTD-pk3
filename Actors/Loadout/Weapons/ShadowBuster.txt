@@ -108,6 +108,8 @@ actor ShadowBusterRound : ProjectileBase
 {
 +USEBOUNCESTATE
 +BOUNCEONWALLS
+var int user_PierceRipper[2];
+var int user_RippedPlayer[64];
 Obituary "$OB_SHADOWBUSTER"
 DamageType "ShadowBuster"
 Speed 32

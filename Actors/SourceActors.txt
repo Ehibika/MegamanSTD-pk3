@@ -545,6 +545,17 @@ actor EvasionState : BasePowerPro
     */
 }
 
+actor BreakWeakness : BasePowerPro 
+{
+damagefactor "DrillHead", 10.0
+damagefactor "CrushingSpray", 10.0
+damagefactor "SuperAdaptor", 10.0
+damagefactor "KnightWrecker", 10.0
+damagefactor "GutsPunch", 10.0
+damagefactor "KnightWreckerSwing", 10.0
+damagefactor "DashPunch", 10.0
+}
+
 
 Actor WallJumperX
 {

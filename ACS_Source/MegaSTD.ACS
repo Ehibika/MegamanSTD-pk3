@@ -16,6 +16,7 @@ script "MSTD_HitEvents" (int type, int arg1, int arg2) EVENT
 if(CheckForIgnore(arg2)){Terminate;}
 
 int Damage = arg1;
+int LifeSteal;
 str PainType = arg2;
 int SourceTID;
 int VictimTID = ActivatorTID();
@@ -26,23 +27,6 @@ bool CritHit,Assassin,FireCrit,PoisonCrit,FrostBiteCrit,Guts,Determined,Marksman
 int DB_Determined,DB_Guts,DB_Marksman;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
-
-//===============|Ripper Hit limiter (By Trillster)|===============
-if((ClassifyActor(0) & ACTOR_PLAYER) && GetActorProperty(0,APROP_Health) > 0) {
-	int hittedNum = PlayerNumber();
-	
-	SetActivator(0,AAPTR_DAMAGE_INFLICTOR);
-	
-	int pierceRipperTimes = returnActorVarArraySize(0, "user_PierceRipper");
-	if(pierceRipperTimes > 0) {
-		int timesRipped = GetUserArray(0, "user_RippedPlayer", hittedNum);
-		if(timesRipped >= pierceRipperTimes) {
-			SetResultValue(0);
-		} else {
-			SetUserArray(0, "user_RippedPlayer", hittedNum, timesRipped + 1);
-		}
-	}
-}
 
 //===============|Check for damage properties on the opposing player|===============
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
@@ -96,6 +80,9 @@ if(IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == true){if(CheckForS
 //====|Heater/Refrigerate|======
 if(CheckForHeater(arg2)){GiveActorInventory(VictimTID,"BurnStatusFastBuild",1);}
 if(CheckForREfrigerate(arg2)){GiveActorInventory(VictimTID,"FrostbiteStatusFastBuild",1);}
+
+//====|Recharge|======
+if(CheckForRecharge(arg2)){LifeSteal = DamageModify(Damage,0.5);}
 
 //===============|Check for damage properties on the recieving player|===============
 SetActivator(0, AAPTR_DAMAGE_TARGET);
@@ -173,8 +160,39 @@ SetActivator(0, AAPTR_DAMAGE_SOURCE);
 if(CheckInventory("IsQuickMan")){GiveInventory("AtomicSpeedResource",(arg1*0.3>>16)+1);GiveInventory("AtomicSpeedUp",1);}
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 
-if(Damage>0){TakeInventory("HealRampPower",9);GiveInventory("HealRampPower",1);}
-if(GetCvar("MSTD_DDLoaded")){ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);}
+//===============|Ripper Hit limiter (By Trillster)|===============
+if((ClassifyActor(0) & ACTOR_PLAYER) && GetActorProperty(0,APROP_Health) > 0) {
+	int hittedNum = PlayerNumber();
+	
+	SetActivator(0,AAPTR_DAMAGE_INFLICTOR);
+	
+	int pierceRipperTimes = returnActorVarArraySize(0, "user_PierceRipper");
+	if(pierceRipperTimes > 0) {
+		int timesRipped = GetUserArray(0, "user_RippedPlayer", hittedNum);
+		if(timesRipped >= pierceRipperTimes) {
+			Damage = 0;//SetResultValue(0);
+		} else {
+			SetUserArray(0, "user_RippedPlayer", hittedNum, timesRipped + 1);
+		}
+	}
+}
+SetActivator(0, AAPTR_DAMAGE_TARGET);
+
+
+
+if(LifeSteal>0 && (!CheckInventory("PoisonMark")))
+	{
+	SetActivator(0, AAPTR_DAMAGE_SOURCE);
+	HealThing(LifeSteal,GetActorProperty(0,APROP_SPAWNHEALTH));
+	SetActivator(0, AAPTR_DAMAGE_TARGET);
+	}
+
+if(Damage>0)
+	{
+	TakeInventory("HealRampPower",9);GiveInventory("HealRampPower",1);
+	if(GetCvar("MSTD_DDLoaded")){ACS_NamedExecuteAlways("DamageNumbers_Trigger_11",0,type,Damage,SourceTID);}
+	}
+
 SetResultValue(Damage);
 
 //==Speedrunner==

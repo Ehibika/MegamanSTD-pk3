@@ -143,6 +143,7 @@
 
 #include "actors/Classes/Knightman/KnightmanClass.txt"
 #include "actors/Classes/Knightman/KnightShield.txt"
+#include "actors/Classes/Knightman/KnightWrecker.txt"
 
 
 #include "actors/Classes/BrightMan/BrightManClass.txt"
@@ -204,6 +205,9 @@
 #include "Actors/Loadout/Weapons/TurboLauncher.txt"
 #include "Actors/Loadout/Weapons/Roaster.txt"
 #include "Actors/Loadout/Weapons/TossShield.txt"
+
+#include "Actors/Loadout/Weapons/AquaBuster.txt"
+#include "Actors/Loadout/Weapons/AncientRelic.txt"
 
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"

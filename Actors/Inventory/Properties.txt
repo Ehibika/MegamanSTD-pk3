@@ -36,6 +36,7 @@ actor Pro_Refrigerate : Once {}
 actor Pro_EnergyBalancer : Once {}
 actor Pro_ReserveTank : BackpackItem {}
 actor Pro_Specialist : Once {}
+actor Pro_Recharge : Once {}
 //================================
 
 

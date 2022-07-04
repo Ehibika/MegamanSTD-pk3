@@ -64,6 +64,8 @@ OptionValue WepInto_Class
 36, "\cf:Launcher::\cjBallistic\cf:"
 37, "\cf:Launcher::\cjEnergy\cf:"
 38, "\cf:Melee::\cjToss Shield\cf:"
+39, "\cf:Melee::\cjSaber\cf:"
+40, "\cf:Buster::\cjTrick Shot\cf:"
 }
 
 OptionValue WepInto_Category
@@ -106,6 +108,9 @@ OptionValue WepInto_Category
 36, "\c[MenuRed]:Fire:"
 37, "\c[MenuRed]:Fire:"
 38, "\c[grey]:Null:"
+39, "\c[MenuRed]:Fire: \c[DarkGray]:Heavy:"
+40, "\c[MenuBlue]:Aqua:"
+
 }
 
 OptionValue WepInto_Damage
@@ -149,6 +154,9 @@ OptionValue WepInto_Damage
 36, "\c[menuorange] ***"
 37, "\c[MenuRed] ****"
 38, "\c[menuorange] **"
+39, "\c[MenuRed] *****"
+40, "\c[menuorange] ***"
+
 }
 
 OptionValue WepInto_Rate
@@ -192,6 +200,8 @@ OptionValue WepInto_Rate
 36, "\c[menuorange] ***"
 37, "\c[menuyellow] *"
 38, "\c[menuorange] **"
+39, "\c[menuorange] **"
+40, "\c[menuorange] ***"
 }
 
 OptionValue WepInfo_Desc
@@ -236,6 +246,8 @@ OptionValue WepInfo_Desc
 36, "A lightweight Ballistic type \nlauncher that fires missiles at \na faster speed and rate than \nother launchers."
 37, "Energy Type launcher that Charges \nup to fire heatwaves that \ndeal critical damage to burning\n Targets."
 38, "A tactical, throwable shield \nthat can be held first to block \nshots, and thrown like a \nboomerang afterwards."
+39, "A Huge, Heavy Saber type weapon \nwith the power of fire, it's \nswings although slow, can \ninflict burns and crit on \nburning foes."
+40, "Buster Class weapon that lobs \ngravity effected blobs of water \nthat deal splash damage within a small area."
 }
 
 //=================================
@@ -301,6 +313,7 @@ OptionValue PropertyList
 29, "Energy Balancer"
 30, "Reserve Tank"
 31, "Specialist"
+32, "Recharge"
 }
 
 OptionValue Propertyinfo
@@ -345,6 +358,7 @@ OptionValue Propertyinfo
 29, "Passively reloads your offhand weapon"
 30, "Increases all weapon ammo capacity"
 31, "Improves the movespeed and power \nof your Slot A Weapon while weakening the stats of your Slot B weapon"
+32, "Dealing Elec damage will return \nhalf of the damage to you as health."
 }
 
 

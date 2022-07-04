@@ -204,11 +204,6 @@ actor Core_AutoSentry : BasicDeployable
 speed 1
 DamageFactor "Sentryshot", 0
 
-//Break Weakness
-damagefactor "DrillHead", 10.0
-damagefactor "CrushingSpray", 10.0
-damagefactor "SuperAdaptor", 10.0
-
 scale 1.5
 height 55
 Radius 24
@@ -221,6 +216,7 @@ states
 
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_GiveInventory("BreakWeakness")
 Goto Spawn.Basic
 
 Spawn.Basic:

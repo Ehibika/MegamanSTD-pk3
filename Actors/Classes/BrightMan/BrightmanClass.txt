@@ -12,7 +12,9 @@ Player.Startitem "UseAbility2_BrightMan"
 
 Player.Startitem "PRO_BusterMastery"
 Player.Startitem "PRO_ElecResistance"
-//Player.Startitem "Pro_Hefty"
+Player.Startitem "Pro_Recharge"
+
+Player.Startitem "BrightBulb_Charges",2
 
 +NOSKIN
 States

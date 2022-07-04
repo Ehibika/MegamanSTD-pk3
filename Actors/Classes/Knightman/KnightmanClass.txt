@@ -2,16 +2,16 @@ Actor KnightMan : ClassBase
 {
 Player.DisplayName "KnightMan"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 350
+Player.MaxHealth 350
 Player.JumpZ 10
 
 Player.Startitem "IsKnightMan"
 Player.Startitem "UseAbility1_KnightMan"
 Player.Startitem "UseAbility2_KnightMan"
 
-Player.Startitem "PRO_Marksman"
-Player.Startitem "PRO_EuclidResistance"
+Player.Startitem "PRO_MeleeMastery"
+Player.Startitem "PRO_BladeParry"
 Player.Startitem "Pro_Hefty"
 
 Player.Startitem "KnightManSetup"
@@ -24,15 +24,21 @@ States
 Spawn: 
 KNIM A 0
 KNIM B 1 
-KNIM A 1
+KNIM A 1 A_JumpIfInventory("KnightSwingAnimation",1,"Swing")
 GoTo Spawn+2
 See:
 KNIM BCDE 5
 GoTo Spawn+1
 Missile:
-KNIM F 5
+KNIM F 1 
+KNIM F 5 A_JumpIfInventory("KnightSwingAnimation",1,"Swing")
 KNIM G 4
-GoTo Spawn+2
+Goto Spawn+2
+Swing:
+KNIM I 2
+KNIM I 1 A_JumpIfInventory("KnightSwingAnimation",1,"Swing")
+KNIM I 1
+Goto Missile+2
 PainFix:
 KNIM H 0 
 GoTo PainFrames

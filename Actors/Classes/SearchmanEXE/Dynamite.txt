@@ -242,16 +242,21 @@ TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("DynamiteCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("DynamiteCooldownItem",1,"Spawn")
 TNT1 A 0 A_GiveToTarget("Dynamite_Charges",1)
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+
 TNT1 A 0 A_JumpIfInTargetInventory("Dynamite_Charges",3,"Death")
 TNT1 A 0 A_GiveToTarget("DynamiteCooldownItem",420)
 Goto Spawn
 Death:
 DeathTake:
 TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0 A_TakeFromTarget("AltChargesCooldownFlag",99)
+
 TNT1 A 0
 stop
 }
 }
+
 
 actor DynamiteCooldown : CustomInventory
 {
@@ -264,11 +269,14 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_JumpIfInventory("AltCooldownFlag",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("AltChargesCooldownFlag",1,"Nope")
 
 TNT1 A 0 A_Giveinventory("DynamiteCooldownItem",420)
-TNT1 A 0 A_Giveinventory("AltCooldownFlag")
 TNT1 A 0 A_Spawnitemex("DynamiteCooler")
+TNT1 A 0 A_Giveinventory("AltChargesCooldownFlag")
+
+TNT1 A 0 A_JumpIfInventory("Dynamite_Charges",1,"Nope")
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
 stop
 Nope:
 TNT1 A 0

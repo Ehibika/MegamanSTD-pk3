@@ -41,6 +41,8 @@ OB_ABSOLUTEFREEZE = "%k Eliminated %o with the Absolute Freeze";
 OB_TURBOLAUNCHER = "%k Eliminated %o with the Turbo Launcher";
 OB_ROASTER = "%k Eliminated %o with the Roaster";
 OB_TOSSSHIELD = "%k Eliminated %o with the Toss Shield";
+OB_ANCIENTRELIC = "%k Eliminated %o with the Ancient Relic";
+OB_AQUABUSTER = "%k Eliminated %o with the Aqua Buster";
 
 // -=- Ability obituaries -=-
 OB_BLASTLAUNCHER = "%k Blew %o up with a Blast launcher bomb";
@@ -90,6 +92,9 @@ OB_EXPLOSIVEROUND = "%k gave the knee of evil to %o using the Explosive Round.";
 OB_HEADBEAMS = "%o was caught out by %k's Head Beam.";
 OB_BLADEDASHIMPACT = "%o was Crushed by %k's Blade dash impact.";
 OB_BLADEDASHSABER = "%o was Sliced by %k's Blade dash.";
+
+OB_KNIGHTWRECKER = "%o Was Smote by %k's Knight Wrecker";
+OB_BRIGHTSHOCK = "%o Got Vaporized by %k's Bright Shock";
 
 //#region old
 //DOT Obituaries

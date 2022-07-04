@@ -16,6 +16,10 @@ actor UndershirtFlag : Once {}
 
 actor AltCooldownFlag : Once {}
 actor AbilityCooldownFlag : Once {}
+
+actor AltChargesCooldownFlag : Once {}
+actor AbilityChargesCooldownFlag : Once {}
+
 actor AbilityTimeout : Powerup {inventory.amount 1 Powerup.Duration 70}
 actor ShieldClearer : Powerup {inventory.amount 1 Powerup.Duration 17}
 

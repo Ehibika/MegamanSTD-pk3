@@ -1,12 +1,15 @@
 actor Ability2_BrightMan : AbilityMasterBase
 {
+Weapon.AmmoUse 1
+Weapon.AmmoGive 0
 Weapon.AmmoUse2 1
 Weapon.AmmoGive2 0
 Inventory.Pickupmessage "$PU_MEGABUSTER"
 Obituary "$OB_BRIGHTBULB"
-Tag "Dash Ability"
-weapon.ammotype2 "AbilityAmmo"
-inventory.icon "FLASHSI"
+Tag "Bright Bulb"
+weapon.ammotype "BrightBulb_Charges"
+weapon.ammotype2 "BrightBulb_Charges"
+inventory.icon "BRIGHSI"
 +WEAPON.ALLOW_WITH_RESPAWN_INVUL
 States
 {
@@ -37,7 +40,7 @@ Loop
 
 Fire:
 "####" A 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" B 0 A_FireCustomMissile("BrightBulb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" B 0 A_FireCustomMissile("BrightBulb",0,1,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 "####" A 0 A_TakeInventory("WeaponCharge",999)
 "####" BCA 2
 "####" A 1 Offset(0,32)
@@ -55,7 +58,7 @@ goto End
 
 AltFire:
 "####" A 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" B 0 A_FireCustomMissile("BrightBulb2",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" B 0 A_FireCustomMissile("BrightBulb2",0,1,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 "####" A 0 A_TakeInventory("WeaponCharge",999)
 "####" BCA 2
 "####" A 1 Offset(0,32)
@@ -106,7 +109,10 @@ actor BrightBulbAbility : CustomInventory
 states
 {
 Pickup:
-TNT1 A 0 A_JumpIfInventory("BrightBulbCooldownItem",1,"Nope")
+TNT1 A 0 A_JumpIfInventory("BrightBulb_Charges",1,"Pickup2")
+stop
+
+Pickup2:
 TNT1 A 0 ACS_NamedExecuteAlways("RunClassAbility",0,2)
 stop
 
@@ -117,7 +123,14 @@ stop
 }
 //=================
 //=================
-
+//[+]========================================================================[+]
+//--------------------------------|Ammo & inventory|---------------------------
+//[+]========================================================================[+]
+actor BrightBulb_Charges : Ammo
+{
+inventory.amount 1
+inventory.maxamount 2
+}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
@@ -411,4 +424,64 @@ ROLO R 0
 stop
 
 }
+}
+
+
+
+//[+]========================================================================[+]
+//------------------------------|Cooldown Actors|------------------------------
+//[+]========================================================================[+]
+actor BrightBulbCooler : WatcherBase 
+{
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 1
+TNT1 A 0 A_TakeFromTarget("BrightBulbCooldownItem",1)
+TNT1 A 0 A_JumpIfInTargetInventory("BrightBulbCooldownItem",1,"Spawn")
+TNT1 A 0 A_GiveToTarget("BrightBulb_Charges",1)
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0 A_JumpIfInTargetInventory("BrightBulb_Charges",2,"Death")
+TNT1 A 0 A_GiveToTarget("BrightBulbCooldownItem",420)
+Goto Spawn
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0 A_TakeFromTarget("AbilityChargesCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
+
+actor BrightBulbCooldown : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_JumpIfInventory("AbilityChargesCooldownFlag",1,"Nope")
+
+TNT1 A 0 A_Giveinventory("BrightBulbCooldownItem",420)
+TNT1 A 0 A_Spawnitemex("BrightBulbCooler")
+TNT1 A 0 A_Giveinventory("AbilityChargesCooldownFlag")
+
+TNT1 A 0 A_JumpIfInventory("BrightBulb_Charges",1,"Nope")
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
+stop
+Nope:
+TNT1 A 0
+stop
+}
+}
+
+actor BrightBulbCooldownItem : inventory
+{
+inventory.amount 1
+inventory.maxamount 420
 }

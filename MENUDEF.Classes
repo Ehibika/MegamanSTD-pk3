@@ -25,6 +25,8 @@ OptionString ClassNames
 "ToadMan", "ToadMan" 
 "Bass", "Bass" 
 "Sigma", "Sigma"
+"Knightman", "Knightman" 
+"BrightMan", "BrightMan"
 }
 
 OptionString ClassProperties
@@ -53,6 +55,8 @@ OptionString ClassProperties
 "ToadMan", "AquaResistance \nToxicReistance \nAcrobat" //ToadMan
 "Bass", "MachineGunMastery \nElementalGuard \nSpeedrunner" //Bass
 "Sigma", "Hefty \nMeleeMastery \nBladeParry" //Sigma
+"Knightman", "MeleeMastery \nBladeParry \nHefty" //Knightman
+"BrightMan", "BusterMastery \nElecResistance \nRecharge" //BrightMan
 }
 
 OptionString Class_HP
@@ -81,6 +85,8 @@ OptionString Class_HP
 "ToadMan", "250" 
 "Bass", "200" 
 "Sigma", "275" 
+"Knightman", "350" 
+"BrightMan", "250"
 }
 
 
@@ -110,6 +116,8 @@ OptionString Class_Altfire
 "ToadMan", "Acid Rain Generator" 
 "Bass", "Bass Buster" 
 "Sigma", "Blade Dash" 
+"Knightman", "Knight Shield" 
+"BrightMan", "Bright Shock"
 }
 
 
@@ -140,6 +148,8 @@ OptionString Class_AltfireInfo
 "ToadMan"  , "Places a generator that will  \nconstantly expel acid rain \naround itself. \nUpon taking damage it will stop \nfor a moment."
 "Bass"		, "Charges a buster attack \nuncharged fires 15 shots, \ncharged fires a single charge shot, \naiming down propels you upwards \nbased if it's uncharged or not, \nIt will also fire exploding bullets." 
 "Sigma"		, "Dash Forward to deal \ncollision damage followed by a \nwide Saber Slash." 
+"Knightman", "Raise your shield to \nproject a wide energy barrier \nthat repells projectiles, the energy \nbarrier has limited health and \nmust recharge fully if broken." 
+"BrightMan", "Launch an energy orb \nthat absorbs enemy shots, \nshooting it yourself will cause it to \ndetonate, dealing damage relative \nto the damage you dealt to it."
 }
 
 
@@ -169,6 +179,8 @@ OptionString Class_Ability
 "ToadMan", "Soothing Rain" 
 "Bass", "Booster Crescent Kick" 
 "Sigma", "Head Beams" 
+"Knightman", "Knight Wrecker" 
+"BrightMan", "Bright Bulb"
 }
 
 OptionString Class_AbilityInfo
@@ -198,6 +210,8 @@ OptionString Class_AbilityInfo
 "ToadMan"      , "Soothing rain will pour around \nyourself, healing everyone \nin the region. " 
 "Bass"			, "Perform an upward-diagonal kick \nthat deals knockback and stun, \nthe final kick will propel the user \nforward and deal more knockback." 
 "Sigma"			, "When initiated, Sigma will \nautomatically fire 8 projectiles from \nhis forehead while he is free to \ndo other actions."
+"Knightman"     , "KnightMan swings his flail \noverhead, knocking away any nearby \nfoes, press mainfire to lob the flail \nto stun foes at the impact site, deals \nBreak damage." 
+"BrightMan"     , "Launch a lightbulb that \nexplodes like a grenade, blinding anyone \nthat was looking at it, regardless \nof distance. use altfire to launch a bulb \nwith a shorter fuse."
 }
 
 OptionString Class_PassiveInfo
@@ -227,4 +241,6 @@ OptionString Class_PassiveInfo
 "ToadMan" , "---" 
 "Bass" , "---"
 "Sigma" , "---" 
+"Knightman", "---" 
+"BrightMan", "---"
 }

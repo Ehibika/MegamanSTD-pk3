@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 51
+#LIBDEFINE PAINCOUNT 58
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -68,7 +68,7 @@ str PainRecord[PAINCOUNT][2] = {
 /*35*/{"IceSlasherBoss",ELM_ICE},
 /*36*/{"FlashPoint",ELM_EUCLID|ELM_EXPLOSION},
 /*37*/{"StopArrow",ELM_EUCLID},
-/*38*/{"AbsoluteFreeze",ELM_ICE},
+/*38*/{"AbsoluteFreeze",ELM_ICE|ELM_EXPLOSION},
 /*39*/{"AbsoluteFreezeDirect",ELM_ICE|ELM_EXPLOSION},
 /*40*/{"TurboLauncher",ELM_FIRE|ELM_EXPLOSION},
 /*41*/{"Roaster",ELM_FIRE|ELM_EXPLOSION},
@@ -81,6 +81,13 @@ str PainRecord[PAINCOUNT][2] = {
 /*48*/{"ShiningRayBomb",ELM_EXPLOSION},
 /*49*/{"HeadBeams",ELM_EXPLOSION},
 /*50*/{"Dynamite",ELM_EXPLOSION},
+/*51*/{"AquaBuster",ELM_AQUA|ELM_EXPLOSION},
+/*52*/{"AncientRelicEdge",ELM_FIRE|ELM_BLADE},
+/*53*/{"AncientRelicTip",ELM_FIRE|ELM_BLADE},
+/*54*/{"RepairLauncher",ELM_EXPLOSION},
+/*55*/{"KnightWrecker",ELM_BREAK},
+/*56*/{"KnightWreckerSwing",ELM_BREAK},
+/*57*/{"BrightShock",ELM_ELEC},
 };
 
 
@@ -134,7 +141,7 @@ return 0;
 }
 
 
-#LIBDEFINE CRITCOUNT 10
+#LIBDEFINE CRITCOUNT 12
 //Crit Bitflags
 #LIBDEFINE CRIT_NULL 0.0
 #LIBDEFINE CRIT_ALWAYS 1.0
@@ -158,6 +165,8 @@ str CritRecord[CRITCOUNT][2] = {
 /*7*/{"AbsoluteFreezeDirect",CRIT_CONDITION|CRIT_FROSTBITESTATUS},
 /*8*/{"Roaster",CRIT_CONDITION|CRIT_BURNSTATUS},
 /*9*/{"ScatteredFlower",CRIT_CONDITION|CRIT_POISONSTATUS},
+/*10*/{"AncientRelicEdge",CRIT_CONDITION|CRIT_BURNSTATUS},
+/*11*/{"AncientRelicTip",CRIT_CONDITION|CRIT_BURNSTATUS},
 
 };
 
