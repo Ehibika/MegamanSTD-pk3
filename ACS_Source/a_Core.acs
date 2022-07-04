@@ -720,3 +720,21 @@ Function void SynchWarperRender (int TID)
 {
 SetActorProperty(0,Aprop_Renderstyle,GetActorProperty(TID, Aprop_Renderstyle));
 }
+
+
+function bool checkForActorVar(int tid, str theVar) {
+	SetUserVariable(tid,theVar,1);
+	return (GetUserVariable(tid,theVar)==1);
+}
+
+function int returnActorVarArraySize(int tid, str theVar) {
+	int i = 0;
+	while(true) {
+		SetUserArray(tid, theVar, i, 1);
+		if(GetUserArray(tid, theVar, i) == 0) {
+			break;
+		}
+		i++;
+	}
+	return i;
+}

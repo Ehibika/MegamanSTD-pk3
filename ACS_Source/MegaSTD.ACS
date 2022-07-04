@@ -27,6 +27,23 @@ int DB_Determined,DB_Guts,DB_Marksman;
 if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
+//===============|Ripper Hit limiter (By Trillster)|===============
+if((ClassifyActor(0) & ACTOR_PLAYER) && GetActorProperty(0,APROP_Health) > 0) {
+	int hittedNum = PlayerNumber();
+	
+	SetActivator(0,AAPTR_DAMAGE_INFLICTOR);
+	
+	int pierceRipperTimes = returnActorVarArraySize(0, "user_PierceRipper");
+	if(pierceRipperTimes > 0) {
+		int timesRipped = GetUserArray(0, "user_RippedPlayer", hittedNum);
+		if(timesRipped >= pierceRipperTimes) {
+			SetResultValue(0);
+		} else {
+			SetUserArray(0, "user_RippedPlayer", hittedNum, timesRipped + 1);
+		}
+	}
+}
+
 //===============|Check for damage properties on the opposing player|===============
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
 SourceTID = ActivatorTID();

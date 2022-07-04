@@ -83,7 +83,7 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-actor VioletZapperShot : fastProjectileBase
+actor VioletZapperShot : ProjectileBase
 {
 Obituary "$OB_VIOLETZAPPER"
 DamageType "VioletZapper"
