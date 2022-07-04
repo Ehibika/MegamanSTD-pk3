@@ -613,7 +613,7 @@ TNT1 A 0
 stop
 Jump:
 TNT1 A 0 A_GiveInventory("PowerWallJumpSpeed",1)
-TNT1 A 0 ACS_NamedExecuteAlways("CSACS_WallJump",0,10)
+TNT1 A 0 ACS_NamedExecuteAlways("MSTD_WallJump",0,10)
 TNT1 A 0 A_PlaySoundEx("Misc/WallKick","Voice")
 TNT1 A 0 A_GiveInventory("WallJumped", 1)
 stop

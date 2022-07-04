@@ -120,7 +120,7 @@ actor RepairLauncherhealDelay : Powerup {inventory.amount 1 Powerup.Duration 7}
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const Int RepairLauncherAOE = 128;
+Const Int RepairLauncherAOE = 180;
 Const Int RepairLauncherMinAOE = 64;
 Const int RGI_RepairLauncher = 2;
 Const int RGI_RepairLauncher2 = 5;
@@ -131,7 +131,7 @@ Const int RepairLauncher_MaxHeal = 200;
 Const int RepairLauncher_Damage = 60;
 
 
-	actor RepairLauncherAim : GolfBallAim{ Speed 128 Gravity 3.0}
+	actor RepairLauncherAim : GolfBallAim{ Speed 64 Gravity 1.5}
 
 	actor RepairLauncherAimInstantStarter : RepairLauncherAim
 	{
@@ -197,8 +197,8 @@ radius 5
 height 5
 scale 2.5
 Var int User_GravTime;
-speed 128
-gravity 3.0
+speed 64
+gravity 1.5
 bouncefactor 0.9
 damagetype "RepairLauncher"
 Obituary "$OB_REPAIRLAUNCHER"
@@ -226,21 +226,19 @@ stop
 }
 }
 
-actor RepairLauncherHealer : FastProjectileBase
+actor RepairLauncherHealer : BasicHelper
 {
-    //PROJECTILE
     damagetype "RepairLauncher"
     Obituary "$OB_REPAIRLAUNCHER"
-    +MISSILE
     +SKYEXPLODE
     +EXPLODEONWATER
     +RIPPER
     +SERVERSIDEONLY
     RenderStyle None
     Damage (0) 
-    Radius 10
-    Height 10
-    speed 15 
+    Radius 4
+    Height 4
+    speed 0 
     scale 2.5
     states
     {

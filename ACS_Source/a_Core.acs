@@ -75,6 +75,7 @@ int pln = playerNumber();
 // Stores the players starting Jump Height on spawn
 PlayerJumpZ[pln] = GetActorProperty(0, APROP_JumpZ);
 GiveInventory("CanWallJump",1);
+ACS_NamedExecuteAlways("CSLT_StepHandler",0);
 }
 
 
@@ -466,9 +467,18 @@ if(amount>currentAmount) {
 }
 }
 
+Script "MSTD_ButtonCheck" (int theButton)
+{
+SetResultValue(PressingButton(theButton));
+}
 
+Script "MSTD_PressingBothAttack" (void)
+{
+int buttons = GetPlayerInput(-1, INPUT_BUTTONS);
+SetResultValue(PressingButton2(buttons,BT_ATTACK)&&PressingButton2(buttons,BT_ALTATTACK));
+}
 
-Function int CSLTButtonCheck (int NewButtons, int OldButtons, int Which)
+Function int MSTDButtonCheck (int NewButtons, int OldButtons, int Which)
 {
 	int ButtonNow = NewButtons & Which;
 	int ButtonOld = OldButtons & Which;

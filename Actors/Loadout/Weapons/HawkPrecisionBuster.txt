@@ -46,6 +46,7 @@ Fire:
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_Jumpifinventory("HawkPrecisionBusterTimer",1,"NoAmmo")
 "####" A 0 A_Jumpifinventory("RefireBuffer",1,"Hold")
+"####" A 0 A_Jumpifinventory("SemiAutoBuffer",1,"Hold")
 "####" "#" 0 A_PlaySoundEx("weapon/HardBuster6","Weapon")
 "####" "#" 0 A_PlaySoundEx("weapon/coilexplode", "SoundSlot6")
 

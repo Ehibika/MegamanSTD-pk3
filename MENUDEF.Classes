@@ -139,7 +139,7 @@ OptionString Class_AltfireInfo
 "Vile", "Fires a large projectile \nwith huge radius \nthat stuns opponents." 
 "ToadMan"  , "Places a generator that will  \nconstantly expel acid rain \naround itself. \nUpon taking damage it will stop \nfor a moment."
 "Bass"		, "Charges a buster attack \nuncharged fires 15 shots, \ncharged fires a single charge shot, \naiming down propels you upwards \nbased if it's uncharged or not, \nIt will also fire exploding bullets." 
-"Sigma"		, "Dash Forward to deal \ncollision damage followed by a \nwide Saber Slash, the slash can \nbe initiated early with mainfire." 
+"Sigma"		, "Dash Forward to deal \ncollision damage followed by a \nwide Saber Slash." 
 }
 
 
@@ -197,7 +197,7 @@ OptionString Class_AbilityInfo
 "Vile" , "Launches an explosive \nwith great blast radius, \nThis bomb bounces less on walls, \nUse that to hit opponents below!"
 "ToadMan"      , "Soothing rain will pour around \nyourself, healing everyone \nin the region. " 
 "Bass"			, "Perform an upward-diagonal kick \nthat deals knockback and stun, \nthe final kick will propel the user \nforward and deal more knockback." 
-"Sigma"			, "Fires 4 projectiles \nwith each great speed and \ncontact damage but \nlacks in blast damage."
+"Sigma"			, "When initiated, Sigma will \nautomatically fire 8 projectiles from \nhis forehead while he is free to \ndo other actions."
 }
 
 OptionString Class_PassiveInfo

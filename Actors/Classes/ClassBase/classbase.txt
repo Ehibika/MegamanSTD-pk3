@@ -47,6 +47,11 @@ ClassDeath:
 "----" A 1 A_Jump(256,"Deploy.Death")
 wait
 
+Pain.GuitarMachineGun:
+Pain.StopArrow:
+Pain.FlashPoint:
+TNT1 A 1 A_Jump(256,"Deploy.stop")
+wait
 }
 }
 

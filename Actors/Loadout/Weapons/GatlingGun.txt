@@ -44,8 +44,8 @@ Fire:
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_PlaySoundEx("weapon/BasherShot","Weapon")
 "####" A 0 A_Giveinventory("GattlingGunCST")
-"####" A 0 A_Jumpifinventory("WeaponCharge",7,"Fire.MaxSpeed")
-"####" A 0 A_Jumpifinventory("WeaponCharge",3,"Fire.Speed2")
+"####" A 0 A_Jumpifinventory("WeaponCharge",4,"Fire.MaxSpeed")
+"####" A 0 A_Jumpifinventory("WeaponCharge",2,"Fire.Speed2")
 "####" A 1 A_Jump(256,"Fire.Speed1")
 goto Fire.Speed1
 
@@ -139,7 +139,7 @@ actor GatlingGunShot : fastProjectileBase
 Obituary "$OB_GATLINGGUN"
 DamageType "GatlingGunP"
 Speed 80
-Damage (5)
+Damage (10)
 radius 3
 
 height 3

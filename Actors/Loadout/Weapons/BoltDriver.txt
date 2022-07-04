@@ -56,7 +56,7 @@ Fire:
 */
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
-"####" A 0 A_PlaySoundEx("weapon/HardBuster1","Weapon")
+"####" A 0 A_PlaySoundEx("enemy/hammerjoethrow","Weapon")
 "####" A 0 A_FireCustomMissile("BoltDriverShot",0,2,0,8)
 "####" A 0 A_FireCustomMissile("BoltDriverShot",BT_SprAng,0,0,8,0,0)
 "####" A 0 A_FireCustomMissile("BoltDriverShot",BT_SprD_Ang,0,0,8,0,BT_SprD_Ang)
@@ -71,13 +71,13 @@ Fire:
 "####" A 0 A_Giveinventory("BoltDriverCST")
 "####" BC 2 
 "####" A 4 
-"####" A 2 Offset(0,32)
-"####" A 2 Offset(0,46)
-"####" A 2 Offset(0,58)
-"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
-"####" A 2 Offset(0,58)
-"####" A 2 Offset(0,46)
-"####" A 2 Offset(0,32)
+"####" A 1 Offset(0,32)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,58)
+"####" A 0 A_PlaySoundEx("weapon/adapterreturn","Weapon")
+"####" A 1 Offset(0,58)
+"####" A 1 Offset(0,46)
+"####" A 1 Offset(0,32)
 "####" A 2  A_WeaponReady(WRF_NOPRIMARY|WRF_NOSWITCH)
 "####" C 0 A_REfire
 goto Ready.Wep
@@ -86,6 +86,24 @@ NoAmmo:
 "####" A 1
 "####" A 0 A_Jumpifinventory("BoltDriver_Ammo",1,"Ready")
 Goto Reload
+
+Reload.Hold:
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 0 A_JumpIfNoAmmo("Reload.FirstLoop")
+Goto Reload.loop
+
+Reload.FirstLoop:
+"####" A 17 A_WeaponReady(WRF_STARTRELOADING) 
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 0 A_Giveinventory("WeaponSingleReloader",1)
+"####" A 1 A_JumpIf(CallACS("CheckAmmoFull")==0,"Reload.Loop")
+Reload.Loop:
+"####" A 10 A_WeaponReady(WRF_CYCLERELOADING) 
+"####" A 0 A_PlaySoundEx("weapon/rminestick","Weapon")
+"####" A 0 A_Giveinventory("WeaponSingleReloader",1)
+"####" A 1 A_JumpIf(CallACS("CheckAmmoFull")==0,"Reload.Loop")
+"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+goto Reload.Rise2
 
 Flash:
 TNT1 A 5 
@@ -125,7 +143,7 @@ actor BoltDriverShot : fastProjectileBase
 {
 Obituary "$OB_BOLTDRIVER"
 DamageType "BoltDriver"
-Speed 96
+Speed 160
 Damage (10)
 radius 3
 
@@ -151,6 +169,7 @@ TNT1 A 1
 Goto Spawn2
     Death:
     TNT1 A 0 A_JumpIf(Callacs("HealerShotIdentify")==1,"TeamHeal")
+    AQBA L 0 A_GiveInventory("ProjectileDCode",1)
     TNT1 A 1 A_Spawnitemex("BlasterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
     stop
 

@@ -36,6 +36,12 @@ Goto End
 }
 }
 
+Actor ShiningRayBombHitDelay : powerprotection
+{
+Powerup.duration 20
+Damagefactor "ShiningRayBomb", 0
+}
+
 actor ShiningRayBombSpawner  
 {
 +MISSILE
@@ -70,6 +76,8 @@ actor ShiningRayBomb : ShiningRayBombSpawner
 {
 +NOGRAVITY
 reactiontime 18
+Obituary "$OB_SHININGRAYBOMB"
+DamageType "Shiningraybomb"
 States
 {
 Spawn:
@@ -83,7 +91,7 @@ BALA C 0 A_PlaySoundEX("weapon/BombAlarm","Soundslot6")
 BALA C 20 A_SpawnItemEx("SLBombPulseFX",0,0,0,0,0,0,0,1)
 Detonate:
 TNT1 A 0 A_PlaySoundEx("weapon/Napalm","Weapon")
-BALA A 0 A_Explode(50, 96, 0,1,96)
+BALA A 0 A_Explode(150, 96, 0,1,96)
 TNT1 A 0 //
 TNT1 A 0 A_SpawnItemEx("SLImpactFX",0,0,0,0,0,0,0,1)
 DetonateLoop:
@@ -96,7 +104,7 @@ TNT1 A 1
 stop
 CeilingHit:
 BALA A 0 A_PlaySoundEx("weapon/crackerexplode", "Weapon")
-BALA A 0 A_Explode(50, 96, 0,1,96)
+BALA A 0 A_Explode(150, 96, 0,1,96)
 TNT1 A 35 A_SpawnItemEx("ExplosionEffect2")
 stop
 }
@@ -144,8 +152,9 @@ PROJECTILE
 +BRIGHT
 //-NOGRAVITY
 Obituary "$OB_SHININGRAYBOMB"
+DamageType "Shiningraybomb"
 Speed 70
-Damage (25)
+Damage (150)
 radius 5
 height 5
 scale 2.5
@@ -164,7 +173,7 @@ TNT1 A 0 A_CountDown
 loop
 Death:
 BALA A 0 A_JumpIf(Args[0]<1,3) //This is done so the bullets that instantly hit a wall show no FX
-BALA A 0 A_Explode(100, 96, 0,1,96)
+BALA A 0 A_Explode(150, 96, 0,1,96)
 TNT1 A 35 A_SpawnItemEx("SLImpactFX",0,0,0,0,0,0,0,1)
 BALA A 0
 stop

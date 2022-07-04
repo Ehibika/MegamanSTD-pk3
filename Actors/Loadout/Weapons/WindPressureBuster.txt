@@ -44,6 +44,7 @@ Fire:
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
 "####" B 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_Jumpifinventory("RefireBuffer",1,"Hold")
+"####" A 0 A_Jumpifinventory("SemiAutoBuffer",1,"Hold")
 "####" B 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
 "####" B 0 A_FireCustomMissile("WindPressureBusterRound",0,1,4,4,0,0)
 "####" B 0 A_Giveinventory("WindPressureCST")
@@ -104,7 +105,7 @@ actor WindPressureBusterRound : fastProjectileBase
 Obituary "$OB_WINDPRESSUREBUSTER"
 DamageType "WindPressureBuster"
 Speed 128
-Damage (50)
+Damage (45)
 radius 8
 height 8
 scale 1.0

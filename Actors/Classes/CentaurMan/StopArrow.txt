@@ -117,7 +117,7 @@ actor StopArrowRound : fastProjectileBase
 {
 Obituary "$OB_STOPARROW"
 DamageType "StopArrow"
-Speed 128
+Speed 245
 Damage (10)
 scale 3.5
 radius 14

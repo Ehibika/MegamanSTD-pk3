@@ -5,109 +5,64 @@
 ==|BugFixes|==
 
 ==|Mechanic Changes|==
-[+] "Weight" is now a class specific attribute, taking over the function of the "Heavyweight" and "Lightweight" properties.
-[+] added a new "Blind" status, which causes the victim to be unable to see players
 
 ==|Property Changes|==
-[+] Team Medic recovery rate increased from 7 per second to 14 per second
 
 ==|Class Changes|==
-[+]NEW CLASSES[+]
-[+] Bass
-[+] Sigma
-
-[+]SearchmanEXE[+]
-[+] HP reduced from 175 > 150
-[+] Property "MachinegunMastery" Swapped out for "Specialist"
-[+] Property "Energy Balancer" Swapped out for "Assassin"
-[+] Search Scope max damage range increased from 1,200 > 2,100
-[++] in otherwords, the threshold for max damage is much further away 
-[+] Search Scope max damage Reduced from 300 > 230
-[++]This is to account for the "Assasin" Property
-
-[+]ToadMan[+]
-[+] Acid Rain Generators health reduced from 500 > 100
-[+] Acid Rain damage is now consistent in the AOE
-
-[+]GutsMan[+]
-[+] HP increased from 300 > 350
-[+] Property "HeavyWeight" Swapped out for "Reserve Tank"
-
-[+]Marino[+]
-[+]Scattered Flower now crits on poisoned targets
-
-[+]Super Megaman[+]
-[+] Property "HeavyWeight" Swapped out for "Energy Balancer"
-
-[+]Massimo[+]
-[+] Property "HeavyWeight" Swapped out for "Determined"
-
-[+]CentaurMan[+]
-[+]HP increased from 200 > 250
 
 [+]Auto[+]
-[+]Now returns to the roster after being fixed up
-[+] Health generator now has 3 charges.
-[+] Health generator cooldown increased from 4 sec > 8 sec
+[+]Auto Sentry shot damage reduced from 10 > 5
+[+]Auto Sentry is now vulnerable to the stop status
 
-[+]Harpnote[+]
-[+] GuitarMachineGun damage reduced from 25 > 10
-[+] Pulse song now inflicts blind instead of the damage debuff
+[+]Toadman[+]
+[+]Acid rain generators now have a hit buffer to mitigate damage stacking
+[+]Acid rain generators is now vulnerable to the stop status
+[+]addressed the issue of soothing rain occassionaly not working
 
-[+]Fireman[+]
-[+] Class Passive now applies Damage resistance as meter fills
-[+++] when meter is full, fireman overheats and looses HP overtime
-[+++] When overheating, fireman is unable to heal by any means until he expends meter
-[+] Fireman now passively gains meter over time
-[+] NEW ABILITY : Fire arm, takes the place of fireball
-[+++] Firearm lets fireman spew lingering flames like a particle sprayer (i.e:Gas emitter)
-[+] Property "SprayerMastery" Swapped out for "Heater"
-[+] Firestorm shots now deal damage across a small splash radii
-[+] Firestorm shots now only consume a quarter of meter regardless of stage
-[+] Firestorm shots damage has been adjusted down, from 50-225 to 50-
+[+]Sigma[+]
+[+]Blade dash can no longer be cancelled early by pressing mainfire
+[+++]this was due to desynchs
+[+]Head beam now auto fires 8 shots when initiated.
+[+]Head Beam Shot velocity reduced from 106 > 64
+
+[+]Alia[+]
+[+]shining ray bomb has been readjusted so that it consistently deals 150 damage
+
+[+]Centaurman[+]
+[+]Stop arrow speed increased from 128 > 245
+
 ==|Weapon Changes|==
+[+]Lazer Rifle[+]
+[+]Shot Damage reduced from 45 > 30
+[+]Fire rate reduced
+[+]Projectile lifetime reduced from 20 frames > 10 frames
 
-[+]Standard Saber[+]
-[+]Blade edge damage reduced from 100 > 75
-[+]Blade Tip damage reduced from 150 > 100
+[+]Violet Zapper[+]
+[+]Shot Damage reduced from 35 > 25
+[+]Projectile lifetime reduced from 55 frames > 38 frames
 
-[+]Beam Rapier[+]
-[+]Blade edge damage reduced from 100 > 50
-[+]Blade Tip damage reduced from 150 > 100
+[+]Gattling Gun[+]
+[+]Shot damage increased from 5 > 10
 
-[+]Triangular Saber[+]
-[+]Blade edge damage reduced from 125 > 80
+[+]Military Buster[+]
+[+]Shot damage decreased from 60 > 50
 
-[+]Replislasher[+]
-[+]Blade edge damage reduced from 100 > 50
-[+] Wave damage reduced from 100 > 50
-[+] Wave damage buffer increased
+[+]WindPressure Buster[+]
+[+]Shot damage decreased from 50 > 45
 
-[+]Shotgun[+]
-[+] Damage reduced from 20 > 15
+[+]Repair launcher[+]
+[+]Shot Speed reduced from 128 > 64
+[+]Shot gravity reduced from 3.0 > 1.5
+[+++] these are not nerfs but rather efforts to improve the weapons hitregistration
+[+]Effect radius increased from 128 > 180
 
-[+]Roaster[+]
-[+] Damage reduced from 20 > 15
-[+] Damage is now consistent throughough the weapon's hitbox
+[+]Bolt Driver[+]
+[+] Pump frames reduced
+[+] Now works on a cycling reload
+[+] Shot speed increased from 96 > 160
 
-[+]MegaLauncher[+]
-[+] Splash damage min radius increased from 64 > 96
-
-[+]Toss Shield[+]
-[+] Can now be aimed upwards and downwards
-[+] Shield hitbox widened slightly
-[+] Shield now grants better protection against sabers
-[+] Damage increased from 35 > 75
-
-[+]Gas Emitter[+]
-[+] Projectile speed increased from 48 > 64
-
-[+]Burning Sprayer[+]
-[+]Range increased from 25 > 35
-
-[+]Repair Launcher[+]
-[+] Can now deal damage in an AOE
-[+] Can now Self heal at half it's heal rate
-[+] Wep movespeed decreased from 0.8 > 0.6
-[+] is now on a cycling reload again
+[+]Screw Rifle[+]
+[+]Fire rate reduced
+[+]Shot Speed increased from 96 > 120
+[+]Projectile lifetime reduced from 20 frames > 10 frames
 //================================================================================*/
