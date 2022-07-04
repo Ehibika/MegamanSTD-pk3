@@ -166,6 +166,13 @@ TRET A 0
 TRET A 0 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_NULL)
 Goto Scan
 
+Deploy.stop:
+TNT1 A 0 A_Playsoundex("support/TimeStop","Soundslot8")
+Deploy.stopLoop:
+TRET A 1 A_SpawnItemEx("TimeStopGFX", random(8, 64), 0, random(0, 64), 0, 0, 0, random(0, 359))
+TRET A 0 A_Jumpifinventory("StopMark",1,"Deploy.stopLoop") //
+Goto Scan
+
 Death:
 TRET A 0 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT) //reset target to master
 TNT1 A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
@@ -224,6 +231,10 @@ Deploy.Pain:
 TRET A 1
 Goto Spawn.Basic
 
+Deploy.stop:
+TNT1 A 1 ACS_NamedExecuteAlways("DeployableStopper",0,TID-10)
+Goto Spawn.Basic
+
 Deploy.Death:
 Death:
 TNT1 A 0 A_PlaySoundEx("weapon/napalm", "Weapon")
@@ -252,7 +263,7 @@ actor AutoSentryBullet : fastProjectileBase
 Obituary "$OB_AUTOSENTRY"
 DamageType "AutoSentry"
 Speed 96
-Damage (10)
+Damage (5)
 radius 3
 
 MissileHeight 16
@@ -637,34 +648,6 @@ stop
 
 
 
-actor AutoSentryChecker : CustomInventory  //checks if there is space to spawn the sentry
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
-BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
- "####" E 1 A_SpawnitemEx("SentryMarker", 120, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
-
-stop
-TeamRedFire:
- "####" E 1 A_SpawnitemEx("SentryMarker_RED", 120, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
-TNT1 A 0
-stop
-TeamBlueFire:
- "####" E 1 A_SpawnitemEx("SentryMarker_BLUE", 120, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
-TNT1 A 0
-stop
-}
-}
-
-
 actor AutoSentryPlanter : CustomInventory  //places a sentry based on the team.
 {
 inventory.amount 1
@@ -692,32 +675,6 @@ stop
 }
 }
 
-actor AutoSentryPlanter2 : CustomInventory  //places a sentry based on the team.
-{
-inventory.amount 1
-Inventory.MaxAmount 100
-+AUTOACTIVATE
-States
-{
-Spawn:
-TNT1 A 0
-stop
-Pickup:
-BLTR C 0 A_Jumpifinventory("WilyTeamFlag",1,"TeamRedFire")
-BLTR C 0 A_Jumpifinventory("LightTeamFlag",1,"TeamBlueFire")
-//---otherwise, just place a blank one
-GDTB A 0 A_SpawnItemEX("SentryPlacer",80,0,0,0,0,0,0,SXF_SETMASTER)
-stop
-TeamRedFire:
-GDTB A 0 A_SpawnItemEX("SentryPlacer_RED",80,0,0,0,0,0,0,SXF_SETMASTER)
-TNT1 A 0
-stop
-TeamBlueFire:
-GDTB A 0 A_SpawnItemEX("SentryPlacer_BLUE",80,0,0,0,0,0,0,SXF_SETMASTER)
-TNT1 A 0
-stop
-}
-}
 
 actor TurretReticleSpawner : CustomInventory 
 {

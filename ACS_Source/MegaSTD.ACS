@@ -1468,7 +1468,7 @@ If(WallJumpLimit == 0){SetInventory("WallJumpLimit", 10); WallJumpLimit = 10;}
 While(GetActorProperty(0,APROP_Health) > 0 && CheckInventory("CanWallJumpFlag"))
 	{
 	Buttons = GetPlayerInput(-1, INPUT_BUTTONS);
-	if(CheckInventory("JumpCancler")==0 && CSLTButtonCheck(Buttons, OldButtons, BT_JUMP)==1) 
+	if(CheckInventory("JumpCancler")==0 && MSTDButtonCheck(Buttons, OldButtons, BT_JUMP)==1) 
 		{
 		If(WallJumpLimit > 0)
 			{
@@ -1489,7 +1489,7 @@ While(GetActorProperty(0,APROP_Health) > 0 && CheckInventory("CanWallJumpFlag"))
 	}
 }
 
-script "CSACS_WallJump" (int Force, int BonusJump)
+script "MSTD_WallJump" (int Force, int BonusJump)
 {
 	//SetActivatorToTarget(0);
 	//int JumpFixAngle = 0;
@@ -1619,3 +1619,74 @@ Script "BlinderFXWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+Script "DeployableStopper" (int TID)
+{//Used for CoreActors to inflict stop on the acting part
+GiveActorInventory(TID,"StopMark",1);
+SetActorState(TID,"Deploy.Stop");
+}
+
+
+#DEFINE CLOAKDAGGERLIMIT 65.0//96.0
+#DEFINE CLOAKDAGGERSTEPCOST 65.0//72.0
+#DEFINE CLOAKDAGGERREGEN 1.5
+// 100 / CLOAKDAGGERLIMIT =
+#DEFINE CLOAKDAGGERFIXEDMULTIPLY 1.042
+
+script "CSLT_StepHandler" (void)
+{
+int CloakDagger = CLOAKDAGGERLIMIT;
+while(PlayerHealth()>0) {
+	if(GetActorZ (0) - GetActorFloorZ (0) < 1){CloakDagger = CloakDaggerFunc(CloakDagger);}
+	delay(1);
+}
+}
+
+function int CloakDaggerFunc(int CloakDagger)
+{
+	if(CheckInventory("CardboardBoxRadiusFlag")==0 && CheckInventory("HushStep")==0) {
+		CloakDagger -= getTotalVelocity();
+	}
+	CloakDagger += CLOAKDAGGERREGEN;
+	if(CloakDagger > CLOAKDAGGERLIMIT) {
+		CloakDagger = CLOAKDAGGERLIMIT;
+	} else if (CloakDagger <= 0.0) {
+		CloakDagger += CLOAKDAGGERSTEPCOST;
+		GiveInventory("FootStepPickup",1);
+	}
+	//adjustInventory("CloakDaggerBar",(fixedMul(CloakDagger,CLOAKDAGGERFIXEDMULTIPLY))>>16);
+	return CloakDagger;
+}
+
+function int getTotalVelocity(void)
+{
+	int len;
+	int x = GetActorVelX(0);
+	int y = GetActorVelY(0);
+	int z = GetActorVelZ(0);
+
+	int ang = vectorangle(x,y);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(y, sin(ang));
+	else len = fixeddiv(x, cos(ang));
+
+	ang = vectorangle(len, z);
+	if(((ang+0.125)%0.5) > 0.25) len = fixeddiv(z, sin(ang));
+	else len = fixeddiv(len, cos(ang));
+
+	//print(f:len);
+	return len;
+}
+
+
+
+// Checks if the target is the client. Useful for FX you don't want to render for the creator of them.
+script "MSTD_istargetclient" (void) CLIENTSIDE
+{
+	SetActivatorToTarget(0);
+	if(consoleplayernumber() == playernumber()){
+		SetResultValue(1);
+	}
+	else
+	{
+		SetResultValue(0);
+	}
+}

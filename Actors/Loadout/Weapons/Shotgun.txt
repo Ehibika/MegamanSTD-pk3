@@ -73,7 +73,7 @@ Fire:
 "####" A 1 Offset(0,32)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,58)
-"####" A 0 A_PlaySoundEx("weapon/Crashland","Weapon")
+"####" A 0 A_PlaySoundEx("weapon/adapterreturn","Weapon")
 "####" A 1 Offset(0,58)
 "####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)

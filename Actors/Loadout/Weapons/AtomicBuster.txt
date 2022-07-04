@@ -44,6 +44,7 @@ Fire:
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_Jumpifinventory("RefireBuffer",1,"Hold")
+"####" A 0 A_Jumpifinventory("SemiAutoBuffer",1,"Hold")
 "####" A 0 A_PlaySoundEx("weapon/magmabazooka","Weapon")
 "####" A 0 A_FireCustomMissile("AtomicBusterRound",0,1,4,4,0,0)
 "####" A 0 A_Giveinventory("AtomicBusterCST")

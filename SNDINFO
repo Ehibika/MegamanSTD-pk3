@@ -113,6 +113,20 @@ weapon/centaurcharge CENCHARG
 Misc/Bonk BONK1
 Misc/WallKick XLAND
 
+Misc/FootStep XLAND
+$volume Misc/FootStep	 0.5
+
+Misc/footstep2	FOOTSTP2
+$volume Misc/footstep2	 0.8
+
+Misc/footstep3	FOOTSTP1
+$volume Misc/footstep3	 0.5
+
+$volume weapon/centaurwalk	 0.5
+
+enemy/hammerjoestep		hjstep
+enemy/hammerjoethrow	hjthrw
+
 weapon/soothingrain	RAINF
 	$volume weapon/soothingrain	 0.2
 

@@ -25,7 +25,7 @@ TNT1 A 0
 BUST T 1 
 loop
 Death:
-BUST T 1 A_Spawnitemex("BustergunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+BUST T 1 A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -51,7 +51,7 @@ TNT1 A 0
 BUST T 1 
 loop
 Death:
-BUST T 1 A_Spawnitemex("BustergunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+BUST T 1 A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -109,7 +109,7 @@ TNT1 A 1
 goto spawn+2
 Death:
 TNT1 A 1 A_PlaySound("weapon/mirrordeflect")
-TNT1 A 1 A_Spawnitemex("BustergunPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 1 A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -613,7 +613,7 @@ TNT1 A 0
 stop
 Jump:
 TNT1 A 0 A_GiveInventory("PowerWallJumpSpeed",1)
-TNT1 A 0 ACS_NamedExecuteAlways("CSACS_WallJump",0,10)
+TNT1 A 0 ACS_NamedExecuteAlways("MSTD_WallJump",0,10)
 TNT1 A 0 A_PlaySoundEx("Misc/WallKick","Voice")
 TNT1 A 0 A_GiveInventory("WallJumped", 1)
 stop

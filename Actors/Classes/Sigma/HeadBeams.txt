@@ -14,22 +14,11 @@ States
 Ready:
 HSPR A 0 
 "####" A 1 Offset(0,110)
-"####" A 1 Offset(0,96)
 "####" A 1 Offset(0,82)
-"####" A 1 Offset(0,70)
 "####" A 1 Offset(0,58)
-"####" A 1 Offset(0,46)
 "####" A 1 Offset(0,32)
-"####" A 0 A_GiveInventory("WeaponCharge")
-"####" A 0 A_PlaySoundEx("weapon/xbcharge","Weapon")
-Ready1:
-HSPR A 0 A_GiveInventory("WeaponCharge",1)
-"####" A 0 A_WeaponReady(WRF_NOPRIMARY)
-"####" A 1 A_JumpIfInventory("WeaponCharge",17,"Ready2")
-goto Ready1
-Ready2:
-"####" B 1 A_WeaponReady
-goto Ready2
+"####" A 0 //A_PlaySoundEx("weapon/xbcharge","Weapon")
+goto Fire
 
 Deselect:
 TNT1 A 0 A_TakeInventory("AbilityActiveFlag",9)
@@ -40,26 +29,13 @@ Loop
 
 
 Fire:
-HSPR CD 2
-"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
-"####" D 0 A_TakeInventory("WeaponCharge",999)
-"####" DDD 2
-"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
-"####" DDD 2
-"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
-"####" DDD 2
-"####" D 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
-"####" D 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+HSPR BCD 2
+"####" D 0 A_PlaySoundEX("support/Healdiode1","Soundslot6")
+"####" D 0 A_SpawnItemEx("HeadBeamHandler", 0, 0, 0, 0, 0, 0, 0, SXF_NOCHECKPOSITION)
+"####" D 5
 "####" D 1 Offset(0,32)
-"####" D 1 Offset(0,46)
 "####" D 1 Offset(0,58)
-"####" D 1 Offset(0,70)
 "####" D 1 Offset(0,82)
-"####" D 1 Offset(0,82)
-"####" D 1 Offset(0,96)
 "####" D 1 Offset(0,110)
 "####" D 0 A_GiveInventory("HeadBeamsCooldown")
 "####" D 0 A_GiveInventory("RefireBuffer")
@@ -122,7 +98,7 @@ actor HeadBeamsRound : fastProjectileBase
 Translation "192:192=216:216","4:4=160:160","198:198=24:24"
 Obituary "$OB_HEADBEAMS"
 DamageType "HeadBeams"
-Speed 106 //96 x 1.1 = 105.6, same for a_explode radius (48=52.8)
+Speed 64 
 Damage (0) //10 | Damage moved to splash ~Bika
 scale 3.5
 radius 14
@@ -145,6 +121,36 @@ stop
 }
 }
 
+actor HeadBeamShooter : CustomInventory
+{
+states
+{
+Pickup:
+WEA2 A 0 A_PlaySoundEx("weapon/xbshoot","Weapon")
+WEA2 A 0 A_FireCustomMissile("HeadBeamsRound",0,0,0,16,0,0)
+fail
+}
+}
+
+actor HeadBeamHandler : BasicHelper 
+{
+ReactionTime 8
+Speed 0
+States
+{
+Spawn:
+TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
+TNT1 A 10
+TNT1 A 0 A_GiveToTarget("HeadBeamShooter",1)
+TNT1 A 0 A_Countdown
+Loop
+Death:
+DeathTake:
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
+TNT1 A 0
+stop
+}
+}
 
 //[+]========================================================================[+]
 //--------------------------------|Effect Actors|-------------------------------

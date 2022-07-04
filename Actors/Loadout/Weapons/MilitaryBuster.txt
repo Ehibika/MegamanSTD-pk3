@@ -44,6 +44,7 @@ Fire:
 "####" A 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"NoAmmo")
 "####" A 0 A_Jumpifinventory("RefireBuffer",1,"Hold")
+"####" A 0 A_Jumpifinventory("SemiAutoBuffer",1,"Hold")
 "####" A 0 A_PlaySoundEx("weapon/HardBuster4","Weapon")
 "####" A 0 A_FireCustomMissile("MilitaryBusterRound",0,1,4,4,0,0)
 "####" A 0 A_Giveinventory("MilitaryBusterCST")
@@ -100,7 +101,7 @@ actor MilitaryBusterRound : fastProjectileBase
 Obituary "$OB_MILITARYBUSTER"
 DamageType "MilitaryBuster"
 Speed 96
-Damage (60)
+Damage (50)
 scale 1.0
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition

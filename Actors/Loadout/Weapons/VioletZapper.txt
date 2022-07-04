@@ -88,7 +88,7 @@ actor VioletZapperShot : fastProjectileBase
 Obituary "$OB_VIOLETZAPPER"
 DamageType "VioletZapper"
 Speed 26
-Damage (35)
+Damage (25)
 radius 8
 
 MissileHeight 16
@@ -97,7 +97,7 @@ scale 1.5
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition
 
-reactiontime 55
+reactiontime 38
 States
 {
 Spawn:

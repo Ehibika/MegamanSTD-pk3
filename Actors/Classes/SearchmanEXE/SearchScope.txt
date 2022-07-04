@@ -223,11 +223,11 @@ actor SearchScopeBurst : FastProjectileBase//FastProj to match damager hitbox
         TNT1 A 0 A_SetPitch(Pitch+1)
         TNT1 A 0 A_SpawnItemEx("SearchScopeBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
         TNT1 A 0 A_Stop
-        TNT1 A 0 A_SpawnItemEx("SearchScopeFX",0,0,0,0,0,0,0,1)
+        TNT1 A 0 //A_SpawnItemEx("SearchScopeFX",0,0,0,0,0,0,0,1)
         TNT1 A 1
         stop
     Death:
-        TNT1 A 0 A_SpawnItemEx("SearchScopeEndFX",0,0,0,0,0,0,0,1)
+        TNT1 A 0 //A_SpawnItemEx("SearchScopeEndFX",0,0,0,0,0,0,0,1)
         stop
     Death2:
         TNT1 A 0 A_Stop

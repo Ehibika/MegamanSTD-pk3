@@ -41,7 +41,7 @@ End:
 SAHD F 1 A_TakeInventory("RollingCutterFlag",1)
 SAHD F 0 A_SpawnItemEX("RingWarpEffect")
 SAHD F 1 A_TakeInventory("CutterFlag",999)
-SAHD F 0 A_TakeInventory("CanWarp",999)
+SAHD F 0 //A_TakeInventory("CanWarp",999)
 "####" F 1 A_TakeInventory("AbilityActiveFlag",9)
 "####" F 0 
 Goto End

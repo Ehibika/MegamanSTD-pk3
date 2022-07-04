@@ -184,6 +184,7 @@ TNT1 A 0 A_TakeFromTarget("IceSlasherCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("IceSlasherCooldownItem",1,"Spawn")
 Death:
 DeathTake:
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
 TNT1 A 0
 stop
 }
@@ -201,6 +202,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Giveinventory("IceSlasherCooldownItem",140)
+TNT1 A 0 A_Giveinventory("AltCooldownFlag")
 TNT1 A 0 A_Spawnitemex("IceSlasherCooler")
 stop
 Nope:

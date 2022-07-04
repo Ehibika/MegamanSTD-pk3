@@ -152,7 +152,7 @@ TNT1 A 0 A_TakeFromTarget("BoosterCrescentKickCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("BoosterCrescentKickCooldownItem",1,"Spawn")
 Death:
 DeathTake:
-TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0 A_TakeFromTarget("AbilityCooldownFlag",99)
 TNT1 A 0
 stop
 }
@@ -170,7 +170,7 @@ TNT1 A 0
 stop
 Pickup:
 TNT1 A 0 A_Giveinventory("BoosterCrescentKickCooldownItem",140)
-TNT1 A 0 A_Giveinventory("AltCooldownFlag")
+TNT1 A 0 A_Giveinventory("AbilityCooldownFlag")
 TNT1 A 0 A_Spawnitemex("BoosterCrescentKickCooler")
 stop
 Nope:

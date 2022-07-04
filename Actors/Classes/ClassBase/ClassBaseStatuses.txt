@@ -19,6 +19,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("PoisonMark",1,"Sustain")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
+TNT1 A 0 A_JumpIfInTargetInventory("TempPoisonProof",1,"Nope")
 TNT1 A 0 A_Jumpifinventory("Pro_ToxicResistance",1,"Nope")
 //==
 TNT1 A 0 A_GiveInventory("PoisonMark",1)
@@ -98,7 +99,8 @@ TNT1 A 0 A_JumpIfInTargetInventory("DetoxLevel",100,"Detox")
 TNT1 A 0 A_SetuserVar("user_LoopCount", user_LoopCount+1)
 TNT1 A 0 A_Jumpif( user_LoopCount <= 7,"Spawn2")
 TNT1 A 0 A_SetuserVar("user_LoopCount", 0)
-TNT1 A 0 A_JumpIfInTargetInventory("ProtectorFlag",1,5)
+
+TNT1 A 0 //A_JumpIfInTargetInventory("ProtectorFlag",1,5)
 
 // when we deal tick damage, we set the target to our master (the person responsible for inflicting the dot) and use this script
 // to make them deal tick damage to the victim directly.
@@ -275,6 +277,7 @@ stop
 Pickup:
 TNT1 A 0 A_Jumpifinventory("BurnMark",1,"Sustain")
 TNT1 A 0 A_Jumpifinventory("Pro_FireResistance",1,"Nope")
+TNT1 A 0 A_JumpIfInTargetInventory("TempBurnProof",1,"Nope")
 TNT1 A 0 A_Jumpif(CallACS("CheckStatusGuard",0,STATUS_MAJOR),"Nope") 
 //==
 TNT1 A 0 A_GiveInventory("BurnMark",1)
@@ -340,7 +343,7 @@ TNT1 A 0 A_SetuserVar("user_LoopCount", user_LoopCount+1)
 TNT1 A 0 A_Jumpif( user_LoopCount <= 2,"Spawn2")
 TNT1 A 0 A_SetuserVar("user_LoopCount", 0)
 
-TNT1 A 0 A_JumpIfInTargetInventory("ProtectorFlag",1,5)
+TNT1 A 0 //A_JumpIfInTargetInventory("ProtectorFlag",1,5)
 
 // when we deal tick damage, we set the target to our master (the person responsible for inflicting the dot) and use this script
 // to make them deal tick damage to the victim directly.
