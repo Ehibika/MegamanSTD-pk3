@@ -76,7 +76,7 @@ Ammo.BackpackMaxAmount 80
 actor ViperRifleCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 3
+Powerup.Duration 4
 powerup.type "ConShotTimer"
 }
 
@@ -98,7 +98,7 @@ actor ViperRifleShot : fastProjectileBase
 Obituary "$OB_VIPERRIFLE"
 DamageType "ViperRifle" //ViperRifle
 Speed 96
-Damage (25)
+Damage (20)
 radius 3
 
 MissileHeight 16

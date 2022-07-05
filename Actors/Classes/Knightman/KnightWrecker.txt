@@ -1,4 +1,4 @@
-Const int KnightWreckerSwingDist = 64;
+Const int KnightWreckerSwingDist = 96;
 Const int KSWD = KnightWreckerSwingDist;
 
 actor Ability2_Knightman : AbilityMasterBase
@@ -14,14 +14,14 @@ States
 
 Ready:
 KNIH A 0 
-"####" A 1 Offset(0,110) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" A 1 Offset(0,110) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" E 1 Offset(0,96) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" E 1 Offset(0,82) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" F 1 Offset(0,70) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" F 1 Offset(0,58) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" G 1 Offset(0,46) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
-"####" G 1 Offset(0,32) A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
+"####" A 1 Offset(0,110) 
+"####" A 1 Offset(0,110) 
+"####" E 1 Offset(0,96) 
+"####" E 1 Offset(0,82) 
+"####" F 1 Offset(0,70) 
+"####" F 1 Offset(0,58) 
+"####" G 1 Offset(0,46) 
+"####" G 1 Offset(0,32) 
 goto fire
 
 Select:
@@ -35,50 +35,33 @@ fire:
 "####" C 0 A_GiveInventory("KnightWreckerTimer")
 "####" C 0 A_GiveInventory("WeaponCharge")
 "####" C 0 A_Gunflash("Flash.AimHandler")
-//"####" AAEEFFGG 1 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 Swinging:
 "####" B 0 A_TakeInventory("KnightSwingAnimation",1)
 "####" B 0 A_PlaySoundEx("rfclass/knightswing", "Weapon")
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 45)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 45 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 90)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 90 + 22.5)
 "####" G 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
 "####" G 0 A_Jumpif(CallACS("MSTD_ButtonCheck",BT_ATTACK) == True,"SwingAttack")
 
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" H 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 135)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" H 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 135 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" H 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 180)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" H 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 180 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" G 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
 "####" G 0 A_Jumpif(CallACS("MSTD_ButtonCheck",BT_ATTACK) == True,"SwingAttack")
 
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 225)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 225 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 270)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" F 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 270 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" G 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
 "####" G 0 A_Jumpif(CallACS("MSTD_ButtonCheck",BT_ATTACK) == True,"SwingAttack")
 
 "####" G 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 315)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" G 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 315 + 22.5)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" G 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 0)
-"####" A 0 A_SpawnItemEx("KnightWreckerX",KSWD,0,8,momx,momy,momz,0,8,0)
 "####" G 1 A_SpawnItemEx("KnightCrushSwinger", 0, 0, 64, 0, 0, 0, 22.5)
 "####" G 0 A_JumpIfInventory("AbilityTimeout",1,"Fire.Finish")
 "####" G 0 A_Jumpif(CallACS("MSTD_ButtonCheck",BT_ATTACK) == True,"SwingAttack")//A_Refire("Swinging")
@@ -317,7 +300,7 @@ states
 	Spawn:
 	TNT1 A 0
     AQBA L 0 A_GiveInventory("ProjectileCode",1)
-	TNT1 A 1 A_SpawnItemEx("KnightCrushSwingerBall", 60, 0, 0, 0, -10, 0, 0, 1) 
+	TNT1 A 1 A_SpawnItemEx("KnightCrushSwingerBall", KSWD, 0, 0, 0, -10, 0, 0, 1) 
 	stop
 }
 }
@@ -350,8 +333,8 @@ Damagetype "KnightWreckerSwing"
 +RIPPER
 +DONTBLAST
 damage (6)//11
-radius 10
-height 10
+radius 20
+height 15
 States
 {
 Spawn:

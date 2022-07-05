@@ -1,32 +1,44 @@
 
 OptionString ClassNames
 {
+//Ordered based on Keyconf
+
+//Classic
 "Megaman", "Megaman" 
 "SuperMegaman", "Super Megaman" 
+"Bass", "Bass" 
+"FireMan", "FireMan"
+"Iceman", "Iceman"
+"GutsMan", "GutsMan"
+"FlashMan", "FlashMan"
+"QuickMan", "QuickMan"
+"ToadMan", "ToadMan"
+"BrightMan", "BrightMan"
+"Centaurman", "Centaurman"
+"Knightman", "Knightman" 
 "AutoSTD" , "Auto" 
+
+//X series
 "MegamanX", "Megaman X" 
 "Zero", "Zero" 
+"Sigma", "Sigma"
+"Vile", "Vile"
+"Spark Mandrill", "Spark Mandrill" 
 "Axl", "Axl" 
+"Alia", "Alia" 
 "Massimo", "Massimo" 
 "Marino", "Marino" 
 "Cinnamon", "Cinnamon" 
-"Alia", "Alia" 
+
+//Battle network
 "MegamanEXE", "MegamanEXE" 
 "SearchmanEXE", "SearchmanEXE" 
-"FireMan", "FireMan" 
+
+//Starforce
 "HarpNote", "HarpNote" 
-"Centaurman", "Centaurman"
-"FlashMan", "FlashMan"
-"Iceman", "Iceman"
-"GutsMan", "GutsMan"
-"QuickMan", "QuickMan"
-"Spark Mandrill", "Spark Mandrill" 
-"Vile", "Vile"
-"ToadMan", "ToadMan" 
-"Bass", "Bass" 
-"Sigma", "Sigma"
-"Knightman", "Knightman" 
-"BrightMan", "BrightMan"
+
+
+
 }
 
 OptionString ClassProperties

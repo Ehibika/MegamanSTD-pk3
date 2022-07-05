@@ -391,6 +391,33 @@ InInventory IsSigma, 1
 	DrawBar "ALTEMP", "ALTHBAR1", HeadBeamsCooldownItem, vertical,reverse, 25, 163;
 	ininventory HeadBeamsCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", HeadBeamsCooldownItem, vertical,reverse, 25, 163;}
 	} 
+
+InInventory IsBrightMan, 1
+	{
+	DrawImage "TBOLSI", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BrightShockCooldownItem, vertical,reverse, 5, 163;
+	ininventory BrightShockCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BrightShockCooldownItem, vertical,reverse, 5, 163;}
+
+	DrawImage "BRIGHSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", BrightBulbCooldownItem, vertical,reverse, 25, 163;
+	ininventory BrightBulbCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", BrightBulbCooldownItem, vertical,reverse, 25, 163;}
+	DrawNumber 3, smallfont, white, BrightBulb_Charges, alignment(left), 30,166;
+	} 
+
+InInventory IsKnightMan, 1
+	{
+	DrawImage "PROTOS", 2, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", K_ShieldBreak, vertical,reverse, 5, 163;
+	ininventory K_ShieldBreak ,1 {DrawBar "ALTEMP", "ALTHBAR", K_ShieldBreak, vertical,reverse, 5, 163;}
+
+	DrawImage "KNIGSI", 22, 166;
+	DrawBar "ALTEMP", "ALTHBAR1", KnightWreckerCooldownItem, vertical,reverse, 25, 163;
+	ininventory KnightWreckerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", KnightWreckerCooldownItem, vertical,reverse, 25, 163;}
+
+	ininventory Ability2_KnightMan ,1 {DrawBar "SRESO2", "NORESO2", KnightWreckerTimerItem, Horizontal, 42, 171;}
+	DrawBar "FIRMBR", "NORESO", ShieldEnergy, Horizontal, 42, 161;
+	ininventory K_ShieldBreak ,1 {DrawBar "FIRMBR2", "NORESO", ShieldEnergy, Horizontal, 42, 161;}
+	} 
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------
 //[+]======================================[+]

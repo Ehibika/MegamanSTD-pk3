@@ -118,5 +118,5 @@ str MasterWepList[WEAPONLIST][6] = {
 /*37*/{"Roaster","RoasterWep","Roaster_Ammo", WF_LAUNCHER,"Roaster",""},
 /*38*/{"TossShield","TossShieldWep","TossShield_WaitCount", WF_MELEE|WF_TOSSSHIELD,"TossShield",""},
 /*39*/{"AncientRelic","AncientRelicWep","TossShield_WaitCount", WF_MELEE,"AncientRelicEdge","AncientRelicTip"},
-/*40*/{"AquaBuster","AquaBusterWep","AquaBusterWep_Ammo", WF_BUSTER,"AquaBuster",""},
+/*40*/{"AquaBuster","AquaBusterWep","AquaBuster_Ammo", WF_BUSTER,"AquaBuster",""},
 };

@@ -416,8 +416,8 @@ InInventory IsKnightMan, 1
 	ininventory KnightWreckerCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", KnightWreckerCooldownItem, vertical,reverse, 25, 163;}
 
 	ininventory Ability2_KnightMan ,1 {DrawBar "SRESO2", "NORESO2", KnightWreckerTimerItem, Horizontal, 42, 171;}
-	ininventory K_ShieldBreak ,1 {DrawBar "FIRMBR2", "NORESO", ShieldEnergy, Horizontal, 42, 161;}
 	DrawBar "FIRMBR", "NORESO", ShieldEnergy, Horizontal, 42, 161;
+	ininventory K_ShieldBreak ,1 {DrawBar "FIRMBR2", "NORESO", ShieldEnergy, Horizontal, 42, 161;}
 	} 
 //[+]======================================[+]
 //-----------|Suit Resource Bars|-----------

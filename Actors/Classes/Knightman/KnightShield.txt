@@ -206,13 +206,13 @@ Actor FrontShieldPart : BarrierPartBase
   DamageFactor "BladeDashSaberTip", 0.0
   DamageFactor "AncientRelicTip", 0.0
 
-damagefactor "DrillHead", 10.0
-damagefactor "CrushingSpray", 10.0
-damagefactor "SuperAdaptor", 10.0
-damagefactor "KnightWrecker", 10.0
-damagefactor "GutsPunch", 10.0
-damagefactor "KnightWreckerSwing", 10.0
-damagefactor "DashPunch", 10.0
+damagefactor "DrillHead", 3.0
+damagefactor "CrushingSpray", 3.0
+damagefactor "SuperAdaptor", 3.0
+damagefactor "KnightWrecker", 3.0
+damagefactor "GutsPunch", 3.0
+damagefactor "KnightWreckerSwing", 3.0
+damagefactor "DashPunch", 3.0
 
     RenderStyle "Translucent"	//Fuzzy looks great in software mode
 	Species "FrontShield"

@@ -110,7 +110,16 @@ if(CheckInventory("UndershirtFlag")&& Damage > GetActorProperty(0,APROP_HEALTH))
 SetActivator(0, AAPTR_DAMAGE_INFLICTOR);
 if(CheckActorInventory(VictimTID,"GuardSlow"))
 	{
-	if(ProjInView(VictimTID)&&CheckForElement(arg2,ELM_EXPLOSION)){log(s:"Gotcha"); Damage = 0;}
+	if(ProjInView(VictimTID)&&CheckForElement(arg2,ELM_EXPLOSION))	
+		{
+		//log(s:"Gotcha"); 
+		if(CheckActorInventory(VictimTID,"IsKnightMan"))
+			{
+			if(CheckForElement(arg2,ELM_BREAK)){Damage = Damage*3;}
+			TakeActorInventory(VictimTID,"ShieldEnergy",Damage);
+			}
+		Damage = 0;
+		}
 	}
 
 SetActivator(0, AAPTR_DAMAGE_TARGET);

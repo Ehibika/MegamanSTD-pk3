@@ -90,13 +90,13 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int LightWaveCannon_DMG = 50;
+Const int LightWaveCannon_DMG = 60;
 Const int LightWaveCannon_RAD = 96;
 Const int LightWaveCannon_RADMin = 32;
 actor LightWaveCannonShot : FastProjectileBase
 {
 Speed 96
-Damage (10)
+Damage (0)
 Obituary "$OB_LIGHTWAVECANNON"
 damagetype "LightWaveCannon"
 renderstyle "add"

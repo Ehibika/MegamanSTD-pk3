@@ -114,13 +114,13 @@ Damagefactor "DrillHead", 0
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int DrillHeadCannon_DMG = 70;
+Const int DrillHeadCannon_DMG = 80;
 Const int DrillHeadCannon_RAD = 128;
 Const int DrillHeadCannon_RADMin = 32;
 actor DrillHeadCannonShot : FastProjectileBase
 {
 Speed 64
-Damage (10)
+Damage (0)
 //+RIPPER
 Obituary "$OB_DRILLHEADCANNON"
 damagetype "DrillHead"

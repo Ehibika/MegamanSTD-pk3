@@ -108,13 +108,13 @@ powerup.type "ConShotTimer"
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int MegaCannon_DMG = 90;
+Const int MegaCannon_DMG = 100;
 Const int MegaCannon_RAD = 160;
 Const int MegaCannon_RADMin = 96;
 actor MegaCannonShot : FastProjectileBase
 {
 Speed 48
-Damage (10)
+Damage (0)
 Obituary "$OB_MEGACANNON"
 damagetype "MegaCannon"
 radius 8

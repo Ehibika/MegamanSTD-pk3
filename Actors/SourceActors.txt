@@ -423,6 +423,7 @@ height 1
 +NOGRAVITY
 +DONTBLAST
 +DONTREFLECT
++DONTSPLASH
 renderstyle none
 States
 {

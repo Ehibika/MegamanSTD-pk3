@@ -1,6 +1,6 @@
 /*================================================================================
 
-[+]====================|Alpha V.10|========================[+]
+[+]====================|Alpha V.11|========================[+]
 
 ==|BugFixes|==
 
@@ -77,4 +77,11 @@
 [+]Fire rate reduced
 [+]Shot Speed increased from 96 > 120
 [+]Projectile lifetime reduced from 20 frames > 10 frames
+
+[+]Energy Cannon[+]
+[+]Shot damage decreased from 150 > 100
+
+[+]Viper Rifle[+]
+[+]Shot damage decreased from 25 > 20
+[+]Fire rate reduced
 //================================================================================*/
