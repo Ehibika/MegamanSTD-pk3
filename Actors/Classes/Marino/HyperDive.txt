@@ -13,12 +13,12 @@ States
 {
 
 Ready:
-HSPR U 0 
+HRDV U 0 
 "####" U 1 //A_WeaponReady
 goto Fire
 
 Fire:
-HSPR U 0 A_PlaySoundEx("weapon/chargekick","Weapon")
+HRDV U 0 A_PlaySoundEx("weapon/chargekick","Weapon")
 "####" U 0 ACS_NamedExecuteAlways("core_flyplayer",0,0,2)
 "####" U 0 ACS_NamedExecuteAlways("core_freezeplayer",0,0,1)
 "####" U 0 A_GiveInventory("BreakDashCharge", 8)

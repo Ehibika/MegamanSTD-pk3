@@ -37,7 +37,7 @@ TNT1 A 0 ACS_NamedExecuteAlways("WepSpeedMod",0,Launcher_MSPD*FVM)
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
 0G_H A 1 A_Raise
 Loop
-
+/*
 Fire:
 "####" B 0 A_JumpIfNoAmmo("NoAmmo")
 "####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Buffer")
@@ -74,9 +74,13 @@ Fire.Charge5:
 "####" BCLK 2
 "####" A 2 A_Refire("Fire.Charge5")
 Goto Fire.Release
+*/
 
+Fire:
 Fire.Release:
-"####" A 0 A_TakeInventory("WeaponCharge",999)
+//"####" A 0 A_TakeInventory("WeaponCharge",999)
+"####" B 0 A_JumpIfNoAmmo("NoAmmo")
+"####" A 0 A_Jumpifinventory("ConShotTimer",1,"Fire.Buffer")
 "####" A 0 A_PlaySoundEx("weapon/magmabazooka","Weapon")
 "####" A 0 A_FireCustomMissile("RoasterShot",0,2,0,2)
 "####" A 2 Offset(4,28)
@@ -154,24 +158,26 @@ Damagefactor "Roaster", 0
 actor RoasterCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 28
+Powerup.Duration 17
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
-Const int Roaster_DMG = 10;
-Const int Roaster_RAD = 96;
-Const int Roaster_RADMin = 96;
+Const int Roaster_DMG = 50;
+Const int Roaster_RAD = 128;
+Const int Roaster_RADMin = 128;
 
-actor RoasterShot : FastProjectileBase
+actor RoasterShot : ProjectileBase
 {
 Speed 32
-Damage (0)
+Damage (Roaster_DMG)
 Obituary "$OB_ROASTER"
 damagetype "Roaster"
 renderstyle "Add"
 +RIPPER
+var int user_PierceRipper[1];
+var int user_RippedPlayer[64];
 radius 24
 Reactiontime 3
 height 12
@@ -182,8 +188,8 @@ Spawn:
 TNT1 A 0 
 AQBA L 0 A_GiveInventory("ProjectileCode",1)
 Spawn2:
-HEAT E 1 A_SpawnItemEx("RoasterShotTrail",0,0,0,0,0,0,0,1)//A_SpawnItemEx("RoasterTrail",-80,0,-momz,momx,momy,momz,0,9)
-TNT1 A 0 //A_Countdown
+TNT1 A 3 A_SpawnItemEx("RoasterFX",-80,0,-momz,momx,momy,momz,0,9)//
+TNT1 A 0 A_Explode(Roaster_DMG,Roaster_RAD,0,0,Roaster_RADMin)
 loop
 
 Death:
@@ -247,11 +253,13 @@ States
 Spawn:
 TNT1 A 0
 AQBA L 0 A_GiveInventory("ProjectileCode",1)
-TNT1 A 0 A_SpawnItemEx("RoasterTrailFX1",0,0,0,0,0,0,0,1)
+TNT1 A 0 A_SpawnItemEx("RoasterFX",0,0,0,0,0,0,0,1)
+/*
 TNT1 A 0 A_SpawnItemEx("RoasterTrailFX2",0,0,0,-momx*0.2,-momy*0.2,-momz*0.2,0,9)
 TNT1 A 0 A_SpawnItemEx("RoasterTrailFX3",0,0,0,-momx*0.4,-momy*0.4,-momz*0.4,0,9)
 TNT1 A 0 A_SpawnItemEx("RoasterTrailFX4",0,0,0,-momx*0.6,-momy*0.6,-momz*0.6,0,9)
 TNT1 A 0 A_SpawnItemEx("RoasterTrailFX5",0,0,0,-momx*0.8,-momy*0.8,-momz*0.8,0,9)
+*/
 TNT1 A 1 
 stop
 }
@@ -315,5 +323,19 @@ Spawn:
 TNT1 A 0
 HEAT A 1 
 stop
+}
+}
+
+actor RoasterFX : RoasterTrailFX1
+{
+States
+{
+Spawn:
+TNT1 A 0
+HEAT ABCDEF 1 
+Spawn2:
+HEAT F 1 A_SetScale(Scalex+0.8)
+TNT1 A 0 A_Fadeout
+loop
 }
 }

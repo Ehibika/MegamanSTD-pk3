@@ -116,7 +116,7 @@ CRBM A 0
 CHBU ABCD 2
 Loop
 Death:
-CHBU A 1 A_Spawnitemex("BlasterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+CHBU A 1 A_Spawnitemex("BasicShotPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -133,7 +133,7 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Special Actors|------------------------------
 //[+]========================================================================[+]
-actor BlasterPuff1 : FXActor_A
+actor BasicShotPuff : FXActor_A
 {
 scale 4
 States

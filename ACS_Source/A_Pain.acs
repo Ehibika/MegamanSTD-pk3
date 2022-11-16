@@ -7,7 +7,7 @@
 #library "A_Pain"
 #include "zcommon.acs"
 
-#LIBDEFINE PAINCOUNT 58
+#LIBDEFINE PAINCOUNT 65
 
 //Element Bitflags
 #LIBDEFINE ELM_NULL 0.0
@@ -22,6 +22,7 @@
 #LIBDEFINE ELM_BLADE 256.0 //just in case
 #LIBDEFINE ELM_EXPLOSION 512.0
 #LIBDEFINE ELM_DONTSTOP 1024.0
+#LIBDEFINE ELM_LIFESTEAL 2048.0
 
 str PainRecord[PAINCOUNT][2] = {
 /*
@@ -88,6 +89,14 @@ str PainRecord[PAINCOUNT][2] = {
 /*55*/{"KnightWrecker",ELM_BREAK},
 /*56*/{"KnightWreckerSwing",ELM_BREAK},
 /*57*/{"BrightShock",ELM_ELEC},
+/*58*/{"NapalmHead",ELM_FIRE|ELM_EXPLOSION},
+/*59*/{"BlackBomb",ELM_FIRE|ELM_EXPLOSION},
+/*60*/{"PoisSeed",ELM_TOXIC},
+/*61*/{"ViperRifle",ELM_TOXIC},
+/*62*/{"MagBomb",ELM_TOXIC},
+/*63*/{"Quake",ELM_BREAK},
+/*64*/{"RepairSprayer",ELM_LIFESTEAL},
+
 };
 
 
@@ -137,6 +146,22 @@ Function Bool CheckForDontStop(int PainType)
 		}
 	}
     if(PainFlag & ELM_DONTSTOP || PainFlag & ELM_EUCLID){Return 1;}
+return 0;
+}
+
+Function Bool CheckForLifeSteal(int PainType)
+{
+//Damage types that Return some of it's damage to the user as healing
+    Int PainFlag;
+    For(int j = 0; j < PAINCOUNT; j++)
+	{
+	If(PainRecord[j][0] == PainType)
+		{
+        //found our weapon paintype
+        PainFlag = PainRecord[j][1];      
+		}
+	}
+    if(PainFlag & ELM_LIFESTEAL){Return 1;}
 return 0;
 }
 

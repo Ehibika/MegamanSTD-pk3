@@ -8,7 +8,7 @@
 #include "zcommon.acs"
 
 
-#LIBDEFINE WEAPONLIST 41
+#LIBDEFINE WEAPONLIST 42
 #LIBDEFINE SUBWEAPONLIST_MAX 7
 #LIBDEFINE PSILIST 5
 
@@ -104,11 +104,11 @@ str MasterWepList[WEAPONLIST][6] = {
 /*24*/{"ViperRifle","ViperRifleWep","ViperRifle_Ammo", WF_MACHINEGUN,"ViperRifle",""},
 
 /*25*/{"ThriceGun","ThriceGunWep","ThriceGun_Ammo", WF_MACHINEGUN,"ThriceGun",""},
-/*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL,"MediBuster",""},
+/*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL,"Medibuster",""},
 /*27*/{"ScrewShooter","ScrewShooterWep","ScrewShooter_Ammo", WF_MACHINEGUN|WF_MEDICAL,"ScrewShooter",""},
 /*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL,"BoltDriver",""},
 /*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairSprayer",""},
-/*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_MACHINEGUN|WF_MEDICAL,"RepairLauncher",""},
+/*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_LAUNCHER|WF_MEDICAL,"RepairLauncher",""},
 /*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherWave"},
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},
 /*33*/{"VioletZapper","VioletZapperWep","VioletZapper_Ammo", WF_MACHINEGUN,"VioletZapper",""},
@@ -119,4 +119,6 @@ str MasterWepList[WEAPONLIST][6] = {
 /*38*/{"TossShield","TossShieldWep","TossShield_WaitCount", WF_MELEE|WF_TOSSSHIELD,"TossShield",""},
 /*39*/{"AncientRelic","AncientRelicWep","TossShield_WaitCount", WF_MELEE,"AncientRelicEdge","AncientRelicTip"},
 /*40*/{"AquaBuster","AquaBusterWep","AquaBuster_Ammo", WF_BUSTER,"AquaBuster",""},
+/*41*/{"Napalm Head","NapalmHeadWep","NapalmHead_Ammo", WF_LAUNCHER,"NapalmHead",""},
+
 };

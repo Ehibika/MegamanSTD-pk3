@@ -2,8 +2,8 @@ Actor BrightMan : ClassBase
 {
 Player.DisplayName "BrightMan"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsBrightMan"
@@ -12,7 +12,7 @@ Player.Startitem "UseAbility2_BrightMan"
 
 Player.Startitem "PRO_BusterMastery"
 Player.Startitem "PRO_ElecResistance"
-Player.Startitem "Pro_Recharge"
+Player.Startitem "Pro_EnergyBalancer"
 
 Player.Startitem "BrightBulb_Charges",2
 

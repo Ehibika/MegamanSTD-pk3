@@ -25,7 +25,7 @@ int VictimHPPer = GetHealthPercent(0,0,0);
 
 bool CritHit,Assassin,FireCrit,PoisonCrit,FrostBiteCrit,Guts,Determined,Marksman;
 int DB_Determined,DB_Guts,DB_Marksman;
-if(type == 11) //GAMEEVENT_ACTOR_DAMAGED 
+if(type == 11 && ClassifyActor(0) & ACTOR_PLAYER) //GAMEEVENT_ACTOR_DAMAGED 
 {
 
 //===============|Check for damage properties on the opposing player|===============
@@ -157,12 +157,14 @@ if(CheckInventory("IsFireman")
 	&& CheckForElement(arg2,ELM_FIRE) 
 	&& IsPointerEqual(AAPTR_DAMAGE_TARGET,AAPTR_DAMAGE_SOURCE) == False)
 	{
-	if(CheckInventory("FiremanHeat")<100){GiveInventory("FiremanHeat",DamageModify(Damage,0.2));}
+	int FiremanHeatGain = DamageModify(Damage,0.2);
+	if(FiremanHeatGain>10){FiremanHeatGain = 10;}
+	if(CheckInventory("FiremanHeat")<100){GiveInventory("FiremanHeat",FiremanHeatGain);}
 	}
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 if(CheckInventory("IsFireman") && !CheckForElement(arg2,ELM_BREAK) )
 	{
-	Damage = ValueMap(CheckInventory("FiremanHeat"),1,100,DamageModify(Damage,1.0),DamageModify(Damage,0.2));
+	Damage = ValueMap(CheckInventory("FiremanHeat"),1,100,DamageModify(Damage,1.0),DamageModify(Damage,0.4));
 	}
 //==Quickman Class Passive==
 SetActivator(0, AAPTR_DAMAGE_SOURCE);
@@ -187,14 +189,15 @@ if((ClassifyActor(0) & ACTOR_PLAYER) && GetActorProperty(0,APROP_Health) > 0) {
 }
 SetActivator(0, AAPTR_DAMAGE_TARGET);
 
-
-
+//===============|LifeSteal|===============
+if(CheckForLifeSteal(arg2)){LifeSteal = DamageModify(Damage,0.5);}
+SetActivator(0, AAPTR_DAMAGE_SOURCE);
 if(LifeSteal>0 && (!CheckInventory("PoisonMark")))
 	{
-	SetActivator(0, AAPTR_DAMAGE_SOURCE);
 	HealThing(LifeSteal,GetActorProperty(0,APROP_SPAWNHEALTH));
-	SetActivator(0, AAPTR_DAMAGE_TARGET);
 	}
+SetActivator(0, AAPTR_DAMAGE_TARGET);
+
 
 if(Damage>0)
 	{
@@ -207,6 +210,26 @@ SetResultValue(Damage);
 //==Speedrunner==
 //if(CheckSpeedrunnerLoss()){TakeInventory("PowerSpeedRunner",9); LocalAmbientSound("support/StatDown",127);}
 }
+
+//OBject Hit Events
+if(type == 11 && CheckActorClass(0,"BlackBomb2") ) //GAMEEVENT_ACTOR_DAMAGED 
+	{
+
+		if(CheckForElement(arg2,ELM_FIRE)){Damage = 0; SetActorState(0,"Explode");}
+		else if(CheckForElement(arg2,ELM_BREAK)){Damage = Damage*3;}
+		SetResultValue(Damage);
+
+	}
+
+if(type == 11 && (
+		CheckActorClass(0,"RockCube") 
+		||CheckActorClass(0,"Fan")
+		)) //GAMEEVENT_ACTOR_DAMAGED 
+	{
+		if(CheckForElement(arg2,ELM_BREAK)){Damage = Damage*3;}
+		if(!CheckActorClass(0,"RockCube")){GiveInventory("ObjectPain",1);}
+		SetResultValue(Damage);
+	}
 }
 
 function bool ProjInView(int target) {
@@ -714,7 +737,7 @@ function bool BoomIsAllyFunc(void)  {
 	return(Boom_TargetTeam==getSelfTeam());
 }
 
-Script "BlastKnockback2" (int force, int range) 
+Script "BlastKnockback2" (int force, int range, int Self) 
 {
 int xDist = GetActorX(0) - Boom_X;
 int yDist = GetActorY(0) - Boom_Y;
@@ -726,7 +749,7 @@ int pitch = VectorAngle(xyDist,zDist);
 int dist = VectorLength(xyDist,zDist);
 
 			if(CheckInventory("WeightClass_Light")){force += force*0.5>>16; if(force < 0){force = 0;};}
-			if(CheckInventory("WeightClass_Heavy")){force -= force*0.5>>16; if(force < 0){force = 0;};}
+			if(!Self && CheckInventory("WeightClass_Heavy")){force -= force*0.5>>16; if(force < 0){force = 0;};}
 
 dist >>= 16;
 //Printbold(i:dist,s:" ",i:range,s:" ",i:force);
@@ -867,6 +890,66 @@ For(int q = 0;q < GetMaxEntities(); q++)
 }
 
 }
+
+//Version of push/pull that always references the owner.
+script "MSTD_PushPull" (int maxforce, int maxRange, int noFalloff)
+{
+	if(maxRange == 0){terminate;}
+
+	int targetTID;
+	int angle;
+	int finalforce;
+	int distance;
+	int userTID;
+	int userTeam = -1;
+	int userCount = 0;
+
+		userTID = ACS_NamedExecuteWithResult("Core_GetTarget", 0);
+		userTeam = GetPlayerInfo(userTID - 1000, PLAYERINFO_TEAM);
+		//log(i:userTeam);
+
+		
+	for(int p = 0;p < GetMaxEntities(); p++)
+	{
+		if(!PlayerInGame(p))
+		{
+			continue;
+		}
+		if(ACS_ExecuteWithResult(975,1)==1)
+		{
+			if(userTeam == GetPlayerInfo(p, PLAYERINFO_TEAM))
+			{
+				continue;
+			}
+		}
+		
+
+		targetTID = p+1000;
+		if(!CheckActorInventory(targetTID, "NoPushFlag")
+			//&&!isTID_KBProof(targetTID) 
+			&& xyzDistance(0, targetTID) < maxRange && userTID != targetTID)
+		{	
+			userCount++;
+			distance = xyzDistance(0,targetTID);
+			finalforce = ceil_cscc(FixedMul(maxforce << 16, 1.0 - FixedDiv(distance, maxRange)));
+			if(CheckInventory("WeightClass_Light")){finalforce += finalforce*0.5>>16; if(finalforce < 0){finalforce = 0;};}
+			if(CheckInventory("WeightClass_Heavy")){finalforce -= finalforce*0.5>>16; if(finalforce < 0){finalforce = 0;};}
+
+			if(finalforce > maxforce || noFalloff > 0 )
+			{
+				finalforce = maxforce;
+			}
+			
+			angle = VectorAngle(GetActorX(0) - GetActorX(targetTID), GetActorY(0) - GetActorY(targetTID)) >> 8;
+			if(distance>40 || finalforce < 0)
+			{
+				ThrustThing(angle, finalforce, false, targetTID);
+			}
+		}
+		
+	}
+	SetResultValue(userCount); // Returns amount of players caught in the pull
+}// End script 247
 #endregion
 //#endregion
 
@@ -1091,7 +1174,7 @@ Script "WepSpeedMod" (int Value)
 int FixedValue = Value<<16;
 //Check for mastery
 
-if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.7; /*log(s:"Got Hefty!");*/}
+if(CheckProp(MasterProPList[16][PROP_NAME])) {Value = 0.8; /*log(s:"Got Hefty!");*/}
 if(MasteryCheck(GetThisWeaponType())) {Value += 0.1; /*log(s:"Got Mastery!");*/}
 if(CheckProp(MasterProPList[14][PROP_NAME])) 
 	{
@@ -1109,7 +1192,7 @@ if(CheckProp(MasterProPList[31][PROP_NAME]))
 			}
 		}
 
-//IsBladeParryActive();
+IsBladeParryActive();
 
 //Quickman's Speed passive
 if(CheckInventory("IsQuickman")){Value += 0.2*CheckInventory("AtomicSpeedLevel");}

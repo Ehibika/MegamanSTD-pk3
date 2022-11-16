@@ -273,11 +273,14 @@ actor CompressedBlast_Knockback : CustomInventory
 States
 {
 Pickup:
-TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup2")
+TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup3")
 TNT1 A 0 A_JumpIf(CallACS("Boom_IsEnemy"),"Pickup2")
 stop
 Pickup2:
 TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad)
+stop
+Pickup3:
+TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad,true)
 stop
 }
 }

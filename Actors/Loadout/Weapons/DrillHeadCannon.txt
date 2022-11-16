@@ -120,13 +120,15 @@ Const int DrillHeadCannon_RADMin = 32;
 actor DrillHeadCannonShot : FastProjectileBase
 {
 Speed 64
-Damage (0)
-//+RIPPER
+Damage (DrillHeadCannon_DMG)
++RIPPER
+var int user_PierceRipper[1];
+var int user_RippedPlayer[64];
 Obituary "$OB_DRILLHEADCANNON"
 damagetype "DrillHead"
-radius 8
+radius 12
+height 12
 Reactiontime 25
-height 8
 scale 4.5
 States
 {
@@ -182,11 +184,14 @@ actor DrillHeadCannon_Knockback : CustomInventory
 States
 {
 Pickup:
-TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup2")
+TNT1 A 0 A_JumpIf(CallACS("Boom_IsMine"),"Pickup3")
 TNT1 A 0 A_JumpIf(CallACS("Boom_IsEnemy"),"Pickup2")
 stop
 Pickup2:
 TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad)
+stop
+Pickup3:
+TNT1 A 0 ACS_NamedExecuteWithResult("BLASTKNOCKBACK2",BlastThrust,BlastThrustRad,true)
 stop
 }
 }

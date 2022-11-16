@@ -87,7 +87,7 @@ inventory.maxamount 3
 actor DynamiteAimPath : GolfBallAimInstantStarter { Speed 35 Gravity 1.5}
 
 
-Const int Dynamite_DMG = 150;
+Const int Dynamite_DMG = 100;
 Const int Dynamite_RAD = 160;
 Const int Dynamite_RADMin = 96;
 
@@ -139,10 +139,20 @@ height 8
 speed 0
 health 10
 scale 2
+args 0,8
 states
 {
 Spawn:
 TNT1 A 0
+TNT1 A 0 A_CheckCeiling("SpawnCeiling")
+goto Spawn1
+
+SpawnCeiling:
+MXP1 A 0 A_SetScale(Scalex,-ScaleY)
+MXP1 A 0 A_SetArg(0,-args[1])
+goto Spawn1
+
+Spawn1:
 DMIT A 0 A_GiveInventory("ProjectileCode",1)
 DMIT A 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,4,3)
 DMIT A 1 A_RearrangePointers(AAPTR_DEFAULT, AAPTR_TARGET, AAPTR_DEFAULT)
@@ -162,7 +172,7 @@ DMIT A 1  A_LookEx(LOF_NOSOUNDCHECK, 1, Dynamite_RAD, Dynamite_RAD, 360, "Target
 Goto Scan1
 Scan2: //Blink
 DMIT A 0 A_SetArg(0,0)
-DMIT A 4 A_SpawnItemEx("SLBombPulseFX",0,0,8,0,0,0,0,1)
+DMIT A 4 A_SpawnItemEx("SLBombPulseFX",0,0,args[1],0,0,0,0,1)
 DMIT A 1  A_LookEx(LOF_NOSOUNDCHECK, 1, Dynamite_RAD, Dynamite_RAD, 360, "Targetcheck")
 Goto Scan1
 Targetcheck:
@@ -174,7 +184,7 @@ Goto Explode
 
 Explode:
 DMIT B 0 A_PlaySoundEX("weapon/BombAlarm","Soundslot6")
-DMIT ABABA 5
+DMIT AB 5
 TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
 TNT1 A 1 A_RearrangePointers(AAPTR_MASTER, AAPTR_DEFAULT, AAPTR_DEFAULT)
 TNT1 A 0 A_SpawnItemEx("ExplosionEffect2",0,0,0,0,0,0,0,1)

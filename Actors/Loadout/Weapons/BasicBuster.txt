@@ -108,7 +108,7 @@ TNT1 A 0 A_CountDown
 TNT1 A 1 
 Goto Spawn2
 Death:
-TNT1 A 1 A_Spawnitemex("BlasterPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+TNT1 A 1 A_Spawnitemex("BasicShotPuff",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -116,12 +116,14 @@ stop
 //[+]========================================================================[+]
 //--------------------------------|Effect Actors|-------------------------------
 //[+]========================================================================[+]
-actor BlasterPuff1 : FXActor_A
+actor BasicShotPuff : FXActor_A
 {
 scale 1.5
 States
 {
 Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
 BIM1 AABCDEF 1
 stop
 }

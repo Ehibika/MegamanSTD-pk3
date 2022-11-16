@@ -16,7 +16,7 @@ Actor BasicDeployable : ClassBase
 +STEPMISSILE
 +DONTREFLECT
 +NOTAUTOAIMED
-Bloodtype "ActorHitFX"
+//Bloodtype "ActorHitFX"
 speed 0
 Damage(0)
 Maxstepheight 7
@@ -68,7 +68,7 @@ actor ActorHitFX
   Spawn:
     MMFX A 0 bright
     MMFX A 1 bright A_Stop
-    MMFX A 0 bright A_PlaySound ("Misc/Metdie")
+    MMFX A 0 bright A_PlaySound ("Weapon/ObjectHit")
     MMFX A 1 bright
     stop
   }

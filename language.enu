@@ -6,7 +6,7 @@ OB_WINDPRESSUREBUSTER = "%k Eliminated %o with the WIND PRESSURE BUSTER";
 OB_ARROWBUSTER = "%k Eliminated %o with the ARROW BUSTER";
 OB_SHADOWBUSTER = "%k Eliminated %o with the SHADOW BUSTER";
 OB_LAZERRIFLE = "%k Eliminated %o with the LAZER RIFLE";
-OB_TRIANGLEGUN = "%k Eliminated %o with the TRIANGL EGUN";
+OB_TRIANGLEGUN = "%k Eliminated %o with the TRIANGLE GUN";
 OB_HIGHSPEEDRIFLE = "%k Eliminated %o with the HIGH SPEED RIFLE";
 OB_GATLINGGUN = "%k Eliminated %o with the GATLING GUN";
 OB_SHOTGUN = "%k Eliminated %o with the SHOTGUN";
@@ -51,7 +51,12 @@ OB_RYUENJIN = "%k Scorched %o's Ryuenjin Technique";
 OB_REKKOHA = "%k was destroyed by %o's Rekkoha";
 
 OB_GUTSPUNCH = "%o Got Punched by %k";
-OB_MINIBOMB = "%0 Got Deleted by %o's minibomb";
+OB_MINIBOMB = "%o Got Deleted by %o's minibomb";
+OB_BLACKBOMB = "%o Got Deleted by %o's Black Bomb";
+OB_MAGBOMB = "%o Got Deleted by %o's Mag Bomb";
+OB_POISSEED = "%o Got Deleted by %o's Poison Seed";
+OB_FREEZEBOMB = "%o Got Deleted by %o's Freeze Bomb";
+OB_QUAKE = "%o Got Deleted by %o's Quake";
 
 OB_HYPERDIVE = "%o Got Struck down by %k's Hyper Dive";
 OB_SCATTEREDFLOWER = "%o Got Struck down by %k's Scattered Flower Technique";
@@ -177,3 +182,4 @@ WEP_LAUNCHER = "\c[MenuGreen]Launchers \c-:";
 WEP_MELEE = "\c[MenuBlue]Melee \c-:";
 
 RELOADNOTICE = "\c[HelpMenuCol]Remember to Bind the reload and ability Key!";
+DDNOTICE = "\c[HelpMenuCol]Damage Display Options (if Wad is loaded)";

@@ -1,3 +1,14 @@
+Const int MBC_BlackBomb = 1; //Fire
+Const int MBC_FreezeBomb = 2; //Ice
+Const int MBC_Whirlpool = 3; //Aqua
+Const int MBC_PoisonSeed = 4; //Toxic
+Const int MBC_MagBomb = 5; //Elec
+Const int MBC_Wind = 6; //Wind
+Const int MBC_Howitzer = 7; //Break
+Const int MBC_Euclid = 8; //Euclid
+Const int MBC_StepSword = 9; //Blade
+Const int MBC_Repair = 10; //Repair
+
 actor Ability1_megamanEXE : AbilityMasterBase
 {
 Weapon.AmmoUse2 1
@@ -12,15 +23,136 @@ States
 {
 
 Ready:
-XB20 A 0 
+XB20 A 0 //Ordered Highest to lowest
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_Repair,"Ready.Repair")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_StepSword,"Ready.StepSword")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_Euclid,"Ready.Euclid")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_Howitzer,"Ready.Howitzer")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_Wind,"Ready.Wind")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_MagBomb,"Ready.MagBomb")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_PoisonSeed,"Ready.PoisonSeed")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_Whirlpool,"Ready.WhirlPool")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_FreezeBomb,"Ready.FreezeBomb")
+TNT1 A 0 A_JumpIfInventory("MiniBombChipFlag",MBC_BlackBomb,"Ready.BlackBomb")
+
+goto Ready.Minibomb
+
+
+
+
+
+
+Ready.Wind:
+
+Ready.Euclid:
+Ready.StepSword:
+Ready.Repair:
+
+Ready.Minibomb:
 "####" A 1 //A_WeaponReady
 goto Fire
+
+Ready.BlackBomb:
+"####" A 1 //A_WeaponReady
+goto Fire.BlackBomb
+
+Ready.WhirlPool:
+"####" A 1 //A_WeaponReady
+goto Fire.WhirlPool
+
+Ready.PoisonSeed:
+"####" A 1 //A_WeaponReady
+goto Fire.PoisonSeed
+
+Ready.MagBomb:
+"####" A 1 //A_WeaponReady
+goto Fire.MagBomb
+
+Ready.Howitzer:
+"####" A 1 //A_WeaponReady
+goto Fire.Howitzer
+
+Ready.FreezeBomb:
+"####" A 1 //A_WeaponReady
+goto Fire.FreezeBomb
 
 Fire:
 XB00 A 0 
 "####" FG 2
 "####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
 "####" A 0 A_FireCustomMissile("MiniBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.BlackBomb:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("BlackBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.WhirlPool:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("WhirlPool_FlareShot",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.PoisonSeed:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("PoisSeedShot",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.MagBomb:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("MagBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.Howitzer:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("QuakeBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
+"####" HIJK 2
+"####" K 16
+"####" C 0 A_GiveInventory("MiniBombCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" C 0 A_Jump(256,"End")
+goto End
+
+Fire.FreezeBomb:
+XB00 A 0 
+"####" FG 2
+"####" A 0 A_PlaySoundEx("weapon/CrackerThrow","Weapon")
+"####" A 0 A_FireCustomMissile("FreezeBomb",0,0,0,0,0,Aim_ArcOverHead+(Aim_ArcScale*Sin(-pitch)))
 "####" HIJK 2
 "####" K 16
 "####" C 0 A_GiveInventory("MiniBombCooldown")
@@ -64,7 +196,11 @@ stop
 }
 //=================
 //=================
-Const int Minibomb_DMG = 50;
+
+actor MiniBombChipFlag : Inventory{inventory.amount 1 inventory.maxamount 10}
+
+
+Const int Minibomb_DMG = 100;
 Const int Minibomb_RAD = 128;
 Const int Minibomb_RADMin = 32;
 
@@ -167,7 +303,7 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
-TNT1 A 0 A_Giveinventory("MiniBombCooldownItem",85)
+TNT1 A 0 A_Giveinventory("MiniBombCooldownItem",175)
 TNT1 A 0 A_Spawnitemex("MiniBombCooler")
 stop
 Nope:
@@ -179,5 +315,5 @@ stop
 actor MiniBombCooldownItem : inventory
 {
 inventory.amount 1
-inventory.maxamount 85
+inventory.maxamount 175
 }

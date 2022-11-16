@@ -100,6 +100,8 @@ ELSP A 1 A_ChangeFlag("FLOORHUGGER",0)
 ELSP A 0 A_ChangeFlag("SLIDESONWALLS",0)
 GoTo Looping
 Looping:
+PBAL B 0 ThrustThingZ(0,0,0,1)
+PBAL B 0 ThrustThing(angle*256/360,0,1,0)
 ELSP A 2 A_ChangeVelocity(25,0,0,CVF_RELATIVE|CVF_REPLACE) 
 ELSP A 0 A_JumpIf(z-floorz>0, "Air")
 ELSP B 2 A_CountDown
@@ -111,6 +113,7 @@ ELSP A 0 A_SpawnItemEx("ElectricSparkSplit",0,0,0,25,0,0,90)
 stop
 Air:
 ELSP A 1 A_ChangeVelocity(0,0,-25,CVF_RELATIVE|CVF_REPLACE) 
+PBAL B 0 ThrustThing(angle*256/360,0,1,0)
 ELSP A 0 A_JumpIf(z-floorz==0, "Looping")
 ELSP A 1
 ELSP A 0 A_JumpIf(z-floorz==0, "Looping")

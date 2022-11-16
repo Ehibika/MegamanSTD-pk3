@@ -242,20 +242,6 @@ stop
 
 actor SoothingRainHealer//: BasicHelper
 {
-    +MISSILE
-    -SOLID
-    +NOCLIP
-    +NOINTERACTION
-    +NOGRAVITY
-    +DONTBLAST
-    +DONTREFLECT
-    +THRUACTORS
-    +SERVERSIDEONLY
-    RenderStyle none
-    Radius 2
-    Height 2
-
-    Speed 15
     States
     {
     Spawn:

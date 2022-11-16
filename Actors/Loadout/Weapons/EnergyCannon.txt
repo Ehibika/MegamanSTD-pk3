@@ -91,8 +91,8 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 Const int EnergyCannon_DMG = 100;
-Const int EnergyCannon_RAD = 128;
-Const int EnergyCannon_RADMin = 32;
+Const int EnergyCannon_RAD = 160;
+Const int EnergyCannon_RADMin = 96;
 
 actor EnergyCannonShot : FastProjectileBase
 {

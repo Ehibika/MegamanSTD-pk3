@@ -20,7 +20,7 @@ if(!ThisWepType){return 0;}
 //First we will gather all the masteries we have and combine them as a bitflag
 int MasteryFlag;
 
-if(CheckProp(MasterProPList[0][PROP_NAME])){MasteryFlag = MasteryFlag|WF_BUSTER;}
+if(CheckProp(MasterProPList[0][PROP_NAME])){MasteryFlag = MasteryFlag| WF_BUSTER;}
 if(CheckProp(MasterProPList[1][PROP_NAME])){MasteryFlag = MasteryFlag| WF_MACHINEGUN;}
 if(CheckProp(MasterProPList[2][PROP_NAME])){MasteryFlag = MasteryFlag| WF_SPRAYER;}
 if(CheckProp(MasterProPList[3][PROP_NAME])){MasteryFlag = MasteryFlag| WF_LAUNCHER;}
@@ -74,7 +74,7 @@ if(!CheckPropRange(0,4)){Return 0;}
 int WepFlag;
 For(int i = 0; i < WEAPONLIST; i++)
 	{
-	If(MasterWepList[i][4] == PainType || MasterWepList[i][5] == PainType)
+	If(StrCmp(PainType,MasterWepList[i][4])==0 || StrCmp(PainType,MasterWepList[i][5])==0)
 		{
         //found our weapon paintype, now see if the player has a mastery for this weapon.
         WepFlag = MasterWepList[i][3];      
@@ -93,6 +93,27 @@ For(int i = 0; i < PAINCOUNT; i++)
 		{
         //found our weapon paintype
         if(ElementFlag & PainRecord[i][1]) Return 1;      
+		}
+	}
+Return 0;
+}
+
+Function int GetElement (str PainType)
+{
+//Check to see if the given paintype is of a specific element
+int elmFlag;
+For(int i = 0; i < PAINCOUNT; i++)
+	{
+	If(PainRecord[i][0] == PainType)
+		{
+        //found our weapon paintype, clear out non elemental flags first
+        //
+
+         elmFlag = PainRecord[i][1];
+
+         if(elmFlag & ELM_EXPLOSION){elmFlag = elmFlag & ~ELM_EXPLOSION;}
+         if(elmFlag & ELM_DONTSTOP){elmFlag = elmFlag & ~ELM_DONTSTOP;}
+         Return elmFlag;   
 		}
 	}
 Return 0;
@@ -124,10 +145,8 @@ Switch(ElementFlag)
     Case ELM_TOXIC: return CheckProp(MasterProPList[8][PROP_NAME]); break;
     Case ELM_ELEC: return CheckProp(MasterProPList[9][PROP_NAME]); break;
     Case ELM_WIND: return CheckProp(MasterProPList[10][PROP_NAME]); break;
-    Case ELM_WIND: return CheckProp(MasterProPList[11][PROP_NAME]); break;
-    Case ELM_BREAK:	return CheckProp(MasterProPList[12][PROP_NAME]); break;
-    Case ELM_EUCLID: return CheckProp(MasterProPList[13][PROP_NAME]); break;
-    Case ELM_BLADE:  return CheckProp(MasterProPList[14][PROP_NAME]); break;
+    Case ELM_BREAK: return CheckProp(MasterProPList[11][PROP_NAME]); break;
+    Case ELM_EUCLID: return CheckProp(MasterProPList[12][PROP_NAME]); break;
     }
 
 return 0;
@@ -187,7 +206,7 @@ Delay(1);
 //if(CheckProp(MasterProPList[15][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Acrobat",0,0);}
 if(CheckProp(MasterProPList[15][PROP_NAME])){PlayerJumpZ[PlayerNumber()]+=5.0; SetActorProperty(0,APROP_JUMPZ,PlayerJumpZ[PlayerNumber()]);}
 if(CheckProp(MasterProPList[20][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Undershirt",0,0);}
-if(CheckProp(MasterProPList[22][PROP_NAME])){ACS_NamedExecuteAlways("Passive_TeamMedic",0,0);}
+ACS_NamedExecuteAlways("RepairWepRecovery",0,0);//if(CheckProp(MasterProPList[22][PROP_NAME])){ACS_NamedExecuteAlways("Passive_TeamMedic",0,0);}
 if(CheckProp(MasterProPList[23][PROP_NAME])){ACS_NamedExecuteAlways("Passive_Subtank",0,0);}
 if(CheckProp(MasterProPList[29][PROP_NAME])){ACS_NamedExecuteAlways("Passive_EnergyBalancer",0,0);}
 }
@@ -201,14 +220,14 @@ The undershirfFlag is taken by damage events, when the player doesn't have it,
 this script waits untill they get back to full HP to restore the undershirfFlag
 */
 GiveInventory("UndershirtFlag",1);
-//GiveInventory("UnderShirtFX_On",1);
+GiveInventory("UnderShirtFX_On",1);
 while(GetActorProperty(0,APROP_HEALTH) > 0)
     {
     
     if(!CheckInventory("UndershirtFlag"))
         {
         HPNow = GetActorProperty(0,APROP_HEALTH);
-        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);/*GiveInventory("UnderShirtFX_On",1)*/;localAmbientSound("item/Refill",127);}
+        if(HPNow >= HPMax){GiveInventory("UndershirtFlag",1);GiveInventory("UnderShirtFX_On",1);localAmbientSound("item/Refill",127);}
         }
     delay(17);
     }
@@ -232,6 +251,30 @@ while(GetActorProperty(0,APROP_HEALTH) > 0)
         else{HealThing(2,HPMax);}
         }
     delay(5);
+    }
+}
+
+Script "RepairWepRecovery" (void)
+{
+/*
+So long as the player is equipped with a Repair weapon, they will auto regen HP after avoiding
+damage for 1 second
+*/
+if(!CheckForRepairWep()){Terminate;}
+Bool TeamMedic = CheckProp(MasterProPList[22][PROP_NAME]);
+int HPMax = GetActorProperty(0,APROP_SPAWNHEALTH);
+int RecovStart = 403;
+int RecovRate = GetHealthPercent(-1,1,1);
+if(TeamMedic){RecovStart = 490; RecovRate = GetHealthPercent(-1,1,2);}
+while(GetActorProperty(0,APROP_HEALTH) > 0)
+    {
+    //log(i:GetActorPowerupTics(0,"HealRampPower"));
+    if(GetActorPowerupTics(0,"HealRampPower")<RecovStart && GetActorProperty(0,APROP_HEALTH) < GetActorProperty(0,APROP_SPAWNHEALTH))
+        {
+        if(CheckInventory("PoisonMark")){GiveInventory("DetoxLevel",5);GiveInventory("DetoxEfectSpawn",1);}
+        else{HealThing(RecovRate,HPMax);}
+        }
+    delay(7);
     }
 }
 
@@ -421,6 +464,26 @@ For(int i = 0; i < WEAPONLIST; i++)
 Return 0;
 }
 
+Function Bool CheckForRepairWep(Void)
+{
+//Confirm if we are equipped with a medical weapon
+str wepnamecheck;
+For(int i = 0; i < WEAPONLIST; i++)
+	{
+    wepnamecheck = MasterWepList[i][1];
+    If(CheckInventory(wepnamecheck) || CheckInventory(StrParam(s:wepnamecheck,i:2)))
+		{
+        If(MasterWepList[i][3] & WF_MEDICAL)
+            {
+            //You have a medical weapon
+            Return 1;   
+            }
+ 
+		}
+	}
+Return 0;
+}
+
 Function bool CheckForElementalGuard (str PainType)
 {
 if(!CheckProp(MasterProPList[21][PROP_NAME])){Return 0;}
@@ -539,6 +602,19 @@ if this damage is Elec based, return true.
 Return CheckForElement(PainType,ELM_ELEC);
 }
 
+//================
+
+function bool MSTD_ShowPropertyFXClient(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"MSTD_ShowPropertyFX")>0);
+}
+
+function bool MSTD_ShowOverHealFXClient(void)
+{
+	return (getUserCvar(ConsolePlayerNumber(),"MSTD_ShowOverHealFX")>0);
+}
+
+
 
 Script "BladeParryWarper" (void) CLIENTSIDE
 {
@@ -547,6 +623,7 @@ Script "BladeParryWarper" (void) CLIENTSIDE
 	// Loop if shield is active
 	while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "InBladeParry") > 0
+    && MSTD_ShowPropertyFXClient()
 	){
         SynchWarperRender(Player);
 		Delay(1);
@@ -560,8 +637,9 @@ Script "BladeParryWarper" (void) CLIENTSIDE
 
 Function void IsBladeParryActive(void)
 {
+
 Bool BladeParry;
-if(CheckProp(MasterProPList[13][PROP_NAME]))
+if(CheckProp(MasterProPList[13][PROP_NAME]) && MSTD_ShowPropertyFXClient())
         {
         int ThisWeapon = STD_WhichWeapon();
         If((MasterWepList[ThisWeapon][3] & WF_MELEE) || (MasterWepList[ThisWeapon][3] & WF_BLADE)){BladeParry = 1;}
@@ -581,6 +659,7 @@ Script "UnderShirtWarper" (void) CLIENTSIDE
 	// Loop if shield is active
 	while(GetActorProperty(Player, APROP_HEALTH)>0
 	&& CheckActorInventory(Player, "UndershirtFlag") > 0
+    && MSTD_ShowPropertyFXClient()
 	){
         SynchWarperRender(Player);
 		Delay(1);
@@ -592,13 +671,17 @@ Script "UnderShirtWarper" (void) CLIENTSIDE
 	Thing_Remove(0);
 }
 
+
+
 Script "overhealFXWarper" (void) CLIENTSIDE
 {
 	int Player = ACS_NamedExecuteWithResult("core_gettarget",0);
 	
 	// Loop if shield is active
 		while(GetActorProperty(Player, APROP_HEALTH)>0
-	&& CheckActorInventory(Player, "OverhealFlag") > 0)
+	&& CheckActorInventory(Player, "OverhealFlag") > 0
+    && MSTD_ShowOverHealFXClient()
+        )
 	{
         SynchWarperRender(Player);
 		Delay(1);
@@ -622,6 +705,7 @@ Script "GutsyRageFXWarper" (void) CLIENTSIDE
         ||CheckActorInventory(Player, "PoisonMark") > 0
         ||CheckActorInventory(Player, "StunMark") > 0
         )
+        && MSTD_ShowPropertyFXClient()
 	){
         SynchWarperRender(Player);
 		Delay(1);
@@ -631,4 +715,48 @@ Script "GutsyRageFXWarper" (void) CLIENTSIDE
     SetActorState(0,"Death");
     Delay(17);
 	Thing_Remove(0);
+}
+
+Script "ClassPassive_EXEChipSystem" (void)
+{
+/*
+We will start by getting the element flag for our weapons
+*/
+int WepA_Num = GetUserCvar(PlayerNumber(),"Lo_WepA");
+int WepB_Num = GetUserCvar(PlayerNumber(),"Lo_WepB");
+
+str WepAPain = MasterWepList[WepA_Num][4];
+str WepBPain = MasterWepList[WepB_Num][4];
+
+int MinibombChip;
+int RockCubeChip;
+
+Switch(GetElement(WepAPain))
+    {
+    CASE ELM_FIRE: MinibombChip = 1; break;
+    CASE ELM_ICE: MinibombChip = 2; break;
+    CASE ELM_AQUA: MinibombChip = 3; break;
+    CASE ELM_TOXIC: MinibombChip = 4; break;
+    CASE ELM_ELEC: MinibombChip = 5; break;
+    CASE ELM_WIND: MinibombChip = 6; break;
+    CASE ELM_BREAK:	MinibombChip = 7; break;
+    CASE ELM_EUCLID: MinibombChip = 8; break;
+    CASE ELM_BLADE: MinibombChip = 9; break;
+    }
+GiveInventory("MiniBombChipFlag",MinibombChip);
+
+Switch(GetElement(WepBPain))
+    {
+    CASE ELM_FIRE: RockCubeChip = 1; break;
+    CASE ELM_ICE: RockCubeChip = 2; break;
+    CASE ELM_AQUA: RockCubeChip = 3; break;
+    CASE ELM_TOXIC: RockCubeChip = 4; break;
+    CASE ELM_ELEC: RockCubeChip = 5; break;
+    CASE ELM_WIND: RockCubeChip = 6; break;
+    CASE ELM_BREAK:	RockCubeChip = 7; break;
+    CASE ELM_EUCLID: RockCubeChip = 8; break;
+    CASE ELM_BLADE: RockCubeChip = 9; break;
+    }
+GiveInventory("RockCubeChipFlag",RockCubeChip);
+
 }

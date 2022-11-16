@@ -53,22 +53,22 @@ OptionString ClassProperties
 "Marino", "Speedrunner \nAcrobat \nAssassin" //Marino
 "Cinnamon", "Team Medic \nElemental Guard \nToxic Ressistance" //Cinnamon
 "Alia", "BusterMastery \nSprayerMastery \nTeam Medic" //Alia
-"MegamanEXE", "BusterMastery \nBlade Parry \nUndershirt" //Megaman.EXE
-"SearchmanEXE", "Specialist \nMarksman \nAssassin" //Searchman.EXE
+"MegamanEXE", "BusterMastery \nUndershirt \n\cGChip System" //Megaman.EXE
+"SearchmanEXE", "Specialist \nMarksman \nEnergy Balancer" //Searchman.EXE
 "FireMan", "FireResistance \nSprayerMastery \n\cGFlashFire" //Fireman
 "HarpNote", "ElecResistance \nEuclidResistance \nTeam Medic" //HarpNote
-"Centaurman", "Marksman \nEuclidResistance \nHefty"
+"Centaurman", "Specialist \nEuclidResistance \nHefty"
 "FlashMan", "MachineGunMastery \nBusterMastery \nEuclidResistance"
 "Iceman", "IceResistance \nSubTank \nElemental Guard"
 "GutsMan", "Gutsy \nHefty \nReserve Tank"
 "QuickMan", "Speedrunner \nAcrobat \n\cGAtomic Speed"
-"Spark Mandrill", "ElecResistance \nHefty \nGutsy" //Spark Mandrill
+"Spark Mandrill", "ElecResistance \nRecharge \nGutsy" //Spark Mandrill
 "Vile", "SubTank \nLauncherMastery \nDetermined" //Vile
 "ToadMan", "AquaResistance \nToxicReistance \nAcrobat" //ToadMan
 "Bass", "MachineGunMastery \nElementalGuard \nSpeedrunner" //Bass
 "Sigma", "Hefty \nMeleeMastery \nBladeParry" //Sigma
-"Knightman", "MeleeMastery \nBladeParry \nHefty" //Knightman
-"BrightMan", "BusterMastery \nElecResistance \nRecharge" //BrightMan
+"Knightman", "MeleeMastery \nBladeParry \nUndershirt" //Knightman
+"BrightMan", "BusterMastery \nElecResistance \nEnergy Balancer" //BrightMan
 }
 
 OptionString Class_HP

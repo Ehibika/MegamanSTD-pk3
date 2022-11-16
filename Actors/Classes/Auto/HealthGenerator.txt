@@ -344,12 +344,14 @@ TNT1 A 1
 TNT1 A 0 A_TakeFromTarget("HealthGeneratorCooldownItem",1)
 TNT1 A 0 A_JumpIfInTargetInventory("HealthGeneratorCooldownItem",1,"Spawn")
 TNT1 A 0 A_GiveToTarget("HealthGenerator_Charges",1)
+TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
 TNT1 A 0 A_JumpIfInTargetInventory("HealthGenerator_Charges",3,"Death")
 TNT1 A 0 A_GiveToTarget("HealthGeneratorCooldownItem",280)
 Goto Spawn
 Death:
 DeathTake:
 TNT1 A 0 A_TakeFromTarget("AltCooldownFlag",99)
+TNT1 A 0 A_TakeFromTarget("AltChargesCooldownFlag",99)
 TNT1 A 0
 stop
 }
@@ -366,8 +368,13 @@ Spawn:
 TNT1 A 0
 stop
 Pickup:
+TNT1 A 0 A_JumpIfInventory("AltChargesCooldownFlag",1,"Nope")
+
 TNT1 A 0 A_Giveinventory("HealthGeneratorCooldownItem",280)
 TNT1 A 0 A_Spawnitemex("HealthGeneratorCooler")
+TNT1 A 0 A_Giveinventory("AltChargesCooldownFlag")
+
+TNT1 A 0 A_JumpIfInventory("HealthGenerator_Charges",1,"Nope")
 TNT1 A 0 A_Giveinventory("AltCooldownFlag")
 stop
 Nope:

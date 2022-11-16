@@ -101,7 +101,7 @@ Ammo.BackpackMaxAmount 60
 
 Actor ElectriggerVhitDelay : powerprotection
 {
-Powerup.duration 4
+Powerup.duration 3
 Damagefactor "ElectriggerV", 0
 }
 

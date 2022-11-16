@@ -76,7 +76,7 @@ Ammo.BackpackMaxAmount 120
 actor VioletZapperCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 3
+Powerup.Duration 4
 powerup.type "ConShotTimer"
 }
 //[+]========================================================================[+]
@@ -89,10 +89,8 @@ Obituary "$OB_VIOLETZAPPER"
 DamageType "VioletZapper"
 Speed 26
 Damage (25)
-radius 8
-
-MissileHeight 16
-height 16
+radius 10
+height 10
 scale 1.5
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition

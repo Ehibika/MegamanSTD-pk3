@@ -42,7 +42,9 @@
 #include "Actors/Classes/MegamanEXE/MegamanEXEClass.txt"
 #include "Actors/Classes/MegamanEXE/GutsPunch.txt"
 #include "Actors/Classes/MegamanEXE/Minibomb.txt"
+#include "Actors/Classes/MegamanEXE/Minibomb_Chips.txt"
 #include "Actors/Classes/MegamanEXE/RockCube.txt"
+#include "Actors/Classes/MegamanEXE/RockCube_Chips.txt"
 
 
 #include "Actors/Classes/Massimo/MassimoClass.txt"
@@ -208,6 +210,7 @@
 
 #include "Actors/Loadout/Weapons/AquaBuster.txt"
 #include "Actors/Loadout/Weapons/AncientRelic.txt"
+#include "Actors/Loadout/Weapons/NapalmHead.txt"
 
 /*
 #include "Actors/Loadout/Weapons/depreciated/NWN-01_Blaster.txt"

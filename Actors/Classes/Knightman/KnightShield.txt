@@ -168,12 +168,12 @@ TNT1 A 0 A_JumpIfInTargetInventory("CutterFlag",999,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("isDead",1,"DeathTake")
 TNT1 A 0 A_JumpIfInTargetInventory("ShieldRegenDelay",1,"Spawn.Basic")
 TNT1 A 0 A_JumpIfInTargetInventory("K_ShieldBreak",1,"Spawn.Repair")
-TNT1 A 0 A_GiveToTarget("ShieldEnergy",5)
+TNT1 A 0 A_GiveToTarget("ShieldEnergy",7)
 TNT1 A 0 A_Jump(256,"Spawn.Basic")
 Goto Spawn.Basic
 
 Spawn.Repair:
-TNT1 A 0 A_GiveToTarget("ShieldEnergy",3)
+TNT1 A 0 A_GiveToTarget("ShieldEnergy",7)
 TNT1 A 0 A_JumpIfInTargetInventory("ShieldEnergy",500,"Spawn.Restore")
 TNT1 A 0 A_Jump(256,"Spawn.Basic")
 Goto Spawn.Basic

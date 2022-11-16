@@ -11,7 +11,7 @@ Player.Startitem "UseAbility1_SparkMandrill"
 Player.Startitem "UseAbility2_SparkMandrill"
 
 Player.Startitem "PRO_ElectricResistance"
-Player.Startitem "PRO_Hefty"
+Player.Startitem "PRO_Recharge"
 Player.Startitem "PRO_Gutsy"
 
 Player.Startitem "WeightClass_Heavy"

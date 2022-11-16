@@ -136,7 +136,7 @@ Powerup.Duration 17
 damagefactor "KnightWreckerSwing", 0.0
 }
 
-Const int KnightWreckerDamage = 75;
+Const int KnightWreckerDamage = 125;
 Const int KnightWreckerSwingDamage = 25;
 Const int KnightWrecker_AOE = 160;
 Const int KnightWrecker_MinAOE = 96;
@@ -332,7 +332,7 @@ Obituary "$OB_KNIGHTWRECKER"
 Damagetype "KnightWreckerSwing"
 +RIPPER
 +DONTBLAST
-damage (6)//11
+damage (KnightWreckerSwingDamage)//11
 radius 20
 height 15
 States

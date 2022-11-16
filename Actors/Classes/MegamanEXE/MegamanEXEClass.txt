@@ -2,8 +2,8 @@ Actor megamanEXE : ClassBase
 {
 Player.DisplayName "megamanEXE"
 Player.SoundClass "megaman"
-Health 175
-Player.MaxHealth 175
+Health 200
+Player.MaxHealth 200
 Player.JumpZ 10
 
 Player.Startitem "IsmegamanEXE"
@@ -11,8 +11,9 @@ Player.Startitem "UseAbility1_megamanEXE"
 Player.Startitem "UseAbility2_megamanEXE"
 
 Player.Startitem "PRO_BusterMastery"
-Player.Startitem "PRO_BladeParry"
 Player.Startitem "PRO_Undershirt"
+//===|megamanEXE Class Passive: Chip System|===
+Player.Startitem "MegamanEXE_ChipSystem"
 
 +NOSKIN
 States
@@ -37,3 +38,14 @@ GoTo PainFrames
 
 
 Actor IsmegamanEXE : Once{}
+
+actor MegamanEXE_ChipSystem : CustomInventory
+{
+states
+{
+Pickup:
+TNT1 A 0 ACS_NamedExecuteAlways("ClassPassive_EXEChipSystem",0,0)
+stop
+
+}
+}

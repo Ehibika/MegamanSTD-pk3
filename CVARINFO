@@ -1,5 +1,7 @@
 server noarchive bool MSTD_SV_ProJTeamColor = true;
 user bool MSTD_CV_ProjTeamColor = true;
+user bool MSTD_ShowPropertyFX = true;
+user bool MSTD_ShowOverHealFX = true;
 
 user bool unselectable = False; 
 server noarchive bool MSTD_DDLoaded = true;

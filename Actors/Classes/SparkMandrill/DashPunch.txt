@@ -26,7 +26,7 @@ Fire:
 "####" E 0 A_GiveInventory("BreakDashCharge", 4)
 Fire.DashLoop:
 "####" F 0 A_ChangeVelocity(Cos(pitch)*DPSPD, 0, Momz,CVF_RELATIVE|CVF_REPLACE)
-"####" FF 1 A_FireCustomMissile("DashPunch",0,0,0,0)
+"####" FF 1 A_SpawnItemEx("DashPunch",30,10,20,Cos(pitch)*50, 0, -sin(pitch)*50,0) 
 "####" W 0 A_TakeInventory("BreakDashCharge", 1)
 "####" W 0 A_JumpIfInventory("BreakDashRecoil", 1, "Fire.DashLoopEnd")
 "####" W 0 A_JumpIfInventory("BreakDashCharge", 1, "Fire.DashLoop")
@@ -92,9 +92,9 @@ Const int DashPunch_RAD = 128;
 actor DashPunch : FastProjectileBase
 {
 PROJECTILE
-Radius 16
+Radius 14
 Height 25
-scale 2.5
+scale 2
 damage (80)
 +HITTRACER
 +SLIDESONWALLS

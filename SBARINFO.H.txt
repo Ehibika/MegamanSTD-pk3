@@ -24,6 +24,14 @@ InInventory not NoClipBar, 1{
 DrawNumber 3, smallfont, white, Ammo1, alignment(left), 48,135;//27, 132;
 }
 
+//Ability Cooldown bars
+//==|Altfire
+	DrawBar "ALTEMP", "ALTHBAR1", AltCooldownTime, vertical,reverse, 5, 163;
+	ininventory AltCooldownTime ,1 {DrawBar "ALTEMP", "ALTHBAR", AltCooldownTime, vertical,reverse, 5, 163;}
+//==|Ability
+	DrawBar "ALTEMP", "ALTHBAR1", AbilityCooldownTime, vertical,reverse, 25, 163;
+	ininventory AbilityCooldownTime ,1 {DrawBar "ALTEMP", "ALTHBAR", AbilityCooldownTime, vertical,reverse, 25, 163;}
+
 
 //#region -=- later reference -=-
 /*
@@ -88,18 +96,18 @@ InInventory PlayerIconFlag,25 {InInventory not PlayerIconFlag,26 {DrawImage "SE0
 InInventory PlayerIconFlag,26 {InInventory not PlayerIconFlag,27 {DrawImage "SE00Z0", 87, 156;}}
 
 //[+]======================================[+]
-//--------------|ClassHuds huds|---------------
+//--------------|Class huds|---------------
 //[+]======================================[+]
 
 InInventory IsMegaman, 1
 	{
 	DrawImage "CHARSI", 2, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", CombatSlideCooldownItem, vertical,reverse, 5, 163;
-	ininventory CombatSlideCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", CombatSlideCooldownItem, vertical,reverse, 5, 163;}
+	//DrawBar "ALTEMP", "ALTHBAR1", AltCooldownTime, vertical,reverse, 5, 163;
+	//ininventory AltCooldownTime ,1 {DrawBar "ALTEMP", "ALTHBAR", AltCooldownTime, vertical,reverse, 5, 163;}
 
 	DrawImage "RCOIL", 22, 166;
-	DrawBar "ALTEMP", "ALTHBAR1", RushCallCooldownItem, vertical,reverse, 25, 163;
-	ininventory RushCallCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", RushCallCooldownItem, vertical,reverse, 25, 163;}
+	//DrawBar "ALTEMP", "ALTHBAR1", AbilityCooldownTime, vertical,reverse, 25, 163;
+	//ininventory AbilityCooldownTime ,1 {DrawBar "ALTEMP", "ALTHBAR", AbilityCooldownTime, vertical,reverse, 25, 163;}
 	}
 
 InInventory IsMegamanX, 1
@@ -345,6 +353,7 @@ InInventory IsSearchManEXE, 1
 	DrawImage "SCOPI", 22, 166;
 	DrawBar "ALTEMP", "ALTHBAR1", SearchScopeCooldownItem, vertical,reverse, 25, 163;
 	ininventory SearchScopeCooldownItem ,1 {DrawBar "ALTEMP", "ALTHBAR", SearchScopeCooldownItem, vertical,reverse, 25, 163;}
+	ininventory NOT Ability2_SearchmanEXE ,1 {DrawNumber 3, smallfont, white, SearchScope_Charges, alignment(left), 30,166;}
 	}
 
 InInventory IsVile, 1
@@ -420,8 +429,15 @@ InInventory IsKnightMan, 1
 	ininventory K_ShieldBreak ,1 {DrawBar "FIRMBR2", "NORESO", ShieldEnergy, Horizontal, 42, 161;}
 	} 
 //[+]======================================[+]
-//-----------|Suit Resource Bars|-----------
+//-----------|Weapon SBars|-----------
 //[+]======================================[+]
+IsSelected GatlingGunWep, GatlingGunWep2
+	{
+	DrawImage "HEATBASE", 46, 137;
+	DrawBar "HTBAR1", "NOHEATBR", GatlingGun_Heat, Horizontal, 61, 137;
+	ininventory GatlingGun_Heat ,300 {DrawBar "HTBAR2", "NOHEATBR", GatlingGun_Heat, Horizontal, 61, 137;}
+	ininventory GatlingGun_OverHeat ,1 {DrawBar "HTBAR3", "BLHEATBR", GatlingGun_Heat, Horizontal, 61, 137;}
+	}
 
 //[+]======================================[+]
 //-----------|Weapon Resource Bars|-----------

@@ -219,7 +219,7 @@ Death:
 AQBA L 0 A_GiveInventory("ProjectileDCode",1)
 HBAL EE 0 A_Stop
 TNT1 A 0 A_Explode(RepairLauncher_Damage,RepairLauncherAOE,0,0,RepairLauncherMinAOE)
-HBAL E 0 A_SpawnItemEx("RepairLauncherHealer")
+HBAL E 0 A_SpawnItemEx("RepairLauncherHealer",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
 TNT1 A 0 A_SpawnItemEx("RepairLauncherImpactRing",0,0,0,0,0,0,0,1)
 TNT1 A 1 A_SpawnItemEx("RepairLauncherBlastFX",0,0,0,0,0,0,0,1)
 stop
@@ -228,18 +228,6 @@ stop
 
 actor RepairLauncherHealer : BasicHelper
 {
-    damagetype "RepairLauncher"
-    Obituary "$OB_REPAIRLAUNCHER"
-    +SKYEXPLODE
-    +EXPLODEONWATER
-    +RIPPER
-    +SERVERSIDEONLY
-    RenderStyle None
-    Damage (0) 
-    Radius 4
-    Height 4
-    speed 0 
-    scale 2.5
     states
     {
         Spawn:

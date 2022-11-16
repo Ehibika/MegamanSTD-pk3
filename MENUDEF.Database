@@ -66,6 +66,7 @@ OptionValue WepInto_Class
 38, "\cf:Melee::\cjToss Shield\cf:"
 39, "\cf:Melee::\cjSaber\cf:"
 40, "\cf:Buster::\cjTrick Shot\cf:"
+41, "\cf:Launcher::\cjLob Shot\cf:"
 }
 
 OptionValue WepInto_Category
@@ -110,7 +111,7 @@ OptionValue WepInto_Category
 38, "\c[grey]:Null:"
 39, "\c[MenuRed]:Fire: \c[DarkGray]:Heavy:"
 40, "\c[MenuBlue]:Aqua:"
-
+41, "\c[MenuRed]:Fire:"
 }
 
 OptionValue WepInto_Damage
@@ -156,7 +157,7 @@ OptionValue WepInto_Damage
 38, "\c[menuorange] **"
 39, "\c[MenuRed] *****"
 40, "\c[menuorange] ***"
-
+41, "\c[MenuRed] *****"
 }
 
 OptionValue WepInto_Rate
@@ -202,6 +203,7 @@ OptionValue WepInto_Rate
 38, "\c[menuorange] **"
 39, "\c[menuorange] **"
 40, "\c[menuorange] ***"
+41, "\c[menuorange] ***"
 }
 
 OptionValue WepInfo_Desc
@@ -248,6 +250,7 @@ OptionValue WepInfo_Desc
 38, "A tactical, throwable shield \nthat can be held first to block \nshots, and thrown like a \nboomerang afterwards."
 39, "A Huge, Heavy Saber type weapon \nwith the power of fire, it's \nswings although slow, can \ninflict burns and crit on \nburning foes."
 40, "Buster Class weapon that lobs \ngravity effected blobs of water \nthat deal splash damage within a small area."
+41, "Launcher that fires bouncing \ngrenades that explode after a \nperiod of time."
 }
 
 //=================================
@@ -329,7 +332,7 @@ OptionValue Propertyinfo
 6, "Cut Ice Damage recieved in half \nand blocks the Frostbite status"
 7, "Cut Aqua Damage recieved in half."
 8, "Cut Toxic Damage recieved in half \nand blocks the Poison status"
-9, "Cut Elec Damage recieved in half."
+9, "Cut Elec Damage recieved in half. \nand blocks the Blind status"
 10, "Cut Wind Damage recieved in half."
 //11, "Does nothing, Breaking damage breaches all defenses" 
 12, "Cut Euclid Damage recieved in half\nand blocks the Stop and \nSlow statuses."
@@ -345,13 +348,13 @@ OptionValue Propertyinfo
 19, "Deal increased damage to targets \nat or above full Health"
 20, "Will survive a fatal hit at 1 HP, \npassive reactivates once you return to full HP"
 21, "Reduces Fire, Aqua, Ice, and Elec \ndamage by 25%"
-22, "When equipped with a repair weapon, \nyou will passively regenerate HP."
+22, "Amplifies Passive HP regen when \nequipped with a repair gun."
 23, "Can overheal off of health \npickups on the map. gains overheal \nahead of time in modes \nwhere pickups don't spawn."
 
 24, "Damage increases while under \na negative effect"
 25, "weapon damage increases when \nHP is low."
 
-26, "weapon damage increases when \nthe further away you are from \nyour target"
+26, "weapon damage increases the \nfurther away you are from \nyour target"
 27, "Weapon Damage from Wind and \nAqua weapons will now inflict \nBurn"
 28, "Weapon Damage from Wind and \nAqua weapons will now inflict \nFrostbite"
 

@@ -25,7 +25,7 @@ TNT1 A 0
 BUST T 1 
 loop
 Death:
-BUST T 1 A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+BUST T 1 //A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }
@@ -51,7 +51,7 @@ TNT1 A 0
 BUST T 1 
 loop
 Death:
-BUST T 1 A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
+BUST T 1 //A_Spawnitemex("MilitaryPuff1",0,0,0,0,0,0,0,SXF_TRANSFERTRANSLATION)
 stop
 }
 }

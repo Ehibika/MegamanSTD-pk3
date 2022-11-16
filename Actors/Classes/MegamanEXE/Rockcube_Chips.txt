@@ -1,0 +1,192 @@
+//[+]========================================================================[+]
+//--------------------------------|Fan|--------------------------------
+//[+]========================================================================[+]
+
+actor Fan  : BasicDeployable
+{
+height 64
+radius 32
+scale 2.0
++NOTARGETSWITCH
++DONTRIP
+painsound "misc/ObjectHit"
+painchance 0
+damagefactor "GutsPunch", 1000.0
+
+damagefactor "StandardSaberEdge", 0.3
+damagefactor "StandardSaberTip", 0.3
+damagefactor "BeamRapireEdge", 0.3
+damagefactor "BeamRapireTip", 0.3
+damagefactor "TriangularBladeEdge", 0.3
+damagefactor "TriangularBladeTip", 0.3
+
+
+//translation "0:255=0:255"
+
+//Item 1
++FORCEYBILLBOARD
+-SHOOTABLE
++SOLID
++THRUSPECIES
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++MISSILE
+species "MovingPlatform"
+//+THRUSPECIES
+
+//Concrete Shot
++NOTAUTOAIMED
++CANTSEEK
++DONTRIP
+
++USEDAMAGEEVENTSCRIPT 
+Health 250
+Mass 9999
+Args 1
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_GiveInventory("ProjectileCode")
+TNT1 D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,2,args[0])
+TNT1 A 1 A_SpawnItemEX("FanVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_Stop
+TNT1 A 0 Thing_ChangeTID(0,ACS_NamedExecuteWithResult("core_gettarget")+4500)
+TNT1 A 0 A_ChangeFlag(MISSILE, 0)
+TNT1 A 0 A_ChangeFlag(THRUGHOST,0)
+TNT1 A 0 A_ChangeFlag(SHOOTABLE,1)
+Spawn2:
+TNT1 AAAA 1 A_GiveInventory("FanFunc",1)
+TNT1 A 0 A_SpawnItemEX("FanBlowFX",0,0,32,32,0,0,0,SXF_TRANSFERTRANSLATION)
+goto Spawn2
+
+Deploy.stop:
+Deploy.Pain:
+TNT1 A 2 A_Pain
+goto Spawn2
+
+Deploy.Death:
+TNT1 A 0 A_GiveInventory("ProjectileDCode",1)
+TNT1 A 0 A_ChangeFlag(SHOOTABLE,0)
+TNT1 A 0 A_ChangeFlag(SOLID,0)
+TNT1 A 2 A_Pain
+DeathEnd:
+TNT1 A 0 A_JumpIfInTargetInventory("LightTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("WilyTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("CossackTeamFlag",1,"Colored")
+TNT1 A 0 A_JumpIfInTargetInventory("KingTeamFlag",1,"Colored")
+TNT1 A 1 A_Jump(256,"NotColored")
+wait
+NotColored:
+TNT1 A 0 A_SpawnItemEX("ExplosionEffect1",0,0,32,0,0,0,0)
+TNT1 A 10
+stop
+Colored:
+TNT1 A 0 A_SpawnItemEX("ExplosionEffect1",0,0,32,0,0,0,0,1)
+TNT1 A 10
+stop
+}
+}
+
+
+actor FanSpawnVisual : BasicGraphicEffect
+{
+renderstyle "add"
+alpha 0.5
+scale 2.5
+States
+{
+Spawn:
+BECA A 0
+BECA A 0 A_GiveInventory("ProjectileFXCode",1)
+BECA A 2
+stop
+}
+}
+
+actor FanVisual
+{
+PROJECTILE
++NOINTERACTION
++FORCEYBILLBOARD
++NOCLIP
+scale 2.5
++CLIENTSIDEONLY
+height 0
+radius 0
+states
+{
+Spawn:
+TNT1 A 0
+BECA A 1
+stop
+}
+}
+
+actor FanBlowFX : BasicGraphicEffect
+{
+renderstyle "Translucent"
+alpha 0.9
+scale 2.5
+ReactionTime 5
+States
+{
+Spawn:
+BECA C 0
+BEWA C 0 A_GiveInventory("ProjectileFXCode",1)
+BEWA CCCCC 2 A_SetScale(ScaleX+0.5)
+Spawn2:
+BEWA C 0 A_SetScale(ScaleX+0.5)
+BEWA C 2 A_FadeOut
+BEWA C 0 A_CountDown
+loop
+}
+}
+
+
+actor DustSucker : BasicHelper
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 A 3 ACS_NamedExecuteWithResult("MSTD_SuctionCode",700,10,3,-1)
+stop
+TNT1 A 3 ACS_NamedExecuteWithResult("MSTD_SuctionCode",700,10,1,-1)
+stop
+}
+}
+
+actor FanFunc : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEX("FanVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
+TNT1 A 0 A_CustomMissile("DustSucker",0,0,0,0)  
+stop
+}
+}
+
+actor ObjectPain : CustomInventory
+{
+inventory.amount 1
+Inventory.MaxAmount 100
++AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_SpawnItemEX("ActorHitFX",random2(radius),random2(radius),random(0,height),0,0,0,0,SXF_TRANSFERTRANSLATION)
+stop
+}
+}

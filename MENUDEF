@@ -33,7 +33,7 @@ LISTMENU "MainMenu"
 		Font "DBIGFONT", "MenuGreen" // [C]
 		TextItem "Player Setup", "p", "PlayerMenu"
 		TextItem "Loadout", "t", "EditLoadOutMenu" //
-		TextItem "Database", "d", "N_DataBaseMenu" //
+		TextItem "Mod Menu", "d", "MSTD_Menu" //
 		//Font "DBIGFONT", "MenuGreen" // [C]
 		//TextItem "Class Help", "h", "ReadThisMenu"
 		Font "DBIGFONT", "MenuWhite" //
@@ -93,6 +93,13 @@ ListMenu "PlayerMenu"//[v5c edit]
 	Class "PlayerMenu"
 }
 
+listmenu "MSTD_Menu"
+{
+	StaticPatch 108,31, "Super Team Dive"//94,2
+	Position 97,72
+	TextItem "Mod Options", "m1", "MSTDMenu"
+	TextItem "DataBase", "m2", "N_DataBaseMenu"
+}
 
 listmenu "N_DataBaseMenu"
 {
@@ -115,3 +122,24 @@ listmenu "LoadOutMenu"
 	TextItem "Edit Emblem", "t2", "EditEmblemMenu"
 }
 
+OptionMenu "MSTDMenu"
+{
+    Title "Mod Options"
+	StaticText ""
+	Option "Projectile Team Coloring",	"MSTD_CV_ProjTeamColor", "OnOff"
+	Option "Show Property FX",			"MSTD_ShowPropertyFX", "OnOff"
+	Option "Show Overheal FX",			"MSTD_ShowOverHealFX", "OnOff"
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText ""
+	StaticText "===============================================================",1
+	StaticText "$DDNOTICE"
+	Submenu "Damage Display Options", "DDOptions"
+	StaticText "===============================================================",1
+	StaticText "$RELOADNOTICE"
+	Control 	"Reload",			"+Reload"
+	Control 	"Ability",			"+Zoom"
+}

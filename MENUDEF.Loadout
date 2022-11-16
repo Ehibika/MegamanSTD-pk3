@@ -75,6 +75,7 @@ OptionValue WepOptionsA
 38, "Toss Shield"
 39, "Ancient Relic\c[MenuRed]:Fire: \c[DarkGray]:Heavy:"
 40, "Aqua Buster \c[MenuBlue]:Aqua:"
+41, "Napalm Head \c[MenuRed]:Fire:"
 }
 
 OptionValue WepOptionsB
@@ -120,6 +121,7 @@ OptionValue WepOptionsB
 38, "Toss Shield"
 39, "Ancient Relic"
 40, "Aqua Buster"
+41, "Napalm Head"
 }
 
 OptionValue WepOptions_Busters
@@ -172,6 +174,7 @@ OptionValue WepOptions_Launchers
 35, "Absolute Freeze \c[MenuCyan]:Ice:"
 36, "Turbo Launcher \c[MenuRed]:Fire:\c[Gold]:Lite:"
 37, "Roaster \c[MenuRed]:Fire:"
+41, "Napalm Head \c[MenuRed]:Fire:"
 
 }
 
@@ -238,10 +241,12 @@ OptionValue WepDescA
 34, "Fires high impact, \nlong ranged bolts \nwith a long delay"
 35, "Launcher that Fires \nFreezing missile, procs \nand crits on frostbite"
 36, "Lightweight launcher \nthat fires fast missiles."
-37, "Chargup launcher that \nfires superheated waves, \ncrits on burning foes."
+37, "launcher that fires\nsuperheated waves, \ncrits on burning foes."
 38, "A throwable shield \nthat can be heald \nto block shots"
-39, "Lobs Blobs of Water \nthat Deal Splash Damage"
-40, "Hefty, fiery sword \nthat burns and crits \non burns"
+39, "Hefty, fiery sword \nthat burns and crits \non burns"
+40, "Lobs Blobs of Water \nthat Deal Splash Damage"
+41, "Launcher that Fires\n Powerful, bouncing \ngrenades."
+
 }
 
 OptionValue WepDescB

@@ -3,85 +3,138 @@
 [+]====================|Alpha V.11|========================[+]
 
 ==|BugFixes|==
+[+] Fixed an oversight where euclid resistance was actually granting break resistance
+[+] Fixed an isue where players could hear their own footsteps
 
 ==|Mechanic Changes|==
-[+] Restored elemental crit multipliers from 1.3 > 3.0 (forgot about this)
-[+] Blind now hides damage and healing numbers
+[+] Self inflicted knockback is treated as normal for heavyweight characters
+[+] Repair weapons now all grant passive recovery to the wielder at a longer delay than what team medic provided
+[+++] Repair weapon self heal is now at 2% of HP per tic instead of 2 HP
+[+++] Repair weapon self heal tics at 5 times per second instead of 7
+
+[+]Burn dot damage adjusted, now it hits 8 times through it's duration for %6 Heath each
+[+++] one instance of burn will take ~48% of your health through it's duration
+
+[+] Added an option menu to toggle some features
+
+[+] Status Crit multiplier decreased from 3x to 2x
 
 ==|Property Changes|==
-[+++]NEW PROPERTIES[+++]
-[+] Recharge : Gain lifesteal on elec Damage
+[+] Hefty now clamps all weapon movespeeds to 0.8 instead of 0.7
+[+] Team medic now recontextualized to expedite repair weapon self healing
 
 ==|Class Changes|==
-[+++]NEW CLASSES[+++]
-[+]Knightman
-[+]BrightMan
+[+]Fireman[+]
+[+]max damage resistance on passive reduced from 80% > 60%
+[+]Can gain no more than 15% meter on a single hit
+
+[+]Axl[+]
+[+]Strafe Barrage bullet damage reduced from 40 > 30
+[+]Strafe Barrage bullet lifetime reduced from 20 frames > 8
+[+]Strafe Barrage bullet Spread increased from 1.4 > 2.8
+
+[+]Zero[+]
+[+]Reduced the sweetspot size of Ryuenjin
+
+[+]Spark Mandrill[+]
+[+]Property "Hefty" Swapped out for "Recharge"
+
+[+]BrightMan[+]
+[+]HP reduced from 250 > 200
+[+]Property "Recharge" Swapped out for "Energy Balancer"
+
+[+]Megaman.EXE[+]
+[+]Implemented his new Chip system, now his abilities will vary depending on his weapon
+[+++] Gained as a class passive, losing Blade parry as a result
+[+]Minibomb cooldown increased from 2.5 sec > 5 sec
+[+]Minibomb Damage increased from 50 > 100
+[+]HP Increased from 175 > 200
+
+[+]Searchman.exe[+]
+[+]SearchScope now has 8 ammo "Charges" that individualy restore on cooldown
+[+]SearchScope Shot delay increased from 17 frames > 35
+[+]SearchScope magnifications changed from 2.5/4.5/6/5 > 1.5
+[+]Dynamite trigger delay reduced from 25 frames > 10 
+[+]Dynamite blast damage reduced from 150 > 100
+[+]Property "Assassin" Swapped out for "Energy Balancer"
 
 [+]Auto[+]
-[+]Auto Sentry shot damage reduced from 10 > 5
-[+]Auto Sentry is now vulnerable to the stop status
+[+]Auto Sentry shot height increased
+[+]Auto sentry shot damage increased from 5 > 8
 
 [+]Toadman[+]
-[+]Acid rain generators now have a hit buffer to mitigate damage stacking
-[+]Acid rain generators is now vulnerable to the stop status
-[+]addressed the issue of soothing rain occassionaly not working
+[+]AcidRainGenerator Health increased from 100 > 300
 
-[+]Sigma[+]
-[+]Blade dash can no longer be cancelled early by pressing mainfire
-[+++]this was due to desynchs
-[+]Head beam now auto fires 8 shots when initiated.
-[+]Head Beam Shot velocity reduced from 106 > 64
+[+]CentaurMan[+]
+[+]HP increased from 250 > 350
+[+]Property "Marksman" Swapped out for "Specialist"
 
-[+]Alia[+]
-[+]shining ray bomb has been readjusted so that it consistently deals 150 damage
-
-[+]Centaurman[+]
-[+]Stop arrow speed increased from 128 > 245
+[+]KnightMan[+]
+[+]HP increased from 350 > 450
+[+]Property "Hefty" Swapped out for "Undershirt"
+[+]KnightWrecker damage increased from 75 > 125
+[+]Knight Shield recovery rate increased
 
 ==|Weapon Changes|==
-[+++]NEW WEAPONS[+++]
-[+]Ancient Relic
-[+]Aqua Buster
+[+]Mega Cannon[+]
+[+]Shot hitbox readjusted
+[+]Ammo increased from 4 > 6
+[+++] Boosted ammo increased from 6 > 8
+
+[+]DrillHead Cannon[+]
+[+]Shot hitbox readjusted
+[+]Shots now Pierce Targets again
+[+++]Cannot hit foes with both the direct pierce and splash
 
 [+]Lazer Rifle[+]
-[+]Shot Damage reduced from 45 > 30
-[+]Fire rate reduced
-[+]Projectile lifetime reduced from 20 frames > 10 frames
+[+]Shot hitbox readjusted
+[+]Shot Damage increased from 30 > 35
+[+]Shot lifetime increased from 10 frames > 16
 
-[+]Violet Zapper[+]
-[+]Shot Damage reduced from 35 > 25
-[+]Projectile lifetime reduced from 55 frames > 38 frames
+[+]HighSpeed Rifle[+]
+[+]Reworked to now be a hitscan weapon
+[+++]Shot ranged reduced to 1000 (was ~1500 before)
+[+]Shot damage reduced from 25 > 20
 
-[+]Gattling Gun[+]
-[+]Shot damage increased from 5 > 10
+[+]Triangle Gun[+]
+[+]Shot hitbox readjusted
+[+]Shot Speed increased from 46 > 96
+[+]Tri shot spread distance reduced from 8 > 4
+[+]Shots now Pierce Targets
 
-[+]Military Buster[+]
-[+]Shot damage decreased from 60 > 50
+[+]Violet zapper[+]
+[+]Shot hitbox readjusted
+[+]Firerate reduced
 
-[+]WindPressure Buster[+]
-[+]Shot damage decreased from 50 > 45
-[+]Shots now possess Radial knockback
-
-[+]Repair launcher[+]
-[+]Shot Speed reduced from 128 > 64
-[+]Shot gravity reduced from 3.0 > 1.5
-[+++] these are not nerfs but rather efforts to improve the weapons hitregistration
-[+]Effect radius increased from 128 > 180
+[+]Screw Shooter[+]
+[+]Shot hitbox readjusted
 
 [+]Bolt Driver[+]
-[+] Pump frames reduced
-[+] Now works on a cycling reload
-[+] Shot speed increased from 96 > 160
+[+]Shot hitbox readjusted
 
-[+]Screw Rifle[+]
-[+]Fire rate reduced
-[+]Shot Speed increased from 96 > 120
-[+]Projectile lifetime reduced from 20 frames > 10 frames
+[+]MediBuster[+]
+[+]Reworked to be a sniper style buster
+[+++] in otherwords, it's a railgun now
+[+]Buster fire delay increased from 8 > 17
+
+[+]Gatling Gun[+]
+[+]No longer ammo based, reworked to operate on a heat system.
+[+]Shot speed increased from 80 > 96
+[+]Shot lifetime decreased from 20 > 16
+[+]Shot Spread decreased from 2.6 > 1.6 
+[+]Shots now Pierce Targets
 
 [+]Energy Cannon[+]
-[+]Shot damage decreased from 150 > 100
+[+]Max Blast Radius increased from 128 > 160
+[+]Min Blast Radius increased from 32 > 96
 
-[+]Viper Rifle[+]
-[+]Shot damage decreased from 25 > 20
-[+]Fire rate reduced
+[+]LightWave Cannon[+]
+[+]Max Blast Radius increased from 96 > 128
+[+]Min Blast Radius increased from 32 > 80
+
+[+]Roaster[+]
+[+]Charge removed
+[+]Shot properties readjusted
+[+++] now hits only once for 50 damage per projectile (still retains piercing)
+
 //================================================================================*/

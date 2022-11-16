@@ -1,3 +1,14 @@
+Const int RCC_Candle = 1; //Fire
+Const int RCC_IceBlock = 2; //Ice
+Const int RCC_Aqua = 3; //Aqua
+Const int RCC_Anubis = 4; //Toxic
+Const int RCC_EvilEye = 5; //Elec
+Const int RCC_Fan = 6; //Wind
+Const int RCC_Break = 7; //Break
+Const int RCC_Prism = 8; //Euclid
+Const int RCC_Pawn = 9; //Blade
+Const int RCC_Apple = 10; //Repair
+
 actor Ability2_megamanEXE : AbilityMasterBase
 {
 Weapon.AmmoUse2 1
@@ -14,15 +25,54 @@ States
 {
 
 Ready:
+XB20 A 0 //Ordered Highest to lowest
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Apple,"Ready.Apple")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Pawn,"Ready.Pawn")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Prism,"Ready.Prism")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Break,"Ready.Break")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Fan,"Ready.Fan")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_EvilEye,"Ready.EvilEye")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Anubis,"Ready.Anubis")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Aqua,"Ready.Aqua")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_IceBlock,"Ready.IceBlock")
+TNT1 A 0 A_JumpIfInventory("RockCubeChipFlag",RCC_Candle,"Ready.Candle")
+goto Ready.RockCube
+
+Ready.Candle:
+Ready.IceBlock:
+Ready.Aqua:
+Ready.Anubis:
+Ready.EvilEye:
+
+Ready.Break:
+Ready.Prism:
+Ready.Pawn:
+Ready.Apple:
+Ready.RockCube:
 XB20 B 0 
 "####" B 0 A_SpawnItemEX("RockCubeSpawnVisual",80,0,16,0)
 "####" B 1 A_WeaponReady
-goto ready
+goto ready.RockCube
+
+Ready.Fan:
+XB20 B 0 
+"####" B 0 A_SpawnItemEX("FanSpawnVisual",80,0,16,0)
+"####" B 1 A_Jumpif(CallACS("MSTD_ButtonCheck",BT_ATTACK) == True,"Fire.Fan")
+goto ready.Fan
 
 Fire:
-
 "####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
-"####" B 0 A_SpawnItemEX("RockCube",80,0,16,1)
+"####" B 0 A_SpawnItemEX("RockCube",80,0,16+(z-floorz),1)
+"####" C 7 
+"####" BA 2 
+"####" C 0 A_GiveInventory("RockCubeCooldown")
+"####" C 0 A_GiveInventory("RefireBuffer")
+"####" B 0 A_Jump(256,"End")
+goto End
+
+Fire.Fan:
+"####" C 0 A_PlaySoundEx("weapon/crackerthrow","Weapon")
+"####" B 0 A_SpawnItemEX("Fan",80,0,16+(z-floorz),1)
 "####" C 7 
 "####" BA 2 
 "####" C 0 A_GiveInventory("RockCubeCooldown")
@@ -67,6 +117,7 @@ stop
 //=================
 //=================
 
+actor RockCubeChipFlag : Inventory{inventory.amount 1 inventory.maxamount 10}
 
 actor RockCube  : BasicDeployable
 {
@@ -113,7 +164,6 @@ States
 Spawn:
 TNT1 A 0
 TNT1 A 0 A_GiveInventory("ProjectileCode")
-TNT1 A 0 A_GiveInventory("BreakWeakness")
 TNT1 D 0 ACS_NamedExecuteAlways("GiveM_EntiTID",0,2,args[0])
 TNT1 A 1 A_SpawnItemEX("RockCubeVisual",0,0,0,momx,momy,momz,0,SXF_TRANSFERTRANSLATION|SXF_ABSOLUTEVELOCITY)
 TNT1 A 0 A_Stop
@@ -240,18 +290,6 @@ stop
 }
 }
 
-actor DustSucker : BasicHelper
-{
-states
-{
-Spawn:
-TNT1 A 0
-TNT1 A 3 ACS_NamedExecuteWithResult("MSTD_SuctionCode",700,10,3,-1)
-stop
-TNT1 A 3 ACS_NamedExecuteWithResult("MSTD_SuctionCode",700,10,1,-1)
-stop
-}
-}
 
 //[+]========================================================================[+]
 //------------------------------|Cooldown Actors|------------------------------
