@@ -100,14 +100,14 @@ str MasterWepList[WEAPONLIST][6] = {
 
 /*21*/{"FireballBuster","FireballBusterWep","FireballBuster_Ammo", WF_BUSTER,"FireballBuster",""},
 /*22*/{"AtomicBuster","AtomicBusterWep","AtomicBuster_Ammo", WF_BUSTER,"AtomicBuster",""},
-/*23*/{"RepairGun","RepairGunWep","RepairGun_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairGun",""},
+/*23*/{"MeddyGun","MeddyGunWep","MeddyGun_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"MeddyGun",""},
 /*24*/{"ViperRifle","ViperRifleWep","ViperRifle_Ammo", WF_MACHINEGUN,"ViperRifle",""},
 
 /*25*/{"ThriceGun","ThriceGunWep","ThriceGun_Ammo", WF_MACHINEGUN,"ThriceGun",""},
 /*26*/{"MediBuster","MediBusterWep","MediBuster_Ammo", WF_BUSTER|WF_MEDICAL,"Medibuster",""},
 /*27*/{"ScrewShooter","ScrewShooterWep","ScrewShooter_Ammo", WF_MACHINEGUN|WF_MEDICAL,"ScrewShooter",""},
 /*28*/{"BoltDriver","BoltDriverWep","BoltDriver_Ammo", WF_MACHINEGUN|WF_MEDICAL,"BoltDriver",""},
-/*29*/{"RepairSprayer","RepairSprayerWep","RepairSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL|WF_HARMLESS,"RepairSprayer",""},
+/*29*/{"FloromaSprayer","FloromaSprayerWep","FloromaSprayer_Ammo", WF_MACHINEGUN|WF_MEDICAL,"FloromaSprayer",""},
 /*30*/{"RepairLauncher","RepairLauncherWep","RepairLauncher_Ammo", WF_LAUNCHER|WF_MEDICAL,"RepairLauncher",""},
 /*31*/{"Replislasher","ReplislasherWep","Replislasher_Ammo", WF_MELEE,"ReplislasherEdge","ReplislasherWave"},
 /*32*/{"ElectriggerV","ElectriggerVWep","ElectriggerV_Ammo", WF_SPRAYER,"ElectriggerV",""},

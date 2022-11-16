@@ -95,7 +95,7 @@ str PainRecord[PAINCOUNT][2] = {
 /*61*/{"ViperRifle",ELM_TOXIC},
 /*62*/{"MagBomb",ELM_TOXIC},
 /*63*/{"Quake",ELM_BREAK},
-/*64*/{"RepairSprayer",ELM_LIFESTEAL},
+/*64*/{"FloromaSprayer",ELM_LIFESTEAL},
 
 };
 

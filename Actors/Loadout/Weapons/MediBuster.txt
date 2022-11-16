@@ -391,7 +391,7 @@ States
 Spawn:
 TNT1 A 0 
 TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
-TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("RepairGunBeamFX_1", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),1)
+TNT1 AAAAAAAAAAAA 0 A_SpawnItemEx("MeddyGunBeamFX_1", 0, 0, 0, 256/24, 256/24, random2(256/24), random(0, 359),1)
 SHFX LMNOP 1
 stop
 }

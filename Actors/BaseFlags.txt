@@ -3,6 +3,7 @@ actor WeightClass_Light : Once {}
 //The absense of the flag is normal weight class
 actor WeightClass_Heavy : Once {}
 
+
 actor ConShotTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor HeatStallTimer : Powerup {inventory.amount 1 Powerup.Duration 35}
 actor RefireBuffer : Powerup {inventory.amount 1 Powerup.Duration 5}

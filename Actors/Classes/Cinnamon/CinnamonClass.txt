@@ -2,8 +2,8 @@ Actor Cinnamon : ClassBase
 {
 Player.DisplayName "Cinnamon"
 Player.SoundClass "megaman"
-Health 250
-Player.MaxHealth 250
+Health 300
+Player.MaxHealth 300
 Player.JumpZ 10
 
 Player.Startitem "IsCinnamon"

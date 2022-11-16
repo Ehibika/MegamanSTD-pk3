@@ -25,13 +25,13 @@ OB_TRIANGULARSABER = "%k Eliminated %o with the TRIANGULAR SABER";
 
 OB_FIREBALLBUSTER = "%k Eliminated %o with the FireballBuster";
 OB_ATOMICBUSTER = "%k Eliminated %o with the AtomicBuster";
-OB_REPAIRGUN = "%k Eliminated %o with the RepairGun";
+OB_MEDDYGUN = "%k Eliminated %o with the MeddyGun";
 OB_VIPERRIFLE = "%k Eliminated %o with the ViperRifle";
 OB_THRICEGUN = "%k Eliminated %o with the ThriceGun";
 OB_MEDIBUSTER = "%k Eliminated %o with the MediBuster";
 OB_SCREWSHOOTER = "%k Eliminated %o with the ScrewShooter";
 OB_BOLTDRIVER = "%k Eliminated %o with the BoltDriver";
-OB_REPAIRSPRAYER = "%k Eliminated %o with the RepairSprayer";
+OB_FLOROMASPRAYER = "%k Eliminated %o with the FloromaSprayer";
 OB_REPAIRLAUNCHER = "%k Eliminated %o with the Repair Launcher";
 OB_REPLISLASHER = "%k Eliminated %o with the Replislasher";
 OB_ELECTRIGGERV = "%k Eliminated %o with the ElectriggerV";

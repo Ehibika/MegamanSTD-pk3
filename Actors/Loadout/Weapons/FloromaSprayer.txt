@@ -1,14 +1,14 @@
 
 
-actor RepairSprayerWep : WepMasterBase
+actor FloromaSprayerWep : WepMasterBase
 {
-Tag "RepairSprayer"
+Tag "FloromaSprayer"
 Weapon.AmmoUse 1
 Weapon.AmmoGive 20
 scale 2.0
-Obituary "$OB_REPAIRSPRAYER"
+Obituary "$OB_FLOROMASPRAYER"
 Inventory.Pickupmessage "$PU_MEGABUSTER"
-weapon.ammotype "RepairSprayer_Ammo"
+weapon.ammotype "FloromaSprayer_Ammo"
 inventory.icon "MENDI"
 +WEAPON.AMMO_OPTIONAL
 +WEAPON.DONTBOB
@@ -22,8 +22,8 @@ stop
 
 Ready:
 Ready.Wep:
-FWPR B 1 A_WeaponReady(WRF_ALLOWINPUTS)
-"####" B 0 A_Jumpifinventory("RepairSprayer_Ammo",1,"Ready.Core")
+DW29 B 1 A_WeaponReady(WRF_ALLOWINPUTS)
+"####" B 0 A_Jumpifinventory("FloromaSprayer_Ammo",1,"Ready.Core")
 Goto Reload
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
@@ -46,16 +46,16 @@ hold:
 Goto hold.Bullet
 hold.Bullet:
 "####" L 0 A_PlaySoundEx("weapon/rollheal","Weapon")
-"####" B 0 A_FireCustomMissile("RepairSprayerBurst",0,1,0,0)
-"####" B 0 A_FireCustomMissile("RepairSprayerHealerStart",0,0,0,0)
-"####" B 0 A_GiveInventory("RepairSprayerCST",1)
+"####" B 0 A_FireCustomMissile("FloromaSprayerBurst",0,1,0,0)
+"####" B 0 A_FireCustomMissile("FloromaSprayerHealerStart",0,0,0,0)
+"####" B 0 A_GiveInventory("FloromaSprayerCST",1)
 "####" C 2 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Refire("hold")
 "####" B 1 A_WeaponReady(WRF_FIRING)
 goto Ready.Wep
 hold.Effect:
 "####" L 0 A_PlaySoundEx("weapon/rollheal","Weapon")
-"####" B 0 A_FireCustomMissile("RepairSprayerBurst",0,0,0,0)
+"####" B 0 A_FireCustomMissile("FloromaSprayerBurst",0,0,0,0)
 "####" C 2 A_WeaponReady(WRF_FIRING)
 "####" B 0 A_Refire("hold")
 "####" B 1 A_WeaponReady(WRF_FIRING)
@@ -64,7 +64,7 @@ goto Ready.Wep
 
 NoAmmo:
 "####" B 1
-"####" B 0 A_Jumpifinventory("RepairSprayer_Ammo",1,"Ready")
+"####" B 0 A_Jumpifinventory("FloromaSprayer_Ammo",1,"Ready")
 Goto Reload
 
 Reload.Hold:
@@ -82,12 +82,12 @@ stop
 }
 }
 
-actor RepairSprayerWep2 : RepairSprayerWep
+actor FloromaSprayerWep2 : FloromaSprayerWep
 {Weapon.SlotNumber 2}
 //[+]========================================================================[+]
 //--------------------------------|Ammo & inventory|---------------------------
 //[+]========================================================================[+]
-actor RepairSprayer_Ammo : Ammo
+actor FloromaSprayer_Ammo : Ammo
 {
 inventory.amount 1
 inventory.maxamount 20
@@ -95,17 +95,17 @@ Ammo.BackpackMaxAmount 40
 +INVENTORY.IGNORESKILL
 }
 
-Actor RepairSprayerhitDelay : powerprotection
+Actor FloromaSprayerhitDelay : powerprotection
 {
-Powerup.duration 3
-Damagefactor "RepairSprayer", 0
+Powerup.duration 7
+Damagefactor "FloromaSprayer", 0
 }
-actor RepairSprayerhealDelay : Powerup {inventory.amount 1 Powerup.Duration 7}
+actor FloromaSprayerhealDelay : Powerup {inventory.amount 1 Powerup.Duration 7}
 
-actor RepairSprayerCST : PowerupGiver
+actor FloromaSprayerCST : PowerupGiver
 {
 +INVENTORY.AUTOACTIVATE
-Powerup.Duration 5
+Powerup.Duration 7
 powerup.type "ConShotTimer"
 }
 
@@ -113,17 +113,17 @@ powerup.type "ConShotTimer"
 //--------------------------------|Projectiles |--------------------------------
 //[+]========================================================================[+]
 
-Const Int RepairSprayerRange = SprayerRange+10;
-Const Int RepairSprayerAOE = 96;
-Const Int RepairSprayerFXAOE = 64;
-Const Int RPAOE2 = RepairSprayerFXAOE/2;
-Const float RepairSprayer_DMG = 8;
-Const int RGI_RepairSprayer = 1;
+Const Int FloromaSprayerRange = SprayerRange+10;
+Const Int FloromaSprayerAOE = 96;
+Const Int FloromaSprayerFXAOE = 64;
+Const Int RPAOE2 = FloromaSprayerFXAOE/2;
+Const float FloromaSprayer_DMG = 8;
+Const int RGI_FloromaSprayer = 1;
 
-Const int RepairSprayer_MinHeal = 14;
-Const int RepairSprayer_MaxHeal = 30;
+Const int FloromaSprayer_MinHeal = 14;
+Const int FloromaSprayer_MaxHeal = 30;
 
-actor RepairSprayerHealerStart //: BasicHelper
+actor FloromaSprayerHealerStart //: BasicHelper
 {
     +MISSILE
     -SOLID
@@ -143,16 +143,16 @@ actor RepairSprayerHealerStart //: BasicHelper
     Spawn:
         TNT1 A 0
         TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
-        TNT1 A 1 A_SpawnItemEx("RepairSprayerHealer",0,0,0,momx,momy,momz,0,8)
+        TNT1 A 1 A_SpawnItemEx("FloromaSprayerHealer",0,0,0,momx,momy,momz,0,8)
         stop
     }
 }
 
-actor RepairSprayerHealer : FastProjectileBase
+actor FloromaSprayerHealer : FastProjectileBase
 {
     PROJECTILE
-    damagetype "RepairSprayer"
-    Obituary "$OB_REPAIRSPRAYER"
+    damagetype "FloromaSprayer"
+    Obituary "$OB_FLOROMASPRAYER"
     +MISSILE
     +SKYEXPLODE
     +EXPLODEONWATER
@@ -169,33 +169,33 @@ actor RepairSprayerHealer : FastProjectileBase
         Spawn:
         TNT1 A 0
         TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-        TNT1 A 0 A_JumpIf(Pitch > RepairSprayerRange,"Death2")
+        TNT1 A 0 A_JumpIf(Pitch > FloromaSprayerRange,"Death2")
         TNT1 A 0 A_SetPitch(Pitch+1)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerHealer",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerHealer",0,0,0,momx,momy,momz,0,552+1)//512+32+8
         TNT1 A 0 A_Stop
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerHealer2")
-        TNT1 A 0 //A_Explode(RepairSprayer_DMG,32,0,0,32)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerHealer2")
+        TNT1 A 0 A_Explode(FloromaSprayer_DMG,32,0,0,32)
         TNT1 A 1 
         stop
     Death:
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerHealer2")
-        TNT1 A 1 //A_Explode(RepairSprayer_DMG,32,0,0,32)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerHealer2")
+        TNT1 A 1 A_Explode(FloromaSprayer_DMG,32,0,0,32)
         stop
     Death2:
         TNT1 A 0 A_Stop
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerHealer2")
-        TNT1 A 1 //A_Explode(RepairSprayer_DMG,32,0,0,32)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerHealer2")
+        TNT1 A 1 A_Explode(FloromaSprayer_DMG,32,0,0,32)
         stop
 
         
     }
 }
 
-actor RepairSprayerHealer2 : FastProjectileBase
+actor FloromaSprayerHealer2 : FastProjectileBase
 {
     //PROJECTILE
-    damagetype "RepairSprayer"
-    Obituary "$OB_REPAIRSPRAYER"
+    damagetype "FloromaSprayer"
+    Obituary "$OB_FLOROMASPRAYER"
     +MISSILE
     +SKYEXPLODE
     +EXPLODEONWATER
@@ -211,13 +211,13 @@ actor RepairSprayerHealer2 : FastProjectileBase
     {
         Spawn:
         TNT1 A 0
-        TNT1 A 0 ACS_NamedExecuteAlways("STD_RadiusGive",0,RGI_RepairSprayer,RepairSprayerAOE,RG_TEAM)
+        TNT1 A 0 ACS_NamedExecuteAlways("STD_RadiusGive",0,RGI_FloromaSprayer,FloromaSprayerAOE,RG_TEAM)
         TNT1 A 5 
         stop    
     }
 }
 
-actor RepairSprayerBurstStart //: BasicHelper
+actor FloromaSprayerBurstStart //: BasicHelper
 {
     +MISSILE
     -SOLID
@@ -237,12 +237,12 @@ actor RepairSprayerBurstStart //: BasicHelper
     Spawn:
         TNT1 A 0
         TNT1 A 0 A_Warp(2,0,0,32,0,16+8)//But which interpolation? Does it matter?
-        TNT1 A 1 A_SpawnItemEx("RepairSprayerBurst",0,0,0,momx,momy,momz,0,8)
+        TNT1 A 1 A_SpawnItemEx("FloromaSprayerBurst",0,0,0,momx,momy,momz,0,8)
         stop
     }
 }
 
-actor RepairSprayerBurst : FastProjectileBase
+actor FloromaSprayerBurst : FastProjectileBase
 {
     +MISSILE
     +NOGRAVITY
@@ -263,38 +263,38 @@ actor RepairSprayerBurst : FastProjectileBase
     Spawn:
         TNT1 A 0
         TNT1 A 0 A_GiveInventory("ProjectileCode",1)
-        TNT1 A 0 A_JumpIf(Pitch > RepairSprayerRange,"Death2")
-        TNT1 A 0 A_JumpIf(Pitch > (RepairSprayerRange/3)*2,"Spawn3")
-        TNT1 A 0 A_JumpIf(Pitch > (RepairSprayerRange/3),"Spawn2")
+        TNT1 A 0 A_JumpIf(Pitch > FloromaSprayerRange,"Death2")
+        TNT1 A 0 A_JumpIf(Pitch > (FloromaSprayerRange/3)*2,"Spawn3")
+        TNT1 A 0 A_JumpIf(Pitch > (FloromaSprayerRange/3),"Spawn2")
         TNT1 A 0 A_SetPitch(Pitch+1)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx1",random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx4",random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx6",random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx5",random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),random(-RPAOE2*0.3,RPAOE2*0.3),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
         TNT1 A 0 A_Stop 
         TNT1 A 1
         stop
     Spawn2:
         TNT1 A 0 A_SetPitch(Pitch+1)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx2",random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx4",random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx6",random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx4",random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),random(-RPAOE2*0.6,RPAOE2*0.6),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
         TNT1 A 0 A_Stop
         TNT1 A 1
         stop
     Spawn3:
         TNT1 A 0 A_SetPitch(Pitch+1)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx3",random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
-        TNT1 A 0 A_SpawnItemEx("RepairSprayerFx5",random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerBurst",0,0,0,momx,momy,momz,0,552+1)//512+32+8
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx6",random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
+        TNT1 A 0 A_SpawnItemEx("FloromaSprayerFx4",random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),random(-RPAOE2,RPAOE2),momx,momy,momz,0,SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION|SXF_TRANSFERTRANSLATION)
         TNT1 A 0 A_Stop
         TNT1 A 1
         stop
     Death:
-        TNT1 A 0 //A_SpawnItemEx("RepairSprayerEndFX",0,0,0,0,0,0,0,1)
+        TNT1 A 0 //A_SpawnItemEx("FloromaSprayerEndFX",0,0,0,0,0,0,0,1)
         stop
     Death2:
         TNT1 A 0 A_Stop
-        TNT1 A 0 //A_SpawnItemEx("RepairSprayerEndFX",0,0,0,0,0,0,0,1)
+        TNT1 A 0 //A_SpawnItemEx("FloromaSprayerEndFX",0,0,0,0,0,0,0,1)
         stop
     }
 }
@@ -307,18 +307,18 @@ actor RadiusGiveItem_1 : CustomInventory
 States
 {
 Pickup:
-TNT1 A 0 A_JumpifInventory("RepairSprayerhealDelay",1,"Nope")
+TNT1 A 0 A_JumpifInventory("FloromaSprayerhealDelay",1,"Nope")
 TNT1 A 0 A_JumpIfinventory("CannotUseHealing",1, "Nope")
 TNT1 A 0 A_JumpifInventory("PoisonMark",1,"HealBlock")
 //TNT1 A 0 HealThing(CallACS("HealRamp",5,10))
-TNT1 A 0 ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,0,CallACS("HealRamp",RepairSprayer_MinHeal,RepairSprayer_MaxHeal),25)
-TNT1 A 0 A_GiveInventory("RepairGunFeedback",1)
-TNT1 A 0 A_GiveInventory("RepairSprayerhealDelay",1)
+TNT1 A 0 ACS_NamedExecuteAlways("MSTD_Basic(Over)Heal",0,0,CallACS("HealRamp",FloromaSprayer_MinHeal,FloromaSprayer_MaxHeal),25)
+TNT1 A 0 A_GiveInventory("MeddyGunFeedback",1)
+TNT1 A 0 A_GiveInventory("FloromaSprayerhealDelay",1)
 stop
 HealBlock:
 TNT1 A 0 A_GiveInventory("DetoxLevel",6)
 TNT1 A 0 A_GiveInventory("DetoxEfectSpawn",1)
-TNT1 A 0 A_GiveInventory("RepairSprayerhealDelay",1)
+TNT1 A 0 A_GiveInventory("FloromaSprayerhealDelay",1)
 TNT1 A 5
 stop
 Nope:
@@ -328,7 +328,7 @@ Stop
 }
 //const float SSNP_A = 0.2;
 
-actor RepairSprayerFx1  
+actor FloromaSprayerFx1  
 {
 PROJECTILE
 +NOINTERACTION
@@ -339,40 +339,42 @@ Radius 2
 damage (0)
 reactiontime 1
 scale 1.5
-RenderStyle "ADD"
+RenderStyle "Translucent"
 Alpha 0.6
 States
 {
 Spawn:
 ICMS A 0// Thrustthingz(0,30,0,0)
 HEAL A 0 acs_NamedExecuteWithResult("SprayerAlpha",0.4*FVM)
-HEAL AB 2 //A_Fadein(0.1)
+FPET AB 2//HEAL AB 2 //A_Fadein(0.1)
 ICMS C 0 
 stop
 }
 }
 
-actor RepairSprayerFx2 : RepairSprayerFx1
+actor FloromaSprayerFx2 : FloromaSprayerFx1
 {
+scale 2.0
 States
 {
 Spawn:
 ICMS A 0// Thrustthingz(0,30,0,0)
 HEAL B 0 acs_NamedExecuteWithResult("SprayerAlpha",0.4*FVM)
-HEAL BC 2 //A_Fadein(0.1)
+FPET AB 2//HEAL BC 2 //A_Fadein(0.1)
 ICMS C 0 
 stop
 }
 }
 
-actor RepairSprayerFx3 : RepairSprayerFx1
+actor FloromaSprayerFx3 : FloromaSprayerFx1
 {
+scale 2.5
 States
 {
 Spawn:
 ICMS A 0// Thrustthingz(0,30,0,0)
 HEAL C 0 acs_NamedExecuteWithResult("SprayerAlpha",0.4*FVM)
-HEAL CC 2 //A_Fadein(0.1)
+FPET AB 2//HEAL CC 2 //A_Fadein(0.1)
 ICMS C 0 
 stop
 }
@@ -380,7 +382,7 @@ stop
 
 
 
-actor RepairSprayerFx4 : BasicClientside
+actor FloromaSprayerFx4 : BasicClientside
 {
 scale 1.5
 Renderstyle "add"
@@ -405,7 +407,7 @@ stop
 }
 }
 
-actor RepairSprayerFx5 : BasicClientside
+actor FloromaSprayerFx5 : BasicClientside
 {
 scale 1.5
 Renderstyle "add"
@@ -433,6 +435,47 @@ stop
 Spawn4:
 GRBU N 2
 stop
+
+}
+}
+
+actor FloromaSprayerFx6 : BasicClientside
+{
+scale 2.5
+Renderstyle "Translucent"
+States
+{
+Spawn:
+TNT1 A 0 
+TNT1 A 0 A_GiveInventory("ProjectileFXCode",1)
+HEAL C 0 acs_NamedExecuteWithResult("SprayerAlpha",0.4*FVM)
+TNT1 A 0 A_Jump(256,"Spawn1","Spawn2","Spawn3","Spawn4","Spawn5")
+stop
+
+Spawn1:
+PDAN I 2
+PDAN III 1 A_Fadeout
+stop
+
+Spawn2:
+PDAN J 2
+PDAN JJJ 1 A_Fadeout
+stop
+
+Spawn3:
+PDAN K 2
+PDAN KKK 1 A_Fadeout
+stop
+
+Spawn4:
+PDAN LM 1
+stop
+
+Spawn5:
+FPET AB 1
+PDAN ABAB 1 A_Fadeout
+stop
+
 
 }
 }

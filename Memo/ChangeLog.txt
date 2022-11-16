@@ -33,6 +33,16 @@
 [+]Strafe Barrage bullet lifetime reduced from 20 frames > 8
 [+]Strafe Barrage bullet Spread increased from 1.4 > 2.8
 
+[+]Cinnamon[+]
+[+]HP increased from 250 > 300
+[+]Syringe toss now inflicts a debuff that lowers damage by half for 5 seconds
+[+]Syringe toss throw frame delay reduced
+[+]Syringe toss damage decreased from 80 > 50
+[+]Syringe toss hitbox increased
+[+]Syringe toss cooldown increased from 2 sec > 4
+[+]Syringe toss Projectile Speed increased from 96 > 128
+
+
 [+]Zero[+]
 [+]Reduced the sweetspot size of Ryuenjin
 
@@ -70,7 +80,6 @@
 [+]Property "Marksman" Swapped out for "Specialist"
 
 [+]KnightMan[+]
-[+]HP increased from 350 > 450
 [+]Property "Hefty" Swapped out for "Undershirt"
 [+]KnightWrecker damage increased from 75 > 125
 [+]Knight Shield recovery rate increased

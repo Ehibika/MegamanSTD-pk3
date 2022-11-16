@@ -188,7 +188,7 @@
 
 #include "Actors/Loadout/Weapons/FireballBuster.txt"
 #include "Actors/Loadout/Weapons/AtomicBuster.txt"
-#include "Actors/Loadout/Weapons/RepairGun.txt"
+#include "Actors/Loadout/Weapons/MeddyGun.txt"
 #include "Actors/Loadout/Weapons/ViperBuster.txt"
 #include "Actors/Loadout/Weapons/ViperRifle.txt"
 #include "Actors/Loadout/Weapons/ThriceGun.txt"
@@ -196,7 +196,7 @@
 #include "Actors/Loadout/Weapons/MediBuster.txt"
 #include "Actors/Loadout/Weapons/ScrewShooter.txt"
 #include "Actors/Loadout/Weapons/BoltDriver.txt"
-#include "Actors/Loadout/Weapons/RepairSprayer.txt"
+#include "Actors/Loadout/Weapons/FloromaSprayer.txt"
 #include "Actors/Loadout/Weapons/RepairLauncher.txt"
 
 #include "Actors/Loadout/Weapons/Replislasher.txt"

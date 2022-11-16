@@ -2,8 +2,8 @@ Actor KnightMan : ClassBase
 {
 Player.DisplayName "KnightMan"
 Player.SoundClass "megaman"
-Health 450
-Player.MaxHealth 450
+Health 350
+Player.MaxHealth 350
 Player.JumpZ 10
 
 Player.Startitem "IsKnightMan"
