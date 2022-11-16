@@ -94,7 +94,7 @@ height 10
 scale 1.0
 Var Int User_TrailCount;
 Var Int User_TP; //TrailPosition
-
+ 
 reactiontime 16
 States
 {
